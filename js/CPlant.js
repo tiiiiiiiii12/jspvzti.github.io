@@ -1032,7 +1032,7 @@ var CPlants = NewO({
             return "left:-8px;top:25px"
         },
         jinyinAct:function(a){
-                a.Ele.style.opacity=0.5;
+                $(a.id).style.opacity=0.5;
                 a.canEat=0
         },
         CanGrow: function(c, b, d) {
