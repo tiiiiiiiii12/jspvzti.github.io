@@ -1392,7 +1392,7 @@ var CPlants = NewO({
                 c.HP < 1 ? CustomZombie(oFootballZombie,c.R,c.C).OrnHP=2400: 
                 c.HP < 2000? c.CustomStatus < 3 && (c.CustomStatus = 3,(d=CustomZombie(oScreenDoorZombie,c.R,c.C,1)).HP=800,d.jinyinnum=100):
                 c.HP < 4000? c.CustomStatus < 2 && (c.CustomStatus = 2,(d=CustomZombie(oConeheadZombie,c.R,c.C,1)).jinyinnum=100):
-                c.HP < 6000 && c.CustomStatus < 1 && (c.CustomStatus = 1, (d=CustomZombie(oZombie,c.R,c.C,1)).HP=800))
+                c.HP < 6000 && c.CustomStatus < 1 && (c.CustomStatus = 1, (d=CustomZombie(oZombie,c.R,c.C,1)).HP=800)
         },
         getHurt: function(e, b, a) {
             var c = this,
