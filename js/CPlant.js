@@ -837,7 +837,8 @@ var CPlants = NewO({
                 function(d, c, b) {
                     $P[d] && (a.ChangePosition($(d), 1), oSym.addTask(100,
                         function(h, g, f, e) {
-                            $P[h] && (AppearSun(Math.floor(g + Math.random() * 41), f, 25, 0), oSym.addTask(100,
+                            $P[h] && (a.jinyin&&AppearSun(Math.floor(g + Math.random() * 41), f, 15, 0),
+                                    AppearSun(Math.floor(g + Math.random() * 41), f, 25, 0), oSym.addTask(100,
                                 function(i) {
                                     $P[i] && a.ChangePosition($(i), 0)
                                 },
@@ -896,6 +897,7 @@ var CPlants = NewO({
             var c = b[1];
             return c && c.EName == "oSunFlower"
         },
+        
         BirthStyle: function(c, e, b, a) {
             var d = b.childNodes[1];
             d.src = "images/Plants/TwinSunflower/TwinSunflower.gif";
@@ -920,10 +922,12 @@ var CPlants = NewO({
             var b = GetX(a.C);
             oSym.addTask(500,
                 function(f, d, c, e) {
-                    $P[f] && (a.ChangePosition($(f), 1), oSym.addTask(100,
+                    oS.ProduceSun&&$P[f] && (a.ChangePosition($(f), 1), oSym.addTask(100,
                         function(k, h, g, j, i) {
                             AppearSun(Math.floor(h + Math.random() * 21), j, 25, 0),
-                                AppearSun(Math.floor(g + Math.random() * 21), j, 25, 0),
+                            AppearSun(Math.floor(g + Math.random() * 21), j, 25, 0),
+                            a.jinyin&&AppearSun(Math.floor(g + Math.random() * 21), j, 50, 0),
+                        a.jinyin&&Math.random()*100>98&&AppearCard(a.pixelLeft, a.pixelTop, oSunFlower, 0, 1500),
                                 oSym.addTask(100,
                                     function(l) {
                                         $P[l] && a.ChangePosition($(l), 0)
@@ -1121,12 +1125,14 @@ var CPlants = NewO({
                 d = $(b),
                 c = oZ.getArZ(j, h, e),
                 f = c.length,
+                num=0,
                 a;
             while (f--) {
                 (a = c[f]).Altitude < 2 && a.getThump(1500)
             }
         for(i=g.C;i<=9;i++){
-            !oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i));
+            num<2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i),
+                num+=1);
         }
             g.Die(1);
             PlayAudio("potato_mine");
