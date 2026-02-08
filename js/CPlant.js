@@ -52,10 +52,6 @@ var CPlants = NewO({
             e.pixelTop = g;
             e.pixelBottom = g + e.GetDBottom();
             e.opacity = 1;
-        Math.random()*100<e.jinyinnum&&(
-                    e.jinyin=true,
-                    e.jinyinAct&&e.jinyinAct(e)   
-                ); 
             e.InitTrigger(e, b, e.R = h, e.C = a, e.AttackedLX = k + e.beAttackedPointL, e.AttackedRX = k + e.beAttackedPointR);
             $P[b] = e;
             $P.length += 1;
@@ -65,6 +61,10 @@ var CPlants = NewO({
                     zIndex: j
                 },
                 n);
+                Math.random()*100<e.jinyinnum&&(
+                    e.jinyin=true,
+                    e.jinyinAct&&e.jinyinAct(e)   
+                ); 
             oGd.add(e, h + "_" + a + "_" + e.PKind);
             e.PrivateBirth(e, n)
         },
@@ -1031,9 +1031,9 @@ var CPlants = NewO({
         getShadow: function(a) {
             return "left:-8px;top:25px"
         },
-        jinyinAct:function(){
-                this.Ele.style.opacity=0.5;
-                this.canEat=0
+        jinyinAct:function(a){
+                a.Ele.style.opacity=0.5;
+                a.canEat=0
         },
         CanGrow: function(c, b, d) {
             var a = b + "_" + d,
