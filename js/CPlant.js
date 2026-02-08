@@ -1031,7 +1031,10 @@ var CPlants = NewO({
         getShadow: function(a) {
             return "left:-8px;top:25px"
         },
-        jinyinAct:function(){this.canEat=0},
+        jinyinAct:function(){
+                this.Ele.style.opacity=0.5;
+                this.canEat=0
+        },
         CanGrow: function(c, b, d) {
             var a = b + "_" + d,
                 ArP = oS.ArP;
@@ -1042,7 +1045,7 @@ var CPlants = NewO({
             }
         },
         Tooltip: "使你能够将非水生植物种在上面",
-        Produce: '睡莲可以让你种植非水生植物在它上面。<p>特点：<font color="#FF0000">非水生植物可以种植在它上面<br>必须种植在水面</font></p>睡莲从不抱怨，它也从来不想知道发生了什么事。在它身上种植物，它也不会说什么。难道，它有什么惊奇想法或者可怕的秘密？没人知道。睡莲把这些都埋藏在心底。'
+        Produce: '睡莲可以让你种植非水生植物在它上面。</font></p>精英形态：虚化，不可被啃食<p>特点：<font color="#FF0000">非水生植物可以种植在它上面<br>必须种植在水面</font></p>睡莲从不抱怨，它也从来不想知道发生了什么事。在它身上种植物，它也不会说什么。难道，它有什么惊奇想法或者可怕的秘密？没人知道。睡莲把这些都埋藏在心底。'
     }),
     oPotatoMine = InheritO(CPlants, {
         EName: "oPotatoMine",
@@ -1050,7 +1053,7 @@ var CPlants = NewO({
         width: 75,
         height: 55,
         beAttackedPointR: 55,
-        SunNum: 75,
+        SunNum:50,
         coolTime: 30,
         Stature: -1,
         CanGrow: function(d, c, f) {
@@ -2454,7 +2457,17 @@ var CPlants = NewO({
             var a = c.R,
                 b = c.C;
             oGd.$Plantern[a + "_" + b] = c.id;
-            NewImg("", "images/Plants/Plantern/light.gif", "filter:alpha(opacity=30);opacity:.3;left:0;top:0;z-index:" + c.zIndex, $(c.id));
+        function(c){
+            if(c.jinyin){
+                for (let i=a-1;i<=a+1;i++){
+                    for (let l=b-1;l<=b+1;l++){
+                     oGd.$[i + "_" + l+"_1"]&&oGd.$[i + "_" + l+"_1"].AttTime>100&&oGd.$[i + "_" + l+"_1"].AttTime-=40;
+                     oSym.addTask(0,arguments.callee,[c]);
+                  }
+                }
+            }
+        }(c);
+            NewImg("", "images/Plants/Plantern/light.gif", "filter:alpha(opacity=30);opacity:"+c.jinyin?".6":".3"+";left:0;top:0;z-index:" + c.zIndex, $(c.id));
             oS.HaveFog && oGd.GatherFog(a, b, 2, 3, 0), oFlowerVase.prototype.FreshXRay(); // 刷新场地上花瓶 XRAY
         },
         InitTrigger: function() {},
@@ -2462,6 +2475,13 @@ var CPlants = NewO({
             var a = c.R,
                 b = c.C;
             delete oGd.$Plantern[a + "_" + b];
+        if(c.jinyin){
+                for (let i=a-1;i<=a+1;i++){
+                    for (let l=b-1;l<=b+1;l++){
+                     oGd.$[i + "_" + l+"_1"]&&oGd.$[i + "_" + l+"_1"].AttTime<=100&&oGd.$[i + "_" + l+"_1"].AttTime+=40;
+                  }
+                }
+            }
             oS.HaveFog && oGd.GatherFog(a, b, 2, 3, 1), oFlowerVase.prototype.FreshXRay(); // 刷新场地上花瓶 XRAY
         },
         GetDY: function(b, c, a) {
@@ -2686,9 +2706,7 @@ var CPlants = NewO({
             var id = this.id,
                 z, oBalloon;
             $(id).childNodes[1].src = 'images/Plants/Blover/Blover.gif';
- 
-            for (z in $Z) oBalloon = $Z[z], (oBalloon.EName == 'oBalloonZombie') && oBalloon.getDispelled(); //把气球吹跑
- 
+            for (z in $Z) oBalloon = $Z[z],oBalloon&& oBalloon.getr(oBalloon,160),oBalloon&&this.jinyin&& oBalloon.getHit2(oBalloon,500), (oBalloon.EName == 'oBalloonZombie') && oBalloon.getDispelled(); //把气球吹跑
             if (oS.HaveFog) { // 如果场地上有雾，驱散
                 oGd.MoveFogRight(); // 驱散雾
                 oSym.addTask(2400 + 150, oGd.MoveFogLeft, []); // 24s后恢复
