@@ -1154,7 +1154,7 @@ oZ = {
 			s = oT.$L[r];
 			while (q--) {
 				a = j[q];
-				$Z[this.id]&&a.HP && a.PZ && a.ZX < 901 && oT["chkD" + a.WalkDirection](a, r, p, s); !$Z[this.id] ? (j.splice(q, 1), f[0](a)) : f[a.ChkActs(a, r, j, q)](a)
+				a.HP>0&& a.PZ && a.ZX < 901 && oT["chkD" + a.WalkDirection](a, r, p, s); a.HP<=0 ? (j.splice(q, 1), f[0](a)) : f[a.ChkActs(a, r, j, q)](a)
 			}
 			l ? (l = d = 0, j.sort(function(u, t) {
 				return u.AttackedLX - t.AttackedLX
