@@ -1379,7 +1379,7 @@ var CPlants = NewO({
         HP: 8000,
         PicArr: ["images/Card/Plants/TallNut.png", "images/Plants/TallNut/0.gif", "images/Plants/TallNut/TallNut.gif", "images/Plants/TallNut/TallnutCracked1.gif", "images/Plants/TallNut/TallnutCracked2.gif"],
         Tooltip: "不会被跳过的坚实壁垒",
-        Produce: '高坚果是重型壁垒植物，而且不会被跨过。<p>韧性：<font color="#FF0000">非常高</font><br>特殊：<font color="#FF0000">不会被跨过或越过</font></p>人们想知道，坚果墙和高坚果是否在竞争。高坚果以男中音的声调大声笑了。“我们之间怎么会存在竞争关系？我们是哥们儿。你知道坚果墙为我做了什么吗……”高坚果的声音越来越小，他狡黠地笑着。”',
+        Produce: '高坚果是重型壁垒植物，而且不会被跨过<p>韧性：<font color="#FF0000">非常高</font><br>特殊：<font color="#FF0000">不会被跨过或越过</font></p>人们想知道，坚果墙和高坚果是否在竞争。高坚果以男中音的声调大声笑了。“我们之间怎么会存在竞争关系？我们是哥们儿。你知道坚果墙为我做了什么吗……”高坚果的声音越来越小，他狡黠地笑着。”',
         CanGrow: function(c, b, f) {
             var a = b + "_" + f,
                 d = c[1],
@@ -1387,10 +1387,21 @@ var CPlants = NewO({
             return e ? oGd.$LF[b] == 1 ? f > 0 && f < e.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a] || d) : c[0] && !d : d && d.EName == "oTallNut" ? 1 : oGd.$LF[b] == 1 ? !(f < 1 || f > 9 || oGd.$Crater[a] || oGd.$Tombstones[a] || d) : c[0] && !d
         },
         Stature: 1,
+        JudgeHurtCustom:function(c){
+                var d;
+                c.HP < 1 ? CustomZombie(oFootballZombie,c.R,c.C).OrnHP=2400: 
+                c.HP < 2000? c.CustomStatus < 3 && (c.CustomStatus = 3,(d=CustomZombie(oScreenDoorZombie,c.R,c.C,1)).HP=800,d.jinyinnum=100):
+                c.HP < 4000? c.CustomStatus < 2 && (c.CustomStatus = 2,(d=CustomZombie(oConeheadZombie,c.R,c.C,1)).jinyinnum=100):
+                c.HP < 6000 && c.CustomStatus < 1 && (c.CustomStatus = 1, (d=CustomZombie(oZombie,c.R,c.C,1)).HP=800))
+        },
         getHurt: function(e, b, a) {
             var c = this,
                 d = $(c.id).childNodes[1];
-            !(b % 3) ? (c.HP -= a) < 1 ? c.Die() : c.HP < 2667 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/TallNut/TallnutCracked2.gif") : c.HP < 5333 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/TallNut/TallnutCracked1.gif"): c.Die()
+            !(b % 3) ? (c.HP -= a) < 1 ? (c.Die()): 
+                    c.HP < 1000 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/TallNut/TallnutCracked2.gif") : 
+                    c.HP < 2667 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/TallNut/TallnutCracked2.gif") : 
+                    c.HP < 5333 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/TallNut/TallnutCracked1.gif"): c.Die();
+                   c.jinyin&&c.JudgeHurtCustom(c);             
         }
     }),
     oCherryBomb = InheritO(CPlants, {
@@ -2457,7 +2468,7 @@ var CPlants = NewO({
             var a = c.R,
                 b = c.C;
             oGd.$Plantern[a + "_" + b] = c.id;
-        function(c){
+        (function(c){
             if(c.jinyin){
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
@@ -2466,7 +2477,7 @@ var CPlants = NewO({
                   }
                 }
             }
-        }(c);
+        })(c);
             NewImg("", "images/Plants/Plantern/light.gif", "filter:alpha(opacity=30);opacity:"+c.jinyin?".6":".3"+";left:0;top:0;z-index:" + c.zIndex, $(c.id));
             oS.HaveFog && oGd.GatherFog(a, b, 2, 3, 0), oFlowerVase.prototype.FreshXRay(); // 刷新场地上花瓶 XRAY
         },
