@@ -298,7 +298,7 @@ var CZombies = function(b, a) {
                         h = oGd.$,
 						a,
                         c;
-					(((a=g.JudgeAttackH1())&&a.beAttacked)||(c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h))) ? (!g.isAttacking&&(g.isAttacking = 1, g.EleBody.src = g.PicArr[g.AttackGif]),!(a&&a.beAttacked)&&g.NormalAttack(c[0], c[1])) : g.isAttacking && (g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif])
+					((a=g.JudgeAttackH1())&&a.beAttacked)||(c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h)) ? (!g.isAttacking&&(g.isAttacking = 1, g.EleBody.src = g.PicArr[g.AttackGif]),!(a&&a.beAttacked)&&g.NormalAttack(c[0], c[1])) : g.isAttacking && (g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif])
                 },
 				JudgeAttackH1: function() {
                     var e = this,
@@ -338,8 +338,7 @@ var CZombies = function(b, a) {
                         f = e.id,
                         c;
                     d && d.beAttacked && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif], e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) : e.isAttacking && (e.isAttacking = 0, e.EleBody.src = e.PicArr[e.NormalGif])
-					return d
-                },
+				},
 	getr:function(e,l){
 		GetC(e.ZX)<10&&(e.ZX +=l,
 			e.AttackedLX += l, 
