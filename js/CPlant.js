@@ -539,11 +539,11 @@ var CPlants = NewO({
                 function(f, j, h, c, n, i, m, k, o, g) {
                     var l, e = GetC(n),
                         d = oZ["getZ" + c](n, i);
-                    m < 1 && g[i + "_" + e] && k != e && (PlayAudio("firepea"), ++m && (h = 40), k = e, j.src = "images/Plants/PB" + m + c + ".gif");
+                    m < 1 && g[i + "_" + e] && k != e && (PlayAudio("firepea"), ++m && (h = 40), k = e,c=1500);
                     d && d.Altitude == 1 ? (d[{
                         "-1": "getSnowPea",
-                        0: "getPea",
-                        1: "getFirePea"
+                        0: "getFreezePea",
+                        1: "getFreezePea"
                     } [m]](d, h, c), (SetStyle(j, {
                         left: o + 28 + "px",
                         width: "52px",
@@ -661,7 +661,7 @@ var CPlants = NewO({
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次发射四颗豌豆<br>(需要双发射手)",
-        Produce: '机枪射手可以一次发射四颗豌豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
+        Produce: '机枪射手可以一次发射四颗豌豆</font></p>精英形态：三条线各发射五颗豌豆，且本行有概率是冰豆或火豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
         PrivateBirth:this.jinyin?oThreepeater.prototype.PrivateBirth:
                 function(c) {
             var b = c.AttackedLX,
@@ -812,7 +812,7 @@ var CPlants = NewO({
         SunNum: 50,
         PicArr: ["images/Card/Plants/SunFlower.png", "images/Plants/SunFlower/0.gif", "images/Plants/SunFlower/SunFlower1.gif", "images/Plants/SunFlower/SunFlower.gif"],
         Tooltip: "提供你额外的阳光",
-        Produce: '向日葵，为你生产额外阳光的经济作物。尝试尽可能多种植吧！<p>阳光产量：<font color="#FF0000">中等</font></p>向日葵情不自禁地和着节拍起舞。是什么节拍呢？嗨，是大地自己用来提神的爵士节拍，这种频率的节拍，只有向日葵才能听到。',
+        Produce: '向日葵，为你生产额外阳光的经济作物。尝试尽可能多种植吧！</font></p>精英形态：每次多生产一个小阳光<p>阳光产量：<font color="#FF0000">中等</font></p>向日葵情不自禁地和着节拍起舞。是什么节拍呢？嗨，是大地自己用来提神的爵士节拍，这种频率的节拍，只有向日葵才能听到。',
         BirthStyle: function(c, e, b, a) {
             var d = b.childNodes[1];
             d.src = "images/Plants/SunFlower/SunFlower.gif";
@@ -893,7 +893,7 @@ var CPlants = NewO({
         coolTime: 50,
         PicArr: ["images/Card/Plants/TwinSunflower.png", "images/Plants/TwinSunflower/0.gif", "images/Plants/TwinSunflower/TwinSunflower1.gif", "images/Plants/TwinSunflower/TwinSunflower.gif"],
         Tooltip: "一次提供两倍于向日葵的阳光量<br>(需要向日葵)",
-        Produce: '双子向日葵的阳光产量是普通向日葵的两倍。<p>阳光产量：<font color="#FF0000">双倍<br>只能种在普通向日葵上</font></p>这是一个疯狂的夜晚，禁忌的科学技术，让双子向日葵来到了这个世界。电闪雷鸣，狂风怒吼，都在表示着这个世界对他的拒绝。但是一切都无济于事，双子向日葵他却仍然活着！',
+        Produce: '双子向日葵的阳光产量是普通向日葵的两倍。</font></p>精英形态：阳光产量增加，小概率给一个小向日葵卡牌<p>阳光产量：<font color="#FF0000">双倍<br>只能种在普通向日葵上</font></p>这是一个疯狂的夜晚，禁忌的科学技术，让双子向日葵来到了这个世界。电闪雷鸣，狂风怒吼，都在表示着这个世界对他的拒绝。但是一切都无济于事，双子向日葵他却仍然活着！',
         CanGrow: function(b, a, d) {
             var c = b[1];
             return c && c.EName == "oSunFlower"
@@ -1085,7 +1085,7 @@ var CPlants = NewO({
         },
         PicArr: ["images/Card/Plants/PotatoMine.png", "images/Plants/PotatoMine/0.gif", "images/Plants/PotatoMine/PotatoMine.gif", "images/Plants/PotatoMine/PotatoMineNotReady.gif", "images/Plants/PotatoMine/PotatoMine_mashed.gif", "images/Plants/PotatoMine/ExplosionSpudow.gif"],
         Tooltip: "敌人接触后爆炸<br>需要时间安放",
-        Produce: '土豆雷具有强大的威力，但是他们需要点时间来武装自己。你应把他们种在僵尸前进的路上，当他们一被接触就会发生爆炸。<p>伤害：<font color="FF0000">巨大</font><br>范围：<font color="#FF0000">一个小区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，需要一定准备时间才能起作用。</font></p>一些人说土豆雷很懒，因为他总是把所有事情留到最后。土豆雷才没空理他们，他正忙着考虑他的投资战略呢。',
+        Produce: '土豆雷具有强大的威力，但是他们需要点时间来武装自己。你应把他们种在僵尸前进的路上，当他们一被接触就会发生爆炸</font></p>精英形态：立刻出土，爆炸后向右在前方无植物的格子上分裂至多两个土豆雷<p>伤害：<font color="FF0000">巨大</font><br>范围：<font color="#FF0000">一个小区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，需要一定准备时间才能起作用。</font></p>一些人说土豆雷很懒，因为他总是把所有事情留到最后。土豆雷才没空理他们，他正忙着考虑他的投资战略呢。',
         Status: 0,
         AudioArr: ["potato_mine"],
         canTrigger: 0,
@@ -1188,12 +1188,12 @@ var CPlants = NewO({
         width: 65,
         height: 73,
         beAttackedPointR: 45,
-        SunNum: 50,
+        SunNum: 75,
         HP: 4000,
         coolTime: 30,
         PicArr: ["images/Card/Plants/WallNut.png", "images/Plants/WallNut/0.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif"],
-        Tooltip: "阻碍僵尸前进, 并保护你其他的植物",
-        Produce: '坚果墙拥有足以让你用来保护其它植物的坚硬外壳。<p>韧性：<font color="FF0000">高</font></p>坚果墙：“人们想知道，经常被僵尸啃的感觉怎样？他们不知道，我有限的感官，只能让我感到一种麻麻的感觉，像是，令人放松的背部按摩。”',
+        Tooltip: "阻碍僵尸前进, 并保护你其他的植物,对僵尸有反伤",
+        Produce: '坚果墙拥有足以让你用来保护其它植物的坚硬带刺外壳。<p>韧性：<font color="FF0000">高</font></p>坚果墙：“人们想知道，经常被僵尸啃的感觉怎样？他们不知道，我有限的感官，只能让我感到一种麻麻的感觉，像是，令人放松的背部按摩。”',
         CanGrow: function(c, b, f) {
             var a = b + "_" + f,
                 d = c[1],
@@ -1205,7 +1205,8 @@ var CPlants = NewO({
         getHurt: function(e, b, a) {
             var c = this,
                 d = $(c.id).childNodes[1];
-            !(b % 3) ? (c.HP -= a) < 1 ? c.Die() : c.HP < 1334 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/WallNut/Wallnut_cracked2.gif") : c.HP < 2667 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/WallNut/Wallnut_cracked1.gif"): c.Die()
+            !(b % 3) ? (c.HP -= a) < 1 ? c.Die() : c.HP < 1334 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/WallNut/Wallnut_cracked2.gif") : c.HP < 2667 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/WallNut/Wallnut_cracked1.gif"): c.Die();
+            b!=3&&e.getHit1(e,15);
         }
     }),
     oNutBowling = InheritO(CPlants, {
