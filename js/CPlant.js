@@ -590,6 +590,7 @@ var CPlants = NewO({
         getTriggerR: function(a) {
             return [a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]
         },
+        jinyinAct:function(){},
         PrivateBirth: function(f) {
             var e = f.AttackedLX,
                 d = e - 40,
@@ -681,8 +682,9 @@ var CPlants = NewO({
             var c = b[1];
             return c && c.EName == "oRepeater"
         },
+        getTriggerR:oThreepeater.prototype.getTriggerR,
         jinyinAct:function(a){
-        a.getTriggerR=oThreepeater.prototype.getTriggerR;
+        a.PrivateBirth=oThreepeater.prototype.PrivateBirth;
         a.NormalAttack1=oThreepeater.prototype.NormalAttack;
         a.PrivateDie=oThreepeater.prototype.PrivateDie
         },
