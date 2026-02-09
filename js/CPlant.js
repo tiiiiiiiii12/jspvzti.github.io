@@ -53,6 +53,10 @@ var CPlants = NewO({
             e.pixelBottom = g + e.GetDBottom();
             e.opacity = 1;
             e.InitTrigger(e, b, e.R = h, e.C = a, e.AttackedLX = k + e.beAttackedPointL, e.AttackedRX = k + e.beAttackedPointR);
+            Math.random()*100<e.jinyinnum&&(
+                    e.jinyin=true,
+                    e.jinyinAct&&e.jinyinAct(e)   
+                ); 
             $P[b] = e;
             $P.length += 1;
             e.BirthStyle(e, b, f, {
@@ -61,10 +65,6 @@ var CPlants = NewO({
                     zIndex: j
                 },
                 n);
-                Math.random()*100<e.jinyinnum&&(
-                    e.jinyin=true,
-                    e.jinyinAct&&e.jinyinAct(e)   
-                ); 
             oGd.add(e, h + "_" + a + "_" + e.PKind);
             e.PrivateBirth(e, n)
         },
