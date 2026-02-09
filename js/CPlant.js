@@ -685,7 +685,8 @@ var CPlants = NewO({
             return c && c.EName == "oRepeater"
         },
         getTriggerR:function(a){
-        return (this.jinyin?[a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]:[a, a])
+        var b=this;
+        return (b.jinyin?[a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]:[a, a])
         },
         jinyinAct:function(a){
         a.NormalAttack1=oThreepeater.prototype.NormalAttack;
