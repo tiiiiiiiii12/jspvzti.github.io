@@ -45,6 +45,7 @@ var CPlants = NewO({
                 b = e.id = "P_" + Math.random(),
                 j = e.zIndex += 3 * h,
                 f = NewEle(0, "div", "position:absolute");
+                e.randomnum=Math.random()*100;
             NewImg(0, ShadowPNG, e.getShadow(e), f);
             NewImg(0, e.PicArr[e.NormalGif], "", f);
             e.pixelLeft = k;
@@ -61,7 +62,7 @@ var CPlants = NewO({
                     zIndex: j
                 },
                 n);
-        Math.random()*100<e.jinyinnum&&(
+        e.randomnum<e.jinyinnum&&(
                     e.jinyin=true,
                     e.jinyinAct&&e.jinyinAct(e)   
                 ); 
@@ -661,7 +662,7 @@ var CPlants = NewO({
         Tooltip: "一次发射四颗豌豆<br>(需要双发射手)",
         Produce: '机枪射手可以一次发射四颗豌豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
         PrivateBirth:function(c) {
-        if(c.jinyin)return oThreepeater.prototype.PrivateBirth(c);
+        if(c.randomnum<c.jinyinnum)return oThreepeater.prototype.PrivateBirth(c);
             var b = c.AttackedLX,
                 a = b - 40;
             c.BulletClass = NewO({
@@ -1389,16 +1390,15 @@ var CPlants = NewO({
         Stature: 1,
         JudgeHurtCustom:function(c){
                 var d;
-                c.HP < 1 ? CustomZombie(oFootballZombie,c.R,c.C).OrnHP=2400: 
+                c.HP < 1 ? CustomZombie(oFootballZombie,c.R,c.C,1).OrnHP=2400: 
                 c.HP < 2000? c.CustomStatus < 3 && (c.CustomStatus = 3,(d=CustomZombie(oScreenDoorZombie,c.R,c.C,1)).HP=800,d.jinyinnum=100):
-                c.HP < 4000? c.CustomStatus < 2 && (c.CustomStatus = 2,(d=CustomZombie(oConeheadZombie,c.R,c.C,1)).jinyinnum=100):
-                c.HP < 6000 && c.CustomStatus < 1 && (c.CustomStatus = 1, (d=CustomZombie(oZombie,c.R,c.C,1)).HP=800)
+                c.HP < 4000? c.CustomStatus < 2 && (c.CustomStatus = 2,CustomZombie(oConeheadZombie,c.R,c.C,1).jinyinnum=100):
+                c.HP < 6000 && c.CustomStatus < 1 && (c.CustomStatus = 1, (d=CustomZombie(oZombie,c.R,c.C,1)).HP=800,d.jinyinnum=100)
         },
         getHurt: function(e, b, a) {
             var c = this,
                 d = $(c.id).childNodes[1];
             !(b % 3) ? (c.HP -= a) < 1 ? (c.Die()): 
-                    c.HP < 1000 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/TallNut/TallnutCracked2.gif") : 
                     c.HP < 2667 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/TallNut/TallnutCracked2.gif") : 
                     c.HP < 5333 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/TallNut/TallnutCracked1.gif"): c.Die();
                    c.jinyin&&c.JudgeHurtCustom(c);             
