@@ -2478,7 +2478,7 @@ var CPlants = NewO({
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
                      oGd.$[i + "_" + l+"_1"]&&oGd.$[i + "_" + l+"_1"].AttTime>100&&(oGd.$[i + "_" + l+"_1"].AttTime-=40);
-                    oSym.addTask(2000,function(f){$P[f.id]&&(CustomSpecial(oPlantern,a,b)).jinyinnum=100},[c]);
+                    oSym.addTask(2000,function(f){$P[f.id]&&((CustomSpecial(oPlantern,a,b)).jinyinnum=100)},[c]);
                   }
                 }
         },
