@@ -53,9 +53,7 @@ var CPlants = NewO({
             e.pixelTop = g;
             e.pixelBottom = g + e.GetDBottom();
             e.opacity = 1;
-        oSym.addTask(10,function(e,b,k){
             e.InitTrigger(e, b, e.R = h, e.C = a, e.AttackedLX = k + e.beAttackedPointL, e.AttackedRX = k + e.beAttackedPointR);
-        },[e,b,k]);
             $P[b] = e;
             $P.length += 1;
             e.BirthStyle(e, b, f, {
