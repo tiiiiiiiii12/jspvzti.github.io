@@ -2416,7 +2416,7 @@ jinyinAct: function(a){
             a.beAttacked && (PlayAudio("zombie_entering_water"), a.Altitude = 2, SetHidden(a.EleShadow), a.EleBody.src = a.PicArr[8] + Math.random(), oSym.addTask(240,
                 function(d, b) {
                     var c;
-                    $Z[d] && b.beAttacked && (b.WalkStatus = 1, b.Altitude = 1, b.OSpeed = b.Speed = 10.8, SetStyle(b.Ele, {
+                    $Z[d] && b.beAttacked && (b.WalkStatus = 1, b.Altitude = 1, b.OSpeed = b.Speed = 21.6, SetStyle(b.Ele, {
                         left: (c = b.X -= 140) + "px"
                     }), b.AttackedLX = c + (b.beAttackedPointL = 185), b.AttackedRX = c + (b.beAttackedPointR = 265), b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = b.ChkActsL2)
                 },
@@ -2623,11 +2623,14 @@ jinyinAct: function(a){
 	a.PrivateAct=function(a){
 	var p=a.Ele;
 	!(a.PZ==a.check)&&(
-	EditImg($(p.JaHead),0,"images/Plants/CherryBomb/CherryBomb.gif",{transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"},0),
+	EditImg($(p.JaHead),0,"images/Plants/CherryBomb/CherryBomb.gif",{
+		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)",
+		left:a.PZ?"60px":"20px"
+	},0),
 	a.check=a.PZ);
 	$Z[a.id]&&(!a.beAttacked)&&(ClearChild($(p.JaHead)));
 		if(!a.opennum){
-		$Z[a.id]&&($Z[a.id].HP<240)&&(a.OpenBox(a.id),
+		$Z[a.id]&&$Z[a.id].beAttacked&&($Z[a.id].HP<240)&&(a.OpenBox(a.id),
 		a.opennum=1)
 		}
 			}
@@ -2643,6 +2646,8 @@ jinyinAct: function(a){
         OpenBox: function(b) {
             var a = $Z[b];
             a.EleBody.src = a.PicArr[7];
+			a.HP=400;
+			a.GoingDie=a.NormalDie;
             a.ChkActs = a.ChkActs1 = function() {
                 return 1
             };
