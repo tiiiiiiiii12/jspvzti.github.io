@@ -2605,12 +2605,33 @@ jinyinAct: function(a){
         AttackGif: 2,
         OSpeed: 3.6,
         Speed: 3.6,
-        Produce: '这种僵尸带着个会爆炸的潘多拉盒子。</p><p>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快</font><br>特点：<font color="#FF0000">打开玩偶匣会爆炸</font><br>弱点：<font color="#FF0000">磁力菇</font><br>这种僵尸令人不寒而栗，不是因为他的冰冷身躯而是因为他的疯狂。',
+        Produce: '这种僵尸带着个会爆炸的潘多拉盒子，开盒时不无敌</font><br>精英形态：樱桃炸弹，残血必开盒</font><br>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快</font><br>特点：<font color="#FF0000">打开玩偶匣会爆炸</font><br>弱点：<font color="#FF0000">磁力菇</font><br>这种僵尸令人不寒而栗，不是因为他的冰冷身躯而是因为他的疯狂。',
         AudioArr: ["jackinthebox", "jack_surprise", "explosion"],
         PicArr: (function() {
             var a = "images/Zombies/JackinTheBoxZombie/";
             return ["images/Card/Zombies/JackboxZombie.png", a + "0.gif", a + "Attack.gif", a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif", a + "Walk.gif", a + "OpenBox.gif", a + "Boom.gif" + $Random, a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random]
         })(),
+		check:1,
+		jinyinAct:function(a){
+			a.NormalGif=a.LostHeadGif;
+			a.AttackGif=a.LostHeadAttackGif;
+			a.EleBody.src=a.PicArr[a.NormalGif];
+	var z=a.Ele;
+	z.JaHead = "Ja" + Math.random();
+      var Ja = NewImg(z.JaHead,"images/Plants/CherryBomb/CherryBomb.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:60px;top:0px;",0);
+      z.appendChild(Ja);
+	a.PrivateAct=function(a){
+	var p=a.Ele;
+	!(a.PZ==a.check)&&(
+	EditImg($(p.JaHead),0,"images/Plants/CherryBomb/CherryBomb.gif",{transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"},0),
+	a.check=a.PZ);
+	$Z[a.id]&&(!a.beAttacked)&&(ClearChild($(p.JaHead)));
+		if(!a.opennum){
+		$Z[a.id]&&($Z[a.id].HP<240)&&(a.OpenBox(a.id),
+		a.opennum=1)
+		}
+			}
+		},
         RandomOpenBox: function(a) {
             oSym.addTask(Math.floor(Math.random() * 100) > 4 ? Math.floor(1325 + Math.random() * 976) : Math.floor(450 + Math.random() * 301),
                 function(c) {
@@ -2641,7 +2662,6 @@ jinyinAct: function(a){
                     c;
                 d && d.beAttacked && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif], e.AttackZombie(f, c = d.id), !d.isAttacking && d.AttackZombie2(d, c, f)) : e.AttackZombie(f, d.id, 1)) : e.isAttacking && (e.isAttacking = 0)
             };
-            a.getPea = a.getSnowPea = a.getFirePeaSputtering = a.getFirePea = a.getHit = a.getHit0 = a.getHit1 = a.getHit2 = a.getHit3 = a.ChangeR = a.bedevil = function() {};
             oSym.addTask(50,
                 function(c) {
                     $Z[c] && (a.Status = 0, !--oGd.$JackinTheBox && StopAudio("jackinthebox"), PlayAudio("jack_surprise"), oSym.addTask(90,
