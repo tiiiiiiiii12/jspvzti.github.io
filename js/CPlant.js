@@ -660,7 +660,7 @@ var CPlants = NewO({
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次发射四颗豌豆<br>(需要双发射手)",
         Produce: '机枪射手可以一次发射四颗豌豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
-        PrivateBirth: function(c) {
+        PrivateBirth: this.jinyin?function(c) {
             var b = c.AttackedLX,
                 a = b - 40;
             c.BulletClass = NewO({
@@ -674,7 +674,7 @@ var CPlants = NewO({
                 F: oGd.MB1
             });
             c.BulletEle = NewImg(0, "images/Plants/PB00.gif", "left:" + a + "px;top:" + (c.pixelTop + 8) + "px;visibility:hidden;z-index:" + (c.zIndex + 2))
-        },
+        }:oThreepeater.prototype.PrivateBirth,
         CanGrow: function(b, a, d) {
             var c = b[1];
             return c && c.EName == "oRepeater"
@@ -683,7 +683,6 @@ var CPlants = NewO({
         return (this.jinyin?[a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]:[a, a])
         },
         jinyinAct:function(a){
-        a.PrivateBirth=oThreepeater.prototype.PrivateBirth;
         a.NormalAttack1=oThreepeater.prototype.NormalAttack;
         a.PrivateDie=oThreepeater.prototype.PrivateDie
         },
@@ -2468,7 +2467,12 @@ var CPlants = NewO({
             var a = c.R,
                 b = c.C;
             oGd.$Plantern[a + "_" + b] = c.id;
-        (function(c){
+            NewImg("", "images/Plants/Plantern/light.gif", "filter:alpha(opacity=30);opacity:"+c.jinyin?".9":".3"+";left:0;top:0;z-index:" + c.zIndex, $(c.id));
+            oS.HaveFog && oGd.GatherFog(a, b, 2, 3, 0), oFlowerVase.prototype.FreshXRay(); // 刷新场地上花瓶 XRAY
+        },
+        jinyinAct:function(c){
+        var a = c.R,
+                b = c.C;
             if(c.jinyin){
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
@@ -2477,9 +2481,6 @@ var CPlants = NewO({
                   }
                 }
             }
-        })(c);
-            NewImg("", "images/Plants/Plantern/light.gif", "filter:alpha(opacity=30);opacity:"+c.jinyin?".6":".3"+";left:0;top:0;z-index:" + c.zIndex, $(c.id));
-            oS.HaveFog && oGd.GatherFog(a, b, 2, 3, 0), oFlowerVase.prototype.FreshXRay(); // 刷新场地上花瓶 XRAY
         },
         InitTrigger: function() {},
         PrivateDie: function(c) {
