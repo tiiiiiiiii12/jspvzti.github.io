@@ -225,7 +225,6 @@ var CZombies = function(b, a) {
                         [f, d])
                 },
                 getFreeze: function(d, c,a) {
-                    d.beAttacked && d.getHit0(d, 20, 0);
                     d.Speed = 0;
                     oSym.addTask(a||400,
                         function(g, f, e) {
@@ -448,6 +447,10 @@ var CZombies = function(b, a) {
             getFirePeaSputtering: function() {
                 this.getHit0(this, 13)
             },
+			getFreezePea:function(a,b,d){
+				a.getHit0(a,b,0);
+				a.getFreeze(a,a.id,d);
+			},
             getSnowPea: function(f, c, g) {
                 var e = f.FreeSlowTime,
                     b = oSym.Now + 1000;
