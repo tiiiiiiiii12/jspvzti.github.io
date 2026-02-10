@@ -1231,7 +1231,7 @@ var CZombies = function(b, a) {
             3: "images/Zombies/BucketheadZombie/BucketheadZombieAttack.gif",
             9: "images/Zombies/Zombie/Zombie2.gif",
             11: "images/Zombies/BucketheadZombie/1.gif",
-			12: "images/Zombies/BucketheadZombie/jinyinBucketheadZombie.gif",
+			12: "images/Zombies/BucketheadZombie/jinyinBucketheadWalk.gif",
 			13: "images/Zombies/BucketheadZombie/jinyinBucketheadAttack.gif"
         }
     }),
