@@ -1731,11 +1731,13 @@ jinyinAct: function(a){
             var a;
             !(d.FreeFreezeTime || d.FreeSetbodyTime) && (d.beAttacked && !d.isAttacking && d.JudgeAttack(), !d.isAttacking && (d.AttackedLX += (a = d.Speed), d.ZX = d.AttackedRX += a, d.Ele.style.left = Math.ceil(d.X += a) + "px"));
             d.AttackedLX > GetX(9) && (d.WalkStatus = 0, d.EleBody.src = d.PicArr[d.NormalGif = d.WalkGif0], SetVisible(d.EleShadow), d.ChkActs = d.ChkActs2);
+			d.PrivateAct && d.PrivateAct(d);
             return 1
         },
         ChkActs2: function(e, c, f, b) {
             var a, d;
             !(e.FreeFreezeTime || e.FreeSetbodyTime) ? (e.beAttacked && !e.isAttacking && e.JudgeAttack(), !e.isAttacking ? (e.AttackedLX += (a = e.Speed)) > oS.W ? (f.splice(b, 1), e.DisappearDie(), d = 0) : (e.ZX = e.AttackedRX += a, e.Ele.style.left = Math.ceil(e.X += a) + "px", d = 1) : d = 1) : d = 1;
+			d.PrivateAct && d.PrivateAct(d);
             return d
         },
         ExchangeLR: function(d, b) {
@@ -1828,6 +1830,7 @@ jinyinAct: function(a){
 		jinyinAct:function(a){
 			a.WalkGif1=a.jinyinWalkGif1;
 			oConeheadZombie.prototype.jinyinAct(a);
+			a.EleBody
 		},
         AudioArr: ["plastichit", "zombie_entering_water"],
         getHit: OrnIZombies.prototype.getHit,
