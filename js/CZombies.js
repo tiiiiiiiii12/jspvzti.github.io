@@ -1184,10 +1184,12 @@ var CZombies = function(b, a) {
         AudioArr: ["plastichit"],
         PlayNormalballAudio: function() {
             PlayAudio("plastichit")
-        },
+		},
+		jinyinGif:12,
+        jinyinAttackGif:13,
 		jinyinAct:function(a){
-			a.NormalGif=12;
-			a.AttackGif=13;
+			a.NormalGif=a.jinyinGif;
+			a.AttackGif=a.jinyinAttackGif;
 			a.OrnHP=600;
 			a.EleBody.src=a.PicArr[a.NormalGif];
 			a.PrivateAct=function(a){
@@ -1210,6 +1212,9 @@ var CZombies = function(b, a) {
             PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)])
         },
 		jinyinAct:function(a){
+			a.NormalGif=a.jinyinGif;
+			a.AttackGif=a.jinyinAttackGif;
+			a.EleBody.src=a.PicArr[a.NormalGif];
 			a.PrivateAct=function(a){
 				if(!a.bool&&a.OrnHP<1){
 					PrivateTombstones(a.R,GetC(a.ZX));
@@ -1225,7 +1230,9 @@ var CZombies = function(b, a) {
             2: "images/Zombies/BucketheadZombie/BucketheadZombie.gif",
             3: "images/Zombies/BucketheadZombie/BucketheadZombieAttack.gif",
             9: "images/Zombies/Zombie/Zombie2.gif",
-            11: "images/Zombies/BucketheadZombie/1.gif"
+            11: "images/Zombies/BucketheadZombie/1.gif",
+			12: "images/Zombies/BucketheadZombie/jinyinBucketheadZombie.gif",
+			13: "images/Zombies/BucketheadZombie/jinyinBucketheadAttack.gif"
         }
     }),
     oFootballZombie = InheritO(oConeheadZombie, {
