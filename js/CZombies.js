@@ -1723,7 +1723,7 @@ jinyinAct: function(a){
         ChkActsL2: function(d, c, e, b) {
             var a;
             !(d.FreeFreezeTime || d.FreeSetbodyTime) && (d.beAttacked && !d.isAttacking && d.JudgeAttack(), !d.isAttacking && (d.AttackedRX -= (a = d.Speed), d.ZX = d.AttackedLX -= a, d.Ele.style.left = Math.floor(d.X -= a) + "px"));
-            d.AttackedLX < GetX(0) && (d.WalkStatus = 0, d.EleBody.src = d.Ornaments?oDuckyTubeZombie1.prototype.WalkGif0:d.PicArr[d.NormalGif = d.WalkGif0], SetVisible(d.EleShadow), d.ChkActs = d.ChkActsL3);
+            d.AttackedLX < GetX(0) && (d.WalkStatus = 0, d.EleBody.src = d.Ornaments?d.PicArr[d.NormalGif = d.WalkGif0]:oDuckyTubeZombie1.prototype.PicArr[d.NormalGif = d.WalkGif0],SetVisible(d.EleShadow), d.ChkActs = d.ChkActsL3);
 			d.PrivateAct && d.PrivateAct(d);
             return 1
         },
