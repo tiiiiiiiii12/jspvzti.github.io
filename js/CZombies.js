@@ -1807,39 +1807,40 @@ jinyinAct: function(a){
         })(),
         AudioArr: ["zombie_entering_water"]
     }),
-    oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
-        EName: "oDuckyTubeZombie2",
-        CName: "路障鸭子救生圈僵尸",
-        OrnHP: 370,
-        Lvl: 2,
-        SunNum: 75,
-        CanDisplay: 0,
-        OrnLostNormalGif: 9,
-        OrnLostAttackGif: 10,
-		Ornaments:1,
-        PlayNormalballAudio: function() {
-            PlayAudio("plastichit")
-        },
-		jinyinWalkGif1:12,
-		jinyinGif:11,
-		jinyinAttackGif:13,
-        PicArr: (function() {
-            var b = "images/Zombies/DuckyTubeZombie2/",
-                a = "images/Zombies/DuckyTubeZombie1/";
-            return ["images/Card/Zombies/DuckyTubeZombie1.png", b + "0.gif", b + "Walk1.gif", b + "Walk2.gif", b + "1.gif", b + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "Walk1.gif", a + "Walk2.gif", a + "Attack.gif", b + "jinyinWalk1.gif", b + "jinyinWalk2.gif",b + "jinyinAttack.gif"]
-        })(),
-		jinyinAct:function(a){
-			 a.WalkGif1= a.jinyinWalkGif1;
-            a.WalkGif0= a.jinyinGif;
-			oConeheadZombie.prototype.jinyinAct(a);
-		},
-        AudioArr: ["plastichit", "zombie_entering_water"],
-        getHit: OrnIZombies.prototype.getHit,
-        getHit0: OrnIZombies.prototype.getHit0,
-        getHit1: OrnIZombies.prototype.getHit1,
-        getHit2: OrnIZombies.prototype.getHit2,
-        getHit3: OrnIZombies.prototype.getHit3
-    }),
+oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
+  EName: "oDuckyTubeZombie2",
+  CName: "路障鸭子救生圈僵尸",
+  OrnHP: 370,
+  Lvl: 2,
+  SunNum: 75,
+  CanDisplay: 0,
+  OrnLostNormalGif: 9,
+  OrnLostAttackGif: 10,
+  Ornaments: 1,
+  PlayNormalballAudio: function() {
+    PlayAudio("plastichit")
+  },
+  jinyinWalkGif1: 11,
+  jinyinGif: 12,
+  jinyinAttackGif: 13,
+  PicArr: (function() {
+    var b = "images/Zombies/DuckyTubeZombie2/",
+      a = "images/Zombies/DuckyTubeZombie1/";
+    return ["images/Card/Zombies/DuckyTubeZombie1.png", b + "0.gif", b + "Walk1.gif", b + "Walk2.gif", b + "1.gif", b + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "Walk1.gif", a + "Walk2.gif", a + "Attack.gif", b + "jinyinWalk1.gif", b + "jinyinWalk2.gif", b + "jinyinAttack.gif"]
+  })(),
+  jinyinAct: function(a) {
+    a.WalkGif1 = a.jinyinGif;
+    a.WalkGif0 = a.jinyinWalkGif1;
+    oConeheadZombie.prototype.jinyinAct(a);
+    a.EleBody.src = a.PicArr[a.intowater ? a.jinyinGif : a.jinyinWalkGif1]
+  },
+  AudioArr: ["plastichit", "zombie_entering_water"],
+  getHit: OrnIZombies.prototype.getHit,
+  getHit0: OrnIZombies.prototype.getHit0,
+  getHit1: OrnIZombies.prototype.getHit1,
+  getHit2: OrnIZombies.prototype.getHit2,
+  getHit3: OrnIZombies.prototype.getHit3
+}),
     oDuckyTubeZombie3 = InheritO(oDuckyTubeZombie2, {
         EName: "oDuckyTubeZombie3",
         CName: "铁桶鸭子救生圈僵尸",
@@ -1856,9 +1857,10 @@ jinyinAct: function(a){
             return ["images/Card/Zombies/DuckyTubeZombie1.png", b + "0.gif", b + "Walk1.gif", b + "Walk2.gif", b + "1.gif", b + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "Walk1.gif", a + "Walk2.gif", a + "Attack.gif", b + "Walk1.gif", b + "Walk2.gif", b + "Attack.gif"]
         })(),
 		jinyinAct:function(a){
-			 a.WalkGif0 = a.jinyinWalkGif1;
-            a.WalkGif1 = a.jinyinGif;
-			oBucketheadZombie.prototype.jinyinAct(a);
+    a.WalkGif1 = a.jinyinGif;
+    a.WalkGif0 = a.jinyinWalkGif1;
+	oBucketheadZombie.prototype.jinyinAct(a);
+	a.EleBody.src = a.PicArr[a.intowater ? a.jinyinGif : a.jinyinWalkGif1]
 		}
     }),
     oSnorkelZombie = InheritO(oDuckyTubeZombie1, {
