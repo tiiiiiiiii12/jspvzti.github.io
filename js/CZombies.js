@@ -544,7 +544,7 @@ var CZombies = function(b, a) {
 		jinyinAct:function(a){
 		a.Ele.style.filter="grayscale(100%) brightness(400%)";
 		a.PrivateAct=function(a){
-			a.Speed&&!a.isAttacking&&a.getr(a,-(a.Speed*2))
+			a.PZ&&a.Speed&&!a.isAttacking&&a.getr(a,-(a.Speed*2))
 		}
 		},
         Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
@@ -1079,11 +1079,14 @@ var CZombies = function(b, a) {
         StandGif: 9,
         PicArr: (function() {
             var a = "images/Zombies/Zombie/";
-            return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "Zombie.gif", a + "ZombieAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif"]
+            return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "Zombie.gif", a + "ZombieAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif", a + "jinyinZombieWalk.gif", a + "jinyinZombieAttack.gif"]
         })(),
-		jinyinAct:function(){
-			this.OSpeed=this.Speed=3.6;
-			this.tasktime*=0.75;
+		jinyinAct:function(a){
+			a.NormalGif=10;
+			a.AttackGif=11;
+			a.EleBody.src=a.PicArr[a.NormalGif];
+			a.OSpeed=a.Speed=3.6;
+			a.tasktime*=0.75;
 		},
         Produce: '韧性：<font color="#FF0000">低</font></p>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
     }),
@@ -1208,7 +1211,7 @@ var CZombies = function(b, a) {
         },
 		jinyinAct:function(a){
 			a.PrivateAct=function(a){
-				if(!a.bool&&!a.Ornaments){
+				if(!a.bool&&a.OrnHP<1){
 					PrivateTombstones(a.R,GetC(a.ZX));
 					a.bool=1;
 				}
@@ -1710,6 +1713,7 @@ jinyinAct: function(a){
             var a;
             !(d.FreeFreezeTime || d.FreeSetbodyTime) && (d.beAttacked && !d.isAttacking && d.JudgeAttack(), !d.isAttacking && (d.AttackedRX -= (a = d.Speed), d.ZX = d.AttackedLX -= a, d.Ele.style.left = Math.floor(d.X -= a) + "px"));
             d.AttackedLX < GetX(0) && (d.WalkStatus = 0, d.EleBody.src = d.PicArr[d.NormalGif = d.WalkGif0], SetVisible(d.EleShadow), d.ChkActs = d.ChkActsL3);
+			d.PrivateAct && d.PrivateAct(d)
             return 1
         },
         ChkActsL3: CZombies.prototype.ChkActs,
@@ -2646,7 +2650,7 @@ jinyinAct: function(a){
         OpenBox: function(b) {
             var a = $Z[b];
             a.EleBody.src = a.PicArr[7];
-			a.HP=400;
+			a.HP=300;
 			a.GoingDie=a.NormalDie;
             a.ChkActs = a.ChkActs1 = function() {
                 return 1
