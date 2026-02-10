@@ -1676,7 +1676,6 @@ jinyinAct: function(a){
                 default:
                     g.ChkActs = g.ChkActsL2;
                     g.WalkStatus = 1;
-                    g.EleBody.src = g.PicArr[g.NormalGif = g.WalkGif1];
                     SetHidden(f);
                     NewEle(a = c + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:61px;top:" + (g.height - 88) + "px;width:97px;height:88px;over-flow:hidden", 0, b);
                     ImgSpriter(a, c, [
@@ -1691,7 +1690,8 @@ jinyinAct: function(a){
                         ], 0,
                         function(i, j) {
                             ClearChild($(i))
-                        })
+                        });
+					g.EleBody.src = g.PicArr[g.NormalGif = g.WalkGif1];
             }
             e ? oSym.addTask(e,
                 function(j, i) {
@@ -1849,7 +1849,7 @@ jinyinAct: function(a){
         PicArr: (function() {
             var b = "images/Zombies/DuckyTubeZombie3/",
                 a = "images/Zombies/DuckyTubeZombie1/";
-            return ["images/Card/Zombies/DuckyTubeZombie1.png", b + "0.gif", b + "Walk1.gif", b + "Walk2.gif", b + "1.gif", b + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "Walk1.gif", a + "Walk2.gif", a + "Attack.gif"]
+            return ["images/Card/Zombies/DuckyTubeZombie1.png", b + "0.gif", b + "Walk1.gif", b + "Walk2.gif", b + "1.gif", b + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "Walk1.gif", a + "Walk2.gif", a + "Attack.gif", b + "Walk1.gif", b + "Walk2.gif", b + "Attack.gif"]
         })(),
 		jinyinAct:oBucketheadZombie.prototype.jinyinAct
     }),
