@@ -1826,7 +1826,7 @@ jinyinAct: function(a){
             return ["images/Card/Zombies/DuckyTubeZombie1.png", b + "0.gif", b + "Walk1.gif", b + "Walk2.gif", b + "1.gif", b + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "Walk1.gif", a + "Walk2.gif", a + "Attack.gif", b + "jinyinWalk1.gif", b + "jinyinWalk2.gif",b + "jinyinAttack.gif"]
         })(),
 		jinyinAct:function(a){
-			a.WalkGif0=a.jinyinWalkGif1;
+			a.WalkGif1=a.jinyinWalkGif1;
 			oConeheadZombie.prototype.jinyinAct(a);
 		},
         AudioArr: ["plastichit", "zombie_entering_water"],
