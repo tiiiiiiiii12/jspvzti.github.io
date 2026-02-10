@@ -1198,7 +1198,7 @@ var CZombies = function(b, a) {
 				var Z,
 					len=(Z=oZ.getArZ(a.ZX+20,a.ZX+100,a.R)).length;
 				while(len--){
-					Z[len]&&(Z[len].EName!="oConeheadZombie")&&a.Ornaments&&Z[len].ChangeR(Z[len])
+					Z[len]&&(Z[len].EName!="oDuckyTubeZombie2")&&(Z[len].EName!="oConeheadZombie")&&a.Ornaments&&Z[len].ChangeR(Z[len])
 				}
 			}
 		},
