@@ -2632,7 +2632,7 @@ jinyinAct: function(a){
 		left:a.PZ?"60px":"20px"
 	},0),
 	a.check=a.PZ);
-	$Z[a.id]&&(!a.beAttacked)&&(ClearChild($(p.JaHead)));
+	!$Z[a.id]&&(ClearChild($(p.JaHead)));
 		if(!a.opennum){
 		$Z[a.id]&&$Z[a.id].beAttacked&&($Z[a.id].HP<240)&&(a.OpenBox(a.id),
 		a.opennum=1)
