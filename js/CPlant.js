@@ -2670,9 +2670,9 @@ var CPlants = NewO({
                     var j, f = GetC(k),
                         e = oZ["getZ" + d](k, h);
                 if(num>75){
-                    e && e.Altitude == 1&&(e.getPea(e, 2, d)),(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
+                    e && e.Altitude == 1&&(e.getHit0(e, 2, d)),(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
                 }else{
-                e && e.Altitude == 1?(e.num>50&&e.getr(e,20),e.getPea(e,20,d), ClearChild(i)):(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
+                e && e.Altitude == 1?(num>50&&e.getr(e,20),e.getPea(e,20,d), ClearChild(i)):(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
                 }
                 },
                 [c, $(c), 0, b.AttackedLX, b.R, b.AttackedLX - 40])
