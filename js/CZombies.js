@@ -1691,6 +1691,7 @@ jinyinAct: function(a){
                         function(i, j) {
                             ClearChild($(i))
                         });
+					g.intowater=true;
 					g.EleBody.src = g.PicArr[g.NormalGif = g.WalkGif1];
             }
             e ? oSym.addTask(e,
@@ -1723,7 +1724,7 @@ jinyinAct: function(a){
             var a;
             !(d.FreeFreezeTime || d.FreeSetbodyTime) && (d.beAttacked && !d.isAttacking && d.JudgeAttack(), !d.isAttacking && (d.AttackedRX -= (a = d.Speed), d.ZX = d.AttackedLX -= a, d.Ele.style.left = Math.floor(d.X -= a) + "px"));
             d.AttackedLX < GetX(0) && (d.WalkStatus = 0, d.EleBody.src = d.Ornaments?oDuckyTubeZombie1.prototype.WalkGif0:d.PicArr[d.NormalGif = d.WalkGif0], SetVisible(d.EleShadow), d.ChkActs = d.ChkActsL3);
-			d.PrivateAct && d.PrivateAct(d)
+			d.PrivateAct && d.PrivateAct(d);
             return 1
         },
         ChkActsL3: CZombies.prototype.ChkActs,
@@ -1830,7 +1831,7 @@ jinyinAct: function(a){
 		jinyinAct:function(a){
 			a.WalkGif1=a.jinyinWalkGif1;
 			oConeheadZombie.prototype.jinyinAct(a);
-			a.EleBody
+			a.EleBody.src=a.intowater?a.PicArr[a.WalkGif1]:a.PicArr[a.WalkGif0]
 		},
         AudioArr: ["plastichit", "zombie_entering_water"],
         getHit: OrnIZombies.prototype.getHit,
