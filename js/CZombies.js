@@ -1077,13 +1077,15 @@ var CZombies = function(b, a) {
         EName: "oZombie",
         CName: "领带僵尸",
         StandGif: 9,
+		jinyinGif:10,
+		jinyinAttackGif:11,
         PicArr: (function() {
             var a = "images/Zombies/Zombie/";
             return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "Zombie.gif", a + "ZombieAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif", a + "jinyinZombieWalk.gif", a + "jinyinZombieAttack.gif"]
         })(),
 		jinyinAct:function(a){
-			a.NormalGif=10;
-			a.AttackGif=11;
+			a.NormalGif=a.jinyinGif;
+			a.AttackGif=a.jinyinAttackGif;
 			a.EleBody.src=a.PicArr[a.NormalGif];
 			a.OSpeed=a.Speed=3.6;
 			a.tasktime*=0.75;
@@ -1118,8 +1120,8 @@ var CZombies = function(b, a) {
 		HP:500,
 		SunNum:75,
 		jinyinAct:function(a){
-			a.NormalGif=10;
-			a.AttackGif=11;
+			a.NormalGif=a.jinyinGif;
+			a.AttackGif=a.jinyinAttackGif;
 			a.EleBody.src=a.PicArr[a.NormalGif];
 			a.tasktime*=0.1;
 			a.GoingDieHead=function(){};
