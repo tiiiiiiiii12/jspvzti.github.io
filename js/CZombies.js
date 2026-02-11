@@ -241,6 +241,7 @@ var CZombies = function(b, a) {
                 },
                 NormalDie: function() {
                     var c = this;
+					c.PrivateDie&&c.PrivateDie(c);
                     c.EleBody.src = c.PicArr[c.DieGif] + Math.random();
                     oSym.addTask(250, ClearChild, [c.Ele]);
                     c.HP = 0;
@@ -249,6 +250,7 @@ var CZombies = function(b, a) {
                 },
                 ExplosionDie: function() {
                     var c = this;
+					c.PrivateDie&&c.PrivateDie(c);
                     c.EleBody.src = c.PicArr[c.BoomDieGif] + Math.random();
                     oSym.addTask(300, ClearChild, [c.Ele]);
                     c.HP = 0;
@@ -256,6 +258,7 @@ var CZombies = function(b, a) {
                     c.PZ && oP.MonPrgs()
 				},
                 DisappearDie: function() {
+					this.PrivateDie&&this.PrivateDie(this);
                     ClearChild(this.Ele);
                     this.HP = 0;
                     delete $Z[this.id];
@@ -263,6 +266,7 @@ var CZombies = function(b, a) {
                 },
                 CrushDie: function() {
                     var c = this;
+					c.PrivateDie&&c.PrivateDie(c);
                     c.GoingDieHead(c.id, c.PicArr, c);
                     ClearChild(c.Ele);
                     c.HP = 0;
@@ -1118,12 +1122,37 @@ var CZombies = function(b, a) {
         OSpeed: 4.4,
         Speed: 4.4,
 		HP:500,
-		SunNum:75,
+		increaseSpeed:1.5,
+		SunNum:150,
+		PrivateAct:function(a){
+			for (u in $Z) {
+              e = $Z[u];	
+			if(!e.angry&&e.id!==a.id){
+				e.angry=1;
+				e.OSpeed*=a.increaseSpeed;
+				e.Speed*=a.increaseSpeed;
+				e.LostPaperSpeed*=a.increaseSpeed;
+				e.tasktime*=a.jinyin?0.25:0.5;
+			}
+		}
+	},
+		PrivateDie:function(a){			
+			for (u in $Z) {
+              e = $Z[u];	
+			if(e.angry&&e.id!==a.id){
+				e.angry=0;
+				e.OSpeed/=a.increaseSpeed;
+				e.Speed/=a.increaseSpeed;
+				e.LostPaperSpeed/=a.increaseSpeed;
+				e.tasktime/=a.jinyin?0.25:0.5;
+			}
+		}},
 		jinyinAct:function(a){
 			a.NormalGif=a.jinyinGif;
 			a.AttackGif=a.jinyinAttackGif;
 			a.EleBody.src=a.PicArr[a.NormalGif];
 			a.tasktime*=0.1;
+			a.increaseSpeed=2;
 			a.GoingDieHead=function(){};
 			a.JudgeAttack=function() {
                 var f = this,
@@ -1145,7 +1174,7 @@ var CZombies = function(b, a) {
 			a.getSlow=a.getFreeze=function(){};
 		},
         beAttackedPointR: 101,
-        Produce: '旗帜僵尸标志着即将来袭的一大堆僵尸"流"。<p>韧性：<font color="#FF0000">低</font></p>毫无疑问，摇旗僵尸喜爱脑髓。但在私下里他也迷恋旗帜。也许是因为旗帜上也画有脑子吧，这很难说。'
+        Produce: '旗帜僵尸标志着即将来袭的一大堆僵尸"流"。</font></p>通用技能：号召</font></p>当旗帜僵尸存在时，全场僵尸速度和伤害都翻倍</font></p>精英形态：处决者旗帜</font></p>本身速度更快，碾压植物，免疫减速等负面效果<p>韧性：<font color="#FF0000">低</font></p>毫无疑问，摇旗僵尸喜爱脑髓。但在私下里他也迷恋旗帜。也许是因为旗帜上也画有脑子吧，这很难说。'
     }),
     OrnIZombies = function() {
         var a = function(f, b) {
@@ -1224,7 +1253,7 @@ var CZombies = function(b, a) {
 				}
 			}
 		},
-        Produce: '他的铁桶头盔，能极大程度的承受伤害。<p>韧性：<font color="#FF0000">高</font><br>弱点：<font color="#FF0000">磁力菇</font></p>铁桶头僵尸经常戴着水桶，在冷漠的世界里显得独一无二。但事实上，他只是忘记了，那铁桶还在他头上而已。'
+        Produce: '他的铁桶头盔，能极大程度的承受伤害。<p>韧性：<font color="#FF0000">高</font><br>精英形态：铁桶被打掉后，原地生成墓碑</font><br>弱点：<font color="#FF0000">磁力菇</font></p>铁桶头僵尸经常戴着水桶，在冷漠的世界里显得独一无二。但事实上，他只是忘记了，那铁桶还在他头上而已。'
     }, {
         PicArr: {
             0: "images/Card/Zombies/BucketheadZombie.png",
@@ -1288,7 +1317,7 @@ var CZombies = function(b, a) {
             return ["images/Card/Zombies/PoleVaultingZombie.png", a + "0.gif", a + "PoleVaultingZombie.gif", a + "PoleVaultingZombieAttack.gif", a + "PoleVaultingZombieLostHead.gif", a + "PoleVaultingZombieLostHeadAttack.gif", a + "PoleVaultingZombieHead.gif" + $Random, a + "PoleVaultingZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "PoleVaultingZombieWalk.gif", a + "PoleVaultingZombieLostHeadWalk.gif", a + "PoleVaultingZombieJump.gif", a + "PoleVaultingZombieJump2.gif", a + "1.gif"]
         })(),
         AudioArr: ["polevault", "grassstep"],
-        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<p>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font></p>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为非凡。那就是撑杆僵尸。',
+        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<p>韧性：<font color="#FF0000">中（600)</font><Br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font></p>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为非凡。那就是撑杆僵尸。',
         getShadow: function(a) {
             return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 35) + "px"
         },
@@ -1402,7 +1431,7 @@ var CZombies = function(b, a) {
             return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（400）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（450）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>速度：正常，而后4倍(失去报纸后)</p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
         getShadow: function(a) {
             return "left:75px;top:" + (a.height - 25) + "px"
         },
@@ -1610,7 +1639,7 @@ jinyinAct: function(a){
         PlayNormalballAudio: function() {
             PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
         },
-        Produce: '他的铁栅门是有效的盾牌。<p>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高</font><br>弱点：大喷菇和磁力菇</p>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
+        Produce: '他的铁栅门是有效的盾牌。<p>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高</font><br>精英形态：手持大喷菇，对前方两格植物造成每次50伤害</font><br>弱点：大喷菇和磁力菇</p>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
         GoingDie: CZombies.prototype.GoingDie,
         getFirePea: function(c, a, b) {
             PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
