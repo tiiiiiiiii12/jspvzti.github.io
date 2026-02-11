@@ -551,7 +551,7 @@ var CZombies = function(b, a) {
 			a.PZ&&a.Speed&&!a.isAttacking&&a.getr(a,-(a.Speed*2))
 		}
 		},
-        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
+        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态：白色，三倍速度<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
         BirthCallBack: function(e) {
             var d = e.delayT,
                 c = e.id,
@@ -696,7 +696,7 @@ var CZombies = function(b, a) {
                 b = d + "spotlight2" + c + ".png" + $Random;
             return ["images/Card/Zombies/DancingZombie.png", d + "0.gif", d + "DancingZombie.gif", d + "Attack.gif", d + "LostHead.gif", d + "LostHeadAttack.gif", d + "Head.gif" + $Random, d + "Die.gif" + $Random, d + "BoomDie.gif" + $Random, d + "SlidingStep.gif" + $Random, d + "Dancing.gif" + $Random, d + "Summon1.gif", d + "Summon2.gif", d + "Summon3.gif", d + "LostHeadSlidingStep.gif" + $Random, d + "LostHeadDancing.gif" + $Random, d + "LostHeadSummon.gif" + $Random, a, b]
         })(),
-        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。</p><p>韧性：<font color="#FF0000">中</font><br>特点：<font color="#FF0000">召唤伴舞僵尸</font></p>舞王僵尸的最新唱片“抓住脑子啃啊啃”在僵尸界的人气正急速飙升。',
+        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。</p><p>韧性：<font color="#FF0000">中</font><br>精英形态：白色，一直滑步，无视植物，碰到脑子召唤伴舞</font><br>特点：<font color="#FF0000">召唤伴舞僵尸</font></p>舞王僵尸的最新唱片“抓住脑子啃啊啃”在僵尸界的人气正急速飙升。',
         getSnowPea: function() {
             this.PlaySlowballAudio();
         },
@@ -1119,15 +1119,15 @@ var CZombies = function(b, a) {
         })(),
         EName: "oFlagZombie",
         CName: "旗帜僵尸",
-        OSpeed: 4.4,
-        Speed: 4.4,
+        OSpeed: 3.3,
+        Speed: 3.3,
 		HP:500,
 		increaseSpeed:1.5,
 		SunNum:150,
 		PrivateAct:function(a){
 			for (u in $Z) {
               e = $Z[u];	
-			if(!e.angry&&e.id!==a.id){
+			if($Z[a.id]&&!e.angry&&e.id!==a.id){
 				e.angry=1;
 				e.OSpeed*=a.increaseSpeed;
 				e.Speed*=a.increaseSpeed;
@@ -1168,8 +1168,8 @@ var CZombies = function(b, a) {
                 var d = $Z[c];
                 $P[b].getHurt(d, 2, d.Attack)
             },
-			a.Speed*=1.5;
-			a.OSpeed*=1.5;
+			a.Speed*=2;
+			a.OSpeed*=2;
 			a.getSnowPea=OrnNoneZombies.prototype.getPea;
 			a.getSlow=a.getFreeze=function(){};
 		},
