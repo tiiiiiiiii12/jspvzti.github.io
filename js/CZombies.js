@@ -1174,7 +1174,7 @@ var CZombies = function(b, a) {
 			a.getSlow=a.getFreeze=function(){};
 		},
         beAttackedPointR: 101,
-        Produce: '旗帜僵尸标志着即将来袭的一大堆僵尸"流"。</font></p>通用技能：号召</font></p>当旗帜僵尸存在时，全场僵尸速度和伤害都翻倍</font></p>精英形态：处决者旗帜</font></p>本身速度更快，碾压植物，免疫减速等负面效果<p>韧性：<font color="#FF0000">低</font></p>毫无疑问，摇旗僵尸喜爱脑髓。但在私下里他也迷恋旗帜。也许是因为旗帜上也画有脑子吧，这很难说。'
+        Produce: '旗帜僵尸标志着即将来袭的一大堆僵尸"流"。</font><br>通用技能：号召</font><br>当旗帜僵尸存在时，全场僵尸速度和伤害都翻倍</font><br>精英形态：处决者旗帜</font><br>本身速度更快，碾压植物，免疫减速等负面效果<p>韧性：<font color="#FF0000">低</font></p>毫无疑问，摇旗僵尸喜爱脑髓。但在私下里他也迷恋旗帜。也许是因为旗帜上也画有脑子吧，这很难说。'
     }),
     OrnIZombies = function() {
         var a = function(f, b) {
