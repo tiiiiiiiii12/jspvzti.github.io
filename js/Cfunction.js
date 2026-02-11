@@ -1959,7 +1959,7 @@ CheckAutoSun = function(a) {
 	b != oS.AutoSun && (addCookie("JSPVZAutoSun", oS.AutoSun = b), b && AutoClickSun())
 },
 GetNewCard = function(a, b, c) {
-	StopMusic();
+	AllAudioStop();
 	PlayAudio("winmusic");
 	oSym.Clear(); (SetStyle(a, {
 		left: "350px",
@@ -2275,14 +2275,6 @@ ShowLevel = function() {
 	PlayAudio("gravebutton");
 	SetNone($("dOptionsMenu"));
 	SetBlock($("dAdvSmallContainer"))
-},
-hard = function() {
-PlayAudio("gravebutton");
-CZombies.prototype.hard=1
-},
-easy= function() {
-PlayAudio("gravebutton");
-CZombies.prototype.hard=0
 },
 HiddenLevel = function() {
 	PlayAudio("tap");
