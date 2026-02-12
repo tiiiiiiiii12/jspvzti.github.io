@@ -2112,7 +2112,7 @@ var CPlants = NewO({
                 case 0:
                     c.num+=1;
                     !c.Sleep && (d.bedevil(d),
-        d.jinyin&&(d.BulletEle = NewImg(0, "images/Plants/PB"+c.num<2?"-1":"0"+"0.gif","left:" + (d.AttackedLX - 40) + "px;top:" + (d.pixelTop + 30) + "px;visibility:hidden;z-index:" + (d.zIndex + 2)), 
+        d.jinyin&&(d.BulletEle = NewImg(0, "images/Plants/PB"+(c.num<2?"-1":"0")+"0.gif","left:" + (d.AttackedLX - 40) + "px;top:" + (d.pixelTop + 30) + "px;visibility:hidden;z-index:" + (d.zIndex + 2)), 
         d.NormalAttack = c.num<2?oSnowPea.prototype.NormalAttack:oPeashooter.prototype.NormalAttack, oSym.addTask(1, function(d) {
         d.NormalAttack(),
         $Z[d.id] && d.beAttacked ? oSym.addTask(140/c.num,arguments.callee, [d]): d.BulletEle = null;
@@ -2485,7 +2485,7 @@ var CPlants = NewO({
                 b = c.C;
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
-                     oGd.$[i + "_" + l+"_1"]&&oGd.$[i + "_" + l+"_1"].AttTime>=0&&(oGd.$[i + "_" + l+"_1"].AttTime-=60);
+                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime>=0)&&(oGd.$[i + "_" + l+"_1"].AttTime-=60);
                     oSym.addTask(2000,function(f){$P[f.id]&&((CustomSpecial(oPlantern,a,b)).jinyinnum=100)},[c]);
                   }
                 }
