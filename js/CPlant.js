@@ -2104,8 +2104,7 @@ var CPlants = NewO({
         Produce: '当僵尸吃下魅惑菇后，他将会掉转方向为你作战。<p>使用方法：<font color="#FF0000">单独使用，接触生效</font><br>特点：<font color="#FF0000">让一只僵尸为你作战<br>白天睡觉</font></p>魅惑菇声称：“僵尸们是我们的朋友，他们被严重误解了，僵尸们在我们的生态环境里扮演着重要角色。我们可以也应当更努力地让他们学会用我们的方式来思考。”',
         InitTrigger: function() {},
         getHurt: function(d, b, a) {
-            var c = this,
-                N=c.num?0:((c.num-1)**2)+1;
+            var c = this;
             switch (b) {
                 case 3:
                     (c.HP -= a) < 1 && c.Die();
@@ -2113,11 +2112,11 @@ var CPlants = NewO({
                 case 0:
                     c.num+=1;
                     !c.Sleep && (d.bedevil(d),
-        d.jinyin&&(d.BulletEle = NewImg(0, "images/Plants/PB"+c.num<2?"-1":0+"0.gif","left:" + (d.AttackedLX - 40) + "px;top:" + (d.pixelTop + 30) + "px;visibility:hidden;z-index:" + (d.zIndex + 2)), 
-        d.NormalAttack = c.num<2?oSnowPea.prototype.NormalAttack:oPeashooter.prototype.NormalAttack, oSym.addTask(1, function(d,N) {
+        d.jinyin&&(d.BulletEle = NewImg(0, "images/Plants/PB"+c.num<2?"-1":"0"+"0.gif","left:" + (d.AttackedLX - 40) + "px;top:" + (d.pixelTop + 30) + "px;visibility:hidden;z-index:" + (d.zIndex + 2)), 
+        d.NormalAttack = c.num<2?oSnowPea.prototype.NormalAttack:oPeashooter.prototype.NormalAttack, oSym.addTask(1, function(d) {
         d.NormalAttack(),
-        $Z[d.id] && d.beAttacked ? (--N&&oSym.addTask(10, arguments.callee, [d,N]),oSym.addTask(140, arguments.callee, [d,c.num?0:((c.num-1)**2)+1])) : d.BulletEle = null;
-          }, [d,N])));
+        $Z[d.id] && d.beAttacked ? oSym.addTask(140/c.num,arguments.callee, [d]): d.BulletEle = null;
+          }, [d])));
                     (c.HP -= 100) < 1 && c.Die();
                     break;
                 default:
