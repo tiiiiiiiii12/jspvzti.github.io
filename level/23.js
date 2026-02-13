@@ -3,7 +3,8 @@ oS.Init({
   ZName:[oZombie,oZombie2,oZombie3,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oConeheadZombie,oSnorkelZombie,oBucketheadZombie],
   PicArr:function(){
     var a=oTangleKelp.prototype,
-      b=a.PicArr;return["images/interface/background3.jpg",b.[a.CardGif],b[a.NormalGif]]}(),
+      b=a.PicArr;
+    return ["images/interface/background3.jpg",b.[a.CardGif],b[a.NormalGif]]}(),
   Coord:2,
   SunNum:50,
   LF:[0,1,1,2,2,1,1],
