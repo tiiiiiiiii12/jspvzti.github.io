@@ -590,7 +590,54 @@ var CPlants = NewO({
         getTriggerR: function(a) {
             return [a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]
         },
-        jinyinAct:function(){},
+NormalAttack1: function() {
+    var g = this,
+      f = g.pixelLeft + 58,
+      d = f - 35,
+      b = g.pixelTop + 20,
+      c = g.R,
+      e = f + 15,
+      a = function(j, h, a, i) {
+        return (j && j.Altitude == 1 ? (j[{
+          0: "getPea",
+          1: "getFirePea"
+        } [a]](j, i, 0), (SetStyle(h, {
+          left: j.ZX - 12 + "px",
+          width: "52px",
+          height: "46px"
+        })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [h]), false) : true)
+      };
+    (function(h, N) {
+      oSym.addTask(0,
+        function(j) {
+          var i = $(j);
+          i && SetVisible(i)
+        },
+        [h]);
+      oSym.addTask(1,
+        function(n, l, m, k, i,j,N, A, I) {
+          A == 0 && oGd.$Torch[GetR(k) + "_" + GetC(n)] && (PlayAudio("firepea"), A = 1, I = 40, i.src = "images/Plants/PB" + A + "0.gif");
+          j(oZ.getZ0(n, l), i, A, I) && ((n += 4) > 900 || (k += N) > 600 || k < -15 ? ClearChild(i) : (SetStyle(i, {
+            left: (m += 4) + "px",
+            top: k + "px"
+          }), oSym.addTask(1, arguments.callee, [n, GetR(k + 15), m, k, i,j,N, A, I])))
+        },
+        [f, c, d, b, EditEle(g.BulletEle.cloneNode(false), {
+            id: h
+          },
+          0, EDPZ),a,N,0,20]);
+      ++N <= 4 && oSym.addTask(10, arguments.callee, ["StarB" + Math.random(), N]);
+    })("StarB" + Math.random(), -4)
+  },
+        jinyinAct:function(a){
+          a.PrivateBirth= function(f) {
+    var e = f.AttackedLX,
+      b;
+    f.BulletEle = (NewImg(0, "images/Plants/PB00.gif", "left:" + e + "px;top:" + (GetY(b) - 50) + "px;visibility:hidden;z-index:" + (3 * b + 2)))
+  };
+          a.NormalAttack=a.NormalAttack1;
+          a.AttTime=120;
+        },
         PrivateBirth: function(f) {
             var e = f.AttackedLX,
                 d = e - 40,
