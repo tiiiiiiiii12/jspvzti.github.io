@@ -7,7 +7,7 @@ oS.Init({
 		return ["images/interface/background3.jpg", "images/interface/Dave.gif", "images/interface/Dave2.gif", "images/interface/Dave3.gif", b[a.CardGif], b[a.NormalGif]]
 	}(),
 	Coord: 2,
-	SunNum: 50,
+	SunNum: 150,
 	LF: [0, 1, 1, 2, 2, 1, 1],
 	backgroundImage: "images/interface/background3.jpg",
 	CanSelectCard: 1,
@@ -124,3 +124,4 @@ oS.Init({
 	}
 
 });
+
