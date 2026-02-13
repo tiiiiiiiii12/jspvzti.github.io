@@ -33,7 +33,7 @@ oS.Init({
     [oDuckyTubeZombie3,1,6],
     [oConeheadZombie,1,1],
     [oBucketheadZombie,1,1],
-    [oDancingZombie,1,1],
+    [oFootballZombie,1,1],
     [oSnorkelZombie,1,7,[29,30]]
   ],
   FlagNum:30,
