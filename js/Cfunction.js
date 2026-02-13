@@ -1582,7 +1582,7 @@ LetsGO = function() {
 	SetVisible(e); ! oS.BrainsNum && CustomSpecial(oBrains, oS.R - 1, -2); (oS.StartGame ||
 	function() {
 		StopMusic();
-		NewMusic(oS.LoadMusic = oS.StartGameMusic);
+		PlayMusic(oS.LoadMusic = oS.StartGameMusic);
 		SetVisible($("tdShovel"), $("dFlagMeter"), $("dTop"));
 		oS.InitLawnMower();
 		PrepareGrowPlants(function() {
