@@ -7,7 +7,7 @@ oS.Init({
 		return ["images/interface/background3.jpg", b[a.CardGif], b[a.NormalGif]]
 	}(),
 	Coord: 2,
-	SunNum: 50,
+	SunNum: 150,
 	LF: [0, 1, 1, 2, 2, 1, 1],
 	backgroundImage: "images/interface/background3.jpg",
 	CanSelectCard: 1,
@@ -38,7 +38,7 @@ oS.Init({
 	FlagNum: 20,
 	FlagToSumNum: {
 		a1: [3, 5, 9, 10, 13, 15, 19],
-		a2: [1, 4, 6, 20, 8, 10, 18, 60]
+		a2: [1, 2, 3, 15, 8, 10, 18, 60]
 	},
 	FlagToMonitor: {
 		9: [ShowLargeWave, 0],
@@ -54,5 +54,6 @@ oS.Init({
 	}
 
 });
+
 
 
