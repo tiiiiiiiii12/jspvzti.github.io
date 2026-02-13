@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oHypnoShroom, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash],
-	ZName: [oZombie, oZombie2, oZombie3, oDuckyTubeZombie1, oDuckyTubeZombie2, oDuckyTubeZombie3, oConeheadZombie, oNewspaperZombie, oFootballZombie, oBucketheadZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oDuckyTubeZombie1, oDuckyTubeZombie2, oDuckyTubeZombie3, oConeheadZombie, oNewspaperZombie, oFootballZombie, oBucketheadZombie,oDancingZombie],
 	PicArr: function() {
 		var a = oThreepeater.prototype,
 			b = a.PicArr;
@@ -11,7 +11,7 @@ oS.Init({
 	LF: [0, 1, 1, 2, 2, 1, 1],
 	backgroundImage: "images/interface/background3.jpg",
 	CanSelectCard: 1,
-	LevelName: "关卡 2-3",
+	LevelName: "关卡 3-2",
 	LvlEName: 22,
 	LargeWaveFlag: {
 		10: $("imgFlag3"),
@@ -32,12 +32,13 @@ oS.Init({
 		[oConeheadZombie, 2, 1],
 		[oBucketheadZombie, 1, 1],
 		[oFootballZombie, 1, 1],
+		[oDancingZombie, 1, 1],
 		[oNewspaperZombie, 1, 1]
 	],
 	FlagNum: 20,
 	FlagToSumNum: {
 		a1: [3, 5, 9, 10, 13, 15, 19],
-		a2: [1, 2, 3, 10, 4, 5, 6, 25]
+		a2: [1, 4, 6, 20, 8, 10, 18, 60]
 	},
 	FlagToMonitor: {
 		9: [ShowLargeWave, 0],
@@ -51,4 +52,5 @@ oS.Init({
 		});
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:290px;left:636px", EDAll)
 	}
+
 });
