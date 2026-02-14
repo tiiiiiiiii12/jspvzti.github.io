@@ -579,13 +579,13 @@ var CPlants = NewO({
         Produce: '双发射手可以一次发射两颗豌豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">两倍</font></p>双发射手很凶悍，他是在街头混大的。他不在乎任何人的看法，无论是植物还是僵尸，他打出豌豆，是为了让别人离他远点。其实呢，双发射手一直暗暗地渴望着爱情。',
         NormalAttack1: oPeashooter.prototype.NormalAttack,
         NormalAttack: function(a) {
-            this.NormalAttack1();
-            oSym.addTask(15,
-                function(c) {
-                    var b = $P[c];
-                    b && b.NormalAttack1()
+            oSym.addTask(0,
+                function(d, b) {
+                    var c = $P[d];
+                    c && c.NormalAttack1();
+                    --b && oSym.addTask(15, arguments.callee, [d, b])
                 },
-                [this.id])
+                [this.id, Math.round(Math.random()*2+2)])
         }
     }),
     oThreepeater = InheritO(oPeashooter, {
@@ -720,8 +720,8 @@ NormalAttack1: function() {
         coolTime: 50,
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
-        Tooltip: "一次发射四颗豌豆<br>(需要双发射手)",
-        Produce: '机枪射手可以一次发射四颗豌豆</font></p>精英形态：三条线各发射五颗豌豆，且本行有概率是冰豆或火豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
+        Tooltip: "一次发射五颗豌豆<br>(需要双发射手)",
+        Produce: '机枪射手可以一次发射五颗豌豆</font></p>精英形态：三条线各发射五颗豌豆，且本行有概率是冰豆或火豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
         PrivateBirth:this.jinyin?oThreepeater.prototype.PrivateBirth:
                 function(c) {
             var b = c.AttackedLX,
