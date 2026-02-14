@@ -504,7 +504,7 @@ var CPlants = NewO({
                         "-1": "getSnowPea",
                         0: "getPea",
                         1: "getFirePea"
-                    } [m]](d, h, c), (SetStyle(j, {
+                    } [m]](d, h,c),(SetStyle(j, {
                         left: o + 28 + "px",
                         width: "52px",
                         height: "46px"
@@ -588,7 +588,7 @@ var CPlants = NewO({
         Tooltip: "一次射出三行的豌豆",
         Produce: '三线射手可以在三条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">三线</font></p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
         getTriggerR: function(a) {
-            return [a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]
+            return [1,oS.R]
         },
 NormalAttack1: function() {
     var g = this,
@@ -665,8 +665,6 @@ NormalAttack1: function() {
         NormalAttack: function() {
             var a, c = this,
                 d, b = 0;
-            c.Pea=Math.random()*100>20?0:1;
-            c.PicArr[3]="images/Plants/PB"+c.Pea+"0.gif";
             for (a in c.oTrigger) {
                 EditEle(c.BulletEle[b++].cloneNode(false), {
                         id: d = "PB" + Math.random(),
@@ -731,14 +729,16 @@ NormalAttack1: function() {
             var c = b[1];
             return c && c.EName == "oRepeater"
         },
-        getTriggerR:oThreepeater.prototype.getTriggerR,
+        getTriggerR:function(a){
+           return [a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]
+        },
         jinyinAct:function(a){
         a.PrivateBirth=oThreepeater.prototype.PrivateBirth;
         a.NormalAttack1=oThreepeater.prototype.NormalAttack;
         a.PrivateDie=oThreepeater.prototype.PrivateDie
         },
         Pea:0,
-        NormalAttack1: oPeashooter.prototype.NormalAttack,
+        NormalAttack1: oPeashooter。prototype.NormalAttack,
         NormalAttack: function(a) {
             oSym.addTask(0,
                 function(d, b) {
