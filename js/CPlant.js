@@ -666,6 +666,7 @@ NormalAttack1: function() {
             var a, c = this,
                 d, b = 0;
             c.Pea=Math.random()*100>20?0:1;
+            c.PicArr[3]="images/Plants/PB"+c.Pea+"0.gif";
             for (a in c.oTrigger) {
                 EditEle(c.BulletEle[b++].cloneNode(false), {
                         id: d = "PB" + Math.random(),
