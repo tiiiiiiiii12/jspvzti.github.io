@@ -482,6 +482,15 @@ var CPlants = NewO({
         PrivateDie: function(a) {
             a.BulletEle = null
         },
+        jinyinAct:function(a){
+            $(a.id).style.opacity=0.7;
+            $(a.id).onclick=function(){
+                !a.dianji&&a.NormalAttack(a);
+                a.dianji=true;
+                oSym.addTask(50,function(a){a.dianji=false});
+                a.getHurt(a,0,10);
+            }
+        },
         NormalAttack: function() {
             var a = this,
                 b = "PB" + Math.random();
@@ -516,7 +525,8 @@ var CPlants = NewO({
     oSnowPea = InheritO(oPeashooter, {
         EName: "oSnowPea",
         CName: "寒冰射手",
-        SunNum: 175,
+        SunNum: 200,
+        jinyinAct:function(){},
         BKind: -1,
         PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
@@ -550,7 +560,7 @@ var CPlants = NewO({
                         height: "46px"
                     })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ? 5 : -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g])) : ClearChild(j)
                 },
-                [b, $(b), 20, 0, a.AttackedLX, a.R, -1, 0, a.AttackedLX - 40, oGd.$Torch])
+                [b, $(b), 20, 0, a.AttackedLX, a.R,Math.random()*100>10?-1:0,0,a.AttackedLX - 40, oGd.$Torch])
         }
     }),
     oRepeater = InheritO(oPeashooter, {
@@ -560,6 +570,7 @@ var CPlants = NewO({
         height: 71,
         beAttackedPointR: 53,
         SunNum: 200,
+        jinyinAct:function(){},
         PicArr: ["images/Card/Plants/Repeater.png", "images/Plants/Repeater/0.gif", "images/Plants/Repeater/Repeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次发射两颗豌豆",
@@ -626,8 +637,8 @@ NormalAttack1: function() {
             id: h
           },
           0, EDPZ),a,N,0,20]);
-      ++N <= 4 && oSym.addTask(10, arguments.callee, ["StarB" + Math.random(), N]);
-    })("StarB" + Math.random(), -4)
+      ++N <= 5 && oSym.addTask(10, arguments.callee, ["StarB" + Math.random(), N]);
+    })("StarB" + Math.random(), -5)
   },
         jinyinAct:function(a){
           a.PrivateBirth= function(f) {
@@ -636,7 +647,7 @@ NormalAttack1: function() {
     f.BulletEle = (NewImg(0, "images/Plants/PB00.gif", "left:" + e + "px;top:" + (GetY(b) - 50) + "px;visibility:hidden;z-index:" + (3 * b + 2)))
   };
           a.NormalAttack=a.NormalAttack1;
-          a.AttTime=120;
+          a.AttTime=140;
         },
         PrivateBirth: function(f) {
             var e = f.AttackedLX,
@@ -738,7 +749,7 @@ NormalAttack1: function() {
         a.PrivateDie=oThreepeater.prototype.PrivateDie
         },
         Pea:0,
-        NormalAttack1: oPeashooter。prototype.NormalAttack,
+        NormalAttack1: oPeashooter.prototype.NormalAttack,
         NormalAttack: function(a) {
             oSym.addTask(0,
                 function(d, b) {
