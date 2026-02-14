@@ -487,7 +487,9 @@ var CPlants = NewO({
             $(a.id).onclick=function(){
                 !a.dianji&&a.NormalAttack(a);
                 a.dianji=true;
-                oSym.addTask(50,function(a){a.dianji=false});
+                oSym.addTask(50,function(a){
+                        a.dianji=false
+                },[a]);
                 a.getHurt(a,0,10);
             }
         },
