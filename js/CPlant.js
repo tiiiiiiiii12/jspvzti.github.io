@@ -586,7 +586,7 @@ var CPlants = NewO({
         PicArr: ["images/Card/Plants/Threepeater.png", "images/Plants/Threepeater/0.gif", "images/Plants/Threepeater/Threepeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次射出三行的豌豆",
-        Produce: '三线射手可以在三条线上同时射出豌豆。<p>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">三线</font></p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
+        Produce: '三线射手可以在三条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">三线</font></p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
         getTriggerR: function(a) {
             return [a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]
         },
@@ -616,7 +616,7 @@ NormalAttack1: function() {
         [h]);
       oSym.addTask(1,
         function(n, l, m, k, i,j,N, A, I) {
-          A == 0 && oGd.$Torch[GetR(k) + "_" + GetC(n)] && (PlayAudio("firepea"), A = 1, I = 40, i.src = "images/Plants/PB" + A + "0.gif");
+          A == 0 && oGd.$Torch[GetR(k) + "_" + GetC(n)] && (A = 1, I = 40, i.src = "images/Plants/PB" + A + "0.gif");
           j(oZ.getZ0(n, l), i, A, I) && ((n += 4) > 900 || (k += N) > 600 || k < -15 ? ClearChild(i) : (SetStyle(i, {
             left: (m += 4) + "px",
             top: k + "px"
@@ -665,6 +665,7 @@ NormalAttack1: function() {
         NormalAttack: function() {
             var a, c = this,
                 d, b = 0;
+            c.Pea=Math.random()*100>20?0:1;
             for (a in c.oTrigger) {
                 EditEle(c.BulletEle[b++].cloneNode(false), {
                         id: d = "PB" + Math.random(),
@@ -2532,7 +2533,7 @@ NormalAttack1: function() {
                 b = c.C;
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
-                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime>=0)&&(oGd.$[i + "_" + l+"_1"].AttTime-=60);
+                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime>=-50)&&(oGd.$[i + "_" + l+"_1"].AttTime-=60);
                     oSym.addTask(2000,function(f){$P[f.id]&&((CustomSpecial(oPlantern,a,b)).jinyinnum=100)},[c]);
                   }
                 }
@@ -2545,7 +2546,7 @@ NormalAttack1: function() {
         if(c.jinyin){
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
-                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime<=-60)&&(oGd.$[i + "_" + l+"_1"].AttTime+=60);
+                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime<=-110)&&(oGd.$[i + "_" + l+"_1"].AttTime+=60);
                   }
                 }
             }
