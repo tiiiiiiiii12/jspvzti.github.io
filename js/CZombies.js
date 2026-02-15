@@ -156,8 +156,8 @@ var CZombies = function(b, a) {
                 Birth: function() {
                     var c = this;
                     $Z[c.id] = c;
-					c.HP*=Math.min(c.level*0.75,1);
-					c.OrnHP*=Math.min(c.level*0.75,1);
+					c.HP*=Math.max(c.level*0.75,1);
+					c.OrnHP*=Math.max(c.level*0.75,1);
 					c.tasktime/=c.level;
                     oZ.add(c);
                     c.BirthCallBack(c);
