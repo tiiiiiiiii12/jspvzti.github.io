@@ -1381,7 +1381,18 @@ var CZombies = function(b, a) {
                     var h = $Z[m],
                         k,
                         q,
-                        r;
+                        r,
+					    R = (h.R - 1) || 0,
+                        RM = h.R + 1 <= oS.R ? h.R + 1 : oS.R,
+                    C = GetC(h.ZX);
+                for(let i = R;i <= RM;i++){
+                    for(let j = C - 1;j <= C + 1;j++){
+                        for(let k = 0;k <= 3;k++){
+                            let p = oGd.$[i+"_"+j+"_"+k];
+							p&&h.jinyin&&(CustomZombie(oPoleVaultingZombie,i,l)).HP=160;
+                        }
+                    }
+                }
                     h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = q = k.AttackedRX) - h.beAttackedPointL) + h.beAttackedPointR, SetStyle(i, {
                         left: h.X + "px"
                     }), n.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", SetVisible(l), h.isAttacking = 0, h.Altitude = 1, h.OSpeed = h.Speed = 1.6, h.NormalGif = 9, h.LostHeadGif = 10, h.NormalAttack = (r = CZombies.prototype).NormalAttack, h.getCrushed = r.getCrushed, h.getFreeze = r.getFreeze, h.getRaven = r.getRaven) : (h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g) - h.beAttackedPointR) + h.beAttackedPointL, SetStyle(i, {
@@ -1487,6 +1498,10 @@ var CZombies = function(b, a) {
             PlayAudio("splat" + Math.floor(1 + Math.random() * 3));
             c.getHit0(c, a, b)
         },
+		getFreezePea: function(c, a, b) {
+            PlayAudio("splat" + Math.floor(1 + Math.random() * 3));
+            c.getHit0(c, a, b)
+        },
         getFirePea: function(f, b, e) {
             f.PlayFireballAudio();
             (f.FreeSlowTime || f.FreeFreezeTime) && (f.Speed = f.OSpeed, f.FreeSlowTime = 0, f.FreeFreezeTime = 0);
@@ -1540,7 +1555,7 @@ var CZombies = function(b, a) {
                 g.ChkActs1 = function() {
                     return 1
                 },
-                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(150,
+                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(150,
                     function(m, l) {
                         var k = $Z[m];
                         if (!k) {
@@ -1663,7 +1678,7 @@ jinyinAct: function(a){
         },
         CheckOrnHP: function(g, h, d, c, f, b, a) {
             var e = OrnNoneZombies.prototype;
-            (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, g.getSnowPea = g.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
+            (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
         },
         getFireball: function(c, a, b) {
             b != c.WalkDirection ? (c.FreeSlowTime = 0, c.Attack = 100, c.Speed != c.OSpeed ? (c.PlayNormalballAudio(), c.Speed = c.OSpeed) : c.PlayFireballAudio()) : c.PlayNormalballAudio()
