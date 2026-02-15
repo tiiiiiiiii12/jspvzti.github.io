@@ -475,7 +475,7 @@ var CPlants = NewO({
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         PicArr: ["images/Card/Plants/Peashooter.png", "images/Plants/Peashooter/0.gif", "images/Plants/Peashooter/Peashooter.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         Tooltip: "向敌人射出豌豆",
-        Produce: '豌豆射手，你的第一道防线。它们通过发射豌豆来攻击僵尸。<p>伤害：<font color="#FF0000">中等</font></p>一棵植物，怎么能如此快地生长，并发射如此多的豌豆呢？豌豆射手：“努力工作，奉献自己，再加上一份阳光，高纤维和氧化碳均衡搭配，这种健康早餐让一切成为可能。”',
+        Produce: '豌豆射手，你的第一道防线。它们通过发射豌豆来攻击僵尸。<br>精英形态：点击可额外发射豌豆，但会扣自身10血<p>伤害：<font color="#FF0000">中等</font></p>一棵植物，怎么能如此快地生长，并发射如此多的豌豆呢？豌豆射手：“努力工作，奉献自己，再加上一份阳光，高纤维和氧化碳均衡搭配，这种健康早餐让一切成为可能。”',
         PrivateBirth: function(a) {
             a.BulletEle = NewImg(0, a.PicArr[3], "left:" + (a.AttackedLX - 40) + "px;top:" + (a.pixelTop + 3) + "px;visibility:hidden;z-index:" + (a.zIndex + 2))
         },
@@ -533,7 +533,7 @@ var CPlants = NewO({
         PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
         Tooltip: "寒冰射手可造成伤害, 同时又有减速效果",
-        Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果。<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
+        Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
         NormalAttack: function() {
             var a = this,
                 b = "PB" + Math.random();
@@ -575,8 +575,8 @@ var CPlants = NewO({
         jinyinAct:function(){},
         PicArr: ["images/Card/Plants/Repeater.png", "images/Plants/Repeater/0.gif", "images/Plants/Repeater/Repeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
-        Tooltip: "一次发射两颗豌豆",
-        Produce: '双发射手可以一次发射两颗豌豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">两倍</font></p>双发射手很凶悍，他是在街头混大的。他不在乎任何人的看法，无论是植物还是僵尸，他打出豌豆，是为了让别人离他远点。其实呢，双发射手一直暗暗地渴望着爱情。',
+        Tooltip: "一次发射2~4颗豌豆",
+        Produce: '双发射手可以一次发射2~4颗豌豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">两倍</font></p>双发射手很凶悍，他是在街头混大的。他不在乎任何人的看法，无论是植物还是僵尸，他打出豌豆，是为了让别人离他远点。其实呢，双发射手一直暗暗地渴望着爱情。',
         NormalAttack1: oPeashooter.prototype.NormalAttack,
         NormalAttack: function(a) {
             oSym.addTask(0,
@@ -590,16 +590,16 @@ var CPlants = NewO({
     }),
     oThreepeater = InheritO(oPeashooter, {
         EName: "oThreepeater",
-        CName: "三线射手",
+        CName: "N线射手",
         width: 73,
         height: 80,
         beAttackedPointR: 53,
-        SunNum: 325,
+        SunNum:375,
         Pea:0,
         PicArr: ["images/Card/Plants/Threepeater.png", "images/Plants/Threepeater/0.gif", "images/Plants/Threepeater/Threepeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
-        Tooltip: "一次射出三行的豌豆",
-        Produce: '三线射手可以在三条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">三线</font></p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
+        Tooltip: "一次射出N行的豌豆",
+        Produce: 'N线射手可以在N条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">三线</font></p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
         getTriggerR: function(a) {
             return [1,oS.R]
         },
@@ -1147,7 +1147,7 @@ NormalAttack1: function() {
         },
         PicArr: ["images/Card/Plants/PotatoMine.png", "images/Plants/PotatoMine/0.gif", "images/Plants/PotatoMine/PotatoMine.gif", "images/Plants/PotatoMine/PotatoMineNotReady.gif", "images/Plants/PotatoMine/PotatoMine_mashed.gif", "images/Plants/PotatoMine/ExplosionSpudow.gif"],
         Tooltip: "敌人接触后爆炸<br>需要时间安放",
-        Produce: '土豆雷具有强大的威力，但是他们需要点时间来武装自己。你应把他们种在僵尸前进的路上，当他们一被接触就会发生爆炸</font></p>精英形态：立刻出土，爆炸后向右在前方无植物的格子上分裂至多两个土豆雷<p>伤害：<font color="FF0000">巨大</font><br>范围：<font color="#FF0000">一个小区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，需要一定准备时间才能起作用。</font></p>一些人说土豆雷很懒，因为他总是把所有事情留到最后。土豆雷才没空理他们，他正忙着考虑他的投资战略呢。',
+        Produce: '土豆雷具有强大的威力，但是他们需要点时间来武装自己。你应把他们种在僵尸前进的路上，当他们一被接触就会发生爆炸</font><br>精英形态：立刻出土，爆炸后向右在前方无植物的格子上分裂至多两个土豆雷<p>伤害：<font color="FF0000">巨大</font><br>范围：<font color="#FF0000">一个小区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，需要一定准备时间才能起作用。</font></p>一些人说土豆雷很懒，因为他总是把所有事情留到最后。土豆雷才没空理他们，他正忙着考虑他的投资战略呢。',
         Status: 0,
         AudioArr: ["potato_mine"],
         canTrigger: 0,
@@ -1444,7 +1444,7 @@ NormalAttack1: function() {
         HP: 8000,
         PicArr: ["images/Card/Plants/TallNut.png", "images/Plants/TallNut/0.gif", "images/Plants/TallNut/TallNut.gif", "images/Plants/TallNut/TallnutCracked1.gif", "images/Plants/TallNut/TallnutCracked2.gif"],
         Tooltip: "不会被跳过的坚实壁垒",
-        Produce: '高坚果是重型壁垒植物，而且不会被跨过<p>韧性：<font color="#FF0000">非常高</font><br>特殊：<font color="#FF0000">不会被跨过或越过</font></p>人们想知道，坚果墙和高坚果是否在竞争。高坚果以男中音的声调大声笑了。“我们之间怎么会存在竞争关系？我们是哥们儿。你知道坚果墙为我做了什么吗……”高坚果的声音越来越小，他狡黠地笑着。”',
+        Produce: '高坚果是重型壁垒植物，而且不会被跨过<p>韧性：<font color="#FF0000">非常高</font><br>精英形态：随血量召唤增强的特定僵尸<br>特殊：<font color="#FF0000">不会被跨过或越过</font></p>人们想知道，坚果墙和高坚果是否在竞争。高坚果以男中音的声调大声笑了。“我们之间怎么会存在竞争关系？我们是哥们儿。你知道坚果墙为我做了什么吗……”高坚果的声音越来越小，他狡黠地笑着。”',
         CanGrow: function(c, b, f) {
             var a = b + "_" + f,
                 d = c[1],
@@ -1888,7 +1888,7 @@ NormalAttack1: function() {
         PicArr: ["images/Card/Plants/CoffeeBean.png", "images/Plants/CoffeeBean/0.gif", "images/Plants/CoffeeBean/CoffeeBean.gif", "images/Plants/CoffeeBean/CoffeeBeanEat.gif" + $Random],
         AudioArr: ["coffee", "wakeup"],
         Tooltip: "唤醒在白天里睡觉的蘑菇类植物",
-        Produce: '咖啡豆，可以唤醒睡眠中的蘑菇们。<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">可以种在其他植物上，用来唤醒蘑菇们</font></p>咖啡豆：“嘿，伙计们！嘿，怎么回事？是谁？嘿！你瞧见那个东西没？什么东西？哇！是狮子！”嗯，咖啡豆确定，这样可以让自己很兴奋。',
+        Produce: '咖啡豆，可以唤醒睡眠中的蘑菇们。<br>精英形态：使后种植的植物全精英，持续10秒<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">可以种在其他植物上，用来唤醒蘑菇们</font></p>咖啡豆：“嘿，伙计们！嘿，怎么回事？是谁？嘿！你瞧见那个东西没？什么东西？哇！是狮子！”嗯，咖啡豆确定，这样可以让自己很兴奋。',
         InitTrigger: function() {},
         GetDBottom: function() {
             return 49
@@ -1897,7 +1897,7 @@ NormalAttack1: function() {
             return -30
         },
         CanGrow: function(a, b) {
-            return (b = a[1]) && b.Sleep && !a[3]
+            return a[1]||a[3]||a[2]
         },
         BirthStyle: function(c, d, b, a) {
             b.childNodes[1].src = this.PicArr[3] + Math.random();
@@ -1908,6 +1908,11 @@ NormalAttack1: function() {
         },
         PrivateBirth: function(a) {
             SetHidden($(a.id).firstChild);
+            a.jinyin&&($(a.id).style.opacity=0.5,CPlants.prototype.jinyin=1);
+            oSym.addTask(1000,function() {
+                CPlants.prototype.jinyin=0
+        },
+        []);
             PlayAudio("coffee");
             oSym.addTask(240,
                 function(c) {
@@ -2070,7 +2075,7 @@ NormalAttack1: function() {
         Attacking: 0,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         Tooltip: "远程射手, 但敌人靠近时会蜷缩不动",
-        Produce: '胆小菇是一种远程射手，敌人接近后会躲起来。<p>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击<br>白天睡觉</font></p>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
+        Produce: '胆小菇是一种远程射手，敌人接近后会躲起来。<p>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少<br>白天睡觉</font></p>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
         GetDX: CPlants.prototype.GetDX,
         getTriggerRange: CPlants.prototype.getTriggerRange,
         getTriggerR: function(c) {
@@ -2244,11 +2249,16 @@ NormalAttack1: function() {
         Status: 0,
         PicArr: ["images/Card/Plants/SunShroom.png", "images/Plants/SunShroom/0.gif", "images/Plants/SunShroom/SunShroom2.gif", "images/Plants/SunShroom/SunShroomSleep.gif", "images/Plants/SunShroom/SunShroom.gif"],
         Tooltip: "开始提供少量的阳光, 一段时间后提供正常量的阳光",
-        Produce: '阳光菇开始提供少量阳光，稍后提供正常数量阳光。<p>生产阳光：<font color="#FF0000">开始低，之后正常<br>白天睡觉</font></p>阳光菇讨厌阳光。恨到当它内部产生点阳光时，就尽可能快的吐出来。它就是不能忍受这个。对它来说，阳光令人厌恶。',
+        Produce: '阳光菇开始提供少量阳光，稍后提供正常数量阳光。<br>精英形态：过一段时间死亡并生成225阳光<p>生产阳光：<font color="#FF0000">开始低，之后正常<br>白天睡觉</font></p>阳光菇讨厌阳光。恨到当它内部产生点阳光时，就尽可能快的吐出来。它就是不能忍受这个。对它来说，阳光令人厌恶。',
         GetDX: CPlants.prototype.GetDX,
         GetDY: CPlants.prototype.GetDY,
         InitTrigger: function() {},
         PrivateDie: function(a) {},
+        jinyinAct:function(a){
+           oSym.addTask(300,function(a){
+           $P[a.id]&&(AppearSun(a.pixelLeft,a.pixelTop,225),a.Die())
+         },[a])
+        },
         PrivateBirth: function() {},
         BirthStyle: function(c, d, b, a) {
             oS.DKind ? (c.canTrigger = 0, c.Sleep = 1, b.childNodes[1].src = "images/Plants/SunShroom/SunShroomSleep.gif") : (oSym.addTask(600,
@@ -2534,7 +2544,7 @@ NormalAttack1: function() {
         SunNum: 25,
         PicArr: ["images/Card/Plants/Plantern.png", "images/Plants/Plantern/0.gif", "images/Plants/Plantern/Plantern.gif", "images/Plants/Plantern/light.gif"],
         Tooltip: "照亮一片区域, 让玩家可以看穿战场迷雾",
-        Produce: '灯笼草，能照亮一片区域，让你看清战场迷雾<p>范围：<font color="#FF0000">一片圆形区域</font><br>特点：<font color="#FF0000">使你看清战场迷雾</font></p>灯笼草拒绝科学，他只会埋头苦干。其他植物吃的是光，挤出的是氧气。灯笼草吃的是黑暗，挤出的却是光。对于他如何能产生光这件事，灯笼草持谨慎态度。“我不会说这是‘巫术’，我也不会使用‘黑暗力量’，我只是……我想我说得够多的了。”',
+        Produce: '灯笼草，能照亮一片区域，让你看清战场迷雾<br>精英形态：提升周围植物攻速<p>范围：<font color="#FF0000">一片圆形区域</font><br>特点：<font color="#FF0000">使你看清战场迷雾</font></p>灯笼草拒绝科学，他只会埋头苦干。其他植物吃的是光，挤出的是氧气。灯笼草吃的是黑暗，挤出的却是光。对于他如何能产生光这件事，灯笼草持谨慎态度。“我不会说这是‘巫术’，我也不会使用‘黑暗力量’，我只是……我想我说得够多的了。”',
         PrivateBirth: function(c) {
             var a = c.R,
                 b = c.C;
@@ -2547,7 +2557,7 @@ NormalAttack1: function() {
                 b = c.C;
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
-                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime>=-50)&&(oGd.$[i + "_" + l+"_1"].AttTime-=60);
+                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime<=-50)&&(oGd.$[i + "_" + l+"_1"].AttTime-=60);
                     oSym.addTask(2000,function(f){$P[f.id]&&((CustomSpecial(oPlantern,a,b)).jinyinnum=100)},[c]);
                   }
                 }
@@ -2560,7 +2570,7 @@ NormalAttack1: function() {
         if(c.jinyin){
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
-                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime<=-110)&&(oGd.$[i + "_" + l+"_1"].AttTime+=60);
+                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime>=-110)&&(oGd.$[i + "_" + l+"_1"].AttTime+=60);
                   }
                 }
             }
@@ -2587,7 +2597,7 @@ NormalAttack1: function() {
             return ["images/Card/Plants/Cactus.png", "images/Plants/Cactus/0.gif", "images/Plants/Cactus/Cactus.gif", "images/Plants/Cactus/Cactus2.gif", "images/Plants/Cactus/Attack.gif", "images/Plants/Cactus/Attack2.gif", "images/Plants/Cactus/Elongation.gif", "images/Plants/Cactus/Shorten.gif", "images/Plants/Cactus/Projectile" + ($User.Browser.IE6 ? 8 : 32) + ".png"]
         })(),
         Tooltip: "能发射刺穿气球的子弹",
-        Produce: '仙人掌发射的穿刺弹可以用来打击地面和空中目标，有概率连发 </font><br>精英形态：子弹有概率穿透或击退<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">地面和空中</font></p>确实，仙人掌非常“刺儿”，但是她的刺下，隐藏藏着颗温柔的心，充满着爱和善良。她只是想拥抱别人，和被别人拥抱。大多数人都做不到这点，但是仙人掌她并不介意。她盯着一只铠甲鼠好一阵子了，这次好像真的可以抱抱了。',
+        Produce: '仙人掌发射的穿刺弹可以用来打击地面和空中目标，有概率连发<br>精英形态：子弹有概率穿透或击退<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">地面和空中</font></p>确实，仙人掌非常“刺儿”，但是她的刺下，隐藏藏着颗温柔的心，充满着爱和善良。她只是想拥抱别人，和被别人拥抱。大多数人都做不到这点，但是仙人掌她并不介意。她盯着一只铠甲鼠好一阵子了，这次好像真的可以抱抱了。',
         getShadow: function(a) {
             return "left:3px;top:132px"
         },
