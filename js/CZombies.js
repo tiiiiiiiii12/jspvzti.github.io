@@ -1401,7 +1401,7 @@ var CZombies = function(b, a) {
                     for(let j = C - 1;j <= C + 1;j++){
                         for(let k = 0;k <= 3;k++){
                             let p = oGd.$[i+"_"+j+"_"+k];
-							p&&h.jinyin&&((Z=CustomZombie(oPoleVaultingZombie,i,j)).HP=120,Z.jinyinnum=0);
+							p&&h.jinyin&&((Z=CustomZombie(oPoleVaultingZombie,i,j)).HP=150,Z.jinyinnum=0);
                         }
                     }
                 }
