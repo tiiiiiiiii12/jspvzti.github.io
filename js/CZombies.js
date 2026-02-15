@@ -1123,11 +1123,11 @@ var CZombies = function(b, a) {
         Speed: 3.3,
 		HP:500,
 		increaseSpeed:1.5,
-		SunNum:150,
+		SunNum:200,
 		PrivateAct:function(a){
 			for (u in $Z) {
               e = $Z[u];	
-			if($Z[a.id]&&!e.angry&&e.id!==a.id){
+			if($Z[a.id]&&!e.angry&&u!==a.id){
 				e.angry=1;
 				e.OSpeed*=a.increaseSpeed;
 				e.Speed*=a.increaseSpeed;
