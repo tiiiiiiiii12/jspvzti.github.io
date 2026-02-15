@@ -1386,17 +1386,9 @@ var CZombies = function(b, a) {
 					    R = (h.R - 1) || 0,
                         RM = h.R + 1 <= oS.R ? h.R + 1 : oS.R,
                     C = GetC(h.ZX);
-                for(let i = R;i <= RM;i++){
-                    for(let j = C - 1;j <= C + 1;j++){
-                        for(let k = 0;k <= 3;k++){
-                            let p = oGd.$[i+"_"+j+"_"+k];
-							p&&h.jinyin&&((Z=CustomZombie(oPoleVaultingZombie,i,j)).HP=120,Z.jinyinnum=0);
-                        }
-                    }
-                }
                     h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = q = k.AttackedRX) - h.beAttackedPointL) + h.beAttackedPointR, SetStyle(i, {
                         left: h.X + "px"
-                    }), n.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", SetVisible(l), h.isAttacking = 0, h.Altitude = 1, h.OSpeed = h.Speed = 1.6, h.NormalGif = 9, h.LostHeadGif = 10, h.NormalAttack = (r = CZombies.prototype).NormalAttack, h.getCrushed = r.getCrushed, h.getFreeze = r.getFreeze, h.getRaven = r.getRaven) : (h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g) - h.beAttackedPointR) + h.beAttackedPointL, SetStyle(i, {
+					}),n.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", SetVisible(l), h.isAttacking = 0, h.Altitude = 1, h.OSpeed = h.Speed = 1.6, h.NormalGif = 9, h.LostHeadGif = 10, h.NormalAttack = (r = CZombies.prototype).NormalAttack, h.getCrushed = r.getCrushed, h.getFreeze = r.getFreeze, h.getRaven = r.getRaven) : (h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g) - h.beAttackedPointR) + h.beAttackedPointL, SetStyle(i, {
                         left: h.X + "px"
                     }), n.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump2.gif" + $Random + Math.random(), SetVisible(l), oSym.addTask(80,
                         function(s, v) {
@@ -1404,7 +1396,15 @@ var CZombies = function(b, a) {
                                 t;
                             u && (v.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", u.isAttacking = 0, u.Altitude = 1, u.OSpeed = u.Speed = 1.6, u.NormalGif = 9, u.LostHeadGif = 10, u.NormalAttack = (t = CZombies.prototype).NormalAttack, u.getCrushed = t.getCrushed, u.getFreeze = t.getFreeze, u.getRaven = t.getRaven)
                         },
-                        [m, n])))
+                        [m, n])));
+			for(let i = R;i <= RM;i++){
+                    for(let j = C - 1;j <= C + 1;j++){
+                        for(let k = 0;k <= 3;k++){
+                            let p = oGd.$[i+"_"+j+"_"+k];
+							p&&h.jinyin&&((Z=CustomZombie(oPoleVaultingZombie,i,j)).HP=120,Z.jinyinnum=0);
+                        }
+                    }
+                }
                 },
                 [d, b, a, c, e])
         }
