@@ -1347,13 +1347,13 @@ var CZombies = function(b, a) {
                         c = f.Ele = $(d);
                     f.EleShadow = c.firstChild;
                     f.EleBody = c.childNodes[1];
-			        f.jinyin&&f.ExchangeLR(f,1);
                     e ? oSym.addTask(e,
                         function(h, g) {
                             var i = $Z[h];
                             i && (i.FreeSetbodyTime = 0, SetBlock(g))
                         },
-                        [d, c]) : SetBlock(c)
+                        [d, c]) : SetBlock(c);
+			        f.jinyin&&f.ExchangeLR(f,1);
                 },
         getCrushed: function(a) {
             this.NormalAttack(this.id, a.id, a.AttackedLX);
