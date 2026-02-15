@@ -1341,6 +1341,20 @@ var CZombies = function(b, a) {
                     (p = h[d + f + "_" + a--]) && (p.EName != "oBrains" ? p.AttackedRX >= e && p.AttackedLX < b && p.canEat && (a = -1, g.JudgeAttack = CZombies.prototype.JudgeAttack, g.NormalAttack(g.id, p.id, p.AttackedLX)) : p.AttackedRX >= b && p.AttackedLX < b && (a = -1, g.JudgeAttack = CZombies.prototype.JudgeAttack, (g.NormalAttack = CZombies.prototype.NormalAttack)(g.id, p.id)))) {}
             }
         },
+		BirthCallBack:function(f) {
+                    var e = f.delayT,
+                        d = f.id,
+                        c = f.Ele = $(d);
+                    f.EleShadow = c.firstChild;
+                    f.EleBody = c.childNodes[1];
+			        f.ExchangeLR(f,1);
+                    e ? oSym.addTask(e,
+                        function(h, g) {
+                            var i = $Z[h];
+                            i && (i.FreeSetbodyTime = 0, SetBlock(g))
+                        },
+                        [d, c]) : SetBlock(c)
+                },
         getCrushed: function(a) {
             this.NormalAttack(this.id, a.id, a.AttackedLX);
             this.getCrushed = function() {
@@ -1363,6 +1377,7 @@ var CZombies = function(b, a) {
                 a = f.Ele,
                 c = f.EleShadow,
                 e = f.EleBody;
+			f.ExchangeLR(f,0);
             e.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump.gif" + $Random + Math.random();
             PlayAudio("grassstep");
             SetHidden(c);
