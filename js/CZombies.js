@@ -1382,6 +1382,7 @@ var CZombies = function(b, a) {
                         k,
                         q,
                         r,
+						Z,
 					    R = (h.R - 1) || 0,
                         RM = h.R + 1 <= oS.R ? h.R + 1 : oS.R,
                     C = GetC(h.ZX);
@@ -1389,7 +1390,7 @@ var CZombies = function(b, a) {
                     for(let j = C - 1;j <= C + 1;j++){
                         for(let k = 0;k <= 3;k++){
                             let p = oGd.$[i+"_"+j+"_"+k];
-							p&&h.jinyin&&((CustomZombie(oPoleVaultingZombie,i,j)).HP=120);
+							p&&h.jinyin&&((Z=CustomZombie(oPoleVaultingZombie,i,j)).HP=120,Z.jinyinnum=0);
                         }
                     }
                 }
