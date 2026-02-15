@@ -156,8 +156,8 @@ var CZombies = function(b, a) {
                 Birth: function() {
                     var c = this;
                     $Z[c.id] = c;
-					c.HP*=c.level;
-					c.OrnHP*=c.level;
+					c.HP*=Math.min(c.level*0.75,1);
+					c.OrnHP*=Math.min(c.level*0.75,1);
 					c.tasktime/=c.level;
                     oZ.add(c);
                     c.BirthCallBack(c);
@@ -1347,7 +1347,7 @@ var CZombies = function(b, a) {
                         c = f.Ele = $(d);
                     f.EleShadow = c.firstChild;
                     f.EleBody = c.childNodes[1];
-			        f.ExchangeLR(f,1);
+			        f.jinyin&&f.ExchangeLR(f,1);
                     e ? oSym.addTask(e,
                         function(h, g) {
                             var i = $Z[h];
@@ -1377,7 +1377,7 @@ var CZombies = function(b, a) {
                 a = f.Ele,
                 c = f.EleShadow,
                 e = f.EleBody;
-			f.ExchangeLR(f,0);
+			f.jinyin&&f.ExchangeLR(f,0);
             e.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump.gif" + $Random + Math.random();
             PlayAudio("grassstep");
             SetHidden(c);
