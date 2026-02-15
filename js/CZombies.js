@@ -1389,7 +1389,7 @@ var CZombies = function(b, a) {
                     for(let j = C - 1;j <= C + 1;j++){
                         for(let k = 0;k <= 3;k++){
                             let p = oGd.$[i+"_"+j+"_"+k];
-							p&&h.jinyin&&(CustomZombie(oPoleVaultingZombie,i,l)).HP=160;
+							p&&h.jinyin&&((CustomZombie(oPoleVaultingZombie,i,l)).HP=200);
                         }
                     }
                 }
