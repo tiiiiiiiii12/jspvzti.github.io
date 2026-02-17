@@ -538,7 +538,7 @@ var CPlants = NewO({
 oSnowPea = InheritO(oPeashooter, {
   EName: "oSnowPea",
   CName: "寒冰射手",
-  SunNum: 225,
+  SunNum: 275,
   BKind: -1,
   power: 0,
   PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
@@ -559,9 +559,8 @@ oS.StaticCard&&(ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200),
     NewEle(b.id + "_Bullet", "div", "position:absolute;visibility:hidden;width:686px;height:62px;left:" + b.AttackedRX +
       "px;top:" + (b.pixelTop + 5) + "px;background:url(images/Plants/SnowPea/FumeShroomBullet.gif);z-index:" + (b.zIndex + 1), 0, EDPZ);
     oSym.addTask(100, function(b) {
-        b.power < 50 ? (b.power += 1) :
-        ($(b.id).style.opacity = 0.7, b.LoadingComplelete(b));
-        $Z[b.id] &&oSym.addTask(100, arguments.callee, [b])
+        b.HP>1&&(b.power < 50 ? (b.power += 1) :($(b.id).style.opacity = 0.7, b.LoadingComplelete(b)));
+        b.HP>1&&oSym.addTask(100, arguments.callee, [b])
     }, [b])
   },
   PrivateBirth: function(b) {
