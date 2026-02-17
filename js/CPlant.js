@@ -549,21 +549,20 @@ oSnowPea = InheritO(oPeashooter, {
     $("oAttack_" + a.id).onclick=function(){
 (parseInt(ESSunNum.innerHTML) >= 200||!oS.StaticCard) && (
 oS.StaticCard&&(ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200),
-    a.NormalAttack1(),
+    a.NormalAttack1(0),
     a.power=0,
     $(a.id).style.opacity = 1,
  $("oAttack_" + a.id).onclick=null)
      }
   },
   jinyinAct: function(b) {
-    var a = b.id;
-    NewEle(a + "_Bullet", "div", "position:absolute;visibility:hidden;width:686px;height:62px;left:" + b.AttackedRX +
+    NewEle(b.id + "_Bullet", "div", "position:absolute;visibility:hidden;width:686px;height:62px;left:" + b.AttackedRX +
       "px;top:" + (b.pixelTop + 5) + "px;background:url(images/Plants/SnowPea/FumeShroomBullet.gif);z-index:" + (b.zIndex + 1), 0, EDPZ);
-    oSym.addTask(100, function(b, a) {
+    oSym.addTask(100, function(b) {
         b.power < 50 ? (b.power += 1) :
-        ($(a).style.opacity = 0.7, b.LoadingComplelete(b));
-        $Z[a] &&oSym.addTask(100, arguments.callee, [b, a])
-    }, [b, a])
+        ($(b.id).style.opacity = 0.7, b.LoadingComplelete(b));
+        $Z[b.id] &&oSym.addTask(100, arguments.callee, [b])
+    }, [b])
   },
   PrivateBirth: function(b) {
     NewEle(
@@ -624,11 +623,11 @@ oS.StaticCard&&(ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200),
       function(f, j, h, c, n, i, m, k, o, g) {
         var l, e = GetC(n),
           d = oZ["getZ" + c](n, i);
-        m < 1 && g[i + "_" + e] && k != e && (PlayAudio("firepea"), ++m && (h = 40), k = e, c = 1500);
+        m < 1 && g[i + "_" + e] && k != e && (++m && (h = 40), k = e, c = 1500);
         d && d.Altitude == 1 ? (d[{
           "-1": "getSnowPea",
-          0: "getSnowPea",
-          1: "getSnowPea"
+          0: "getFreezePea",
+          1: "getFreezePea"
         } [m]](d, h, c), (SetStyle(j, {
           left: o + 28 + "px",
           width: "52px",
