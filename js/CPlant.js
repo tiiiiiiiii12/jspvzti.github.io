@@ -535,51 +535,108 @@ var CPlants = NewO({
                 [b, $(b), 20, 0, a.AttackedLX, a.R, 0, 0, a.AttackedLX - 40, oGd.$Torch])
         }
     }),
-    oSnowPea = InheritO(oPeashooter, {
-        EName: "oSnowPea",
-        CName: "寒冰射手",
-        SunNum: 225,
-        jinyinAct:function(){},
-        BKind: -1,
-        power:0,
-        PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
-        AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
-        Tooltip: "寒冰射手可造成伤害, 同时又有减速效果",
-        Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
-        PrivateDie:function(a){
-             
-        },
-        NormalAttack: function() {
-            var a = this,
-                b = "PB" + Math.random();
-            EditEle(a.BulletEle.cloneNode(false), {
-                    id: b
-                },
-                0, EDPZ);
-            oSym.addTask(15,
-                function(d) {
-                    var c = $(d);
-                    c && SetVisible(c)
-                },
-                [b]);
-            oSym.addTask(1,
-                function(f, j, h, c, n, i, m, k, o, g) {
-                    var l, e = GetC(n),
-                        d = oZ["getZ" + c](n, i);
-                    m < 1 && g[i + "_" + e] && k != e && (PlayAudio("firepea"), ++m && (h = 40), k = e,c=1500);
-                    d && d.Altitude == 1 ? (d[{
-                        "-1": "getSnowPea",
-                        0: "getFreezePea",
-                        1: "getFreezePea"
-                    } [m]](d, h, c), (SetStyle(j, {
-                        left: o + 28 + "px",
-                        width: "52px",
-                        height: "46px"
-                    })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ? 5 : -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g])) : ClearChild(j)
-                },
-                [b, $(b), 20, 0, a.AttackedLX, a.R,Math.random()*100>10?-1:0,0,a.AttackedLX - 40, oGd.$Torch])
-        }
-    }),
+oSnowPea = InheritO(oPeashooter, {
+  EName: "oSnowPea",
+  CName: "寒冰射手",
+  SunNum: 225,
+  BKind: -1,
+  power: 0,
+  PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
+  AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
+  Tooltip: "寒冰射手可造成伤害, 同时又有减速效果",
+  Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
+  LoadingComplelete: function(a) {
+    $("oAttack_" + a.id).onclick=function(){
+parseInt(ESSunNum.innerHTML) >= 200 && (
+ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200,
+    a.NormalAttack1(),
+    a.power=0,
+    $(a.id).style.opacity = 1,
+ $("oAttack_" + a.id).onclick=null)
+     }
+  },
+  jinyinAct: function(b) {
+    var a = b.id;
+    NewEle(a + "_Bullet", "div", "position:absolute;visibility:hidden;width:686px;height:62px;left:" + b.AttackedRX +
+      "px;top:" + (b.pixelTop + 5) + "px;background:url(images/Plants/SnowPea/FumeShroomBullet.gif);z-index:" + (b.zIndex + 1), 0, EDPZ);
+    oSym.addTask(100, function(b, a) {
+      $Z[a] && (b.power < 50 ? (b.power += 1, oSym.addTask(100, arguments.callee, [b, a])) :
+        ($(a).style.opacity = 0.7, b.LoadingComplelete(b)))
+    }, [b, a])
+  },
+  PrivateBirth: function(b) {
+    NewEle(
+      "oAttack_" + b.id,
+      "div",
+      "left:" + (b.AttackedLX - 20) + "px;top:" + (b.pixelTop - 10) +
+      "px;position:absolute;width:97px;height:87px;z-index:150",
+      0,
+      EDPZ);
+    b.BulletEle = NewImg(0, b.PicArr[3], "left:" + (b.AttackedLX - 40) + "px;top:" + (b.pixelTop + 3) + "px;visibility:hidden;z-index:" + (b.zIndex + 2));
+  },
+  PrivateDie: function(a) {
+    a.power >= 50 && a.NormalAttack1(a);
+     ClearChild($("oAttack_" + a.id));
+  },
+  NormalAttack1: function(A) {
+    PlayAudio("fume");
+    var f = this,
+      d = oZ.getArZ(f.AttackedLX,oS.W,f.R),
+      e = d.length,
+      g,
+      a = f.id + "_Bullet";
+    oSym.addTask(1, function(f, d, g, e, a) {
+      SetVisible($(a));
+      ImgSpriter(a, f.id, [
+          ["0 0", 9, 1],
+          ["0 -62px", 9, 2],
+          ["0 -124px", 9, 3],
+          ["0 -186px", 9, 4],
+          ["0 -248px", 9, 5],
+          ["0 -310px", 9, 6],
+          ["0 -372px", 9, 7],
+          ["0 -434px", 9, -1]
+        ], 0,
+        function(i, j) {
+          $P[j] ? SetHidden($(i)) : ClearChild($(i))
+        });
+      while (e--) {
+        (g = d[e]).Altitude < 2 && (g.getSlow(g, g.id, 1500), g.getHit1(g, !A?500:20))
+      }
+    }, [f, d, g, e, a])
+  },
+  NormalAttack: function() {
+    var a = this,
+      b = "PB" + Math.random();
+    a.jinyin&&Math.random()*100>20&&a.NormalAttack1(1);
+    EditEle(a.BulletEle.cloneNode(false), {
+        id: b
+      },
+      0, EDPZ);
+    oSym.addTask(15,
+      function(d) {
+        var c = $(d);
+        c && SetVisible(c)
+      },
+      [b]);
+    oSym.addTask(1,
+      function(f, j, h, c, n, i, m, k, o, g) {
+        var l, e = GetC(n),
+          d = oZ["getZ" + c](n, i);
+        m < 1 && g[i + "_" + e] && k != e && (PlayAudio("firepea"), ++m && (h = 40), k = e, c = 1500);
+        d && d.Altitude == 1 ? (d[{
+          "-1": "getSnowPea",
+          0: "getSnowPea",
+          1: "getSnowPea"
+        } [m]](d, h, c), (SetStyle(j, {
+          left: o + 28 + "px",
+          width: "52px",
+          height: "46px"
+        })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ? 5 : -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g])) : ClearChild(j)
+      },
+      [b, $(b), 20, 0, a.AttackedLX, a.R, Math.random() * 100 > 10 ? -1 : 0, 0, a.AttackedLX - 40, oGd.$Torch])
+  }
+}),
     oRepeater = InheritO(oPeashooter, {
         EName: "oRepeater",
         CName: "双发射手",
