@@ -560,8 +560,9 @@ oS.StaticCard&&(ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200),
     NewEle(a + "_Bullet", "div", "position:absolute;visibility:hidden;width:686px;height:62px;left:" + b.AttackedRX +
       "px;top:" + (b.pixelTop + 5) + "px;background:url(images/Plants/SnowPea/FumeShroomBullet.gif);z-index:" + (b.zIndex + 1), 0, EDPZ);
     oSym.addTask(100, function(b, a) {
-      $Z[a] && (b.power < 50 ? (b.power += 1, oSym.addTask(100, arguments.callee, [b, a])) :
-        ($(a).style.opacity = 0.7, b.LoadingComplelete(b)))
+      $Z[a] && (b.power < 50 ? (b.power += 1) :
+        ($(a).style.opacity = 0.7, b.LoadingComplelete(b)));
+        oSym.addTask(100, arguments.callee, [b, a])
     }, [b, a])
   },
   PrivateBirth: function(b) {
