@@ -547,8 +547,8 @@ oSnowPea = InheritO(oPeashooter, {
   Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
   LoadingComplelete: function(a) {
     $("oAttack_" + a.id).onclick=function(){
-(parseInt(ESSunNum.innerHTML) >= 200||!oS.StaticCar) && (
-oS.StaticCard&&ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200,
+(parseInt(ESSunNum.innerHTML) >= 200||!oS.StaticCard) && (
+oS.StaticCard&&(ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200),
     a.NormalAttack1(),
     a.power=0,
     $(a.id).style.opacity = 1,
