@@ -480,11 +480,22 @@ var CPlants = NewO({
             a.BulletEle = NewImg(0, a.PicArr[3], "left:" + (a.AttackedLX - 40) + "px;top:" + (a.pixelTop + 3) + "px;visibility:hidden;z-index:" + (a.zIndex + 2))
         },
         PrivateDie: function(a) {
-            a.BulletEle = null
+            a.BulletEle = null;
+            ClearChild($("oAttack_" + a.id));
         },
         jinyinAct:function(a){
+      let s = NewEle(
+      "oAttack_" + a.id,
+      "div",
+      "left:" +
+      (a.AttackedLX - 20) +
+      "px;top:" +
+      (a.pixelTop - 10) +
+      "px;position:absolute;width:97px;height:87px;z-index:150",
+      0,
+      EDPZ);
             $(a.id).style.opacity=0.7;
-            $(a.id).onclick=function(){
+            s.onclick=function(){
                 !a.dianji&&a.NormalAttack(a);
                 a.dianji=true;
                 oSym.addTask(50,function(a){
@@ -527,13 +538,17 @@ var CPlants = NewO({
     oSnowPea = InheritO(oPeashooter, {
         EName: "oSnowPea",
         CName: "寒冰射手",
-        SunNum: 200,
+        SunNum: 225,
         jinyinAct:function(){},
         BKind: -1,
+        power:0,
         PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
         Tooltip: "寒冰射手可造成伤害, 同时又有减速效果",
         Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
+        PrivateDie:function(a){
+             
+        },
         NormalAttack: function() {
             var a = this,
                 b = "PB" + Math.random();
