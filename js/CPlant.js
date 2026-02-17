@@ -540,27 +540,37 @@ oSnowPea = InheritO(oPeashooter, {
   CName: "寒冰射手",
   SunNum: 275,
   BKind: -1,
-  power: 0,
+  power: 30,
   PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
   AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
   Tooltip: "寒冰射手可造成伤害, 同时又有减速效果",
-  Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
+  Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<br>精英形态：攻击有概率发射整行的减速喷雾<br>精英特殊技能：点击它花费200阳光发射500伤害整行的减速喷雾，有冷却提示<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
   LoadingComplelete: function(a) {
-    $("oAttack_" + a.id).onclick=function(){
-(parseInt(ESSunNum.innerHTML) >= 200||!oS.StaticCard) && (
-oS.StaticCard&&(ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200),
-    a.NormalAttack1(0),
-    a.power=0,
-    $(a.id).style.opacity = 1,
- $("oAttack_" + a.id).onclick=null)
-     }
+    $("oAttack_" + a.id).onclick = function() {
+      (parseInt(ESSunNum.innerHTML) >= 200 || !oS.StaticCard) && (
+        oS.StaticCard && (ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200),
+        a.NormalAttack1(0),
+        a.power = 0,
+        $(a.id).style.opacity = 1,
+        $("oAttack_" + a.id).onclick = null)
+    }
   },
   jinyinAct: function(b) {
+    var B = NewEle("dskill", "div", "position:absolute;color:white;top:40px;left:10px;width:100px;font-size:16px;z-index:50", "", $(b.id));
+    var A = "hp" + Math.random();
+    dskill.id = A;
+    var C = $(A);
+    oSym.addTask(0, function(C, B, b) {
+      ClearChild(C);
+      $(b.id) && $(b.id).appendChild(C);
+      B.innerHTML = b.power < 50 ? '<div>' + (50 - b.power) + "</div>" : "<div>技能就绪！</div>"
+      oSym.addTask(50, arguments.callee, [C, B, b])
+    }, [C, B, b]);
     NewEle(b.id + "_Bullet", "div", "position:absolute;visibility:hidden;width:686px;height:62px;left:" + b.AttackedRX +
       "px;top:" + (b.pixelTop + 5) + "px;background:url(images/Plants/SnowPea/FumeShroomBullet.gif);z-index:" + (b.zIndex + 1), 0, EDPZ);
     oSym.addTask(100, function(b) {
-        b.HP>1&&(b.power < 50 ? (b.power += 1) :($(b.id).style.opacity = 0.7, b.LoadingComplelete(b)));
-        b.HP>1&&oSym.addTask(100, arguments.callee, [b])
+      b.HP > 1 && (b.power < 50 ? (b.power += 1) : ($(b.id).style.opacity = 0.7, b.LoadingComplelete(b)));
+      b.HP > 1 && oSym.addTask(100, arguments.callee, [b])
     }, [b])
   },
   PrivateBirth: function(b) {
@@ -575,12 +585,12 @@ oS.StaticCard&&(ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200),
   },
   PrivateDie: function(a) {
     a.power >= 50 && a.NormalAttack1(a);
-     ClearChild($("oAttack_" + a.id));
+    ClearChild($("oAttack_" + a.id));
   },
   NormalAttack1: function(A) {
     PlayAudio("fume");
     var f = this,
-      d = oZ.getArZ(f.AttackedLX,oS.W,f.R),
+      d = oZ.getArZ(f.AttackedLX, oS.W, f.R),
       e = d.length,
       g,
       a = f.id + "_Bullet";
@@ -600,14 +610,14 @@ oS.StaticCard&&(ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200),
           $P[j] ? SetHidden($(i)) : ClearChild($(i))
         });
       while (e--) {
-        (g = d[e]).Altitude < 2 && (g.getSlow(g, g.id, 1500), g.getHit1(g, !A?500:20))
+        (g = d[e]).Altitude < 2 && (g.getSlow(g, g.id, 1500), g.getHit1(g, !A ? 500 : 20))
       }
     }, [f, d, g, e, a])
   },
   NormalAttack: function() {
     var a = this,
       b = "PB" + Math.random();
-    a.jinyin&&Math.random()*100>80&&a.NormalAttack1(1);
+    a.jinyin && Math.random() * 100 > 80 && a.NormalAttack1(1);
     EditEle(a.BulletEle.cloneNode(false), {
         id: b
       },
