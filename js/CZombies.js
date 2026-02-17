@@ -1270,8 +1270,8 @@ var CZombies = function(b, a) {
         EName: "oFootballZombie",
         CName: "橄榄球僵尸",
         OrnHP: 1600,
-        Lvl: 3,
-        SunNum: 175,
+        Lvl: 4,
+        SunNum: 225,
         StandGif: 11,
         width: 154,
         height: 160,
@@ -1282,10 +1282,21 @@ var CZombies = function(b, a) {
         PlayNormalballAudio: function() {
             PlayAudio("plastichit")
         },
-		jinyinAct:function(){},
+		jinyinAct:function(a){
+			a.PicArr=a.PicArr2;
+			a.EleBody.src=a.PicArr[a.NormalGif];
+			a.Speed*=0.75;
+			a.OSpeed*=0.75;
+			a.getFreeze=function(){};
+			a.OrnHP=3200;
+		},
         PicArr: (function() {
             var a = "images/Zombies/FootballZombie/";
             return ["images/Card/Zombies/FootballZombie.png", a + "0.gif", a + "FootballZombie.gif", a + "Attack.gif", a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "OrnLost.gif", a + "OrnLostAttack.gif", a + "1.gif"]
+        })(),
+		PicArr2: (function() {
+            var a = "images/Zombies/BlackFootballZombie/";
+            return ["images/Card/Zombies/FootballZombie.png", a + "0.gif", a + "FootballZombie.gif", a + "Attack.gif", a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random,"images/Zombies/FootballZombie/BoomDie.gif" + $Random, a + "OrnLost.gif", a + "OrnLostAttack.gif", a + "1.gif"]
         })(),
         getShadow: function(a) {
             return "left:" + (a.beAttackedPointL + 15) + "px;top:" + (a.height - 22) + "px"
