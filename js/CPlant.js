@@ -8,7 +8,7 @@ var CPlants = NewO({
         NormalGif: 2,
         BookHandBack: 0,
         canEat: 1,
-        jinyinnum:20,
+        jinyinnum:25,
         zIndex: 0,
         AudioArr: [],
         coolTime: 7.5,
