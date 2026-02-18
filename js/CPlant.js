@@ -540,7 +540,7 @@ oSnowPea = InheritO(oPeashooter, {
   CName: "寒冰射手",
   SunNum: 275,
   BKind: -1,
-  power: 30,
+  power: 20,
   PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
   AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
   Tooltip: "寒冰射手可造成伤害, 同时又有减速效果",
@@ -548,7 +548,7 @@ oSnowPea = InheritO(oPeashooter, {
   LoadingComplelete: function(a) {
     $("oAttack_" + a.id).onclick = function() {
       (oS.SunNum>=200 || !oS.StaticCard) && (
-        !oS.CardKind&&oS.StaticCard && (ESSunNum.innerHTML = +ESSunNum.innerHTML-200),
+        !oS.CardKind&&oS.StaticCard && (ESSunNum.innerHTML = +ESSunNum.innerHTML-200,oS.SunNum-=200),
         a.NormalAttack1(0),
         a.power = 0,
         $(a.id).style.opacity = 1,
@@ -563,7 +563,7 @@ oSnowPea = InheritO(oPeashooter, {
     oSym.addTask(0, function(C, B, b) {
       ClearChild(C);
       $(b.id) && $(b.id).appendChild(C);
-      B.innerHTML = b.power < 50 ? '<div>' + (50 - b.power) + "</div>" : "<div>技能就绪！</div>"
+      B.innerHTML = b.power < 40 ? '<div>' + (50 - b.power) + "</div>" : "<div>技能就绪！</div>"
       oSym.addTask(50, arguments.callee, [C, B, b])
     }, [C, B, b]);
     NewEle(b.id + "_Bullet", "div", "position:absolute;visibility:hidden;width:686px;height:62px;left:" + b.AttackedRX +
@@ -584,7 +584,7 @@ oSnowPea = InheritO(oPeashooter, {
     b.BulletEle = NewImg(0, b.PicArr[3], "left:" + (b.AttackedLX - 40) + "px;top:" + (b.pixelTop + 3) + "px;visibility:hidden;z-index:" + (b.zIndex + 2));
   },
   PrivateDie: function(a) {
-    a.power >= 50 && a.NormalAttack1(0);
+    a.power >= 40 && a.NormalAttack1(0);
     ClearChild($("oAttack_" + a.id));
   },
   NormalAttack1: function(A) {
