@@ -547,8 +547,8 @@ oSnowPea = InheritO(oPeashooter, {
   Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<br>精英形态：攻击有概率发射整行的减速喷雾<br>精英特殊技能：点击它花费200阳光发射500伤害整行的减速喷雾，有冷却提示<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
   LoadingComplelete: function(a) {
     $("oAttack_" + a.id).onclick = function() {
-      (parseInt(ESSunNum.innerHTML) >= 200 || !oS.StaticCard) && (
-        oS.StaticCard && (ESSunNum.innerHTML = parseInt(ESSunNum.innerHTML) - 200),
+      (oS.SunNum>=200 || !oS.StaticCard) && (
+        oS.CardKind&&oS.StaticCard && (ESSunNum.innerHTML = +ESSunNum.innerHTML-200),
         a.NormalAttack1(0),
         a.power = 0,
         $(a.id).style.opacity = 1,
@@ -584,7 +584,7 @@ oSnowPea = InheritO(oPeashooter, {
     b.BulletEle = NewImg(0, b.PicArr[3], "left:" + (b.AttackedLX - 40) + "px;top:" + (b.pixelTop + 3) + "px;visibility:hidden;z-index:" + (b.zIndex + 2));
   },
   PrivateDie: function(a) {
-    a.power >= 50 && a.NormalAttack1(a);
+    a.power >= 50 && a.NormalAttack1(0);
     ClearChild($("oAttack_" + a.id));
   },
   NormalAttack1: function(A) {
@@ -594,6 +594,9 @@ oSnowPea = InheritO(oPeashooter, {
       e = d.length,
       g,
       a = f.id + "_Bullet";
+while (e--) {
+        (g = d[e]).Altitude < 2 && (g.getSlow(g, g.id, 1500), g.getHit1(g, !A ? 500 : 20))
+      }
     oSym.addTask(1, function(f, d, g, e, a) {
       SetVisible($(a));
       ImgSpriter(a, f.id, [
@@ -609,9 +612,6 @@ oSnowPea = InheritO(oPeashooter, {
         function(i, j) {
           $P[j] ? SetHidden($(i)) : ClearChild($(i))
         });
-      while (e--) {
-        (g = d[e]).Altitude < 2 && (g.getSlow(g, g.id, 1500), g.getHit1(g, !A ? 500 : 20))
-      }
     }, [f, d, g, e, a])
   },
   NormalAttack: function() {
