@@ -1005,15 +1005,14 @@ NormalAttack1: function() {
                             },
                             [e.C, e.R]));
                         break;
-                    case 3:
-                        
+                    case 3:                   
                         var d = (e.HP -= b);
                         !(d % 100) && (AppearSun(Math.floor(GetX(e.C) - 40 + Math.random() * 41), GetY(e.R), 25, 0), oSym.addTask(50,
                             function(h, g) {
                                 AppearSun(Math.floor(GetX(h) - 40 + Math.random() * 41), GetY(g), 25, 0)
                             },
                             [e.C, e.R]), d < 1 ? e.Die() : oSym.addTask(50,
-                            function(h, g) {
+                            function(h,g) {
                                 AppearSun(Math.floor(GetX(h) - 40 + Math.random() * 41), GetY(g), 25, 0)
                             },
                             [e.C, e.R]));
@@ -1041,7 +1040,6 @@ NormalAttack1: function() {
             var c = b[1];
             return c && c.EName == "oSunFlower"
         },
-        
         BirthStyle: function(c, e, b, a) {
             var d = b.childNodes[1];
             d.src = "images/Plants/TwinSunflower/TwinSunflower.gif";
@@ -1066,7 +1064,7 @@ NormalAttack1: function() {
             var b = GetX(a.C);
             oSym.addTask(500,
                 function(f, d, c, e) {
-                    oS.ProduceSun&&$P[f] && (a.ChangePosition($(f), 1), oSym.addTask(100,
+                    $P[f] && (a.ChangePosition($(f), 1), oSym.addTask(100,
                         function(k, h, g, j, i) {
                             AppearSun(Math.floor(h + Math.random() * 21), j, 25, 0),
                             AppearSun(Math.floor(g + Math.random() * 21), j, 25, 0),
@@ -2337,7 +2335,7 @@ NormalAttack1: function() {
         PrivateDie: function(a) {},
         jinyinAct:function(a){
            oSym.addTask(300,function(a){
-           $P[a.id]&&(AppearSun(a.pixelLeft,a.pixelTop,225),a.Die())
+           a.HP>1&&(AppearSun(a.pixelLeft,a.pixelTop,225),a.Die())
          },[a])
         },
         PrivateBirth: function() {},
