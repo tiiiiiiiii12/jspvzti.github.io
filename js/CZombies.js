@@ -402,6 +402,7 @@ var CZombies = function(b, a) {
                     c.ChkActs = c.ChkActs1;
                     oP.MonPrgs()
                 },
+			    jianshang:1,
                 SetAlpha: $User.Browser.IE ?
                     function(f, d, e, c) {
                         d.style.filter = (f.CSS_alpha = "alpha(opacity=" + e + ")") + f.CSS_fliph
@@ -413,7 +414,7 @@ var CZombies = function(b, a) {
     }(),
     OrnNoneZombies = function() {
         var a = function(c, b) {
-            if ((c.HP -= b) < c.BreakPoint) {
+            if ((c.HP -= b*f.jianshang) < c.BreakPoint) {
                 c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]);
                 c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function() {};
                 return
@@ -1181,7 +1182,8 @@ var CZombies = function(b, a) {
             var d = f.OrnHP,
                 c = f.HP,
                 e = OrnNoneZombies.prototype;
-            (d = f.OrnHP -= b) < 1 && (f.HP += d, f.Ornaments = 0, f.EleBody.src = f.PicArr[[f.NormalGif = f.OrnLostNormalGif, f.AttackGif = f.OrnLostAttackGif][f.isAttacking]], f.PlayNormalballAudio = e.PlayNormalballAudio, f.PlayFireballAudio = e.PlayFireballAudio, f.PlaySlowballAudio = e.PlaySlowballAudio, f.getHit = f.getHit0 = f.getHit1 = f.getHit2 = f.getHit3 = e.getHit);
+			if(b>=d+c)return f.NormalDie();
+            (d = f.OrnHP -= b*f.jianshang) < 1 && (f.HP += d, f.Ornaments = 0, f.EleBody.src = f.PicArr[[f.NormalGif = f.OrnLostNormalGif, f.AttackGif = f.OrnLostAttackGif][f.isAttacking]], f.PlayNormalballAudio = e.PlayNormalballAudio, f.PlayFireballAudio = e.PlayFireballAudio, f.PlaySlowballAudio = e.PlaySlowballAudio, f.getHit = f.getHit0 = f.getHit1 = f.getHit2 = f.getHit3 = e.getHit);
             f.SetAlpha(f, f.EleBody, 50, 0.5);
             oSym.addTask(10,
                 function(h, g) {
