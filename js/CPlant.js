@@ -548,7 +548,7 @@ oSnowPea = InheritO(oPeashooter, {
   LoadingComplelete: function(a) {
     $("oAttack_" + a.id).onclick = function() {
       (oS.SunNum>=200 || !oS.StaticCard) && (
-        oS.CardKind&&oS.StaticCard && (ESSunNum.innerHTML = +ESSunNum.innerHTML-200),
+        !oS.CardKind&&oS.StaticCard && (ESSunNum.innerHTML = +ESSunNum.innerHTML-200),
         a.NormalAttack1(0),
         a.power = 0,
         $(a.id).style.opacity = 1,
