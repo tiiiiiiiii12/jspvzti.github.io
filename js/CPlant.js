@@ -563,13 +563,13 @@ oSnowPea = InheritO(oPeashooter, {
     oSym.addTask(0, function(C, B, b) {
       ClearChild(C);
       $(b.id) && $(b.id).appendChild(C);
-      B.innerHTML = b.power < 40 ? '<div>' + (50 - b.power) + "</div>" : "<div>技能就绪！</div>"
+      B.innerHTML = b.power < 40 ? '<div>' + (40 - b.power) + "</div>" : "<div>技能就绪！</div>"
       oSym.addTask(50, arguments.callee, [C, B, b])
     }, [C, B, b]);
     NewEle(b.id + "_Bullet", "div", "position:absolute;visibility:hidden;width:686px;height:62px;left:" + b.AttackedRX +
       "px;top:" + (b.pixelTop + 5) + "px;background:url(images/Plants/SnowPea/FumeShroomBullet.gif);z-index:" + (b.zIndex + 1), 0, EDPZ);
     oSym.addTask(100, function(b) {
-      b.HP > 1 && (b.power < 50 ? (b.power += 1) : ($(b.id).style.opacity = 0.7, b.LoadingComplelete(b)));
+      b.HP > 1 && (b.power < 40 ? (b.power += 1) : ($(b.id).style.opacity = 0.7, b.LoadingComplelete(b)));
       b.HP > 1 && oSym.addTask(100, arguments.callee, [b])
     }, [b])
   },
