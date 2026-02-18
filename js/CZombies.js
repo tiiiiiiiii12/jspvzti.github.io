@@ -414,7 +414,7 @@ var CZombies = function(b, a) {
     }(),
     OrnNoneZombies = function() {
         var a = function(c, b) {
-            if ((c.HP -= b*f.jianshang) < c.BreakPoint) {
+            if ((c.HP -= b*c.jianshang) < c.BreakPoint) {
                 c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]);
                 c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function() {};
                 return
