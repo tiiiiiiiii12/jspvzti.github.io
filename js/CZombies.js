@@ -1460,7 +1460,7 @@ var CZombies = function(b, a) {
             return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（300，发怒后30%减伤）</font><br>精英形态：破报犹豫时间变长，无减伤，破报后虚化（可被路灯花显形）<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)</p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（300，发怒后50%减伤）</font><br>精英形态：破报犹豫时间变长，无减伤，破报后虚化（可被路灯花显形）<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)</p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
         getShadow: function(a) {
             return "left:75px;top:" + (a.height - 25) + "px"
         },
@@ -1574,7 +1574,7 @@ var CZombies = function(b, a) {
                 g.ChkActs1 = function() {
                     return 1
                 },
-                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(g.jinyin?600:150,
+                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(g.jinyin?450:150,
                     function(m, l) {
                         var k = $Z[m];
                         if (!k) {
@@ -1585,7 +1585,7 @@ var CZombies = function(b, a) {
                         k.ChkActs =!k.WalkDirection?j.ChkActs:j.ChkActs1;
                         k.ChkActs1 = j.ChkActs1;
 						k.tasktime*=0.4;
-						!k.jinyin&&(k.jianshang=0.7);
+						!k.jinyin&&(k.jianshang=0.5);
 						k.jinyin&&(k.PrivateAct=function(h) {
                    var num = 0;
                 !h.xianxing ? (h.Altitude = 4,
