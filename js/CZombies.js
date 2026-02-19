@@ -697,7 +697,7 @@ var CZombies = function(b, a) {
                 b = d + "spotlight2" + c + ".png" + $Random;
             return ["images/Card/Zombies/DancingZombie.png", d + "0.gif", d + "DancingZombie.gif", d + "Attack.gif", d + "LostHead.gif", d + "LostHeadAttack.gif", d + "Head.gif" + $Random, d + "Die.gif" + $Random, d + "BoomDie.gif" + $Random, d + "SlidingStep.gif" + $Random, d + "Dancing.gif" + $Random, d + "Summon1.gif", d + "Summon2.gif", d + "Summon3.gif", d + "LostHeadSlidingStep.gif" + $Random, d + "LostHeadDancing.gif" + $Random, d + "LostHeadSummon.gif" + $Random, a, b]
         })(),
-        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。</p><p>韧性：<font color="#FF0000">中</font><br>精英形态：白色，一直滑步，无视植物，碰到脑子召唤伴舞</font><br>特点：<font color="#FF0000">召唤伴舞僵尸</font></p>舞王僵尸的最新唱片“抓住脑子啃啊啃”在僵尸界的人气正急速飙升。',
+        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。</p><p>韧性：<font color="#FF0000">中</font><br>精英形态：白色，一直滑步，无视植物，碰到脑子召唤伴舞（800血）</font><br>特点：<font color="#FF0000">召唤伴舞僵尸</font></p>舞王僵尸的最新唱片“抓住脑子啃啊啃”在僵尸界的人气正急速飙升。',
         getSnowPea: function() {
             this.PlaySlowballAudio();
         },
@@ -1175,7 +1175,7 @@ var CZombies = function(b, a) {
 			a.getSlow=a.getFreeze=function(){};
 		},
         beAttackedPointR: 101,
-        Produce: '旗帜僵尸标志着即将来袭的一大堆僵尸"流"。</font><br>通用技能：号召</font><br>当旗帜僵尸存在时，全场僵尸速度和伤害都翻倍</font><br>精英形态：处决者旗帜</font><br>本身速度更快，碾压植物，免疫减速等负面效果<p>韧性：<font color="#FF0000">低</font></p>毫无疑问，摇旗僵尸喜爱脑髓。但在私下里他也迷恋旗帜。也许是因为旗帜上也画有脑子吧，这很难说。'
+        Produce: '旗帜僵尸标志着即将来袭的一大堆僵尸"流"。</font><br>通用技能：号召</font><br>当旗帜僵尸存在时，全场僵尸速度和伤害都翻倍</font><br>精英形态：处决者旗帜</font><br>本身速度更快，碾压植物，免疫减速等负面效果<br>韧性：<font color="#FF0000">中（500）</font><br>毫无疑问，摇旗僵尸喜爱脑髓。但在私下里他也迷恋旗帜。也许是因为旗帜上也画有脑子吧，这很难说。'
     }),
     OrnIZombies = function() {
         var a = function(f, b) {
@@ -1303,7 +1303,7 @@ var CZombies = function(b, a) {
         getShadow: function(a) {
             return "left:" + (a.beAttackedPointL + 15) + "px;top:" + (a.height - 22) + "px"
         },
-        Produce: '橄榄球僵尸的表演秀。<p>韧性：<font color="#FF0000">极高</font><br>精英形态：黑橄榄，两倍头盔血量，速度减慢，免疫冻结<br>速度：<font color="#FF0000">快</font><br>弱点：<font color="#FF0000">磁力菇</font></p>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么<p>黑橄榄贴图来源：江南游戏'
+        Produce: '橄榄球僵尸的表演秀。<p>韧性：<font color="#FF0000">极高</font><br>精英形态：黑橄榄，两倍头盔血量，速度减慢，免疫冻结<br>速度：<font color="#FF0000">快</font><br>弱点：<font color="#FF0000">磁力菇</font><br>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么<br>黑橄榄贴图来源：江南游戏'
     }),
     oPoleVaultingZombie = InheritO(OrnNoneZombies, {
         EName: "oPoleVaultingZombie",
@@ -1446,7 +1446,7 @@ var CZombies = function(b, a) {
         CName: "读报僵尸",
         OrnHP: 150,
         Lvl: 3,
-		HP:450,
+		HP:300,
 		SunNum:75,
         LostPaperGif: 13,
         StandGif: 14,
@@ -1460,7 +1460,7 @@ var CZombies = function(b, a) {
             return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（450）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)</p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（300，发怒后30%减伤）</font><br>精英形态：破报犹豫时间变长，无减伤，破报后虚化（可被路灯花显形）<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)</p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
         getShadow: function(a) {
             return "left:75px;top:" + (a.height - 25) + "px"
         },
@@ -1565,7 +1565,7 @@ var CZombies = function(b, a) {
                 },
                 [b.id]))
         },
-		jinyinAct:function(a){a.LostPaperGif=a.GoingDieGif},
+		jinyinAct:function(a){a.LostPaperGif=a.DieGif},
         CheckOrnHP: function(g, h, d, c, f, b, a) {
             var e = OrnNoneZombies.prototype;
             (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.ChkActs = function() {
@@ -1608,7 +1608,7 @@ var CZombies = function(b, a) {
                         k.EleBody.src = l;
                         k.JudgeAttack()
                     },
-                    [h, f[[g.NormalGif = g.LostHeadGif, g.AttackGif = g.LostHeadAttackGif][b]]]))
+                    [h, f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]]]))
         }
     }),
     oScreenDoorZombie = InheritO(oNewspaperZombie, {
