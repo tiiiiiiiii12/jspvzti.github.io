@@ -301,14 +301,14 @@ var CZombies = function(b, a) {
                         h = oGd.$,
 						a,
                         c;
-					((a=g.JudgeAttackH1())&&a.beAttacked)||(c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h)) ? (!g.isAttacking&&(g.isAttacking = 1, g.EleBody.src = g.PicArr[g.AttackGif]),!(a&&a.beAttacked)&&g.NormalAttack(c[0], c[1])) : g.isAttacking && (g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif])
+					(a=g.JudgeAttackH1())||(c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h)) ? (!g.isAttacking&&(g.isAttacking = 1, g.EleBody.src = g.PicArr[g.AttackGif]),!a&&g.NormalAttack(c[0], c[1])) : g.isAttacking && (g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif])
                 },
 				JudgeAttackH1: function() {
                     var e = this,
                         d = oZ.getHZ1(e.ZX, e.R),
                         f = e.id,
                         c;
-                    d && d.beAttacked && d.AttackedRX > 100 && d.Altitude == 1 &&(!e.isAttacking ? e.AttackZombie(f, c = d.id) : e.AttackZombie(f, d.id, 1))
+                    d && d.AttackedRX > 100 && d.Altitude == 1 &&(!e.isAttacking ? e.AttackZombie(f, c = d.id) : e.AttackZombie(f, d.id, 1))
 					return d
                 },
                 JudgeLR: function(f, d, e, c, g) {
@@ -340,7 +340,7 @@ var CZombies = function(b, a) {
                         d = oZ.getZ0(e.ZX, e.R),
                         f = e.id,
                         c;
-                    d && d.beAttacked && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif], e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) : e.isAttacking && (e.isAttacking = 0, e.EleBody.src = e.PicArr[e.NormalGif])
+                    d && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif], e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) : e.isAttacking && (e.isAttacking = 0, e.EleBody.src = e.PicArr[e.NormalGif])
 				},
 	getr:function(e,l){
 		GetC(e.ZX)<10&&(e.ZX +=l,
@@ -1303,7 +1303,7 @@ var CZombies = function(b, a) {
         getShadow: function(a) {
             return "left:" + (a.beAttackedPointL + 15) + "px;top:" + (a.height - 22) + "px"
         },
-        Produce: '橄榄球僵尸的表演秀。<p>韧性：<font color="#FF0000">极高</font><br>速度：<font color="#FF0000">快</font><br>弱点：<font color="#FF0000">磁力菇</font></p>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么。'
+        Produce: '橄榄球僵尸的表演秀。<p>韧性：<font color="#FF0000">极高</font><br>精英形态：黑橄榄，两倍头盔血量，速度减慢，免疫冻结<br>速度：<font color="#FF0000">快</font><br>弱点：<font color="#FF0000">磁力菇</font></p>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么<p>黑橄榄贴图来源：江南游戏'
     }),
     oPoleVaultingZombie = InheritO(OrnNoneZombies, {
         EName: "oPoleVaultingZombie",
@@ -1565,6 +1565,7 @@ var CZombies = function(b, a) {
                 },
                 [b.id]))
         },
+		jinyinAct:function(a){a.LostPaperGif=a.GoingDieGif},
         CheckOrnHP: function(g, h, d, c, f, b, a) {
             var e = OrnNoneZombies.prototype;
             (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.ChkActs = function() {
@@ -1573,7 +1574,7 @@ var CZombies = function(b, a) {
                 g.ChkActs1 = function() {
                     return 1
                 },
-                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(150,
+                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(g.jinyin?600:150,
                     function(m, l) {
                         var k = $Z[m];
                         if (!k) {
@@ -1584,6 +1585,21 @@ var CZombies = function(b, a) {
                         k.ChkActs =!k.WalkDirection?j.ChkActs:j.ChkActs1;
                         k.ChkActs1 = j.ChkActs1;
 						k.tasktime*=0.4;
+						!k.jinyin&&(k.jianshang=0.7);
+						k.jinyin&&(k.PrivateAct=function(h) {
+                   var num = 0;
+                !h.xianxing ? (h.Altitude = 4,
+                h.Ele.style.opacity = 0.1) : (h.Altitude = 1,
+              h.Ele.style.opacity = 1);
+            var a = h.R,
+              b = GetC(h.ZX);
+            for (let i = a - 1; i <= a + 1; i++) {
+              for (let l = b - 2; l <= b + 2; l++) {
+                !num && h.xianxing && oGd.$[i + "_" + l + "_" + "1"] && (oGd.$[i + "_" + l + "_" + "1"].EName != "oPlantern") && (h.xianxing = 0);
+                !num && !h.xianxing && oGd.$[i + "_" + l + "_" + "1"] && (oGd.$[i + "_" + l + "_" + "1"].EName == "oPlantern") && (h.xianxing = true, num = 1)
+              }
+            }
+          });
                         k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
                         if (!k.beAttacked) {
                             return
@@ -1592,7 +1608,7 @@ var CZombies = function(b, a) {
                         k.EleBody.src = l;
                         k.JudgeAttack()
                     },
-                    [h, f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]]]))
+                    [h, f[[g.NormalGif = g.LostHeadGif, g.AttackGif = g.LostHeadAttackGif][b]]]))
         }
     }),
     oScreenDoorZombie = InheritO(oNewspaperZombie, {
