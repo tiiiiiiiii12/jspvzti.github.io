@@ -12,9 +12,9 @@ oS.Init({
 		var P = oS.VaseArP, L = P.Left, R = P.Right, GNum = P.GreenNum, ZNum = P.ZombieNum, VaseList = [], GroundList = [];
 		var SummonAll = function () { // 生成罐子函数
 			while (VaseList.length && GroundList.length) {
-				var Top = VaseList[VaseList.length - 1], Pos = GroundList[GroundList.length - 1];
+				var Tops= VaseList[VaseList.length - 1], Pos = GroundList[GroundList.length - 1];
 
-				var ret = oFlowerVase.prototype.SpecialBirth(Pos[0], Pos[1], 0, 顶部); // 生成罐子
+				var ret = oFlowerVase.prototype.SpecialBirth(Pos[0], Pos[1], 0,Tops); // 生成罐子
 
 				ret.AutoSummonBase = false; // 生成底座后，关闭删除该底座的权限
 
@@ -82,4 +82,3 @@ oS.Init({
 		SelectCard("oCherryBomb"), SelectCard("oLilyPad");
 	}
 });
-
