@@ -1,7 +1,7 @@
 // VaseKillerNew2
 oS.Init({
 	PName: [oCherryBomb, oFumeShroom, oScaredyShroom, oCactus, oSeaShroom, oPeashooter, oPumpkinHead, oStarfruit, oLilyPad, oTangleKelp, oPlantern, oPotatoMine], 
-	ZName: [oZombie, oZombie2, oZombie3, oScreenDoorZombie, oPoleVaultingZombie, oBucketheadZombie, oJackinTheBoxZombie, oDuckyTubeZombie1, oDuckyTubeZombie3], 
+	ZName: [oZombie, oZombie2, oConeheadZombie, oScreenDoorZombie, oPoleVaultingZombie, oBucketheadZombie, oJackinTheBoxZombie, oDuckyTubeZombie1, oDuckyTubeZombie2], 
 	PicArr: ["images/interface/background4.jpg","images/interface/trophy.png","images/interface/PointerDown.gif","images/interface/Stripe.png"], 
 	backgroundImage: "images/interface/background4.jpg", 
 	DKind: 0, ShowScroll: false, ProduceSun: false, 
@@ -14,7 +14,7 @@ oS.Init({
 			while (VaseList.length && GroundList.length) {
 				var Top = VaseList[VaseList.length - 1], Pos = GroundList[GroundList.length - 1];
 
-				var ret = oFlowerVase.prototype.SpecialBirth(Pos[0], Pos[1], 0, Top); // 生成罐子
+				var ret = oFlowerVase.prototype.SpecialBirth(Pos[0], Pos[1], 0, 顶部); // 生成罐子
 
 				ret.AutoSummonBase = false; // 生成底座后，关闭删除该底座的权限
 
@@ -82,3 +82,4 @@ oS.Init({
 		SelectCard("oCherryBomb"), SelectCard("oLilyPad"), SelectCard("oPlantern"), SelectCard("oTangleKelp"), SelectCard("oPotatoMine");
 	}
 });
+
