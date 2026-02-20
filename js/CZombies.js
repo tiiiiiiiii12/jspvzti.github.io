@@ -6,7 +6,7 @@ var CZombies = function(b, a) {
                 NormalGif: 2,
                 CardGif: 0,
                 StaticGif: 1,
-			    jinyinnum:15,
+			    jinyinnum:20,
                 StandGif: 2,
                 BookHandBack: 0,
                 AudioArr: [],
@@ -1130,7 +1130,7 @@ var CZombies = function(b, a) {
               e = $Z[u];	
 			if($Z[a.id]&&!e.angry&&u!==a.id){
 				e.angry=1;
-				e.OSpeed*=a.increaseSpeed;
+				e.incrspeed=(e.OSpeed*=a.increaseSpeed);
 				e.Speed*=a.increaseSpeed;
 				e.LostPaperSpeed*=a.increaseSpeed;
 				e.tasktime*=a.jinyin?0.25:0.5;
@@ -1140,7 +1140,7 @@ var CZombies = function(b, a) {
 		PrivateDie:function(a){			
 			for (u in $Z) {
               e = $Z[u];	
-			if(e.angry&&e.id!==a.id){
+			if(e.OSpeed=e.incrspeed&&e.angry&&(e.id!==a.id)){
 				e.angry=0;
 				e.OSpeed/=a.increaseSpeed;
 				e.Speed/=a.increaseSpeed;
@@ -1446,7 +1446,7 @@ var CZombies = function(b, a) {
         CName: "读报僵尸",
         OrnHP: 150,
         Lvl: 3,
-		HP:300,
+		HP:370,
 		SunNum:75,
         LostPaperGif: 13,
         StandGif: 14,
@@ -1574,7 +1574,7 @@ var CZombies = function(b, a) {
                 g.ChkActs1 = function() {
                     return 1
                 },
-                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(g.jinyin?450:150,
+                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(g.jinyin?600:150,
                     function(m, l) {
                         var k = $Z[m];
                         if (!k) {
@@ -1642,9 +1642,9 @@ jinyinAct: function(a){
 		let A= oZ["getAr"+(a.PZ?"HZ":"Z")](a.PZ?a.ZX-200:a.ZX,a.PZ?a.ZX:a.ZX+200, a.R),
         Tz= A.length;
 	for (let i = GetC(a.ZX) - 2; i <= GetC(a.ZX); i++) {
-            for (let l = 0; l < 4; l++) {
+            for (let l = 0; l < 3; l++) {
               var m = oGd.$[a.R + "_" + i + "_" + l];
-            Tz||(m!==undefined&&a.PZ)?(
+            !a.isAttacking&&(Tz||(m!==undefined&&a.PZ))?(
 					a.Speed = a.OSpeed = 0,
 				EditImg($(z.FumeDoor),0,"images/Plants/FumeShroom/FumeShroomAttack.gif",{},0),
                   PlayAudio("fume"),
@@ -1704,11 +1704,11 @@ jinyinAct: function(a){
             c.getHit0(c, a, b)
         },
         getHit0: function(c, a, b) {
-            b == c.WalkDirection ? (c.CheckOrnHP(c, c.id, c.OrnHP, a, c.PicArr, c.isAttacking, 1), c.SetAlpha(c, c.EleBody, 50, 0.5), oSym.addTask(10,
+     c.CheckOrnHP(c, c.id, c.OrnHP, a, c.PicArr, c.isAttacking, 1), c.SetAlpha(c, c.EleBody, 50, 0.5), oSym.addTask(10,
                 function(e, d) {
                     (d = $Z[e]) && d.SetAlpha(d, d.EleBody, 100, 1)
                 },
-                [c.id])) : (c.HP -= a) < c.BreakPoint && (c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]), c.getHit = c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function() {})
+                [c.id])
         },
         CheckOrnHP: function(g, h, d, c, f, b, a) {
             var e = OrnNoneZombies.prototype;
@@ -2614,9 +2614,9 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                             h.getRaven = s.getRaven;
                             h.AttackZombie2 = s.AttackZombie2
                         };
-                    h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = r = k.AttackedRX-80) - (h.beAttackedPointL = 45)) + (h.beAttackedPointR = 100), SetStyle(i, {
+                    h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = r = k.AttackedRX) - (h.beAttackedPointL = 45)) + (h.beAttackedPointR = 100), SetStyle(i, {
                         left: h.X + "px"
-                    }), h.EleShadow.style.left = "45px", n()) : (h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g) - (h.beAttackedPointR = 100)) + (h.beAttackedPointL = 45), SetStyle(i, {
+                    }), h.EleShadow.style.left = "45px", n()) : (h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g-(h.jinyin?80:0)) - (h.beAttackedPointR = 100)) + (h.beAttackedPointL = 45), SetStyle(i, {
                         left: h.X + "px"
                     }), h.EleShadow.style.left = "45px", q.src = h.PicArr[13] + Math.random(), oSym.addTask(170,
                         function(t, w) {
@@ -2897,7 +2897,6 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             return c
         },
 		jinyinAct:function(){
-			this.OrnHP=160
 		},
         AudioArr: ["ballooninflate", "balloon_pop"],
         BookHandPosition: "80% 80%",
