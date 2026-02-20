@@ -20,7 +20,7 @@ var CPlants = NewO({
         CanGrow: function(c, b, e) {
             var a = b + "_" + e,
                 d = oS.ArP;
-            return d ? oGd.$LF[b] == 1 ? (e > 0 && e < d.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a] || c[1])) : c[0] && !c[1] : oGd.$LF[b] == 1 ? !(e < 1 || e > 9 || oGd.$Crater[a] || oGd.$Tombstones[a] || c[1]) : c[0] && !c[1]
+            return d ? oGd.$LF[b] == 1 ? (e > 0 && e < d.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1])) : c[0] && !c[1] : oGd.$LF[b] == 1 ? !(e < 1 || e > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1]) : c[0] && !c[1]
         },
         getHurt: function(e, c, b) {
             var d = this,
@@ -196,7 +196,7 @@ var CPlants = NewO({
                         c,
                         d,
                         f;
-                    e && (d = e.R, f = e.C, delete oGd.$Tombstones[c = d + "_" + f], e.Die(), ClearChild($("dTombstones" + c)), oS.StaticCard && AppearSun(Math.floor(GetX(f) + Math.random() * 41), GetY(d), 25, 0))
+                    e && (d = e.R, f = e.C, e.jinyin?delete oGd.$Tombstones[c = d + "_" + f]:oGd.$Tombstones[c = d + "_" + f]=2), e.Die(), !e.jinyin&&ClearChild($("dTombstones" + c)), oS.StaticCard && AppearSun(Math.floor(GetX(f) + Math.random() * 41), GetY(d), 25, 0))
                 },
                 [a.id])
         }
@@ -1099,7 +1099,7 @@ NormalAttack1: function() {
         Produce: '南瓜头，可以用他的外壳保护其他植物。<p>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">可以种在其他植物上</font></p>南瓜头最近都没收到，关于他表哥刃菲尔德的消息。很明显，刃菲尔德是个大明星，是一种……叫什么运动来着……的体育明星？佩格跳跳球大师？南瓜头反正搞不懂是什么运动，他只想做好他自己的工作。',
         CanGrow: function(c, b, d) {
             var a = b + "_" + d;
-            return c[2] ? 1 : oGd.$LF[b] == 1 ? !(d < 1 || d > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]) : c[0]
+            return c[2] ? 1 : oGd.$LF[b] == 1 ? !(d < 1 || d > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1) : c[0]
         },
         GetDY: function(b, c, a) {
             return a[0] ? -12 : -5
@@ -1154,7 +1154,7 @@ NormalAttack1: function() {
             var c = d + "_" + f,
                 b = oGd.$LF[d],
                 a = f < 1 || f > 9;
-            return b % 2 ? b < 3 ? !(a || e[1] || e[2] || e[0] || oGd.$Crater[c] || oGd.$Tombstones[c]) : !(a || e[0] || oGd.$Crater[c]) : 0
+            return b % 2 ? b < 3 ? !(a || e[1] || e[2] || e[0] || oGd.$Crater[c] || oGd.$Tombstones[c]==1) : !(a || e[0] || oGd.$Crater[c]) : 0
         },
         Tooltip: "可以让植物栽种在屋顶上",
         Produce: '花盆可以让你在屋顶上种植植物。<p>特点：<font color="#FF0000">允许你在屋顶上种植</font></p>“我是一个让植物栽种的花盆，但我也是一棵植物。是不是很意外？',
@@ -1208,7 +1208,7 @@ NormalAttack1: function() {
                     3:
                         return (false);
                     case 1:
-                        return (f > 0 && f < e.ArC[1] && !(d[1] || oGd.$Crater[b] || oGd.$Tombstones[b]));
+                        return (f > 0 && f < e.ArC[1] && !(d[1] || oGd.$Crater[b] || oGd.$Tombstones[b]==1));
                     case 2:
                         return (f > 0 && f < e.ArC[1] && d[0] && !d[1])
                 }
@@ -1218,7 +1218,7 @@ NormalAttack1: function() {
                     3:
                         return (false);
                     case 1:
-                        return (!(f < 1 || f > 9 || d[1] || oGd.$Crater[b] || oGd.$Tombstones[b]));
+                        return (!(f < 1 || f > 9 || d[1] || oGd.$Crater[b] || oGd.$Tombstones[b]==1));
                     case 2:
                         return (d[0] && !d[1])
                 }
@@ -1339,7 +1339,7 @@ NormalAttack1: function() {
             var a = b + "_" + f,
                 d = c[1],
                 e = oS.ArP;
-            return e ? oGd.$LF[b] == 1 ? f > 0 && f < e.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a] || d) : c[0] && !d : d && d.EName == "oWallNut" ? 1 : oGd.$LF[b] == 1 ? !(f < 1 || f > 9 || oGd.$Crater[a] || oGd.$Tombstones[a] || d) : c[0] && !d
+            return e ? oGd.$LF[b] == 1 ? f > 0 && f < e.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a]==1 || d) : c[0] && !d : d && d.EName == "oWallNut" ? 1 : oGd.$LF[b] == 1 ? !(f < 1 || f > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1 || d) : c[0] && !d
         },
         InitTrigger: function() {},
         HurtStatus: 0,
@@ -1357,7 +1357,7 @@ NormalAttack1: function() {
         height: 71,
         beAttackedPointL: 10,
         beAttackedPointR: 61,
-        SunNum: 0,
+        SunNum: 400,
         HP: 4000,
         coolTime: 0,
         canEat: 0,
@@ -1366,6 +1366,7 @@ NormalAttack1: function() {
         AudioArr: ["bowling", "bowlingimpact", "bowlingimpact2"],
         Produce: "",
         CanAttack: 1,
+        PKind:10,
         InitTrigger: function() {},
         getHurt: function() {},
         CanGrow: function(d, e, f) {
@@ -1429,7 +1430,7 @@ NormalAttack1: function() {
                     }), w != a && (z.R = w, t = true, !z.CanAttack && (z.CanAttack = 1)), i != l && (z.C = i, t = true), t && (oGd.del({
                         R: a,
                         C: l,
-                        PKind: 1
+                        PKind: 10
                     }), oGd.add(z, w + "_" + i + "1")), oSym.addTask(1, arguments.callee, [z, y, z.AttackedLX, z.AttackedRX, z.pixelLeft, x, e, g, b]))
                 }
             })(c, oS.W, c.AttackedLX, c.AttackedRX, c.pixelLeft, d, 0, GetY1Y2(1)[0], 600)
@@ -1528,7 +1529,7 @@ NormalAttack1: function() {
             var a = b + "_" + f,
                 d = c[1],
                 e = oS.ArP;
-            return e ? oGd.$LF[b] == 1 ? f > 0 && f < e.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a] || d) : c[0] && !d : d && d.EName == "oTallNut" ? 1 : oGd.$LF[b] == 1 ? !(f < 1 || f > 9 || oGd.$Crater[a] || oGd.$Tombstones[a] || d) : c[0] && !d
+            return e ? oGd.$LF[b] == 1 ? f > 0 && f < e.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a]==1 || d) : c[0] && !d : d && d.EName == "oTallNut" ? 1 : oGd.$LF[b] == 1 ? !(f < 1 || f > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1 || d) : c[0] && !d
         },
         Stature: 1,
         JudgeHurtCustom:function(c){
@@ -1661,7 +1662,7 @@ NormalAttack1: function() {
         CanGrow: function(c, b, e) {
             var a = b + "_" + e,
                 d = oS.ArP;
-            return d ? e > 0 && e < d.ArC[1] && oGd.$LF[b] == 1 && !(c[1] || c[0]) : !(e < 1 || e > 9 || oGd.$LF[b] - 1 || c[1] || c[0] || oGd.$Crater[a] || oGd.$Tombstones[a])
+            return d ? e > 0 && e < d.ArC[1] && oGd.$LF[b] == 1 && !(c[1] || c[0]) : !(e < 1 || e > 9 || oGd.$LF[b] - 1 || c[1] || c[0] || oGd.$Crater[a] || oGd.$Tombstones[a]==1)
         },
         getHurt: function(d, b, a) {
             var c = this;
@@ -1762,7 +1763,7 @@ NormalAttack1: function() {
             var a = b + "_" + f,
                 d = c[1],
                 e = oS.ArP;
-            return e ? oGd.$LF[b] == 1 ? f > 0 && f < e.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a] || d) : c[0] && !d : d && d.EName == "oGarlic" ? 1 : oGd.$LF[b] == 1 ? !(f < 1 || f > 9 || oGd.$Crater[a] || oGd.$Tombstones[a] || d) : c[0] && !d
+            return e ? oGd.$LF[b] == 1 ? f > 0 && f < e.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a]==1 || d) : c[0] && !d : d && d.EName == "oGarlic" ? 1 : oGd.$LF[b] == 1 ? !(f < 1 || f > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1 || d) : c[0] && !d
         },
         InitTrigger: function() {},
         HurtStatus: 0,
