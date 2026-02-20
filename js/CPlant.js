@@ -632,7 +632,7 @@ while (e--) {
       function(f, j, h, c, n, i, m, k, o, g) {
         var l, e = GetC(n),
           d = oZ["getZ" + c](n, i);
-        m < 1 && g[i + "_" + e] && k != e && (++m && (h = 40), k = e, c = 1500);
+        m < 1 && g[i + "_" + e] && k != e && (++m && (h = 40), k = e);
         d && d.Altitude == 1 ? (d[{
           "-1": "getSnowPea",
           0: "getFreezePea",
@@ -2946,7 +2946,6 @@ NormalAttack1: function() {
         width: 89,
         height: 95,
         beAttackedPointR: 53, // 血量 宽度 高度 判定点
- 
         PotSize: 0,
         XRay: 0,
         CardTime: 1500, // 花瓶种类 是否透视 卡片冷却时间 
