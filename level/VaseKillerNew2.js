@@ -14,7 +14,7 @@ oS.Init({
 			while (VaseList.length && GroundList.length) {
 				var Top = VaseList[VaseList.length - 1], Pos = GroundList[GroundList.length - 1];
 
-				var ret = oFlowerVase.prototype.SpecialBirth(Pos[0], Pos[1], 0, 顶部); // 生成罐子
+				var ret = oFlowerVase.prototype.SpecialBirth(Pos[0], Pos[1], 0, Top); // 生成罐子
 
 				ret.AutoSummonBase = false; // 生成底座后，关闭删除该底座的权限
 
@@ -82,4 +82,5 @@ oS.Init({
 		SelectCard("oCherryBomb"), SelectCard("oLilyPad"), SelectCard("oPlantern"), SelectCard("oTangleKelp"), SelectCard("oPotatoMine");
 	}
 });
+
 
