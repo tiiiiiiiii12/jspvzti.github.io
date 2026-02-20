@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oCherryBomb, oPeashooter, oSquash, oSnowPea, oHypnoShroom, oRepeater2], 
-	ZName: [oZombie, oZombie2, oZombie3, oBucketheadZombie, oFootballZombie, oJackinTheBoxZombie, oDancingZombie, oBackupDancer], 
+	ZName: [oZombie, oZombie2, oConeheadZombie, oBucketheadZombie, oFootballZombie, oJackinTheBoxZombie, oDancingZombie, oBackupDancer], 
 	PicArr: ["images/interface/background2.jpg","images/interface/trophy.png","images/interface/PointerDown.gif","images/interface/Stripe.png","images/Card/Plants/SplitPea.png"], 
 	backgroundImage: "images/interface/background2.jpg", 
 	DKind: 0, ShowScroll: false, 
@@ -222,4 +222,5 @@ oS.Init({
 				break;
 		}
 	}
+
 });
