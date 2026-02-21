@@ -651,7 +651,7 @@ var CZombies = function(b, a) {
         },
         LostHeadGif: 14,
 		jinyinAct:function(a){
-			a.HP*=1.6;
+			a.HP*=1.5;
 			a.Ele.style.filter="grayscale(100%) brightness(400%)";
 			a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
@@ -697,7 +697,7 @@ var CZombies = function(b, a) {
                 b = d + "spotlight2" + c + ".png" + $Random;
             return ["images/Card/Zombies/DancingZombie.png", d + "0.gif", d + "DancingZombie.gif", d + "Attack.gif", d + "LostHead.gif", d + "LostHeadAttack.gif", d + "Head.gif" + $Random, d + "Die.gif" + $Random, d + "BoomDie.gif" + $Random, d + "SlidingStep.gif" + $Random, d + "Dancing.gif" + $Random, d + "Summon1.gif", d + "Summon2.gif", d + "Summon3.gif", d + "LostHeadSlidingStep.gif" + $Random, d + "LostHeadDancing.gif" + $Random, d + "LostHeadSummon.gif" + $Random, a, b]
         })(),
-        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。</p><p>韧性：<font color="#FF0000">中</font><br>精英形态：白色，一直滑步，无视植物，碰到脑子召唤伴舞（800血）</font><br>特点：<font color="#FF0000">召唤伴舞僵尸</font></p>舞王僵尸的最新唱片“抓住脑子啃啊啃”在僵尸界的人气正急速飙升。',
+        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。</p><p>韧性：<font color="#FF0000">中</font><br>精英形态：白色，一直滑步，无视植物，碰到脑子召唤伴舞（750血）</font><br>特点：<font color="#FF0000">召唤伴舞僵尸</font></p>舞王僵尸的最新唱片“抓住脑子啃啊啃”在僵尸界的人气正急速飙升。',
         getSnowPea: function() {
             this.PlaySlowballAudio();
         },
@@ -1140,7 +1140,7 @@ var CZombies = function(b, a) {
 		PrivateDie:function(a){			
 			for (u in $Z) {
               e = $Z[u];	
-			if(e.OSpeed=e.incrspeed&&e.angry&&(e.id!==a.id)){
+			if(e.Speed=e.incrspeed&&e.angry&&(e.id!==a.id)){
 				e.angry=0;
 				e.OSpeed/=a.increaseSpeed;
 				e.Speed/=a.increaseSpeed;
