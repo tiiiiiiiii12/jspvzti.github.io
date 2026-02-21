@@ -1641,9 +1641,9 @@ jinyinAct: function(a){
 	"div", "position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"visibility:hidden;width:343px;height:62px;left:"+(a.PZ?"-250":"40")+"px;top:70px;background:url(images/Plants/FumeShroom/FumeShroomBullet.gif);z-index:" + (a.zIndex + 1),0,$(a.id));
 	oSym.addTask(1, function(a,h,z) {
 		if (a.Ornaments&&$Z[a.id]) {
-		let A= oZ["getAr"+(a.PZ?"HZ":"Z")](a.PZ?a.ZX-200:a.ZX,a.PZ?a.ZX:a.ZX+200, a.R),
+		let A= oZ["getAr"+(a.PZ?"HZ":"Z")](a.PZ?a.ZX-300:a.ZX,a.PZ?a.ZX:a.ZX+300, a.R),
         Tz= A.length;
-	for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX); i++) {
+	for (let i = GetC(a.ZX+20) - 3; i <= GetC(a.ZX+20); i++) {
             for (let l=0;l<=3;l++){
               var m = oGd.$[a.R + "_" + i + "_" + l];
             !a.isAttacking&&(Tz||(m!==undefined&&a.PZ))?(
@@ -1655,18 +1655,19 @@ jinyinAct: function(a){
 			a&&a.Ornaments&&EditImg($(z.FumeDoor),0,"images/Plants/FumeShroom/FumeShroom.gif",{},0)
 			},[a,z]),
                   ImgSpriter(h, a.id, [
-                      ["0 0", 3, 1],
-                      ["0 -62px", 3, 2]
+                      ["0 0", 4, 1],
+                      ["0 -62px", 4, 2],
+					  ["0 -124px", 4, 3]
                     ], 0,
-                    function(i, j) {
+                    function(i) {
                       SetHidden($(i))
                     }),
-                  a.PZ&&m && (m.getHurt(a, 3,50))
+                  a.PZ&&m && (m.getHurt(a, 3,25))
 						):(a.Speed = a.OSpeed =a.LostPaperSpeed);
 					}
 	             }
 			while (Tz--) {
-              (t = A[Tz])&&(t.Altitude==1)&&(t.getHit1(t,50,0))
+              (t = A[Tz])&&(t.Altitude==1)&&(t.getHit1(t,25,0))
             }
               } else {
                 ClearChild(h);
@@ -1689,7 +1690,7 @@ jinyinAct: function(a){
         PlayNormalballAudio: function() {
             PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
         },
-        Produce: '他的铁栅门是有效的盾牌。<p>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高</font><br>精英形态：手持大喷菇，对前方两格植物造成每次50伤害</font><br>弱点：大喷菇和磁力菇</p>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
+        Produce: '他的铁栅门是有效的盾牌。<p>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高</font><br>精英形态：手持大喷菇，对前方三格植物造成每次25伤害</font><br>弱点：大喷菇和磁力菇</p>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
         GoingDie: CZombies.prototype.GoingDie,
         getFirePea: function(c, a, b) {
             PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
