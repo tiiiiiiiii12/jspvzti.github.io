@@ -777,15 +777,24 @@ oP = {
 	SetTimeoutTomZombie: function(c) {
 		var f = [],
 		d = [],
+		x=[],
+		z=[],
 		e = 0,
+		v=0,
 		a = c.length,
 		b,
+		y
 		g;
 		for (b in oGd.$Tombstones) {
 			g = b.split("_");
 			d[e] = (f[e] = new c[Math.floor(Math.random() * a)]).CustomBirth(g[0], g[1], 100); ++e
 		}
-		this.AppearUP(d, f, e,Number(oGd.$Tombstones[b])-1)
+		for (y in oGd.$Tombstones1) {
+			g = y.split("_");
+			x[v] = (z[v] = new c[Math.floor(Math.random() * a)]).CustomBirth(g[0], g[1], 100),z[v].pz=true; ++v
+		}
+		this.AppearUP(d, f, e);
+		this.AppearUP(x, z, v,1)
 	},
 	SetTimeoutWaterZombie: function(j, b, e, h) {
 		var f = oGd.$LF,
