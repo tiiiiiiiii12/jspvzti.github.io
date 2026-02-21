@@ -1574,7 +1574,7 @@ var CZombies = function(b, a) {
                 g.ChkActs1 = function() {
                     return 1
                 },
-                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(g.jinyin?600:150,
+                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(g.jinyin?450:150,
                     function(m, l) {
                         var k = $Z[m];
                         if (!k) {
@@ -2237,11 +2237,12 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         var a = function(d, b) {
             var c = d.HP;
             switch (true) {
-                case (d.HP = c -= b) < 200:
+                case (d.HP = c -= b) < 60:
                     d.GoingDie();
                     d.getHit0 = d.getHit1 = d.getHit2 = d.getHit3 = function() {};
                     return;
                 case c < 391:
+					d.jinyin&&(d.OSpeed=d.Speed=4.8);
                     d.EleBody.src = "images/Zombies/Zomboni/3.gif";
                     break;
                 case c < 871:
@@ -2273,6 +2274,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             GetDY: function() {
                 return 0
             },
+			getSlow:function(){},
             OSpeed: 2.5,
             Speed: 2.5,
             AKind: 2,
