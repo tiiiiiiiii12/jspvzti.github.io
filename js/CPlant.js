@@ -712,7 +712,7 @@ NormalAttack1: function() {
       oSym.addTask(1,
         function(n, l, m, k, i,j,N, A, I) {
           A == 0 && oGd.$Torch[GetR(k) + "_" + GetC(n)] && (A = 1, I = 40, i.src = "images/Plants/PB" + A + "0.gif");
-          j(oZ.getZ0(n, l), i, A, I,k) && ((n += 4+(N+5)) > 900 || (k += N) > 600 || k < -15 ? ClearChild(i) : (SetStyle(i, {
+          j(oZ.getZ0(n, l), i, A, I,k) && ((n += 4) > 900 || (k += N) > 600 || k < -15 ? ClearChild(i) : (SetStyle(i, {
             left: (m += 4) + "px",
             top: k + "px"
           }), oSym.addTask(1, arguments.callee, [n, GetR(k + 15), m, k, i,j,N, A, I])))
