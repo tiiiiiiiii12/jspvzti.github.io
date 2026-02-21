@@ -893,6 +893,7 @@ oGd = {
 		this.$ = [];
 		this.$Crater = [];
 		this.$Tombstones = {};
+		this.$Tombstones1= {};
 		this.$Torch = [];
 		this.$Plantern = [];
 		this.$LF = oS.LF;
