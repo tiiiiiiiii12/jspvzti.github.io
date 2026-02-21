@@ -1641,8 +1641,8 @@ jinyinAct: function(a){
 		if (a.Ornaments&&$Z[a.id]) {
 		let A= oZ["getAr"+(a.PZ?"HZ":"Z")](a.PZ?a.ZX-200:a.ZX,a.PZ?a.ZX:a.ZX+200, a.R),
         Tz= A.length;
-	for (let i = GetC(a.ZX) - 2; i <= GetC(a.ZX); i++) {
-            for (let l = 0; l < 3; l++) {
+	for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX); i++) {
+            for (let l=0;l<=3;l++){
               var m = oGd.$[a.R + "_" + i + "_" + l];
             !a.isAttacking&&(Tz||(m!==undefined&&a.PZ))?(
 					a.Speed = a.OSpeed = 0,
@@ -1654,8 +1654,7 @@ jinyinAct: function(a){
 			},[a,z]),
                   ImgSpriter(h, a.id, [
                       ["0 0", 4, 1],
-                      ["0 -62px", 4, 2],
-                      ["0 -124px", 4, -1]
+                      ["0 -62px", 4, 2]
                     ], 0,
                     function(i, j) {
                       SetHidden($(i))
