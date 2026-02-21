@@ -1936,7 +1936,7 @@ NormalAttack1: function() {
                 b = $(c),
                 a = c + "_Bullet";
             while (e--) {
-                (g = d[e]).Altitude < 2 && g.getHit1(g, 20)
+                (g = d[e]).Altitude < 2 && g.getHit1(g, 25)
             }
             b.childNodes[1].src = "images/Plants/FumeShroom/FumeShroomAttack.gif";
             SetVisible($(a));
@@ -2060,7 +2060,7 @@ NormalAttack1: function() {
             for (g = k.MinR; g <= f; g++) {
                 e = oZ.getArZ(c, b, g);
                 for (h = e.length; h--;
-                    (a = e[h]).Altitude < 2 && a.getHit1(a, 80)) {}
+                    (a = e[h]).Altitude < 2 && (a.getHit1(a, 80),a.getr(a,20))) {}
             }
             oSym.addTask(100,
                 function(i) {
@@ -2832,7 +2832,7 @@ NormalAttack1: function() {
                 if(num>75){
                     e && e.Altitude == 1&&(e.getHit0(e, 3, d)),(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
                 }else{
-                e && e.Altitude == 1?(num>50&&e.getr(e,20),e.getPea(e,20,d), ClearChild(i)):(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
+                e && e.Altitude == 1?(num>50&&e.getr(e,30),e.getPea(e,20,d), ClearChild(i)):(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
                 }
                 },
                 [c, $(c), 0, b.AttackedLX, b.R, b.AttackedLX - 40])
