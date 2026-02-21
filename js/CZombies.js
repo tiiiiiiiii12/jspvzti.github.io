@@ -308,8 +308,10 @@ var CZombies = function(b, a) {
                         d = oZ.getHZ1(e.ZX, e.R),
                         f = e.id,
                         c;
-                    d && d.AttackedRX > 100 && d.Altitude == 1 &&(!e.isAttacking ? e.AttackZombie(f, c = d.id) : e.AttackZombie(f, d.id, 1))
+					if(d && d.Altitude == 1){
+                     (!e.isAttacking ? e.AttackZombie(f, c = d.id) : e.AttackZombie(f, d.id, 1))
 					return d
+				   }
                 },
                 JudgeLR: function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
