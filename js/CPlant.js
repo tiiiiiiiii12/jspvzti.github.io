@@ -2003,7 +2003,7 @@ NormalAttack1: function() {
                     d && (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
                     a.Die()
                 },
-                [a.R + "_" + a.C + "1"])
+                [a.R + "_" + a.C + "_1"])
         }
     }),
     oGloomShroom = InheritO(oFumeShroom, {
@@ -2337,7 +2337,7 @@ NormalAttack1: function() {
         PrivateDie: function(a) {},
         jinyinAct:function(a){
            oSym.addTask(300,function(a){
-           a.HP>1&&(AppearSun(a.pixelLeft,a.pixelTop,225),a.Die())
+           $P[a.id]&&(AppearSun(a.pixelLeft,a.pixelTop,225),a.Die())
          },[a])
         },
         PrivateBirth: function() {},
