@@ -1130,7 +1130,7 @@ var CZombies = function(b, a) {
               e = $Z[u];	
 			if($Z[a.id]&&!e.angry&&u!==a.id){
 				e.angry=1;
-				e.incrspeed=(e.OSpeed*=a.increaseSpeed);
+				e.OSpeed*=a.increaseSpeed;
 				e.Speed*=a.increaseSpeed;
 				e.LostPaperSpeed*=a.increaseSpeed;
 				e.tasktime*=a.jinyin?0.25:0.5;
@@ -1140,7 +1140,7 @@ var CZombies = function(b, a) {
 		PrivateDie:function(a){			
 			for (u in $Z) {
               e = $Z[u];	
-			if(e.Speed=e.incrspeed&&e.angry&&(e.id!==a.id)){
+			if(e.angry&&(e.id!==a.id)){
 				e.angry=0;
 				e.OSpeed/=a.increaseSpeed;
 				e.Speed/=a.increaseSpeed;
