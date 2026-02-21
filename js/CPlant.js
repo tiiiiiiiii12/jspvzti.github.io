@@ -691,13 +691,14 @@ NormalAttack1: function() {
       b = g.pixelTop + 20,
       c = g.R,
       e = f + 15,
-      a = function(j, h, a, i) {
+      a = function(j, h, a, i,Top) {
         return (j && j.Altitude == 1 ? (j[{
           0: "getPea",
           1: "getFirePea"
         } [a]](j, i, 0), (SetStyle(h, {
           left: j.ZX - 12 + "px",
           width: "52px",
+          top:Top+"px",
           height: "46px"
         })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [h]), false) : true)
       };
@@ -711,7 +712,7 @@ NormalAttack1: function() {
       oSym.addTask(1,
         function(n, l, m, k, i,j,N, A, I) {
           A == 0 && oGd.$Torch[GetR(k) + "_" + GetC(n)] && (A = 1, I = 40, i.src = "images/Plants/PB" + A + "0.gif");
-          j(oZ.getZ0(n, l), i, A, I) && ((n += 4) > 900 || (k += N) > 600 || k < -15 ? ClearChild(i) : (SetStyle(i, {
+          j(oZ.getZ0(n, l), i, A, I,k) && ((n += 4+(N+5)) > 900 || (k += N) > 600 || k < -15 ? ClearChild(i) : (SetStyle(i, {
             left: (m += 4) + "px",
             top: k + "px"
           }), oSym.addTask(1, arguments.callee, [n, GetR(k + 15), m, k, i,j,N, A, I])))
@@ -720,7 +721,7 @@ NormalAttack1: function() {
             id: h
           },
           0, EDPZ),a,N,0,20]);
-      ++N <= 5 && oSym.addTask(10, arguments.callee, ["StarB" + Math.random(), N]);
+      ++N <= 5&&$P[g.id]&& oSym.addTask(10, arguments.callee, ["StarB" + Math.random(), N]);
     })("StarB" + Math.random(), -5)
   },
         jinyinAct:function(a){
