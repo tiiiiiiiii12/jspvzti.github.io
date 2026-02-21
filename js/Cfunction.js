@@ -785,7 +785,7 @@ oP = {
 			g = b.split("_");
 			d[e] = (f[e] = new c[Math.floor(Math.random() * a)]).CustomBirth(g[0], g[1], 100); ++e
 		}
-		this.AppearUP(d, f, e,oGd.$Tombstones[b]-1)
+		this.AppearUP(d, f, e,Number(oGd.$Tombstones[b])-1)
 	},
 	SetTimeoutWaterZombie: function(j, b, e, h) {
 		var f = oGd.$LF,
@@ -817,7 +817,7 @@ oP = {
 				g = f[e];
 				g.Birth.call(g);
 				SetBlock(g.Ele);
-				g.pz&&g.bedevil(g);
+				pz&&g.bedevil(g);
 				oSym.addTask(10,
 				function(l, k, i, j,pz) {
 					k = Math.max(k - j, 0);
