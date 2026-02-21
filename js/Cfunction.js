@@ -783,7 +783,7 @@ oP = {
 		v=0,
 		a = c.length,
 		b,
-		y
+		y,
 		g;
 		for (b in oGd.$Tombstones) {
 			g = b.split("_");
