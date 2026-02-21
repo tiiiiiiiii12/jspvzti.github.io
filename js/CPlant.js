@@ -187,7 +187,7 @@ var CPlants = NewO({
         },
         InitTrigger: function() {},
         Tooltip: "把它种在墓碑上用来吞噬墓碑",
-        Produce: '墓地苔用来吃掉墓碑。<p>使用方法：<font color="#FF0000">单次使用，只对墓碑生效。</font><br>特点：<font color="#FF0000">吞噬墓碑。</font></p>尽管墓地苔的外表十分吓人，但他想要所有人都知道，其实他喜欢小猫咪，而且利用业余时间，在一家僵尸康复中心做志愿者。“我只是在做正确的事情，”他说。',
+        Produce: '墓地苔用来吃掉墓碑。<p>使用方法：<font color="#FF0000">单次使用，只对墓碑生效。</font><br>特点：<font color="#FF0000">吞噬墓碑。</font><br>精英形态：使墓碑反向，出魅惑僵尸（墓碑可种植物）</p>尽管墓地苔的外表十分吓人，但他想要所有人都知道，其实他喜欢小猫咪，而且利用业余时间，在一家僵尸康复中心做志愿者。“我只是在做正确的事情，”他说。',
         PrivateBirth: function(a) {
             PlayAudio("gravebusterchomp");
             oSym.addTask(420,
@@ -196,7 +196,7 @@ var CPlants = NewO({
                         c,
                         d,
                         f;
-                    e && (d = e.R, f = e.C, e.jinyin?delete oGd.$Tombstones[c = d + "_" + f]:oGd.$Tombstones[c = d + "_" + f]=2, e.Die(), !e.jinyin&&ClearChild($("dTombstones" + c)), oS.StaticCard && AppearSun(Math.floor(GetX(f) + Math.random() * 41), GetY(d), 25, 0))
+                    e && (d = e.R, f = e.C, e.jinyin?delete oGd.$Tombstones[c = d + "_" + f]:oGd.$Tombstones[c = d + "_" + f]=2, e.Die(), !e.jinyin?ClearChild($("dTombstones" + c):$("dTombstones" + c).style.transform="rorateY(180deg)"), oS.StaticCard && AppearSun(Math.floor(GetX(f) + Math.random() * 41), GetY(d), 25, 0))
                 },
                 [a.id])
         }
