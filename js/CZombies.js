@@ -1655,9 +1655,10 @@ jinyinAct: function(a){
 			a&&a.Ornaments&&EditImg($(z.FumeDoor),0,"images/Plants/FumeShroom/FumeShroom.gif",{},0)
 			},[a,z]),
                   ImgSpriter(h, a.id, [
-                      ["0 0", 4, 1],
-                      ["0 -62px", 4, 2],
-					  ["0 -124px", 4, 3]
+                      ["0 0", 5, 1],
+                      ["0 -62px", 5, 2],
+					  ["0 -124px", 5, 3],
+					  ["0 -186px", 5, -1],
                     ], 0,
                     function(i) {
                       SetHidden($(i))
