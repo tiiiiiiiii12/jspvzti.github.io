@@ -2190,7 +2190,7 @@ NormalAttack1: function() {
 	PrivateHit: function(a, b, A, c, d) {
     A == 1 &&oS.StaticCard&&!oS.CardKind&&(AppearSun(b.ZX, b.pixelTop + 120, 5,0));
     A == 2 && (b.getHit0(b, 60, 0), delete oGd.$Crater[c + "_" + d], ClearChild($(c + "_" + d + "_crater")));
-    A == 3 &&!b.WalkDirection&&(b.ExchangeLR(b, 1), b.ZX = b.AttackedRX, b.ChkActs = b.ChkActs1, b.WalkDirection = 0);
+    A == 3 &&!b.WalkDirection&&(b.ExchangeLR(b, 1), b.ZX = b.AttackedRX, b.ChkActs = b.ChkActs1, b.WalkDirection = 1);
     A == 4 && (b.DisappearDie());
     A == 5 && !oS.CardKind && oP.FlagToEnd()
        },
