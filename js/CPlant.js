@@ -2174,7 +2174,7 @@ NormalAttack1: function() {
         PrivateBirth: function(c) {
             var b = c.AttackedLX,
                 a = b - 46;
-			CustomSpecial(oCoffeeBean,c.R,c.C).jinyinnum=0;
+			(CustomSpecial(oCoffeeBean,c.R,c.C)).jinyin=0;
             c.BulletClass = NewO({
                 X: b,
                 R: c.R,
