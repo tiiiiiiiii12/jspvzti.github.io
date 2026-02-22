@@ -1,5 +1,5 @@
 oS.Init({
-	PName: [oFumeShroom, oHypnoShroom, oGraveBuster, oDoomShroom, oScaredyShroom, oPuffShroom],
+	PName: [oFumeShroom, oHypnoShroom, oGraveBuster, oDoomShroom, oScaredyShroom, oPuffShroom,oIceShroom],
 	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oDancingZombie, oScreenDoorZombie, oFootballZombie, oBackupDancer, oBucketheadZombie],
 	PicArr: ["images/interface/background2.jpg", "images/interface/trophy.png", "images/interface/Tombstones.png", "images/interface/Tombstone_mounds.png"],
 	backgroundImage: "images/interface/background2.jpg",
@@ -80,7 +80,7 @@ oS.Init({
 	FlagNum: 20,
 	FlagToSumNum: {
 		a1: [3, 5, 9, 10, 13, 15, 19],
-		a2: [3, 6, 12, 20, 24, 36, 48, 100]
+		a2: [3, 6, 18, 24, 36, 48, 60, 100]
 	},
 	FlagToMonitor: {
 		9: [ShowLargeWave, 0],
@@ -153,4 +153,5 @@ oS.Init({
 		}()
 	},
 	ViewPlantTitle: function(a) {}
+
 });
