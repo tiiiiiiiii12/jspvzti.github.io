@@ -2298,7 +2298,7 @@ NormalAttack1: function() {
 		function(b,a) {
 			var c=$P[a];
 			c&&c.NormalAttack2();
-			--b?oSym.addTask(2, arguments.callee, [b]):c&&c.Die()
+			--b?oSym.addTask(2, arguments.callee, [b,a]):c&&c.Die()
 		},
 		[100,this.id])
 	},
