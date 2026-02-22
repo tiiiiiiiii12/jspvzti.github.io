@@ -2296,10 +2296,11 @@ NormalAttack1: function() {
 	NormalAttack1: function() {
 		oSym.addTask(1,
 		function(b,a) {
-			a&&a.NormalAttack2();
-			--b?oSym.addTask(2, arguments.callee, [b]):a.Die()
+			var c=$P[a];
+			c&&c.NormalAttack2();
+			--b?oSym.addTask(2, arguments.callee, [b]):c&&c.Die()
 		},
-		[100,this])
+		[100,this.id])
 	},
 NormalAttack2: function() {
     var g = this,
