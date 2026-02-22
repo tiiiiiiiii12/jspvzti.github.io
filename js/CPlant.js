@@ -2292,7 +2292,7 @@ NormalAttack1: function() {
 			a.jinyin&&(a.BulletEle=null);
 		},
         PrivateBirth: function(a) {
-            a.jinyin&&(a.BulletEle = NewImg(0,"images/Plants/PB-10.gif", "left:" + (a.AttackedLX - 40) + "px;top:0px;transform:rotateY(90deg);visibility:hidden;z-index:" + (a.zIndex + 2)));
+            a.jinyin&&(a.BulletEle = NewImg(0,"images/Plants/PB-10.gif", "left:" + (a.AttackedLX - 40) + "px;top:0px;z-index:" + (a.zIndex + 2)));
             !oS.DKind ? (a.jinyin&&a.NormalAttack1(),a.NormalAttack(a.id), a.getHurt = function(d, c, b) {}) : a.getHurt = CPlants.prototype.getHurt;
         },
 	NormalAttack1: function() {
@@ -2300,9 +2300,9 @@ NormalAttack1: function() {
 		function(b,a) {
 			var c=$P[a];
 			c&&c.NormalAttack2();
-			--b?oSym.addTask(2, arguments.callee, [b,a]):c&&c.Die()
+			--b?oSym.addTask(1, arguments.callee, [b,a]):c&&c.Die()
 		},
-		[100,this.id])
+		[500,this.id])
 	},
 NormalAttack2: function() {
     var g = this,
