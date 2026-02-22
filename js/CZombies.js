@@ -2762,7 +2762,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         OpenBox: function(b) {
             var a = $Z[b];
             a.EleBody.src = a.PicArr[7];
-			a.HP=300;
+			a.HP=370;
 			a.GoingDie=a.NormalDie;
             a.ChkActs = a.ChkActs1 = function() {
                 return 1
