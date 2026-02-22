@@ -2288,7 +2288,9 @@ NormalAttack1: function() {
         GetDX: CPlants.prototype.GetDX,
         GetDY: CPlants.prototype.GetDY,
         InitTrigger: function() {},
-        PrivateDie: function(a) {},
+        PrivateDie: function(a) {
+			a.jinyin&&(a.BulletEle=null);
+		},
         PrivateBirth: function(a) {
             a.jinyin&&(a.BulletEle = NewImg(0,"images/Plants/PB-10.gif", "left:" + (a.AttackedLX - 40) + "px;top:0px;transform:rotateY(90deg);visibility:hidden;z-index:" + (a.zIndex + 2)));
             !oS.DKind ? (a.jinyin&&a.NormalAttack1(),a.NormalAttack(a.id), a.getHurt = function(d, c, b) {}) : a.getHurt = CPlants.prototype.getHurt;
