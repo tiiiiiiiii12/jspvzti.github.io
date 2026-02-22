@@ -2652,7 +2652,7 @@ NormalAttack1: function() {
         if(c.jinyin){
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
-                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime>=-110)&&(oGd.$[i + "_" + l+"_1"].AttTime+=60);
+                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime<=-60)&&(oGd.$[i + "_" + l+"_1"].AttTime+=60);
                   }
                 }
             }
