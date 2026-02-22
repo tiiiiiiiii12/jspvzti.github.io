@@ -2294,13 +2294,12 @@ NormalAttack1: function() {
             !oS.DKind ? (a.jinyin&&a.NormalAttack1(),a.NormalAttack(a.id), a.getHurt = function(d, c, b) {}) : a.getHurt = CPlants.prototype.getHurt;
         },
 	NormalAttack1: function() {
-		var a=this;
 		oSym.addTask(1,
 		function(b,a) {
-			a.NormalAttack2();
-			--b && oSym.addTask(2, arguments.callee, [b])
+			a&&a.NormalAttack2();
+			--b?oSym.addTask(2, arguments.callee, [b]):a.Die()
 		},
-		[100,a])
+		[100,this])
 	},
 NormalAttack2: function() {
     var g = this,
@@ -2349,7 +2348,7 @@ NormalAttack2: function() {
                         oSym.addTask(40,
                             function(g) {
                                 ClearChild(g);
-                                f.Die()
+                                !f.jinyin&&f.Die()
                             },
                             [NewEle(b, "div", "position:absolute;left:0;top:0;width:900px;height:600px;z-index:10;filter:alpha(opacity=50);opacity:.5;background:#9CF url(images/Plants/IceShroom/Snow.gif) no-repeat scroll " + (f.pixelLeft - 197) + "px " + (f.pixelTop - 80) + "px", 0, EDPZ)]);
                     }
