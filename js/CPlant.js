@@ -2294,9 +2294,10 @@ NormalAttack1: function() {
             !oS.DKind ? (a.NormalAttack1(),a.NormalAttack(a.id), a.getHurt = function(d, c, b) {}) : a.getHurt = CPlants.prototype.getHurt;
         },
 	NormalAttack1: function() {
+		var a=this;
 		oSym.addTask(1,
 		function(b) {
-			this.NormalAttack2();
+			a.NormalAttack2();
 			--b && oSym.addTask(2, arguments.callee, [b])
 		},
 		[100])
