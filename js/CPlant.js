@@ -196,8 +196,8 @@ var CPlants = NewO({
                         c,
                         d,
                         f;
-                    e && (d = e.R, f = e.C, delete oGd.$Tombstones[c = d + "_" + f], e.Die(), !e.jinyin?ClearChild($("dTombstones" + c)):$("dTombstones" + c).style.transform="rotateY(180deg)",
-                          oGd.$Tombstones1[c]=1,oS.StaticCard && AppearSun(Math.floor(GetX(f) + Math.random() * 41), GetY(d), 25, 0))
+                    e && (d = e.R, f = e.C, delete oGd.$Tombstones[c = d + "_" + f], e.Die(), !e.jinyin?ClearChild($("dTombstones" + c)):($("dTombstones" + c).style.transform="rotateY(180deg)",oGd.$Tombstones1[c]=1),
+                          oS.StaticCard && AppearSun(Math.floor(GetX(f) + Math.random() * 41), GetY(d), 25, 0))
                 },
                 [a.id])
         }
