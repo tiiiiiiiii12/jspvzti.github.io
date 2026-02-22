@@ -2261,7 +2261,7 @@ NormalAttack1: function() {
                 case 0:
                     c.num+=1;
                     !c.Sleep && (d.bedevil(d),
-        c.jinyin&&(d.BulletEle = NewImg(0, "images/Plants/PB"+(c.num<2?"-1":"0")+"0.gif","left:" + (d.AttackedLX - 40) + "px;top:" + (d.pixelTop + 30) + "px;visibility:hidden;z-index:" + (d.zIndex + 2)), 
+        c.jinyin&&(d.BulletEle = NewImg(0, "images/Plants/PB00.gif","left:" + (d.AttackedLX - 40) + "px;top:" + (d.pixelTop + 30) + "px;visibility:hidden;z-index:" + (d.zIndex + 2)), 
         d.NormalAttack=oPeashooter.prototype.NormalAttack, oSym.addTask(1, function(d) {
         d.NormalAttack(),
         $Z[d.id] && d.beAttacked ? oSym.addTask(140/c.num,arguments.callee, [d]): d.BulletEle = null;
@@ -2290,13 +2290,50 @@ NormalAttack1: function() {
         InitTrigger: function() {},
         PrivateDie: function(a) {},
         PrivateBirth: function(a) {
-            !oS.DKind ? (a.NormalAttack(a.id), a.getHurt = function(d, c, b) {}) : a.getHurt = CPlants.prototype.getHurt
+            a.jinyin&&(a.BulletEle = NewImg(0,"images/Plants/PB-10.gif", "left:" + (a.AttackedLX - 40) + "px;top:0px;transform:rotateY(90deg);visibility:hidden;z-index:" + (a.zIndex + 2)));
+            !oS.DKind ? (a.NormalAttack1(),a.NormalAttack(a.id), a.getHurt = function(d, c, b) {}) : a.getHurt = CPlants.prototype.getHurt;
         },
+	NormalAttack1: function() {
+		oSym.addTask(1,
+		function(b) {
+			this.NormalAttack2();
+			--b && oSym.addTask(2, arguments.callee, [b])
+		},
+		[100])
+	},
+NormalAttack2: function() {
+    var g = this,
+      d = Math.random() * 780 + 100,
+      b = 0,
+      c = g.R,
+      e = d + 30,
+      a = function(j, i, h) {
+        return (j && j.Altitude == 1 ? (j.getSnowPea(j, 20, i), ClearChild(h), false) : true)
+      };
+    (function(h) {
+      oSym.addTask(15,
+        function(j) {
+          var i = $(j);
+          i && SetVisible(i)
+        },
+        [h]);
+      oSym.addTask(1,
+        function(m, n, l, k, i, j) {
+          j(oZ.getRangeLeftZ(m, n, l), 0, i) && ((k += 5) > 600 ? ClearChild(i) : (i.style.top = k + "px",
+            i.style.left = m + "px", oSym.addTask(1, arguments.callee, [m, n, GetR(k + 15), k, i, j])))
+        },
+        [d, e, c, b, EditEle(g.BulletEle.cloneNode(false), {
+            id: h
+          },
+          0, EDPZ), a])
+    })("StarB" + Math.random());
+  },
         WakeUP: function(a) {
             var b = a.id;
             a.Sleep = 0;
             $(b).childNodes[1].src = "images/Plants/IceShroom/IceShroom.gif";
-            a.NormalAttack(b)
+            a.NormalAttack(b);
+            a.NormalAttack1()
         },
         NormalAttack: function(a) {
             oSym.addTask(100,
@@ -2310,10 +2347,10 @@ NormalAttack1: function() {
                         }
                         oSym.addTask(40,
                             function(g) {
-                                ClearChild(g)
+                                ClearChild(g);
+                                f.Die()
                             },
                             [NewEle(b, "div", "position:absolute;left:0;top:0;width:900px;height:600px;z-index:10;filter:alpha(opacity=50);opacity:.5;background:#9CF url(images/Plants/IceShroom/Snow.gif) no-repeat scroll " + (f.pixelLeft - 197) + "px " + (f.pixelTop - 80) + "px", 0, EDPZ)]);
-                        f.Die()
                     }
                 },
                 [a])
