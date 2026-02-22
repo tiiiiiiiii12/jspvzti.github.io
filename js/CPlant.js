@@ -2151,13 +2151,13 @@ NormalAttack1: function() {
         width: 57,
         height: 81,
         beAttackedPointR: 37,
-        SunNum: 225,
+        SunNum: 175,
         Cry: 0,
         ArZ: [],
         Attacking: 0,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         Tooltip: "远程射手, 但敌人靠近时会蜷缩不动",
-        Produce: '胆小菇是一种远程射手，敌人接近后会躲起来。<p>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少<br>白天睡觉</font></p>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
+        Produce: '胆小菇是一种远程射手，敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少<br>白天睡觉</font><br>精英形态：发射包括普通孢子(60%)在内的六种子弹<br>阳光：击中僵尸生成5阳光(22%)<br>草皮卷：对僵尸造成额外60伤害并修补所在格弹坑(17%)<br>脑子：使僵尸逃跑(3%)<br>铲子：秒杀僵尸(1.9%)<br>奖杯：直接过关（iz无效）(0.1%)<br>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
         GetDX: CPlants.prototype.GetDX,
         getTriggerRange: CPlants.prototype.getTriggerRange,
         getTriggerR: function(c) {
@@ -2187,9 +2187,9 @@ NormalAttack1: function() {
             a.BulletEle = null
         },
 	PrivateHit: function(a, b, A, c, d) {
-    A == 1 && (AppearSun(b.ZX, b.pixelTop + 120, 10));
+    A == 1 &&oS.StaticCard&&!oS.CardKind&&(AppearSun(b.ZX, b.pixelTop + 120, 5,0));
     A == 2 && (b.getHit0(b, 60, 0), delete oGd.$Crater[c + "_" + d], ClearChild($(c + "_" + d + "_crater")));
-    A == 3 && (b.ExchangeLR(b, 1), b.ZX = b.AttackedRX, b.ChkActs = b.ChkActs1, b.WalkDirection = 0);
+    A == 3 &&!b.WalkDirection&&(b.ExchangeLR(b, 1), b.ZX = b.AttackedRX, b.ChkActs = b.ChkActs1, b.WalkDirection = 0);
     A == 4 && (b.DisappearDie());
     A == 5 && !oS.CardKind && oP.FlagToEnd()
        },
@@ -2203,16 +2203,16 @@ NormalAttack1: function() {
     if (num < 600) {
       c.Pea = 0;
       BulletImg = "images/Plants/ShroomBullet.gif"
-    } else if (num < 800) {
+    } else if (num < 820) {
       c.Pea = 1;
       BulletImg = "images/interface/Sun.gif"
-    } else if (num < 920) {
+    } else if (num < 950) {
       c.Pea = 2;
       BulletImg = "images/interface/SodRollCap.png"
     } else if (num < 980) {
       c.Pea = 3;
       BulletImg = "images/interface/brain.png"
-    } else if (num < 998) {
+    } else if (num < 999) {
       c.Pea = 4;
       BulletImg = "images/interface/Shovel.png"
     } else {
