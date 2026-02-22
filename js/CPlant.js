@@ -2151,7 +2151,7 @@ NormalAttack1: function() {
         width: 57,
         height: 81,
         beAttackedPointR: 37,
-        SunNum: 125,
+        SunNum: 225,
         Cry: 0,
         ArZ: [],
         Attacking: 0,
@@ -2170,6 +2170,7 @@ NormalAttack1: function() {
                 a = b.id;
             e.PZ && Math.abs(e.ZX - b.MX) < 121 && e.beAttacked ? (b.ArZ.push(e.id), !b.Cry && (b.Cry = 1, $(a).childNodes[1].src = "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", b.CryCheck(a))) : (e.R == b.R && !b.Cry && !b.Attacking && e.Altitude > 0 && e.Altitude < 3 && b.NormalAttack())
         },
+		Pea:0,
         PrivateBirth: function(c) {
             var b = c.AttackedLX,
                 a = b - 46;
@@ -2185,26 +2186,55 @@ NormalAttack1: function() {
         PrivateDie: function(a) {
             a.BulletEle = null
         },
-        NormalAttack: function() {
-            var c = this,
-                a = c.id,
-                d = "SSB" + Math.random(),
-                b = c.AttackedLX;
-            EditEle(c.BulletEle.cloneNode(false), {
-                    id: d
-                },
-                0, EDPZ);
-            oSym.addTask(1,
-                function(k, e, f, g, h) {
-                    var j = GetC(f),
-                        i = oZ.getZ0(f, g);
-                    i && i.Altitude == 1 ? (i.getPea(i, 20, 0), (SetStyle(e, {
-                        left: h + 38 + "px",
-                        width: "52px",
-                        height: "46px"
-                    })).src = "images/Plants/ShroomBulletHit.gif", oSym.addTask(10, ClearChild, [e])) : (f += 5) < oS.W ? (e.style.left = (h += 5) + "px", oSym.addTask(1, arguments.callee, [k, e, f, g, h])) : ClearChild(e)
-                },
-                [d, $(d), b, c.R, b - 46]);
+	PrivateHit: function(a, b, A, c, d) {
+    A == 1 && (AppearSun(b.ZX, b.pixelTop + 120, 10));
+    A == 2 && (b.getHit0(b, 60, 0), delete oGd.$Crater[c + "_" + d], ClearChild($(c + "_" + d + "_crater")));
+    A == 3 && (b.ExchangeLR(b, 1), b.ZX = b.AttackedRX, b.ChkActs = b.ChkActs1, b.WalkDirection = 0);
+    A == 4 && (b.DisappearDie());
+    A == 5 && !oS.CardKind && oP.FlagToEnd()
+       },
+    NormalAttack: function() {
+    var c = this,
+      num = c.jinyin?Math.random() * 1000:0,
+      BulletImg,
+      a = c.id,
+      d = "SSB" + Math.random(),
+      b = c.AttackedLX;
+    if (num < 600) {
+      c.Pea = 0;
+      BulletImg = "images/Plants/ShroomBullet.gif"
+    } else if (num < 800) {
+      c.Pea = 1;
+      BulletImg = "images/interface/Sun.gif"
+    } else if (num < 920) {
+      c.Pea = 2;
+      BulletImg = "images/interface/SodRollCap.png"
+    } else if (num < 980) {
+      c.Pea = 3;
+      BulletImg = "images/interface/brain.png"
+    } else if (num < 998) {
+      c.Pea = 4;
+      BulletImg = "images/interface/Shovel.png"
+    } else {
+      c.Pea = 5;
+      BulletImg = "images/interface/trophy.png"
+    }
+    EditEle(c.BulletEle.cloneNode(false), {
+        id: d,
+        src: BulletImg
+      },
+      0, EDPZ);
+    oSym.addTask(1,
+      function(k, e, f, g, h, A) {
+        var j = GetC(f),
+          i = oZ.getZ0(f, g);
+        i && i.Altitude == 1 ? (i.getPea(i, 20, 0), c.PrivateHit(c, i, A, j, g), (SetStyle(e, {
+          left: h + 38 + "px",
+          width: "52px",
+          height: "46px"
+        })).src = "images/Plants/ShroomBulletHit.gif", oSym.addTask(10, ClearChild, [e])) : (f += 5) < oS.W ? (e.style.left = (h += 5) + "px", oSym.addTask(1, arguments.callee, [k, e, f, g, h, A])) : ClearChild(e)
+      },
+      [d, $(d), b, c.R, b - 46, c.Pea]);
             c.Attacking = 1;
             oSym.addTask(10,
                 function(g, e) {
@@ -2284,7 +2314,7 @@ NormalAttack1: function() {
         PicArr: ["images/Card/Plants/IceShroom.png", "images/Plants/IceShroom/0.gif", "images/Plants/IceShroom/IceShroom.gif", "images/Plants/IceShroom/IceShroomSleep.gif", "images/Plants/IceShroom/Snow.gif", "images/Plants/IceShroom/icetrap.gif"],
         AudioArr: ["frozen", "wakeup"],
         Tooltip: "暂时使画面里的所有敌人停止行动",
-        Produce: '寒冰菇，能短暂的冻结屏幕上所有僵尸。<p>伤害：<font color="#FF0000">非常低，冻结僵尸</font><br>范围：<font color="#FF0000">屏幕上的所有僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效<br>白天睡觉</font></p>寒冰菇皱着眉头，倒不是因为它不高兴或不满意，只是因为，它儿时因受创伤而遗留下了面瘫。',
+        Produce: '寒冰菇，能短暂的冻结屏幕上所有僵尸。<p>伤害：<font color="#FF0000">非常低，冻结僵尸</font><br>范围：<font color="#FF0000">屏幕上的所有僵尸</font><br>精英形态：自上而下散落大量冰豆<br>用法：<font color="#FF0000">单独使用，立即生效<br>白天睡觉</font></p>寒冰菇皱着眉头，倒不是因为它不高兴或不满意，只是因为，它儿时因受创伤而遗留下了面瘫。',
         GetDX: CPlants.prototype.GetDX,
         GetDY: CPlants.prototype.GetDY,
         InitTrigger: function() {},
@@ -2371,14 +2401,14 @@ NormalAttack2: function() {
         Status: 0,
         PicArr: ["images/Card/Plants/SunShroom.png", "images/Plants/SunShroom/0.gif", "images/Plants/SunShroom/SunShroom2.gif", "images/Plants/SunShroom/SunShroomSleep.gif", "images/Plants/SunShroom/SunShroom.gif"],
         Tooltip: "开始提供少量的阳光, 一段时间后提供正常量的阳光",
-        Produce: '阳光菇开始提供少量阳光，稍后提供正常数量阳光。<br>精英形态：过一段时间死亡并生成225阳光<p>生产阳光：<font color="#FF0000">开始低，之后正常<br>白天睡觉</font></p>阳光菇讨厌阳光。恨到当它内部产生点阳光时，就尽可能快的吐出来。它就是不能忍受这个。对它来说，阳光令人厌恶。',
+        Produce: '阳光菇开始提供少量阳光，稍后提供正常数量阳光。<br>精英形态：过一段时间死亡并生成175阳光<p>生产阳光：<font color="#FF0000">开始低，之后正常<br>白天睡觉</font></p>阳光菇讨厌阳光。恨到当它内部产生点阳光时，就尽可能快的吐出来。它就是不能忍受这个。对它来说，阳光令人厌恶。',
         GetDX: CPlants.prototype.GetDX,
         GetDY: CPlants.prototype.GetDY,
         InitTrigger: function() {},
         PrivateDie: function(a) {},
         jinyinAct:function(a){
-           oSym.addTask(300,function(a){
-           $P[a.id]&&(AppearSun(a.pixelLeft,a.pixelTop,225),a.Die())
+           oSym.addTask(500,function(a){
+           $P[a.id]&&(AppearSun(a.pixelLeft,a.pixelTop,175),a.Die())
          },[a])
         },
         PrivateBirth: function() {},
