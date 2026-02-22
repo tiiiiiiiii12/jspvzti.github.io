@@ -2291,7 +2291,7 @@ NormalAttack1: function() {
         PrivateDie: function(a) {},
         PrivateBirth: function(a) {
             a.jinyin&&(a.BulletEle = NewImg(0,"images/Plants/PB-10.gif", "left:" + (a.AttackedLX - 40) + "px;top:0px;transform:rotateY(90deg);visibility:hidden;z-index:" + (a.zIndex + 2)));
-            !oS.DKind ? (a.NormalAttack1(),a.NormalAttack(a.id), a.getHurt = function(d, c, b) {}) : a.getHurt = CPlants.prototype.getHurt;
+            !oS.DKind ? (a.jinyin&&a.NormalAttack1(),a.NormalAttack(a.id), a.getHurt = function(d, c, b) {}) : a.getHurt = CPlants.prototype.getHurt;
         },
 	NormalAttack1: function() {
 		var a=this;
@@ -2312,7 +2312,7 @@ NormalAttack2: function() {
         return (j && j.Altitude == 1 ? (j.getSnowPea(j, 20, i), ClearChild(h), false) : true)
       };
     (function(h) {
-      oSym.addTask(15,
+      oSym.addTask(1,
         function(j) {
           var i = $(j);
           i && SetVisible(i)
@@ -2334,7 +2334,7 @@ NormalAttack2: function() {
             a.Sleep = 0;
             $(b).childNodes[1].src = "images/Plants/IceShroom/IceShroom.gif";
             a.NormalAttack(b);
-            a.NormalAttack1()
+            a.jinyin&&a.NormalAttack1()
         },
         NormalAttack: function(a) {
             oSym.addTask(100,
