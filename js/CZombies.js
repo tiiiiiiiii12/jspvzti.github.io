@@ -2647,7 +2647,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
     oImp = InheritO(OrnNoneZombies, {
         EName: "oImp",
         CName: "小鬼僵尸",
-        HP: 70,
+        HP: 200,
         BreakPoint: 23,
         beAttackedPointL: 30,
         beAttackedPointR: 60,
@@ -2658,14 +2658,55 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         DieGif: 3,
         BoomDieGif: 4,
         AttackGif: 2,
-        OSpeed: 5.4,
-        Speed: 5.4,
+        OSpeed: 3.6,
+        Speed: 3.6,
         GetDX: function() {
             return -50
         },
         GetDY: function() {
             return 0
         },
+		jinyinAct:function(a){
+	  var z=a.Ele;
+	     z.JaHead = "Ja" + Math.random();
+      var Ja = NewImg(z.JaHead,"images/Plants/PotatoMine/PotatoMine.gif","position:absolute;left:20px;top:0px;",0);
+      z.appendChild(Ja);
+	  a.Speed*=1.5;
+	  a.OSpeed*=1.5;
+	a.PrivateAct=function(a){
+			var p=a.Ele;
+	if(!a.bool){
+		for (i=3;i>=1;i--){
+                var tp = oGd.$[a.R+"_"+GetC(a.ZX)+"_"+i];
+			    var tz=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-40,a.ZX+40,a.R);
+			    var tzl=tz.length;
+                if(tp && tp.canEat&&a.PZ){
+                    a.bool = 1;
+					a.Speed/=1.5;
+	                a.OSpeed/=1.5;
+                    tp.getHurt(a,3,1000);
+					ClearChild($(p.JaHead));
+                    PlayAudio("potato_mine");
+                }
+			if(tz[tzl]&&(tz[tzl].Altitude==1)&&tz[tzl].beAttacked){              
+				    a.bool = 1;
+					a.Speed/=1.5;
+	                a.OSpeed/=1.5;
+				    ClearChild($(p.JaHead));
+                    PlayAudio("potato_mine");
+					tz[tzl]&&(tz[tzl].Altitude==1)&&tz[tzl].beAttacked&&tz[tzl].getHit0(tz[tzl],1000,0);
+			}
+		}
+	}
+	!(a.PZ==a.check)&&(
+	EditImg($(p.JaHead),0,"images/Plants/PotatoMine/PotatoMine.gif",{
+		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)",
+		left:a.PZ?"20px":"0px"
+	},0),
+	a.check=a.PZ);
+	!a.beAttacked&&ClearChild($(p.JaHead));
+	  }
+	},
         getShadow: function(a) {
             return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 32) + "px"
         },
