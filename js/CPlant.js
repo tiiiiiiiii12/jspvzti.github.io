@@ -2173,10 +2173,10 @@ NormalAttack1: function() {
             e.PZ && Math.abs(e.ZX - b.MX) < 121 && e.beAttacked ? (b.ArZ.push(e.id), !b.Cry && (b.Cry = 1, $(a).childNodes[1].src = "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", b.CryCheck(a))) : (e.R == b.R && !b.Cry && !b.Attacking && e.Altitude > 0 && e.Altitude < 3 && b.NormalAttack())
         },
 		Pea:0,
+		BirthStyle:CPlants.prototype.BirthStyle,
         PrivateBirth: function(c) {
             var b = c.AttackedLX,
                 a = b - 46;
-			(CustomSpecial(oCoffeeBean,c.R,c.C)).jinyin=0;
             c.BulletClass = NewO({
                 X: b,
                 R: c.R,
