@@ -1265,7 +1265,7 @@ NormalAttack1: function() {
         TriggerCheck: function(e, c) {
             var a = this.R,
                 b = this.C;
-            e.beAttacked && e.Altitude < 2 && !oGd.$[a + "_" + b + "2"] && this.NormalAttack(this.pixelLeft-80,this.pixelRight+80, this.R)
+            e.beAttacked && e.Altitude < 2 && !oGd.$[a + "_" + b + "2"] && this.NormalAttack(this.pixelLeft-50,this.pixelRight+50, this.R)
         },
         NormalAttack: function(j, h, e) {
             var g = this,
@@ -1276,10 +1276,10 @@ NormalAttack1: function() {
                 num=0,
                 a;
             while (f--) {
-                (a = c[f]).Altitude < 2 && a.getThump(1500)
+                (a = c[f]).Altitude < 2 && a.getThump(1400)
             }
         for(i=g.C;i<=9;i++){
-            num<2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i),
+            num<2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i).jinyinnum=0,
                 num+=1);
         }
             g.Die(1);
@@ -1538,7 +1538,7 @@ NormalAttack1: function() {
         JudgeHurtCustom:function(c){
                 var d;
                 c.HP < 1 ? CustomZombie(oFootballZombie,c.R,c.C,1).OrnHP=2400: 
-                c.HP < 2000? c.CustomStatus < 3 && (c.CustomStatus = 3,(d=CustomZombie(oScreenDoorZombie,c.R,c.C,1)).HP=800,d.jinyinnum=100):
+                c.HP < 2000? c.CustomStatus < 3 && (c.CustomStatus = 3,(d=CustomZombie(oScreenDoorZombie,c.R,c.C,1)).OrnHP=1600,d.jinyinnum=100):
                 c.HP < 4000? c.CustomStatus < 2 && (c.CustomStatus = 2,CustomZombie(oConeheadZombie,c.R,c.C,1).jinyinnum=100):
                 c.HP < 6000 && c.CustomStatus < 1 && (c.CustomStatus = 1, (d=CustomZombie(oZombie,c.R,c.C,1)).HP=800,d.jinyinnum=100)
         },
@@ -1799,7 +1799,7 @@ NormalAttack1: function() {
         },
         getTriggerRange: function(a, b, c) {
             return [
-                [b - 50, c + 80, 0]
+                [b - 100, c + 160, 0]
             ]
         },
         TriggerCheck: function(h, g, e) {
@@ -1807,7 +1807,7 @@ NormalAttack1: function() {
                 b = this.id,
                 a = $(b).childNodes[1],
                 f = h.isAttacking;
-            h.beAttacked && h.Altitude > -1 && h.Altitude < 2 && (f || !f && c - this.AttackedRX < 71) && (PlayAudio("squash_hmm"), oT.$[this.R].splice(e, 1), a.src = c > this.AttackedRX ? "images/Plants/Squash/SquashR.png" : "images/Plants/Squash/SquashL.png", oSym.addTask(100,
+            h.beAttacked && h.Altitude > -1 && h.Altitude < 2 && (f || !f && c - this.AttackedRX < 142) && (PlayAudio("squash_hmm"), oT.$[this.R].splice(e, 1), a.src = c > this.AttackedRX ? "images/Plants/Squash/SquashR.png" : "images/Plants/Squash/SquashL.png", oSym.addTask(100,
                 function(d, j, i) {
                     var k = $P[d];
                     k && k.NormalAttack(k, h.id, i)
