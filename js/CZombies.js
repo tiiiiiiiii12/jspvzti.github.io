@@ -2644,100 +2644,101 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             b.AutoReduceHP(c)
         }
     }),
-    oImp = InheritO(OrnNoneZombies, {
-        EName: "oImp",
-        CName: "小鬼僵尸",
-        HP: 200,
-        BreakPoint: 23,
-        beAttackedPointL: 30,
-        beAttackedPointR: 60,
-        width: 81,
-        height: 110,
-        StandGif: 5,
-        NormalGif: 5,
-        DieGif: 3,
-        BoomDieGif: 4,
-        AttackGif: 2,
-        OSpeed: 3.6,
-        Speed: 3.6,
-        GetDX: function() {
-            return -50
-        },
-        GetDY: function() {
-            return 0
-        },
-		jinyinAct:function(a){
-	  var z=a.Ele;
-	     z.JaHead = "Ja" + Math.random();
-      var Ja = NewImg(z.JaHead,"images/Plants/PotatoMine/PotatoMine.gif","position:absolute;left:20px;top:0px;",0);
-      z.appendChild(Ja);
-	a.PrivateAct=function(a){
-			var p=a.Ele;
-	if(!a.bool&&a.beAttacked){
-		for (i=3;i>=1;i--){
-                var tp = oGd.$[a.R+"_"+GetC(a.ZX)+"_"+i];
-			    var tz=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-40,a.ZX+40,a.R);
-			    var tzl=tz.length;
-                if(tp && tp.canEat&&a.PZ){
-				let l = GetX(tp.C) - 80,
-                    t = GetY(tp.R) - 80;
-      oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + l + "px;top:" + t + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
-                    a.bool = 1;
-                    tp.getHurt(a,3,1000);
-					ClearChild($(p.JaHead));
-                    PlayAudio("potato_mine");
-                }
-		while(tzl--){
-			if(tz[tzl]&&(tz[tzl].Altitude==1)&&tz[tzl].beAttacked){
-				    a.bool = 1;
-				    ClearChild($(p.JaHead));
-                    PlayAudio("potato_mine");
-					tz[tzl].getHit0(tz[tzl],1000,0);
-			}
-		  }
-		}
-	!(a.PZ==a.check)&&(
-	EditImg($(p.JaHead),0,"images/Plants/PotatoMine/PotatoMine.gif",{
-		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)",
-		left:a.PZ?"20px":"0px"
-	},0),
-	a.check=a.PZ);
-	      }
-	!a.beAttacked&&ClearChild($(p.JaHead));
-	  }
-	},
-        getShadow: function(a) {
-            return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 32) + "px"
-        },
-        Produce: '小淘气们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。</p><p>韧性：<font color="#FF0000">低</font><br>小淘气虽然瘦小，却很结实。他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴。',
-        GoingDie: function() {
-            var b = this,
-                c = b.id,
-                a = b.PicArr;
-            b.EleBody.src = a[3] + Math.random();
-            b.beAttacked = 0;
-            b.FreeFreezeTime = b.FreeSetbodyTime = b.FreeSlowTime = 0;
-            b.AutoReduceHP(c)
-        },
-        NormalDie: function() {
-            var a = this;
-            oSym.addTask(250, ClearChild, [a.Ele]);
-            a.HP = 0;
-            delete $Z[a.id];
-            a.PZ && oP.MonPrgs()
-        },
-        CrushDie: function() {
-            var a = this;
-            ClearChild(a.Ele);
-            a.HP = 0;
-            delete $Z[a.id];
-            a.PZ && oP.MonPrgs()
-        },
-        PicArr: (function() {
-            var a = "images/Zombies/Imp/";
-            return ["images/Card/Zombies/Imp.png", a + "0.gif", a + "Attack.gif", a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif"]
-        })()
-    }),
+oImp = InheritO(OrnNoneZombies, {
+  EName: "oImp",
+  CName: "小鬼僵尸",
+  HP: 200,
+  BreakPoint: 23,
+  beAttackedPointL: 30,
+  beAttackedPointR: 60,
+  width: 81,
+  check: 1,
+  height: 110,
+  StandGif: 5,
+  NormalGif: 5,
+  DieGif: 3,
+  BoomDieGif: 4,
+  AttackGif: 2,
+  OSpeed: 3.6,
+  Speed: 3.6,
+  GetDX: function() {
+    return -50
+  },
+  GetDY: function() {
+    return 0
+  },
+  jinyinAct: function(a) {
+    var z = a.Ele;
+    z.JaHead = "Ja" + Math.random();
+    var Ja = NewImg(z.JaHead, "images/Plants/PotatoMine/PotatoMine.gif", "position:absolute;transform:rotateY(180deg);left:0px;top:20px;", 0);
+    z.appendChild(Ja);
+    a.PrivateAct = function(a) {
+      var p = a.Ele;
+      if (!a.bool && a.beAttacked) {
+        for (i = 3; i >= 1; i--) {
+          var tp = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
+          var tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 40, a.ZX + 40, a.R);
+          var tzl = tz.length;
+          if (tp && tp.canEat && a.PZ) {
+            let l = GetX(tp.C) - 80,
+              t = GetY(tp.R) - 80;
+            oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + l + "px;top:" + t + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
+            a.bool = 1;
+            tp.getHurt(a, 3, 1000);
+            ClearChild($(p.JaHead));
+            PlayAudio("potato_mine");
+          }
+          while (tzl--) {
+            if (tz[tzl] && (tz[tzl].Altitude == 1) && tz[tzl].beAttacked) {
+              a.bool = 1;
+              oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.ZX - 80) + "px;top:" + (a.pixelTop + 40) + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
+              ClearChild($(p.JaHead));
+              PlayAudio("potato_mine");
+              tz[tzl].getHit0(tz[tzl], 1000, 0);
+            }
+          }
+        }
+      }!a.PZ == a.check && !a.bool && a.beAttacked && (
+        EditImg($(p.JaHead), 0, "images/Plants/PotatoMine/PotatoMine.gif", {
+          transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
+          left: a.PZ ? "20px" : "0px"
+        }, 0),
+        a.check = a.PZ);
+      !a.beAttacked && ClearChild($(p.JaHead));
+    }
+  },
+  getShadow: function(a) {
+    return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 32) + "px"
+  },
+  Produce: '小淘气们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。</p><p>韧性：<font color="#FF0000">低</font><br>小淘气虽然瘦小，却很结实。他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴。',
+  GoingDie: function() {
+    var b = this,
+      c = b.id,
+      a = b.PicArr;
+    b.EleBody.src = a[3] + Math.random();
+    b.beAttacked = 0;
+    b.FreeFreezeTime = b.FreeSetbodyTime = b.FreeSlowTime = 0;
+    b.AutoReduceHP(c)
+  },
+  NormalDie: function() {
+    var a = this;
+    oSym.addTask(250, ClearChild, [a.Ele]);
+    a.HP = 0;
+    delete $Z[a.id];
+    a.PZ && oP.MonPrgs()
+  },
+  CrushDie: function() {
+    var a = this;
+    ClearChild(a.Ele);
+    a.HP = 0;
+    delete $Z[a.id];
+    a.PZ && oP.MonPrgs()
+  },
+  PicArr: (function() {
+    var a = "images/Zombies/Imp/";
+    return ["images/Card/Zombies/Imp.png", a + "0.gif", a + "Attack.gif", a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif"]
+  })()
+}),
     oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
         EName: "oJackinTheBoxZombie",
         CName: "小丑僵尸",
