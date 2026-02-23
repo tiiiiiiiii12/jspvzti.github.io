@@ -2174,6 +2174,7 @@ NormalAttack1: function() {
             e.PZ && Math.abs(e.ZX - b.MX) < 121 && e.beAttacked ? (b.ArZ.push(e.id), !b.Cry && (b.Cry = 1, $(a).childNodes[1].src = "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", b.CryCheck(a))) : (e.R == b.R && !b.Cry && !b.Attacking && e.Altitude > 0 && e.Altitude < 3 && b.NormalAttack())
         },
 		Pea:0,
+		night: false,
 		BirthStyle:CPlants.prototype.BirthStyle,
         PrivateBirth: function(c) {
             var b = c.AttackedLX,
@@ -2191,11 +2192,12 @@ NormalAttack1: function() {
             a.BulletEle = null
         },
 	PrivateHit: function(a, b, A, c, d) {
-    A == 1 &&oS.StaticCard&&!oS.CardKind&&(AppearSun(b.ZX, b.pixelTop + 120, 5,0));
-    A == 2 && (b.getHit0(b, 60, 0), delete oGd.$Crater[c + "_" + d], ClearChild($(c + "_" + d + "_crater")));
-    A == 3 &&!b.WalkDirection&&(b.ExchangeLR(b, 1), b.ZX = b.AttackedRX, b.ChkActs = b.ChkActs1, b.WalkDirection = 1);
+	A==0&&(b.getPea(b, 20, 0));
+    A == 1 &&(oS.StaticCard&&!oS.CardKind&&(AppearSun(b.ZX, b.pixelTop + 120, 5,0)),b.getPea(b, 20, 0));
+    A == 2 && (b.getPea(b, 80, 0), delete oGd.$Crater[c + "_" + d], ClearChild($(c + "_" + d + "_crater")));
+    A == 3 &&(!b.WalkDirection&&(b.ExchangeLR(b, 1), b.ZX = b.AttackedRX, b.ChkActs = b.ChkActs1, b.WalkDirection = 1),b.getPea(b, 20, 0));
     A == 4 && (b.DisappearDie());
-    A == 5 && !oS.CardKind && oP.FlagToEnd()
+    A == 5 && (!oS.CardKind && oP.FlagToEnd(),b.getPea(b, 20, 0))
        },
     NormalAttack: function() {
     var c = this,
@@ -2232,7 +2234,7 @@ NormalAttack1: function() {
       function(k, e, f, g, h, A) {
         var j = GetC(f),
           i = oZ.getZ0(f, g);
-        i && i.Altitude == 1 ? (i.getPea(i, 20, 0), c.PrivateHit(c, i, A, j, g), (SetStyle(e, {
+        i && i.Altitude == 1 ? (c.PrivateHit(c, i, A, j, g), (SetStyle(e, {
           left: h + 38 + "px",
           width: "52px",
           height: "46px"
