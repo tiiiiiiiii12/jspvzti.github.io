@@ -1464,7 +1464,7 @@ var CZombies = function(b, a) {
             return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（300，发怒后50%减伤）</font><br>精英形态：破报犹豫时间变长，无减伤，破报后虚化（可被路灯花显形）<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)</p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（370，发怒后50%减伤）</font><br>精英形态：破报犹豫时间变长，无减伤，破报后虚化（可被路灯花显形）<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)</p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
         getShadow: function(a) {
             return "left:75px;top:" + (a.height - 25) + "px"
         },
@@ -1660,7 +1660,7 @@ jinyinAct: function(a){
                       ["0 0", 5, 1],
                       ["0 -62px", 5, 2],
 					  ["0 -124px", 5, 3],
-					  ["0 -186px", 5, -1],
+					  ["0 -186px", 5, -1]
                     ], 0,
                     function(i) {
                       SetHidden($(i))
@@ -1935,6 +1935,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)])
         },
         AudioArr: ["shieldhit", "shieldhit2", "zombie_entering_water"],
+		jinyinAct:function(){},
         PicArr: (function() {
             var b = "images/Zombies/DuckyTubeZombie3/",
                 a = "images/Zombies/DuckyTubeZombie1/";
@@ -2278,8 +2279,8 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             Speed: 2.5,
             AKind: 2,
             Attack: 50,
-			tasktime:20,
-            Produce: '冰车僵尸运用冰雪，碾过你的植物。<p>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">碾压植物，留下条冰道</font></p>经常被误以为是在驾驶着冰车的僵尸，但事实上冰车僵尸是种完全不同的生物形式，他与太空兽人联系更紧密而不是僵尸。',
+			tasktime:40,
+            Produce: '冰车僵尸运用冰雪，碾过你的植物。<p>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">碾压植物，留下条冰道</font><br>精英形态：重度损伤时加速</p>经常被误以为是在驾驶着冰车的僵尸，但事实上冰车僵尸是种完全不同的生物形式，他与太空兽人联系更紧密而不是僵尸。',
             PicArr: (function() {
                 var b = "images/Zombies/Zomboni/";
                 return ["images/Card/Zombies/Zomboni.png", b + "0.gif", b + "1.gif", b + "2.gif", b + "3.gif", b + "4.gif", b + "5.gif" + $Random, b + "BoomDie.gif" + $Random, b + "ice.png", b + "ice_cap.png"]
@@ -2304,15 +2305,13 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             },
             ChkActs: function(e, j, q, k) {
                 var b, r, m, g, n = oGd.$Ice[j],
-                    d, h, f, c, l = $("dIceCar" + j);
- 
+                    d, h, f, c, l = $("dIceCar" + j); 
                 if (l == null) { // 对没有冰道的情况下特判
                     l = NewEle("dIceCar" + j, "div", "position:absolute;z-index:1;left:145px;top:" + (GetY(e.R) - 65) + "px;width:800px;height:72px", 0, EDPZ); // 生成新的冰道
                     NewImg("", "images/interface/blank.png", "position:absolute;clip:rect(0,auto,auto,800px);width:800px;height:72px;left:5px;background:url(images/Zombies/Zomboni/ice.png) repeat-x", l);
                     NewImg("", "images/Zombies/Zomboni/ice_cap.png", "position:absolute;display:none;left:0", l);
                     n = oGd.$Ice[j] = [1, 11, e.AttackedLX];
-                }
- 
+                } 
                 e.JudgeAttack();
                 (r = e.AttackedRX -= (b = e.Speed)) < -50 ? (q.splice(k, 1), e.DisappearDie(), m = 0) : (r < 100 && !e.PointZombie && (e.PointZombie = 1, !oS.CardKind && (StopMusic(), PlayAudio("losemusic", false)), e.ChangeR({
                     R: j,
@@ -2439,7 +2438,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                     g = oGd.$,
 					a,
                     b;
-                ((a=f.JudgeAttackH1())&&a.beAttacked)||(b = f.JudgeLR(f, d, e, c, g) || f.JudgeSR(f, d, e, c, g))&&!(a&&a.beAttacked)&&f.NormalAttack(b[0], b[1])
+                f.JudgeAttackH1()||(b = f.JudgeLR(f, d, e, c, g) || f.JudgeSR(f, d, e, c, g))&&!a&&f.NormalAttack(b[0], b[1])
             },
             JudgeLR: function(e, c, d, b, f) {
                 return d > 10 || d < 1 ? false : function() {
@@ -2613,7 +2612,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                             h.getCrushed = s.getCrushed;
                             h.getFreeze = s.getFreeze;
                             h.getRaven = s.getRaven;
-                            h.AttackZombie2 = s.AttackZombie2
+                            h.AttackZombie= s.AttackZombie
                         };
                     h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = r = k.AttackedRX) - (h.beAttackedPointL = 45)) + (h.beAttackedPointR = 100), SetStyle(i, {
                         left: h.X + "px"
@@ -2941,7 +2940,8 @@ oImp = InheritO(OrnNoneZombies, {
         CanPass: function(d, c) {
             return c
         },
-		jinyinAct:function(){
+		jinyinAct:function(a){
+			a.ChkActs=CZombies.prototype.ChkActs
 		},
         AudioArr: ["ballooninflate", "balloon_pop"],
         BookHandPosition: "80% 80%",
