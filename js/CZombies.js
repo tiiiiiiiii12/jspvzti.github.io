@@ -1882,7 +1882,7 @@ jinyinAct: function(a){
         GetDY: function() {
             return 5
         },
-        Produce: '鸭子救生圈能让僵尸能浮在水面上。<p>韧性：<font color="#FF0000">低</font><br>只在水池关卡出现</font></p>只有特定的僵尸才能成为救生圈僵尸。并不是每个僵尸都能胜任的。有些救生圈有点漏气，但他们没能注意到，所以他们离开并放弃了对脑子的渴求。',
+        Produce: '鸭子救生圈能让僵尸能浮在水面上<br><font color="#FF0000">水路铁桶无精英</font><br>韧性：<font color="#FF0000">低</font><br>只在水池关卡出现</font></p>只有特定的僵尸才能成为救生圈僵尸。并不是每个僵尸都能胜任的。有些救生圈有点漏气，但他们没能注意到，所以他们离开并放弃了对脑子的渴求。',
         PicArr: (function() {
             var a = "images/Zombies/DuckyTubeZombie1/";
             return ["images/Card/Zombies/DuckyTubeZombie1.png", a + "0.gif", a + "Walk1.gif", a + "Walk2.gif", a + "1.gif", a + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random]
@@ -1937,13 +1937,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             var b = "images/Zombies/DuckyTubeZombie3/",
                 a = "images/Zombies/DuckyTubeZombie1/";
             return ["images/Card/Zombies/DuckyTubeZombie1.png", b + "0.gif", b + "Walk1.gif", b + "Walk2.gif", b + "1.gif", b + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "Walk1.gif", a + "Walk2.gif", a + "Attack.gif", b + "Walk1.gif", b + "Walk2.gif", b + "Attack.gif"]
-        })(),
-		jinyinAct:function(a){
-    a.WalkGif1 = a.jinyinGif;
-    a.WalkGif0 = a.jinyinWalkGif1;
-	oBucketheadZombie.prototype.jinyinAct(a);
-	a.EleBody.src = a.PicArr[a.intowater ? a.jinyinGif : a.jinyinWalkGif1]
-		}
+        })()
     }),
     oSnorkelZombie = InheritO(oDuckyTubeZombie1, {
         EName: "oSnorkelZombie",
@@ -2697,7 +2691,7 @@ oImp = InheritO(OrnNoneZombies, {
               ClearChild($(p.JaHead));
               PlayAudio("potato_mine");
 			  a.JudgeAttack=CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"];
-              tz[tzl].getHit0(tz[tzl], 1000, 0);
+              tz[tzl].getHit0(tz[tzl], 500, 0);
             }
           }
         }
