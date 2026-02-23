@@ -2002,7 +2002,7 @@ NormalAttack1: function() {
 					a.jinyin&&(EDAll.style.opacity=0.5,CPlants.prototype.jinyin=1);
 			oSym.addTask(1000,function() {
                 CPlants.prototype.jinyin=0;
-				EDAll.style.opacity=0.5;
+				EDAll.style.opacity=1;
                 },[]);
                     d && (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
                     a.Die()
