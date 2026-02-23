@@ -2681,18 +2681,18 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 if(tp && tp.canEat&&a.PZ){
 				let l = GetX(tp.C) - 80,
                     t = GetY(tp.R) - 80;
-      oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + l + "px;top:" + t + "px;height:93px;width:132px;z-index:25;", EDPZ)];
+      oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + l + "px;top:" + t + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
                     a.bool = 1;
                     tp.getHurt(a,3,1000);
 					ClearChild($(p.JaHead));
                     PlayAudio("potato_mine");
                 }
 		while(tzl--){
-			if(tz[tzl]&&(tz[tzl].Altitude==1)&&tz[tzl].beAttacked){              
+			if(tz[tzl]&&(tz[tzl].Altitude==1)&&tz[tzl].beAttacked){
 				    a.bool = 1;
 				    ClearChild($(p.JaHead));
                     PlayAudio("potato_mine");
-					tz[tzl]&&tz[tzl].getHit0(tz[tzl],1000,0);
+					tz[tzl].getHit0(tz[tzl],1000,0);
 			}
 		  }
 		}
