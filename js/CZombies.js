@@ -170,11 +170,13 @@ var CZombies = function(b, a) {
                     return this.DisappearDie(),
                         1
                 },
-                getExplosion: function() {
-                    this.ExplosionDie()
+                getExplosion: function(a) {
+				if(a==undefied){var a=1800}
+                   this.HP+this.OrnHP>(a-this.BreakPoint)?this.getHit0(this,a,0):this.ExplosionDie()
                 },
-                getThump: function() {
-                    this.DisappearDie()
+                getThump: function(a) {
+					if(a==undefied){var a=1800}
+                    this.HP+this.OrnHP>(a-this.BreakPoint)?this.getHit0(this,a,0):this.DisappearDie()
                 },
                 PlayNormalballAudio: function() {
                     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
