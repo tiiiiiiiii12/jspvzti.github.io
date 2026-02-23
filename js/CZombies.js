@@ -2713,7 +2713,7 @@ oImp = InheritO(OrnNoneZombies, {
   getShadow: function(a) {
     return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 32) + "px"
   },
-  Produce: '小淘气们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。</p><br>精英形态：携带土豆雷，对植物或敌对僵尸造成1000范围伤害<p>韧性：<font color="#FF0000">低</font><br>小淘气虽然瘦小，却很结实。他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴。',
+  Produce: '小淘气们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。<br>精英形态：携带土豆雷，对植物或敌对僵尸造成1000范围伤害<p>韧性：<font color="#FF0000">低</font><br>小淘气虽然瘦小，却很结实。他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴。',
   GoingDie: function() {
     var b = this,
       c = b.id,
