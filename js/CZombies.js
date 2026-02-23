@@ -172,11 +172,11 @@ var CZombies = function(b, a) {
                 },
                 getExplosion: function(a) {
 				if(a==undefined){var a=1800}
-                   this.HP+this.OrnHP>(a-this.BreakPoint)?this.getHit0(this,a,0):this.ExplosionDie()
+                   this.HP+this.OrnHP-this.BreakPoint>a?this.getHit0(this,a,0):this.ExplosionDie()
                 },
                 getThump: function(a) {
 					if(a==undefined){var a=1800}
-                    this.HP+this.OrnHP>(a-this.BreakPoint)?this.getHit0(this,a,0):this.DisappearDie()
+                    this.HP+this.OrnHP-this.BreakPoint>a?this.getHit0(this,a,0):this.DisappearDie()
                 },
                 PlayNormalballAudio: function() {
                     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
