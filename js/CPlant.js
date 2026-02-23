@@ -1971,7 +1971,7 @@ NormalAttack1: function() {
         PicArr: ["images/Card/Plants/CoffeeBean.png", "images/Plants/CoffeeBean/0.gif", "images/Plants/CoffeeBean/CoffeeBean.gif", "images/Plants/CoffeeBean/CoffeeBeanEat.gif" + $Random],
         AudioArr: ["coffee", "wakeup"],
         Tooltip: "唤醒在白天里睡觉的蘑菇类植物",
-        Produce: '咖啡豆，可以唤醒睡眠中的蘑菇们。<br>精英形态：使后种植的植物全精英，持续10秒<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">可以种在其他植物上，用来唤醒蘑菇们</font></p>咖啡豆：“嘿，伙计们！嘿，怎么回事？是谁？嘿！你瞧见那个东西没？什么东西？哇！是狮子！”嗯，咖啡豆确定，这样可以让自己很兴奋。',
+        Produce: '咖啡豆，可以唤醒睡眠中的蘑菇们。<br>精英形态：使后种植的植物全精英，持续10秒<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">可以种在其他植物上，用来唤醒蘑菇们</font></p>咖啡豆：“嘿，愉快的人啊！嘿，悲伤的人啊！是谁？嘿！你瞧见那个东西没？什么东西？哇！是被灌醉的小丑！”嗯，咖啡豆确定，这样可以让自己很兴奋。',
         InitTrigger: function() {},
         GetDBottom: function() {
             return 49
@@ -2158,7 +2158,7 @@ NormalAttack1: function() {
         ArZ: [],
         Attacking: 0,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
-        Tooltip: "远程射手, 但敌人靠近时会蜷缩不动",
+        Tooltip: "↑上面的内容是假的，它是远程射手，但敌人靠近时会蜷缩不动，",
         Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子(70%)在内的六种子弹<br>阳光：击中僵尸生成5阳光(22%)<br>草皮卷：对僵尸造成80伤害并修补弹坑(17%)<br>脑子：使僵尸逃跑(3%)<br>铲子：秒杀僵尸(1.99%)<br>奖杯：直接过关（iz无效）(0.01%)<br>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
         GetDX: CPlants.prototype.GetDX,
         getTriggerRange: CPlants.prototype.getTriggerRange,
