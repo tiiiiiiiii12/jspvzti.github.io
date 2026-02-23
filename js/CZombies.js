@@ -171,11 +171,11 @@ var CZombies = function(b, a) {
                         1
                 },
                 getExplosion: function(a) {
-				if(a==undefied){var a=1800}
+				if(a==undefined){var a=1800}
                    this.HP+this.OrnHP>(a-this.BreakPoint)?this.getHit0(this,a,0):this.ExplosionDie()
                 },
                 getThump: function(a) {
-					if(a==undefied){var a=1800}
+					if(a==undefined){var a=1800}
                     this.HP+this.OrnHP>(a-this.BreakPoint)?this.getHit0(this,a,0):this.DisappearDie()
                 },
                 PlayNormalballAudio: function() {
