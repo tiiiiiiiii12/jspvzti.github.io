@@ -1521,7 +1521,7 @@ NormalAttack1: function() {
         width: 83,
         height: 119,
         beAttackedPointR: 63,
-        SunNum: 125,
+        SunNum: 150,
         CustomStatus:0,
         HP: 8000,
         PicArr: ["images/Card/Plants/TallNut.png", "images/Plants/TallNut/0.gif", "images/Plants/TallNut/TallNut.gif", "images/Plants/TallNut/TallnutCracked1.gif", "images/Plants/TallNut/TallnutCracked2.gif"],
@@ -1966,6 +1966,7 @@ NormalAttack1: function() {
         beAttackedPointR: 29,
         SunNum: 75,
         PKind: 3,
+		coolTime:15,
         canEat: 0,
         PicArr: ["images/Card/Plants/CoffeeBean.png", "images/Plants/CoffeeBean/0.gif", "images/Plants/CoffeeBean/CoffeeBean.gif", "images/Plants/CoffeeBean/CoffeeBeanEat.gif" + $Random],
         AudioArr: ["coffee", "wakeup"],
@@ -1990,17 +1991,18 @@ NormalAttack1: function() {
         },
         PrivateBirth: function(a) {
             SetHidden($(a.id).firstChild);
-            a.jinyin&&($(a.id).style.opacity=0.5,CPlants.prototype.jinyin=1);
-            oSym.addTask(1000,function() {
-                CPlants.prototype.jinyin=0
-        },
-        []);
+            a.jinyin&&($(a.id).style.opacity=0.5);
             PlayAudio("coffee");
             oSym.addTask(240,
                 function(c) {
                     PlayAudio("wakeup");
                     var d = oGd.$[c],
                         b;
+					a.jinyin&&(EDAll.style.opacity=0.5,CPlants.prototype.jinyin=1);
+			oSym.addTask(1000,function() {
+                CPlants.prototype.jinyin=0;
+				EDAll.style.opacity=0.5;
+                },[]);
                     d && (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
                     a.Die()
                 },
@@ -2157,7 +2159,7 @@ NormalAttack1: function() {
         Attacking: 0,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         Tooltip: "远程射手, 但敌人靠近时会蜷缩不动",
-        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，自带咖啡豆（非精英）</font><br>精英形态：发射包括普通孢子(60%)在内的六种子弹<br>阳光：击中僵尸生成5阳光(22%)<br>草皮卷：对僵尸造成80伤害并修补弹坑(17%)<br>脑子：使僵尸逃跑(3%)<br>铲子：秒杀僵尸(1.99%)<br>奖杯：直接过关（iz无效）(0.01%)<br>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
+        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，自带咖啡豆（非精英）</font><br>精英形态：发射包括普通孢子(70%)在内的六种子弹<br>阳光：击中僵尸生成5阳光(22%)<br>草皮卷：对僵尸造成80伤害并修补弹坑(17%)<br>脑子：使僵尸逃跑(3%)<br>铲子：秒杀僵尸(1.99%)<br>奖杯：直接过关（iz无效）(0.01%)<br>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
         GetDX: CPlants.prototype.GetDX,
         getTriggerRange: CPlants.prototype.getTriggerRange,
         getTriggerR: function(c) {
@@ -2188,7 +2190,7 @@ NormalAttack1: function() {
             a.BulletEle = null
         },
 	PrivateHit: function(a, b, A, c, d) {
-    A == 1 &&oS.StaticCard&&!oS.CardKind&&(AppearSun(b.ZX, b.pixelTop + 120, 5,0));
+    A == 1 &&oS.StaticCard&&!oS.CardKind&&(AppearSun(b.ZX, b.pixelTop + 120, 15,0));
     A == 2 && (b.getHit0(b, 60, 0), delete oGd.$Crater[c + "_" + d], ClearChild($(c + "_" + d + "_crater")));
     A == 3 &&!b.WalkDirection&&(b.ExchangeLR(b, 1), b.ZX = b.AttackedRX, b.ChkActs = b.ChkActs1, b.WalkDirection = 1);
     A == 4 && (b.DisappearDie());
@@ -2201,7 +2203,7 @@ NormalAttack1: function() {
       a = c.id,
       d = "SSB" + Math.random(),
       b = c.AttackedLX;
-    if (num < 6000) {
+    if (num < 7000) {
       c.Pea = 0;
       BulletImg = "images/Plants/ShroomBullet.gif"
     } else if (num < 8200) {
