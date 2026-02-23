@@ -2696,7 +2696,7 @@ oImp = InheritO(OrnNoneZombies, {
               oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.ZX - 80) + "px;top:" + (a.pixelTop + 40) + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
               ClearChild($(p.JaHead));
               PlayAudio("potato_mine");
-			  a.JudgeAttack=CZombies.prototype.JudgeAttack;
+			  a.JudgeAttack=CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"];
               tz[tzl].getHit0(tz[tzl], 1000, 0);
             }
           }
