@@ -2670,6 +2670,7 @@ oImp = InheritO(OrnNoneZombies, {
   jinyinAct: function(a) {
     var z = a.Ele;
     z.JaHead = "Ja" + Math.random();
+	a.JudgeAttack=function(){};
     var Ja = NewImg(z.JaHead, "images/Plants/PotatoMine/PotatoMine.gif", "position:absolute;transform:rotateY(180deg);left:0px;top:20px;", 0);
     z.appendChild(Ja);
     a.PrivateAct = function(a) {
@@ -2684,6 +2685,7 @@ oImp = InheritO(OrnNoneZombies, {
               t = GetY(tp.R) - 80;
             oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + l + "px;top:" + t + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
             a.bool = 1;
+			a.JudgeAttack=CZombies.prototype.JudgeAttack;
             tp.getHurt(a, 3, 1000);
             ClearChild($(p.JaHead));
             PlayAudio("potato_mine");
@@ -2694,6 +2696,7 @@ oImp = InheritO(OrnNoneZombies, {
               oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.ZX - 80) + "px;top:" + (a.pixelTop + 40) + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
               ClearChild($(p.JaHead));
               PlayAudio("potato_mine");
+			  a.JudgeAttack=CZombies.prototype.JudgeAttack;
               tz[tzl].getHit0(tz[tzl], 1000, 0);
             }
           }
@@ -2710,7 +2713,7 @@ oImp = InheritO(OrnNoneZombies, {
   getShadow: function(a) {
     return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 32) + "px"
   },
-  Produce: '小淘气们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。</p><p>韧性：<font color="#FF0000">低</font><br>小淘气虽然瘦小，却很结实。他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴。',
+  Produce: '小淘气们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。</p><br>精英形态：携带土豆雷，对植物或敌对僵尸造成1000范围伤害<p>韧性：<font color="#FF0000">低</font><br>小淘气虽然瘦小，却很结实。他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴。',
   GoingDie: function() {
     var b = this,
       c = b.id,
