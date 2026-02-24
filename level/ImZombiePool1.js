@@ -1,6 +1,6 @@
 oS.Init({
     PName: [oFumeShroom, oPumpkinHead, oHypnoShroom, oPotatoMine, oSunFlower, oThreepeater, oScaredyShroom, oCactus, oPeashooter, oRepeater, oJalapeno, oGarlic, oPlantern,oIceShroom],
-    ZName: [oImp, oBucketheadZombie, oDuckyTubeZombie1, oDuckyTubeZombie3, oNewspaperZombie, oBalloonZombie,oDolphinRiderZombie,oPoleVaultingZombie,oFlagZombie],
+    ZName: [oImp, oBucketheadZombie, oDuckyTubeZombie1, oDuckyTubeZombie3, oNewspaperZombie, oBalloonZombie,oDolphinRiderZombie,oPoleVaultingZombie,oGargantuar],
     PicArr: ["images/interface/background4.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background4.jpg",
     Coord: 2,
@@ -58,6 +58,7 @@ oS.Init({
         oS.RiddleAutoGrow();
     }
 });
+
 
 
 
