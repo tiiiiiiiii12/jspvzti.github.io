@@ -1792,7 +1792,7 @@ NormalAttack1: function() {
         PicArr: ["images/Card/Plants/Squash.png", "images/Plants/Squash/0.gif", "images/Plants/Squash/Squash.gif", "images/Plants/Squash/SquashAttack.gif", "images/Plants/Squash/SquashL.png", "images/Plants/Squash/SquashR.png"],
         AudioArr: ["squash_hmm", "gargantuar_thump"],
         Tooltip: "压扁接近的僵尸",
-        Produce: '窝瓜会压扁第一个接近它的僵尸。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">短，覆盖所有它压到的僵尸。</font><br>用法：<font color="#FF0000">单独使用</font></p>“我准备好了！”窝瓜大吼道，“干吧！！算我一份！没人比我厉害！我就是你要的人！来啊！等啥啊？要的就是这个！”',
+        Produce: '窝瓜会压扁第一个接近它的僵尸。<p>伤害：<font color="#FF0000">极高(1850)</font><br>范围：<font color="#FF0000">短，覆盖所有它压到的僵尸。</font><br>用法：<font color="#FF0000">单独使用</font></p>“我准备好了！”窝瓜大吼道，“干吧！！算我一份！没人比我厉害！我就是你要的人！来啊！等啥啊？要的就是这个！”',
         GetDY: function(b, c, a) {
             return a[0] ? -21 : -10
         },
@@ -1833,7 +1833,7 @@ NormalAttack1: function() {
                         h = g.length,
                         k;
                     while (h--) {
-                        (k = g[h]).Altitude > -1 && k.PZ && k.Altitude < 3 && k.getThump()
+                        (k = g[h]).Altitude > -1 && k.PZ && k.Altitude < 3 && k.getThump(1850)
                     }
                     oSym.addTask(185, ClearChild, [f])
                 },
@@ -2162,7 +2162,7 @@ NormalAttack1: function() {
         ArZ: [],
         Attacking: 0,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
-        Tooltip: "↑上面的内容是假的，它是远程射手，但敌人靠近时会蜷缩不动，",
+        Tooltip: "它是远程射手，但敌人靠近时会蜷缩不动",
         Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子(70%)在内的六种子弹<br>阳光：击中僵尸生成5阳光(22%)<br>草皮卷：对僵尸造成80伤害并修补弹坑(17%)<br>脑子：使僵尸逃跑(3%)<br>铲子：秒杀僵尸(1.99%)<br>奖杯：直接过关（iz无效）(0.01%)<br>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
         GetDX: CPlants.prototype.GetDX,
         getTriggerRange: CPlants.prototype.getTriggerRange,
