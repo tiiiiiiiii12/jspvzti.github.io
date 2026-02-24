@@ -1577,11 +1577,11 @@ NormalAttack1: function() {
             switch (true) {
                 case c && c < 3:
 					d.getHurt=function(){};
-                    d.jinyin&&(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514));
+                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):d.Die();
                     break;
                 case (d.HP -= b) < 1:
 					d.getHurt=function(){};
-                    d.jinyin&&(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514));
+                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):d.Die();
                     break;
                 case d.HP < 1334:
                     d.HurtStatus < 2 && (d.HurtStatus = 2, a.childNodes[1].src = "images/Plants/PumpkinHead/pumpkin_damage2.gif");
