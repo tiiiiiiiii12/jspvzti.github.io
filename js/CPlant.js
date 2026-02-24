@@ -1560,7 +1560,7 @@ NormalAttack1: function() {
         zIndex: 1,
         PicArr: ["images/Card/Plants/PumpkinHead.png", "images/Plants/PumpkinHead/0.gif", "images/Plants/PumpkinHead/PumpkinHead.gif", "images/Plants/PumpkinHead/PumpkinHead1.gif", "images/Plants/PumpkinHead/PumpkinHead2.gif", "images/Plants/PumpkinHead/pumpkin_damage1.gif", "images/Plants/PumpkinHead/pumpkin_damage2.gif", "images/Plants/PumpkinHead/Pumpkin_back.gif"],
         Tooltip: "能保护种在里面的植物",
-        Produce: '南瓜头，可以用他的外壳保护其他植物<br>精英形态：濒死或被碾压直接爆炸，并掉落一张被自身保护的植物卡牌<p>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">可以种在其他植物上</font></p>南瓜头最近都没收到，关于他表哥刃菲尔德的消息。很明显，刃菲尔德是个大明星，是一种……叫什么运动来着……的体育明星？佩格跳跳球大师？南瓜头反正搞不懂是什么运动，他只想做好他自己的工作。',
+        Produce: '南瓜头，可以用他的外壳保护其他植物，濒死或被碾概率爆炸<br>精英形态：濒死必定爆炸，并掉落一张被自身保护的植物卡牌<p>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">可以种在其他植物上</font></p>南瓜头最近都没收到，关于他表哥刃菲尔德的消息。很明显，刃菲尔德是个大明星，是一种……叫什么运动来着……的体育明星？佩格跳跳球大师？南瓜头反正搞不懂是什么运动，他只想做好他自己的工作。',
         CanGrow: function(c, b, d) {
             var a = b + "_" + d;
             return c[2] ? 1 : oGd.$LF[b] == 1 ? !(d < 1 || d > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1) : c[0]
@@ -1577,11 +1577,11 @@ NormalAttack1: function() {
             switch (true) {
                 case c && c < 3:
 					d.getHurt=function(){};
-                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):d.Die();
+                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):Math.random()*100>15?d.Die():d.NormalAttack(d,0);
                     break;
                 case (d.HP -= b) < 1:
 					d.getHurt=function(){};
-                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):d.Die();
+                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):Math.random()*100>15?d.Die():d.NormalAttack(d,0);
                     break;
                 case d.HP < 1334:
                     d.HurtStatus < 2 && (d.HurtStatus = 2, a.childNodes[1].src = "images/Plants/PumpkinHead/pumpkin_damage2.gif");
@@ -1834,7 +1834,7 @@ NormalAttack1: function() {
                         k;
                     while (h--) {
                         (k = g[h]).Altitude > -1 && k.PZ && k.Altitude < 3 && k.getThump(1850);
-						(k.OrnHP+k.HP)<=1850&&d.jinyin&&(CustomZombie(window[g[h].EName],j,GetC(g[h].ZX),1).jinyinnum=100);
+						(k.OrnHP+k.HP-k.BreakPoint)<=0&&d.jinyin&&(CustomZombie(window[g[h].EName],j,GetC(g[h].ZX),1).jinyinnum=100);
                     }
                     oSym.addTask(185, ClearChild, [f])
                 },
