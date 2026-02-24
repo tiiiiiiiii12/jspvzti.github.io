@@ -73,7 +73,7 @@ var oGargantuar = InheritO(oZombie, {
   ExplosionDie: function() {
     this.NormalDie()
   },
-  getExplosion: function() {
+  DisappearDie: function() {
     this.NormalDie()
   },
   hasthrew: 0,
