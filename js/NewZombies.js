@@ -10,7 +10,7 @@ var oGargantuar = InheritO(oZombie, {
   DieGif: 7,
   width: 350,
   beAttackedPointL: 154,
-  beAttackedPointR: 220,
+  beAttackedPointR: 285,
   ImplessAttackGif: 10,
   HP: 3000,
   height: 275,
@@ -25,6 +25,9 @@ var oGargantuar = InheritO(oZombie, {
         h && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((g = $Z[e]) && g.getHit0(g, 1000, 0), h.JudgeAttack())
       },
       [d, c])
+  },
+  getShadow: function(c) {
+    return "left:" + (c.beAttackedPointL - 20) + "px;top:" + (c.height - 22) + "px;width:172px;height:72px"
   },
   jinyinAct: function() {},
   JudgeAttack: function() {
@@ -89,7 +92,7 @@ var oGargantuar = InheritO(oZombie, {
   },
   hasthrew: 0,
   PrivateAct: function(a) {
-    !a.hasthrew && (GetC(a.ZX) > 4||!a.PZ) && !a.isAttacking && (a.HP <= 1500) && $Z[a.id] && a.throwImp(a);
+    !a.hasthrew && (GetC(a.ZX) > 4 || !a.PZ) && !a.isAttacking && (a.HP <= 1500) && $Z[a.id] && a.throwImp(a);
   },
   throwImp: function(g) {
     g.ChkActs = function() {
@@ -106,7 +109,7 @@ var oGargantuar = InheritO(oZombie, {
             return
           }
           k.DieGif = k.ImplessDieGif;
-          var AC = Math.max(GetC(k.ZX) - 4*k.PZ, 3);
+          var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
           oSym.addTask(50, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif] + Math.random(), "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 120) + "px;z-index:" + k.zIndex, EDPZ)])
           oSym.addTask(50, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
