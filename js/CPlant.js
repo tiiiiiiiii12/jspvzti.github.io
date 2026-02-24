@@ -1335,13 +1335,13 @@ NormalAttack1: function() {
                     PlayAudio(["bowlingimpact", "bowlingimpact2"][Math.floor(Math.random() * 2)]);
                     switch (A.Ornaments) {
                         case 0:
-                            A.NormalDie();
+                            A.getHit0(A,1500);
                             break;
                         case 1:
                             A.getHit0(A, Math.min(A.OrnHP, 900), 0);
                             break;
                         default:
-                            z.side ? A.Normaldie() : A.CheckOrnHP(A, u, A.OrnHP, 400, A.PicArr, 0, 0, 0)
+                            z.side ? A.getHit2(A,1500) : A.CheckOrnHP(A, u, A.OrnHP, 400, A.PicArr, 0, 0, 0)
                     }
                     z.CanAttack = 0;
                     switch (a) {
