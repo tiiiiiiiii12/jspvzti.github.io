@@ -1,7 +1,7 @@
       oGargantuar= InheritO(oZombie, {
         PicArr: (function() {
             var a = "images/Zombies/Gargantuar/";
-            return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif", a + "ImpToLand.gif" + $Random, a + "throwImp.gif" + $Random, a+"ImplessDie.gif" + $Random,a+"Die.gif" + $Random, a+"ImplessWalk.gif", a + "0.gif",a+"ImplessAttack.gif"]
+            return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif", a + "ImpToLand.gif", a + "throwImp.gif", a+"ImplessDie.gif",a+"Die.gif" + $Random, a+"ImplessWalk.gif", a + "0.gif",a+"ImplessAttack.gif"]
         })(),
         width:350,
         height:350,
