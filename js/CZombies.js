@@ -1233,7 +1233,11 @@ var CZombies = function(b, a) {
 				var Z,
 					len=(Z=oZ.getArZ(a.ZX+20,a.ZX+100,a.R)).length;
 				while(len--){
-					Z[len]&&(Z[len].EName!="oDuckyTubeZombie2")&&(Z[len].EName!="oConeheadZombie")&&a.Ornaments&&Z[len].ChangeR(Z[len])
+					Z[len]&&(Z[len].EName!="oDuckyTubeZombie2")&&(Z[len].EName!="oConeheadZombie")&&(Z[len].ChangeR!=function(){})&&a.Ornaments&&(
+						Z[len].ChangeR(Z[len]),Z[len].ChangeR=function(){},
+						oSym.addTask(500,function(Z,len){
+							Z[len].ChangeR=CZombies.prototype.ChangeR
+						},[Z,len]))
 				}
 			}
 		},
@@ -1542,11 +1546,12 @@ var CZombies = function(b, a) {
                 [f.id]))
         },
         getHit0: function(c, a, b) {
-            b == c.WalkDirection ? (c.CheckOrnHP(c, c.id, c.OrnHP, a, c.PicArr, c.isAttacking, 1), c.SetAlpha(c, c.EleBody, 50, 0.5), oSym.addTask(10,
+			if(c.OrnHP+c.HP<=a) return c.NormalDie();
+            c.CheckOrnHP(c, c.id, c.OrnHP, a, c.PicArr, c.isAttacking, 1), c.SetAlpha(c, c.EleBody, 50, 0.5), oSym.addTask(10,
                 function(e, d) {
                     (d = $Z[e]) && d.SetAlpha(d, d.EleBody, 100, 1)
                 },
-                [c.id])) : (c.HP -= a) < c.BreakPoint && (c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]), c.getFirePea = OrnNoneZombies.prototype.getFirePea, c.getSnowPea = OrnNoneZombies.prototype.getSnowPea, c.getHit = c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function() {})
+                [c.id])
         },
         getHit1: function(b, a) {
             (b.HP -= a) < b.BreakPoint ? (b.GoingDie(b.PicArr[[b.LostHeadGif, b.LostHeadAttackGif][b.isAttacking]]), b.getFirePea = OrnNoneZombies.prototype.getFirePea, b.getSnowPea = OrnNoneZombies.prototype.getSnowPea, b.getHit = b.getHit0 = b.getHit1 = b.getHit2 = b.getHit3 = function() {}) : (b.CheckOrnHP(b, b.id, b.OrnHP, a, b.PicArr, b.isAttacking, 0), b.SetAlpha(b, b.EleBody, 50, 0.5), oSym.addTask(10,
@@ -1608,7 +1613,7 @@ var CZombies = function(b, a) {
                         if (!k.beAttacked) {
                             return
                         }
-                        PlayAudio("newspaper_rarrgh2");
+                        !k.jinyin&&PlayAudio("newspaper_rarrgh2");
                         k.EleBody.src = l;
                         k.JudgeAttack()
                     },
@@ -1709,6 +1714,7 @@ jinyinAct: function(a){
             c.getHit0(c, a, b)
         },
         getHit0: function(c, a, b) {
+		if(c.OrnHP+c.HP<=a) return c.NormalDie();
      c.CheckOrnHP(c, c.id, c.OrnHP, a, c.PicArr, c.isAttacking, 1), c.SetAlpha(c, c.EleBody, 50, 0.5), oSym.addTask(10,
                 function(e, d) {
                     (d = $Z[e]) && d.SetAlpha(d, d.EleBody, 100, 1)
@@ -2518,7 +2524,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             return ["images/Card/Zombies/DolphinRiderZombie.png", a + "0.gif", a + "Walk1.gif", a + "Walk2.gif", a + "1.gif", a + "Attack.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Jump.gif" + $Random, a + "Jump2.gif" + $Random, a + "Walk3.gif", a + "Walk4.gif", a + "Die2.gif" + $Random, a + "Jump3.gif" + $Random]
         })(),
         AudioArr: ["dolphin_before_jumping", "dolphin_appears", "zombie_entering_water"],
-        Produce: '海豚骑士僵尸善于利用你水池防御的弱点。<p>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快，慢（跳越后）</font><br>特点：<font color="#FF0000">跃过他所遇到的第一株植物</font><br>只在水池关卡出现</font></p>那海豚其实也是个僵尸。',
+        Produce: '海豚骑士僵尸善于利用你水池防御的弱点。<p>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快，慢（跳越后）</font><br>特点：<font color="#FF0000">跃过他所遇到的第一株植物</font><br>精英形态：<font color="#FF0000">跳跃距离更远</font><br>只在水池关卡出现</font></p>那海豚其实也是个僵尸。',
         BirthCallBack: function(a) {
             PlayAudio("dolphin_appears");
             oAquaticZombie.prototype.BirthCallBack(a), GetC(this.ZX) <= 9 && this.Jump(this);
@@ -2616,7 +2622,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                         };
                     h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = r = k.AttackedRX) - (h.beAttackedPointL = 45)) + (h.beAttackedPointR = 100), SetStyle(i, {
                         left: h.X + "px"
-                    }), h.EleShadow.style.left = "45px", n()) : (h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g-(h.jinyin?80:0)) - (h.beAttackedPointR = 100)) + (h.beAttackedPointL = 45), SetStyle(i, {
+                    }), h.EleShadow.style.left = "45px", n()) : (h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g-(h.jinyin?100:0)) - (h.beAttackedPointR = 100)) + (h.beAttackedPointL = 45), SetStyle(i, {
                         left: h.X + "px"
                     }), h.EleShadow.style.left = "45px", q.src = h.PicArr[13] + Math.random(), oSym.addTask(170,
                         function(t, w) {
@@ -2680,22 +2686,17 @@ oImp = InheritO(OrnNoneZombies, {
               t = GetY(tp.R) - 80;
             oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + l + "px;top:" + t + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
             a.bool = 1;
-			a.JudgeAttack=CZombies.prototype.JudgeAttack;
             tp.getHurt(a, 3, 1000);
-            ClearChild($(p.JaHead));
-            PlayAudio("potato_mine");
           }
           while (tzl--) {
             if (tz[tzl] && (tz[tzl].Altitude == 1) && tz[tzl].beAttacked) {
               a.bool = 1;
               oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.ZX - 80) + "px;top:" + (a.pixelTop + 40) + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
-              ClearChild($(p.JaHead));
-              PlayAudio("potato_mine");
-			  a.JudgeAttack=CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"];
               tz[tzl].getHit0(tz[tzl], 500, 0);
             }
           }
         }
+		a.bool&&(ClearChild($(p.JaHead)),PlayAudio("potato_mine"),a.JudgeAttack=CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"]);
       }!a.PZ == a.check && !a.bool && a.beAttacked && (
         EditImg($(p.JaHead), 0, "images/Plants/PotatoMine/PotatoMine.gif", {
           transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
