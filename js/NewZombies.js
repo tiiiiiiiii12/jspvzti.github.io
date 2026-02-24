@@ -86,6 +86,7 @@
                 g.ChkActs1 = function() {
                     return 1
                 },
+				g.DieGif=g.ImplessDieGif,
                 g.hasthrew=1,
                 g.EleBody.src = g.PicArr[g.throwImpGif] + $Random + Math.random(),oSym.addTask(100,
                     function(m, l) {
@@ -99,7 +100,7 @@
                         k.ChkActs1 = j.ChkActs1;
                         k.EleBody.src = l;
                     },
-                    [g.id,g.PicArr[[g.NormalGif = g.ImplessWalkGif, g.AttackGif = g.ImplessAttackGif,g.DieGif=g.ImplessDieGif][b]]])
+                    [g.id,g.PicArr[[g.NormalGif = g.ImplessWalkGif, g.AttackGif = g.ImplessAttackGif][g.isAttacking]]])
         },
         SunNum:275,
         ImplessWalkGif:9,
