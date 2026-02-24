@@ -27,7 +27,7 @@ var oGargantuar = InheritO(oZombie, {
       [d, c])
   },
   getShadow: function(c) {
-    return "left:" + (c.beAttackedPointL - 20) + "px;top:" + (c.height - 22) + "px;width:172px;height:72px"
+    return "left:" + (c.beAttackedPointL - 20) + "px;top:" + (c.height - 44) + "px;width:172px;height:72px"
   },
   jinyinAct: function() {},
   JudgeAttack: function() {
