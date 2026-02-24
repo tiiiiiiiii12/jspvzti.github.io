@@ -86,7 +86,7 @@
                     return 1
                 },
                 g.hasthrew=1,
-                g.EleBody.src = f[g.throwImpGif] + $Random + Math.random(),oSym.addTask(100,
+                g.EleBody.src = g.PicArr[g.throwImpGif] + $Random + Math.random(),oSym.addTask(100,
                     function(m, l) {
                         var k = $Z[m];
                         if (!k) {
