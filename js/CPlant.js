@@ -1834,7 +1834,7 @@ NormalAttack1: function() {
                         k;
                     while (h--) {
                         (k = g[h]).Altitude > -1 && k.PZ && k.Altitude < 3 && k.getThump(1850);
-						(k.OrnHP+k.HP)<=1850&&d.jinyin&&(CustomZombie(window[g[h].EName],j,GetC(g[h].ZX),1).jinyin=1);
+						(k.OrnHP+k.HP)<=1850&&d.jinyin&&(CustomZombie(window[g[h].EName],j,GetC(g[h].ZX),1).jinyinnum=100);
                     }
                     oSym.addTask(185, ClearChild, [f])
                 },
