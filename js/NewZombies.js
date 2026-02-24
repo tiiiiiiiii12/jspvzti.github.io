@@ -123,6 +123,7 @@ var oGargantuar = InheritO(oZombie, {
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
           oSym.addTask(50, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif] + Math.random(), "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 120) + "px;transform:"+(k.PZ?"rotateY(0px)":"rotateY(180px)")+";z-index:" + k.zIndex, EDPZ)])
           oSym.addTask(50, function(k) {
+            PlayAudio("ImpToLand");
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
           }, [k]);
           var j = CZombies.prototype;
@@ -135,5 +136,5 @@ var oGargantuar = InheritO(oZombie, {
   SunNum: 275,
   EName: "oGargantuar",
   CName: "伽刚特尔",
-  Produce: '非常强力的僵尸<p>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，是僵尸世界公认的偶像，最成功之僵。但他出道十几年以来，却仍有个老大难的问题：他没有女朋友！'
+  Produce: '非常强力的僵尸<p>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
 })
