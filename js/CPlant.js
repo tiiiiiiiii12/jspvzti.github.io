@@ -1225,7 +1225,7 @@ NormalAttack1: function() {
                 (a = c[f]).Altitude < 2 && a.getThump(1400)
             }
         for(i=g.C;i<=9;i++){
-            num<2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i).jinyinnum=0,
+            num<2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0,
                 num+=1);
         }
             g.Die(1);
