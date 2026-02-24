@@ -75,7 +75,7 @@
         },
         hasthrew:0,
         PrivateAct:function(a){
-          a.hasthrew&&GetC(a.ZX)>4&&!a.isAttacking&&(a.HP<=1500)&&$Z[a.id]&&a.throwImp(a);
+          !a.hasthrew&&GetC(a.ZX)>4&&!a.isAttacking&&(a.HP<=1500)&&$Z[a.id]&&a.throwImp(a);
         },
         throwImp:function(g) {
             g.ChkActs = function() {
@@ -97,7 +97,7 @@
                         k.ChkActs1 = j.ChkActs1;
                         k.EleBody.src = l;
                     },
-                    [g.id,f[[g.NormalGif = g.ImplessWalkGif, g.AttackGif = g.ImplessAttackGif][b]]])
+                    [g.id,g.PicArr[[g.NormalGif = g.ImplessWalkGif, g.AttackGif = g.ImplessAttackGif,g.DieGif=g.ImplessDieGif][b]]])
         },
         SunNum:275,
         ImplessWalkGif:9,
