@@ -1787,12 +1787,12 @@ NormalAttack1: function() {
         width: 100,
         height: 226,
         beAttackedPointR: 67,
-        SunNum: 50,
+        SunNum: 125,
         coolTime: 30,
         PicArr: ["images/Card/Plants/Squash.png", "images/Plants/Squash/0.gif", "images/Plants/Squash/Squash.gif", "images/Plants/Squash/SquashAttack.gif", "images/Plants/Squash/SquashL.png", "images/Plants/Squash/SquashR.png"],
         AudioArr: ["squash_hmm", "gargantuar_thump"],
         Tooltip: "压扁接近的僵尸",
-        Produce: '窝瓜会压扁第一个接近它的僵尸。<p>伤害：<font color="#FF0000">极高(1850)</font><br>范围：<font color="#FF0000">短，覆盖所有它压到的僵尸。</font><br>用法：<font color="#FF0000">单独使用</font></p>“我准备好了！”窝瓜大吼道，“干吧！！算我一份！没人比我厉害！我就是你要的人！来啊！等啥啊？要的就是这个！”',
+        Produce: '窝瓜会压扁第一个接近它的僵尸。<p>伤害：<font color="#FF0000">极高(1850)</font><br>精英形态：压扁一个僵尸直接生成魅惑的此僵尸的精英形态<br>范围：<font color="#FF0000">短，覆盖所有它压到的僵尸。</font><br>用法：<font color="#FF0000">单独使用</font></p>“我准备好了！”窝瓜大吼道，“干吧！！算我一份！没人比我厉害！我就是你要的人！来啊！等啥啊？要的就是这个！”',
         GetDY: function(b, c, a) {
             return a[0] ? -21 : -10
         },
@@ -1833,7 +1833,8 @@ NormalAttack1: function() {
                         h = g.length,
                         k;
                     while (h--) {
-                        (k = g[h]).Altitude > -1 && k.PZ && k.Altitude < 3 && k.getThump(1850)
+                        (k = g[h]).Altitude > -1 && k.PZ && k.Altitude < 3 && k.getThump(1850);
+						(k.OrnHP+k.HP)<=1850&&d.jinyin&&(CustomZombie(window[g[h].EName],j,GetC(g[h].ZX),1).jinyin=1);
                     }
                     oSym.addTask(185, ClearChild, [f])
                 },
