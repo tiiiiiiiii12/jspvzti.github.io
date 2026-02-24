@@ -1283,7 +1283,7 @@ NormalAttack1: function() {
         coolTime: 30,
         PicArr: ["images/Card/Plants/WallNut.png", "images/Plants/WallNut/0.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif"],
         Tooltip: "阻碍僵尸前进, 并保护你其他的植物,对僵尸有反伤",
-        Produce: '坚果墙拥有足以让你用来保护其它植物的坚硬带刺外壳。<p>韧性：<font color="FF0000">高</font></p>坚果墙：“人们想知道，经常被僵尸啃的感觉怎样？他们不知道，我有限的感官，只能让我感到一种麻麻的感觉，像是，令人放松的背部按摩。”',
+        Produce: '坚果墙拥有足以让你用来保护其它植物的坚硬带刺外壳<br>精英形态：濒死时变成保龄球<p>韧性：<font color="FF0000">高</font></p>坚果墙：“人们想知道，经常被僵尸啃的感觉怎样？他们不知道，我有限的感官，只能让我感到一种麻麻的感觉，像是，令人放松的背部按摩。”',
         CanGrow: function(c, b, f) {
             var a = b + "_" + f,
                 d = c[1],
@@ -1295,7 +1295,7 @@ NormalAttack1: function() {
         getHurt: function(e, b, a) {
             var c = this,
                 d = $(c.id).childNodes[1];
-            !(b % 3) ? (c.HP -= a) < 1 ? c.Die() : c.HP < 1334 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/WallNut/Wallnut_cracked2.gif") : c.HP < 2667 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/WallNut/Wallnut_cracked1.gif"): c.Die();
+            !(b % 3) ? (c.HP -= a) < 1 ? (c.Die(),c.jinyin&&CustomSpecial(oNutBowling,c.R,c.C)) : c.HP < 1334 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/WallNut/Wallnut_cracked2.gif") : c.HP < 2667 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/WallNut/Wallnut_cracked1.gif"): (c.Die(),c.jinyin&&CustomSpecial(oNutBowling,c.R,c.C));
             b!=3&&e.getHit1(e,15);
         }
     }),
@@ -1380,7 +1380,7 @@ NormalAttack1: function() {
                         R: a,
                         C: l,
                         PKind: 10
-                    }), oGd.add(z, w + "_" + i + "1")), oSym.addTask(1, arguments.callee, [z, y, z.AttackedLX, z.AttackedRX, z.pixelLeft, x, e, g, b]))
+                    }), oGd.add(z, w + "_" + i + "_10")), oSym.addTask(1, arguments.callee, [z, y, z.AttackedLX, z.AttackedRX, z.pixelLeft, x, e, g, b]))
                 }
             })(c, oS.W, c.AttackedLX, c.AttackedRX, c.pixelLeft, d, 0, GetY1Y2(1)[0], 600)
         }
@@ -1411,7 +1411,7 @@ NormalAttack1: function() {
                     R: l,
                     C: h,
                     PKind: 1
-                }), oGd.add(b, l + "_" + j + "1")), oSym.addTask(1, arguments.callee, [b, c, n, m, e, g]))
+                }), oGd.add(b, l + "_" + j + "_1")), oSym.addTask(1, arguments.callee, [b, c, n, m, e, g]))
             })(a, oS.W, a.AttackedLX, a.AttackedRX, a.R, $(a.id))
         }
     }),
@@ -1457,7 +1457,7 @@ NormalAttack1: function() {
                         R: v,
                         C: p,
                         PKind: 1
-                    }), oGd.add(s, v + "_" + l + "1")), oSym.addTask(1, arguments.callee, [s, q, s.AttackedLX, s.AttackedRX, m]))
+                    }), oGd.add(s, v + "_" + l + "_1")), oSym.addTask(1, arguments.callee, [s, q, s.AttackedLX, s.AttackedRX, m]))
                 }
             })(a, oS.W, a.AttackedLX, a.AttackedRX, $(a.id))
         }
@@ -1546,7 +1546,7 @@ NormalAttack1: function() {
                 [a.id])
         }
     }),
-	    oPumpkinHead = InheritO(CPlants, {
+	oPumpkinHead = InheritO(CPlants, {
         EName: "oPumpkinHead",
         CName: "南瓜头",
         width: 97,
@@ -1560,7 +1560,7 @@ NormalAttack1: function() {
         zIndex: 1,
         PicArr: ["images/Card/Plants/PumpkinHead.png", "images/Plants/PumpkinHead/0.gif", "images/Plants/PumpkinHead/PumpkinHead.gif", "images/Plants/PumpkinHead/PumpkinHead1.gif", "images/Plants/PumpkinHead/PumpkinHead2.gif", "images/Plants/PumpkinHead/pumpkin_damage1.gif", "images/Plants/PumpkinHead/pumpkin_damage2.gif", "images/Plants/PumpkinHead/Pumpkin_back.gif"],
         Tooltip: "能保护种在里面的植物",
-        Produce: '南瓜头，可以用他的外壳保护其他植物，濒死或被碾压直接爆炸<p>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">可以种在其他植物上</font></p>南瓜头最近都没收到，关于他表哥刃菲尔德的消息。很明显，刃菲尔德是个大明星，是一种……叫什么运动来着……的体育明星？佩格跳跳球大师？南瓜头反正搞不懂是什么运动，他只想做好他自己的工作。',
+        Produce: '南瓜头，可以用他的外壳保护其他植物<br>精英形态：濒死或被碾压直接爆炸，并掉落一张被自身保护的植物卡牌<p>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">可以种在其他植物上</font></p>南瓜头最近都没收到，关于他表哥刃菲尔德的消息。很明显，刃菲尔德是个大明星，是一种……叫什么运动来着……的体育明星？佩格跳跳球大师？南瓜头反正搞不懂是什么运动，他只想做好他自己的工作。',
         CanGrow: function(c, b, d) {
             var a = b + "_" + d;
             return c[2] ? 1 : oGd.$LF[b] == 1 ? !(d < 1 || d > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1) : c[0]
@@ -1577,11 +1577,11 @@ NormalAttack1: function() {
             switch (true) {
                 case c && c < 3:
 					d.getHurt=function(){};
-                    d.NormalAttack(d,0);
+                    d.jinyin&&(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514));
                     break;
                 case (d.HP -= b) < 1:
 					d.getHurt=function(){};
-                    d.NormalAttack(d,0);
+                    d.jinyin&&(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514));
                     break;
                 case d.HP < 1334:
                     d.HurtStatus < 2 && (d.HurtStatus = 2, a.childNodes[1].src = "images/Plants/PumpkinHead/pumpkin_damage2.gif");
