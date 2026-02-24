@@ -15,7 +15,18 @@ var oGargantuar = InheritO(oZombie, {
   HP: 3000,
   height: 275,
   BreakPoint: 1,
-  GoingDie: CZombies.prototype.NormalDie,
+  NormalDie: function() {
+    var c = this;
+    PlayAudio("GargantuarDie");
+    c.EleBody.src = c.PicArr[c.DieGif] + Math.random();
+    oSym.addTask(250, ClearChild, [c.Ele]);
+    c.HP = 0;
+    delete $Z[c.id];
+    c.PZ && oP.MonPrgs()
+  },
+  GoingDie:function() {
+    this.NormalDie()
+  },
   AttackZombie: function(d, c) {
     PlayAudio("zaji");
     oSym.addTask(125,
