@@ -22,6 +22,7 @@
 		},
 			[d, c])
 	},
+	jinyinAct:function(){},
   JudgeAttack: function() {
                     var g = this,
                         d = g.ZX,
@@ -63,7 +64,7 @@
                 var h = $Z[f];
                 var tp;
               for (i=1;i<=3;i++){
-                h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((tp=oGd.$[h.R+"_"+h.C+"_"+i]) && tp.getHurt(h,1,50), h.JudgeAttack())
+                h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime &&(d=$P[e])&&((tp=oGd.$[d.R+"_"+d.C+"_"+i]) && tp.getHurt(h,1,50), h.JudgeAttack())
               }
             }, [d, c]);
         },
