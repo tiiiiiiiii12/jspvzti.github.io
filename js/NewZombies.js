@@ -10,7 +10,7 @@ var oGargantuar = InheritO(oZombie, {
   DieGif: 7,
   width: 350,
   beAttackedPointL: 154,
-  beAttackedPointR: 200,
+  beAttackedPointR: 220,
   ImplessAttackGif: 10,
   HP: 3000,
   height: 275,
