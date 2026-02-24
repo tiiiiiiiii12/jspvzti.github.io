@@ -89,7 +89,7 @@ var oGargantuar = InheritO(oZombie, {
   },
   hasthrew: 0,
   PrivateAct: function(a) {
-    !a.hasthrew && GetC(a.ZX) > 4 && !a.isAttacking && (a.HP <= 1500) && $Z[a.id] && a.throwImp(a);
+    !a.hasthrew && (GetC(a.ZX) > 4||!a.PZ) && !a.isAttacking && (a.HP <= 1500) && $Z[a.id] && a.throwImp(a);
   },
   throwImp: function(g) {
     g.ChkActs = function() {
