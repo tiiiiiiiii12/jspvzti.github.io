@@ -2164,7 +2164,7 @@ NormalAttack1: function() {
         Attacking: 0,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         Tooltip: "它是远程射手，但敌人靠近时会蜷缩不动",
-        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子(70%)在内的六种子弹<br>阳光：击中僵尸生成5阳光(22%)<br>草皮卷：对僵尸造成80伤害并修补弹坑(17%)<br>脑子：使僵尸逃跑(3%)<br>铲子：秒杀僵尸(1.99%)<br>奖杯：直接过关（iz无效）(0.01%)<br>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
+        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子(70%)在内的六种子弹<br>阳光：击中僵尸生成5阳光(22%)<br>草皮卷：对僵尸造成80伤害并修补弹坑(17%)<br>脑子：使僵尸逃跑(3%)<br>铲子：对僵尸造成高伤(1.99%)<br>奖杯：直接过关（iz无效）(0.01%)<br>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
         GetDX: CPlants.prototype.GetDX,
         getTriggerRange: CPlants.prototype.getTriggerRange,
         getTriggerR: function(c) {
@@ -2200,7 +2200,7 @@ NormalAttack1: function() {
     A == 1 &&(oS.StaticCard&&!oS.CardKind&&(AppearSun(b.ZX, b.pixelTop + 120, 5,0)),b.getPea(b, 20, 0));
     A == 2 && (b.getPea(b, 80, 0), delete oGd.$Crater[c + "_" + d], ClearChild($(c + "_" + d + "_crater")));
     A == 3 &&(!b.WalkDirection&&(b.ExchangeLR(b, 1), b.ZX = b.AttackedRX, b.ChkActs = b.ChkActs1, b.WalkDirection = 1),b.getPea(b, 20, 0));
-    A == 4 && (b.DisappearDie());
+    A == 4 && (b.getThump(1500));
     A == 5 && (!oS.CardKind && oP.FlagToEnd(),b.getPea(b, 20, 0))
        },
     NormalAttack: function() {
