@@ -8,23 +8,27 @@ var oGargantuar = InheritO(oZombie, {
   ImplessDieGif: 6,
   ImplessWalkGif: 8,
   DieGif: 7,
+  AudioArr: ["ImpToLand", "GargantuarDie","zaji"],
   width: 350,
+  CanPass: function(d, c) {
+    return c
+  },
   beAttackedPointL: 154,
   beAttackedPointR: 285,
   ImplessAttackGif: 10,
   HP: 3000,
-  height: 275,
+  height: 300,
   BreakPoint: 1,
   NormalDie: function() {
     var c = this;
     PlayAudio("GargantuarDie");
     c.EleBody.src = c.PicArr[c.DieGif] + Math.random();
-    oSym.addTask(250, ClearChild, [c.Ele]);
+    oSym.addTask(500, ClearChild, [c.Ele]);
     c.HP = 0;
     delete $Z[c.id];
     c.PZ && oP.MonPrgs()
   },
-  GoingDie:function() {
+  GoingDie: function() {
     this.NormalDie()
   },
   AttackZombie: function(d, c) {
@@ -38,7 +42,37 @@ var oGargantuar = InheritO(oZombie, {
       [d, c])
   },
   getShadow: function(c) {
-    return "left:" + (c.beAttackedPointL - 20) + "px;top:" + (c.height - 44) + "px;width:172px;height:72px"
+    return "left:" + (c.beAttackedPointL - 20) + "px;top:" + (c.height - 54) + "px;width:172px;height:72px"
+  },
+  ChkActs: function(h, f, j, e) {
+    var d, c, g, a;
+    !(h.FreeFreezeTime || h.FreeSetbodyTime) ? (h.beAttacked && !h.isAttacking && h.JudgeAttack(), !h.isAttacking ? ((c = h.AttackedRX -= (d = h.Speed)) < -50 ? (j.splice(e, 1), h.DisappearDie(), g = 0) : (c < 100 && !h.PointZombie && (h.PointZombie = 1, !oS.CardKind && (StopMusic(), PlayAudio("losemusic", false)), h.ChangeR({
+      R: f,
+      ar: [oS.R - 1],
+      CustomTop: 400 - h.height + h.GetDY()
+    })), h.ZX = h.AttackedLX -= d, h.Ele.style.left = Math.floor(h.X -= d) + "px", g = 1)) : g = 1) : g = 1;
+    !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
+      top: "100px",
+      clip: "rect(0,auto,200px,0)"
+    }), h.intowater = true, SetHidden(h.EleShadow));
+    h.intowater && (oGd.$LF[h.R] == 2) && (h.ZX > GetX(9) || h.ZX < GetX(0)) && (SetStyle(h.EleBody, {
+      top: "0px",
+      clip: "rect(0,auto,300px,0)"
+    }), h.intowater = false, SetVisible(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:61px;top:" + (h.height - 88) + "px;width:194px;height:176px;over-flow:hidden", 0, h.id), ImgSpriter(a, h.id, [
+        ["0 0", 9, 1],
+        ["-97px 0", 9, 2],
+        ["-194px 0", 9, 3],
+        ["-291px 0", 9, 4],
+        ["-388px 0", 9, 5],
+        ["-485px 0", 9, 6],
+        ["-582px 0", 9, 7],
+        ["-679px 0", 9, -1]
+      ], 0,
+      function(i) {
+        ClearChild($(i))
+      }), PlayAudio("zombie_entering_water"));
+    h.PrivateAct && h.PrivateAct(h);
+    return g
   },
   jinyinAct: function() {},
   JudgeAttack: function() {
@@ -90,7 +124,7 @@ var oGargantuar = InheritO(oZombie, {
     oSym.addTask(125, function(f, e) {
       var h = $Z[f];
       var tp;
-      for (i = 1; i <= 3; i++) {
+      for (i = -1; i <= 3; i++) {
         h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50), h.JudgeAttack())
       }
     }, [d, c]);
@@ -98,8 +132,8 @@ var oGargantuar = InheritO(oZombie, {
   ExplosionDie: function() {
     this.NormalDie()
   },
-  DisappearDie: function() {
-    this.NormalDie()
+  DisappearDie: function(a) {
+    this.getHit(this, 1800)
   },
   hasthrew: 0,
   PrivateAct: function(a) {
@@ -121,7 +155,7 @@ var oGargantuar = InheritO(oZombie, {
           }
           k.DieGif = k.ImplessDieGif;
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
-          oSym.addTask(50, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 120) + "px;transform:"+(k.PZ?"rotateY(0px)":"rotateY(180px)")+";z-index:" + k.zIndex, EDPZ)])
+          oSym.addTask(50, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 120) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)])
           oSym.addTask(50, function(k) {
             PlayAudio("ImpToLand");
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
@@ -133,7 +167,7 @@ var oGargantuar = InheritO(oZombie, {
         },
         [g.id, g.PicArr[[g.NormalGif = g.ImplessWalkGif, g.AttackGif = g.ImplessAttackGif][g.isAttacking]]])
   },
-  SunNum: 275,
+  SunNum: 250,
   EName: "oGargantuar",
   CName: "伽刚特尔",
   Produce: '非常强力的僵尸<p>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
