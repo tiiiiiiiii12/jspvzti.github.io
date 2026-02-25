@@ -10,6 +10,7 @@ var oGargantuar = InheritO(oZombie, {
   DieGif: 7,
   AudioArr: ["ImpToLand", "GargantuarDie","zaji"],
   width: 350,
+  getr:function(){},
   CanPass: function(d, c) {
     return c
   },
@@ -23,7 +24,7 @@ var oGargantuar = InheritO(oZombie, {
     var c = this;
     PlayAudio("GargantuarDie");
     c.EleBody.src = c.PicArr[c.DieGif];
-    oSym.addTask(500, ClearChild, [c.Ele]);
+    oSym.addTask(400, ClearChild, [c.Ele]);
     c.HP = 0;
     delete $Z[c.id];
     c.PZ && oP.MonPrgs()
@@ -185,5 +186,5 @@ var oGargantuar = InheritO(oZombie, {
   SunNum: 250,
   EName: "oGargantuar",
   CName: "伽刚特尔",
-  Produce: '非常强力的僵尸<p>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
+  Produce: '非常强力的僵尸<p>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
 })
