@@ -1,3 +1,3 @@
 # tiiiiiiiiiii版
-# a pvz mod
+# a jspvz mod
 tiiiiiiiii12.github.io/tiiiiiiiiiii12.github.io/plantsvszombies.htm
