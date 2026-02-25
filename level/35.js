@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oCherryBomb, oPeashooter, oSquash, oSnowPea, oHypnoShroom, oRepeater2], 
-	ZName: [oZombie, oZombie2, oConeheadZombie, oBucketheadZombie, oFootballZombie, oJackinTheBoxZombie, oDancingZombie, oBackupDancer], 
+	ZName: [oZombie, oZombie2, oConeheadZombie, oBucketheadZombie, oFootballZombie, oGargantuar,oImp, oDancingZombie, oBackupDancer], 
 	PicArr: ["images/interface/background2.jpg","images/interface/trophy.png","images/interface/PointerDown.gif","images/interface/Stripe.png","images/Card/Plants/SplitPea.png"], 
 	backgroundImage: "images/interface/background2.jpg", 
 	DKind: 0, ShowScroll: false, 
@@ -27,7 +27,7 @@ oS.Init({
 			GreenNum: 3, // 绿色罐子数量
 			Left: 5, Right: 9, // 生成的列范围
 			ZombieP: [0, 0, 1, 1, 2, 2, 3, 3, 5, 6], // 僵尸罐子
-			PlantP: [1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4], // 植物罐子
+			PlantP: [1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 4, 4, 4, 4], // 植物罐子
 			SunP: [], // 阳光罐子列表
 		} 
 	], 
@@ -224,3 +224,4 @@ oS.Init({
 	}
 
 });
+
