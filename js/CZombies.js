@@ -1186,7 +1186,7 @@ var CZombies = function(b, a) {
             var d = f.OrnHP,
                 c = f.HP,
                 e = OrnNoneZombies.prototype;
-			if(b>=d+c)return (f.HP=0,f.GoingDie(f));
+			if(b>=d+c)return (f.HP=0,f.GoingDie(f.PicArr[f.LostHeadGif]));
             (d = f.OrnHP -= b*f.jianshang) < 1 && (f.HP += d, f.Ornaments = 0, f.EleBody.src = f.PicArr[[f.NormalGif = f.OrnLostNormalGif, f.AttackGif = f.OrnLostAttackGif][f.isAttacking]], f.PlayNormalballAudio = e.PlayNormalballAudio, f.PlayFireballAudio = e.PlayFireballAudio, f.PlaySlowballAudio = e.PlaySlowballAudio, f.getHit = f.getHit0 = f.getHit1 = f.getHit2 = f.getHit3 = e.getHit);
             f.SetAlpha(f, f.EleBody, 50, 0.5);
             oSym.addTask(10,
