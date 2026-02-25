@@ -93,7 +93,10 @@ var oGargantuar = InheritO(oZombie, {
       d = oZ.getZ0(e.ZX, e.R),
       f = e.id,
       c;
-    d && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif] + Math.random(), e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) : e.isAttacking && (e.isAttacking = 0, e.EleBody.src = e.PicArr[e.NormalGif])
+    d && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif] + Math.random(), e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) : 
+    e.isAttacking && (oSym.addTask(25, function(g) {
+      g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif]
+    }, [e]))
   },
   JudgeLR: function(f, d, e, c, g) {
     return e > 10 || e < 1 ? false : function() {
