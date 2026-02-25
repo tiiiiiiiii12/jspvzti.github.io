@@ -50,7 +50,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         }, EDAll);
     },
     RiddleAutoGrow: function() {
-        for (var i = j[0]; i <= j[1]; ++i) CustomSpecial(oBrains, i, 0); // 脑子
+        for (var i = 1; i <= oS.R;i++) CustomSpecial(oBrains, i, 0); // 脑子
     },
     StartGame: function() {
         NewEle("dButton", "button", "position:absolute;left:150px;top:150px;width:100px;height:35px;z-index:255", {
