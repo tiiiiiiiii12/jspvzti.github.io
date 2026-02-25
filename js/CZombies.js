@@ -1952,7 +1952,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         EName: "oSnorkelZombie",
         CName: "潜水僵尸",
         Lvl: 2,
-        SunNum: 75,
+        SunNum: 150,
         width: 143,
         height: 200,
 		HP:500,
@@ -1961,8 +1961,11 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         OSpeed: 3.2,
         Speed: 3.2,
         Altitude: 1,
-        Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击<br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
+        Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击<br>精英形态：入水后不抬头<br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
         JumpTime: 40,
+		jinyinAct:function(a){
+			a.JumpTime=100
+		},
         getShadow: function(a) {
             return "left:" + a.beAttackedPointL + "px;top:" + (a.height - 45) + "px"
         },
@@ -1994,7 +1997,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         },
         ChkActsL2: function(d, c, e, b) {
             var a;
-            !(d.FreeFreezeTime || d.FreeSetbodyTime) && (d.AttackedLX > GetX(0) ? (d.beAttacked && !d.isAttacking && d.JudgeAttack(), !d.isAttacking && (d.AttackedRX -= (a = d.Speed), d.ZX = d.AttackedLX -= a, d.Ele.style.left = Math.floor(d.X -= a) + "px")) : (d.beAttacked && (d.WalkStatus = 0, d.Altitude = 1, d.EleBody.src = d.PicArr[d.NormalGif = d.WalkGif0], SetVisible(d.EleShadow), d.ChkActs = d.ChkActsL3)));
+            !(d.FreeFreezeTime || d.FreeSetbodyTime) && (d.AttackedLX > GetX(0) ? (!d.jinyin&&d.beAttacked && !d.isAttacking && d.JudgeAttack(), !d.isAttacking && (d.AttackedRX -= (a = d.Speed), d.ZX = d.AttackedLX -= a, d.Ele.style.left = Math.floor(d.X -= a) + "px")) : (d.beAttacked && (d.WalkStatus = 0, d.Altitude = 1, d.EleBody.src = d.PicArr[d.NormalGif = d.WalkGif0], SetVisible(d.EleShadow), d.ChkActs = d.ChkActsL3)));
             return 1
         },
         JudgeAttack: function() {
