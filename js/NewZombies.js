@@ -154,10 +154,10 @@ var oGargantuar = InheritO(oZombie, {
             return
           }
           k.DieGif = k.ImplessDieGif;
+          PlayAudio("ImpToLand");
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
           oSym.addTask(50, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 120) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)])
           oSym.addTask(50, function(k) {
-            PlayAudio("ImpToLand");
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
           }, [k]);
           var j = CZombies.prototype;
