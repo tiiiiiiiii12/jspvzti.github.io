@@ -1,7 +1,7 @@
 oS.Init({
     PName: [],
     ZName: [oImp,oZombie,oConeheadZombie,oBucketheadZombie,oFlagZombie,oScreenDoorZombie, oDuckyTubeZombie1,oDuckyTubeZombie2,
-oPoleVaultingZombie,oDuckyTubeZombie3, oNewspaperZombie, oDolphinRiderZombie, oPoleVaultingZombie,
+oPoleVaultingZombie,oDuckyTubeZombie3, oNewspaperZombie, oDolphinRiderZombie, 
 oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBoxZombie,oBalloonZombie,oBackupDancer],
     PicArr: ["images/interface/background4.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background4.jpg",
@@ -55,11 +55,15 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         NewEle("dButton", "button", "position:absolute;left:150px;top:50px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
             onclick: function() {
-             var i=1;
-             while(i++<oS.R){
-                var b=oZ.getArZ(0,oS.W,i).length;
-                b&&b.bedevil(b);
-               }
+            var h=1,
+                k,
+                n;
+                do {
+                    k = (n = oZ.getArZ(0,oS.W, h)).length;
+                        while (k--) {
+                            n[k].bedevil(n[k])
+                        }
+                   } while (h++ < oS.R)
             }
         }, EDAll);
         oP.Monitor(), BeginCool();
