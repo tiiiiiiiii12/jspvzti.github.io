@@ -115,15 +115,15 @@ var oGargantuar = InheritO(oZombie, {
   ExplosionDie: function() {
     this.NormalDie()
   },
-  DisappearDie: function(a) {
-    this.getHit(this, 1800)
+  DisappearDie: function() {
+    this.NormalDie(this)
   },
   hasthrew: 0,
   PrivateAct: function(h) {
         !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
       top: "100px",
       clip: "rect(0,auto,200px,0)"
-    }), h.intowater = true, SetHidden(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:61px;top:" + (h.height - 88) + "px;width:97px;height:88px;over-flow:hidden", 0, h.Ele), ImgSpriter(a, h.id, [
+    }), h.intowater = true, SetHidden(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:126px;top:" + (h.height - 88) + "px;width:97px;height:88px;over-flow:hidden", 0, h.Ele), ImgSpriter(a, h.id, [
         ["0 0", 9, 1],
         ["-97px 0", 9, 2],
         ["-194px 0", 9, 3],
