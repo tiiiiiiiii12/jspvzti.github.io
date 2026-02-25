@@ -54,11 +54,7 @@ var oGargantuar = InheritO(oZombie, {
     !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
       top: "100px",
       clip: "rect(0,auto,200px,0)"
-    }), h.intowater = true, SetHidden(h.EleShadow));
-    h.intowater && (oGd.$LF[h.R] == 2) && (h.ZX > GetX(9) || h.ZX < GetX(0)) && (SetStyle(h.EleBody, {
-      top: "0px",
-      clip: "rect(0,auto,300px,0)"
-    }), h.intowater = false, SetVisible(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:61px;top:" + (h.height - 88) + "px;width:194px;height:176px;over-flow:hidden", 0, h.id), ImgSpriter(a, h.id, [
+    }), h.intowater = true, SetHidden(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:61px;top:" + (h.height - 88) + "px;width:194px;height:176px;over-flow:hidden", 0, h.Ele), ImgSpriter(a, h.id, [
         ["0 0", 9, 1],
         ["-97px 0", 9, 2],
         ["-194px 0", 9, 3],
@@ -71,6 +67,10 @@ var oGargantuar = InheritO(oZombie, {
       function(i) {
         ClearChild($(i))
       }), PlayAudio("zombie_entering_water"));
+    h.intowater && (oGd.$LF[h.R] == 2) && (h.ZX > GetX(9) || h.ZX < GetX(0)) && (SetStyle(h.EleBody, {
+      top: "0px",
+      clip: "rect(0,auto,300px,0)"
+    }, SetVisible(h.EleShadow)), h.intowater = false);
     h.PrivateAct && h.PrivateAct(h);
     return g
   },
