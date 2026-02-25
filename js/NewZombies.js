@@ -37,7 +37,10 @@ var oGargantuar = InheritO(oZombie, {
       function(f, e) {
         var h = $Z[f],
           g;
-        h && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((g = $Z[e]) && g.getHit0(g, 1000, 0), h.JudgeAttack())
+        h && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((g = $Z[e]) && g.getHit0(g, 1000, 0),
+      oSym.addTask(25, function(h) {
+              h.JudgeAttack()
+            },[h]))
       },
       [d, c])
   },
@@ -64,9 +67,7 @@ var oGargantuar = InheritO(oZombie, {
       a,
       c;
     (a = g.JudgeAttackH1()) || (c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h)) ? (!g.isAttacking && (g.isAttacking = 1, g.EleBody.src = g.PicArr[g.AttackGif] + Math.random()), !a && g.NormalAttack(c[0], c[1])) :
-    g.isAttacking && (oSym.addTask(25, function(g) {
-      g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif]
-    }, [g]))
+    g.isAttacking && (g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif])
   },
   JudgeAttackH: function() {
     var e = this,
@@ -74,9 +75,7 @@ var oGargantuar = InheritO(oZombie, {
       f = e.id,
       c;
     d && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif] + Math.random(), e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) : 
-    e.isAttacking && (oSym.addTask(25, function(g) {
-      g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif]
-    }, [e]))
+    e.isAttacking && (e.isAttacking = 0, e.EleBody.src = e.PicArr[e.NormalGif])
   },
   JudgeLR: function(f, d, e, c, g) {
     return e > 10 || e < 1 ? false : function() {
@@ -108,7 +107,10 @@ var oGargantuar = InheritO(oZombie, {
       var h = $Z[f];
       var tp;
       for (i = -1; i <= 3; i++) {
-        h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50), h.JudgeAttack())
+        h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50),
+            oSym.addTask(25, function(h) {
+              h.JudgeAttack()
+            },[h])
       }
     }, [d, c]);
   },
