@@ -110,7 +110,7 @@ var oGargantuar = InheritO(oZombie, {
         h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50),
             oSym.addTask(25, function(h) {
               h.JudgeAttack()
-            },[h])
+            },[h]))
       }
     }, [d, c]);
   },
