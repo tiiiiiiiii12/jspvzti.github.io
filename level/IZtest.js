@@ -57,7 +57,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             onclick: function() {
              var i=1;
              while(i++<oS.R){
-                var b=oZ.getArZ(0,oS.W).length;
+                var b=oZ.getArZ(0,oS.W,i).length;
                 b&&b.bedevil(b);
                }
             }
