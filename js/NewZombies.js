@@ -1,7 +1,7 @@
 var oGargantuar = InheritO(oZombie, {
   PicArr: (function() {
     var a = "images/Zombies/Gargantuar/";
-    return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif" + $Random, a + "ImpToLand.gif" + $Random, a + "throwImp.gif", a + "ImplessDie.gif" + $Random, a + "Die.gif" + $Random, a + "ImplessWalk.gif", a + "0.gif", a + "ImplessAttack.gif" + $Random]
+    return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif" + $Random, a + "ImpToLand.gif", a + "throwImp.gif", a + "ImplessDie.gif" + $Random, a + "Die.gif" + $Random, a + "ImplessWalk.gif", a + "0.gif", a + "ImplessAttack.gif" + $Random]
   })(),
   throwImpGif: 5,
   ImpToLandGif: 4,
@@ -113,7 +113,7 @@ var oGargantuar = InheritO(oZombie, {
         return 1
       },
       g.hasthrew = 1,
-      g.EleBody.src = g.PicArr[g.throwImpGif] + $Random + Math.random(), oSym.addTask(100,
+      g.EleBody.src = g.PicArr[g.throwImpGif], oSym.addTask(100,
         function(m, l) {
           var k = $Z[m];
           if (!k) {
@@ -121,7 +121,7 @@ var oGargantuar = InheritO(oZombie, {
           }
           k.DieGif = k.ImplessDieGif;
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
-          oSym.addTask(50, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif] + Math.random(), "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 120) + "px;transform:"+(k.PZ?"rotateY(0px)":"rotateY(180px)")+";z-index:" + k.zIndex, EDPZ)])
+          oSym.addTask(50, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 120) + "px;transform:"+(k.PZ?"rotateY(0px)":"rotateY(180px)")+";z-index:" + k.zIndex, EDPZ)])
           oSym.addTask(50, function(k) {
             PlayAudio("ImpToLand");
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
