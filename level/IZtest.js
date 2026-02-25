@@ -8,7 +8,6 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
     Coord: 2,
     DKind: 0,
     LF: [0, 1, 1, 2, 2, 1, 1],
-    ShowScroll: false,
     ProduceSun: false,
     SunNum: 114514,
     BrainsNum: 6,
