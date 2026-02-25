@@ -1,5 +1,5 @@
 oS.Init({
-    PName: [oFumeShroom, oPumpkinHead, oHypnoShroom, oPotatoMine, oSunFlower, oThreepeater, oScaredyShroom, oCactus, oPeashooter, oRepeater, oJalapeno, oGarlic, oPlantern,oIceShroom,oWallNut],
+    PName: [oFumeShroom, oPumpkinHead, oHypnoShroom, oPotatoMine, oSunFlower, oThreepeater, oScaredyShroom, oCactus, oPeashooter, oRepeater, oGatlingPea, oGarlic, oPlantern,oIceShroom,oWallNut],
     ZName: [oImp, oScreenDoorZombie, oDuckyTubeZombie1, oDuckyTubeZombie3, oNewspaperZombie, oDolphinRiderZombie,oPoleVaultingZombie,oGargantuar,oSnorkelZombie],
     PicArr: ["images/interface/background4.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background4.jpg",
@@ -8,7 +8,7 @@ oS.Init({
     LF: [0, 1, 1, 2, 2, 1, 1],
     ShowScroll: false,
     ProduceSun: false,
-    SunNum: 600,
+    SunNum: 800,
     BrainsNum: 6,
     CardKind: 1,
     LevelName: "泳池奇遇",
@@ -58,6 +58,7 @@ oS.Init({
         oS.RiddleAutoGrow();
     }
 });
+
 
 
 
