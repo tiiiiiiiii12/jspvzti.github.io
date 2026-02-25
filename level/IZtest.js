@@ -52,7 +52,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         for (var i = 1; i <= oS.R;i++) CustomSpecial(oBrains, i, 0); // 脑子
     },
     StartGame: function() {
-        NewEle("dButton", "button", "position:absolute;left:150px;top:150px;width:100px;height:35px;z-index:255", {
+        NewEle("dButton", "button", "position:absolute;left:150px;top:50px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
             onclick: function() {
              var i=1;
@@ -64,6 +64,5 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         }, EDAll);
         oP.Monitor(), BeginCool();
         SetVisible($("dFlagMeter"), $("dTop"));
-        oS.RiddleAutoGrow();
     }
 });
