@@ -51,26 +51,6 @@ var oGargantuar = InheritO(oZombie, {
       ar: [oS.R - 1],
       CustomTop: 400 - h.height + h.GetDY()
     })), h.ZX = h.AttackedLX -= d, h.Ele.style.left = Math.floor(h.X -= d) + "px", g = 1)) : g = 1) : g = 1;
-    !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
-      top: "100px",
-      clip: "rect(0,auto,200px,0)"
-    }), h.intowater = true, SetHidden(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:61px;top:" + (h.height - 88) + "px;width:194px;height:176px;over-flow:hidden", 0, h.Ele), ImgSpriter(a, h.id, [
-        ["0 0", 9, 1],
-        ["-97px 0", 9, 2],
-        ["-194px 0", 9, 3],
-        ["-291px 0", 9, 4],
-        ["-388px 0", 9, 5],
-        ["-485px 0", 9, 6],
-        ["-582px 0", 9, 7],
-        ["-679px 0", 9, -1]
-      ], 0,
-      function(i) {
-        ClearChild($(i))
-      }), PlayAudio("zombie_entering_water"));
-    h.intowater && (oGd.$LF[h.R] == 2) && (h.ZX > GetX(9) || h.ZX < GetX(0)) && (SetStyle(h.EleBody, {
-      top: "0px",
-      clip: "rect(0,auto,300px,0)"
-    }, SetVisible(h.EleShadow)), h.intowater = false);
     h.PrivateAct && h.PrivateAct(h);
     return g
   },
@@ -139,8 +119,28 @@ var oGargantuar = InheritO(oZombie, {
     this.getHit(this, 1800)
   },
   hasthrew: 0,
-  PrivateAct: function(a) {
-    !a.hasthrew && (GetC(a.ZX) > 4 || !a.PZ) && !a.isAttacking && (a.HP <= 1500) && $Z[a.id] && a.throwImp(a);
+  PrivateAct: function(h) {
+        !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
+      top: "100px",
+      clip: "rect(0,auto,200px,0)"
+    }), h.intowater = true, SetHidden(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:61px;top:" + (h.height - 88) + "px;width:194px;height:176px;over-flow:hidden", 0, h.Ele), ImgSpriter(a, h.id, [
+        ["0 0", 9, 1],
+        ["-97px 0", 9, 2],
+        ["-194px 0", 9, 3],
+        ["-291px 0", 9, 4],
+        ["-388px 0", 9, 5],
+        ["-485px 0", 9, 6],
+        ["-582px 0", 9, 7],
+        ["-679px 0", 9, -1]
+      ], 0,
+      function(i) {
+        ClearChild($(i))
+      }), PlayAudio("zombie_entering_water"));
+    h.intowater && (oGd.$LF[h.R] == 2) && (h.ZX > GetX(9) || h.ZX < GetX(0)) && (SetStyle(h.EleBody, {
+      top: "0px",
+      clip: "rect(0,auto,300px,0)"
+    }, SetVisible(h.EleShadow)), h.intowater = false);
+    !h.hasthrew && (GetC(h.ZX) > 4 || !h.PZ) && !h.isAttacking && (h.HP <= 1500) && $Z[h.id] && h.throwImp(h);
   },
   throwImp: function(g) {
     g.ChkActs = function() {
