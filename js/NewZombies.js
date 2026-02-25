@@ -1,7 +1,7 @@
 var oGargantuar = InheritO(oZombie, {
   PicArr: (function() {
     var a = "images/Zombies/Gargantuar/";
-    return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif" + $Random, a + "ImpToLand.gif", a + "throwImp.gif", a + "ImplessDie.gif" + $Random, a + "Die.gif" + $Random, a + "ImplessWalk.gif", a + "0.gif", a + "ImplessAttack.gif" + $Random]
+    return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif" + $Random, a + "ImpToLand.gif", a + "throwImp.gif", a + "ImplessDie.gif", a + "Die.gif", a + "ImplessWalk.gif", a + "0.gif", a + "ImplessAttack.gif" + $Random]
   })(),
   throwImpGif: 5,
   ImpToLandGif: 4,
@@ -22,7 +22,7 @@ var oGargantuar = InheritO(oZombie, {
   NormalDie: function() {
     var c = this;
     PlayAudio("GargantuarDie");
-    c.EleBody.src = c.PicArr[c.DieGif] + Math.random();
+    c.EleBody.src = c.PicArr[c.DieGif];
     oSym.addTask(500, ClearChild, [c.Ele]);
     c.HP = 0;
     delete $Z[c.id];
