@@ -57,6 +57,16 @@ var oGargantuar = InheritO(oZombie, {
     h.PrivateAct && h.PrivateAct(h);
     return g
   },
+  JudgeAttackH1: function() {
+                    var e = this,
+                        d = oZ.getHZ1(e.ZX-20, e.R),
+                        f = e.id,
+                        c;
+					if(d && d.Altitude == 1){
+          (!e.isAttacking ? e.AttackZombie(f, c = d.id) : e.AttackZombie(f, d.id, 1))
+					return d
+				   }
+  },
   jinyinAct: function() {},
   JudgeAttack: function() {
     var g = this,
@@ -71,7 +81,7 @@ var oGargantuar = InheritO(oZombie, {
   },
   JudgeAttackH: function() {
     var e = this,
-      d = oZ.getZ0(e.ZX, e.R),
+      d = oZ.getZ0(e.ZX+20, e.R),
       f = e.id,
       c;
     d && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif] + Math.random(), e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) : 
@@ -84,7 +94,7 @@ var oGargantuar = InheritO(oZombie, {
         i;
       while (h--) {
         if (i = g[d + h]) {
-          return i.AttackedRX >= c - 40 && i.AttackedLX <= c - 40 ? [f.id, i.id] : false
+          return i.AttackedRX >= c - 20 && i.AttackedLX <= c - 20 ? [f.id, i.id] : false
         }
       }
     }()
@@ -96,7 +106,7 @@ var oGargantuar = InheritO(oZombie, {
         i;
       while (h--) {
         if (i = g[d + h]) {
-          return i.AttackedRX >= c && i.AttackedLX <= c ? [f.id, i.id] : false
+          return i.AttackedRX >= c - 20 && i.AttackedLX <= c - 20 ? [f.id, i.id] : false
         }
       }
     }()
@@ -161,7 +171,7 @@ var oGargantuar = InheritO(oZombie, {
           k.DieGif = k.ImplessDieGif;
           PlayAudio("ImpToLand");
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
-          oSym.addTask(50, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 120) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)])
+          oSym.addTask(50, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 180) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)])
           oSym.addTask(50, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
           }, [k]);
