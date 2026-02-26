@@ -1688,7 +1688,7 @@ var CZombies = function(b, a) {
       var P = $(a.id);
       if (!num && a.Ornaments) {
         var C = GetC(a.ZX);
-        var p = oGd.$[a.R + "_" + C + "_" + 1];
+        var p = oGd.$[a.R + "_" + C + "_" + i];
         for (i = 3; i >= 0; i--) {
           a.PZ && p && p.canEat && $(p.id) && (p.C == C) && (PlantKind = p.PKind, NewC = p.C + 1, p.AttackedLX += 80, p.pixelRight += 80, p.AttackedRX += 80, p.pixelLeft += 80, $(p.id).style.left = (p.pixelLeft) + "px",
 			(p.EName == "oBrains" || p.C > 9) && p.Die(), delete oGd.$[p.R + "_" + p.C + "_" + p.PKind], p.C = NewC, oGd.add(p, a.R + "_" + NewC + "_" + PlantKind));
@@ -1710,7 +1710,7 @@ var CZombies = function(b, a) {
   PlayNormalballAudio: function() {
     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
   },
-  Produce: '他的铁栅门是有效的盾牌。<p>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态：<br>1.手持大喷菇，对前方三格植物造成每次25伤害，但防具血量只有500<br>2.手持铲子，将植物铲至身后<br>弱点：大喷菇</p>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
+  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态：<br>1.手持大喷菇，对前方三格植物造成每次25伤害，但防具血量只有500<br>2.手持铲子，将植物铲至身后<br>弱点：大喷菇<br>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
   GoingDie: CZombies.prototype.GoingDie,
   getFirePea: function(c, a, b) {
     PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
