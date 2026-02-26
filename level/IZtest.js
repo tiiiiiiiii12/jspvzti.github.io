@@ -96,9 +96,8 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                             c[m].getr(c[m],-800)
                         }
                    } while (h++ < oS.R)
-            } 
             oSym.addTask(1,arguments.callee,[])
-        },[])
+        },[]);
         oP.Monitor(), BeginCool();
         SetVisible($("dFlagMeter"), $("dTop"));
     }
