@@ -1620,119 +1620,131 @@ var CZombies = function(b, a) {
                     [h, f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]]]))
         }
     }),
-    oScreenDoorZombie = InheritO(oNewspaperZombie, {
-        EName: "oScreenDoorZombie",
-        CName: "铁栅门僵尸",
-        OrnHP: 1100,
-        Lvl: 3,
-        SunNum: 100,
-        StandGif: 13,
-        width: 166,
-        height: 144,
-        beAttackedPointL: 60,
-        beAttackedPointR: 116,
-        check:1,
-        LostPaperSpeed:1.6,
-        PicArr: (function() {
-            var a = "images/Zombies/ScreenDoorZombie/",
-                b = "images/Zombies/Zombie/";
-            return ["images/Card/Zombies/ScreenDoorZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", b + "Zombie2.gif", b + "ZombieAttack.gif", b + "ZombieLostHead.gif", b + "ZombieLostHeadAttack.gif", b + "ZombieHead.gif" + $Random, b + "ZombieDie.gif" + $Random, b + "BoomDie.gif" + $Random, a + "1.gif"]
-        })(),
-		HP:270,
-jinyinAct: function(a){
-		var z = $(a.id);
-		z.FumeDoor = "Fume" + Math.random();
-        var Sh = NewImg(z.FumeDoor,"images/Plants/FumeShroom/FumeShroom.gif","position:absolute;width:100px;height:88px;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:20px;top:50px;",0);
-        z.appendChild(Sh);//寒冰头与大喷菇
-	NewEle(a.id + "_Bullet", 
-	"div", "position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"visibility:hidden;width:343px;height:62px;left:"+(a.PZ?"-250":"40")+"px;top:70px;background:url(images/Plants/FumeShroom/FumeShroomBullet.gif);z-index:" + (a.zIndex + 1),0,$(a.id));
-	oSym.addTask(1, function(a,h,z) {
-		if (a.Ornaments&&$Z[a.id]) {
-		let A= oZ["getAr"+(a.PZ?"HZ":"Z")](a.PZ?a.ZX-300:a.ZX,a.PZ?a.ZX:a.ZX+300, a.R),
-        Tz= A.length;
-	for (let i = GetC(a.ZX+20) - 3; i <= GetC(a.ZX+20); i++) {
-            for (let l=0;l<=3;l++){
-              var m = oGd.$[a.R + "_" + i + "_" + l];
-            !a.isAttacking&&(Tz||(m!==undefined&&a.PZ))?(
-					a.Speed = a.OSpeed = 0,
-				EditImg($(z.FumeDoor),0,"images/Plants/FumeShroom/FumeShroomAttack.gif",{},0),
-                  PlayAudio("fume"),
-                  SetVisible($(h)),
-			oSym.addTask(50,function(a,z){
-			a&&a.Ornaments&&EditImg($(z.FumeDoor),0,"images/Plants/FumeShroom/FumeShroom.gif",{},0)
-			},[a,z]),
-                  ImgSpriter(h, a.id, [
-                      ["0 0", 5, 1],
-                      ["0 -62px", 5, 2],
-					  ["0 -124px", 5, 3],
-					  ["0 -186px", 5, -1]
-                    ], 0,
-                    function(i) {
-                      SetHidden($(i))
-                    }),
-                  a.PZ&&m && (m.getHurt(a, 3,25))
-						):(a.Speed = a.OSpeed =a.LostPaperSpeed);
-					}
-	             }
-			while (Tz--) {
-              (t = A[Tz])&&(t.Altitude==1)&&(t.getHit1(t,25,0))
-            }
-              } else {
-                ClearChild(h);
-		        ClearChild($(z.FumeDoor));
-                a.Speed = a.OSpeed =a.LostPaperSpeed;
-              }
-        a &&oSym.addTask(100, arguments.callee, [a,a.id + "_Bullet",z])
-      }, [a,a.id + "_Bullet",z]);//大喷技能
-	a.PrivateAct=function(a){
-	var P=$(a.id);
-	!(a.PZ==a.check)&&(a.Ornaments&&(EditEle($(a.id + "_Bullet"), 0,
-        {transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)",left:(a.PZ?"-250":"40")+"px"},$(a.id),0),
-	EditImg($(P.FumeDoor),0,"images/Plants/FumeShroom/FumeShroom.gif",{
-		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)",
-		left:a.PZ?"20px":"40px"
-	},0)),
-	a.check=a.PZ);
-	}
-       },   
-        PlayNormalballAudio: function() {
-            PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
-        },
-        Produce: '他的铁栅门是有效的盾牌。<p>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高</font><br>精英形态：手持大喷菇，对前方三格植物造成每次25伤害</font><br>弱点：大喷菇和磁力菇</p>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
-        GoingDie: CZombies.prototype.GoingDie,
-        getFirePea: function(c, a, b) {
-            PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
-            c.getHit0(c, a, b)
-		},
-        getFirePeaSputtering: function() {},
-        getSnowPea: function(c, a, b) {
-            PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)]);
-            c.getHit0(c, a, b)
-        },
-        getPea: function(c, a, b) {
-            PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
-            c.getHit0(c, a, b)
-        },
-        getHit0: function(c, a, b) {
-		if(c.OrnHP+c.HP<=a) return c.NormalDie();
-     c.CheckOrnHP(c, c.id, c.OrnHP, a, c.PicArr, c.isAttacking, 1), c.SetAlpha(c, c.EleBody, 50, 0.5), oSym.addTask(10,
-                function(e, d) {
-                    (d = $Z[e]) && d.SetAlpha(d, d.EleBody, 100, 1)
-                },
-                [c.id])
-        },
-        CheckOrnHP: function(g, h, d, c, f, b, a) {
-            var e = OrnNoneZombies.prototype;
-            (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
-        },
-        getFireball: function(c, a, b) {
-            b != c.WalkDirection ? (c.FreeSlowTime = 0, c.Attack = 100, c.Speed != c.OSpeed ? (c.PlayNormalballAudio(), c.Speed = c.OSpeed) : c.PlayFireballAudio()) : c.PlayNormalballAudio()
-        },
-        getSputtering: function() {},
-        getSlow: function(d, a, c, b, e) {
-            (b != d.WalkDirection || e != -1) ? CZombies.prototype.getSlow(d, a, c): d.PlayNormalballAudio()
+	oScreenDoorZombie = InheritO(oNewspaperZombie, {
+  EName: "oScreenDoorZombie",
+  CName: "铁栅门僵尸",
+  OrnHP: 1000,
+  Lvl: 3,
+  SunNum: 100,
+  StandGif: 13,
+  width: 166,
+  height: 144,
+  beAttackedPointL: 60,
+  beAttackedPointR: 116,
+  check: 1,
+  LostPaperSpeed: 1.6,
+  PicArr: (function() {
+    var a = "images/Zombies/ScreenDoorZombie/",
+      b = "images/Zombies/Zombie/";
+    return ["images/Card/Zombies/ScreenDoorZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", b + "Zombie2.gif", b + "ZombieAttack.gif", b + "ZombieLostHead.gif", b + "ZombieLostHeadAttack.gif", b + "ZombieHead.gif" + $Random, b + "ZombieDie.gif" + $Random, b + "BoomDie.gif" + $Random, a + "1.gif"]
+  })(),
+  HP: 270,
+  jinyinAct: function(a) {
+    var z = $(a.id);
+    var num = Math.round(Math.random() * 1 + 0);
+    z.FumeDoor = "Fume" + Math.random();
+	num&&(a.OrnHP*=0.5);
+    var Sh = NewImg(z.FumeDoor, num ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/Shovel.png", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:" + (num ? 50 : 80) + "px;", 0);
+    z.appendChild(Sh); //寒冰头与大喷菇
+    num && (NewEle(a.id + "_Bullet",
+      "div", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "visibility:hidden;width:343px;height:62px;left:" + (a.PZ ? "-250" : "40") + "px;top:70px;background:url(images/Plants/FumeShroom/FumeShroomBullet.gif);z-index:" + (a.zIndex + 1), 0, $(a.id)), oSym.addTask(1, function(a, h, z) {
+      if (a.Ornaments && $Z[a.id]) {
+        let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.PZ ? a.ZX - 300 : a.ZX, a.PZ ? a.ZX : a.ZX + 300, a.R),
+          Tz = A.length;
+        for (let i = GetC(a.ZX + 20) - 3; i <= GetC(a.ZX + 20); i++) {
+          for (let l = 0; l <= 3; l++) {
+            var m = oGd.$[a.R + "_" + i + "_" + l];
+            (Tz || (m !== undefined && a.PZ)) ? (
+              a.Speed = a.OSpeed = 0,
+              EditImg($(z.FumeDoor), 0, "images/Plants/FumeShroom/FumeShroomAttack.gif", {}, 0),
+              PlayAudio("fume"),
+              SetVisible($(h)),
+              oSym.addTask(50, function(a, z) {
+                a && a.Ornaments && EditImg($(z.FumeDoor), 0, "images/Plants/FumeShroom/FumeShroom.gif", {}, 0)
+              }, [a, z]),
+              ImgSpriter(h, a.id, [
+                  ["0 0", 5, 1],
+                  ["0 -62px", 5, 2],
+                  ["0 -124px", 5, 3],
+                  ["0 -186px", 5, -1]
+                ], 0,
+                function(i) {
+                  SetHidden($(i))
+                }),
+              a.PZ && m && (m.getHurt(a, 3, 25))
+            ) : (a.Speed = a.OSpeed = a.LostPaperSpeed);
+          }
         }
-    }),
+        while (Tz--) {
+          (t = A[Tz]) && (t.Altitude == 1) && (t.getHit1(t, 25, 0))
+        }
+      } else {
+        ClearChild(h);
+        a.Speed = a.OSpeed = a.LostPaperSpeed;
+      }
+      a && oSym.addTask(100, arguments.callee, [a, a.id + "_Bullet", z])
+    }, [a, a.id + "_Bullet", z])); //大喷技能
+    a.PrivateAct = function(a) {
+      var P = $(a.id);
+      if (!num && a.Ornaments) {
+        var C = GetC(a.ZX);
+        var p = oGd.$[a.R + "_" + C + "_" + 1];
+        for (i = 3; i >= 0; i--) {
+          a.PZ && p && p.canEat && $(p.id) && (p.C == C) && (PlantKind = p.PKind, NewC = p.C + 1, p.AttackedLX += 80, p.pixelRight += 80, p.AttackedRX += 80, p.pixelLeft += 80, $(p.id).style.left = (p.pixelLeft) + "px",
+			(p.EName == "oBrains" || p.C > 9) && p.Die(), delete oGd.$[p.R + "_" + p.C + "_" + p.PKind], p.C = NewC, oGd.add(p, a.R + "_" + NewC + "_" + PlantKind));
+        }
+        var z = oZ["get" + (a.PZ ? "HZ1" : "Z0")](a.ZX, a.R);
+        z && z.getr != function() {} && (z.getr(z, 80), z.getHit0(z, 100, 0))
+      }!(a.PZ == a.check) && (a.Ornaments && (num && EditEle($(a.id + "_Bullet"), 0, {
+            transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
+            left: (a.PZ ? "-250" : "40") + "px"
+          }, $(a.id), 0),
+          EditImg($(P.FumeDoor), 0, num ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/Shovel.png", {
+            transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
+            left: a.PZ ? "25px" : "40px"
+          }, 0)),
+        a.check = a.PZ);
+      !a.Ornaments && ClearChild($(P.FumeDoor));
+    }
+  },
+  PlayNormalballAudio: function() {
+    PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
+  },
+  Produce: '他的铁栅门是有效的盾牌。<p>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态：<br>1.手持大喷菇，对前方三格植物造成每次25伤害，但防具血量只有500<br>2.手持铲子，将植物铲至身后<br>弱点：大喷菇</p>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
+  GoingDie: CZombies.prototype.GoingDie,
+  getFirePea: function(c, a, b) {
+    PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
+    c.getHit0(c, a, b)
+  },
+  getFirePeaSputtering: function() {},
+  getSnowPea: function(c, a, b) {
+    PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)]);
+    c.getHit0(c, a, b)
+  },
+  getPea: function(c, a, b) {
+    PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
+    c.getHit0(c, a, b)
+  },
+  getHit0: function(c, a, b) {
+    if (c.OrnHP + c.HP <= a) return c.NormalDie();
+    c.CheckOrnHP(c, c.id, c.OrnHP, a, c.PicArr, c.isAttacking, 1), c.SetAlpha(c, c.EleBody, 50, 0.5), oSym.addTask(10,
+      function(e, d) {
+        (d = $Z[e]) && d.SetAlpha(d, d.EleBody, 100, 1)
+      },
+      [c.id])
+  },
+  CheckOrnHP: function(g, h, d, c, f, b, a) {
+    var e = OrnNoneZombies.prototype;
+    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
+  },
+  getFireball: function(c, a, b) {
+    b != c.WalkDirection ? (c.FreeSlowTime = 0, c.Attack = 100, c.Speed != c.OSpeed ? (c.PlayNormalballAudio(), c.Speed = c.OSpeed) : c.PlayFireballAudio()) : c.PlayNormalballAudio()
+  },
+  getSputtering: function() {},
+  getSlow: function(d, a, c, b, e) {
+    (b != d.WalkDirection || e != -1) ? CZombies.prototype.getSlow(d, a, c): d.PlayNormalballAudio()
+  }
+}),
     oAquaticZombie = InheritO(OrnNoneZombies, {
         StandGif: 4,
         AttackGif: 5,
