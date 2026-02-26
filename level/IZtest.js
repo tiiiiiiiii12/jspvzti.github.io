@@ -87,11 +87,11 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 m,
                 n;
                 do {
-                    k = (n = oZ.getArZ(0,80, h)).length;
+                    k = (n = oZ.getArZ(0,100, h)).length;
                         while (k--) {
                             n[k].PZ&&n[k].getr(n[k],800)
                         }
-                     c = (m = oZ.getArZ(800,990, h)).length;
+                     c = (m = oZ.getArZ(780,990, h)).length;
                         while (c--) {
                             !m[c].PZ&&m[c].getr(m[c],-800)
                         }
