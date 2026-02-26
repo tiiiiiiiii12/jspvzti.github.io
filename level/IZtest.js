@@ -52,7 +52,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         for (var i = 1; i <= oS.R;i++) CustomSpecial(oBrains, i, 0); // 脑子
     },
     StartGame: function() {
-        NewEle("dButton", "button", "position:absolute;left:150px;top:50px;width:100px;height:35px;z-index:255", {
+        NewEle("dButton", "button", "position:absolute;left:250px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
             onclick: function() {
             var h=1,
@@ -61,11 +61,44 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 do {
                     k = (n = oZ.getArZ(0,oS.W, h)).length;
                         while (k--) {
-                            n[k].bedevil(n[k])
+                            n[k]&&n[k].PZ&&n[k].bedevil(n[k])
                         }
                    } while (h++ < oS.R)
             }
         }, EDAll);
+        NewEle("dButton", "button", "position:absolute;left:450px;top:20px;width:100px;height:35px;z-index:255", {
+            innerHTML: "秒杀全场",
+            onclick: function() {
+            var h=1,
+                k,
+                n;
+                do {
+                    k = (n = oZ.getArZ(0,oS.W, h)).length;
+                        while (k--) {
+                            n[k].DisappearDie(n[k])
+                        }
+                   } while (h++ < oS.R)
+            }
+        }, EDAll);
+        oSym.addTask(1,function(){
+            var h=1,
+                k,
+                c,
+                m,
+                n;
+                do {
+                    k = (n = oZ.getArZ(0,50, h)).length;
+                        while (k--) {
+                            n[k].getr(n[k],800)
+                        }
+                     c = (m = oZ.getArZ(780,oS.W, h)).length;
+                        while (c--) {
+                            c[m].getr(c[m],-800)
+                        }
+                   } while (h++ < oS.R)
+            } 
+            oSym.addTask(1,arguments.callee,[])
+        },[])
         oP.Monitor(), BeginCool();
         SetVisible($("dFlagMeter"), $("dTop"));
     }
