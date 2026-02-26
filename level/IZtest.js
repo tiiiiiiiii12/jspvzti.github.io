@@ -89,11 +89,11 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 do {
                     k = (n = oZ.getArZ(0,50, h)).length;
                         while (k--) {
-                            n[k].getr(n[k],800)
+                            n[k].PZ&&n[k].getr(n[k],800)
                         }
                      c = (m = oZ.getArZ(780,oS.W, h)).length;
                         while (c--) {
-                            c[m].getr(c[m],-800)
+                            m[c].PZ&&m[c].getr(m[c],-800)
                         }
                    } while (h++ < oS.R)
             oSym.addTask(1,arguments.callee,[])
