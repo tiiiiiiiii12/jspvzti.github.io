@@ -93,7 +93,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                         }
                      c = (m = oZ.getArZ(780,oS.W, h)).length;
                         while (c--) {
-                            m[c].PZ&&m[c].getr(m[c],-800)
+                            !m[c].PZ&&m[c].getr(m[c],-800)
                         }
                    } while (h++ < oS.R)
             oSym.addTask(1,arguments.callee,[])
