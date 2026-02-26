@@ -1620,7 +1620,7 @@ var CZombies = function(b, a) {
                     [h, f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]]]))
         }
     }),
-	oScreenDoorZombie = InheritO(oNewspaperZombie, {
+oScreenDoorZombie = InheritO(oNewspaperZombie, {
   EName: "oScreenDoorZombie",
   CName: "铁栅门僵尸",
   OrnHP: 1000,
@@ -1688,8 +1688,8 @@ var CZombies = function(b, a) {
       var P = $(a.id);
       if (!num && a.Ornaments) {
         var C = GetC(a.ZX);
+    for (i = 3; i >= 0; i--) {
         var p = oGd.$[a.R + "_" + C + "_" + i];
-        for (i = 3; i >= 0; i--) {
           a.PZ && p && p.canEat && $(p.id) && (p.C == C) && (PlantKind = p.PKind, NewC = p.C + 1, p.AttackedLX += 80, p.pixelRight += 80, p.AttackedRX += 80, p.pixelLeft += 80, $(p.id).style.left = (p.pixelLeft) + "px",
 			(p.EName == "oBrains" || p.C > 9) && p.Die(), delete oGd.$[p.R + "_" + p.C + "_" + p.PKind], p.C = NewC, oGd.add(p, a.R + "_" + NewC + "_" + PlantKind));
         }
