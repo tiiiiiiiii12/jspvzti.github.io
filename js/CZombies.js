@@ -1682,17 +1682,18 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
         ClearChild(h);
         a.Speed = a.OSpeed = a.LostPaperSpeed;
       }
-      a && oSym.addTask(100, arguments.callee, [a, a.id + "_Bullet", z])
+      a && oSym.addTask(140, arguments.callee, [a, a.id + "_Bullet", z])
     }, [a, a.id + "_Bullet", z])); //大喷技能
     a.PrivateAct = function(a) {
       var P = $(a.id);
+	  !a.Ornaments && ClearChild($(P.FumeDoor));
       if (!num && a.Ornaments) {
         var C = GetC(a.ZX);
     for (i = 3; i >= 0; i--) {
         var p = oGd.$[a.R + "_" + C + "_" + i];
           a.PZ && p && p.canEat && $(p.id) && (p.C == C) && (PlantKind = p.PKind, NewC = p.C + 1, p.AttackedLX += 80, p.pixelRight += 80, p.AttackedRX += 80, p.pixelLeft += 80, $(p.id).style.left = (p.pixelLeft) + "px",
 			(p.EName== "oBrains"||p.C>9)?p.Die():(delete oGd.$[p.R + "_" + p.C + "_" + p.PKind], p.C = NewC, oGd.add(p, a.R + "_" + NewC + "_" + PlantKind,
-		p.oTrigger&&oT.delP(p),p.InitTrigger(p,p.id,p.R,p.C,p.AttackedLX,p.AttackedRX))),PlayAudio("shovel"));//重置植物行数并重置索敌
+		p.oTrigger&&oT.delP(p),p.InitTrigger(p,p.id,p.R,p.C,p.AttackedLX,p.AttackedRX))),PlayAudio("shovel"));//重置植物列数并重置索敌
         }
         var z = oZ["get" + (a.PZ ? "HZ1" : "Z0")](a.ZX, a.R);
         z && z.getr != function() {} && (z.getr(z, 80), z.getHit0(z, 100, 0))
@@ -1705,7 +1706,6 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
             left: a.PZ ? "25px" : "40px"
           }, 0)),
         a.check = a.PZ);
-      !a.Ornaments && ClearChild($(P.FumeDoor));
     }
   },
   PlayNormalballAudio: function() {
