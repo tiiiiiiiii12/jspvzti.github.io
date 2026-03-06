@@ -10,7 +10,6 @@ var oGargantuar = InheritO(oZombie, {
   DieGif: 7,
   AudioArr: ["ImpToLand", "GargantuarDie","zaji"],
   width: 350,
-  getr:function(){},
   CanPass: function(d, c) {
     return c
   },
@@ -40,7 +39,7 @@ var oGargantuar = InheritO(oZombie, {
           g;
         h && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((g = $Z[e]) && g.getHit0(g, 1000, 0),
       oSym.addTask(25, function(h) {
-              h.JudgeAttack()
+              h&&h.JudgeAttack()
             },[h]))
       },
       [d, c])
@@ -120,7 +119,7 @@ var oGargantuar = InheritO(oZombie, {
       for (i = -1; i <= 3; i++) {
         h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50),
             oSym.addTask(25, function(h) {
-              h.JudgeAttack()
+              h&&h.JudgeAttack()
             },[h]))
       }
     }, [d, c]);
@@ -131,6 +130,9 @@ var oGargantuar = InheritO(oZombie, {
   DisappearDie: function() {
     this.NormalDie(this)
   },
+getr:function(e,l,c){
+	if(c){CZombies.prototype.getr(e,l)}
+},
   hasthrew: 0,
   PrivateAct: function(h) {
         !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
@@ -187,4 +189,83 @@ var oGargantuar = InheritO(oZombie, {
   EName: "oGargantuar",
   CName: "伽刚特尔",
   Produce: '非常强力的僵尸<p>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
+}),
+oPeaZombie = InheritO(oZombie, {
+  EName: "oPeaZombie",
+  CName:"豌豆僵尸",
+  StandGif: 9,
+  PicArr: (function() {
+    var a = "images/Zombies/Zombie/";
+    return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif"]
+  })(),
+  GoingDieHead:function(){},
+  PrivateBirth: function() {
+    var c = this;
+    c.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (c.AttackedLX) + "px;top:" + (c.pixelTop + 20) + "px;visibility:hidden;z-index:" + (c.zIndex + 2));
+    oSym.addTask(100, function(c) {
+      $Z[c.id] && c.beAttacked && c.shootPea(c);
+      $Z[c.id] ? oSym.addTask(140, arguments.callee, [c]) : c.BulletEle = null;
+    }, [c]);
+	var z = $(c.id);
+    z.PeaHead = "Pea" + Math.random();
+    var pea = NewImg(z.PeaHead,"images/Plants/Peashooter/Peashooter.gif","position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
+    z.appendChild(pea);
+  },
+  bedevil: function(c) {
+    c.ExchangeLR(c, 1);
+    c.JudgeAttack = c.JudgeAttackH;
+    c.PZ = 0;
+    c.WalkDirection = 1;
+    c.ZX = c.AttackedRX;
+    c.ChkActs = c.ChkActs1;
+    c.shootPea = oPeashooter.prototype.NormalAttack;
+    oP.MonPrgs()
+  },
+check:1,
+  PrivateAct:function(a){
+var z=$(a.id);
+	  if(!a.isDie){
+	!(a.PZ==a.check)&&(
+	EditImg($(z.PeaHead),0,"images/Plants/Peashooter/Peashooter.gif",{
+		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"
+	},0);
+	!a.beAttacked&&(ClearChild($(z.PeaHead)),a.isDie=true);
+	  }
+  },
+  shootPea: function() {
+    var a = this,
+      b = "PB" + Math.random();
+    EditEle(a.BulletEle.cloneNode(false), {
+        id: b
+      },
+      0, EDPZ);
+    EditEle(a.BulletEle, {
+      left: (a.ZX) + "px",
+      top: (a.pixelTop + 20) + "px"
+    }, 0, EDPZ);
+    oSym.addTask(1,
+      function(d) {
+        var c = $(d);
+        c && SetVisible(c)
+      },
+      [b]);
+    oSym.addTask(1,
+      function(f, j, n, i, o) {
+        var l, e = GetC(n);
+        var Kind = 3,
+			Z = oZ["getHZ1"](n,i),
+          d, isHit;
+		Z && Z.Altitude == 1 ? (Z.getPea(Z,20,0),Hit=true);
+        while (Kind--) {
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20), PlayAudio("splat1"), (SetStyle(j, {
+            left: o + 28 + "px",
+            width: "52px",
+            height: "46px"
+          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j]))
+        }
+	  !isHit && ((n += (l = -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+      },
+      [b, $(b), a.ZX, a.R, a.ZX - 40])
+  },
+  Produce: '韧性：<font color="#FF0000">低(270)</font></p>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
 })
