@@ -255,7 +255,7 @@ var z=$(a.id);
         var Kind = 3,
 			Z = oZ["getHZ1"](n,i),
           d, isHit;
-		Z && Z.Altitude == 1 ? (Z.getPea(Z,20,0),Hit=true);
+		Z && Z.Altitude == 1 && (Z.getPea(Z,20,0),Hit=true);
         while (Kind--) {
           (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20), PlayAudio("splat1"), (SetStyle(j, {
             left: o + 28 + "px",
