@@ -162,6 +162,7 @@ var CZombies = function(b, a) {
                     oZ.add(c);
                     c.BirthCallBack(c);
                 Math.random()*100<c.jinyinnum&&(c.jinyin=true,c.jinyinAct&&c.jinyinAct(c));
+				c.PrivateBirth&&c.PrivateBirth(c);
                 },
                 getCrushed: function(c) {
                     return true
