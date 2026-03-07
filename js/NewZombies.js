@@ -206,7 +206,7 @@ HP:300,
     c.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (c.AttackedLX) + "px;top:" + (c.pixelTop + 20) + "px;visibility:hidden;z-index:" + (c.zIndex + 2));
     oSym.addTask(100, function(c) {
       $Z[c.id] && c.beAttacked && (c.shootPea(c),c.jinyin&&c.getHit0(c,10));
-      $Z[c.id] ? oSym.addTask(140*(c.jinyin*0.5), arguments.callee, [c]) : c.BulletEle = null;
+      $Z[c.id] ? oSym.addTask(140-(c.jinyin*70), arguments.callee, [c]) : c.BulletEle = null;
     }, [c]);
 	var z = $(c.id);
     z.PeaHead = "Pea" + Math.random();
