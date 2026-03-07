@@ -198,6 +198,7 @@ oPeaZombie = InheritO(oZombie, {
     var a = "images/Zombies/Zombie/";
     return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif"]
   })(),
+  jinyinAct:function(){},
   GoingDieHead:function(){},
   PrivateBirth: function() {
     var c = this;
@@ -268,4 +269,89 @@ var z=$(a.id);
       [b, $(b), a.ZX, a.R, a.ZX - 40])
   },
   Produce: '韧性：<font color="#FF0000">低(270)</font></p>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
-})
+}),
+    oGatlingPeaZombie = InheritO(oNewspaperZombie, {
+        EName: "oGatlingPeaZombie",
+        CName: "机枪读报僵尸",
+        Lvl: 4,
+		HP:450,
+		SunNum:175,
+        PicArr: (function() {
+            var a = "images/Zombies/GatlingPeaZombie/";
+            return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
+        })(),
+        AudioArr: ["newspaper_rarrgh2"],
+        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（450，发怒后50%减伤）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)</p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+		jinyinAct:function(a){},
+		bedevil:oPeaZombie.prototype.bedevil,
+		  shootPea: function() {
+    var a = this,
+      b = "PB" + Math.random();
+    EditEle(a.BulletEle.cloneNode(false), {
+        id: b
+      },
+      0, EDPZ);
+    EditEle(a.BulletEle, {
+      left: (a.ZX) + "px",
+      top: (a.pixelTop + 60) + "px"
+    }, 0, EDPZ);
+    oSym.addTask(1,
+      function(d) {
+        var c = $(d);
+        c && SetVisible(c)
+      },
+      [b]);
+    oSym.addTask(1,
+      function(f, j, n, i, o) {
+        var l, e = GetC(n);
+        var Kind = 3,
+			Z = oZ["getHZ1"](n,i),
+          d, isHit;
+		Z && Z.Altitude == 1 && (Z.getPea(Z,20,0),Hit=true);
+        while (Kind--) {
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20), PlayAudio("splat1"), (SetStyle(j, {
+            left: o + 28 + "px",
+            width: "52px",
+            height: "46px"
+          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j]))
+        }
+	  !isHit && ((n += (l = -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+      },
+      [b, $(b), a.ZX, a.R, a.ZX - 40])
+  },
+        CheckOrnHP: function(g, h, d, c, f, b, a) {
+            var e = OrnNoneZombies.prototype;
+            (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.ChkActs = function() {
+                    return 1
+                },
+                g.ChkActs1 = function() {
+                    return 1
+                },
+                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(200,
+                    function(m, l) {
+                        var k = $Z[m];
+                        if (!k) {
+                            return
+                        }
+                        var j = CZombies.prototype,
+                            i = k.OSpeed = k.LostPaperSpeed;
+                        k.ChkActs =!k.WalkDirection?j.ChkActs:j.ChkActs1;
+                        k.ChkActs1 = j.ChkActs1;
+						k.tasktime*=0.4;
+						k.jianshang=0.5;
+    k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (k.pixelTop + 60) + "px;visibility:hidden;z-index:" + (k.zIndex + 2));
+    oSym.addTask(100, function(k) {
+      $Z[k.id] && k.beAttacked && k.shootPea(k);
+      $Z[k.id] ? oSym.addTask(30, arguments.callee, [k]) : k.BulletEle = null;
+    }, [k]);
+                        k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
+                        if (!k.beAttacked) {
+                            return
+                        }
+                        !k.jinyin&&PlayAudio("newspaper_rarrgh2");
+                        k.EleBody.src = l;
+                        k.JudgeAttack()
+                    },
+                    [h, f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]]]))
+        }
+    })
