@@ -258,13 +258,13 @@ var z=$(a.id);
           d, isHit;
 		Z && Z.Altitude == 1 && (Z.getPea(Z,20,0),Hit=true);
         while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20), PlayAudio("splat1"), (SetStyle(j, {
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20))
+        }
+	  isHit?((SetStyle(j, {
             left: o + 28 + "px",
             width: "52px",
             height: "46px"
-          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j]))
-        }
-	  !isHit && ((n += (l = -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j]))&&((n += (l = -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
       },
       [b, $(b), a.ZX, a.R, a.ZX - 40])
   },
@@ -309,13 +309,13 @@ var z=$(a.id);
           d, isHit;
 		Z && Z.Altitude == 1 && (Z.getPea(Z,20,0),Hit=true);
         while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20), PlayAudio("splat1"), (SetStyle(j, {
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20))
+        }
+	  isHit?((SetStyle(j, {
             left: o + 28 + "px",
             width: "52px",
             height: "46px"
-          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j]))
-        }
-	  !isHit && ((n += (l = -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j]))&&((n += (l = -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
       },
       [b, $(b), a.ZX, a.R, a.ZX - 40])
   },
@@ -327,7 +327,7 @@ var z=$(a.id);
                 g.ChkActs1 = function() {
                     return 1
                 },
-                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(200,
+                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(150,
                     function(m, l) {
                         var k = $Z[m];
                         if (!k) {
@@ -342,7 +342,7 @@ var z=$(a.id);
     k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (k.pixelTop + 60) + "px;visibility:hidden;z-index:" + (k.zIndex + 2));
     oSym.addTask(100, function(k) {
       $Z[k.id] && k.beAttacked && k.shootPea(k);
-      $Z[k.id] ? oSym.addTask(30, arguments.callee, [k]) : k.BulletEle = null;
+      $Z[k.id] ? oSym.addTask(20, arguments.callee, [k]) : k.BulletEle = null;
     }, [k]);
                         k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
                         if (!k.beAttacked) {
