@@ -2204,7 +2204,6 @@ LoadLvl = function(e, c) {
 		document.getElementsByTagName("head").item(0))
 	},
 	[e && b ? 0 : e]);
-	$("aLvlLink").href = "html/2-1" + (e && !isNaN(e) ? "-" + e: "") + ".htm"
 },
 AppearTombstones = function(n, e, m) {
 	var r = oGd.$Tombstones,
