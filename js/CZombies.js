@@ -610,6 +610,7 @@ var CZombies = function(b, a) {
         CustomTop: 400 - g.height + g.GetDY()
       })), g.ZX = g.AttackedLX -= b, g.Ele.style.left = Math.floor(g.X -= b) + "px", f = 1)) : f = 1) : f = 1;
       g.ChkSpeed(g);
+	  g.PrivateAct(g);
       return f
       },
         ChkSpeed: function(b) {
@@ -856,7 +857,7 @@ var CZombies = function(b, a) {
       oSym.addTask(c,
         function(o) {
           var t = $Z[o];
-          t && t.beAttacked && !t.isAttacking && t.NormalAttack(o)
+          t && !t.jinyin&&t.beAttacked && !t.isAttacking && t.NormalAttack(o)
         },
         [d.id])
     },
