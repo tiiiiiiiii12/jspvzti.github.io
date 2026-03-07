@@ -198,6 +198,7 @@ oPeaZombie = InheritO(oZombie, {
     var a = "images/Zombies/Zombie/";
     return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif"]
   })(),
+HP:300,
   jinyinAct:function(a){$(a.id).opacity=0.5,a.HP*=1.5},
   GoingDieHead:function(){},
   PrivateBirth: function() {
@@ -268,7 +269,7 @@ var z=$(a.id);
       },
       [b, $(b), a.ZX, a.R, a.ZX - 40])
   },
-  Produce: '韧性：<font color="#FF0000">低(270)</font><br>精英形态：450血，攻速变快，但每次攻击扣自己10血</p>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
+  Produce: '韧性：<font color="#FF0000">低(300)</font><br>精英形态：450血，攻速变快，但每次攻击扣自己10血</p>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
 }),
     oGatlingPeaZombie = InheritO(oNewspaperZombie, {
         EName: "oGatlingPeaZombie",
