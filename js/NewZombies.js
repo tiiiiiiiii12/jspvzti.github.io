@@ -256,7 +256,7 @@ var z=$(a.id);
         var Kind = 3,
 			Z = oZ["getHZ1"](n,i),
           d, isHit;
-		Z && Z.Altitude == 1 && (Z.getPea(Z,20,0),Hit=true);
+		Z && Z.Altitude == 1 && (Z.getPea(Z,20,0),isHit=true);
         while (Kind--) {
           (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20))
         }
@@ -293,9 +293,9 @@ var z=$(a.id);
       0, EDPZ);
     EditEle(a.BulletEle, {
       left: (a.ZX) + "px",
-      top: (a.pixelTop + 60) + "px"
+      top: (GetY(a.R) + 60) + "px"
     }, 0, EDPZ);
-    oSym.addTask(1,
+    oSym.addTask(2,
       function(d) {
         var c = $(d);
         c && SetVisible(c)
@@ -307,7 +307,7 @@ var z=$(a.id);
         var Kind = 3,
 			Z = oZ["getHZ1"](n,i),
           d, isHit;
-		Z && Z.Altitude == 1 && (Z.getPea(Z,20,0),Hit=true);
+		Z && Z.Altitude == 1 && (Z.getPea(Z,20,0),isHit=true);
         while (Kind--) {
           (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20))
         }
