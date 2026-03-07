@@ -348,7 +348,7 @@ var z=$(a.id);
                         if (!k.beAttacked) {
                             return
                         }
-                        !k.jinyin&&PlayAudio("newspaper_rarrgh2");
+                        PlayAudio("newspaper_rarrgh2");
                         k.EleBody.src = l;
                         k.JudgeAttack()
                     },
