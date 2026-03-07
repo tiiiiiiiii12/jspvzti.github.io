@@ -198,14 +198,14 @@ oPeaZombie = InheritO(oZombie, {
     var a = "images/Zombies/Zombie/";
     return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif"]
   })(),
-  jinyinAct:function(){},
+  jinyinAct:function(a){$(a.id).opacity=0.5,a.HP*=1.5},
   GoingDieHead:function(){},
   PrivateBirth: function() {
     var c = this;
     c.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (c.AttackedLX) + "px;top:" + (c.pixelTop + 20) + "px;visibility:hidden;z-index:" + (c.zIndex + 2));
     oSym.addTask(100, function(c) {
-      $Z[c.id] && c.beAttacked && c.shootPea(c);
-      $Z[c.id] ? oSym.addTask(140, arguments.callee, [c]) : c.BulletEle = null;
+      $Z[c.id] && c.beAttacked && (c.shootPea(c),c.jinyin&&c.getHit0(c,10));
+      $Z[c.id] ? oSym.addTask(140*(c.jinyin*0.5), arguments.callee, [c]) : c.BulletEle = null;
     }, [c]);
 	var z = $(c.id);
     z.PeaHead = "Pea" + Math.random();
@@ -268,7 +268,7 @@ var z=$(a.id);
       },
       [b, $(b), a.ZX, a.R, a.ZX - 40])
   },
-  Produce: '韧性：<font color="#FF0000">低(270)</font></p>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
+  Produce: '韧性：<font color="#FF0000">低(270)</font><br>精英形态：450血，攻速变快，但每次攻击扣自己10血</p>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
 }),
     oGatlingPeaZombie = InheritO(oNewspaperZombie, {
         EName: "oGatlingPeaZombie",
