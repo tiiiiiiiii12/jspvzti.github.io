@@ -231,7 +231,7 @@ var z=$(a.id);
 	EditImg($(z.PeaHead),0,"images/Plants/Peashooter/Peashooter.gif",{
 		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"
 	},0));
-	!a.beAttacked&&(ClearChild($(z.PeaHead)),a.isDie=true);
+	$Z[a.id]&&!a.beAttacked&&(ClearChild($(z.PeaHead)),a.isDie=true);
 	  }
   },
   shootPea: function() {
