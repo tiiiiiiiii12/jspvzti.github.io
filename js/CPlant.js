@@ -500,9 +500,10 @@ var CPlants = NewO({
                 !a.dianji&&a.NormalAttack(a);
                 a.dianji=true;
                 oSym.addTask(50,function(a){
-                        a.dianji=false
+                a.dianji=false
                 },[a]);
                 a.getHurt(a,0,10);
+				a.HP<=1&&(CustomZombie(oPeaZombie,a.R,a.C).jinyinnum=0)
             }
         },
         NormalAttack: function() {
@@ -983,7 +984,8 @@ NormalAttack1: function() {
                 function(d, c, b) {
                     $P[d] && (a.ChangePosition($(d), 1), oSym.addTask(100,
                         function(h, g, f, e) {
-                            $P[h] && (a.jinyin&&AppearSun(Math.floor(g + Math.random() * 41), f, 15, 0),
+                            $P[h] && (a.jinyin&&(AppearSun(Math.floor(g + Math.random() * 41), f, 15, 0),
+									Math.random*100>25&&AppearSun(Math.floor(g + Math.random() * 41), f, 15, 0)),
                                     AppearSun(Math.floor(g + Math.random() * 41), f, 25, 0), oSym.addTask(100,
                                 function(i) {
                                     $P[i] && a.ChangePosition($(i), 0)
