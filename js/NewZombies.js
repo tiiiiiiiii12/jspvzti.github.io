@@ -241,7 +241,7 @@ var z=$(a.id);
       },
       0, EDPZ);
 	EditEle($(b), {
-        top:(a.pixelTop + 20) + "px"
+        top:(GetY(a.R)-60) + "px"
       },
       0, EDPZ);
     oSym.addTask(1,
@@ -264,7 +264,7 @@ var z=$(a.id);
             left: o + 28 + "px",
             width: "52px",
             height: "46px"
-          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])):((n += (l = -5)) < oS.W && n > 100 ? (j.style.top=(a.pixelTop + 20) + "px",j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])):((n += (l = -5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 140) + "px",j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
       },
       [b, $(b), a.ZX, a.R, a.ZX - 40])
   },
@@ -291,10 +291,6 @@ var z=$(a.id);
         id: b
       },
       0, EDPZ);
-	EditEle($(b), {
-        top:(a.pixelTop + 60) + "px"
-      },
-      0, EDPZ);
     oSym.addTask(2,
       function(d) {
         var c = $(d);
@@ -315,7 +311,7 @@ var z=$(a.id);
             left: o + 28 + "px",
             width: "52px",
             height: "46px"
-          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])):((n += (l = -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])):((n += (l = -5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 100) + "px",j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
       },
       [b, $(b), a.ZX, a.R, a.ZX - 40])
   },
