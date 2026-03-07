@@ -503,7 +503,7 @@ var CPlants = NewO({
                 a.dianji=false
                 },[a]);
                 a.getHurt(a,0,10);
-				a.HP<=1&&(CustomZombie(oPeaZombie,a.R,a.C).jinyinnum=0)
+				a.HP<=1&&(CustomZombie(oPeaZombie,a.R,a.C,1).jinyinnum=0)
             }
         },
         NormalAttack: function() {
