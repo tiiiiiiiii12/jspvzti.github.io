@@ -226,14 +226,18 @@ HP:300,
 check:1,
   PrivateAct:function(a){
 var z=$(a.id);
-	  if(!a.isDie){
+	  if($Z[a.id]&&!a.isDie){
 	!(a.PZ==a.check)&&(
 	EditImg($(z.PeaHead),0,"images/Plants/Peashooter/Peashooter.gif",{
 		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"
 	},0));
-	$Z[a.id]&&!a.beAttacked&&(ClearChild($(z.PeaHead)),a.isDie=true);
+	!a.beAttacked&&(ClearChild($(z.PeaHead)),a.isDie=true);
 	  }
   },
+PrivateDie:function(a){
+	var z=$(a.id);
+	z.PeaHead&&ClearChild($(z.PeaHead))
+},
   shootPea: function() {
     var a = this,
       b = "PB" + Math.random();
