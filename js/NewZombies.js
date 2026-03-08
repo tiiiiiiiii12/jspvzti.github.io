@@ -205,7 +205,7 @@ HP:300,
     var c = this;
     c.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (c.AttackedLX) + "px;top:" + (c.pixelTop + 20) + "px;visibility:hidden;z-index:" + (c.zIndex + 2));
     oSym.addTask(100, function(c) {
-      $Z[c.id] && c.beAttacked && (c.shootPea(c),c.jinyin&&c.getHit0(c,10));
+      c.canWalk(c,c.id) && c.beAttacked && (c.shootPea(c),c.jinyin&&c.getHit0(c,10));
       $Z[c.id] ? oSym.addTask(140-(c.jinyin*70), arguments.callee, [c]) : c.BulletEle = null;
     }, [c]);
 	var z = $(c.id);
@@ -341,10 +341,10 @@ PrivateDie:function(a){
 						k.tasktime*=0.4;
 						k.jianshang=0.5;
     k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (k.pixelTop + 60) + "px;visibility:hidden;z-index:" + (k.zIndex + 2));
-    oSym.addTask(100, function(k) {
-      $Z[k.id] && k.beAttacked && k.shootPea(k);
-      $Z[k.id] ? oSym.addTask(20, arguments.callee, [k]) : k.BulletEle = null;
-    }, [k]);
+    oSym.addTask(100, function(k,m) {
+      k.Walk(k,m) && k.beAttacked && k.shootPea(k);
+      $Z[k.id] ? oSym.addTask(20, arguments.callee, [k,m]) : k.BulletEle = null;
+    }, [k,m]);
                         k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
                         if (!k.beAttacked) {
                             return
