@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut],
-	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie,oImp],
 	PicArr: ["images/interface/background1unsodded2.jpg", "images/interface/background1.jpg"],
 	backgroundImage: "images/interface/background1unsodded2.jpg",
 	CanSelectCard: 0,
@@ -67,6 +67,7 @@ oS.Init({
 		[oZombie, 3, 1],
 		[oZombie2, 2, 1],
 		[oZombie3, 2, 1],
+		[oImp, 1, 1],
 		[oConeheadZombie, 2, 1]
 	],
 	FlagNum: 10,
@@ -102,4 +103,5 @@ oS.Init({
 		};
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:295px;left:676px", EDAll)
 	}
+
 });
