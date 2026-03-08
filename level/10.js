@@ -70,6 +70,8 @@ oS.Init({
 		[oZombie3, 1, 1],
 		[oConeheadZombie, 5, 1],
 		[oPoleVaultingZombie, 2, 1],
+		[oImp, 2, 1],
+		[oPeaZombie, 2, 1],
 		[oBucketheadZombie, 5, 1]
 	],
 	FlagNum: 20,
@@ -161,3 +163,4 @@ oS.Init({
 	}
 
 });
+
