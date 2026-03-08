@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower],
-	ZName: [oZombie, oZombie2, oZombie3],
+	ZName: [oZombie, oZombie2, oZombie3,oImp],
 	PicArr: function() {
 		var a = oCherryBomb.prototype,
 			b = a.PicArr;
@@ -122,12 +122,13 @@ oS.Init({
 	AZ: [
 		[oZombie, 6, 1],
 		[oZombie2, 2, 1],
+		[oImp, 2, 1],
 		[oZombie3, 2, 1]
 	],
 	FlagNum: 6,
 	FlagToSumNum: {
 		a1: [3, 5],
-		a2: [1, 3, 7]
+		a2: [1, 6, 20]
 	},
 	FlagToMonitor: {
 		5: [ShowFinalWave, 0]
@@ -144,4 +145,5 @@ oS.Init({
 			display: "block"
 		})
 	}
+
 });
