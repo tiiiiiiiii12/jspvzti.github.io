@@ -123,11 +123,11 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 do {
                     k = (n = oZ.getArZ(0,100, h)).length;
                         while (k--) {
-                           n[k].getr(n[k],800)
+                           n[k].getr(n[k],800,1)
                         }
                      c = (m = oZ.getArHZ(780,990, h)).length;
                         while (c--) {
-                            m[c].getr(m[c],-800)
+                            m[c].getr(m[c],-800,1)
                         }
                    } while (h++ < oS.R)
             oSym.addTask(1,arguments.callee,[])
