@@ -225,7 +225,7 @@ HP:300,
   },
 check:1,
   PrivateAct:function(a){
-var z=$(a.id);
+var z=a.Ele;
 	  if($Z[a.id]&&!a.isDie){
 	!(a.PZ==a.check)&&(
 	EditImg($(z.PeaHead),0,"images/Plants/Peashooter/Peashooter.gif",{
