@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut],
-	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie,oImp],
 	PicArr: function() {
 		var a = oPotatoMine.prototype,
 			b = a.PicArr;
@@ -94,12 +94,13 @@ oS.Init({
 		[oZombie, 3, 1],
 		[oZombie2, 2, 1],
 		[oZombie3, 2, 1],
+		[oImp, 1, 1],
 		[oConeheadZombie, 3, 1]
 	],
 	FlagNum: 10,
 	FlagToSumNum: {
 		a1: [3, 5, 9],
-		a2: [1, 3, 5, 15]
+		a2: [1, 4, 15, 45]
 	},
 	FlagToMonitor: {
 		9: [ShowFinalWave, 0]
@@ -112,4 +113,5 @@ oS.Init({
 		});
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:235px;left:596px", EDAll)
 	}
+
 });
