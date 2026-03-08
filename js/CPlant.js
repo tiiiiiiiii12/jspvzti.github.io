@@ -914,8 +914,7 @@ NormalAttack1: function() {
         NormalAttack: function(c) {
             var d = this,
                 e,
-				a;
-				(a = c)? (oSym.addTask(15,
+				a=c? (oSym.addTask(15,
                     function(f) {
                         $P[f] && b(1)
                     },
