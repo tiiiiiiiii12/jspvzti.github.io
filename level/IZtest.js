@@ -66,7 +66,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             }
         }, EDAll);
-        NewEle("dButton", "button", "position:absolute;left:300px;top:20px;width:100px;height:35px;z-index:255", {
+        NewEle("dButton", "button", "position:absolute;left:350px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "秒杀正常僵尸",
             onclick: function() {
             var h=1,
@@ -80,7 +80,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             }
         }, EDAll);
-       NewEle("dButton", "button", "position:absolute;left:350px;top:20px;width:100px;height:35px;z-index:255", {
+       NewEle("dButton", "button", "position:absolute;left:450px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "秒杀魅惑僵尸",
             onclick: function() {
             var h=1,
@@ -94,7 +94,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             }
         }, EDAll);
-        NewEle("dButton", "button", "position:absolute;left:400px;top:20px;width:100px;height:35px;z-index:255", {
+        NewEle("dButton", "button", "position:absolute;left:550px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "读报解封",
             onclick: function() {
             var h=1,
