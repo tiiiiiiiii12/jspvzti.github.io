@@ -2668,7 +2668,7 @@ oImp = InheritO(OrnNoneZombies, {
     z.appendChild(Ja);
     a.PrivateAct = function(a) {
       var p = a.Ele;
-      if (!a.bool && a.beAttacked) {
+      if (!a.bool && a.beAttacked&&$Z[a.id]) {
         for (i = 3; i >= 1; i--) {
           var tp = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
           var tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 40, a.ZX + 40, a.R);
@@ -2776,13 +2776,16 @@ oImp = InheritO(OrnNoneZombies, {
 		left:a.PZ?"60px":"20px"
 	},0),
 	a.check=a.PZ);
-	!$Z[a.id]&&(ClearChild($(p.JaHead)));
 		if(!a.opennum){
 		$Z[a.id]&&$Z[a.id].beAttacked&&($Z[a.id].HP<240)&&(a.OpenBox(a.id),
 		a.opennum=1)
 		}
 			}
 		},
+PrivateDie:function(a){
+	var z=a.Ele;
+	z.JaHead&&ClearChild($(z.JaHead))
+     },
         RandomOpenBox: function(a) {
             oSym.addTask(Math.floor(Math.random() * 100) > 4 ? Math.floor(1325 + Math.random() * 976) : Math.floor(450 + Math.random() * 301),
                 function(c) {
