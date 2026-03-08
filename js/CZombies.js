@@ -1953,7 +1953,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击<br>精英形态：入水后不抬头<br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
         JumpTime: 40,
 		jinyinAct:function(a){
-			a.JumpTime=100
+			a.JumpTime=75
 		},
         getShadow: function(a) {
             return "left:" + a.beAttackedPointL + "px;top:" + (a.height - 45) + "px"
@@ -2525,7 +2525,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             a.beAttacked && (PlayAudio("zombie_entering_water"), a.Altitude = 2, SetHidden(a.EleShadow), a.EleBody.src = a.PicArr[8] + Math.random(), oSym.addTask(240,
                 function(d, b) {
                     var c;
-                    $Z[d] && b.beAttacked && (b.WalkStatus = 1, b.Altitude = 1, b.OSpeed = b.Speed = 21.6, SetStyle(b.Ele, {
+                    $Z[d] && b.beAttacked && (b.WalkStatus = 1, b.Altitude = 1, b.OSpeed = b.Speed = 16.2, SetStyle(b.Ele, {
                         left: (c = b.X -= 140) + "px"
                     }), b.AttackedLX = c + (b.beAttackedPointL = 185), b.AttackedRX = c + (b.beAttackedPointR = 265), b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = b.ChkActsL2)
                 },
@@ -2640,7 +2640,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
 oImp = InheritO(OrnNoneZombies, {
   EName: "oImp",
   CName: "小鬼僵尸",
-  HP: 200,
+  HP: 180,
   BreakPoint: 23,
   beAttackedPointL: 30,
   beAttackedPointR: 60,
@@ -2824,7 +2824,7 @@ PrivateDie:function(a){
                         function(f) {
                             var e = $Z[f],
                                 d;
-                            e && (d = NewImg("", "images/interface/blank.png", "width:306px;height:300px;left:" + (e.X - 16) + "px;top:" + (e.pixelTop - 90) + "px;z-index:20"), PlayAudio("explosion"), d.src = e.PicArr[8] + Math.random(), EDPZ.appendChild(d), oSym.addTask(70, ClearChild, [d]), e.PZ ? ((function(k, g) {
+                            e && (d = NewImg("", "images/interface/blank.png", "width:306px;height:300px;left:" + (e.X - 16) + "px;top:" + (e.pixelTop - 90) + "px;z-index:20"), PlayAudio("explosion"), d.src = e.PicArr[8] + Math.random(), EDPZ.appendChild(d), oSym.addTask(70, ClearChild, [d]), (function(k, g) {
                                 var q = Math.max(1, k - 1),
                                     o = Math.min(oS.R, k + 1),
                                     n = Math.max(1, g - 1),
@@ -2842,7 +2842,7 @@ PrivateDie:function(a){
                                         }
                                     } while (g++ < h)
                                 } while (q++ < o)
-                            })(e.R, GetC(e.ZX))) : (function(j, l) {
+                            })(e.R, GetC(e.ZX)),(function(j, l) {
                                 var m = j - 120,
                                     o = j + 120,
                                     h = Math.max(1, l - 1),
@@ -2850,12 +2850,12 @@ PrivateDie:function(a){
                                     n,
                                     k;
                                 do {
-                                    k = (n = oZ.getArZ(m, o, h)).length;
+                                    k = (n = oZ["getAr"+(e.PZ?"HZ":"Z")](m, o, h)).length;
                                     while (k--) {
-                                        n[k].ExplosionDie()
+                                        n[k].getExplosion(1600)
                                     }
                                 } while (h++ < g)
-                            })(e.ZX, e.R), e.DisappearDie())
+                            })(e.ZX, e.R), e.ExplosionDie())
                         },
                         [c]))
                 },
@@ -2915,7 +2915,7 @@ PrivateDie:function(a){
     oBalloonZombie = InheritO(OrnIZombies, {
         EName: "oBalloonZombie",
         CName: "气球僵尸",
-        OrnHP: 20,
+        OrnHP: 40,
         SunNum: 150,
         width: 207,
         height: 197,
