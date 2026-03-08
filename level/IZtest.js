@@ -105,7 +105,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 do {
                     k = (n = oZ.getArZ(0,oS.W, h)).length;
                         while (k--) {
-                           (n[k].EName=="oNewspaperZombie"||n[k].EName=="oNewspaperZombie")&&n[k].getHit0(n[k],n[k].OrnHP,0)
+                           (n[k].EName=="oNewspaperZombie"||n[k].EName=="oGatlingPeaZombie")&&n[k].getHit0(n[k],n[k].OrnHP,0)
                         }
                      c = (m = oZ.getArHZ(0,oS.W, h)).length;
                         while (c--) {
