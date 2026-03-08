@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb],
-	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie,oImp],
 	PicArr: function() {
 		var a = oWallNut.prototype,
 			b = a.PicArr;
@@ -40,6 +40,7 @@ oS.Init({
 		[oZombie, 3, 1],
 		[oZombie2, 3, 1],
 		[oZombie3, 2, 1],
+		[oImp, 1, 1],
 		[oConeheadZombie, 1, 1]
 	],
 	FlagNum: 9,
@@ -58,4 +59,5 @@ oS.Init({
 		});
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:295px;left:836px", EDAll)
 	}
+
 });
