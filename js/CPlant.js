@@ -540,17 +540,17 @@ var CPlants = NewO({
 oSnowPea = InheritO(oPeashooter, {
   EName: "oSnowPea",
   CName: "寒冰射手",
-  SunNum: 275,
+  SunNum: 250,
   BKind: -1,
   power: 20,
   PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
   AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
   Tooltip: "寒冰射手可造成伤害, 同时又有减速效果",
-  Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<br>精英形态：攻击有概率发射整行的减速喷雾<br>精英特殊技能：点击它花费200阳光发射500伤害整行的减速喷雾，有冷却提示<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
+  Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<br>精英形态：攻击有概率发射整行的减速喷雾<br>精英特殊技能：点击它花费150阳光发射500伤害整行的减速喷雾，有冷却提示<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
   LoadingComplelete: function(a) {
     $("oAttack_" + a.id).onclick = function() {
-      (oS.SunNum>=200 || !oS.StaticCard) && (
-        !oS.CardKind&&oS.StaticCard && (ESSunNum.innerHTML = +ESSunNum.innerHTML-200,oS.SunNum-=200),
+      (oS.SunNum>=150 || !oS.StaticCard) && (
+        !oS.CardKind&&oS.StaticCard && (ESSunNum.innerHTML = +ESSunNum.innerHTML-150,oS.SunNum-=150),
         a.NormalAttack1(0),
         a.power = 0,
         $(a.id).style.opacity = 1,
@@ -645,7 +645,7 @@ while (e--) {
           height: "46px"
         })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ? 5 : -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g])) : ClearChild(j)
       },
-      [b, $(b), 20, 0, a.AttackedLX, a.R, Math.random() * 100 > 10 ? -1 : 0, 0, a.AttackedLX - 40, oGd.$Torch])
+      [b, $(b), 25, 0, a.AttackedLX, a.R, Math.random() * 100 > 10 ? -1 : 0, 0, a.AttackedLX - 40, oGd.$Torch])
   }
 }),
     oRepeater = InheritO(oPeashooter, {
@@ -668,7 +668,7 @@ while (e--) {
                     c && c.NormalAttack1();
                     --b && oSym.addTask(15, arguments.callee, [d, b])
                 },
-                [this.id, Math.round(Math.random()*2+2)])
+                [this.id, Math.round(Math.random()*1+2)])
         }
     }),
     oThreepeater = InheritO(oPeashooter, {
@@ -682,7 +682,7 @@ while (e--) {
         PicArr: ["images/Card/Plants/Threepeater.png", "images/Plants/Threepeater/0.gif", "images/Plants/Threepeater/Threepeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次射出N行的豌豆",
-        Produce: 'N线射手可以在N条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">三线</font></p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
+        Produce: 'N线射手可以在N条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000"全图</font></p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
         getTriggerR: function(a) {
             return [1,oS.R]
         },
@@ -854,7 +854,7 @@ NormalAttack1: function() {
         width: 92,
         height: 72,
         beAttackedPointR: 72,
-        SunNum: 125,
+        SunNum: 150,
         PicArr: ["images/Card/Plants/SplitPea.png", "images/Plants/SplitPea/0.gif", "images/Plants/SplitPea/SplitPea.gif", "images/Plants/PB00.gif", "images/Plants/PB01.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "前后双向发射豌豆",
@@ -867,7 +867,7 @@ NormalAttack1: function() {
         },
         getTriggerRange: function(a, b, c) {
             return [
-                [100, b + 25, 1],
+                [100, oS.W, 1],
                 [b + 26, oS.W, 0]
             ]
         },
@@ -913,12 +913,14 @@ NormalAttack1: function() {
         },
         NormalAttack: function(c) {
             var d = this,
-                e, a = c ? (oSym.addTask(15,
+                e,
+				a;
+				(a = c)||Math.random()*100>30? (oSym.addTask(15,
                     function(f) {
                         $P[f] && b(1)
                     },
-                    [d.id]), d.AttackedRX - 16) : d.AttackedLX - 40,
-                b = function() {
+                    [d.id]), d.AttackedRX - 16) : d.AttackedLX - 40;
+               var b = function() {
                     EditEle(d.BulletEle[c].cloneNode(false), {
                             id: e = "PB" + Math.random()
                         },
@@ -985,7 +987,7 @@ NormalAttack1: function() {
                     $P[d] && (a.ChangePosition($(d), 1), oSym.addTask(100,
                         function(h, g, f, e) {
                             $P[h] && (a.jinyin&&(AppearSun(Math.floor(g + Math.random() * 41), f, 15, 0),
-									Math.random*100>25&&AppearSun(Math.floor(g + Math.random() * 41), f, 15, 0)),
+									Math.random()*100>25&&AppearSun(Math.floor(g + Math.random() * 41), f, 15, 0)),
                                     AppearSun(Math.floor(g + Math.random() * 41), f, 25, 0), oSym.addTask(100,
                                 function(i) {
                                     $P[i] && a.ChangePosition($(i), 0)
@@ -1485,7 +1487,7 @@ NormalAttack1: function() {
         Stature: 1,
         JudgeHurtCustom:function(c){
                 var d;
-                c.HP < 1 ? CustomZombie(oFootballZombie,c.R,c.C,1).OrnHP=2400: 
+                c.HP < 1 ? CustomZombie(oGargantuar,c.R,c.C,1): 
                 c.HP < 2000? c.CustomStatus < 3 && (c.CustomStatus = 3,(d=CustomZombie(oScreenDoorZombie,c.R,c.C,1)).OrnHP=1600,d.jinyinnum=100):
                 c.HP < 4000? c.CustomStatus < 2 && (c.CustomStatus = 2,CustomZombie(oConeheadZombie,c.R,c.C,1).jinyinnum=100):
                 c.HP < 6000 && c.CustomStatus < 1 && (c.CustomStatus = 1, (d=CustomZombie(oZombie,c.R,c.C,1)).HP=800,d.jinyinnum=100)
@@ -1835,8 +1837,8 @@ NormalAttack1: function() {
                         h = g.length,
                         k;
                     while (h--) {
-                        (k = g[h]).Altitude > -1 && k.PZ && k.Altitude < 3 && k.getThump(1850);
-						(k.OrnHP+k.HP-k.BreakPoint)<=0&&d.jinyin&&(CustomZombie(window[g[h].EName],j,GetC(g[h].ZX),1).jinyinnum=100);
+						((k = g[h]).OrnHP+k.HP-k.BreakPoint)<=0&&k.Altitude > -1 && k.PZ && k.Altitude < 3 &&d.jinyin&&(CustomZombie(window[k.EName],j,GetC(k.ZX),1).jinyinnum=100);
+                        k.Altitude > -1 && k.PZ && k.Altitude < 3 && k.getThump(1850);
                     }
                     oSym.addTask(185, ClearChild, [f])
                 },
@@ -1852,7 +1854,7 @@ NormalAttack1: function() {
         SunNum: 150,
         PicArr: ["images/Card/Plants/Chomper.png", "images/Plants/Chomper/0.gif", "images/Plants/Chomper/Chomper.gif", "images/Plants/Chomper/ChomperAttack.gif", "images/Plants/Chomper/ChomperDigest.gif"],
         Tooltip: "能一口气吞下一只僵尸, 但处于咀嚼状态中十分脆弱",
-        Produce: '大嘴花可以一口吞掉一整只僵尸，但是他们消化僵尸的时候很脆弱。<p>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">非常近</font><br>特点：<font color="#FF0000">消化时间很长</font></p>大嘴花几乎可以去“恐怖小店”，来表演它的绝技了，不过他的经纪人压榨了他太多的钱，所以他没去成。尽管如此，大嘴花没有怨言，只说了句这只是交易的一部分。',
+        Produce: '大嘴花可以一口吞掉一整只僵尸，但是他们消化僵尸的时候很脆弱。<p>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">非常近</font><br>特点：<font color="#FF0000">消化时间很长（26s+吞吃僵尸总血量）</font></p>大嘴花几乎可以去“恐怖小店”，来表演它的绝技了，不过他的经纪人压榨了他太多的钱，所以他没去成。尽管如此，大嘴花没有怨言，只说了句这只是交易的一部分。',
         GetDX: function() {
             return -40
         },
@@ -1878,7 +1880,7 @@ NormalAttack1: function() {
                         function(e, f) {
                             var g = $P[e],
                                 h;
-                            g && ((h = $Z[f]) && h.beAttacked && h.PZ ? $(e).childNodes[1].src = h.getRaven(e) ? (oSym.addTask(4200,
+                            g && ((h = $Z[f]) && h.beAttacked && h.PZ ? $(e).childNodes[1].src = h.getRaven(e) ? (oSym.addTask(2600+Math.min(h.HP+h.OrnHP,1800),
                                 function(i) {
                                     var j = $P[i];
                                     j && (j.canTrigger = 1, $(i).childNodes[1].src = "images/Plants/Chomper/Chomper.gif")
@@ -2473,7 +2475,7 @@ NormalAttack2: function() {
         SunNum: 125,
         PicArr: ["images/Card/Plants/DoomShroom.png", "images/Plants/DoomShroom/0.gif", "images/Plants/DoomShroom/DoomShroom.gif", "images/Plants/DoomShroom/Sleep.gif", "images/Plants/DoomShroom/BeginBoom.gif", "images/Plants/DoomShroom/crater10.png", "images/Plants/DoomShroom/crater11.png", "images/Plants/DoomShroom/crater20.png", "images/Plants/DoomShroom/crater21.png", "images/Plants/DoomShroom/crater30.png", "images/Plants/DoomShroom/crater31.png", "images/Plants/DoomShroom/Boom.png"],
         Tooltip: "造成大规模的伤害, 但会在原地留下一个坑, 坑中无法种植物",
-        Produce: '毁灭菇可以摧毁大范围的僵尸，并留下一个不能种植物的大弹坑。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">大范围内的所有僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">留下一个弹坑<br>白天睡觉</font></p>“你很幸运，我是和你一伙的，”毁灭菇说，“我能摧毁任何你所珍视的东西，小菜一碟。”',
+        Produce: '毁灭菇可以摧毁大范围的僵尸，并留下一个不能种植物的大弹坑。<p>伤害：<font color="#FF0000">极高(3000)</font><br>范围：<font color="#FF0000">大范围内的所有僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">留下一个弹坑<br>白天睡觉</font></p>“你很幸运，我是和你一伙的，”毁灭菇说，“我能摧毁任何你所珍视的东西，小菜一碟。”',
         InitTrigger: function() {},
         AudioArr: ["doomshroom"],
         BirthStyle: function(c, d, b, a) {
@@ -2512,7 +2514,7 @@ NormalAttack2: function() {
                         do {
                             k = (e = oZ.getArZ(n, m, h)).length;
                             while (k--) {
-                                e[k].getExplosion()
+                                e[k].getExplosion(3000)
                             }
                         } while (h++ < f);
                         PlayAudio("doomshroom");
@@ -2580,7 +2582,7 @@ NormalAttack2: function() {
         beAttackedPointL: 15,
         beAttackedPointR: 80,
         coolTime: 30,
-        SunNum: 25,
+        SunNum: 75,
         BookHandBack: 4,
         GetDY: function(b, c, a) {
             return 5
@@ -2588,7 +2590,7 @@ NormalAttack2: function() {
         NormalGif: 1,
         PicArr: ["images/Card/Plants/TangleKlep.png", "images/Plants/TangleKlep/0.gif", "images/Plants/TangleKlep/Float.gif", "images/Plants/TangleKlep/Grab.png", "images/interface/splash.png"],
         Tooltip: "可以将僵尸拉入水底的水生植物",
-        Produce: '缠绕水草是一种可以把接近他的僵尸拉进水中的水生植物。<p>伤害：<font color="#FF0000">极高</font><br>用法：<font color="#FF0000">单独使用，接触后生效</font><br>特点：<font color="#FF0000">必须种在水中</font></p>“我是完全隐形的，”缠绕水草自己想，“我就藏在水面下，没人会看到我。”他的朋友告诉他，他们可以清楚地看到他。不过，缠绕水草似乎不想改变自己的看法。',
+        Produce: '缠绕水草是一种可以把接近他的僵尸拉进水中的水生植物。<br>精英形态：无限拉僵尸下水，但10秒后自动死亡<p>伤害：<font color="#FF0000">极高</font><br>用法：<font color="#FF0000">单独使用，接触后生效</font><br>特点：<font color="#FF0000">必须种在水中</font></p>“我是完全隐形的，”缠绕水草自己想，“我就藏在水面下，没人会看到我。”他的朋友告诉他，他们可以清楚地看到他。不过，缠绕水草似乎不想改变自己的看法。',
         CanGrow: function(c, b, d) {
             var a = b + "_" + d,
                 ArP = oS.ArP;
@@ -2613,6 +2615,12 @@ NormalAttack2: function() {
                 },
                 a, EDPZ)
         },
+		jinyinAct:function(a){
+			$(a.id).style.opacity=0.5;
+			oSym.addTask(1000,function(a){
+				$P[a.id]&&a.Die()
+			},[a])
+		},
         getHurt: function(d, b, a) {
             var c = this;
             b == 3 ? (c.HP -= a) < 1 && c.Die() : (c.canTrigger = 0, c.NormalAttack(c, d))
@@ -2661,7 +2669,7 @@ NormalAttack2: function() {
                             ClearChild($(i))
                         });
                     h.DisappearDie();
-                    g.Die()
+                    g.jinyin?g.canTrigger=1:g.Die()
                 },
                 [a, b])
         }
@@ -2722,7 +2730,10 @@ NormalAttack2: function() {
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
                      oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime>=-50)&&(oGd.$[i + "_" + l+"_1"].AttTime-=60);
-                    oSym.addTask(2000,function(f){$P[f.id]&&((CustomSpecial(oPlantern,a,b)).jinyinnum=100)},[c]);
+                    oSym.addTask(2000,function(f){
+						var c;
+						$P[f.id]&&((c=CustomSpecial(oPlantern,a,b)).jinyinAct(c))
+					},[c]);
                   }
                 }
         },
