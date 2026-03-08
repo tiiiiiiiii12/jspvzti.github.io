@@ -610,7 +610,7 @@ var CZombies = function(b, a) {
         CustomTop: 400 - g.height + g.GetDY()
       })), g.ZX = g.AttackedLX -= b, g.Ele.style.left = Math.floor(g.X -= b) + "px", f = 1)) : f = 1) : f = 1;
       g.ChkSpeed(g);
-	  g.PrivateAct(g);
+	  g.PrivateAct&&g.PrivateAct(g);
       return f
       },
         ChkSpeed: function(b) {
