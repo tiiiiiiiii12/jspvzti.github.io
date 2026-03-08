@@ -59,6 +59,9 @@ var CZombies = function(b, a) {
                 h.PrivateAct&&h.PrivateAct(h);
                     return g
                 },
+			canWalk:function(h,b){
+				return $Z[b]&&!(h.FreeFreezeTime || h.FreeSetbodyTime)
+			},
                 ChkActs1: function(g, e, h, d) {
                     var c,f;
                     !(g.FreeFreezeTime || g.FreeSetbodyTime) ? (g.beAttacked && !g.isAttacking && g.JudgeAttack(), !g.isAttacking ? (g.AttackedLX += (c = g.Speed)) > oS.W ? (h.splice(d, 1), g.DisappearDie(), f = 0) : (g.ZX = g.AttackedRX += c, g.Ele.style.left = Math.ceil(g.X += c) + "px", f = 1) : f = 1) : f = 1;
@@ -752,7 +755,6 @@ var CZombies = function(b, a) {
       b.WalkDirection = 1;
       b.ZX = b.AttackedRX;
       b.ChkActs = b.ChkActs1;
-      b.ChangeChkActsTo1(b, a, b.EleBody);
       b.ResetBackupDancer(b);
       b.havelight&&($(a + "_spotlightCon").style.left = "20px",
       $(a + "_spotlight2Con").style.left = "25px");
@@ -853,7 +855,7 @@ var CZombies = function(b, a) {
         var u = $Z[t];
         u && (u.ExchangeLR(d, 1), u.DZMSpeed = 7.2, u.DZStep = -1, u.DZStepT = oSym.Now + 220, u.FreeSetbodyTime = 0, SetBlock(o))
       };
-      b ? (oSym.addTask(b, func, [l, a]), c += b) : func(l, a);
+      b||!d.canWalk(d,l)? (oSym.addTask(b, func, [l, a]), c += b) : func(l, a);
       oSym.addTask(c,
         function(o) {
           var t = $Z[o];
@@ -1630,7 +1632,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
         for (let i = GetC(a.ZX + 20) - 3; i <= GetC(a.ZX + 20); i++) {
           for (let l = 0; l <= 3; l++) {
             var m = oGd.$[a.R + "_" + i + "_" + l];
-            (Tz || (m !== undefined && a.PZ)) ? (
+            (Tz || (m !== undefined && a.PZ))&&a.canWalk(a,a.id) ? (
               a.Speed = a.OSpeed = 0,
               EditImg($(z.FumeDoor), 0, "images/Plants/FumeShroom/FumeShroomAttack.gif", {}, 0),
               PlayAudio("fume"),
@@ -1672,7 +1674,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
 		p.oTrigger&&oT.delP(p),p.InitTrigger(p,p.id,p.R,p.C,p.AttackedLX,p.AttackedRX))),PlayAudio("shovel"));//重置植物列数并重置索敌
         }
         var z = oZ["get" + (a.PZ ? "HZ1" : "Z0")](a.ZX, a.R);
-        z && z.getr != function() {} && (z.getr(z, 80), z.getHit0(z, 100, 0))
+        z && (z.getr(z, 80), z.getHit0(z, 100, 0))
       }!(a.PZ == a.check) && (a.Ornaments && (num && EditEle($(a.id + "_Bullet"), 0, {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
             left: (a.PZ ? "-250" : "40") + "px"
@@ -1684,6 +1686,9 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
         a.check = a.PZ);
     }
   },
+PrivateDie:function(a){
+	a.Ornaments&&(ClearChild($(a.Ele.FumeDoor)))
+},
   PlayNormalballAudio: function() {
     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
   },
@@ -2777,8 +2782,7 @@ oImp = InheritO(OrnNoneZombies, {
 	},0),
 	a.check=a.PZ);
 		if(!a.opennum){
-		$Z[a.id]&&$Z[a.id].beAttacked&&($Z[a.id].HP<240)&&(a.OpenBox(a.id),
-		a.opennum=1)
+		a.canWalk(a,a.id)&&$Z[a.id].beAttacked&&($Z[a.id].HP<240)&&(a.OpenBox(a.id),a.opennum=1)
 		}
 			}
 		},
