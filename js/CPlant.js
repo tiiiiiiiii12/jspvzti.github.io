@@ -915,7 +915,7 @@ NormalAttack1: function() {
             var d = this,
                 e,
 				a;
-				(a = c)||Math.random()*100>30? (oSym.addTask(15,
+				(a = c)? (oSym.addTask(15,
                     function(f) {
                         $P[f] && b(1)
                     },
