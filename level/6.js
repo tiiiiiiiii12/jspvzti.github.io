@@ -19,12 +19,13 @@ oS.Init({
 		[oZombie2, 2, 1],
 		[oZombie3, 2, 1],
 		[oConeheadZombie, 2, 1],
+		[oPeaZombie, 1, 1],
 		[oPoleVaultingZombie, 1, 2]
 	],
 	FlagNum: 10,
 	FlagToSumNum: {
 		a1: [3, 5, 9],
-		a2: [1, 3, 7, 15]
+		a2: [1, 5, 16, 30]
 	},
 	FlagToMonitor: {
 		9: [ShowFinalWave, 0]
