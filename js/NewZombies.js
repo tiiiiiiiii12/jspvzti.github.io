@@ -235,8 +235,8 @@ var z=a.Ele;
 	  }
   },
 PrivateDie:function(a){
-	var z=$(a.id);
-	z.PeaHead&&ClearChild($(z.PeaHead))
+	var z=a.Ele;
+	$(z.PeaHead)&&ClearChild($(z.PeaHead))
 },
   shootPea: function() {
     var a = this,
@@ -342,7 +342,7 @@ PrivateDie:function(a){
 						k.jianshang=0.5;
     k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (k.pixelTop + 60) + "px;visibility:hidden;z-index:" + (k.zIndex + 2));
     oSym.addTask(100, function(k,m) {
-      k.Walk(k,m) && k.beAttacked && k.shootPea(k);
+      k.canWalk(k,m) && k.beAttacked && k.shootPea(k);
       $Z[k.id] ? oSym.addTask(20, arguments.callee, [k,m]) : k.BulletEle = null;
     }, [k,m]);
                         k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
