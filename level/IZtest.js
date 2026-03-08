@@ -66,8 +66,8 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             }
         }, EDAll);
-        NewEle("dButton", "button", "position:absolute;left:450px;top:20px;width:100px;height:35px;z-index:255", {
-            innerHTML: "秒杀全场",
+        NewEle("dButton", "button", "position:absolute;left:300px;top:20px;width:100px;height:35px;z-index:255", {
+            innerHTML: "秒杀正常僵尸",
             onclick: function() {
             var h=1,
                 k,
@@ -76,6 +76,40 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                     k = (n = oZ.getArZ(0,oS.W, h)).length;
                         while (k--) {
                             n[k].DisappearDie(n[k])
+                        }
+                   } while (h++ < oS.R)
+            }
+        }, EDAll);
+       NewEle("dButton", "button", "position:absolute;left:350px;top:20px;width:100px;height:35px;z-index:255", {
+            innerHTML: "秒杀魅惑僵尸",
+            onclick: function() {
+            var h=1,
+                k,
+                n;
+                do {
+                    k = (n = oZ.getArHZ(0,oS.W, h)).length;
+                        while (k--) {
+                            n[k].DisappearDie(n[k])
+                        }
+                   } while (h++ < oS.R)
+            }
+        }, EDAll);
+        NewEle("dButton", "button", "position:absolute;left:400px;top:20px;width:100px;height:35px;z-index:255", {
+            innerHTML: "读报解封",
+            onclick: function() {
+            var h=1,
+                k,
+                c,
+                m,
+                n;
+                do {
+                    k = (n = oZ.getArZ(0,oS.W, h)).length;
+                        while (k--) {
+                           (n[k].EName=="oNewspaperZombie"||n[k].EName=="oNewspaperZombie")&&n[k].getHit0(n[k],n[k].OrnHP,0)
+                        }
+                     c = (m = oZ.getArHZ(0,oS.W, h)).length;
+                        while (c--) {
+                            (m[c].EName=="oNewspaperZombie"||m[c].EName=="oGatlingPeaZombie")&&m[c].getHit0(m[c],m[c].OrnHP,0)
                         }
                    } while (h++ < oS.R)
             }
