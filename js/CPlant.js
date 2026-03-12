@@ -944,7 +944,7 @@ NormalAttack1: function() {
                                 width: "52px",
                                 height: "46px"
                             })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [m])) : (q += (o = !f ? 5 : -5)) < oS.W && q > 100 ? (m.style.left = (r += o) + "px", oSym.addTask(1, arguments.callee, [i, m, k, f, q, l, p, n, r, j])) : 
-							c&&d.jinyin?(f?(f=0):(f=1),m.src=d.PicArr[(f+3)],m.style.left = (r += o) + "px", oSym.addTask(1, arguments.callee, [i, m, k, f, q, l, p, n, r, j])):ClearChild(m)
+							f&&d.jinyin?(f=0,m.src=d.PicArr[(f+3)],m.style.left = (r += o) + "px", oSym.addTask(1, arguments.callee, [i, m, k, f, q, l, p, n, r, j])):ClearChild(m)
                         },
                         [e, $(e), 20, c, d.AttackedLX, d.R, 0, 0, a, oGd.$Torch])
                 };
