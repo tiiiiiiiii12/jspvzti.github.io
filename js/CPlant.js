@@ -562,6 +562,7 @@ oSnowPea = InheritO(oPeashooter, {
     var A = "hp" + Math.random();
     dskill.id = A;
     var C = $(A);
+	NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", b.getShadow(b), $(b.id));
     oSym.addTask(0, function(C, B, b) {
       ClearChild(C);
       $(b.id) && $(b.id).appendChild(C);
@@ -654,18 +655,48 @@ while (e--) {
         width: 73,
         height: 71,
         beAttackedPointR: 53,
-        SunNum: 200,
+        SunNum: 250,
         jinyinAct:function(){},
         PicArr: ["images/Card/Plants/Repeater.png", "images/Plants/Repeater/0.gif", "images/Plants/Repeater/Repeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次发射2~4颗豌豆",
-        Produce: '双发射手可以一次发射2~4颗豌豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">两倍</font></p>双发射手很凶悍，他是在街头混大的。他不在乎任何人的看法，无论是植物还是僵尸，他打出豌豆，是为了让别人离他远点。其实呢，双发射手一直暗暗地渴望着爱情。',
+        Produce: '双发射手可以一次发射2~4颗豌豆<br>精英形态：攻击额外发射速度不同的豌豆，速度越快伤害越高<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">两倍</font></p>双发射手很凶悍，他是在街头混大的。他不在乎任何人的看法，无论是植物还是僵尸，他打出豌豆，是为了让别人离他远点。其实呢，双发射手一直暗暗地渴望着爱情。',
         NormalAttack1: oPeashooter.prototype.NormalAttack,
+		NormalAttack2: function() {
+            var a = this,
+                b = "PB" + Math.random();
+            EditEle(a.BulletEle.cloneNode(false), {
+                    id: b
+                },
+                0, EDPZ);
+            oSym.addTask(15,
+                function(d) {
+                    var c = $(d);
+                    c && SetVisible(c)
+                },
+                [b]);
+            oSym.addTask(1,
+                function(f, j, h, c, n, i, m, k, o, g,BSpeed) {
+                    var l, e = GetC(n),
+                        d = oZ["getZ" + c](n, i);
+                    m == 0 && g[i + "_" + e] && k != e && (PlayAudio("firepea"), m = 1, h = 10, k = e, j.src = "images/Plants/PB" + m + c + ".gif");
+                    d && d.Altitude == 1 ? (d[{
+                        "-1": "getSnowPea",
+                        0: "getPea",
+                        1: "getFirePea"
+                    } [m]](d,h*(BSpeed+1),c),(SetStyle(j, {
+                        left: o + 28 + "px",
+                        width: "52px",
+                        height: "46px"
+                    })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ?BSpeed:-BSpeed)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g,BSpeed])) : ClearChild(j)
+                },
+                [b, $(b), 5,0, a.AttackedLX, a.R, 0, 0, a.AttackedLX - 40, oGd.$Torch,Math.random()*5+3])
+        },
         NormalAttack: function(a) {
             oSym.addTask(0,
                 function(d, b) {
                     var c = $P[d];
-                    c && c.NormalAttack1();
+                    c && (c.NormalAttack1(),c.jinyin&&c.NormalAttack2());
                     --b && oSym.addTask(15, arguments.callee, [d, b])
                 },
                 [this.id, Math.round(Math.random()*1+2)])
