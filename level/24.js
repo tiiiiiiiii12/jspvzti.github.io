@@ -1,6 +1,6 @@
 oS.Init({
   PName:[oPeashooter,oSunFlower,oCherryBomb,oWallNut,oPotatoMine,oSnowPea,oChomper,oRepeater,oPuffShroom,oSunShroom,oFumeShroom,oGraveBuster,oHypnoShroom,oScaredyShroom,oIceShroom,oDoomShroom,oLilyPad,oSquash,oThreepeater,oTangleKelp],
-  ZName:[oZombie,oZombie2,oZombie3,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oConeheadZombie,oNewspaperZombie,oBucketheadZombie,oPoleVaultingZombie,oSnorkelZombie,oFootballZombie],
+  ZName:[oZombie,oZombie2,oZombie3,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oConeheadZombie,oNewspaperZombie,oBucketheadZombie,oPoleVaultingZombie,oSnorkelZombie,oFootballZombie,oGatlingPeaZombie],
   PicArr:function(){
     var a=oJalapeno.prototype,
       b=a.PicArr;
@@ -23,8 +23,8 @@ oS.Init({
   StartGameMusic:"Kitanai Sekai"
 },{
   AZ:[
-    [oZombie,2,1],
-    [oZombie2,2,1],
+    [oZombie,2,2],
+    [oZombie2,2,2],
     [oZombie3,1,1],
     [oNewspaperZombie,1,1],
     [oPoleVaultingZombie,1,1],
@@ -34,6 +34,7 @@ oS.Init({
     [oConeheadZombie,1,1],
     [oBucketheadZombie,1,1],
     [oFootballZombie,1,1],
+    [oGatlingPeaZombie,1,1],
     [oSnorkelZombie,1,7,[29,30]]
   ],
   FlagNum:30,
