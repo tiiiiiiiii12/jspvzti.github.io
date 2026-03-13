@@ -2883,6 +2883,7 @@ PrivateDie:function(a){
         },
         NormalDie: function() {
             var a = this;
+			a.PrivateDie&&a.PrivateDie(a);
             a.Status && !--oGd.$JackinTheBox && StopAudio("jackinthebox");
             a.EleBody.src = a.PicArr[a.DieGif] + Math.random();
             oSym.addTask(250, ClearChild, [a.Ele]);
@@ -2892,6 +2893,7 @@ PrivateDie:function(a){
         },
         ExplosionDie: function() {
             var a = this;
+			a.PrivateDie&&a.PrivateDie(a);
             a.Status && !--oGd.$JackinTheBox && StopAudio("jackinthebox");
             a.EleBody.src = a.PicArr[a.BoomDieGif] + Math.random();
             oSym.addTask(300, ClearChild, [a.Ele]);
@@ -2900,6 +2902,7 @@ PrivateDie:function(a){
             a.PZ && oP.MonPrgs()
         },
         DisappearDie: function() {
+			this.PrivateDie&&this.PrivateDie(this);
             this.Status && !--oGd.$JackinTheBox && StopAudio("jackinthebox");
             ClearChild(this.Ele);
             this.HP = 0;
@@ -2908,6 +2911,7 @@ PrivateDie:function(a){
         },
         CrushDie: function() {
             var a = this;
+			a.PrivateDie&&a.PrivateDie(a);
             a.Status && !--oGd.$JackinTheBox && StopAudio("jackinthebox");
             a.GoingDieHead(a.id, a.PicArr, a);
             ClearChild(a.Ele);
