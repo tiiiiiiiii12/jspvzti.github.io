@@ -31,12 +31,13 @@ oS.Init({
 		[oZombie3, 2, 1],
 		[oConeheadZombie, 2, 1],
 		[oNewspaperZombie, 1, 1, [1]],
+		[oPeaZombie, 1, 1],
 		[oBucketheadZombie, 1, 1]
 	],
 	FlagNum: 20,
 	FlagToSumNum: {
 		a1: [1, 3, 5, 9, 10, 13, 15, 19],
-		a2: [2, 1, 2, 4, 12, 5, 7, 9, 23]
+		a2: [2, 1, 2, 6, 20, 8, 14, 18, 46]
 	},
 	FlagToMonitor: {
 		9: [ShowLargeWave, 0],
@@ -45,7 +46,7 @@ oS.Init({
 	FlagToEnd: function() {
 		NewImg("imgSF", "images/Card/Plants/FumeShroom.png", "left:587px;top:270px;clip:rect(auto,auto,60px,auto)", EDAll, {
 			onclick: function() {
-				SelectModal(13)
+				GetNewCard(this, oFumeShrooom, 4)
 			}
 		});
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:235px;left:596px", EDAll)
