@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom],
-	ZName: [oZombie, oZombie2, oZombie3, oNewspaperZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oNewspaperZombie,oImp],
 	PicArr: function() {
 		var a = oSunShroom.prototype,
 			b = a.PicArr;
@@ -129,12 +129,13 @@ oS.Init({
 		[oZombie, 3, 1],
 		[oZombie2, 2, 1],
 		[oZombie3, 2, 1],
+		[oImp, 2, 1],
 		[oNewspaperZombie, 2, 1, [1]]
 	],
 	FlagNum: 10,
 	FlagToSumNum: {
 		a1: [3, 5, 9],
-		a2: [1, 2, 4, 15]
+		a2: [1, 2, 8, 25]
 	},
 	FlagToMonitor: {
 		9: [ShowFinalWave, 0]
@@ -147,4 +148,5 @@ oS.Init({
 		});
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:185px;left:676px", EDAll)
 	}
+
 });
