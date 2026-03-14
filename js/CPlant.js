@@ -1944,9 +1944,10 @@ getHurt:function(e, c, b) {
                             g && (oSym.addTask(18,
                                 function(i) {
                                     var j = $P[i];
-									var Z=oZ.getArZ(j.AttackedRX,j.AttackedRX+160,j.R).length;
-									while(Z--){
-										j&&Z.getHit1(Z,60,0)
+									var Z=oZ.getArZ(j.AttackedRX,j.AttackedRX+160,j.R);
+									zl=Z.length;
+									while(zl--){
+										Z.Altitude==1&&j&&Z[zl].getHit1(Z,60,0)
 									}
                                     j && (j.canTrigger = 1, $(i).childNodes[1].src = j.PicArr[j.NormalGif])
                                 },
