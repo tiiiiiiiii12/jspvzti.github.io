@@ -1904,7 +1904,7 @@ NormalAttack1: function() {
         },
         getTriggerRange: function(a, b, c) {
             return [
-                [this.pixelLeft, c + 80, 0]
+                [this.pixelLeft, c + 120, 0]
             ]
         },
         TriggerCheck: function(a) {
@@ -1947,10 +1947,10 @@ getHurt:function(e, c, b) {
             $P[a]&&($(a).childNodes[1].src =$P[a].PicArr[$P[a].AttackGif] + Math.random());
             oSym.addTask(50,
                 function(c) {
-                    $P[c] && oSym.addTask(18,
+                    $P[c] && oSym.addTask(12,
                         function(e) {
                             var g = $P[e];
-                            g && (oSym.addTask(18,
+                            g && (oSym.addTask(12,
                                 function(i) {
                                     var j = $P[i];
 									var R=Math.max(j.R-1,1);									
