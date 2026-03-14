@@ -562,7 +562,7 @@ oSnowPea = InheritO(oPeashooter, {
     var A = "hp" + Math.random();
     dskill.id = A;
     var C = $(A);
-	NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", b.getShadow(b), $(b.id));
+	NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", "left:" + (b.width * 0.5 - 30) + "px;top:" + (b.height - 18) + "px", $(b.id));
     oSym.addTask(0, function(C, B, b) {
       ClearChild(C);
       $(b.id) && $(b.id).appendChild(C);
@@ -1893,7 +1893,8 @@ oChomper = InheritO(CPlants, {
   jinyinGif: 5,
   jinyinAttackGif: 7,
   jinyinDigestGif: 6,
-  PicArr: ["images/Card/Plants/Chomper.png", "images/Plants/Chomper/0.gif", "images/Plants/Chomper/Chomper.gif", "images/Plants/Chomper/ChomperAttack.gif" + $Random, "images/Plants/Chomper/ChomperDigest.gif", "images/Plants/Chomper/jinyinChomper.gif", "images/Plants/Chomper/jinyinChomperDigest.gif", "images/Plants/Chomper/jinyinAttack.gif" + $Random],
+jinyinAttackGif: 8, 
+  PicArr: ["images/Card/Plants/Chomper.png", "images/Plants/Chomper/0.gif", "images/Plants/Chomper/Chomper.gif", "images/Plants/Chomper/ChomperAttack.gif" + $Random, "images/Plants/Chomper/ChomperDigest.gif", "images/Plants/Chomper/jinyinChomper.gif", "images/Plants/Chomper/jinyinChomperDigest.gif", "images/Plants/Chomper/jinyinAttack.gif" + $Random, "images/Plants/Chomper/jinyinAttack.gif" + $Random],
   Tooltip: "能一口气吞下一只僵尸, 但处于咀嚼状态中十分脆弱",
   Produce: '大嘴花可以一口吞掉一整只僵尸，但是他们消化僵尸的时候很脆弱。<br>精英形态：读报大嘴花<br>破报前同普通大嘴花，报纸被打破后怒吼，对3×3的僵尸造成击退和300伤害，此后每次攻击对3×3的僵尸造成50伤害<p>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">非常近</font><br>特点：<font color="#FF0000">消化时间很长（26s+吞吃僵尸总血量）</font></p>大嘴花几乎可以去“恐怖小店”，来表演它的绝技了，不过他的经纪人压榨了他太多的钱，所以他没去成。尽管如此，大嘴花没有怨言，只说了句这只是交易的一部分。',
   GetDX: function() {
@@ -1932,7 +1933,7 @@ oChomper = InheritO(CPlants, {
     PlayAudio("newspaper_rarrgh2");
     var j = $P[c];
     var R = Math.max(j.R - 1, 1);
-	$(c).childNodes[1].src = "images/Plants/Chomper/haqi.gif";
+	$(c).childNodes[1].src = "images/Plants/Chomper/jinyinAttackGif2.gif";
     do {
       var Z = oZ.getArZ(j.AttackedLX, Math.min(j.AttackedRX + 160,oS.W),R);
       var zl = Z.length;
@@ -1947,7 +1948,7 @@ oChomper = InheritO(CPlants, {
       }
     } while (R++ < Math.min(j.R + 1, oS.R))
     j && (j.DigestGif = 4,
-      j.AttackGif = 3,
+      j.AttackGif = j.jinyinAttackGif2,
       j.NormalGif = 2);
     j && (a.NormalAttack = function(a) {
       $P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].AttackGif] + Math.random());
