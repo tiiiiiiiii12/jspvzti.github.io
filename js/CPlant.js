@@ -1936,7 +1936,7 @@ getHurt:function(e, c, b) {
 	$(c).childNodes[1].src = "images/Plants/Chomper/Chomper.gif");
 	   $P[c]&&(a.NormalAttack=function(a) {
             $P[a]&&($(a).childNodes[1].src =$P[a].PicArr[$P[a].AttackGif] + Math.random());
-            oSym.addTask(35,
+            oSym.addTask(50,
                 function(c) {
                     $P[c] && oSym.addTask(18,
                         function(e) {
@@ -1944,11 +1944,14 @@ getHurt:function(e, c, b) {
                             g && (oSym.addTask(18,
                                 function(i) {
                                     var j = $P[i];
-									var Z=oZ.getArZ(j.AttackedRX,j.AttackedRX+160,j.R);
-									zl=Z.length;
+									var R=j.R-1;									
+									do{
+									var Z=oZ.getArZ(j.AttackedRX,j.AttackedRX+160,R);
+									var zl=Z.length;
 									while(zl--){
-										Z[zl].Altitude==1&&j&&Z[zl].getHit1(Z,60,0)
+										Z[zl].Altitude==1&&j&&Z[zl].getHit1(Z[zl],50,0)
 									}
+									}while(R++<j.R+1)
                                     j && (j.canTrigger = 1, $(i).childNodes[1].src = j.PicArr[j.NormalGif])
                                 },
                                 [e]))
