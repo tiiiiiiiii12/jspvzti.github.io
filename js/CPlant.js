@@ -1933,7 +1933,7 @@ jinyinAttackGif2: 8,
     PlayAudio("newspaper_rarrgh2");
     var j = $P[c];
     var R = Math.max(j.R - 1, 1);
-	$(c).childNodes[1].src = "images/Plants/Chomper/jinyinAttackGif2.gif";
+	$(c).childNodes[1].src = "images/Plants/Chomper/jinyinAttackGif2.gif"+$Random+Math.random();
     do {
       var Z = oZ.getArZ(j.AttackedLX, Math.min(j.AttackedRX + 160,oS.W),R);
       var zl = Z.length;
