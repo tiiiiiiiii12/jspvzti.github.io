@@ -1981,7 +1981,7 @@ getHurt:function(e, c, b) {
                             g && ((h = $Z[f]) && h.beAttacked && h.PZ ? $(e).childNodes[1].src = h.getRaven(e) ? (oSym.addTask(2600+Math.min(h.HP+h.OrnHP,1800),
                                 function(i) {
                                     var j = $P[i];
-                                    j && (j.canTrigger = 1, $(i).childNodes[1].src =j.PicArr[j.NormalGif])
+                                    j&&!j.nopaper&& (j.canTrigger = 1, $(i).childNodes[1].src =j.PicArr[j.NormalGif])
                                 },
                                 [e]), g.PicArr[g.DigestGif]) : (g.canTrigger = 1, g.PicArr[g.NormalGif]) : oSym.addTask(18,
                                 function(i) {
