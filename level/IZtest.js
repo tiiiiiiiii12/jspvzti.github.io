@@ -51,6 +51,10 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
     RiddleAutoGrow: function() {
         for (var i = 1; i <= oS.R;i++) CustomSpecial(oBrains, i, 0); // 脑子
     },
+    LvlClearFunc: function() {
+        oS.ScrollScreen = oS.LvlVar.ScrollScreen
+        delete oS.LvlVar.ScrollScreen
+    },
     StartGame: function() {
         NewEle("dButton", "button", "position:absolute;left:250px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
