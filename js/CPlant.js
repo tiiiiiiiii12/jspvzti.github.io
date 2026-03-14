@@ -1971,7 +1971,7 @@ getHurt:function(e, c, b) {
         })
   },
         NormalAttack: function(a, b) {
-            $P[a]&&($(a).childNodes[1].src =$P[a].PicArr[$P[a].AttackGif] + Math.random());
+            $P[a]&&($(a).childNodes[1].src =$P[a].PicArr[$P[a].jinyinAttackGif] + Math.random());
             oSym.addTask(70,
                 function(c, d) {
                     $P[c] && oSym.addTask(18,
