@@ -690,7 +690,7 @@ while (e--) {
                         height: "46px"
                     })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ?BSpeed:-BSpeed)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g,BSpeed])) : ClearChild(j)
                 },
-                [b, $(b), 5,0, a.AttackedLX, a.R, 0, 0, a.AttackedLX - 40, oGd.$Torch,Math.random()*5+3])
+                [b, $(b), 5,0, a.AttackedLX, a.R, 0, 0, a.AttackedLX - 40, oGd.$Torch,Math.random()*3+3])
         },
         NormalAttack: function(a) {
             oSym.addTask(0,
@@ -806,10 +806,10 @@ NormalAttack1: function() {
                     },
                     [d]);
                 oSym.addTask(1,
-                    function(h, l, j, e, p, k, o, m, q, i) {
+                    function(h, l, j, e, p, k, o, m, q, i,P) {
                         var n, g = GetC(p),
                             f = oZ["getZ" + e](p, k);
-                            if (k == c.R) {var o = c.Pea}
+                            if (k == c.R) {var o = P}
                         o == 0 && i[k + "_" + g] && m != g && (PlayAudio("firepea"), o = 1, j = 40, m = g, l.src = "images/Plants/PB" + o + e + ".gif");
                         f && f.Altitude == 1 ? (f[{
                             "-1": "getSnowPea",
@@ -819,9 +819,9 @@ NormalAttack1: function() {
                             left: q + 28 + "px",
                             width: "52px",
                             height: "46px"
-                        })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [l])) : (p += (n = !e ? 5 : -5)) < oS.W && p > 100 ? (l.style.left = (q += n) + "px", oSym.addTask(1, arguments.callee, [h, l, j, e, p, k, o, m, q, i])) : ClearChild(l)
+                        })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [l])) : (p += (n = !e ? 5 : -5)) < oS.W && p > 100 ? (l.style.left = (q += n) + "px", oSym.addTask(1, arguments.callee, [h, l, j, e, p, k, o, m, q, i,P])) : ClearChild(l)
                     },
-                    [d, $(d), 20, 0, c.AttackedLX, a,0,0,c.AttackedLX - 40,oGd.$Torch])
+                    [d, $(d), 20, 0, c.AttackedLX, a,0,0,c.AttackedLX - 40,oGd.$Torch,c.Pea])
             }
         }
     }),
@@ -1925,16 +1925,25 @@ getHurt:function(e, c, b) {
       a = d.id;
     !(c % 3) ? (d.HP -= b) < 1 && d.Die(): (oSym.addTask(200, ClearChild, [NewImg(0, d.PicArr[1] ? d.PicArr[d.StaticGif] : d.PicArr[d.NormalGif], 
 "left:" + (d.AttackedLX - 25) + "px;top:" + (d.pixelTop + 60) + "px;height:15px;width:" + (d.width) + "px;z-index:" + d.zIndex, EDPZ)]), PlayAudio("chomp"), d.Die());
-	$P[a]&&(d.HP<=500)&&!d.nopaper&&(d.BreakPaper(d,a));
+	d.jinyin&&$P[a]&&(d.HP<=500)&&!d.nopaper&&(d.BreakPaper(d,a));
   },
   BreakPaper:function(a,c){
 	  a.nopaper=true;
 	  PlayAudio("newspaper_rarrgh2");
-	  $P[c]&&($P[c].canTrigger = 1,$P[c].DigestGif=4,
-		$P[c].AttackGif=3,
-		$P[c].NormalGif=2,
+	  var j=$P[c];
+	  		var R=Math.max(j.R-1,1);									
+		   do{
+				var Z=oZ.getArZ(j.AttackedRX,j.AttackedRX+160,R);
+				var zl=Z.length;
+				while(zl--){
+				Z[zl].Altitude==1&&j&&(Z[zl].getHit1(Z[zl],300,0),Z[zl].getr(Z[zl],120))
+				}
+			}while(R++<j.R+1)
+	  j&&(j.canTrigger = 1,j.DigestGif=4,
+		j.AttackGif=3,
+		j.NormalGif=2,
 	$(c).childNodes[1].src = "images/Plants/Chomper/Chomper.gif");
-	   $P[c]&&(a.NormalAttack=function(a) {
+	   j&&(a.NormalAttack=function(a) {
             $P[a]&&($(a).childNodes[1].src =$P[a].PicArr[$P[a].AttackGif] + Math.random());
             oSym.addTask(50,
                 function(c) {
@@ -1944,7 +1953,7 @@ getHurt:function(e, c, b) {
                             g && (oSym.addTask(18,
                                 function(i) {
                                     var j = $P[i];
-									var R=j.R-1;									
+									var R=Math.max(j.R-1,1);									
 									do{
 									var Z=oZ.getArZ(j.AttackedRX,j.AttackedRX+160,R);
 									var zl=Z.length;
@@ -1952,7 +1961,7 @@ getHurt:function(e, c, b) {
 										Z[zl].Altitude==1&&j&&Z[zl].getHit1(Z[zl],50,0)
 									}
 									}while(R++<j.R+1)
-                                    j && (j.canTrigger = 1, $(i).childNodes[1].src = j.PicArr[j.NormalGif])
+                                    j && ($(i).childNodes[1].src = j.PicArr[j.NormalGif])
                                 },
                                 [e]))
                         },
