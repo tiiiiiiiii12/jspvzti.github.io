@@ -1919,7 +1919,31 @@ getHurt:function(e, c, b) {
 	$Z[a]&&d.HP<500&&(d.BreakPaper(d,d.id));
   },
   BreakPaper:function(a,c){
-	  
+	  $Z[c]&&($Z[c].canTrigger = 1, $(c).childNodes[1].src = "images/Plants/Chomper/Chomper.gif");
+	   $Z[c]&&a.NormalAttack=function(a, b) {
+            $(a).childNodes[1].src = "images/Plants/Chomper/ChomperAttack.gif" + $Random + Math.random();
+            oSym.addTask(70,
+                function(c, d) {
+                    $P[c] && oSym.addTask(18,
+                        function(e, f) {
+                            var g = $P[e],
+                                h;
+                            g && ((h = $Z[f]) && h.beAttacked && h.PZ ? $(e).childNodes[1].src = h.getRaven(e) ? (oSym.addTask(2600+Math.min(h.HP+h.OrnHP,1800),
+                                function(i) {
+                                    var j = $P[i];
+                                    j && (j.canTrigger = 1, $(i).childNodes[1].src = "images/Plants/Chomper/Chomper.gif")
+                                },
+                                [e]), "images/Plants/Chomper/ChomperDigest.gif") : (g.canTrigger = 1, "images/Plants/Chomper/Chomper.gif") : oSym.addTask(18,
+                                function(i) {
+                                    var j = $P[i];
+                                    j && (j.canTrigger = 1, $(i).childNodes[1].src = "images/Plants/Chomper/Chomper.gif")
+                                },
+                                [e]))
+                        },
+                        [c, d])
+                },
+                [a, b])
+        }
   },
         NormalAttack: function(a, b) {
             $(a).childNodes[1].src = "images/Plants/Chomper/ChomperAttack.gif" + $Random + Math.random();
