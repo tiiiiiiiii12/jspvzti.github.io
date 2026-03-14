@@ -1246,7 +1246,7 @@ NormalAttack1: function() {
         TriggerCheck: function(e, c) {
             var a = this.R,
                 b = this.C;
-            e.beAttacked && e.Altitude < 2 && !oGd.$[a + "_" + b + "2"] && this.NormalAttack(this.pixelLeft-50,this.pixelRight+50, this.R)
+            e.beAttacked && e.Altitude < 2 && !oGd.$[a + "_" + b + "_2"] && this.NormalAttack(this.pixelLeft-50,this.pixelRight+50, this.R)
         },
         NormalAttack: function(j, h, e) {
             var g = this,
@@ -2066,7 +2066,7 @@ NormalAttack1: function() {
             return c && c.EName == "oFumeShroom"
         },
         BirthStyle: function(c, d, b, a) {
-            oGd.$[c.R + "_" + c.C + "1"] && oGd.$[c.R + "_" + c.C + "1"].Sleep && (c.canTrigger = 0, c.Sleep = 1, b.childNodes[1].src = c.PicArr[3]);
+            oGd.$[c.R + "_" + c.C + "_1"] && oGd.$[c.R + "_" + c.C + "_1"].Sleep && (c.canTrigger = 0, c.Sleep = 1, b.childNodes[1].src = c.PicArr[3]);
             EditEle(b, {
                 id: d
             }, a, EDPZ);
