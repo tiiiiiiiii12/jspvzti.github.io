@@ -1961,7 +1961,7 @@ getHurt:function(e, c, b) {
 										Z[zl].Altitude==1&&j&&Z[zl].getHit1(Z[zl],50,0)
 									}
 									}while(R++<j.R+1)
-                                    j && ($(i).childNodes[1].src = j.PicArr[j.NormalGif])
+                                    j && (j.canTrigger = 1,$(i).childNodes[1].src = j.PicArr[j.NormalGif])
                                 },
                                 [e]))
                         },
