@@ -1957,7 +1957,7 @@ getHurt:function(e, c, b) {
         })
   },
         NormalAttack: function(a, b) {
-            $(a).childNodes[1].src =j.PicArr[j.AttackGif] + Math.random();
+            $(a).childNodes[1].src =g.PicArr[g.AttackGif] + Math.random();
             oSym.addTask(70,
                 function(c, d) {
                     $P[c] && oSym.addTask(18,
@@ -1969,7 +1969,7 @@ getHurt:function(e, c, b) {
                                     var j = $P[i];
                                     j && (j.canTrigger = 1, $(i).childNodes[1].src =j.PicArr[j.NormalGif])
                                 },
-                                [e]), j.PicArr[j.DigestGif]) : (g.canTrigger = 1, j.PicArr[j.NormalGif]) : oSym.addTask(18,
+                                [e]), g.PicArr[g.DigestGif]) : (g.canTrigger = 1, g.PicArr[g.NormalGif]) : oSym.addTask(18,
                                 function(i) {
                                     var j = $P[i];
                                     j && (j.canTrigger = 1, $(i).childNodes[1].src =j.PicArr[j.NormalGif])
