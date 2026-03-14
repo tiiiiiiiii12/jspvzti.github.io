@@ -1893,7 +1893,7 @@ NormalAttack1: function() {
 		jinyinGif:5,
 		jinyinAttackDif:7,
 		jinyinDigestGif:6,
-        PicArr: ["images/Card/Plants/Chomper.png", "images/Plants/Chomper/0.gif", "images/Plants/Chomper/Chomper.gif", "images/Plants/Chomper/ChomperAttack.gif", "images/Plants/Chomper/ChomperDigest.gif","images/Plants/Chomper/jinyinChomper.gif","images/Plants/Chomper/jinyinChomperDigest.gif","images/Plants/Chomper/jinyinAttack.gif"],
+        PicArr: ["images/Card/Plants/Chomper.png", "images/Plants/Chomper/0.gif", "images/Plants/Chomper/Chomper.gif", "images/Plants/Chomper/ChomperAttack.gif"+$Random, "images/Plants/Chomper/ChomperDigest.gif","images/Plants/Chomper/jinyinChomper.gif","images/Plants/Chomper/jinyinChomperDigest.gif","images/Plants/Chomper/jinyinAttack.gif"+$Random],
         Tooltip: "能一口气吞下一只僵尸, 但处于咀嚼状态中十分脆弱",
         Produce: '大嘴花可以一口吞掉一整只僵尸，但是他们消化僵尸的时候很脆弱。<p>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">非常近</font><br>特点：<font color="#FF0000">消化时间很长（26s+吞吃僵尸总血量）</font></p>大嘴花几乎可以去“恐怖小店”，来表演它的绝技了，不过他的经纪人压榨了他太多的钱，所以他没去成。尽管如此，大嘴花没有怨言，只说了句这只是交易的一部分。',
         GetDX: function() {
@@ -1929,6 +1929,7 @@ getHurt:function(e, c, b) {
   },
   BreakPaper:function(a,c){
 	  a.nopaper=true;
+	  PlayAudio("newspaper_rarrgh2");
 	  $P[c]&&($P[c].canTrigger = 1,$P[c].DigestGif=4,
 		$P[c].AttackGif=3,
 		$P[c].NormalGif=2,
@@ -1938,7 +1939,7 @@ getHurt:function(e, c, b) {
             oSym.addTask(70,
                 function(c) {
                     $P[c] && oSym.addTask(18,
-                        function(e, f) {
+                        function(e) {
                             var g = $P[e];
                             g && (oSym.addTask(18,
                                 function(i) {
@@ -1951,7 +1952,7 @@ getHurt:function(e, c, b) {
                                 },
                                 [e]))
                         },
-                        [c, d])
+                        [c])
                 },
                 [a])
         })
