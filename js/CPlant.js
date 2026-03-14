@@ -1925,7 +1925,7 @@ getHurt:function(e, c, b) {
       a = d.id;
     !(c % 3) ? (d.HP -= b) < 1 && d.Die(): (oSym.addTask(200, ClearChild, [NewImg(0, d.PicArr[1] ? d.PicArr[d.StaticGif] : d.PicArr[d.NormalGif], 
 "left:" + (d.AttackedLX - 25) + "px;top:" + (d.pixelTop + 60) + "px;height:15px;width:" + (d.width) + "px;z-index:" + d.zIndex, EDPZ)]), PlayAudio("chomp"), d.Die());
-	d.jinyin&&$P[a]&&(d.HP<=500)&&!d.nopaper&&(d.BreakPaper(d,a));
+	d.jinyin&&$P[a]&&(d.HP<=650)&&!d.nopaper&&(d.BreakPaper(d,a));
   },
   BreakPaper:function(a,c){
 	  a.nopaper=true;
@@ -1938,7 +1938,7 @@ getHurt:function(e, c, b) {
 				while(zl--){
 				Z[zl].Altitude==1&&j&&(Z[zl].getHit1(Z[zl],300,0),Z[zl].getr(Z[zl],120))
 				}
-			}while(R++<j.R+1)
+			}while(R++<Math.min(j.R+1,oS.R))
 	  j&&(j.canTrigger = 1,j.DigestGif=4,
 		j.AttackGif=3,
 		j.NormalGif=2,
@@ -1960,7 +1960,7 @@ getHurt:function(e, c, b) {
 									while(zl--){
 										Z[zl].Altitude==1&&j&&Z[zl].getHit1(Z[zl],50,0)
 									}
-									}while(R++<j.R+1)
+									}while(R++<Math.min(j.R+1,oS.R))
                                     j && (j.canTrigger = 1,$(i).childNodes[1].src = j.PicArr[j.NormalGif])
                                 },
                                 [e]))
