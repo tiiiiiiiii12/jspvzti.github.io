@@ -1952,7 +1952,7 @@ jinyinAttackGif2: 8,
       j.NormalGif = 2);
     j && (a.NormalAttack = function(a) {
       $P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].AttackGif] + Math.random());
-      oSym.addTask(40,
+      oSym.addTask(30,
         function(c) {
           $P[c] && oSym.addTask(12,
             function(e) {
