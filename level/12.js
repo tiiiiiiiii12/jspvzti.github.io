@@ -46,7 +46,7 @@ oS.Init({
 	FlagToEnd: function() {
 		NewImg("imgSF", "images/Card/Plants/FumeShroom.png", "left:587px;top:270px;clip:rect(auto,auto,60px,auto)", EDAll, {
 			onclick: function() {
-				GetNewCard(this, oFumeShrooom, 4)
+				GetNewCard(this, oFumeShroom, 4)
 			}
 		});
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:235px;left:596px", EDAll)
