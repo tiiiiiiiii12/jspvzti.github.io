@@ -1925,16 +1925,16 @@ getHurt:function(e, c, b) {
       a = d.id;
     !(c % 3) ? (d.HP -= b) < 1 && d.Die(): (oSym.addTask(200, ClearChild, [NewImg(0, d.PicArr[1] ? d.PicArr[d.StaticGif] : d.PicArr[d.NormalGif], 
 "left:" + (d.AttackedLX - 25) + "px;top:" + (d.pixelTop + 60) + "px;height:15px;width:" + (d.width) + "px;z-index:" + d.zIndex, EDPZ)]), PlayAudio("chomp"), d.Die());
-	$Z[a]&&(d.HP<=500)&&!d.nopaper&&(d.BreakPaper(d,d.id));
+	$P[a]&&(d.HP<=500)&&!d.nopaper&&(d.BreakPaper(d,a));
   },
   BreakPaper:function(a,c){
 	  a.nopaper=true;
-	  $Z[c]&&($Z[c].canTrigger = 1,$Z[c].DigestGif=4,
-		$Z[c].AttackGif=3,
-		$Z[c].NormalGif=2,
+	  $P[c]&&($P[c].canTrigger = 1,$P[c].DigestGif=4,
+		$P[c].AttackGif=3,
+		$P[c].NormalGif=2,
 	$(c).childNodes[1].src = "images/Plants/Chomper/Chomper.gif");
-	   $Z[c]&&(a.NormalAttack=function(a) {
-            $P[a]&&($(a).childNodes[1].src =$P[a].PicArr[$P[a].AttackGif] + Math.random());
+	   $P[c]&&(a.NormalAttack=function(a) {
+            $P[a]&&($(a).childNodes[1].src =this.PicArr[this.AttackGif] + Math.random());
             oSym.addTask(70,
                 function(c) {
                     $P[c] && oSym.addTask(18,
@@ -1957,7 +1957,7 @@ getHurt:function(e, c, b) {
         })
   },
         NormalAttack: function(a, b) {
-            $P[a]&&($(a).childNodes[1].src =$P[a].PicArr[$P[a].AttackGif] + Math.random());
+            $P[a]&&($(a).childNodes[1].src =this.PicArr[this.AttackGif] + Math.random());
             oSym.addTask(70,
                 function(c, d) {
                     $P[c] && oSym.addTask(18,
