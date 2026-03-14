@@ -1880,121 +1880,124 @@ NormalAttack1: function() {
                 [a, b, d.R])
         }
     }),
-    oChomper = InheritO(CPlants, {
-        EName: "oChomper",
-        CName: "大嘴花",
-        width: 130,
-        height: 114,
-        beAttackedPointR: 70,
-        SunNum: 150,
-		HP:500,
-		DigestGif:4,
-		AttackGif:3,
-		jinyinGif:5,
-		jinyinAttackDif:7,
-		jinyinDigestGif:6,
-        PicArr: ["images/Card/Plants/Chomper.png", "images/Plants/Chomper/0.gif", "images/Plants/Chomper/Chomper.gif", "images/Plants/Chomper/ChomperAttack.gif"+$Random, "images/Plants/Chomper/ChomperDigest.gif","images/Plants/Chomper/jinyinChomper.gif","images/Plants/Chomper/jinyinChomperDigest.gif","images/Plants/Chomper/jinyinAttack.gif"+$Random],
-        Tooltip: "能一口气吞下一只僵尸, 但处于咀嚼状态中十分脆弱",
-        Produce: '大嘴花可以一口吞掉一整只僵尸，但是他们消化僵尸的时候很脆弱。<p>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">非常近</font><br>特点：<font color="#FF0000">消化时间很长（26s+吞吃僵尸总血量）</font></p>大嘴花几乎可以去“恐怖小店”，来表演它的绝技了，不过他的经纪人压榨了他太多的钱，所以他没去成。尽管如此，大嘴花没有怨言，只说了句这只是交易的一部分。',
-        GetDX: function() {
-            return -40
-        },
-        getShadow: function(a) {
-            return "top:" + (a.height - 22) + "px"
-        },
-        getTriggerRange: function(a, b, c) {
-            return [
-                [this.pixelLeft, c + 120, 0]
-            ]
-        },
-        TriggerCheck: function(a) {
-            this.AttackCheck2(a) && (this.canTrigger = 0, this.NormalAttack(this.id, a.id))
-        },
-		jinyinAct:function(a){
-			a.HP*=2;
-			a.NormalGif=a.jinyinGif;
-			a.DigestGif=a.jinyinDigestGif;
-			a.AttackGif=a.jinyinAttackGif;
-			$(a.id).childNodes[1].src = a.PicArr[a.NormalGif];
-		},
-        AttackCheck2: function(a) {
-            return a.Altitude == 1 && a.beAttacked
-        },
-getHurt:function(e, c, b) {
+oChomper = InheritO(CPlants, {
+  EName: "oChomper",
+  CName: "大嘴花",
+  width: 130,
+  height: 114,
+  beAttackedPointR: 70,
+  SunNum: 150,
+  HP: 500,
+  DigestGif: 4,
+  AttackGif: 3,
+  jinyinGif: 5,
+  jinyinAttackGif: 7,
+  jinyinDigestGif: 6,
+  PicArr: ["images/Card/Plants/Chomper.png", "images/Plants/Chomper/0.gif", "images/Plants/Chomper/Chomper.gif", "images/Plants/Chomper/ChomperAttack.gif" + $Random, "images/Plants/Chomper/ChomperDigest.gif", "images/Plants/Chomper/jinyinChomper.gif", "images/Plants/Chomper/jinyinChomperDigest.gif", "images/Plants/Chomper/jinyinAttack.gif" + $Random],
+  Tooltip: "能一口气吞下一只僵尸, 但处于咀嚼状态中十分脆弱",
+  Produce: '大嘴花可以一口吞掉一整只僵尸，但是他们消化僵尸的时候很脆弱。<br>精英形态：读报大嘴花<br>破报前同普通大嘴花，报纸被打破后怒吼，对3×3的僵尸造成击退和300伤害，此后每次攻击对3×3的僵尸造成50伤害<p>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">非常近</font><br>特点：<font color="#FF0000">消化时间很长（26s+吞吃僵尸总血量）</font></p>大嘴花几乎可以去“恐怖小店”，来表演它的绝技了，不过他的经纪人压榨了他太多的钱，所以他没去成。尽管如此，大嘴花没有怨言，只说了句这只是交易的一部分。',
+  GetDX: function() {
+    return -40
+  },
+  getShadow: function(a) {
+    return "top:" + (a.height - 22) + "px"
+  },
+  getTriggerRange: function(a, b, c) {
+    return [
+      [this.pixelLeft, c + 120, 0]
+    ]
+  },
+  TriggerCheck: function(a) {
+    this.AttackCheck2(a) && (this.canTrigger = 0, this.NormalAttack(this.id, a.id))
+  },
+  jinyinAct: function(a) {
+    a.HP *= 2;
+    a.NormalGif = a.jinyinGif;
+    a.DigestGif = a.jinyinDigestGif;
+    a.AttackGif = a.jinyinAttackGif;
+    $(a.id).childNodes[1].src = a.PicArr[a.NormalGif];
+  },
+  AttackCheck2: function(a) {
+    return a.Altitude == 1 && a.beAttacked
+  },
+  getHurt: function(e, c, b) {
     var d = this,
       a = d.id;
-    !(c % 3) ? (d.HP -= b) < 1 && d.Die(): (oSym.addTask(200, ClearChild, [NewImg(0, d.PicArr[1] ? d.PicArr[d.StaticGif] : d.PicArr[d.NormalGif], 
-"left:" + (d.AttackedLX - 25) + "px;top:" + (d.pixelTop + 60) + "px;height:15px;width:" + (d.width) + "px;z-index:" + d.zIndex, EDPZ)]), PlayAudio("chomp"), d.Die());
-	d.jinyin&&$P[a]&&(d.HP<=650)&&!d.nopaper&&(d.BreakPaper(d,a));
+    !(c % 3) ? (d.HP -= b) < 1 && d.Die(): (oSym.addTask(200, ClearChild, [NewImg(0, d.PicArr[1] ? d.PicArr[d.StaticGif] : d.PicArr[d.NormalGif],
+      "left:" + (d.AttackedLX - 25) + "px;top:" + (d.pixelTop + 60) + "px;height:15px;width:" + (d.width) + "px;z-index:" + d.zIndex, EDPZ)]), PlayAudio("chomp"), d.Die());
+    d.jinyin && $P[a] && (d.HP <= 700) && !d.nopaper && (d.BreakPaper(d, a));
   },
-  BreakPaper:function(a,c){
-	  a.nopaper=true;
-	  PlayAudio("newspaper_rarrgh2");
-	  var j=$P[c];
-	  		var R=Math.max(j.R-1,1);									
-		   do{
-				var Z=oZ.getArZ(j.AttackedRX,j.AttackedRX+160,R);
-				var zl=Z.length;
-				while(zl--){
-				Z[zl].Altitude==1&&j&&(Z[zl].getHit1(Z[zl],300,0),Z[zl].getr(Z[zl],120))
-				}
-			}while(R++<Math.min(j.R+1,oS.R))
-	  j&&(j.canTrigger = 1,j.DigestGif=4,
-		j.AttackGif=3,
-		j.NormalGif=2,
-	$(c).childNodes[1].src = "images/Plants/Chomper/Chomper.gif");
-	   j&&(a.NormalAttack=function(a) {
-            $P[a]&&($(a).childNodes[1].src =$P[a].PicArr[$P[a].AttackGif] + Math.random());
-            oSym.addTask(50,
-                function(c) {
-                    $P[c] && oSym.addTask(12,
-                        function(e) {
-                            var g = $P[e];
-                            g && (oSym.addTask(12,
-                                function(i) {
-                                    var j = $P[i];
-									var R=Math.max(j.R-1,1);									
-									do{
-									var Z=oZ.getArZ(j.AttackedRX,j.AttackedRX+160,R);
-									var zl=Z.length;
-									while(zl--){
-										Z[zl].Altitude==1&&j&&Z[zl].getHit1(Z[zl],50,0)
-									}
-									}while(R++<Math.min(j.R+1,oS.R))
-                                    j && (j.canTrigger = 1,$(i).childNodes[1].src = j.PicArr[j.NormalGif])
-                                },
-                                [e]))
-                        },
-                        [c])
+  BreakPaper: function(a, c) {
+    a.nopaper = true;
+    PlayAudio("newspaper_rarrgh2");
+    var j = $P[c];
+    var R = Math.max(j.R - 1, 1);
+	$(c).childNodes[1].src = "images/Plants/Chomper/haqi.gif";
+    do {
+      var Z = oZ.getArZ(j.AttackedLX, Math.min(j.AttackedRX + 160,oS.W),R);
+      var zl = Z.length;
+      while (zl--) {
+	  oSym.addTask(1,function(Z,zl,t,c){
+        Z[zl].Altitude == 1 && j && (Z[zl].getHit1(Z[zl], 300, 0), Z[zl].getr(Z[zl],5));
+		j&&(--t?oSym.addTask(1,arguments.callee,[Z,zl,t,c]):(j.canTrigger=1,$(c).childNodes[1].src = j.PicArr[j.NormalGif]))
+	  },[Z,zl,20,c])
+      }
+    } while (R++ < Math.min(j.R + 1, oS.R))
+    j && (j.DigestGif = 4,
+      j.AttackGif = 3,
+      j.NormalGif = 2);
+    j && (a.NormalAttack = function(a) {
+      $P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].AttackGif] + Math.random());
+      oSym.addTask(50,
+        function(c) {
+          $P[c] && oSym.addTask(12,
+            function(e) {
+              var g = $P[e];
+              g && (oSym.addTask(12,
+                function(i) {
+                  var j = $P[i];
+                  var R = Math.max(j.R - 1, 1);
+                  do {
+                    var Z = oZ.getArZ(j.AttackedLX, Math.min(j.AttackedRX + 160,oS.W), R);
+                    var zl = Z.length;
+                    while (zl--) {
+                      Z[zl].Altitude == 1 && j && Z[zl].getHit1(Z[zl], 50, 0)
+                    }
+                  } while (R++ < Math.min(j.R + 1, oS.R))
+                  j && (j.canTrigger = 1, $(i).childNodes[1].src = j.PicArr[j.NormalGif])
                 },
-                [a])
-        })
+                [e]))
+            },
+            [c])
+        },
+        [a])
+    })
   },
-        NormalAttack: function(a, b) {
-            $P[a]&&($(a).childNodes[1].src =$P[a].PicArr[$P[a].jinyinAttackGif] + Math.random());
-            oSym.addTask(70,
-                function(c, d) {
-                    $P[c] && oSym.addTask(18,
-                        function(e, f) {
-                            var g = $P[e],
-                                h;
-                            g && ((h = $Z[f]) && h.beAttacked && h.PZ ? $(e).childNodes[1].src = h.getRaven(e) ? (oSym.addTask(2600+Math.min(h.HP+h.OrnHP,1800),
-                                function(i) {
-                                    var j = $P[i];
-                                    j&&!j.nopaper&& (j.canTrigger = 1, $(i).childNodes[1].src =j.PicArr[j.NormalGif])
-                                },
-                                [e]), g.PicArr[g.DigestGif]) : (g.canTrigger = 1, g.PicArr[g.NormalGif]) : oSym.addTask(18,
-                                function(i) {
-                                    var j = $P[i];
-                                    j && (j.canTrigger = 1, $(i).childNodes[1].src =j.PicArr[j.NormalGif])
-                                },
-                                [e]))
-                        },
-                        [c, d])
-                },
-                [a, b])
-        }
-    }),
+  NormalAttack: function(a, b) {
+    $P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].AttackGif] + Math.random());
+    oSym.addTask(70,
+      function(c, d) {
+        $P[c] && oSym.addTask(18,
+          function(e, f) {
+            var g = $P[e],
+              h;
+            g && ((h = $Z[f]) && h.beAttacked && h.PZ ? $(e).childNodes[1].src = h.getRaven(e) ? (oSym.addTask(2600 + Math.min(h.HP + h.OrnHP, 1800),
+              function(i) {
+                var j = $P[i];
+                j && !j.nopaper && (j.canTrigger = 1, $(i).childNodes[1].src = j.PicArr[j.NormalGif])
+              },
+              [e]), g.PicArr[g.DigestGif]) : (g.canTrigger = 1, g.PicArr[g.NormalGif]) : oSym.addTask(18,
+              function(i) {
+                var j = $P[i];
+                j && (j.canTrigger = 1, $(i).childNodes[1].src = j.PicArr[j.NormalGif])
+              },
+              [e]))
+          },
+          [c, d])
+      },
+      [a, b])
+  }
+}),
     oFumeShroom = InheritO(CPlants, {
         EName: "oFumeShroom",
         CName: "大喷菇",
