@@ -1935,7 +1935,7 @@ getHurt:function(e, c, b) {
 		$P[c].NormalGif=2,
 	$(c).childNodes[1].src = "images/Plants/Chomper/Chomper.gif");
 	   $P[c]&&(a.NormalAttack=function(a) {
-            $P[a]&&($(a).childNodes[1].src =this.PicArr[this.AttackGif] + Math.random());
+            $P[a]&&($(a).childNodes[1].src =$P[a].PicArr[$P[a].AttackGif] + Math.random());
             oSym.addTask(70,
                 function(c) {
                     $P[c] && oSym.addTask(18,
@@ -1959,7 +1959,7 @@ getHurt:function(e, c, b) {
         })
   },
         NormalAttack: function(a, b) {
-            $P[a]&&($(a).childNodes[1].src =this.PicArr[this.AttackGif] + Math.random());
+            $P[a]&&($(a).childNodes[1].src =$P[a].PicArr[$P[a].AttackGif] + Math.random());
             oSym.addTask(70,
                 function(c, d) {
                     $P[c] && oSym.addTask(18,
