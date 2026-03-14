@@ -885,7 +885,7 @@ NormalAttack1: function() {
         width: 92,
         height: 72,
         beAttackedPointR: 72,
-        SunNum: 150,
+        SunNum: 175,
         PicArr: ["images/Card/Plants/SplitPea.png", "images/Plants/SplitPea/0.gif", "images/Plants/SplitPea/SplitPea.gif", "images/Plants/PB00.gif", "images/Plants/PB01.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "前后双向发射豌豆",
@@ -945,11 +945,15 @@ NormalAttack1: function() {
         NormalAttack: function(c) {
             var d = this,
                 e,
-				a=c? (oSym.addTask(15,
+				a=c?(oSym.addTask(15,
                     function(f) {
                         $P[f] && b(1)
                     },
-                    [d.id]), d.AttackedRX - 16) : d.AttackedLX - 40;
+                    [d.id]), d.AttackedRX - 16) : (oSym.addTask(15,
+                    function(f) {
+                        $P[f] && b(0)
+                    },
+                    [d.id]), d.AttackedLX - 40);
                var b = function() {
                     EditEle(d.BulletEle[c].cloneNode(false), {
                             id: e = "PB" + Math.random()
@@ -1822,7 +1826,7 @@ NormalAttack1: function() {
         width: 100,
         height: 226,
         beAttackedPointR: 67,
-        SunNum: 125,
+        SunNum: 100,
         coolTime: 30,
         PicArr: ["images/Card/Plants/Squash.png", "images/Plants/Squash/0.gif", "images/Plants/Squash/Squash.gif", "images/Plants/Squash/SquashAttack.gif", "images/Plants/Squash/SquashL.png", "images/Plants/Squash/SquashR.png"],
         AudioArr: ["squash_hmm", "gargantuar_thump"],
@@ -1883,6 +1887,7 @@ NormalAttack1: function() {
         height: 114,
         beAttackedPointR: 70,
         SunNum: 150,
+		HP:500,
         PicArr: ["images/Card/Plants/Chomper.png", "images/Plants/Chomper/0.gif", "images/Plants/Chomper/Chomper.gif", "images/Plants/Chomper/ChomperAttack.gif", "images/Plants/Chomper/ChomperDigest.gif"],
         Tooltip: "能一口气吞下一只僵尸, 但处于咀嚼状态中十分脆弱",
         Produce: '大嘴花可以一口吞掉一整只僵尸，但是他们消化僵尸的时候很脆弱。<p>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">非常近</font><br>特点：<font color="#FF0000">消化时间很长（26s+吞吃僵尸总血量）</font></p>大嘴花几乎可以去“恐怖小店”，来表演它的绝技了，不过他的经纪人压榨了他太多的钱，所以他没去成。尽管如此，大嘴花没有怨言，只说了句这只是交易的一部分。',
@@ -1900,9 +1905,22 @@ NormalAttack1: function() {
         TriggerCheck: function(a) {
             this.AttackCheck2(a) && (this.canTrigger = 0, this.NormalAttack(this.id, a.id))
         },
+		jinyinAct:function(a){
+			a.HP*=2;
+		},
         AttackCheck2: function(a) {
             return a.Altitude == 1 && a.beAttacked
         },
+getHurt:function(e, c, b) {
+    var d = this,
+      a = d.id;
+    !(c % 3) ? (d.HP -= b) < 1 && d.Die(): (oSym.addTask(200, ClearChild, [NewImg(0, d.PicArr[1] ? d.PicArr[d.StaticGif] : d.PicArr[d.NormalGif], 
+"left:" + (d.AttackedLX - 25) + "px;top:" + (d.pixelTop + 60) + "px;height:15px;width:" + (d.width) + "px;z-index:" + d.zIndex, EDPZ)]), PlayAudio("chomp"), d.Die());
+	$Z[a]&&d.HP<500&&(d.BreakPaper(d,d.id));
+  },
+  BreakPaper:function(a,c){
+	  
+  },
         NormalAttack: function(a, b) {
             $(a).childNodes[1].src = "images/Plants/Chomper/ChomperAttack.gif" + $Random + Math.random();
             oSym.addTask(70,
