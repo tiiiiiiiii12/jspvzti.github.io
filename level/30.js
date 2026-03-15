@@ -1,6 +1,6 @@
 oS.Init({
   PName:[oLilyPad,oThreepeater,oJalapeno,oSpikeweed,oTorchwood,oTangleKelp,oTallNut,oRepeater],
-  ZName:[oZombie,oZombie2,oZombie3,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oGargantuar,oConeheadZombie,oBucketheadZombie,oDolphinRiderZombie,oZomboni,oSnorkelZombie,oPeaZombie,oGatlingPeaZombie],
+  ZName:[oZombie,oZombie2,oZombie3,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oGargantuar,oConeheadZombie,oBucketheadZombie,oDolphinRiderZombie,oZomboni,oSnorkelZombie,oPeaZombie,oGatlingPeaZombie,oImp],
   PicArr:["images/interface/background3.jpg","images/interface/trophy.png"],
   Coord:2,
   SunNum:50,
