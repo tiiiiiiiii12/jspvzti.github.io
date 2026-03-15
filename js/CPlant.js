@@ -1965,7 +1965,7 @@ jinyinAttackGif2: 8,
                     var Z = oZ.getArZ(j.AttackedLX, Math.min(j.AttackedRX + 160,oS.W), R);
                     var zl = Z.length;
                     while (zl--) {
-                      Z[zl].Altitude == 1 && j && Z[zl].getHit1(Z[zl], 50, 0)
+                      Z[zl].Altitude == 1 && j && Z[zl].getHit1(Z[zl], 40, 0)
                     }
                   } while (R++ < Math.min(j.R + 1, oS.R))
                   j && (j.canTrigger = 1, $(i).childNodes[1].src = j.PicArr[j.NormalGif])
