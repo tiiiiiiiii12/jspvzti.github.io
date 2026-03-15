@@ -8,6 +8,7 @@ var oGargantuar = InheritO(oZombie, {
   ImplessDieGif: 6,
   ImplessWalkGif: 8,
   DieGif: 7,
+Lvl:7,
   AudioArr: ["ImpToLand", "GargantuarDie","zaji"],
   width: 350,
   CanPass: function(d, c) {
@@ -67,6 +68,9 @@ var oGargantuar = InheritO(oZombie, {
 					return d
 				   }
   },
+getRaven:function(){
+	this.getHit0(this,40)
+},
   jinyinAct: function() {},
   JudgeAttack: function() {
     var g = this,
