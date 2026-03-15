@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oHypnoShroom, oScaredyShroom, oIceShroom, oDoomShroom],
-	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oDancingZombie, oScreenDoorZombie, oBackupDancer, oBucketheadZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oDancingZombie, oScreenDoorZombie, oBackupDancer, oBucketheadZombie,oPeaZombie,oImp],
 	PicArr: ["images/interface/background2.jpg", "images/interface/Tombstones.png", "images/interface/Tombstone_mounds.png", "images/interface/ZombieNoteSmall.png", "images/interface/ZombieNote2.png"],
 	backgroundImage: "images/interface/background2.jpg",
 	CanSelectCard: 1,
@@ -17,7 +17,7 @@ oS.Init({
 		ar: [5, 9, 11]
 	},
 	UserDefinedFlagFunc: function(a) {
-		oP.FlagNum == oP.FlagZombies && oP.SetTimeoutTomZombie([oZombie, oConeheadZombie, oBucketheadZombie])
+		oP.FlagNum == oP.FlagZombies && oP.SetTimeoutTomZombie([oZombie, oConeheadZombie, oBucketheadZombie,oNewspaperZombie,oPeaZombie])
 	},
 	StartGameMusic: "Ultimate battle"
 }, {
@@ -27,12 +27,13 @@ oS.Init({
 		[oZombie3, 1, 1],
 		[oConeheadZombie, 3, 1],
 		[oScreenDoorZombie, 1, 1],
-		[oDancingZombie, 1, 1]
+		[oPeaZombie, 2, 1],
+		[oImp, 1, 1]
 	],
 	FlagNum: 10,
 	FlagToSumNum: {
 		a1: [3, 5, 9, 10, 13, 15, 19],
-		a2: [1, 2, 3, 50, 4, 5, 6, 65]
+		a2: [1, 3, 4, 40, 8, 10, 12, 80]
 	},
 	FlagToMonitor: {
 		9: [ShowLargeWave, 0],
