@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster],
-	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oScreenDoorZombie, oPoleVaultingZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oScreenDoorZombie, oPoleVaultingZombie,oImp,oNewspaperZomhie],
 	PicArr: function() {
 		var a = oHypnoShroom.prototype,
 			b = a.PicArr;
@@ -9,7 +9,7 @@ oS.Init({
 	backgroundImage: "images/interface/background2.jpg",
 	CanSelectCard: 1,
 	DKind: 0,
-	SunNum: 50,
+	SunNum: 100,
 	LevelName: "关卡 2-5",
 	LvlEName: 15,
 	LargeWaveFlag: {
@@ -33,12 +33,15 @@ oS.Init({
 		[oZombie3, 1, 1],
 		[oConeheadZombie, 2, 1],
 		[oPoleVaultingZombie, 1, 1],
+		[oPeaZombie, 1, 1],
+		[oImp, 1, 1],
+		[oNewspaperZombie, 1, 1],
 		[oScreenDoorZombie, 1, 1]
 	],
 	FlagNum: 20,
 	FlagToSumNum: {
 		a1: [3, 5, 9, 10, 13, 15, 19],
-		a2: [1, 2, 3, 15, 4, 5, 6, 30]
+		a2: [2, 2, 4, 20, 8, 10, 12, 45]
 	},
 	FlagToMonitor: {
 		9: [ShowLargeWave, 0],
