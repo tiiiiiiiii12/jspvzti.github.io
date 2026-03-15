@@ -562,7 +562,7 @@ oSnowPea = InheritO(oPeashooter, {
     var A = "hp" + Math.random();
     dskill.id = A;
     var C = $(A);
-	NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", "left:" + (b.width * 0.5 - 25) + "px;top:" + (b.height - 30) + "px", $(b.id));
+	NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", "left:" + (b.width * 0.5 - 34) + "px;top:" + (b.height - 30) + "px", $(b.id));
     oSym.addTask(0, function(C, B, b) {
       ClearChild(C);
       $(b.id) && $(b.id).appendChild(C);
