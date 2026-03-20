@@ -2397,6 +2397,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             NormalDie: function() {
                 var b = this;
                 PlayAudio("explosion");
+				b.Ele.FumeDoor&&ClearChild(b.Ele.FumeDoor);
                 b.EleBody.src = b.PicArr[b.DieGif] + Math.random();
                 oSym.addTask(70, ClearChild, [b.Ele]);
                 b.HP = 0;
@@ -2406,6 +2407,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             },
             DisappearDie: function() {
                 var b = this;
+				this.Ele.FumeDoor&&ClearChild(this.Ele.FumeDoor);
                 ClearChild(b.Ele);
                 b.HP = 0;
                 delete $Z[b.id];
@@ -2414,6 +2416,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             },
             ExplosionDie: function() {
                 var b = this;
+				b.Ele.FumeDoor&&ClearChild(b.Ele.FumeDoor);
                 b.EleBody.src = b.PicArr[b.BoomDieGif] + Math.random();
                 oSym.addTask(300, ClearChild, [b.Ele]);
                 b.HP = 0;
