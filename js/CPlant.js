@@ -69,6 +69,15 @@ var CPlants = NewO({
             oGd.add(e, h + "_" + a + "_" + e.PKind);
             e.PrivateBirth(e, n)
         },
+	    getFreeze: function(d, c,a) {
+                    oSym.addTask(a||400,
+                        function(g, f, e) {
+                            ClearChild(e);
+                            var h = $P[g];
+                            h && h.FreeFreezeTime == f && (h.FreeFreezeTime=0)
+                        },
+                        [c, d.FreeFreezeTime = oSym.Now + (a||400), NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", d.getShadow(d), $(d.id))])
+                },
         getShadow: function(a) {
             return "left:" + (a.width * 0.5 - 48) + "px;top:" + (a.height - 22) + "px"
         },
@@ -102,7 +111,7 @@ var CPlants = NewO({
         },
         CheckLoop: function(b, c) {
             var a = this.id;
-            this.NormalAttack(b);
+            !this.FreeFreezeTime&&this.NormalAttack(b);
             oSym.addTask(140+this.AttTime,
                 function(e, f, h) {
                     var g;
@@ -497,7 +506,7 @@ var CPlants = NewO({
       EDPZ);
             $(a.id).style.opacity=0.7;
             s.onclick=function(){
-                !a.dianji&&a.NormalAttack(a);
+                !(a.dianji||a.FreeFreezeTime)&&a.NormalAttack(a);
                 a.dianji=true;
                 oSym.addTask(50,function(a){
                 a.dianji=false
@@ -543,6 +552,7 @@ oSnowPea = InheritO(oPeashooter, {
   SunNum: 250,
   BKind: -1,
   power: 20,
+  getFreeze:function(){},
   PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
   AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
   Tooltip: "寒冰射手可造成伤害, 同时又有减速效果",
@@ -656,6 +666,7 @@ while (e--) {
         height: 71,
         beAttackedPointR: 53,
         SunNum: 250,
+		PeaDire:0,
         jinyinAct:function(){},
         PicArr: ["images/Card/Plants/Repeater.png", "images/Plants/Repeater/0.gif", "images/Plants/Repeater/Repeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
@@ -690,7 +701,7 @@ while (e--) {
                         height: "46px"
                     })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ?BSpeed:-BSpeed)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g,BSpeed])) : ClearChild(j)
                 },
-                [b, $(b), 5,0, a.AttackedLX, a.R, 0, 0, a.AttackedLX - 40, oGd.$Torch,Math.random()*3+3])
+                [b, $(b), 5,a.PeaDire, a.AttackedLX, a.R, 0, 0, a.AttackedLX - 40, oGd.$Torch,Math.random()*3+3])
         },
         NormalAttack: function(a) {
             oSym.addTask(0,
@@ -1232,7 +1243,7 @@ NormalAttack1: function() {
         },
         getHurt2: function(d, b, a) {
             var c = this;
-            b > 2 ? (c.HP -= a) < 1 && c.Die() : c.NormalAttack(c.pixelLeft, c.pixelRight, c.R)
+            b > 2 ? (c.HP -= a) < 1 && c.Die() : !c.FreeFreezeTime&&(c.NormalAttack(c.pixelLeft-50, c.pixelRight+50, c.R))
         },
         PrivateBirth: function(b, a) {
             !a && oSym.addTask(b.jinyin?0:1500,
@@ -1250,7 +1261,7 @@ NormalAttack1: function() {
         TriggerCheck: function(e, c) {
             var a = this.R,
                 b = this.C;
-            e.beAttacked && e.Altitude < 2 && !oGd.$[a + "_" + b + "_2"] && this.NormalAttack(this.pixelLeft-50,this.pixelRight+50, this.R)
+            e.beAttacked && e.Altitude < 2 &&!e.FreeFreezeTime&&&& !oGd.$[a + "_" + b + "_2"] && this.NormalAttack(this.pixelLeft-50,this.pixelRight+50, this.R)
         },
         NormalAttack: function(j, h, e) {
             var g = this,
@@ -1293,6 +1304,7 @@ NormalAttack1: function() {
         height: 83,
         beAttackedPointR: 53,
         SunNum: 175,
+		getFreeze:function(){},
         PicArr: ["images/Card/Plants/Torchwood.png", "images/Plants/Torchwood/0.gif", "images/Plants/Torchwood/Torchwood.gif", "images/Plants/PB00.gif", "images/Plants/PB01.gif", "images/Plants/PB10.gif", "images/Plants/PB11.gif", "images/Plants/Torchwood/SputteringFire.gif"],
         AudioArr: ["firepea", "ignite", "ignite2"],
         Tooltip: "通过火炬树桩的豌豆将变为火球",
@@ -1355,6 +1367,7 @@ NormalAttack1: function() {
         Produce: "",
         CanAttack: 1,
         PKind:10,
+		getFreeze:function(){},
         InitTrigger: function() {},
         getHurt: function() {},
         CanGrow: function(d, e, f) {
@@ -1544,6 +1557,7 @@ NormalAttack1: function() {
         beAttackedPointR: 92,
         SunNum: 150,
         coolTime: 50,
+		getFreeze:function(){},
         PicArr: ["images/Card/Plants/CherryBomb.png", "images/Plants/CherryBomb/0.gif", "images/Plants/CherryBomb/CherryBomb.gif", "images/Plants/CherryBomb/Boom.gif" + $Random],
         AudioArr: ["cherrybomb"],
         Tooltip: "炸掉一定区域内的所有僵尸",
@@ -2430,6 +2444,7 @@ jinyinAttackGif2: 8,
         beAttackedPointR: 63,
         SunNum: 75,
         coolTime: 50,
+		getFreeze:function(){},
         PicArr: ["images/Card/Plants/IceShroom.png", "images/Plants/IceShroom/0.gif", "images/Plants/IceShroom/IceShroom.gif", "images/Plants/IceShroom/IceShroomSleep.gif", "images/Plants/IceShroom/Snow.gif", "images/Plants/IceShroom/icetrap.gif"],
         AudioArr: ["frozen", "wakeup"],
         Tooltip: "暂时使画面里的所有敌人停止行动",
@@ -2837,7 +2852,7 @@ NormalAttack2: function() {
                      oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime>=-50)&&(oGd.$[i + "_" + l+"_1"].AttTime-=60);
                     oSym.addTask(2000,function(f){
 						var c;
-						$P[f.id]&&((c=CustomSpecial(oPlantern,a,b)).jinyinAct(c))
+						$P[f.id]&&((c=CustomSpecial(oPlantern,a,b)).jinyinAct(c),c.jinyin=1)
 					},[c]);
                   }
                 }
@@ -2889,7 +2904,7 @@ NormalAttack2: function() {
         },
         CheckLoop: function(b, c) {
             var a = this.id;
-            this.NormalAttack(b);
+            !this.FreeFreezeTime&&this.NormalAttack(b);
             this.ES();
             this.Status == 0 && oSym.addTask(140,
                 function(e, f, h) {
@@ -2909,7 +2924,7 @@ NormalAttack2: function() {
     },
         CheckLoop2: function(b, c) {
             var a = this.id;
-            this.NormalAttack(b);
+            !this.FreeFreezeTime&&this.NormalAttack(b);
             this.ES();
             this.Status && oSym.addTask(140,
                 function(e, f, h) {
@@ -3099,6 +3114,7 @@ NormalAttack2: function() {
     oRepeater2 = InheritO(oRepeater, { // 编者注: 我觉得目前版本 jspvz 比较难受的一点就是子弹不是模块化的，导致要修改其属性就得完全重写一个，其实定义一个子弹的类会更方便，这里便不再过多解释
         EName: "oRepeater2",
         CName: "反向双发射手",
+		PeaDire:1,
         PicArr: ["images/Card/Plants/Repeater2.png", "images/Plants/Repeater2/0.gif", "images/Plants/Repeater2/Repeater2.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         NormalAttack1: function() {
             var a = this,
@@ -3128,7 +3144,7 @@ NormalAttack2: function() {
                         height: "46px"
                     })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ? 5 : -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g])) : ClearChild(j)
                 },
-                [b, $(b), 20, 1, a.AttackedLX + 30, a.R, 0, 0, a.AttackedRX, oGd.$Torch])
+                [b, $(b), 20, a.PeaDire, a.AttackedLX + 30, a.R, 0, 0, a.AttackedRX, oGd.$Torch])
         },
         getTriggerRange: function(a, b, c) {
             return [
