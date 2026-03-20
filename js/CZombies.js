@@ -2245,7 +2245,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                     d.getHit0 = d.getHit1 = d.getHit2 = d.getHit3 = function() {};
                     return;
                 case c < 391:
-					d.jinyin&&(d.OSpeed=d.Speed=4.8);
+					d.num&&(d.OSpeed=d.Speed=4.8);
                     d.EleBody.src = "images/Zombies/Zomboni/3.gif";
                     break;
                 case c < 871:
@@ -2335,6 +2335,36 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 (f.AttackedLX += (b = f.Speed)) > oS.W ? (g.splice(c, 1), f.DisappearDie(), e = 0) : (f.ZX = f.AttackedRX += b, f.Ele.style.left = Math.ceil(f.X += b) + "px", e = 1);
                 return e
             },
+			check:1,
+			jinyinAct:function(a){
+				a.num=Math.round(Math.random()*1+0);
+				var z=$(a.id);
+    z.FumeDoor = "Fume" + Math.random();
+    var Sh = NewImg(z.FumeDoor, num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:80px;", 0);
+    z.appendChild(Sh); //寒冰头与大喷菇
+    num==0 && (oSym.addTask(500, function(a) {
+		var LR=Math.max(a.R-1,1);
+		do{
+        let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.ZX - 120,a.ZX + 120, LR),
+          Tz = A.length;
+        for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX)+1; i++) {
+          for (let l = 0; l <= 3; l++) {
+            var m = oGd.$[LR + "_" + i + "_" + l];
+            a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500)));
+          }
+        }
+        while (Tz--) {
+          (t = A[Tz]) && (t.getFreeze(t,t.id,500))
+        }
+	}while(LR++<Math.min(a.R+1,oS.R))
+      $Z[a.id]&& oSym.addTask(1000, arguments.callee, [a])
+    }, [a])); 
+		!(a.PZ == a.check) && (
+     EditImg($(P.FumeDoor), 0, num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", {
+            transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
+            left: a.PZ ? "25px" : "40px"
+          }, 0)),a.check = a.PZ);
+			},
             getPea: function(c, b) {
                 PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)]);
                 c.getHit0(c, b)
