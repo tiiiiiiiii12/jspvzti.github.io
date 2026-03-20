@@ -2363,7 +2363,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
      EditImg($(P.FumeDoor), 0, num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
             left: a.PZ ? "25px" : "40px"
-          }, 0)),a.check = a.PZ);
+          }, 0),a.check = a.PZ);
 			},
             getPea: function(c, b) {
                 PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)]);
