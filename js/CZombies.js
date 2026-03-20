@@ -2342,7 +2342,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
     z.FumeDoor = "Fume" + Math.random();
     var Sh = NewImg(z.FumeDoor, num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:80px;", 0);
     z.appendChild(Sh); //寒冰头与大喷菇
-    num==0 && (oSym.addTask(500, function(a) {
+    a.num==0 && (oSym.addTask(500, function(a) {
 		var LR=Math.max(a.R-1,1);
 		do{
         let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.ZX - 120,a.ZX + 120, LR),
@@ -2350,14 +2350,14 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX)+1; i++) {
           for (let l = 0; l <= 3; l++) {
             var m = oGd.$[LR + "_" + i + "_" + l];
-            a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500)));
+            a.PZ&&a.canWalk(a,a.id)&&(m && m.getFreeze(m, m.id,500));
           }
         }
         while (Tz--) {
           (t = A[Tz]) && (t.getFreeze(t,t.id,500))
         }
-	}while(LR++<Math.min(a.R+1,oS.R))
-      $Z[a.id]&& oSym.addTask(1000, arguments.callee, [a])
+	}while(LR++ < Math.min(a.R+1,oS.R))
+      $Z[a.id]&&oSym.addTask(1000, arguments.callee, [a])
     }, [a])); 
 		!(a.PZ == a.check) && (
      EditImg($(P.FumeDoor), 0, num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", {
@@ -2407,7 +2407,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             },
             DisappearDie: function() {
                 var b = this;
-				this.Ele.FumeDoor&&ClearChild(this.Ele.FumeDoor);
+				b.Ele.FumeDoor&&ClearChild(b.Ele.FumeDoor);
                 ClearChild(b.Ele);
                 b.HP = 0;
                 delete $Z[b.id];
