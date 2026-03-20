@@ -2340,7 +2340,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
 				a.num=Math.round(Math.random()*1+0);
 				var z=$(a.id);
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:80px;", 0);
+    var Sh = NewImg(z.FumeDoor, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:80px;", 0);
     z.appendChild(Sh); //寒冰头与大喷菇
     a.num==0 && (oSym.addTask(500, function(a) {
 		var LR=Math.max(a.R-1,1);
@@ -2360,7 +2360,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
       $Z[a.id]&&oSym.addTask(1000, arguments.callee, [a])
     }, [a])); 
 		!(a.PZ == a.check) && (
-     EditImg($(P.FumeDoor), 0, num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", {
+     EditImg($(P.FumeDoor), 0, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
             left: a.PZ ? "25px" : "40px"
           }, 0),a.check = a.PZ);
