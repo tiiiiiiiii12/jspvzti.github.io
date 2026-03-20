@@ -233,7 +233,7 @@ var CZombies = function(b, a) {
                 },
                 getFreeze: function(d, c,a) {
                     d.Speed = 0;
-                    oSym.addTask(a||400,
+                    oSym.addTask(400||a,
                         function(g, f, e) {
                             ClearChild(e);
                             var h = $Z[g];
