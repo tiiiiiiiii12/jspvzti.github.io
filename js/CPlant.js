@@ -1261,7 +1261,7 @@ NormalAttack1: function() {
         TriggerCheck: function(e, c) {
             var a = this.R,
                 b = this.C;
-            e.beAttacked && e.Altitude < 2 &&!e.FreeFreezeTime&&&& !oGd.$[a + "_" + b + "_2"] && this.NormalAttack(this.pixelLeft-50,this.pixelRight+50, this.R)
+            e.beAttacked && e.Altitude < 2 &&!e.FreeFreezeTime&&!oGd.$[a + "_" + b + "_2"] && this.NormalAttack(this.pixelLeft-50,this.pixelRight+50, this.R)
         },
         NormalAttack: function(j, h, e) {
             var g = this,
