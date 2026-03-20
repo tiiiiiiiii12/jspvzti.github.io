@@ -2327,12 +2327,15 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 c = GetC(h);
                 c > -1 && c < n[1] && (oGd.$Crater[j + "_" + c] = 1, n[1] = c);
                 h > 120 && h < n[2] && (n[2] = h, l.firstChild.style.clip = "rect(0,auto,auto," + f + "px)", l.childNodes[1].style.left = Math.max(0, f) + "px");
+				e.PrivateAct(e);
                 return m
             },
+			PrivateAct:function(){},
             ChkActs1: function(f, d, g, c) {
                 var b, e;
                 f.JudgeAttack();
                 (f.AttackedLX += (b = f.Speed)) > oS.W ? (g.splice(c, 1), f.DisappearDie(), e = 0) : (f.ZX = f.AttackedRX += b, f.Ele.style.left = Math.ceil(f.X += b) + "px", e = 1);
+				f.PrivateAct(f);
                 return e
             },
 			check:1,
@@ -2340,7 +2343,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
 				a.num=Math.round(Math.random()*1+0);
 				var z=$(a.id);
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:80px;", 0);
+    var Sh = NewImg(z.FumeDoor, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:100px;top:280px;", 0);
     z.appendChild(Sh); //寒冰头与大喷菇
     a.num==0 && (oSym.addTask(500, function(a) {
 		var LR=Math.max(a.R-1,1);
@@ -2358,12 +2361,14 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         }
 	}while(LR++ < Math.min(a.R+1,oS.R))
       $Z[a.id]&&oSym.addTask(1000, arguments.callee, [a])
-    }, [a])); 
+    }, [a]));
+	a.PrivateAct=function(a){
 		!(a.PZ == a.check) && (
      EditImg($(P.FumeDoor), 0, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
-            left: a.PZ ? "25px" : "40px"
+            left: a.PZ ? "100px" : "180px"
           }, 0),a.check = a.PZ);
+	}
 			},
             getPea: function(c, b) {
                 PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)]);
