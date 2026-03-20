@@ -2273,7 +2273,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             beAttackedPointL: 140,
             beAttackedPointR: 290,
             BreakPoint: 200,
-            SunNum: 350,
+            SunNum: 300,
             GetDY: function() {
                 return 0
             },
