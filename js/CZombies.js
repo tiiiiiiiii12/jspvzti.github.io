@@ -2367,7 +2367,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
 		!(a.PZ == a.check) && (
      EditImg($(P.FumeDoor), 0, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
-            left: a.PZ ? "100px" : "180px"
+            left: a.PZ ? "100px" : "290px"
           }, 0),a.check = a.PZ);
 	}
 			},
