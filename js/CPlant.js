@@ -2151,7 +2151,7 @@ oGloomShroom = InheritO(oFumeShroom, {
   PicArr: ["images/Card/Plants/GloomShroom.png", "images/Plants/GloomShroom/0.gif", "images/Plants/GloomShroom/GloomShroom.gif", "images/Plants/GloomShroom/GloomShroomSleep.gif", "images/Plants/GloomShroom/GloomShroomAttack.gif", "images/Plants/GloomShroom/GloomShroomBullet.gif"],
   AudioArr: ["kernelpult", "kernelpult2"],
   Tooltip: "围绕自身释放大量绵羊音<br>(需要大喷菇)",
-  Produce: '它有两种形态，点击可切换（有冷却提示），两种形态有不同的效果<br>寒冰形态：对僵尸造成伤害和概率击退<br>火焰形态：伤害更高，有概率直接破甲(不会抵消减速)<font color="#FF0000">必须种植在大喷菇上</font>起初人们一直非议他，后来曾哥用自己独特的绵羊音横扫了宇宙拆迁办，全世界都拜倒在他的脚下。“听说有个节目叫‘快男’？”曾哥说，“没有我在他们真应该感到羞愧。”他于是决定明年去看看。',
+  Produce: '它有两种形态，点击可切换（有冷却提示），两种形态有不同的效果<br>寒冰形态：对僵尸造成伤害和概率击退<br>火焰形态：伤害更高，有概率直接破甲(不会抵消减速)<br><font color="#FF0000">必须种植在大喷菇上</font><br>起初人们一直非议他，后来曾哥用自己独特的绵羊音横扫了宇宙拆迁办，全世界都拜倒在他的脚下。“听说有个节目叫‘快男’？”曾哥说，“没有我在他们真应该感到羞愧。”他于是决定明年去看看。',
   CanGrow: function(b, a, d) {
     var c = b[1];
     return c && c.EName == "oFumeShroom"
