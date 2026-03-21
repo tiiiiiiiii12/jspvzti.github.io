@@ -922,6 +922,7 @@ NormalAttack1: function() {
         PrivateDie: function(a) {
             a.BulletEle.length = 0
         },
+		jinyinAct:function(){},
         TriggerCheck: function(b, a) {
             if (this.aTri[a]) {
                 return
