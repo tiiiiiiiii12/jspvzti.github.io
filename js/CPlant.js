@@ -2086,143 +2086,127 @@ jinyinAttackGif2: 8,
                 })
         }
     }),
-    oCoffeeBean = InheritO(CPlants, {
-        EName: "oCoffeeBean",
-        CName: "咖啡豆",
-        width: 39,
-        height: 97,
-        beAttackedPointL: 10,
-        beAttackedPointR: 29,
-        SunNum: 75,
-        PKind: 3,
-		coolTime:15,
-        canEat: 0,
-        PicArr: ["images/Card/Plants/CoffeeBean.png", "images/Plants/CoffeeBean/0.gif", "images/Plants/CoffeeBean/CoffeeBean.gif", "images/Plants/CoffeeBean/CoffeeBeanEat.gif" + $Random],
-        AudioArr: ["coffee", "wakeup"],
-        Tooltip: "唤醒在白天里睡觉的蘑菇类植物",
-        Produce: '咖啡豆，可以唤醒睡眠中的蘑菇们。<br>精英形态：使后种植的植物全精英，持续10秒<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">可以种在其他植物上，用来唤醒蘑菇们</font></p>咖啡豆：“嘿，愉快的人啊！嘿，悲伤的人啊！是谁？嘿！你瞧见那个东西没？什么东西？哇！是被灌醉的小丑！”嗯，咖啡豆确定，这样可以让自己很兴奋。',
-        InitTrigger: function() {},
-        GetDBottom: function() {
-            return 49
-        },
-        GetDY: function() {
-            return -30
-        },
-        CanGrow: function(a, b) {
-            return a[1]||a[3]||a[2]
-        },
-        BirthStyle: function(c, d, b, a) {
-            b.childNodes[1].src = this.PicArr[3] + Math.random();
-            EditEle(b, {
-                    id: d
-                },
-                a, EDPZ)
-        },
-        PrivateBirth: function(a) {
-            SetHidden($(a.id).firstChild);
-            a.jinyin&&($(a.id).style.opacity=0.5);
-            PlayAudio("coffee");
-            oSym.addTask(240,
-                function(c) {
-                    PlayAudio("wakeup");
-                    var d = oGd.$[c],
-                        b;
-					a.jinyin&&(EDAll.style.opacity=0.5,CPlants.prototype.jinyin=1);
-			oSym.addTask(1000,function() {
-                CPlants.prototype.jinyin=0;
-				EDAll.style.opacity=1;
-                },[]);
-                    d && (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
-                    a.Die()
-                },
-                [a.R + "_" + a.C + "_1"])
-        }
-    }),
-    oGloomShroom = InheritO(oFumeShroom, {
-        EName: "oGloomShroom",
-        CName: "曾哥",
-        width: 88,
-        height: 83,
-        beAttackedPointR: 68,
-        SunNum: 150,
-        coolTime: 50,
-        PicArr: ["images/Card/Plants/GloomShroom.png", "images/Plants/GloomShroom/0.gif", "images/Plants/GloomShroom/GloomShroom.gif", "images/Plants/GloomShroom/GloomShroomSleep.gif", "images/Plants/GloomShroom/GloomShroomAttack.gif", "images/Plants/GloomShroom/GloomShroomBullet.gif"],
-        AudioArr: ["kernelpult", "kernelpult2"],
-        Tooltip: "围绕自身释放大量绵羊音<br>(需要大喷菇)",
-        Produce: '伪娘终结者，喜欢围绕自身释放大量绵羊音<p><font color="#FF0000">必须种植在大喷菇上</font></p>起初人们一直非议他，后来曾哥用自己独特的绵羊音横扫了宇宙拆迁办，全世界都拜倒在他的脚下。“听说有个节目叫‘快男’？”曾哥说，“没有我在他们真应该感到羞愧。”他于是决定明年去看看。',
-        CanGrow: function(b, a, d) {
-            var c = b[1];
-            return c && c.EName == "oFumeShroom"
-        },
-        BirthStyle: function(c, d, b, a) {
-            oGd.$[c.R + "_" + c.C + "_1"] && oGd.$[c.R + "_" + c.C + "_1"].Sleep && (c.canTrigger = 0, c.Sleep = 1, b.childNodes[1].src = c.PicArr[3]);
-            EditEle(b, {
-                id: d
-            }, a, EDPZ);
-        },
-        GetDX: CPlants.prototype.GetDX,
-        PrivateBirth: function(b) {
-            var a = b.id;
-            NewEle(a + "_Bullet", "div", "position:absolute;visibility:hidden;width:210px;height:200px;left:" + (b.pixelLeft - 60) + "px;top:" + (b.pixelTop - 65) + "px;background:url(images/Plants/GloomShroom/GloomShroomBullet.gif);z-index:" + (b.zIndex + 1), 0, EDPZ)
-        },
-        PrivateDie: function(a) {
-            ClearChild($(a.id + "_Bullet"))
-        },
-        getTriggerRange: function(c, d, e) {
-            var f = GetX(this.C),
-                b = this.MinX = f - 120,
-                a = this.MaxX = f + 120;
-            return [
-                [b, a, 0]
-            ]
-        },
-        getTriggerR: function(c) {
-            var b = this.MinR = c > 2 ? c - 1 : 1,
-                a = this.MaxR = c < oS.R ? Number(c) + 1 : c;
-            return [b, a]
-        },
-        NormalAttack: function() {
-            var k = this,
-                g, f = k.MaxR,
-                c = k.MinX,
-                b = k.MaxX,
-                e, h, a, j = k.id,
-                d = $(j),
-                l = j + "_Bullet";
-            for (g = k.MinR; g <= f; g++) {
-                e = oZ.getArZ(c, b, g);
-                for (h = e.length; h--;
-                    (a = e[h]).Altitude < 2 && (a.getHit1(a, 80),a.getr(a,20))) {}
-            }
-            oSym.addTask(100,
-                function(i) {
-                    PlayAudio(["kernelpult", "kernelpult2"][Math.floor(Math.random() * 2)]);
-                    --i && oSym.addTask(100, arguments.callee, [i])
-                },
-                [4]);
-            d.childNodes[1].src = "images/Plants/GloomShroom/GloomShroomAttack.gif";
-            SetVisible($(l));
-            ImgSpriter(l, j, [
-                    ["0 0", 9, 1],
-                    ["0 -200px", 9, 2],
-                    ["0 -400px", 9, 3],
-                    ["0 -600px", 9, 4],
-                    ["0 -800px", 9, 5],
-                    ["0 -1000px", 9, 6],
-                    ["0 -1200px", 9, 7],
-                    ["0 -1400px", 9, 8],
-                    ["0 -1600px", 9, 9],
-                    ["0 -1800px", 9, 10],
-                    ["0 -2000px", 9, 11],
-                    ["0 -2200px", 9, -1]
-                ], 0,
-                function(m, n) {
-                    var i = $(n);
-                    $P[n] && (i.childNodes[1].src = "images/Plants/GloomShroom/GloomShroom.gif");
-                    SetHidden($(m))
-                })
-        }
-    }),
+oGloomShroom = InheritO(oFumeShroom, {
+  EName: "oGloomShroom",
+  CName: "曾哥",
+  width: 88,
+  height: 83,
+  beAttackedPointR: 68,
+  SunNum: 350,
+  coolTime: 50,
+  yuansu: 0,
+  power: 0,
+  PicArr: ["images/Card/Plants/GloomShroom.png", "images/Plants/GloomShroom/0.gif", "images/Plants/GloomShroom/GloomShroom.gif", "images/Plants/GloomShroom/GloomShroomSleep.gif", "images/Plants/GloomShroom/GloomShroomAttack.gif", "images/Plants/GloomShroom/GloomShroomBullet.gif"],
+  AudioArr: ["kernelpult", "kernelpult2"],
+  Tooltip: "围绕自身释放大量绵羊音<br>(需要大喷菇)",
+  Produce: '它有两种形态，点击可切换（有冷却提示），两种形态有不同的效果<br>寒冰形态：对僵尸造成伤害和概率击退<br>火焰形态：伤害更高，有概率直接破甲(不会抵消减速)<font color="#FF0000">必须种植在大喷菇上</font>起初人们一直非议他，后来曾哥用自己独特的绵羊音横扫了宇宙拆迁办，全世界都拜倒在他的脚下。“听说有个节目叫‘快男’？”曾哥说，“没有我在他们真应该感到羞愧。”他于是决定明年去看看。',
+  CanGrow: function(b, a, d) {
+    var c = b[1];
+    return c && c.EName == "oFumeShroom"
+  },
+  BirthStyle: function(c, d, b, a) {
+    oGd.$[c.R + "_" + c.C + "1"] && oGd.$[c.R + "_" + c.C + "1"].Sleep && (c.canTrigger = 0, c.Sleep = 1, b.childNodes[1].src = c.PicArr[3]);
+    EditEle(b, {
+      id: d
+    }, a, EDPZ);
+  },
+  GetDX: CPlants.prototype.GetDX,
+  PrivateBirth: function(b) {
+    var a = b.id;
+    NewEle(a + "_Bullet", "div", "position:absolute;visibility:hidden;width:210px;height:200px;left:" + (b.pixelLeft - 60) + "px;top:" + (b.pixelTop - 65) + "px;background:url(images/Plants/GloomShroom/GloomShroomBullet.gif);z-index:" + (b.zIndex + 1), 0, EDPZ);
+    var B = NewEle("dskill", "div", "position:absolute;color:white;top:40px;left:10px;width:100px;font-size:16px;z-index:50", "", $(a));
+    var A = "hp" + a;
+    dskill.id = A;
+    var C = $(A);
+    oSym.addTask(0, function(C, B, b) {
+      b.power < 20 ? B.innerHTML = (20 - b.power) : SetHidden(C)
+      oSym.addTask(50, arguments.callee, [C, B, b])
+    }, [C, B, b]);
+    NewEle("oAttack_" + a, "div",
+      "left:" + (b.AttackedLX - 20) + "px;top:" + (b.pixelTop - 10) +
+      "px;position:absolute;width:97px;height:87px;z-index:150", 0, EDPZ);
+    var Img = NewImg(a + "AKind0", "images/Plants/PB-10.gif", "left:20px;top:30px;visibility:visible;z-index:" + (b.zIndex + 2));
+    $(a).appendChild(Img);
+    var Img1 = NewImg(a + "AKind1", "images/Plants/PB10.gif", "left:40px;top:30px;visibility:hidden;z-index:" + (b.zIndex + 2));
+    $(a).appendChild(Img1);
+    oSym.addTask(100, function(b, a) {
+      var g = $(a + "AKind" + (b.yuansu ? 0 : 1));
+      $P[a] && b.power <= 20 && (b.power < 20 ? (b.power += 1) : (b.LoadingComplelete(b),
+        SetVisible(g), g.style.opacity = 0.5));
+      $P[a] && oSym.addTask(100, arguments.callee, [b, a])
+    }, [b, a])
+  },
+  LoadingComplelete: function(a) {
+    $("oAttack_" + a.id).onclick = function() {
+      var bK = a.yuansu ? 0 : 1;
+      a.power = 0;
+      $(a.id + "AKind" + bK).style.opacity = 1;
+      SetHidden($(a.id + "AKind" + a.yuansu));
+      SetVisible($("hp" + a.id));
+      a.yuansu = bK;
+      $("oAttack_" + a.id).onclick = null
+    }
+  },
+  PrivateDie: function(a) {
+    ClearChild($(a.id + "_Bullet"));
+    ClearChild($("oAttack_" + a.id));
+  },
+  getTriggerRange: function(c, d, e) {
+    var f = GetX(this.C),
+      b = this.MinX = f - 120,
+      a = this.MaxX = f + 120;
+    return [
+      [b, a, 0]
+    ]
+  },
+  getTriggerR: function(c) {
+    var b = this.MinR = c > 2 ? c - 1 : 1,
+      a = this.MaxR = c < oS.R ? Number(c) + 1 : c;
+    return [b, a]
+  },
+  NormalAttack: function() {
+    var k = this,
+      g, f = k.MaxR,
+      c = k.MinX,
+      b = k.MaxX,
+      e, h, a, j = k.id,
+      d = $(j),
+      l = j + "_Bullet",
+      num = Math.random() * 100;
+    for (g = k.MinR; g <= f; g++) {
+      e = oZ.getArZ(c, b, g);
+      for (h = e.length; h--;
+        (a = e[h]).Altitude < 2 && (a.getHit1(a, 50), k.yuansu ? (num > 98 && (a.OrnHP = 0), a.getHit1(a, 30)) : (a.getSlow(a, a.id, 1000), num > 80 && a.getr(a, 15)))) {}
+    }
+    oSym.addTask(100,
+      function(i) {
+        PlayAudio(["kernelpult", "kernelpult2"][Math.floor(Math.random() * 2)]);
+        --i && oSym.addTask(100, arguments.callee, [i])
+      },
+      [4]);
+    d.childNodes[1].src = "images/Plants/GloomShroom/GloomShroomAttack.gif";
+    SetVisible($(l));
+    ImgSpriter(l, j, [
+        ["0 0", 9, 1],
+        ["0 -200px", 9, 2],
+        ["0 -400px", 9, 3],
+        ["0 -600px", 9, 4],
+        ["0 -800px", 9, 5],
+        ["0 -1000px", 9, 6],
+        ["0 -1200px", 9, 7],
+        ["0 -1400px", 9, 8],
+        ["0 -1600px", 9, 9],
+        ["0 -1800px", 9, 10],
+        ["0 -2000px", 9, 11],
+        ["0 -2200px", 9, -1]
+      ], 0,
+      function(m, n) {
+        var i = $(n);
+        $P[n] && (i.childNodes[1].src = "images/Plants/GloomShroom/GloomShroom.gif");
+        SetHidden($(m))
+      })
+  }
+}),
     oPuffShroom = InheritO(oFumeShroom, {
         EName: "oPuffShroom",
         CName: "小喷菇",
