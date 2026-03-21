@@ -2086,6 +2086,58 @@ jinyinAttackGif2: 8,
                 })
         }
     }),
+	oCoffeeBean = InheritO(CPlants, {
+        EName: "oCoffeeBean",
+        CName: "咖啡豆",
+        width: 39,
+        height: 97,
+        beAttackedPointL: 10,
+        beAttackedPointR: 29,
+        SunNum: 75,
+        PKind: 3,
+		coolTime:15,
+        canEat: 0,
+        PicArr: ["images/Card/Plants/CoffeeBean.png", "images/Plants/CoffeeBean/0.gif", "images/Plants/CoffeeBean/CoffeeBean.gif", "images/Plants/CoffeeBean/CoffeeBeanEat.gif" + $Random],
+        AudioArr: ["coffee", "wakeup"],
+        Tooltip: "唤醒在白天里睡觉的蘑菇类植物",
+        Produce: '咖啡豆，可以唤醒睡眠中的蘑菇们。<br>精英形态：使后种植的植物全精英，持续10秒<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">可以种在其他植物上，用来唤醒蘑菇们</font></p>咖啡豆：“嘿，愉快的人啊！嘿，悲伤的人啊！是谁？嘿！你瞧见那个东西没？什么东西？哇！是被灌醉的小丑！”嗯，咖啡豆确定，这样可以让自己很兴奋。',
+        InitTrigger: function() {},
+        GetDBottom: function() {
+            return 49
+        },
+        GetDY: function() {
+            return -30
+        },
+        CanGrow: function(a, b) {
+            return a[1]||a[3]||a[2]
+        },
+        BirthStyle: function(c, d, b, a) {
+            b.childNodes[1].src = this.PicArr[3] + Math.random();
+            EditEle(b, {
+                    id: d
+                },
+                a, EDPZ)
+        },
+        PrivateBirth: function(a) {
+            SetHidden($(a.id).firstChild);
+            a.jinyin&&($(a.id).style.opacity=0.5);
+            PlayAudio("coffee");
+            oSym.addTask(240,
+                function(c) {
+                    PlayAudio("wakeup");
+                    var d = oGd.$[c],
+                        b;
+					a.jinyin&&(EDAll.style.opacity=0.5,CPlants.prototype.jinyin=1);
+			oSym.addTask(1000,function() {
+                CPlants.prototype.jinyin=0;
+				EDAll.style.opacity=1;
+                },[]);
+                    d && (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
+                    a.Die()
+                },
+                [a.R + "_" + a.C + "_1"])
+        }
+    }),
 oGloomShroom = InheritO(oFumeShroom, {
   EName: "oGloomShroom",
   CName: "曾哥",
