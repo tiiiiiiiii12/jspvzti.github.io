@@ -2262,7 +2262,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             EName: "oZomboni",
             CName: "冰车僵尸",
             HP: 1350,
-            Lvl: 3,
+            Lvl: 4,
             StandGif: 2,
             DieGif: 6,
             BoomDieGif: 7,
@@ -2273,7 +2273,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             beAttackedPointL: 140,
             beAttackedPointR: 290,
             BreakPoint: 200,
-            SunNum: 300,
+            SunNum: 275,
             GetDY: function() {
                 return 0
             },
