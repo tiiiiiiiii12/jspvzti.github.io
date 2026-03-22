@@ -1,5 +1,5 @@
 oS.Init({
-    PName: [oFumeShroom, oPumpkinHead, oHypnoShroom, oPotatoMine, oSunFlower, oThreepeater, oScaredyShroom, oCactus, oPeashooter, oRepeater, oGatlingPea, oGarlic, oPlantern,oIceShroom,oWallNut,oChomper],
+    PName: [oFumeShroom, oPumpkinHead, oHypnoShroom, oPotatoMine, oSunFlower, oThreepeater, oScaredyShroom, oCactus, oPeashooter, oSnowPea, oGatlingPea, oGarlic, oPlantern,oIceShroom,oWallNut,oChomper,oRepeater],
     ZName: [oImp, oScreenDoorZombie, oDuckyTubeZombie1, oDuckyTubeZombie3, oGatlingPeaZombie, oDolphinRiderZombie,oPoleVaultingZombie,oGargantuar,oSnorkelZombie,oZomboni],
     PicArr: ["images/interface/background4.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background4.jpg",
@@ -20,7 +20,7 @@ oS.Init({
         ArR: [1, 6],
         Auto: 1,
         P: {
-            Arr: [8, 4, 0, 6, 0, 11, 12, 13, 5, 2, 1, 2, 4, 9, 4, 4, 4, 6, 10, 9, 8, 7, 7, 8,14,15],
+            Arr: [8, 4, 0, 6, 0, 11, 12, 13, 5, 2, 1, 2, 4, 9, 4, 4, 4, 6, 10, 9, 8, 7, 7, 8,14,15,16],
             Arr1: [3, 3, 3],
             Arr2: [1, 1]
         }
@@ -58,17 +58,3 @@ oS.Init({
         oS.RiddleAutoGrow();
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
