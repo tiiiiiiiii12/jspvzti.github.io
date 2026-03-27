@@ -857,7 +857,7 @@ var CZombies = function(b, a) {
       oSym.addTask(c,
         function(o) {
           var t = $Z[o];
-          t && (t.num==0)&&t.beAttacked && !t.isAttacking && t.NormalAttack(o)
+          t && !(t.num==0)&&t.beAttacked && !t.isAttacking && t.NormalAttack(o)
         },
         [d.id])
     },
