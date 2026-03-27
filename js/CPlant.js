@@ -1887,7 +1887,7 @@ NormalAttack1: function() {
                         h = g.length,
                         k;
                     while (h--) {
-						((k = g[h]).OrnHP+k.HP-k.BreakPoint)<=0&&k.Altitude > -1 && k.PZ && k.Altitude < 3 &&d.jinyin&&(CustomZombie(window[k.EName],j,GetC(k.ZX),1).jinyinnum=100);
+						((k = g[h]).OrnHP+k.HP-k.BreakPoint)<=1850&&k.Altitude > -1 && k.PZ && k.Altitude < 3 &&d.jinyin&&(CustomZombie(window[k.EName],j,GetC(k.ZX),1).jinyinnum=100);
                         k.Altitude > -1 && k.PZ && k.Altitude < 3 && k.getThump(1850);
                     }
                     oSym.addTask(185, ClearChild, [f])
