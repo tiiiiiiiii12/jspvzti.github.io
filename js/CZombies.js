@@ -658,8 +658,8 @@ var CZombies = function(b, a) {
         },
         LostHeadGif: 14,
 		jinyinAct:function(a){
-			a.Ele.style.filter="grayscale(100%) brightness(400%)";
-			if(!(a.num=Math.round(Math.random()*1+0)||a.num)){
+			var b=a.num;
+			if(!(a.num=Math.round(Math.random()*1+0)||b)){
 				a.HP*=1.5;
 			a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
@@ -1024,7 +1024,7 @@ var CZombies = function(b, a) {
               if (h && h.beAttacked) {
                 s.src = "images/Zombies/DancingZombie/Summon3.gif";
 			for (i in $Z) {
-                h.num&&$Z[i] && $Z[i].beAttacked&&($Z[i].PZ==h.PZ)&& !$Z[i].ChkSpeed && (AZ[AZlength] = (DZid[AZlength] = new oBackupDancer).CustomBirth($Z[i].R, $Z[i].AttackedLX, 100, "Z_" + Math.random(),1), ++AZlength);
+                h.num&&$Z[i] && $Z[i].beAttacked&&($Z[i].PZ==h.PZ)&& !$Z[i].ChkSpeed && (AZ[AZlength] = (DZid[AZlength] = new oBackupDancer).CustomBirth($Z[i].R, $Z[i].AttackedLX, 100, "Z_" + Math.random(),h.PZ), ++AZlength);
               }
                 while (r--) {
                   (q = m[r]) && (!(l = q[0]) || !$Z[l]) && (u[o] = (w[o] = new oBackupDancer).CustomBirth(q[1], q[2](v), 100, q[0] = "Z_" + Math.random(), h.PZ), n.push(NewImg("", k, "z-index:" + q[3] + ";left:" + q[4](v) + "px;top:" + q[5] + "px", EDPZ)), ++o)
