@@ -557,12 +557,8 @@ var CZombies = function(b, a) {
       return e.getHTML(e.id = b, e.X, e.pixelTop = f, e.zIndex = 3 * g + 1, "none", j || 0, e.height + "px", e.PicArr[e.StandGif]);
     },
 		jinyinAct:function(a){
-		a.Ele.style.filter="grayscale(100%) brightness(400%)";
-		a.PrivateAct=function(a){
-			a.PZ&&a.Speed&&!a.isAttacking&&a.getr(a,-(a.Speed*2))
-		}
 		},
-        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态：白色，三倍速度<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
+        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态：暂无<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
         BirthCallBack: function(e) {
             var d = e.delayT,
                 c = e.id,
@@ -662,8 +658,9 @@ var CZombies = function(b, a) {
         },
         LostHeadGif: 14,
 		jinyinAct:function(a){
-			a.HP*=1.5;
 			a.Ele.style.filter="grayscale(100%) brightness(400%)";
+			if(!(a.num=Math.round(Math.random()*1+0)||a.num)){
+				a.HP*=1.5;
 			a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
                         d += --e + "_";
@@ -688,6 +685,7 @@ var CZombies = function(b, a) {
                         }
                     }()
                 }
+			}
 		},
         addSpotlight: (function() {
             var a, b;
@@ -709,7 +707,7 @@ var CZombies = function(b, a) {
                 b = d + "spotlight2" + c + ".png" + $Random;
             return ["images/Card/Zombies/DancingZombie.png", d + "0.gif", d + "DancingZombie.gif", d + "Attack.gif", d + "LostHead.gif", d + "LostHeadAttack.gif", d + "Head.gif" + $Random, d + "Die.gif" + $Random, d + "BoomDie.gif" + $Random, d + "SlidingStep.gif" + $Random, d + "Dancing.gif" + $Random, d + "Summon1.gif", d + "Summon2.gif", d + "Summon3.gif", d + "LostHeadSlidingStep.gif" + $Random, d + "LostHeadDancing.gif" + $Random, d + "LostHeadSummon.gif" + $Random, a, b]
         })(),
-        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。</p><p>韧性：<font color="#FF0000">中</font><br>精英形态：白色，一直滑步，无视植物，碰到脑子召唤伴舞（750血）</font><br>特点：<font color="#FF0000">召唤伴舞僵尸</font></p>舞王僵尸的最新唱片“抓住脑子啃啊啃”在僵尸界的人气正急速飙升。',
+        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。</p><p>韧性：<font color="#FF0000">中</font><br>精英形态一：白色，一直滑步，无视植物，碰到脑子召唤伴舞（750血）<br>精英形态二：白色，每次召唤在全场僵尸的位置复制一个伴舞<br>特点：<font color="#FF0000">召唤伴舞僵尸</font></p>舞王僵尸的最新唱片“抓住脑子啃啊啃”在僵尸界的人气正急速飙升。',
         getSnowPea: function() {
             this.PlaySlowballAudio();
         },
@@ -859,7 +857,7 @@ var CZombies = function(b, a) {
       oSym.addTask(c,
         function(o) {
           var t = $Z[o];
-          t && !t.jinyin&&t.beAttacked && !t.isAttacking && t.NormalAttack(o)
+          t && (t.num==0)&&t.beAttacked && !t.isAttacking && t.NormalAttack(o)
         },
         [d.id])
     },
@@ -1018,11 +1016,16 @@ var CZombies = function(b, a) {
                 r = 4,
                 w = [],
                 u = [],
-                o = 0,
+			  AZ = [],
+              DZid = [],
+              AZlength = o = 0,
                 q,
                 l;
               if (h && h.beAttacked) {
                 s.src = "images/Zombies/DancingZombie/Summon3.gif";
+			for (i in $Z) {
+                h.num&&$Z[i] && $Z[i].beAttacked&&($Z[i].PZ==h.PZ)&& !$Z[i].ChkSpeed && (AZ[AZlength] = (DZid[AZlength] = new oBackupDancer).CustomBirth($Z[i].R, $Z[i].AttackedLX, 100, "Z_" + Math.random(),1), ++AZlength);
+              }
                 while (r--) {
                   (q = m[r]) && (!(l = q[0]) || !$Z[l]) && (u[o] = (w[o] = new oBackupDancer).CustomBirth(q[1], q[2](v), 100, q[0] = "Z_" + Math.random(), h.PZ), n.push(NewImg("", k, "z-index:" + q[3] + ";left:" + q[4](v) + "px;top:" + q[5] + "px", EDPZ)), ++o)
                 }
@@ -1034,18 +1037,27 @@ var CZombies = function(b, a) {
                     }
                   },
                   n);
-                oSym.addTask(110,
-                  function(A, y, z, i) {
-                    var B = $Z[A];
-                    B && B.beAttacked && oP.AppearUP(y, z, i);
-                    oSym.addTask(0, function(B, z, i) {
-                        while (i--) {
-                          B.beAttacked && B && !B.PZ && z[i].bedevil(z[i])
+              oSym.addTask(110,
+                function(A, y, z, i, a, b, c) {
+                  var B = $Z[A];
+                  B && B.beAttacked && (
+                    oP.AppearUP(y, z, i),
+                    B.num&&oP.AppearUP(a, b, c),
+                    oSym.addTask(100,
+                      function(D, C) {
+                        var E = $Z[D];
+                        if (E && E.beAttacked) {
+                          return
+                        }
+                        var j = C.length,
+                          E;
+                        while (j--) {
+                          (E = C[j]).ChangeChkActsTo0(E, E.id, E.EleBody)
                         }
                       },
-                      [B, w, o]);
-                  },
-                  [t, u, w, o]);
+                      [A, z]))
+                },
+                [t, u, w, o, AZ, DZid, AZlength]);
                 oSym.addTask(200,
                   function(y, i) {
                     var z = $Z[y],
@@ -1619,12 +1631,12 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   HP: 270,
   jinyinAct: function(a) {
     var z = $(a.id);
-    var num = Math.round(Math.random() * 1 + 0);
+    a.num=Math.round(Math.random()*1+0)||a.num;
     z.FumeDoor = "Fume" + Math.random();
-	num&&(a.OrnHP*=0.5);
-    var Sh = NewImg(z.FumeDoor, num ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/Shovel.png", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:" + (num ? 50 : 80) + "px;", 0);
+	a.num&&(a.OrnHP*=0.5);
+    var Sh = NewImg(z.FumeDoor, a.num ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/Shovel.png", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:" + (a.num ? 50 : 80) + "px;", 0);
     z.appendChild(Sh); //寒冰头与大喷菇
-    num && (NewEle(a.id + "_Bullet",
+    a.num && (NewEle(a.id + "_Bullet",
       "div", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "visibility:hidden;width:343px;height:62px;left:" + (a.PZ ? "-250" : "40") + "px;top:70px;background:url(images/Plants/FumeShroom/FumeShroomBullet.gif);z-index:" + (a.zIndex + 1), 0, $(a.id)), oSym.addTask(1, function(a, h, z) {
       if (a.Ornaments && $Z[a.id]) {
         let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.PZ ? a.ZX - 300 : a.ZX, a.PZ ? a.ZX : a.ZX + 300, a.R),
@@ -1665,7 +1677,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
     a.PrivateAct = function(a) {
       var P = $(a.id);
 	  !a.Ornaments && ClearChild($(P.FumeDoor));
-      if (!num && a.Ornaments) {
+      if (!a.num && a.Ornaments) {
         var C = GetC(a.ZX);
     for (i = 3; i >= 0; i--) {
         var p = oGd.$[a.R + "_" + C + "_" + i];
@@ -1675,11 +1687,11 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
         }
         var z = oZ["get" + (a.PZ ? "HZ1" : "Z0")](a.ZX, a.R);
         z && (z.getr(z, 80), z.getHit0(z, 100, 0))
-      }!(a.PZ == a.check) && (a.Ornaments && (num && EditEle($(a.id + "_Bullet"), 0, {
+      }!(a.PZ == a.check) && (a.Ornaments && (a.num && EditEle($(a.id + "_Bullet"), 0, {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
             left: (a.PZ ? "-250" : "40") + "px"
           }, $(a.id), 0),
-          EditImg($(P.FumeDoor), 0, num ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/Shovel.png", {
+          EditImg($(P.FumeDoor), 0, a.num ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/Shovel.png", {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
             left: a.PZ ? "25px" : "40px"
           }, 0)),
@@ -2340,7 +2352,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             },
 			check:1,
 			jinyinAct:function(a){
-				a.num=Math.round(Math.random()*1+0);
+				a.num=Math.round(Math.random()*1+0)||a.num;
 				var z=$(a.id);
     z.FumeDoor = "Fume" + Math.random();
     var Sh = NewImg(z.FumeDoor, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:100px;top:280px;", 0);
@@ -2808,7 +2820,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
     a.NormalGif = a.LostHeadGif;
     a.AttackGif = a.LostHeadAttackGif;
     a.EleBody.src = a.PicArr[a.NormalGif];
-    a.num = Math.round(Math.random() * 1 + 0);
+    a.num=Math.round(Math.random()*1+0)||a.num;
     var z = a.Ele;
     z.JaHead = "Ja" + Math.random();
     var Ja = NewImg(z.JaHead, a.num ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/CherryBomb/CherryBomb.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:60px;top:0px;", 0);
