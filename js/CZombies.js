@@ -6,7 +6,7 @@ var CZombies = function(b, a) {
                 NormalGif: 2,
                 CardGif: 0,
                 StaticGif: 1,
-			    jinyin:0,
+			    jinyin:false,
 			    jinyinnum:20,
                 StandGif: 2,
                 BookHandBack: 0,
@@ -166,15 +166,16 @@ var CZombies = function(b, a) {
                     oZ.add(c);
                     c.BirthCallBack(c);
         Math.random()*100<c.jinyinnum&&(c.jinyin=true,c.jinyinAct&&c.jinyinAct(c));
+	if(c.HPlook){
 	var B = NewEle("dskill", "div", "position:absolute;color:white;top:50px;left:10px;width:100px;font-size:16px;z-index:50", "", $(c.id));
     var A = "hp" + Math.random();
     dskill.id = A;
     var C = $(A);
-	NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", "left:" + (c.width * 0.5 - 34) + "px;top:" + (c.height - 30) + "px", $(c.id));
     oSym.addTask(0, function(C, B, b) {
       B.innerHTML = c.OrnHP>=0?c.OrnHP+"+"+c.HP:c.HP + "<br>精英："+c.jinyin
       oSym.addTask(5, arguments.callee, [C, B, b])
-    }, [C, B, b]);
+      }, [C, B, b]);
+	}
 				c.PrivateBirth&&c.PrivateBirth(c);
                 },
                 getCrushed: function(c) {
