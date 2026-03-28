@@ -1227,7 +1227,7 @@ Birth: function() {
 		jinyinAct:function(a){
 			a.NormalGif=a.jinyinGif;
 			a.AttackGif=a.jinyinAttackGif;
-			a.OrnHP=600;
+			a.OrnHP*=1.5;
 			a.EleBody.src=a.PicArr[a.NormalGif];
 			a.PrivateAct=function(a){
 				var Z,
@@ -1298,7 +1298,7 @@ Birth: function() {
 			a.Speed*=0.75;
 			a.OSpeed*=0.75;
 			a.getFreeze=function(){};
-			a.OrnHP=3200;
+			a.OrnHP*=2;
 		},
         PicArr: (function() {
             var a = "images/Zombies/FootballZombie/";
