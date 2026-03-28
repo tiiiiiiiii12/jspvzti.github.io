@@ -574,9 +574,7 @@ oSnowPea = InheritO(oPeashooter, {
     var C = $(A);
 	NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", "left:" + (b.width * 0.5 - 34) + "px;top:" + (b.height - 30) + "px", $(b.id));
     oSym.addTask(0, function(C, B, b) {
-      ClearChild(C);
-      $(b.id) && $(b.id).appendChild(C);
-      B.innerHTML = b.power < 40 ? '<div>' + (40 - b.power) + "</div>" : "<div>技能就绪！</div>"
+      B.innerHTML = b.power < 40 ? (40 - b.power) : "技能就绪！"
       oSym.addTask(50, arguments.callee, [C, B, b])
     }, [C, B, b]);
     NewEle(b.id + "_Bullet", "div", "position:absolute;visibility:hidden;width:686px;height:62px;left:" + b.AttackedRX +
