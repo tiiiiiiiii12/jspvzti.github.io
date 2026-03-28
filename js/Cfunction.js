@@ -815,9 +815,47 @@ oP = {
 		}
 		this.AppearUP(k, m, e)
 	},
+SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
+  var l = [],
+    m = [],
+    k = [],
+    g = h.length,
+    a,
+    d = b - j + 1;
+  a = l.length;
+  c = Num;
+  while (c--) {
+    k[c] = (m[c] = new h[Math.floor(Math.random() * g)]).CustomBirth(Math.floor(Math.random() * oS.R + 1), Math.floor(j + Math.random() * d), 100, "auto")
+  }
+  oP.NumZombies += Num;
+  asyncInnerHTML(k.join(""),
+    function(h, f) {
+      EDPZ.appendChild(h);
+      var e = f.length,
+        g, A, B;
+      while (e--) {
+        g = f[e];
+        let Ele = $(g.id).childNodes[1];
+        let Ttop = parseInt(Ele.style.top);
+        g.Birth.call(g);
+        SetBlock(g.Ele);
+        pz && g.bedevil(g);
+        Ele.style.top = "-900px";
+        oSym.addTask(10,
+          function(l, k, j) {
+            k = Math.min(k + j, 0);
+            SetStyle(l, {
+              top: k + "px"
+            });
+            !(k == 0) && oSym.addTask(5, arguments.callee, [l, k, j])
+          },
+          [g.EleBody, B = -900, -B * 0.1])
+      }
+    }, m)
+},
 	AppearUP: function(a, c, b,pz) {
 		oP.NumZombies += b;
-		asyncInnerHTML(a.join(""),
+		asyncInnerHTML(a.join("_"),
 		function(h, f) {
 			EDPZ.appendChild(h);
 			var e = f.length,
