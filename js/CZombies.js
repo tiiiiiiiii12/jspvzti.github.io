@@ -157,27 +157,27 @@ var CZombies = function(b, a) {
                         [d, c]) : SetBlock(c)
                 },
 			    level:1,
-                Birth: function() {
-                    var c = this;
-                    $Z[c.id] = c;
-					c.HP*=Math.max(c.level*0.75,1);
-					c.OrnHP*=Math.max(c.level*0.75,1);
-					c.tasktime/=c.level;
-                    oZ.add(c);
-                    c.BirthCallBack(c);
-        Math.random()*100<c.jinyinnum&&(c.jinyin=true,c.jinyinAct&&c.jinyinAct(c));
-	if(c.HPlook){
-	var B = NewEle("dskill", "div", "position:absolute;color:white;top:50px;left:10px;width:100px;font-size:16px;z-index:50", "", $(c.id));
+Birth: function() {
+  var c = this;
+  $Z[c.id] = c;
+  c.HP *= Math.max(c.level * 0.75, 1);
+  c.OrnHP *= Math.max(c.level * 0.75, 1);
+  c.tasktime /= c.level;
+  oZ.add(c);
+  c.BirthCallBack(c);
+  Math.random() * 100 < c.jinyinnum && (c.jinyin = true, c.jinyinAct && c.jinyinAct(c));
+  if (c.HPlook) {
+    var B = NewEle("dskill", "div", "position:absolute;color:yellow;width:80px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
     var A = "hp" + Math.random();
     dskill.id = A;
     var C = $(A);
-    oSym.addTask(0, function(C, B, b) {
-      B.innerHTML = c.OrnHP>=0?c.OrnHP+"+"+c.HP:c.HP + "<br>精英："+c.jinyin
-      oSym.addTask(5, arguments.callee, [C, B, b])
-      }, [C, B, b]);
-	}
-				c.PrivateBirth&&c.PrivateBirth(c);
-                },
+    oSym.addTask(0, function(C, B) {
+      B.innerHTML = (c.OrnHP > 0 ? c.OrnHP + "+" + c.HP : c.HP) + "<br>精英:" + c.jinyin
+      oSym.addTask(5, arguments.callee, [C, B])
+    }, [C, B]);
+  }
+  c.PrivateBirth && c.PrivateBirth(c);
+},
                 getCrushed: function(c) {
                     return true
                 },
@@ -669,7 +669,7 @@ var CZombies = function(b, a) {
         LostHeadGif: 14,
 		jinyinAct:function(a){
 			var b=a.num;
-			if(!(a.num=Math.round(Math.random()*1+0)||b)){
+			if(!(a.num=Math.round(Math.random()*1+0))){
 				a.HP*=1.5;
 			a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
@@ -1641,7 +1641,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   HP: 270,
   jinyinAct: function(a) {
     var z = $(a.id);
-    a.num=Math.round(Math.random()*1+0)||a.num;
+    a.num=Math.round(Math.random()*1+0);
     z.FumeDoor = "Fume" + Math.random();
 	a.num&&(a.OrnHP*=0.5);
     var Sh = NewImg(z.FumeDoor, a.num ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/Shovel.png", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:" + (a.num ? 50 : 80) + "px;", 0);
@@ -2362,11 +2362,11 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             },
 			check:1,
 			jinyinAct:function(a){
-				a.num=Math.round(Math.random()*1+0)||a.num;
+				a.num=Math.round(Math.random()*1+0);
 				var z=$(a.id);
     z.FumeDoor = "Fume" + Math.random();
     var Sh = NewImg(z.FumeDoor, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:100px;top:280px;", 0);
-    z.appendChild(Sh); //寒冰头与大喷菇
+    z.appendChild(Sh);
     a.num==0 && (oSym.addTask(500, function(a) {
 		var LR=Math.max(a.R-1,1);
 		do{
@@ -2830,7 +2830,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
     a.NormalGif = a.LostHeadGif;
     a.AttackGif = a.LostHeadAttackGif;
     a.EleBody.src = a.PicArr[a.NormalGif];
-    a.num=Math.round(Math.random()*1+0)||a.num;
+    a.num=Math.round(Math.random()*1+0);
     var z = a.Ele;
     z.JaHead = "Ja" + Math.random();
     var Ja = NewImg(z.JaHead, a.num ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/CherryBomb/CherryBomb.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:60px;top:0px;", 0);
