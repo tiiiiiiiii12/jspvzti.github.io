@@ -842,15 +842,15 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
         pz && g.bedevil(g);
 		let BungeeEle = NewImg(0, "images/Zombies/BungeeBringZombie.png", "z-index: " + (3 * g.R) + ";left:" + (g.ZX - 80) + "px;top:" + (Ttop + g.height - 2030) + "px", EDPZ);
         Ele.style.top = "-900px";
-        oSym.addTask(10,
+        oSym.addTask(5,
           function(l, k, j) {
             k = Math.min(k + j, 0);
             SetStyle(l, {
               top: k + "px"
             });
-            !(k == 0) && oSym.addTask(10, arguments.callee, [l, k, j])
+            !(k == 0) && oSym.addTask(5, arguments.callee, [l, k, j])
           },
-          [g.EleBody, B = -900, -B * 0.1]);
+          [g.EleBody, B = -900, -B * 0.05]);
 		  let TBtop=Ttop + g.height - 1030;
 		oSym.addTask(5,
           function(l, k, j,i,Dire) {
