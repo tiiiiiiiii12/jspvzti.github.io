@@ -181,6 +181,7 @@ getr:function(e,l,c){
           oSym.addTask(100, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 150) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)])
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
+			k&&k.jinyin&&oP.SetTimeoutAirdropZombie(5,9,5,[oImp,oZombie,oConeheadZombie,oPeaZombie,oScreenDoorZombie,oZombie2,oZombie3])
           }, [k]);
           var j = CZombies.prototype;
           k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
