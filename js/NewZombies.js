@@ -164,7 +164,7 @@ var oGargantuar = InheritO(oZombie, {
     }, SetVisible(h.EleShadow)), h.intowater = false);
     if (h.jinyin) {
       var P = $(h.id);
-      !(h.PZ == h.check) && (
+      !h.throwImp&&!(h.PZ == h.check) && (
         EditImg($(P.FumeDoor), 0, "images/Plants/san.gif", {
           transform: h.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
           left: h.PZ ? "100px" : "-80px"
