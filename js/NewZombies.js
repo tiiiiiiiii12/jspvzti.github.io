@@ -167,7 +167,7 @@ var oGargantuar = InheritO(oZombie, {
       !(h.PZ == h.check) && (
         EditImg($(P.FumeDoor), 0, "images/Plants/san.gif", {
           transform: h.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
-          left: h.PZ ? "80px" : "0px"
+          left: h.PZ ? "100px" : "-80px"
         }, 0),
         h.check = h.PZ);
     }!h.hasthrew && (GetC(h.ZX) > 4 || !h.PZ) && !h.isAttacking && (h.HP <= 1500) && $Z[h.id] && h.throwImp(h);
@@ -175,7 +175,7 @@ var oGargantuar = InheritO(oZombie, {
   jinyinAct: function(a) {
     var z = $(a.id);
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, "images/Plants/san.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:80px;top:-80px;", 0);
+    var Sh = NewImg(z.FumeDoor, "images/Plants/san.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:100px;top:-80px;", 0);
     z.appendChild(Sh);
   },
   PrivateDie: oScreenDoorZombie.prototype.PrivateDie,
