@@ -3,13 +3,14 @@ var oGargantuar = InheritO(oZombie, {
     var a = "images/Zombies/Gargantuar/";
     return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif" + $Random, a + "ImpToLand.gif", a + "throwImp.gif", a + "ImplessDie.gif", a + "Die.gif", a + "ImplessWalk.gif", a + "0.gif", a + "ImplessAttack.gif" + $Random]
   })(),
+  check: 1,
   throwImpGif: 5,
   ImpToLandGif: 4,
   ImplessDieGif: 6,
   ImplessWalkGif: 8,
   DieGif: 7,
-Lvl:7,
-  AudioArr: ["ImpToLand", "GargantuarDie","zaji"],
+  Lvl: 7,
+  AudioArr: ["ImpToLand", "GargantuarDie", "zaji"],
   width: 350,
   CanPass: function(d, c) {
     return c
@@ -39,9 +40,9 @@ Lvl:7,
         var h = $Z[f],
           g;
         h && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((g = $Z[e]) && g.getHit0(g, 1000, 0),
-      oSym.addTask(25, function(h) {
-              h&&h.JudgeAttack()
-            },[h]))
+          oSym.addTask(25, function(h) {
+            h && h.JudgeAttack()
+          }, [h]))
       },
       [d, c])
   },
@@ -59,18 +60,19 @@ Lvl:7,
     return g
   },
   JudgeAttackH1: function() {
-                    var e = this,
-                        d = oZ.getHZ1(e.ZX-20, e.R),
-                        f = e.id,
-                        c;
-					if(d && d.Altitude == 1){
-          (!e.isAttacking ? e.AttackZombie(f, c = d.id) : e.AttackZombie(f, d.id, 1))
-					return d
-				   }
+    var e = this,
+      d = oZ.getHZ1(e.ZX - 20, e.R),
+      f = e.id,
+      c;
+    if (d && d.Altitude == 1) {
+      (!e.isAttacking ? e.AttackZombie(f, c = d.id) : e.AttackZombie(f, d.id, 1))
+      return d
+    }
   },
-getRaven:function(){
-	this.getHit0(this,40)
-},
+  getRaven: function() {
+    this.getHit0(this, 40)
+  },
+  jinyinAct: function() {},
   JudgeAttack: function() {
     var g = this,
       d = g.ZX,
@@ -84,11 +86,11 @@ getRaven:function(){
   },
   JudgeAttackH: function() {
     var e = this,
-      d = oZ.getZ0(e.ZX+20, e.R),
+      d = oZ.getZ0(e.ZX + 20, e.R),
       f = e.id,
       c;
-    d && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif] + Math.random(), e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) : 
-    e.isAttacking && (e.isAttacking = 0, e.EleBody.src = e.PicArr[e.NormalGif])
+    d && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif] + Math.random(), e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) :
+      e.isAttacking && (e.isAttacking = 0, e.EleBody.src = e.PicArr[e.NormalGif])
   },
   JudgeLR: function(f, d, e, c, g) {
     return e > 10 || e < 1 ? false : function() {
@@ -121,9 +123,9 @@ getRaven:function(){
       var tp;
       for (i = -1; i <= 3; i++) {
         h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50),
-            oSym.addTask(25, function(h) {
-              h&&h.JudgeAttack()
-            },[h]))
+          oSym.addTask(25, function(h) {
+            h && h.JudgeAttack()
+          }, [h]))
       }
     }, [d, c]);
   },
@@ -133,9 +135,11 @@ getRaven:function(){
   DisappearDie: function() {
     this.NormalDie(this)
   },
-getr:function(e,l,c){
-	if(c){CZombies.prototype.getr(e,l)}
-},
+  getr: function(e, l, c) {
+    if (c) {
+      CZombies.prototype.getr(e, l)
+    }
+  },
   hasthrew: 0,
   PrivateAct: function(h) {
     !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
@@ -160,21 +164,21 @@ getr:function(e,l,c){
     }, SetVisible(h.EleShadow)), h.intowater = false);
     if (h.jinyin) {
       var P = $(h.id);
-      !(a.PZ == a.check) && (
-        EditImg($(P.FumeDoor), 0, "images/Plants/San.gif", {
-          transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
-          left: a.PZ ? "25px" : "40px"
+      !(h.PZ == h.check) && (
+        EditImg($(P.FumeDoor), 0, "images/Plants/san.gif", {
+          transform: h.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
+          left: h.PZ ? "80px" : "0px"
         }, 0),
-        a.check = a.PZ);
+        h.check = h.PZ);
     }!h.hasthrew && (GetC(h.ZX) > 4 || !h.PZ) && !h.isAttacking && (h.HP <= 1500) && $Z[h.id] && h.throwImp(h);
   },
   jinyinAct: function(a) {
     var z = $(a.id);
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, "images/Plants/San.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:-100px;", 0);
+    var Sh = NewImg(z.FumeDoor, "images/Plants/san.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:80px;top:-80px;", 0);
     z.appendChild(Sh);
   },
-PrivateDie:oScreenDoorZombie.prototype.PrivateDie,
+  PrivateDie: oScreenDoorZombie.prototype.PrivateDie,
   throwImp: function(g) {
     g.ChkActs = function() {
         return 1
@@ -193,10 +197,10 @@ PrivateDie:oScreenDoorZombie.prototype.PrivateDie,
           PlayAudio("ImpToLand");
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
           oSym.addTask(100, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 150) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)]);
-		  k&&k.jinyin&&ClearChild($(k.Ele.FumeDoor));
+          k && k.jinyin && ClearChild($(k.Ele.FumeDoor));
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
-			k&&k.jinyin&&oP.SetTimeoutAirdropZombie(5,9,5,[oImp,oZombie,oConeheadZombie,oPeaZombie,oScreenDoorZombie,oZombie2,oZombie3,oBucketheadZombie])
+            k && k.jinyin && oP.SetTimeoutAirdropZombie(5, 9, 5, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie], !k.PZ)
           }, [k]);
           var j = CZombies.prototype;
           k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
