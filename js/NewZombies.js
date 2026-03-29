@@ -71,7 +71,6 @@ Lvl:7,
 getRaven:function(){
 	this.getHit0(this,40)
 },
-  jinyinAct: function() {},
   JudgeAttack: function() {
     var g = this,
       d = g.ZX,
@@ -139,7 +138,7 @@ getr:function(e,l,c){
 },
   hasthrew: 0,
   PrivateAct: function(h) {
-        !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
+    !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
       top: "100px",
       clip: "rect(0,auto,200px,0)"
     }), h.intowater = true, SetHidden(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:126px;top:" + (h.height - 88) + "px;width:97px;height:88px;over-flow:hidden", 0, h.Ele), ImgSpriter(a, h.id, [
@@ -159,8 +158,23 @@ getr:function(e,l,c){
       top: "0px",
       clip: "rect(0,auto,300px,0)"
     }, SetVisible(h.EleShadow)), h.intowater = false);
-    !h.hasthrew && (GetC(h.ZX) > 4 || !h.PZ) && !h.isAttacking && (h.HP <= 1500) && $Z[h.id] && h.throwImp(h);
+    if (h.jinyin) {
+      var P = $(h.id);
+      !(a.PZ == a.check) && (
+        EditImg($(P.FumeDoor), 0, "images/Plants/San.gif", {
+          transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
+          left: a.PZ ? "25px" : "40px"
+        }, 0),
+        a.check = a.PZ);
+    }!h.hasthrew && (GetC(h.ZX) > 3 || !h.PZ) && !h.isAttacking && (h.HP <= 1500) && $Z[h.id] && h.throwImp(h);
   },
+  jinyinAct: function(a) {
+    var z = $(a.id);
+    z.FumeDoor = "Fume" + Math.random();
+    var Sh = NewImg(z.FumeDoor, "images/Plants/San.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:-100px;", 0);
+    z.appendChild(Sh);
+  },
+PrivateDie:oScreenDoorZombie.prototype.PrivateDie,
   throwImp: function(g) {
     g.ChkActs = function() {
         return 1
@@ -178,10 +192,11 @@ getr:function(e,l,c){
           k.DieGif = k.ImplessDieGif;
           PlayAudio("ImpToLand");
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
-          oSym.addTask(100, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 150) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)])
+          oSym.addTask(100, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 150) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)]);
+		  k&&k.jinyin&&ClearChild($(k.Ele.FumeDoor));
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
-			k&&k.jinyin&&oP.SetTimeoutAirdropZombie(5,9,5,[oImp,oZombie,oConeheadZombie,oPeaZombie,oScreenDoorZombie,oZombie2,oZombie3])
+			k&&k.jinyin&&oP.SetTimeoutAirdropZombie(5,9,5,[oImp,oZombie,oConeheadZombie,oPeaZombie,oScreenDoorZombie,oZombie2,oZombie3,oBucketheadZombie])
           }, [k]);
           var j = CZombies.prototype;
           k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
