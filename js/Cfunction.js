@@ -815,7 +815,7 @@ oP = {
 		}
 		this.AppearUP(k, m, e)
 	},
-SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
+SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
   var l = [],
     m = [],
     k = [],
@@ -832,7 +832,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
     function(h, f) {
       EDPZ.appendChild(h);
       var e = f.length,
-        g, A, B,TBtop;
+        g, A, B, TBtop;
       while (e--) {
         g = f[e];
         let Ele = $(g.id).childNodes[1];
@@ -840,7 +840,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
         g.Birth.call(g);
         SetBlock(g.Ele);
         pz && g.bedevil(g);
-		let BungeeEle = NewImg(0, "images/Zombies/BungeeZombie/BungeeBringZombie.png", "z-index: " + (3 * g.R) + ";left:" + (g.ZX - 80) + "px;top:" + (Ttop + g.height - 1700) + "px", EDPZ);
+        let BungeeEle = NewImg(0, "images/Zombies/BungeeZombie/BungeeBringZombie.png", "z-index: " + (3 * g.R) + ";left:" + (g.ZX - 100) + "px;top:" + (Ttop + g.pixelTop - 1900) + "px", EDPZ);
         Ele.style.top = "-900px";
         oSym.addTask(5,
           function(l, k, j) {
@@ -850,17 +850,17 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
             });
             !(k == 0) && oSym.addTask(5, arguments.callee, [l, k, j])
           },
-          [g.EleBody, B = -900, -B * 0.05]);
-		oSym.addTask(5,
-          function(l, k, j,i,Dire) {
-            k = Dire?Math.max(k-j,A):Math.min(k +j, i);
+          [g.EleBody, B = -900, -B * 0.05]);//僵尸落下
+        oSym.addTask(5,
+          function(l, k, j, i, Dire) {
+            k = Dire ? Math.max(k - j, A) : Math.min(k + j, i);
             SetStyle(l, {
               top: k + "px"
             });
-			k == i&&(Dire=1);//回去
-            !(k==A)?oSym.addTask(5, arguments.callee, [l, k, j,i,Dire]):ClearChild(l)
+            k == i && (Dire = 1); //回去
+            !(k == A) ? oSym.addTask(5, arguments.callee, [l, k, j, i, Dire]): ClearChild(l)
           },
-          [BungeeEle, A = Ttop + g.height - 1700, Math.abs((TBtop=Ttop + g.height - 700)-A) * 0.05,TBtop,0]);
+          [BungeeEle, A = Ttop + g.pixelTop - 1900, ((TBtop = Ttop + g.pixelTop - 900) - A) * 0.05, TBtop, 0]);
       }
     }, m)
 },
