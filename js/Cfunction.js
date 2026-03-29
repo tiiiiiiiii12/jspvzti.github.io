@@ -842,6 +842,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
         pz && g.bedevil(g);
 		let BungeeEle = NewImg(0, "images/Zombies/BungeeBringZombie.png", "z-index: " + (3 * g.R) + ";left:" + (g.ZX - 80) + "px;top:" + (Ttop + g.height - 2030) + "px", EDPZ);
         Ele.style.top = "-900px";
+		
         oSym.addTask(5,
           function(l, k, j) {
             k = Math.min(k + j, 0);
@@ -851,17 +852,16 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
             !(k == 0) && oSym.addTask(5, arguments.callee, [l, k, j])
           },
           [g.EleBody, B = -900, -B * 0.05]);
-		  let TBtop=Ttop + g.height - 1030;
 		oSym.addTask(5,
           function(l, k, j,i,Dire) {
-            k = Math.min(k +(Dire?-j:j), i);
+            k = Dire?Math.max(k-j,A):Math.min(k +j, i);
             SetStyle(l, {
               top: k + "px"
             });
 			k == i&&(Dire=1);//回去
-            !(k==Ttop + g.height - 2030)?oSym.addTask(5, arguments.callee, [l, k, j,i,Dire]):ClearChild(l)
+            !(k==A)?oSym.addTask(5, arguments.callee, [l, k, j,i,Dire]):ClearChild(l)
           },
-          [BungeeEle, A = parseInt(BungeeEle.style.Top), Math.abs(TBtop-A) * 0.05,TBtop,0]);
+          [BungeeEle, A = Ttop + g.height - 2030, Math.abs(TBtop-A) * 0.05,TBtop,0]);
       }
     }, m)
 },
