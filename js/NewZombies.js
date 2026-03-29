@@ -200,7 +200,7 @@ var oGargantuar = InheritO(oZombie, {
           k && k.jinyin && ClearChild($(k.Ele.FumeDoor));
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
-            k && k.jinyin && oP.SetTimeoutAirdropZombie(5, 9, 5, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie], !k.PZ)
+            k && k.jinyin && oP.SetTimeoutAirdropZombie(5, 9, 5, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie,oNewspaperZombie], !k.PZ)
           }, [k]);
           var j = CZombies.prototype;
           k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
@@ -212,7 +212,7 @@ var oGargantuar = InheritO(oZombie, {
   SunNum: 275,
   EName: "oGargantuar",
   CName: "伽刚特尔",
-  Produce: '非常强力的僵尸<p>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
+  Produce: '非常强力的僵尸<p>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态：保护伞，扔小鬼时召唤五个空降僵尸<br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
 }),
 oPeaZombie = InheritO(oZombie, {
   EName: "oPeaZombie",
