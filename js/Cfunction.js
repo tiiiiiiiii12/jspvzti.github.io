@@ -852,16 +852,16 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
           },
           [g.EleBody, B = -900, -B * 0.1]);
 		  let TBtop=Ttop + g.height - 1030;
-		oSym.addTask(10,
+		oSym.addTask(5,
           function(l, k, j,i,Dire) {
             k = Math.min(k +(Dire?-j:j), i);
             SetStyle(l, {
               top: k + "px"
             });
 			k == i&&(Dire=1);//回去
-            !(k==Ttop + g.height - 2030)?oSym.addTask(10, arguments.callee, [l, k, j,i,Dire]):ClearChild(l)
+            !(k==Ttop + g.height - 2030)?oSym.addTask(5, arguments.callee, [l, k, j,i,Dire]):ClearChild(l)
           },
-          [BungeeEle, A = parseInt(BungeeEle.style.Top), Math.abs(TBtop-A) * 0.1,TBtop,0]);
+          [BungeeEle, A = parseInt(BungeeEle.style.Top), Math.abs(TBtop-A) * 0.05,TBtop,0]);
       }
     }, m)
 },
