@@ -166,7 +166,7 @@ getr:function(e,l,c){
           left: a.PZ ? "25px" : "40px"
         }, 0),
         a.check = a.PZ);
-    }!h.hasthrew && (GetC(h.ZX) > 3 || !h.PZ) && !h.isAttacking && (h.HP <= 1500) && $Z[h.id] && h.throwImp(h);
+    }!h.hasthrew && (GetC(h.ZX) > 4 || !h.PZ) && !h.isAttacking && (h.HP <= 1500) && $Z[h.id] && h.throwImp(h);
   },
   jinyinAct: function(a) {
     var z = $(a.id);
