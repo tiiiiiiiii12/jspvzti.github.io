@@ -832,7 +832,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
     function(h, f) {
       EDPZ.appendChild(h);
       var e = f.length,
-        g, A, B;
+        g, A, B,TBtop;
       while (e--) {
         g = f[e];
         let Ele = $(g.id).childNodes[1];
@@ -840,9 +840,8 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
         g.Birth.call(g);
         SetBlock(g.Ele);
         pz && g.bedevil(g);
-		let BungeeEle = NewImg(0, "images/Zombies/BungeeBringZombie.png", "z-index: " + (3 * g.R) + ";left:" + (g.ZX - 80) + "px;top:" + (Ttop + g.height - 2030) + "px", EDPZ);
+		let BungeeEle = NewImg(0, "images/Zombies/BungeeZombie/BungeeBringZombie.png", "z-index: " + (3 * g.R) + ";left:" + (g.ZX - 80) + "px;top:" + (Ttop + g.height - 1700) + "px", EDPZ);
         Ele.style.top = "-900px";
-		let TBtop=Ttop + g.height - 800;
         oSym.addTask(5,
           function(l, k, j) {
             k = Math.min(k + j, 0);
@@ -861,7 +860,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {
 			k == i&&(Dire=1);//回去
             !(k==A)?oSym.addTask(5, arguments.callee, [l, k, j,i,Dire]):ClearChild(l)
           },
-          [BungeeEle, A = Ttop + g.height - 1800, Math.abs(TBtop-A) * 0.05,TBtop,0]);
+          [BungeeEle, A = Ttop + g.height - 1700, Math.abs((TBtop=Ttop + g.height - 700)-A) * 0.05,TBtop,0]);
       }
     }, m)
 },
