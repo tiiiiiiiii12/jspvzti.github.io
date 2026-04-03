@@ -171,7 +171,8 @@ var oGargantuar = InheritO(oZombie, {
           left: h.PZ ? "100px" : "-80px"
         }, 0),
         h.check = h.PZ);
-    }!h.hasthrew && (GetC(h.ZX) > 4 || !h.PZ) && !h.isAttacking && (h.HP <= 1500) && $Z[h.id] && h.throwImp(h);
+    }
+	h.hasthrew < h.throwImpnum && (GetC(h.ZX) > 3 || !h.PZ) && !h.isAttacking && (h.HP <= 1500) && $Z[h.id] && h.throwImp(h);
   },
   jinyinAct: function(a) {
     var z = $(a.id);
