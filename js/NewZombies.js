@@ -204,7 +204,7 @@ var oGargantuar = InheritO(oZombie, {
           k && k.jinyin && ClearChild($(k.Ele.FumeDoor));
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
-            k && (k.num==0) && oP.SetTimeoutAirdropZombie(5, 9, 5, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie,oNewspaperZombie], !k.PZ)
+            k && k.jinyin&&(k.throwImpnum==1)&& oP.SetTimeoutAirdropZombie(5, 9, 5, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie,oNewspaperZombie], !k.PZ)
           }, [k]);
           var j = CZombies.prototype;
           k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
