@@ -9,7 +9,9 @@ var oGargantuar = InheritO(oZombie, {
   ImplessDieGif: 6,
   ImplessWalkGif: 8,
   DieGif: 7,
+  throwImpnum: 1,
   Lvl: 7,
+  hasthrew: 0,
   AudioArr: ["ImpToLand", "GargantuarDie", "zaji"],
   width: 350,
   CanPass: function(d, c) {
@@ -72,7 +74,6 @@ var oGargantuar = InheritO(oZombie, {
   getRaven: function() {
     this.getHit0(this, 40)
   },
-  jinyinAct: function() {},
   JudgeAttack: function() {
     var g = this,
       d = g.ZX,
@@ -165,7 +166,7 @@ var oGargantuar = InheritO(oZombie, {
     if (h.jinyin) {
       var P = $(h.id);
       !h.hasthrew&&!(h.PZ == h.check) && (
-        EditImg($(P.FumeDoor), 0, "images/Plants/san.gif", {
+        EditImg($(P.FumeDoor), 0, h.num?"images/Card/Zombies/Imp.png":"images/Plants/san.gif", {
           transform: h.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
           left: h.PZ ? "100px" : "-80px"
         }, 0),
@@ -174,9 +175,11 @@ var oGargantuar = InheritO(oZombie, {
   },
   jinyinAct: function(a) {
     var z = $(a.id);
+	a.num=Math.round(Math.random()*1+0)||a.PrivateNum;
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, "images/Plants/san.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:100px;top:-80px;", 0);
+    var Sh = NewImg(z.FumeDoor, a.num?"images/Card/Zombies/Imp.png":"images/Plants/san.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:100px;top:-80px;", 0);
     z.appendChild(Sh);
+	a.num&&(a.throwImpnum = Math.round(Math.random() * 2 + 2))
   },
   PrivateDie: oScreenDoorZombie.prototype.PrivateDie,
   throwImp: function(g) {
@@ -186,7 +189,7 @@ var oGargantuar = InheritO(oZombie, {
       g.ChkActs1 = function() {
         return 1
       },
-      g.hasthrew = 1,
+      g.hasthrew += 1,
       g.EleBody.src = g.PicArr[g.throwImpGif], oSym.addTask(100,
         function(m, l) {
           var k = $Z[m];
@@ -200,7 +203,7 @@ var oGargantuar = InheritO(oZombie, {
           k && k.jinyin && ClearChild($(k.Ele.FumeDoor));
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
-            k && k.jinyin && oP.SetTimeoutAirdropZombie(5, 9, 5, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie,oNewspaperZombie], !k.PZ)
+            k && (k.num==0) && oP.SetTimeoutAirdropZombie(5, 9, 5, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie,oNewspaperZombie], !k.PZ)
           }, [k]);
           var j = CZombies.prototype;
           k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
