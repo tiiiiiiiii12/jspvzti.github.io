@@ -20,7 +20,6 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         !oS.LvlVar ? oS.LvlVar = {
             ScrollScreen: oS.ScrollScreen
         } : oS.LvlVar.ScrollScreen = oS.ScrollScreen;
-        oS.RiddleAutoGrow();
         $("tGround").style.left = "-115px";
         SetStyle($("dTop"), {
             left: "105px",
@@ -47,9 +46,6 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 SelectModal(0);
             }
         }, EDAll);
-    },
-    RiddleAutoGrow: function() {
-        for (var i = 1; i <= oS.R;i++) CustomSpecial(oBrains, i, 0); // 脑子
     },
     LvlClearFunc: function() {
         oS.ScrollScreen = oS.LvlVar.ScrollScreen
