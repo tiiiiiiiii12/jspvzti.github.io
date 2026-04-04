@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oHypnoShroom, oScaredyShroom, oIceShroom, oDoomShroom],
-	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oDancingZombie, oScreenDoorZombie, oBackupDancer, oBucketheadZombie,oPeaZombie,oImp],
+	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oDancingZombie, oScreenDoorZombie, oBackupDancer, oBucketheadZombie,oPeaZombie,oImp,oPoleVaultingZombie],
 	PicArr: ["images/interface/background2.jpg", "images/interface/Tombstones.png", "images/interface/Tombstone_mounds.png", "images/interface/ZombieNoteSmall.png", "images/interface/ZombieNote2.png"],
 	backgroundImage: "images/interface/background2.jpg",
 	CanSelectCard: 1,
@@ -27,7 +27,9 @@ oS.Init({
 		[oZombie3, 1, 1],
 		[oConeheadZombie, 3, 1],
 		[oScreenDoorZombie, 1, 1],
-		[oPeaZombie, 2, 1],
+		[oPeaZombie, 1, 1],
+		[oDancingZombie, 2, 1],
+		[oPoleVaultingZombie, 1, 1],
 		[oImp, 1, 1]
 	],
 	FlagNum: 10,
