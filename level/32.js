@@ -1,6 +1,6 @@
 oS.Init({
   PName:[oPeashooter,oSunFlower,oCherryBomb,oWallNut,oPotatoMine,oSnowPea,oChomper,oRepeater,oPuffShroom,oSunShroom,oFumeShroom,oGraveBuster,oHypnoShroom,oScaredyShroom,oIceShroom,oDoomShroom,oLilyPad,oSquash,oThreepeater,oTangleKelp,oJalapeno,oSpikeweed,oTorchwood,oTallNut,oSeaShroom,oPlantern],
-  ZName:[oZombie,oZombie2,oDuckyTubeZombie1,oConeheadZombie,oFootballZombie,oJackinTheBoxZombie,oNewspaperZombie],
+  ZName:[oZombie,oZombie2,oDuckyTubeZombie1,oConeheadZombie,oFootballZombie,oJackinTheBoxZombie,oNewspaperZombie,oImp],
   PicArr:function(){
     var b=oCactus.prototype,
       c=b.PicArr,
@@ -32,13 +32,14 @@ oS.Init({
     [oDuckyTubeZombie1,1,6,[6,10,20]],
     [oConeheadZombie,2,1],
     [oNewspaperZombie,1,2],
+    [oImp,1,1],
     [oJackinTheBoxZombie,1,10,[10,20]],
     [oFootballZombie,1,10]
   ],
   FlagNum:20,
   FlagToSumNum:{
     a1:[3,5,9,10,13,15,19],
-    a2:[1,2,3,10,4,8,12,20]},
+    a2:[1,2,4,15,8,12,18,30]},
   FlagToMonitor:{
     9:[ShowLargeWave,0],
     19:[ShowFinalWave,0]
