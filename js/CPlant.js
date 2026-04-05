@@ -723,7 +723,7 @@ while (e--) {
         PicArr: ["images/Card/Plants/Threepeater.png", "images/Plants/Threepeater/0.gif", "images/Plants/Threepeater/Threepeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次射出N行的豌豆",
-        Produce: 'N线射手可以在N条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000"全图</font></p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
+        Produce: 'N线射手可以在N条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">全图</font><br>精英形态：散射水波型子弹，攻速变慢</p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
         getTriggerR: function(a) {
             return [1,oS.R]
         },
@@ -774,7 +774,7 @@ NormalAttack1: function() {
     f.BulletEle = (NewImg(0, "images/Plants/PB00.gif", "left:" + e + "px;top:" + (GetY(b) - 50) + "px;visibility:hidden;z-index:" + (3 * b + 2)))
   };
           a.NormalAttack=a.NormalAttack1;
-          a.AttTime=140;
+          a.AttTime=100;
         },
         PrivateBirth: function(f) {
             var e = f.AttackedLX,
