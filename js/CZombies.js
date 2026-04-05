@@ -572,9 +572,11 @@ Birth: function() {
       return e.getHTML(e.id = b, e.X, e.pixelTop = f, e.zIndex = 3 * g + 1, "none", j || 0, e.height + "px", e.PicArr[e.StandGif]);
     },
 		jinyinAct:function(a){
-			a.ChangeChkActsTo1=function(){};
-			a.ChangeChkActsTo0(a,a.id,a.EleBody);
-			a.canWalk(a,a.id)&&a.PZ&&a.getr(a,-a.Speed);
+			a.ChangeChkActsTo0=function(){};
+			a.ChangeChkActsTo1(a,a.id,a.EleBody);
+			a.PrivateAct=function(a){
+			a.canWalk(a,a.id)&&a.PZ&&a.getr(a,-a.Speed*2);
+			}
 		},
         Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态：不跳舞，三倍速度<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
         BirthCallBack: function(e) {
