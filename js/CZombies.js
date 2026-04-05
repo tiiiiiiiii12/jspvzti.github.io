@@ -575,7 +575,7 @@ Birth: function() {
 			a.ChangeChkActsTo0=function(){};
 			a.ChangeChkActsTo1(a,a.id,a.EleBody);
 			a.PrivateAct=function(a){
-			a.canWalk(a,a.id)&&a.PZ&&a.getr(a,-a.Speed*2);
+			a.canWalk(a,a.id)&&!a.isAttacking&&a.PZ&&a.getr(a,-a.Speed*2);
 			}
 		},
         Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态：不跳舞，三倍速度<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
@@ -2047,7 +2047,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 function(d, c) {
                     var f = $Z[d],
                         e;
-                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && e.getHurt(f, 0, 100),f.HP<550&&f.HP+=40,f.JudgeAttack())
+                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && e.getHurt(f, 0, 100),f.HP<550&&(f.HP+=40),f.JudgeAttack())
                 },
                 [b, a])
         },
