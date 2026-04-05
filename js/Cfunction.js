@@ -1550,6 +1550,20 @@ var c;
   A)).cloneNode(false))).className = "Tom2";
 	}
  },
+PrivateTombstones1=function(h,b){
+	var f;
+	if(!oGd.$Tombstones[h+ "_" +b]){
+A= NewEle("dTombstones" +h+ "_"+b, "div", "position:absolute;width:86px;height:91px;transform:rotateY(180deg);left:" + (GetX(b) - 43) + "px;top:" + (GetY(h) - 91) + "px", 0, EDAll);
+oGd.$Tombstones1[h+ "_" +b] = 1;
+h = Math.floor(Math.random() * 4);
+b = Math.floor(Math.random() * 2);
+var c;
+(A.appendChild(c = (NewEle("", "div", "background-position:-" + 86 * h + "px -" + 91 * b + "px", {
+    className: "Tom1"
+  },
+  A)).cloneNode(false))).className = "Tom2";
+	}
+ },	
 SelectCard = function(c) {
 	PlayAudio("tap");
 	var h = $("Card" + c).childNodes,
