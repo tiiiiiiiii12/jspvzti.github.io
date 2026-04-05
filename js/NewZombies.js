@@ -143,10 +143,13 @@ var oGargantuar = InheritO(oZombie, {
   },
   hasthrew: 0,
   PrivateAct: function(h) {
+	var ImgLeft=parseInt($(h.Ele.FumeDoor).style.left);
     !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
       top: "100px",
       clip: "rect(0,auto,200px,0)"
-    }), h.intowater = true, SetHidden(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:126px;top:" + (h.height - 88) + "px;width:97px;height:88px;over-flow:hidden", 0, h.Ele), ImgSpriter(a, h.id, [
+    }), h.intowater = true, 
+	$(h.Ele.FumeDoor).style.left=(ImgLeft+200)+"px",
+	SetHidden(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:126px;top:" + (h.height - 88) + "px;width:97px;height:88px;over-flow:hidden", 0, h.Ele), ImgSpriter(a, h.id, [
         ["0 0", 9, 1],
         ["-97px 0", 9, 2],
         ["-194px 0", 9, 3],
@@ -162,7 +165,7 @@ var oGargantuar = InheritO(oZombie, {
     h.intowater && (oGd.$LF[h.R] == 2) && (h.ZX > GetX(9) || h.ZX < GetX(0)) && (SetStyle(h.EleBody, {
       top: "0px",
       clip: "rect(0,auto,300px,0)"
-    }, SetVisible(h.EleShadow)), h.intowater = false);
+    }, SetVisible(h.EleShadow)),$(h.Ele.FumeDoor).style.left=(ImgLeft-200)+"px", h.intowater = false);
     if (h.jinyin) {
       var P = $(h.id);
       !h.hasthrew&&!(h.PZ == h.check) && (
@@ -178,7 +181,7 @@ var oGargantuar = InheritO(oZombie, {
     var z = $(a.id);
 	a.num=Math.round(Math.random()*1+0)||a.PrivateNum;
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, a.num?"images/Card/Zombies/Imp.png":"images/Plants/san.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:100px;top:-80px;", 0);
+    var Sh = NewImg(z.FumeDoor, a.num?"images/Card/Zombies/Imp.png":"images/Plants/san.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:100px;top:"+(a.num?"40px;":"-80px;"), 0);
     z.appendChild(Sh);
 	a.num&&(a.throwImpnum = Math.round(Math.random() * 2 + 2))
   },
@@ -216,7 +219,7 @@ var oGargantuar = InheritO(oZombie, {
   SunNum: 275,
   EName: "oGargantuar",
   CName: "伽刚特尔",
-  Produce: '非常强力的僵尸<p>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态：保护伞，扔小鬼时召唤五个空降僵尸<br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
+  Produce: '非常强力的僵尸<br>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态一：<font color="#FF0000">背着保护伞，扔小鬼时召唤五个空降僵尸</font><br>精英形态：<font color="#FF0000">背着小鬼卡牌，一次扔2~4个小鬼</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
 }),
 oPeaZombie = InheritO(oZombie, {
   EName: "oPeaZombie",
