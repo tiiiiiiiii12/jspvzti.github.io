@@ -675,7 +675,7 @@ Birth: function() {
 			var b=a.num;
 			if(!(a.num=Math.round(Math.random()*1+0))){
 				a.HP*=1.5;
-				a.EXchangeLR(a,1);
+				a.ExchangeLR(a,1);
 			a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
                         d += --e + "_";
@@ -1974,7 +1974,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         EName: "oSnorkelZombie",
         CName: "潜水僵尸",
         Lvl: 2,
-        SunNum: 150,
+        SunNum: 100,
         width: 143,
         height: 200,
 		HP:270,
