@@ -439,7 +439,7 @@ Birth: function() {
             if ((c.HP -= b*c.jianshang) < c.BreakPoint) {
                 c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]);
                 c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function(c,b) {
-					c.HP<b*c.jiangshang&&c.NormalDie()
+					(c.HP-=b*c.jiangshang)<1&&c.NormalDie()
 				};
                 return
             }
@@ -677,7 +677,7 @@ Birth: function() {
 			var b=a.num;
 			if(!(a.num=Math.round(Math.random()*1+0))){
 				a.HP*=1.5;
-				a.ExchangeLR(a,1);
+				a.ExchangeLR(a,0);
 			a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
                         d += --e + "_";
@@ -2031,11 +2031,10 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 d = GetC(b),
                 g = oGd.$,
                 a,
-				Jz,
                 f = e.id;
-            (Jz=e.JudgeAttackH1())||(a = e.JudgeLR(e, c, d, b, g) || e.JudgeSR(e, c, d, b, g)) ? !e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[9] + Math.random(), oSym.addTask(50,
+            (a = e.JudgeLR(e, c, d, b, g) || e.JudgeSR(e, c, d, b, g)) ? !e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[9] + Math.random(), oSym.addTask(50,
                 function(i, h,Jz) {
-                    $Z[i] && h.beAttacked && (h.EleBody.src = h.PicArr[h.AttackGif], h.Altitude = 1, !Jz&&h.NormalAttack(a[0], a[1]))
+                    $Z[i] && h.beAttacked && (h.EleBody.src = h.PicArr[h.AttackGif], h.Altitude = 1,h.NormalAttack(a[0], a[1]))
 				},
                 [f, e,Jz])) : !Jz&&e.NormalAttack(a[0], a[1]): e.isAttacking && (e.EleBody.src = e.PicArr[10] + Math.random(), e.Altitude = 0, oSym.addTask(70,
                 function(i, h) {
@@ -2048,7 +2047,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 function(d, c) {
                     var f = $Z[d],
                         e;
-                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && e.getHurt(f, 0, 100),f.HP+=40,f.JudgeAttack())
+                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && e.getHurt(f, 0, 100),f.HP<550&&f.HP+=40,f.JudgeAttack())
                 },
                 [b, a])
         },
@@ -2384,8 +2383,8 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX)+1; i++) {
           for (let l = 0; l <= 3; l++) {
             var m = oGd.$[LR + "_" + i + "_" + l];
-            a.PZ&&a.canWalk(a,a.id)&&(m && m.getFreeze(m, m.id,500),a.SetAlpha(m,$(m.id),50,0.5),
-			oSym.addTask(500, function(a,m) {a.SetAlpha(m,$(m.id),100,1)},[a,m]));
+            a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500),a.SetAlpha(m,$(m.id),50,0.5)),
+			oSym.addTask(500, function(a,m) {m&&a.SetAlpha(m,$(m.id),100,1)},[a,m]));
           }
         }
         while (Tz--) {
@@ -2399,7 +2398,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
 		!(a.PZ == a.check) && (
      EditImg($(P.FumeDoor), 0, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
-            left: a.PZ ? "100px" : "290px"
+            left: a.PZ ? "125px" : "270px"
           }, 0),a.check = a.PZ);
 	}
 			},
@@ -3075,7 +3074,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
             var a = "images/Zombies/BalloonZombie/";
             return ["images/Card/Zombies/Balloonzombie.png", a + "0.gif", a + "1.gif", a + "Attack.gif", a + "Walk2.gif", a + "Attack2.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Boom.gif", a + "Walk.gif", a + "Drop.gif", a + "Boom2.gif"]
         })(),
-        Produce: '气球僵尸漂浮在空中，躲过大多数攻击。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">飞行</font><br>弱点：<font color="#FF0000">仙人掌和三叶草</font></p>气球僵尸真幸运。气球有很多功效，而其他僵尸都不曾捡到过。',
+        Produce: '气球僵尸漂浮在空中，躲过大多数攻击。<p>韧性：<font color="#FF0000">低</font><br>精英形态：<font color="#FF0000">飞行时仍能啃食部分植物</font><br>特点：<font color="#FF0000">飞行</font><br>弱点：<font color="#FF0000">仙人掌和三叶草</font></p>气球僵尸真幸运。气球有很多功效，而其他僵尸都不曾捡到过。',
         BirthCallBack: function(e) {
             var d = e.delayT,
                 c = e.id,
