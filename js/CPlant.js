@@ -1012,7 +1012,7 @@ NormalAttack1: function() {
             d.src = "images/Plants/SunFlower/SunFlower.gif";
             d.style.clip = "rect(0,auto,74px,0)";
             d.style.height = "148px";
-			b.MaxDropSunNum=200;
+			c.MaxDropSunNum=200;
             EditEle(b, {
                     id: e
                 },
