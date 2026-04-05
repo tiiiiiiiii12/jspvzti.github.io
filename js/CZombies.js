@@ -2033,7 +2033,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 a,
 				Jz,
                 f = e.id;
-            (Jz=g.JudgeAttackH1())||(a = e.JudgeLR(e, c, d, b, g) || e.JudgeSR(e, c, d, b, g)) ? !e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[9] + Math.random(), oSym.addTask(50,
+            (Jz=e.JudgeAttackH1())||(a = e.JudgeLR(e, c, d, b, g) || e.JudgeSR(e, c, d, b, g)) ? !e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[9] + Math.random(), oSym.addTask(50,
                 function(i, h,Jz) {
                     $Z[i] && h.beAttacked && (h.EleBody.src = h.PicArr[h.AttackGif], h.Altitude = 1, !Jz&&h.NormalAttack(a[0], a[1]))
 				},
