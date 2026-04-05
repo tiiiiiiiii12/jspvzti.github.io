@@ -723,7 +723,7 @@ while (e--) {
         PicArr: ["images/Card/Plants/Threepeater.png", "images/Plants/Threepeater/0.gif", "images/Plants/Threepeater/Threepeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次射出N行的豌豆",
-        Produce: 'N线射手可以在N条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">全图</font><br>精英形态：散射水波型子弹，攻速变慢</p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
+        Produce: 'N线射手可以在N条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">全图</font></p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
         getTriggerR: function(a) {
             return [1,oS.R]
         },
@@ -1726,7 +1726,7 @@ NormalAttack1: function() {
         SunNum: 100,
         Stature: -1,
         canEat: 0,
-        PicArr: ["images/Card/Plants/Spikeweed.png", "images/Plants/Spikeweed/0.gif", "images/Plants/Spikeweed/Spikeweed.gif"],
+        PicArr: ["images/Card/Plants/Spikeweed.png", "images/Plants/Spikeweed/0.gif", "images/Plants/Spikeweed/Spikeweed.gif", "images/Plants/Spikeweed/jinyinSpikeweed.gif"],
         Attack: 20,
 		plusrange:0,
         ArZ: {},
@@ -1752,6 +1752,10 @@ NormalAttack1: function() {
                     (c.HP -= a) < 1 && c.Die()
             }
         },
+		jinyinAct:function(a){
+			a.NormalGif=3;
+			$(a.id).childNodes[1].src=a.PicArr[a.NormalGif]
+		},
   NormalAttack: function(b, a) {
     var c = $Z[b];
     c.getHit2(c, this.Attack, 0);
