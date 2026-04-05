@@ -43,6 +43,7 @@ var CZombies = function(b, a) {
                 FreeSetbodyTime: 0,
                 FreeFreezeTime: 0,
                 FreeSlowTime: 0,
+			    ShootPeaSpeed:140,
                 CanPass: function(d, c) {
                     return c && c != 2
                 },
@@ -163,6 +164,7 @@ Birth: function() {
   c.HP *= Math.max(c.level * 0.75, 1);
   c.OrnHP *= Math.max(c.level * 0.75, 1);
   c.tasktime /= c.level;
+c.ShootPeaSpeed /= c.level;
   oZ.add(c);
   c.BirthCallBack(c);
   Math.random() * 100 < c.jinyinnum && (c.jinyin = true, c.jinyinAct && c.jinyinAct(c));
