@@ -166,6 +166,8 @@ Birth: function() {
   oZ.add(c);
   c.BirthCallBack(c);
   Math.random() * 100 < c.jinyinnum && (c.jinyin = true, c.jinyinAct && c.jinyinAct(c));
+  c.MaxHP=c.HP;
+  c.MaxOrnHP=c.OrnHP;
   if (c.HPlook) {
     var B = NewEle("dskill", "div", "position:absolute;color:yellow;width:80px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
     var A = "hp" + Math.random();
@@ -435,7 +437,9 @@ Birth: function() {
         var a = function(c, b) {
             if ((c.HP -= b*c.jianshang) < c.BreakPoint) {
                 c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]);
-                c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function() {};
+                c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function(c,b) {
+					c.HP<b*c.jiangshang&&c.NormalDie()
+				};
                 return
             }
             c.SetAlpha(c, c.EleBody, 50, 0.5);
@@ -567,8 +571,11 @@ Birth: function() {
       return e.getHTML(e.id = b, e.X, e.pixelTop = f, e.zIndex = 3 * g + 1, "none", j || 0, e.height + "px", e.PicArr[e.StandGif]);
     },
 		jinyinAct:function(a){
+			a.ChangeChkActsTo1=function(){};
+			a.ChangeChkActsTo0(a,a.id,a.EleBody);
+			a.canWalk(a,a.id)&&a.PZ&&a.getr(a,-a.Speed);
 		},
-        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态：暂无<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
+        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态：不跳舞，三倍速度<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
         BirthCallBack: function(e) {
             var d = e.delayT,
                 c = e.id,
@@ -583,10 +590,6 @@ Birth: function() {
                 [c, b])
         },
         ChangeChkActsTo0: function(c, b, a) {
-            if (!c.PZ) {
-                c.ChangeChkActsTo1(c, b, a);
-                return
-            }
             c.LostHeadGif = 10;
             c.NormalGif = 9;
             !c.isAttacking && (a.src = c.PicArr[9]);
@@ -603,7 +606,7 @@ Birth: function() {
             c.NormalGif = 2;
             c.DZStep = 1;
             !c.isAttacking && (a.src = c.PicArr[2]);
-            c.PZ && oSym.addTask(220,
+            oSym.addTask(220,
                 function(e, d) {
                     var f = $Z[e];
                     f && f.beAttacked && f.ChangeChkActsTo0(f, e, d)
@@ -671,6 +674,7 @@ Birth: function() {
 			var b=a.num;
 			if(!(a.num=Math.round(Math.random()*1+0))){
 				a.HP*=1.5;
+				a.EXchangeLR(a,1);
 			a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
                         d += --e + "_";
@@ -1002,7 +1006,7 @@ Birth: function() {
     },
     NormalAttack: function(a) {
       var b = $Z[a];
-      b.ExchangeLR(b, 0);
+      b.PZ&&b.ExchangeLR(b, 0);
       b.TurnLeft(b)
     },
     Summon: function(d, c) {
@@ -1230,10 +1234,10 @@ Birth: function() {
 			a.OrnHP*=1.5;
 			a.EleBody.src=a.PicArr[a.NormalGif];
 			a.PrivateAct=function(a){
-				var Z,
-					len=(Z=oZ.getArZ(a.ZX+20,a.ZX+100,a.R)).length;
+				var Z=oZ.getArZ(a.ZX+20,a.ZX+100,a.R),
+					len=Z.length;
 				while(len--){
-					Z[len]&&(Z[len].EName!="oDuckyTubeZombie2")&&(Z[len].EName!="oConeheadZombie")&&(Z[len].ChangeR!=function(){})&&a.Ornaments&&(
+					Z[len]&&(Z[len].EName!="oDuckyTubeZombie2")&&(Z[len].EName!="oConeheadZombie")&&a.Ornaments&&(
 						Z[len].ChangeR(Z[len]),Z[len].ChangeR=function(){},
 						oSym.addTask(500,function(Z,len){
 							Z[len].ChangeR=CZombies.prototype.ChangeR
@@ -1258,7 +1262,7 @@ Birth: function() {
 			a.EleBody.src=a.PicArr[a.NormalGif];
 			a.PrivateAct=function(a){
 				if(!a.bool&&a.OrnHP<1){
-					PrivateTombstones(a.R,GetC(a.ZX));
+					a.PZ?PrivateTombstones(a.R,GetC(a.ZX)):PrivateTombstones1(a.R,GetC(a.ZX));
 					a.bool=1;
 				}
 			}
@@ -1298,6 +1302,7 @@ Birth: function() {
 			a.Speed*=0.75;
 			a.OSpeed*=0.75;
 			a.getFreeze=function(){};
+			a.HP*=2.5;
 			a.OrnHP*=2;
 		},
         PicArr: (function() {
@@ -1338,7 +1343,7 @@ Birth: function() {
             return ["images/Card/Zombies/PoleVaultingZombie.png", a + "0.gif", a + "PoleVaultingZombie.gif", a + "PoleVaultingZombieAttack.gif", a + "PoleVaultingZombieLostHead.gif", a + "PoleVaultingZombieLostHeadAttack.gif", a + "PoleVaultingZombieHead.gif" + $Random, a + "PoleVaultingZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "PoleVaultingZombieWalk.gif", a + "PoleVaultingZombieLostHeadWalk.gif", a + "PoleVaultingZombieJump.gif", a + "PoleVaultingZombieJump2.gif", a + "1.gif"]
         })(),
         AudioArr: ["polevault", "grassstep"],
-        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<p>韧性：<font color="#FF0000">中（600)</font><br>精英形态：跳跃完毕后于跳跃前位置的3×3植物上召唤血量极低的普通撑杆<br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font></p>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为非凡。那就是撑杆僵尸。',
+        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<p>韧性：<font color="#FF0000">中（600)</font><br>精英形态：反向，跳跃完毕后于跳跃前位置的3×3植物上召唤血量极低的普通撑杆<br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font></p>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为非凡。那就是撑杆僵尸。',
         getShadow: function(a) {
             return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 35) + "px"
         },
@@ -1426,7 +1431,7 @@ Birth: function() {
                     for(let j = C - 1;j <= C + 1;j++){
                         for(let k = 0;k <= 3;k++){
                             let p = oGd.$[i+"_"+j+"_"+k];
-							p&&h.jinyin&&((Z=CustomZombie(oPoleVaultingZombie,i,j)).HP=150,Z.jinyinnum=0);
+							p&&h.jinyin&&((Z=CustomZombie(oPoleVaultingZombie,i,j)).HP=Math.max(a.MaxHP*=0.25,150),Z.jinyinnum=0);
                         }
                     }
                 }
@@ -1462,7 +1467,7 @@ Birth: function() {
         height: 164,
         beAttackedPointL: 60,
         beAttackedPointR: 130,
-        LostPaperSpeed: 4.8,
+        LostPaperSpeed: 5.4,
         PicArr: (function() {
             var a = "images/Zombies/NewspaperZombie/";
             return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
@@ -1654,7 +1659,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
         for (let i = GetC(a.ZX + 20) - 3; i <= GetC(a.ZX + 20); i++) {
           for (let l = 0; l <= 3; l++) {
             var m = oGd.$[a.R + "_" + i + "_" + l];
-            (Tz || (m !== undefined && a.PZ))&&a.canWalk(a,a.id) ? (
+            (Tz || (m&& a.PZ))&&a.canWalk(a,a.id) ? (
               a.Speed = a.OSpeed = 0,
               EditImg($(z.FumeDoor), 0, "images/Plants/FumeShroom/FumeShroomAttack.gif", {}, 0),
               PlayAudio("fume"),
@@ -1686,17 +1691,16 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
     }, [a, a.id + "_Bullet", z])); //大喷技能
     a.PrivateAct = function(a) {
       var P = $(a.id);
-	  !a.Ornaments && ClearChild($(P.FumeDoor));
       if (!a.num && a.Ornaments) {
         var C = GetC(a.ZX);
     for (i = 3; i >= 0; i--) {
         var p = oGd.$[a.R + "_" + C + "_" + i];
           a.PZ && p && p.canEat && $(p.id) && (p.C == C) && (PlantKind = p.PKind, NewC = p.C + 1, p.AttackedLX += 80, p.pixelRight += 80, p.AttackedRX += 80, p.pixelLeft += 80, $(p.id).style.left = (p.pixelLeft) + "px",
 			(p.EName== "oBrains"||p.C>9)?p.Die():(delete oGd.$[p.R + "_" + p.C + "_" + p.PKind], p.C = NewC, oGd.add(p, a.R + "_" + NewC + "_" + PlantKind,
-		p.oTrigger&&oT.delP(p),p.InitTrigger(p,p.id,p.R,p.C,p.AttackedLX,p.AttackedRX))),PlayAudio("shovel"));//重置植物列数并重置索敌
+		p.oTrigger&&oT.delP(p),p.InitTrigger(p,p.id,p.R,p.C,p.AttackedLX,p.AttackedRX),PlayAudio("shovel"))));//重置植物列数并重置索敌
         }
         var z = oZ["get" + (a.PZ ? "HZ1" : "Z0")](a.ZX, a.R);
-        z && (z.getr(z, 80), z.getHit0(z, 100, 0))
+        z && (z.getr(z, 80), z.getHit0(z, 100, 0),PlayAudio("shovel"))
       }!(a.PZ == a.check) && (a.Ornaments && (a.num && EditEle($(a.id + "_Bullet"), 0, {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
             left: (a.PZ ? "-250" : "40") + "px"
@@ -1707,9 +1711,10 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
           }, 0)),
         a.check = a.PZ);
     }
+	!a.Ornaments&&ClearChild($(a.Ele.FumeDoor))
   },
 PrivateDie:function(a){
-	a.Ornaments&&(ClearChild($(a.Ele.FumeDoor)))
+	a.Ornaments&&ClearChild($(a.Ele.FumeDoor))
 },
   PlayNormalballAudio: function() {
     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
@@ -1971,13 +1976,13 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         SunNum: 150,
         width: 143,
         height: 200,
-		HP:500,
+		HP:270,
         beAttackedPointL: 40,
         beAttackedPointR: 100,
         OSpeed: 3.2,
         Speed: 3.2,
         Altitude: 1,
-        Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击<br>精英形态：入水后不抬头<br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
+        Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击，啃食时每秒回40血<br>精英形态：入水后不抬头<br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
         JumpTime: 40,
 		jinyinAct:function(a){
 			a.JumpTime=75
@@ -2023,12 +2028,13 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 d = GetC(b),
                 g = oGd.$,
                 a,
+				Jz,
                 f = e.id;
-            (a = e.JudgeLR(e, c, d, b, g) || e.JudgeSR(e, c, d, b, g)) ? !e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[9] + Math.random(), oSym.addTask(50,
-                function(i, h) {
-                    $Z[i] && h.beAttacked && (h.EleBody.src = h.PicArr[h.AttackGif], h.Altitude = 1, h.NormalAttack(a[0], a[1]))
+            (Jz=g.JudgeAttackH1())||(a = e.JudgeLR(e, c, d, b, g) || e.JudgeSR(e, c, d, b, g)) ? !e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[9] + Math.random(), oSym.addTask(50,
+                function(i, h,Jz) {
+                    $Z[i] && h.beAttacked && (h.EleBody.src = h.PicArr[h.AttackGif], h.Altitude = 1, !Jz&&h.NormalAttack(a[0], a[1]))
 				},
-                [f, e])) : e.NormalAttack(a[0], a[1]): e.isAttacking && (e.EleBody.src = e.PicArr[10] + Math.random(), e.Altitude = 0, oSym.addTask(70,
+                [f, e,Jz])) : !Jz&&e.NormalAttack(a[0], a[1]): e.isAttacking && (e.EleBody.src = e.PicArr[10] + Math.random(), e.Altitude = 0, oSym.addTask(70,
                 function(i, h) {
                     $Z[i] && h.beAttacked && (h.isAttacking = 0, h.EleBody.src = h.PicArr[h.NormalGif])
                 },
@@ -2039,7 +2045,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 function(d, c) {
                     var f = $Z[d],
                         e;
-                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && e.getHurt(f, 0, 100), f.JudgeAttack())
+                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && e.getHurt(f, 0, 100),f.HP+=40,f.JudgeAttack())
                 },
                 [b, a])
         },
@@ -2050,9 +2056,9 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 a;
             b && b.beAttacked && b.AttackedLX < 900 && b.Altitude < 2 ? (!c.isAttacking ? (c.isAttacking = 1, c.EleBody.src = c.PicArr[9] + Math.random(),a=b.id,oSym.addTask(50,
                 function(g, h, f, e) {
-                    $Z[h] && g.beAttacked && ($Z[e] && f.beAttacked ? (g.EleBody.src = g.PicArr[g.AttackGif], g.Altitude = 1, g.AttackZombie(h, e)) : g.JudgeAttackH())
+                    $Z[h] && g.beAttacked && ($Z[e] && f.beAttacked ? (g.EleBody.src = g.PicArr[g.AttackGif], g.Altitude = 1, g.AttackZombie(g,h,e)) : g.JudgeAttackH())
                 },
-                [c, d, b, a])) : c.AttackZombie(d, a)) : c.isAttacking && (c.EleBody.src = c.PicArr[10] + Math.random(), c.Altitude = 0, oSym.addTask(70,
+                [c, d, b, a])) : c.AttackZombie(c,d,b.id)) : c.isAttacking && (c.EleBody.src = c.PicArr[10] + Math.random(), c.Altitude = 0, oSym.addTask(70,
                 function(f, e) {
                     $Z[f] && e.beAttacked && (e.isAttacking = 0, e.EleBody.src = e.PicArr[e.NormalGif])
                 },
@@ -2264,7 +2270,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             switch (true) {
                 case (d.HP = c -= b) < 60:
                     d.GoingDie();
-                    d.getHit0 = d.getHit1 = d.getHit2 = d.getHit3 = function() {};
+                    d.getHit0 = d.getHit1 = d.getHit2 = d.getHit3 = function(d,b) {(d.HP-=b)<0&&d.NormalDie()};
                     return;
                 case c < 391:
 					d.num&&(d.OSpeed=d.Speed=4.8);
@@ -2365,7 +2371,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
 				a.num=Math.round(Math.random()*1+0);
 				var z=$(a.id);
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:100px;top:280px;", 0);
+    var Sh = NewImg(z.FumeDoor, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:125px;top:280px;", 0);
     z.appendChild(Sh);
     a.num==0 && (oSym.addTask(500, function(a) {
 		var LR=Math.max(a.R-1,1);
@@ -2375,11 +2381,12 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX)+1; i++) {
           for (let l = 0; l <= 3; l++) {
             var m = oGd.$[LR + "_" + i + "_" + l];
-            a.PZ&&a.canWalk(a,a.id)&&(m && m.getFreeze(m, m.id,500));
+            a.PZ&&a.canWalk(a,a.id)&&(m && m.getFreeze(m, m.id,500),a.SetAlpha(m,$(m.id),50,0.5),
+			oSym.addTask(500, function(a,m) {a.SetAlpha(m,$(m.id),100,1)},[a,m]));
           }
         }
         while (Tz--) {
-          (t = A[Tz]) && (t.getFreeze(t,t.id,500))
+          (t = A[Tz])&&a.canWalk(a,a.id)&& (t.getFreeze(t,t.id,500))
         }
 	}while(LR++ < Math.min(a.R+1,oS.R))
       $Z[a.id]&&oSym.addTask(1000, arguments.callee, [a])
@@ -2582,9 +2589,11 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             return ["images/Card/Zombies/DolphinRiderZombie.png", a + "0.gif", a + "Walk1.gif", a + "Walk2.gif", a + "1.gif", a + "Attack.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Jump.gif" + $Random, a + "Jump2.gif" + $Random, a + "Walk3.gif", a + "Walk4.gif", a + "Die2.gif" + $Random, a + "Jump3.gif" + $Random]
         })(),
         AudioArr: ["dolphin_before_jumping", "dolphin_appears", "zombie_entering_water"],
-        Produce: '海豚骑士僵尸善于利用你水池防御的弱点。<p>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快，慢（跳越后）</font><br>特点：<font color="#FF0000">跃过他所遇到的第一株植物</font><br>精英形态：<font color="#FF0000">跳跃距离更远</font><br>只在水池关卡出现</font></p>那海豚其实也是个僵尸。',
+        Produce: '海豚骑士僵尸善于利用你水池防御的弱点。<p>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快，慢（跳越后）</font><br>特点：<font color="#FF0000">跃过他所遇到的第一株植物，出场时有3秒无敌</font><br>精英形态：<font color="#FF0000">跳跃距离更远</font><br>只在水池关卡出现</font></p>那海豚其实也是个僵尸。',
         BirthCallBack: function(a) {
             PlayAudio("dolphin_appears");
+			a.jianshang=0;
+			oSym.addTask(300,function(a){a.jianshang=1},[a]);
             oAquaticZombie.prototype.BirthCallBack(a), GetC(this.ZX) <= 9 && this.Jump(this);
         },
         Jump: function(a) {
@@ -3031,7 +3040,31 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
             return c
         },
 		jinyinAct:function(a){
-			a.ChkActs=CZombies.prototype.ChkActs
+			    a.JudgeLR=function(f, d, e, c, g) {
+                    return e > 10 || e < 1 ? false : function() {
+                        d += --e + "_";
+                        var h = 3,
+                            i;
+                        while (h--) {
+                            if ((i = g[d + h]) && i.canEat&&(i.getHurt==CPlants.prototype.getHurt)) {
+                                return i.AttackedRX >= c && i.AttackedLX <= c ? [f.id, i.id] : false
+                            }
+                        }
+                    }()
+                };
+                a.JudgeSR=function(f, d, e, c, g) {
+                    return e > 9 ? false : function() {
+                        d += e + "_";
+                        var h = 3,
+                            i;
+                        while (h--) {
+                            if ((i = g[d + h]) && i.canEat&&(i.getHurt==CPlants.prototype.getHurt)) {
+                                return i.AttackedRX >= c && i.AttackedLX <= c ? [f.id, i.id] : false
+                            }
+                        }
+                    }()
+                };
+			a.ChkActs=CZombies.prototype.ChkActs;
 		},
         AudioArr: ["ballooninflate", "balloon_pop"],
         BookHandPosition: "80% 80%",
