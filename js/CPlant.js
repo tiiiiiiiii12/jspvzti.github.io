@@ -66,6 +66,7 @@ var CPlants = NewO({
                     e.jinyin=true,
                     e.jinyinAct&&e.jinyinAct(e)   
                 ); 
+			e.MaxHP=e.HP;
             oGd.add(e, h + "_" + a + "_" + e.PKind);
             e.PrivateBirth(e, n)
         },
@@ -1011,6 +1012,7 @@ NormalAttack1: function() {
             d.src = "images/Plants/SunFlower/SunFlower.gif";
             d.style.clip = "rect(0,auto,74px,0)";
             d.style.height = "148px";
+			b.MaxDropSunNum=200;
             EditEle(b, {
                     id: e
                 },
@@ -1046,35 +1048,47 @@ NormalAttack1: function() {
                 switch (c) {
                     case 0:
                         var d = (e.HP -= b);
-                        !(d % 100) && (AppearSun(Math.floor(GetX(e.C) - 40 + Math.random() * 41), GetY(e.R), 25, 0), oSym.addTask(50,
+                        !(d % 100) && (AppearSun(Math.floor(GetX(e.C) - 40 + Math.random() * 41), GetY(e.R), 25, 0), 
+						e.MaxDropSunNum-=25,
+						oSym.addTask(50,
                             function(h, g) {
-                                AppearSun(Math.floor(GetX(h) - 40 + Math.random() * 41), GetY(g), 25, 0)
+                                AppearSun(Math.floor(GetX(h) - 40 + Math.random() * 41), GetY(g), 25, 0);
+								e.MaxDropSunNum-=25
                             },
                             [e.C, e.R])),d < 1 ? e.Die() : oSym.addTask(50,
                             function(h, g) {
-                                !(d % 100) &&AppearSun(Math.floor(GetX(h) - 40 + Math.random() * 41), GetY(g), 25, 0)
+                                !(d % 100) && (AppearSun(Math.floor(GetX(h) - 40 + Math.random() * 41), GetY(g), 25, 0),e.MaxDropSunNum-=25)
                             },
                             [e.C, e.R]);
                         break;
                     case 3:                   
                         var d = (e.HP -= b);
-                        !(d % 100) && (AppearSun(Math.floor(GetX(e.C) - 40 + Math.random() * 41), GetY(e.R), 25, 0), oSym.addTask(50,
+                        !(d % 100) && (AppearSun(Math.floor(GetX(e.C) - 40 + Math.random() * 41), GetY(e.R), 25, 0),e.MaxDropSunNum-=25,oSym.addTask(50,
                             function(h, g) {
-                                AppearSun(Math.floor(GetX(h) - 40 + Math.random() * 41), GetY(g), 25, 0)
+                                AppearSun(Math.floor(GetX(h) - 40 + Math.random() * 41), GetY(g), 25, 0);
+								e.MaxDropSunNum-=25
                             },
                             [e.C, e.R]));
 						d < 1 ? e.Die() : oSym.addTask(50,
                             function(h,g) {
-                              !(d % 100) &&AppearSun(Math.floor(GetX(h) - 40 + Math.random() * 41), GetY(g), 25, 0)
+                              !(d % 100) &&(AppearSun(Math.floor(GetX(h) - 40 + Math.random() * 41), GetY(g), 25, 0),e.MaxDropSunNum-=25)
                             },
                             [e.C, e.R]);
                         break;
                     default: // 如果是非自然原因死亡，直接把剩余价值压榨出来
                         if (e.HP > 0) AppearSun(Math.floor(GetX(e.C) - 40 + Math.random() * 41), GetY(e.R), Math.floor(e.HP / 1.5 / 25) * 25, 0);
+						e.MaxDropSunNum=0;
                         e.Die();
                 }
             }
         },
+		PrivateDie:function(a){
+			a.MaxDropSunNum>0&&AppearSun(Math.floor(GetX(a.C) - 40 + Math.random() * 41), GetY(a.R), a.MaxDropSunNum, 0)
+		},
+		BoomDie:function(){
+			var a=this;
+			a.getHurt(a,2)
+		},
         InitTrigger: function() {}
     }),
     oTwinSunflower = InheritO(oSunFlower, {
@@ -1114,7 +1128,7 @@ NormalAttack1: function() {
         },
         PrivateBirth: function(a) {
             var b = GetX(a.C);
-            oSym.addTask(500,
+            oS.ProduceSun&&oSym.addTask(500,
                 function(f, d, c, e) {
                     $P[f] && (a.ChangePosition($(f), 1), oSym.addTask(100,
                         function(k, h, g, j, i) {
@@ -1392,7 +1406,7 @@ NormalAttack1: function() {
                             A.getHit0(A, Math.min(A.OrnHP, 900), 0);
                             break;
                         default:
-                            z.side ? A.getHit2(A,1500) : A.CheckOrnHP(A, u, A.OrnHP, 400, A.PicArr, 0, 0, 0)
+                            z.Ornaments==2 ? A.getHit2(A,1500) : A.CheckOrnHP(A, u, A.OrnHP, 400, A.PicArr, 0, 0, 0)
                     }
                     z.CanAttack = 0;
                     switch (a) {
@@ -1714,9 +1728,10 @@ NormalAttack1: function() {
         canEat: 0,
         PicArr: ["images/Card/Plants/Spikeweed.png", "images/Plants/Spikeweed/0.gif", "images/Plants/Spikeweed/Spikeweed.gif"],
         Attack: 20,
+		plusrange:0,
         ArZ: {},
         Tooltip: "扎破轮胎, 也能伤害走在上面的僵尸",
-        Produce: '地刺可以扎破轮胎，并对踩到他的僵尸造成伤害<p>伤害：<font color="#FF0000">普通</font><br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>地刺痴迷冰球，他买了包厢的季票。他一直关注着他喜欢的球员，他也始终如一的在赛后清理冰球场。但只有一个问题：他害怕冰球。',
+        Produce: '地刺可以扎破轮胎，并对踩到他的僵尸造成伤害<p>伤害：<font color="#FF0000">普通</font><br>攻击时不断横向生长并增加攻击距离，最多生长至前后各一格<br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>地刺痴迷冰球，他买了包厢的季票。他一直关注着他喜欢的球员，他也始终如一的在赛后清理冰球场。但只有一个问题：他害怕冰球。',
         CanGrow: function(c, b, e) {
             var a = b + "_" + e,
                 d = oS.ArP;
@@ -1737,23 +1752,30 @@ NormalAttack1: function() {
                     (c.HP -= a) < 1 && c.Die()
             }
         },
-        NormalAttack: function(b, a) {
-            var c = $Z[b];
-            c.getHit2(c, this.Attack, 0)
-        },
+  NormalAttack: function(b, a) {
+    var c = $Z[b];
+    c.getHit2(c, this.Attack, 0);
+    var Left = parseInt($(a.id).style.left);
+    a.jinyin&&a.plusrange < 80 && (a.plusrange += 4,
+      a.width += 8,
+      EditEle($(a.id).childNodes[1], {}, {
+        width: (a.width) + "px",
+        height: (a.height) + "px"
+      }), $(a.id).style.left = (Left - 4) + "px");
+  },
         GetDY: function(b, c, a) {
             return -2
         },
         getTriggerRange: function(a, b, c) {
             return [
-                [this.pixelLeft - 80, this.pixelRight + 80, 0]
+                [this.pixelLeft - 160, this.pixelRight + 160, 0]
             ]
         },
         TriggerCheck: function(i, h) {
             var c = i.id,
                 g = this.ArZ,
                 a, b, e, f;
-            i.PZ && !g[c] && (a = i.AttackedLX, b = i.AttackedRX, e = this.AttackedLX, f = this.AttackedRX, a <= f && a >= e || b <= f && b >= e || a <= e && b >= f) && this.AttackCheck2(i) && (g[c] = 1, this.NormalAttack(c), oSym.addTask(100,
+            i.PZ && !g[c] && (a = i.AttackedLX, b = i.AttackedRX, e = this.AttackedLX-this.plusrange, f = this.AttackedRX+this.plusrange, a <= f && a >= e || b <= f && b >= e || a <= e && b >= f) && this.AttackCheck2(i) && (g[c] = 1, this.NormalAttack(c,this), oSym.addTask(100,
                 function(d, j) {
                     var k = $P[d];
                     k && delete k.ArZ[j]
