@@ -21,7 +21,7 @@ oS.Init({
     oP.FlagNum&&(oP.FlagNum%5)&&AppearTombstones(6,9,2);
     oP.FlagNum%10&&(
       oP.SetTimeoutWaterZombie(6,9,3,[oDuckyTubeZombie1]),
-      oP.SetTimeoutTomZombie(6,9,3,[oZombie,oConeheadZombie,oPeaZomnie]),
+      oP.SetTimeoutTomZombie([oZombie,oConeheadZombie,oPeaZomnie]),
     oP.SetTimeoutTomZombie(6,9,3,[oZombie,oConeheadZombie,oBucketheadZombie]));
   },
   StartGameMusic:"Kitanai Sekai"
