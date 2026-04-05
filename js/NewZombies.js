@@ -290,9 +290,9 @@ PrivateDie:function(a){
         var Kind = 3,
 			Z = oZ["getHZ1"](n,i),
           d, isHit;
-		Z && Z.Altitude == 1 && (Z.getPea(Z,20,0),isHit=true);
+		Z && Z.Altitude == 1 && (Z.getPea(Z,20*a.level,0),isHit=true);
         while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20))
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20*a.level))
         }
 	  isHit?((SetStyle(j, {
             left: o + 28 + "px",
@@ -338,9 +338,9 @@ PrivateDie:function(a){
         var Kind = 3,
 			Z = oZ["getHZ1"](n,i),
           d, isHit;
-		Z && Z.Altitude == 1 && (Z.getPea(Z,20,0),isHit=true);
+		Z && Z.Altitude == 1 && (Z.getPea(Z,20*a.level,0),isHit=true);
         while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20))
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20*a.level))
         }
 	  isHit?((SetStyle(j, {
             left: o + 28 + "px",
