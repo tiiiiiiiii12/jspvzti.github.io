@@ -12,6 +12,7 @@ var CZombies = function(b, a) {
                 BookHandBack: 0,
                 AudioArr: [],
                 CanSelect: 1,
+			    jianshang:1,
                 CanDisplay: 1,
                 BookHandPosition: "50% 70%",
                 AttackGif: 3,
