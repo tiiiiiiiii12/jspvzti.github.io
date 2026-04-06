@@ -1715,8 +1715,8 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
             left: a.PZ ? "25px" : "40px"
           }, 0)),
         a.check = a.PZ);
+		!a.Ornaments&&ClearChild($(a.Ele.FumeDoor))
     }
-	!a.Ornaments&&ClearChild($(a.Ele.FumeDoor))
   },
 PrivateDie:function(a){
 	a.Ornaments&&ClearChild($(a.Ele.FumeDoor))
