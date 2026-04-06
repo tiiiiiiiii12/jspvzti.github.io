@@ -440,7 +440,7 @@ Birth: function() {
                 c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]);
                 c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function(c,b) {
 					(c.HP-=(b*c.jianshang))<1&&(
-					c.NormalDie==oAquaticZombie.prototype.NormalDie&&oSym.addTask(50,ClearChild,[b.Ele]),
+					c.NormalDie==oAquaticZombie.prototype.NormalDie&&oSym.addTask(50,ClearChild,[c.Ele]),
 					c.NormalDie())
 				};
                 return
