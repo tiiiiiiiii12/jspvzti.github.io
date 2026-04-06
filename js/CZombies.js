@@ -12,7 +12,6 @@ var CZombies = function(b, a) {
                 BookHandBack: 0,
                 AudioArr: [],
                 CanSelect: 1,
-			    jianshang:1,
                 CanDisplay: 1,
                 BookHandPosition: "50% 70%",
                 AttackGif: 3,
@@ -440,7 +439,7 @@ Birth: function() {
             if ((c.HP -= (b*c.jianshang)) < c.BreakPoint) {
                 c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]);
                 c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function(c,b) {
-					(c.HP-=(b*c.jiangshang))<1&&c.NormalDie()
+					(c.HP-=(b*c.jianshang))<1&&c.NormalDie()
 					return
 				};
                 return
