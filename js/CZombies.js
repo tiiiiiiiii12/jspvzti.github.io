@@ -436,7 +436,7 @@ Birth: function() {
     }(),
     OrnNoneZombies = function() {
         var a = function(c, b) {
-            if ((c.HP -= b*c.jianshang) < c.BreakPoint) {
+            if ((c.HP -= (b*c.jianshang)) < c.BreakPoint) {
                 c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]);
                 c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function(c,b) {
 					(c.HP-=(b*c.jiangshang))<1&&c.NormalDie()
