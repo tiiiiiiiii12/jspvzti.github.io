@@ -440,9 +440,8 @@ Birth: function() {
                 c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]);
                 c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function(c,b) {
 					(c.HP-=(b*c.jianshang))<1&&(
-					c.NormalDie(),
-					c.NormalDie==oAquaticZombie.prototype.NormalDie&&oSym.addTask(50,ClearChild,[b.Ele])
-					)
+					c.NormalDie==oAquaticZombie.prototype.NormalDie&&oSym.addTask(50,ClearChild,[b.Ele]),
+					c.NormalDie())
 				};
                 return
             }
@@ -680,7 +679,6 @@ Birth: function() {
 			var b=a.num;
 			if(!(a.num=Math.round(Math.random()*1+0))){
 				a.HP*=1.5;
-				a.ExchangeLR(a,0);
 			a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
                         d += --e + "_";
@@ -869,6 +867,7 @@ Birth: function() {
         },
         r
       ];
+	  d.num==0&&d.ExchangeLR(d,0);
       func = function(t, o) {
         var u = $Z[t];
         u && (u.ExchangeLR(d, 1), u.DZMSpeed = 7.2, u.DZStep = -1, u.DZStepT = oSym.Now + 220, u.FreeSetbodyTime = 0, SetBlock(o))
@@ -2036,10 +2035,10 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 a,
                 f = e.id;
             (a = e.JudgeLR(e, c, d, b, g) || e.JudgeSR(e, c, d, b, g)) ? !e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[9] + Math.random(), oSym.addTask(50,
-                function(i, h,Jz) {
+                function(i, h) {
                     $Z[i] && h.beAttacked && (h.EleBody.src = h.PicArr[h.AttackGif], h.Altitude = 1,h.NormalAttack(a[0], a[1]))
 				},
-                [f, e,Jz])) : e.NormalAttack(a[0], a[1]): e.isAttacking && (e.EleBody.src = e.PicArr[10] + Math.random(), e.Altitude = 0, oSym.addTask(70,
+                [f, e])) : e.NormalAttack(a[0], a[1]): e.isAttacking && (e.EleBody.src = e.PicArr[10] + Math.random(), e.Altitude = 0, oSym.addTask(70,
                 function(i, h) {
                     $Z[i] && h.beAttacked && (h.isAttacking = 0, h.EleBody.src = h.PicArr[h.NormalGif])
                 },
@@ -2050,7 +2049,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 function(d, c) {
                     var f = $Z[d],
                         e;
-                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && e.getHurt(f, 0, 100),f.HP<550&&(f.HP+=40),f.JudgeAttack())
+                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && e.getHurt(f, 0, 100),f.HP<550&&(f.HP+=30),f.JudgeAttack())
                 },
                 [b, a])
         },
