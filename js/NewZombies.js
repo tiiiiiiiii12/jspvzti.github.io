@@ -143,12 +143,12 @@ var oGargantuar = InheritO(oZombie, {
   },
   hasthrew: 0,
   PrivateAct: function(h) {
-	var ImgLeft=parseInt($(h.Ele.FumeDoor).style.left);
+	var ImgLeft;
     !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
       top: "100px",
       clip: "rect(0,auto,200px,0)"
     }), h.intowater = true, 
-	$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.left=(ImgLeft+200)+"px"),
+	$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.top=((ImgLeft=parseInt($(h.Ele.FumeDoor).style.top))+200)+"px"),
 	SetHidden(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:126px;top:" + (h.height - 88) + "px;width:97px;height:88px;over-flow:hidden", 0, h.Ele), ImgSpriter(a, h.id, [
         ["0 0", 9, 1],
         ["-97px 0", 9, 2],
@@ -165,7 +165,7 @@ var oGargantuar = InheritO(oZombie, {
     h.intowater && (oGd.$LF[h.R] == 2) && (h.ZX > GetX(9) || h.ZX < GetX(0)) && (SetStyle(h.EleBody, {
       top: "0px",
       clip: "rect(0,auto,300px,0)"
-    }, SetVisible(h.EleShadow)),$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.left=(ImgLeft-200)+"px"), h.intowater = false);
+    }, SetVisible(h.EleShadow)),$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.top=((ImgLeft=parseInt($(h.Ele.FumeDoor).style.top))-200)+"px"), h.intowater = false);
     if (h.jinyin) {
       var P = $(h.id);
       !h.hasthrew&&!(h.PZ == h.check) && (
