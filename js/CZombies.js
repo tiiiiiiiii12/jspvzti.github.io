@@ -439,8 +439,10 @@ Birth: function() {
             if ((c.HP -= (b*c.jianshang)) < c.BreakPoint) {
                 c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]);
                 c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function(c,b) {
-					(c.HP-=(b*c.jianshang))<1&&c.NormalDie()
-					return
+					(c.HP-=(b*c.jianshang))<1&&(
+					c.NormalDie(),
+					c.NormalDie=oDuckyTubeZombie.prototype.NomalDie&&oSym.addTask(50,ClearChild,[b.Ele])
+					)
 				};
                 return
             }
@@ -2037,7 +2039,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 function(i, h,Jz) {
                     $Z[i] && h.beAttacked && (h.EleBody.src = h.PicArr[h.AttackGif], h.Altitude = 1,h.NormalAttack(a[0], a[1]))
 				},
-                [f, e,Jz])) : !Jz&&e.NormalAttack(a[0], a[1]): e.isAttacking && (e.EleBody.src = e.PicArr[10] + Math.random(), e.Altitude = 0, oSym.addTask(70,
+                [f, e,Jz])) : e.NormalAttack(a[0], a[1]): e.isAttacking && (e.EleBody.src = e.PicArr[10] + Math.random(), e.Altitude = 0, oSym.addTask(70,
                 function(i, h) {
                     $Z[i] && h.beAttacked && (h.isAttacking = 0, h.EleBody.src = h.PicArr[h.NormalGif])
                 },
