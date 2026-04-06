@@ -441,7 +441,7 @@ Birth: function() {
                 c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function(c,b) {
 					(c.HP-=(b*c.jianshang))<1&&(
 					c.NormalDie(),
-					c.NormalDie=oDuckyTubeZombie.prototype.NomalDie&&oSym.addTask(50,ClearChild,[b.Ele])
+					c.NormalDie==oDuckyTubeZombie.prototype.NomalDie&&oSym.addTask(50,ClearChild,[b.Ele])
 					)
 				};
                 return
