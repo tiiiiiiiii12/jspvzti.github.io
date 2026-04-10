@@ -796,6 +796,19 @@ oP = {
 		this.AppearUP(d, f, e);
 		this.AppearUP(x, z, v,1)
 	},
+	SetTimeoutTomZombies1: function(c) {
+		var x=[],
+		z=[],
+		v=0,
+		a = c.length,
+		y,
+		g;
+		for (y in oGd.$Tombstones1) {
+			g = y.split("_");
+			x[v] = (z[v] = new c[Math.floor(Math.random() * a)]).CustomBirth(g[0], g[1], 100),z[v].pz=true; ++v
+		}
+		this.AppearUP(x, z, v,1)
+	},
 	SetTimeoutWaterZombie: function(j, b, e, h) {
 		var f = oGd.$LF,
 		l = [],
