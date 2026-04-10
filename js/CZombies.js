@@ -872,7 +872,7 @@ Birth: function() {
         u && (u.ExchangeLR(d, 1), u.DZMSpeed = 7.2, u.DZStep = -1, u.DZStepT = oSym.Now + 220, u.FreeSetbodyTime = 0, SetBlock(o))
       };
       b||!d.canWalk(d,l)? (oSym.addTask(b, func, [l, a]), c += b) : func(l, a);
-	d.num==0&&d.ExchangeLR(d,0);
+	Number(d.num)==0&&d.ExchangeLR(d,0);
       oSym.addTask(c,
         function(o) {
           var t = $Z[o];
@@ -2843,7 +2843,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
     a.num=Math.round(Math.random()*1+0)||a.Privatenum;
     var z = a.Ele;
     z.JaHead = "Ja" + Math.random();
-    var Ja = NewImg(z.JaHead, a.num ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/CherryBomb/CherryBomb.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:60px;top:25px;", 0);
+    var Ja = NewImg(z.JaHead, a.num ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/CherryBomb/CherryBomb.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:60px;top:30px;", 0);
     z.appendChild(Ja);
     a.PrivateAct = function(a) {
       var p = a.Ele;
@@ -2854,7 +2854,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
         }, 0),
         a.check = a.PZ);
 		!a.beAttacked&&$Z[a.id]&&ClearChild($(p.JaHead));
-      if (a.num == 0 && !a.opennum) {
+      if (Number(a.num)==0 && !a.opennum) {
         a.canWalk(a, a.id) && $Z[a.id].beAttacked && ($Z[a.id].HP < 240) && (a.OpenBox(a.id), a.opennum = 1)
       }
     }
