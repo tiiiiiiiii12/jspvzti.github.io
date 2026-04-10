@@ -1914,7 +1914,7 @@ NormalAttack1: function() {
                         h = g.length,
                         k;
                     while (h--) {
-						((k = g[h]).OrnHP+k.HP-k.BreakPoint)<=1850&&k.Altitude > -1 && k.PZ && k.Altitude < 3 &&d.jinyin&&(CustomZombie(window[k.EName],j,GetC(k.ZX),1).jinyinnum=100);
+						((k = g[h]).OrnHP+k.HP-k.BreakPoint)<=1850&&k.Altitude > -1 && k.PZ && k.Altitude < 3 &&d.jinyin&&(CustomZombie(window[k.EName],j,0,1).jinyinnum=100);
                         k.Altitude > -1 && k.PZ && k.Altitude < 3 && k.getThump(1850);
                     }
                     oSym.addTask(185, ClearChild, [f])
@@ -2094,10 +2094,21 @@ jinyinAttackGif2: 8,
                 e = d.length,
                 g,
                 c = f.id,
+				h,
                 b = $(c),
+				lastR=Math.max(1,f.R-1),
                 a = c + "_Bullet";
             while (e--) {
-                (g = d[e]).Altitude < 2 && g.getHit1(g, g.Attack)
+                (g = d[e]).Altitude < 2 && g.getHit1(g, f.Attack);
+		if(f.jinyin){
+			do{
+				var jinyinHit=oZ.getArZ(g.ZX,g.AttackedRX,lastR),
+				Zlength = jinyinHit.length;
+				while (Zlength--) {
+                (h = jinyinHit[Zlength]).Altitude < 2&&(h!=g)&& h.getHit1(h, 25)
+				}
+			}while(lastR++<Math.min(oS.R,f.R+1))
+		}
             }
             b.childNodes[1].src = "images/Plants/FumeShroom/FumeShroomAttack.gif";
             SetVisible($(a));
