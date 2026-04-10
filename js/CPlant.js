@@ -573,7 +573,7 @@ oSnowPea = InheritO(oPeashooter, {
     var A = "hp" + Math.random();
     dskill.id = A;
     var C = $(A);
-	NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", "left:" + (b.width * 0.5 - 34) + "px;top:" + (b.height - 30) + "px", $(b.id));
+	NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", "left:" + (b.width * 0.5 - 29) + "px;top:" + (b.height - 30) + "px", $(b.id));
     oSym.addTask(0, function(C, B, b) {
       B.innerHTML = b.power < 40 ? (40 - b.power) : "技能就绪！"
       oSym.addTask(50, arguments.callee, [C, B, b])
@@ -1101,7 +1101,7 @@ NormalAttack1: function() {
         coolTime: 50,
         PicArr: ["images/Card/Plants/TwinSunflower.png", "images/Plants/TwinSunflower/0.gif", "images/Plants/TwinSunflower/TwinSunflower1.gif", "images/Plants/TwinSunflower/TwinSunflower.gif"],
         Tooltip: "一次提供两倍于向日葵的阳光量<br>(需要向日葵)",
-        Produce: '双子向日葵的阳光产量是普通向日葵的两倍。</font></p>精英形态：阳光产量增加，小概率给一个小向日葵卡牌<p>阳光产量：<font color="#FF0000">双倍<br>只能种在普通向日葵上</font></p>这是一个疯狂的夜晚，禁忌的科学技术，让双子向日葵来到了这个世界。电闪雷鸣，狂风怒吼，都在表示着这个世界对他的拒绝。但是一切都无济于事，双子向日葵他却仍然活着！',
+        Produce: '双子向日葵的阳光产量是普通向日葵的两倍。</font></p>阳光产量增加，小概率给一个小向日葵卡牌<p>阳光产量：<font color="#FF0000">双倍<br>只能种在普通向日葵上</font></p>这是一个疯狂的夜晚，禁忌的科学技术，让双子向日葵来到了这个世界。电闪雷鸣，狂风怒吼，都在表示着这个世界对他的拒绝。但是一切都无济于事，双子向日葵他却仍然活着！',
         CanGrow: function(b, a, d) {
             var c = b[1];
             return c && c.EName == "oSunFlower"
@@ -1128,14 +1128,14 @@ NormalAttack1: function() {
         },
         PrivateBirth: function(a) {
             var b = GetX(a.C);
-            oS.ProduceSun&&oSym.addTask(500,
+            oSym.addTask(500,
                 function(f, d, c, e) {
                     $P[f] && (a.ChangePosition($(f), 1), oSym.addTask(100,
                         function(k, h, g, j, i) {
                             AppearSun(Math.floor(h + Math.random() * 21), j, 25, 0),
                             AppearSun(Math.floor(g + Math.random() * 21), j, 25, 0),
-                            a.jinyin&&AppearSun(Math.floor(g + Math.random() * 21), j, 50, 0),
-                        a.jinyin&&Math.random()*100>98&&AppearCard(a.pixelLeft, a.pixelTop, oSunFlower, 0, 1500),
+                            AppearSun(Math.floor(g + Math.random() * 21), j, 50, 0),
+                        Math.random()*100>98&&AppearCard(a.pixelLeft, a.pixelTop, oSunFlower, 0, 1500),
                                 oSym.addTask(100,
                                     function(l) {
                                         $P[l] && a.ChangePosition($(l), 0)
@@ -1549,9 +1549,9 @@ NormalAttack1: function() {
         JudgeHurtCustom:function(c){
                 var d;
                 c.HP < 1 ? CustomZombie(oGargantuar,c.R,c.C,1): 
-                c.HP < 2000? c.CustomStatus < 3 && (c.CustomStatus = 3,(d=CustomZombie(oScreenDoorZombie,c.R,c.C,1)).OrnHP=1600,d.jinyinnum=100):
+                c.HP < 2000? c.CustomStatus < 3 && (c.CustomStatus = 3,(d=CustomZombie(oScreenDoorZombie,c.R,c.C,1)).OrnHP*=1.5,d.jinyinnum=100):
                 c.HP < 4000? c.CustomStatus < 2 && (c.CustomStatus = 2,CustomZombie(oConeheadZombie,c.R,c.C,1).jinyinnum=100):
-                c.HP < 6000 && c.CustomStatus < 1 && (c.CustomStatus = 1, (d=CustomZombie(oZombie,c.R,c.C,1)).HP=800,d.jinyinnum=100)
+                c.HP < 6000 && c.CustomStatus < 1 && (c.CustomStatus = 1, (d=CustomZombie(oZombie,c.R,c.C,1)).HP*=3,d.jinyinnum=100)
         },
         getHurt: function(e, b, a) {
             var c = this,
@@ -1729,9 +1729,10 @@ NormalAttack1: function() {
         PicArr: ["images/Card/Plants/Spikeweed.png", "images/Plants/Spikeweed/0.gif", "images/Plants/Spikeweed/Spikeweed.gif", "images/Plants/Spikeweed/jinyinSpikeweed.gif"],
         Attack: 20,
 		plusrange:0,
+		rpx:15,
         ArZ: {},
         Tooltip: "扎破轮胎, 也能伤害走在上面的僵尸",
-        Produce: '地刺可以扎破轮胎，并对踩到他的僵尸造成伤害<p>伤害：<font color="#FF0000">普通</font><br>攻击时不断横向生长并增加攻击距离，最多生长至前后各一格<br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>地刺痴迷冰球，他买了包厢的季票。他一直关注着他喜欢的球员，他也始终如一的在赛后清理冰球场。但只有一个问题：他害怕冰球。',
+        Produce: '地刺可以扎破轮胎，并对踩到他的僵尸造成伤害，有概率击退僵尸<p>伤害：<font color="#FF0000">普通</font><br>攻击时不断横向生长并增加攻击距离，最多生长至前后各一格<br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>地刺痴迷冰球，他买了包厢的季票。他一直关注着他喜欢的球员，他也始终如一的在赛后清理冰球场。但只有一个问题：他害怕冰球。',
         CanGrow: function(c, b, e) {
             var a = b + "_" + e,
                 d = oS.ArP;
@@ -1759,6 +1760,7 @@ NormalAttack1: function() {
   NormalAttack: function(b, a) {
     var c = $Z[b];
     c.getHit2(c, this.Attack, 0);
+	Math.random()*100>15&&c.getr(c,c.rpx);
     var Left = parseInt($(a.id).style.left);
     a.jinyin&&a.plusrange < 80 && (a.plusrange += 4,
       a.width += 8,
@@ -1800,7 +1802,8 @@ NormalAttack1: function() {
         SunNum: 125,
         coolTime: 50,
         PicArr: ["images/Card/Plants/Spikerock.png", "images/Plants/Spikerock/0.gif", "images/Plants/Spikerock/Spikerock.gif", "images/Plants/Spikerock/2.gif", "images/Plants/Spikerock/3.gif"],
-        Attack: 40,
+        Attack: 50,
+		rpx:20,
         Tooltip: "能扎破多个轮胎, 并伤害经过上面的僵尸<br>(需要地刺)",
         Produce: '地刺王可以扎破多个轮胎，并对踩到他的僵尸造成伤害。<p><font color="#FF0000">必须种植在地刺上</font></p>地刺王刚刚从欧洲旅行回来。他玩的很高兴，也认识了很多有趣的人。这些都真的拓展了他的视野——他从来不知道，他们建造了这么大的博物馆，有这么多的画作。这对他来说太惊奇了。',
         CanGrow: function(b, a, d) {
@@ -2049,8 +2052,9 @@ jinyinAttackGif2: 8,
         beAttackedPointR: 80,
         SunNum: 75,
         BookHandBack: 2,
+		Shroom:true,
         SleepGif: 3,
-        night: true,
+		Attack:25,
         PicArr: ["images/Card/Plants/FumeShroom.png", "images/Plants/FumeShroom/0.gif", "images/Plants/FumeShroom/FumeShroom.gif", "images/Plants/FumeShroom/FumeShroomSleep.gif", "images/Plants/FumeShroom/FumeShroomAttack.gif", "images/Plants/FumeShroom/FumeShroomBullet.gif"],
         AudioArr: ["fume"],
         Tooltip: "喷射可以穿过门板的气液",
@@ -2080,6 +2084,9 @@ jinyinAttackGif2: 8,
                 [b, Math.min(c + 550, oS.W), 0]
             ]
         },
+		jinyinAct:function(a){
+			a.Attack*=2;
+		},
         NormalAttack: function() {
             PlayAudio("fume");
             var f = this,
@@ -2090,7 +2097,7 @@ jinyinAttackGif2: 8,
                 b = $(c),
                 a = c + "_Bullet";
             while (e--) {
-                (g = d[e]).Altitude < 2 && g.getHit1(g, 25)
+                (g = d[e]).Altitude < 2 && g.getHit1(g, g.Attack)
             }
             b.childNodes[1].src = "images/Plants/FumeShroom/FumeShroomAttack.gif";
             SetVisible($(a));
@@ -2151,9 +2158,9 @@ jinyinAttackGif2: 8,
                     PlayAudio("wakeup");
                     var d = oGd.$[c],
                         b;
-					a.jinyin&&(EDAll.style.opacity=0.5,CPlants.prototype.jinyin=1);
+					a.jinyin&&(EDAll.style.opacity=0.5,CPlants.prototype.randomnum=0);
 			oSym.addTask(1000,function() {
-                CPlants.prototype.jinyin=0;
+                CPlants.prototype.randomnum=100;
 				EDAll.style.opacity=1;
                 },[]);
                     d && (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
@@ -2207,12 +2214,12 @@ oGloomShroom = InheritO(oFumeShroom, {
     $(a).appendChild(Img1);
     oSym.addTask(100, function(b, a) {
       var g = $(a + "AKind" + (b.yuansu ? 0 : 1));
-      $P[a] && b.power <= 20 && (b.power < 20 ? (b.power += 1) : (b.LoadingComplelete(b),
+      $P[a] && b.power <= 20 && (b.power < 20 ? (b.power += 1) : (b.LoadingComplete(b),
         SetVisible(g), g.style.opacity = 0.5));
       $P[a] && oSym.addTask(100, arguments.callee, [b, a])
     }, [b, a])
   },
-  LoadingComplelete: function(a) {
+  LoadingComplete: function(a) {
     $("oAttack_" + a.id).onclick = function() {
       var bK = a.yuansu ? 0 : 1;
       a.power = 0;
@@ -2252,7 +2259,7 @@ oGloomShroom = InheritO(oFumeShroom, {
     for (g = k.MinR; g <= f; g++) {
       e = oZ.getArZ(c, b, g);
       for (h = e.length; h--;
-        (a = e[h]).Altitude < 2 && (a.getHit1(a, 50), k.yuansu ? (num > 98 && (a.OrnHP = 0), a.getHit1(a, 30)) : (a.getSlow(a, a.id, 1000), num > 80 && a.getr(a, 15)))) {}
+        (a = e[h]).Altitude < 2 && (a.getHit1(a, 50), k.yuansu ? (num > 95 && (a.OrnHP = 0), a.getHit1(a, 50)) : (a.getSlow(a, a.id, 1000), num > 80 && a.getr(a, 15)))) {}
     }
     oSym.addTask(100,
       function(i) {
@@ -2474,7 +2481,13 @@ oGloomShroom = InheritO(oFumeShroom, {
         PicArr: ["images/Card/Plants/HypnoShroom.png", "images/Plants/HypnoShroom/0.gif", "images/Plants/HypnoShroom/HypnoShroom.gif", "images/Plants/HypnoShroom/HypnoShroomSleep.gif"],
         Tooltip: "让一只僵尸为你作战",
         num:0,
-        Produce: '当僵尸吃下魅惑菇后，他将会掉转方向为你作战。<p>使用方法：<font color="#FF0000">单独使用，接触生效</font><br>特点：<font color="#FF0000">让一只僵尸为你作战<br>白天睡觉</font></p>魅惑菇声称：“僵尸们是我们的朋友，他们被严重误解了，僵尸们在我们的生态环境里扮演着重要角色。我们可以也应当更努力地让他们学会用我们的方式来思考。”',
+		PrivateBirth:function(a){
+			oSym.addTask(2000,function(a){
+				$P[a.id]&&SetTimeoutTomZombies1([oZombie]);
+				$P[a.id]&&oSym.addTask(2000,arguments.callee,[a])
+			},[a]);
+		},
+        Produce: '当僵尸吃下魅惑菇后，他将会掉转方向为你作战，每隔一段时间使场上的魅惑墓碑出僵尸<br>精英形态：使被其魅惑的僵尸发射豌豆，本体被啃咬次数越多，僵尸发射豌豆速度越快<p>使用方法：<font color="#FF0000">单独使用，接触生效</font><br>特点：<font color="#FF0000">让一只僵尸为你作战<br>白天睡觉</font></p>魅惑菇声称：“僵尸们是我们的朋友，他们被严重误解了，僵尸们在我们的生态环境里扮演着重要角色。我们可以也应当更努力地让他们学会用我们的方式来思考。”',
         InitTrigger: function() {},
         getHurt: function(d, b, a) {
             var c = this;
@@ -3164,8 +3177,7 @@ NormalAttack2: function() {
             if (oS.HaveFog) { // 如果场地上有雾，驱散
                 oGd.MoveFogRight(); // 驱散雾
                 oSym.addTask(2400 + 150, oGd.MoveFogLeft, []); // 24s后恢复
-            }
- 
+			}
             oSym.addTask(150, function(id) {
                 var p = $P[id];
                 p && p.Die();
