@@ -1424,7 +1424,7 @@ Birth: function() {
                         r,
 						Z,
 						Z2,
-					    R = (h.R - 1) || 0,
+					    R = Math.max(h.R - 1,1),
                         RM = h.R + 1 <= oS.R ? h.R + 1 : oS.R,
                     C = GetC(h.ZX);
                     h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = q = k.AttackedRX) - h.beAttackedPointL) + h.beAttackedPointR, SetStyle(i, {
