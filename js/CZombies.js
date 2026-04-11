@@ -1428,7 +1428,7 @@ Birth: function() {
                 a = f.Ele,
                 c = f.EleShadow,
                 e = f.EleBody;
-			f.jinyin&&f.ExchangeLR(f,0);
+			f.PZ&&f.jinyin&&f.ExchangeLR(f,0);
             e.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump.gif" + $Random + Math.random();
             PlayAudio("grassstep");
             SetHidden(c);
