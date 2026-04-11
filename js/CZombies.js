@@ -577,7 +577,7 @@ Birth: function() {
 			a.ChangeChkActsTo0=function(){};
 			a.ChangeChkActsTo1(a,a.id,a.EleBody);
 			a.PrivateAct=function(a){
-			a.canWalk(a,a.id)&&a.PZ&&a.getr(a,-a.Speed*2);
+			a.canWalk(a,a.id)&&!a.isAttacking&&a.getr(a,a.PZ?-a.Speed*2:a.Speed*2);
 			}
 		},
         Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态：不跳舞，三倍速度<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
@@ -1364,16 +1364,21 @@ Birth: function() {
                 f,
                 a,
                 e = b - 74;
+			if(!g.JudgeAttackH1()){
             for (f = c - 2; f <= c; f++) {
                 if (f > 9) {
                     continue
                 }
                 for (a = 2; a > -1;
                     (p = h[d + f + "_" + a--]) && (p.EName != "oBrains" ? p.AttackedRX >= e && p.AttackedLX < b && p.canEat && (a = -1, g.JudgeAttack = CZombies.prototype.JudgeAttack, g.NormalAttack(g.id, p.id, p.AttackedLX)) : p.AttackedRX >= b && p.AttackedLX < b && (a = -1, g.JudgeAttack = CZombies.prototype.JudgeAttack, (g.NormalAttack = CZombies.prototype.NormalAttack)(g.id, p.id)))) {}
-            }
+               }
+			}
         },
         jinyinAct:function(a){
 			a.ExchangeLR(a,1);
+		},
+		AttackZombie:function(d,c){
+			$Z[d]&&$Z[d].NormalAttack(d,c,c.ZX)
 		},
         getCrushed: function(a) {
             this.NormalAttack(this.id, a.id, a.AttackedLX);
@@ -1418,6 +1423,7 @@ Birth: function() {
                         q,
                         r,
 						Z,
+						Z2,
 					    R = (h.R - 1) || 0,
                         RM = h.R + 1 <= oS.R ? h.R + 1 : oS.R,
                     C = GetC(h.ZX);
@@ -1432,14 +1438,21 @@ Birth: function() {
                             u && (v.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", u.isAttacking = 0, u.Altitude = 1, u.OSpeed = u.Speed = 1.6, u.NormalGif = 9, u.LostHeadGif = 10, u.NormalAttack = (t = CZombies.prototype).NormalAttack, u.getCrushed = t.getCrushed, u.getFreeze = t.getFreeze, u.getRaven = t.getRaven)
                         },
                         [m, n])));
+			if(h.jinyin){
 			for(let i = R;i <= RM;i++){
                     for(let j = C - 1;j <= C + 1;j++){
                         for(let k = 0;k <= 3;k++){
                             let p = oGd.$[i+"_"+j+"_"+k];
-							p&&h.jinyin&&((Z=CustomZombie(oPoleVaultingZombie,i,j)).HP=Math.max(h.MaxHP*=0.25,150),Z.jinyinnum=0);
+							h&&h.PZ&&h.canWalk(h,m)&&p&&((Z=CustomZombie(oPoleVaultingZombie,i,j,!h.PZ)).HP=Math.max(h.MaxHP*=0.25,150),Z.jinyinnum=0);
                         }
                     }
-                }
+				  var Z=oZ[h.PZ?"getArHZ":"getArZ"](h.ZX-100,h.ZX+100,i);
+				      Zl=Z.length;
+				      while(Zl--){
+						  h&&h.canWalk(h,m)&&((Z2=CustomZombie(oPoleVaultingZombie,i,GetC(Z[Zl].ZX),!h.PZ)).HP=Math.max(h.MaxHP*=0.25,150),Z2.jinyinnum=0);
+					  }
+                   }
+			}
                 },
                 [d, b, a, c, e])
         }
@@ -2075,7 +2088,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 function(g, e, d, f) {
                     $Z[e] && g.beAttacked && ((f = $Z[d]) && f.beAttacked ? (g.EleBody.src = g.PicArr[g.AttackGif], g.Altitude = 1, oSym.addTask(10,
                         function(k, i, j, h) {
-                            $Z[i] && k.beAttacked && !k.FreeFreezeTime && !k.FreeSetbodyTime && ($Z[h] && j.beAttacked ? (j.getHit0(j, 10, 0), j.HP<500&&(j.HP+=3),oSym.addTask(10, arguments.callee, [k, i, j, h])) : (k.EleBody.src = k.PicArr[10] + Math.random(), k.Altitude = 0, oSym.addTask(70,
+                            $Z[i] && k.beAttacked && !k.FreeFreezeTime && !k.FreeSetbodyTime && ($Z[h] && j.beAttacked ? (j.getHit0(j, 10, 0), k.HP<500&&(k.HP+=3),oSym.addTask(10, arguments.callee, [k, i, j, h])) : (k.EleBody.src = k.PicArr[10] + Math.random(), k.Altitude = 0, oSym.addTask(70,
                                 function(l, m) {
                                     $Z[l] && m.beAttacked && (m.isAttacking = 0, m.EleBody.src = m.PicArr[m.NormalGif])
                                 },
