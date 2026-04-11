@@ -1759,8 +1759,8 @@ NormalAttack1: function() {
 		},
   NormalAttack: function(b, a) {
     var c = $Z[b];
-    c.getHit2(c, this.Attack, 0);
-	Math.random()*100>15&&c.getr(c,c.rpx);
+    c.getHit2(c, a.Attack, 0);
+	Math.random()*100>15&&c.getr(c,a.rpx);
     var Left = parseInt($(a.id).style.left);
     a.jinyin&&a.plusrange < 80 && (a.plusrange += 4,
       a.width += 8,
@@ -2494,7 +2494,7 @@ oGloomShroom = InheritO(oFumeShroom, {
         num:0,
 		PrivateBirth:function(a){
 			oSym.addTask(2000,function(a){
-				$P[a.id]&&SetTimeoutTomZombies1([oZombie]);
+				$P[a.id]&&oP.SetTimeoutTomZombies1([oZombie]);
 				$P[a.id]&&oSym.addTask(2000,arguments.callee,[a])
 			},[a]);
 		},
