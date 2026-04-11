@@ -669,8 +669,8 @@ while (e--) {
         jinyinAct:function(){},
         PicArr: ["images/Card/Plants/Repeater.png", "images/Plants/Repeater/0.gif", "images/Plants/Repeater/Repeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
-        Tooltip: "一次发射2~4颗豌豆",
-        Produce: '双发射手可以一次发射2~4颗豌豆<br>精英形态：攻击额外发射速度不同的豌豆，速度越快伤害越高<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">两倍</font></p>双发射手很凶悍，他是在街头混大的。他不在乎任何人的看法，无论是植物还是僵尸，他打出豌豆，是为了让别人离他远点。其实呢，双发射手一直暗暗地渴望着爱情。',
+        Tooltip: "一次发射2~3颗豌豆",
+        Produce: '双发射手可以一次发射2~3颗豌豆<br>精英形态：攻击额外发射速度不同的豌豆，速度越快伤害越高<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">2～3倍</font></p>双发射手很凶悍，他是在街头混大的。他不在乎任何人的看法，无论是植物还是僵尸，他打出豌豆，是为了让别人离他远点。其实呢，双发射手一直暗暗地渴望着爱情。',
         NormalAttack1: oPeashooter.prototype.NormalAttack,
 		NormalAttack2: function() {
             var a = this,
@@ -1006,7 +1006,7 @@ NormalAttack1: function() {
         SunNum: 50,
         PicArr: ["images/Card/Plants/SunFlower.png", "images/Plants/SunFlower/0.gif", "images/Plants/SunFlower/SunFlower1.gif", "images/Plants/SunFlower/SunFlower.gif"],
         Tooltip: "提供你额外的阳光",
-        Produce: '向日葵，为你生产额外阳光的经济作物。尝试尽可能多种植吧！</font></p>精英形态：每次多生产一个小阳光<p>阳光产量：<font color="#FF0000">中等</font></p>向日葵情不自禁地和着节拍起舞。是什么节拍呢？嗨，是大地自己用来提神的爵士节拍，这种频率的节拍，只有向日葵才能听到。',
+        Produce: '向日葵，为你生产额外阳光的经济作物。尝试尽可能多种植吧！</font></p>精英形态：每次多生产1～2个小阳光<p>阳光产量：<font color="#FF0000">中等</font></p>向日葵情不自禁地和着节拍起舞。是什么节拍呢？嗨，是大地自己用来提神的爵士节拍，这种频率的节拍，只有向日葵才能听到。',
         BirthStyle: function(c, e, b, a) {
             var d = b.childNodes[1];
             d.src = "images/Plants/SunFlower/SunFlower.gif";
@@ -1274,7 +1274,7 @@ NormalAttack1: function() {
         TriggerCheck: function(e, c) {
             var a = this.R,
                 b = this.C;
-            e.beAttacked && e.Altitude < 2 &&!e.FreeFreezeTime&&!oGd.$[a + "_" + b + "_2"] && this.NormalAttack(this.pixelLeft-50,this.pixelRight+50, this.R)
+            e.beAttacked && e.Altitude < 2 &&!this.FreeFreezeTime&&!oGd.$[a + "_" + b + "_2"] && this.NormalAttack(this.pixelLeft-50,this.pixelRight+50, this.R)
         },
         NormalAttack: function(j, h, e) {
             var g = this,
@@ -1574,9 +1574,18 @@ NormalAttack1: function() {
         PicArr: ["images/Card/Plants/CherryBomb.png", "images/Plants/CherryBomb/0.gif", "images/Plants/CherryBomb/CherryBomb.gif", "images/Plants/CherryBomb/Boom.gif" + $Random],
         AudioArr: ["cherrybomb"],
         Tooltip: "炸掉一定区域内的所有僵尸",
-        Produce: '樱桃炸弹，能炸掉一定区域内所有僵尸。他们一种下就会立刻引爆。所以请把他们种在僵尸们的身边。<p>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">一个中等区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，立即爆炸</font></p>“我要‘爆’开了。”樱桃一号说。“不，我们是要‘炸’开了！”它哥哥樱桃二号说。经过激烈的商议之后，他们才统一“爆炸这个说法。”',
+        Produce: '樱桃炸弹，能炸掉一定区域内所有僵尸。他们一种下就会立刻引爆。所以请把他们种在僵尸们的身边。<br>精英形态：爆炸后在后面召唤一列精英樱桃炸弹小丑僵尸<br>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">一个中等区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，立即爆炸</font></p>“我要‘爆’开了。”樱桃一号说。“不，我们是要‘炸’开了！”它哥哥樱桃二号说。经过激烈的商议之后，他们才统一“爆炸这个说法。”',
         InitTrigger: function() {},
         getHurt: function() {},
+		jinyinAct:function(a){
+			a.PrivateDie=function(a){
+			for (i=1;i<=oS.R;i++){
+				var b=CustomZombie(oJackinTheBoxZombie,i,a.C-2,1);
+				b.Privatenum=0;
+				b.jinyinnum=100;
+			}
+		}
+		},
         PrivateBirth: function(a) {
             oSym.addTask(63,
                 function(b) {
@@ -1680,6 +1689,7 @@ NormalAttack1: function() {
         AudioArr: ["jalapeno"],
         Tooltip: "消灭整行的敌人",
         Produce: '火爆辣椒可以摧毁一整条线上的敌人。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">整条线上的僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font></p>“嘎嘎嘎嘎嘎嘎嘎！！！”火爆辣椒说。他现在不会爆炸，还不到时候，不过快了，喔~，快了快了，快来了。他知道，他感受到了，他一生都是在等待这个时刻！',
+		jinyinAct:function(){},
         PrivateBirth: function(a) {
             oSym.addTask(72,
                 function(j) {
@@ -1805,7 +1815,7 @@ NormalAttack1: function() {
         Attack: 50,
 		rpx:20,
         Tooltip: "能扎破多个轮胎, 并伤害经过上面的僵尸<br>(需要地刺)",
-        Produce: '地刺王可以扎破多个轮胎，并对踩到他的僵尸造成伤害。<p><font color="#FF0000">必须种植在地刺上</font></p>地刺王刚刚从欧洲旅行回来。他玩的很高兴，也认识了很多有趣的人。这些都真的拓展了他的视野——他从来不知道，他们建造了这么大的博物馆，有这么多的画作。这对他来说太惊奇了。',
+        Produce: '地刺王可以扎破多个轮胎，并对踩到他的僵尸造成伤害，有概率击退僵尸<p><font color="#FF0000">必须种植在地刺上</font></p>地刺王刚刚从欧洲旅行回来。他玩的很高兴，也认识了很多有趣的人。这些都真的拓展了他的视野——他从来不知道，他们建造了这么大的博物馆，有这么多的画作。这对他来说太惊奇了。',
         CanGrow: function(b, a, d) {
             var c = b[1];
             return c && c.EName == "oSpikeweed"
@@ -2054,11 +2064,11 @@ jinyinAttackGif2: 8,
         BookHandBack: 2,
 		Shroom:true,
         SleepGif: 3,
-		Attack:25,
+		Attack:20,
         PicArr: ["images/Card/Plants/FumeShroom.png", "images/Plants/FumeShroom/0.gif", "images/Plants/FumeShroom/FumeShroom.gif", "images/Plants/FumeShroom/FumeShroomSleep.gif", "images/Plants/FumeShroom/FumeShroomAttack.gif", "images/Plants/FumeShroom/FumeShroomBullet.gif"],
         AudioArr: ["fume"],
         Tooltip: "喷射可以穿过门板的气液",
-        Produce: '大喷菇喷出的臭气可以穿透铁丝网门。<p>伤害：<font color="#FF0000">普通，可穿透铁丝网门</font><br>范围：<font color="#FF0000">臭气中的所有僵尸<br>白天睡觉</font></p>“我以前那份没前途的工作，是为一个面包房生产酵母孢，”大喷菇说。“然后小喷菇，上帝保佑它，告诉了我这个喷杀僵尸的机会。现在我真觉得自己完全不同了。”',
+        Produce: '大喷菇喷出的臭气可以穿透铁丝网门。<br>精英形态：双倍伤害，对相邻行僵尸有溅射伤害<br>伤害：<font color="#FF0000">普通，可穿透铁丝网门</font><br>范围：<font color="#FF0000">臭气中的所有僵尸<br>白天睡觉</font></p>“我以前那份没前途的工作，是为一个面包房生产酵母孢，”大喷菇说。“然后小喷菇，上帝保佑它，告诉了我这个喷杀僵尸的机会。现在我真觉得自己完全不同了。”',
         GetDY: function(b, c, a) {
             return a[0] ? -18 : -10
         },
@@ -2105,7 +2115,7 @@ jinyinAttackGif2: 8,
 				var jinyinHit=oZ.getArZ(g.ZX,g.AttackedRX,lastR),
 				Zlength = jinyinHit.length;
 				while (Zlength--) {
-                (h = jinyinHit[Zlength]).Altitude < 2&&(lastR!=f.R)&& h.getHit1(h, 25)
+                (h = jinyinHit[Zlength]).Altitude < 2&&(lastR!=f.R)&& h.getHit1(h, 15)
 				}
 			}while(lastR++<Math.min(oS.R,f.R+1))
 		}
@@ -2366,7 +2376,7 @@ oGloomShroom = InheritO(oFumeShroom, {
         Attacking: 0,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         Tooltip: "它是远程射手，但敌人靠近时会蜷缩不动",
-        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子(70%)在内的六种子弹<br>阳光：击中僵尸生成5阳光(22%)<br>草皮卷：对僵尸造成80伤害并修补弹坑(17%)<br>脑子：使僵尸逃跑(3%)<br>铲子：对僵尸造成高伤(1.99%)<br>奖杯：直接过关（iz无效）(0.01%)<br>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
+        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子(70%)在内的六种子弹<br>阳光：击中僵尸生成5阳光(22%)<br>草皮卷：对僵尸造成80伤害并修补弹坑(17%)<br>脑子：使僵尸逃跑(2%)<br>铲子：对僵尸造成高伤(1.99%)<br>奖杯：直接过关（iz无效）(0.01%)<br>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
         GetDX: CPlants.prototype.GetDX,
         getTriggerRange: CPlants.prototype.getTriggerRange,
         getTriggerR: function(c) {
@@ -2418,7 +2428,7 @@ oGloomShroom = InheritO(oFumeShroom, {
     } else if (num < 8200) {
       c.Pea = 1;
       BulletImg = "images/interface/Sun.gif"
-    } else if (num < 9500) {
+    } else if (num < 9700) {
       c.Pea = 2;
       BulletImg = "images/interface/SodRollCap.png"
     } else if (num < 9800) {
@@ -3368,7 +3378,6 @@ NormalAttack2: function() {
         PrivateBirth: function(self) {
             var Id = self.id,
                 Ele = self.Ele; // 获取
- 
             // 定义鼠标事件相关
             var ClickEle = self.EleClick = NewEle("dCheck_" + Id, "div", "left:" + Ele.style.left + ";top:" + Ele.style.top + ";position:absolute;width:80px;height:101px;background:#FFF;filter:alpha(opacity=0);opacity:0;z-index:150;cursor:pointer", {
                 "onclick": function() {
@@ -3381,7 +3390,7 @@ NormalAttack2: function() {
                     SetAlpha(Ele, 100, 1);
                 }
             }, EDAll);
- 
+			oGd.$Crater[self.R+"_"+self.C]=1;//原地生成隐形弹坑（不可种植物）
             self.ControlBase("Summon", "Auto"); // 生成底座
             self.VaseValue = self.VaseValue || {
                 "Type": "SunNum",
@@ -3406,7 +3415,7 @@ NormalAttack2: function() {
             !ImgSave && ClearChild(self.Ele); // 清除图片
  
             if (OnAudio != false) PlayAudio(self.AudioArr[Math.floor(Math.random() * self.AudioArr.length)]); // 随机播放音效
- 
+			oGd.$Crater[self.R+"_"+self.C]=0;//似了，清除坑洞
             self.ControlBase("Delete", "Auto"); // 删除底座
             ClearChild(self.EleClick), self.PlaceItem(); // 放置物品
         },
