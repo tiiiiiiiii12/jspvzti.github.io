@@ -1378,7 +1378,7 @@ Birth: function() {
 			a.ExchangeLR(a,1);
 		},
 		AttackZombie:function(d,c){
-			$Z[d]&&$Z[d].NormalAttack(d,c,c.ZX)
+			$Z[d]&&($Z[d].JudgeAttack=CZombies.prototype.JudgeAttack,$Z[d].NormalAttack(d,c,c.ZX))
 		},
         getCrushed: function(a) {
             this.NormalAttack(this.id, a.id, a.AttackedLX);
