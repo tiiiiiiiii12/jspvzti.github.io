@@ -677,7 +677,7 @@ Birth: function() {
         LostHeadGif: 14,
 		jinyinAct:function(a){
 			var b=a.num;
-			if(!(a.num=Math.round(Math.random()*1+0))){
+			if(!(a.num=Math.round(Math.random()*1+0)||a.Privatenum)){
 				a.HP*=1.5;
 			a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
@@ -872,11 +872,11 @@ Birth: function() {
         u && (u.ExchangeLR(d, 1), u.DZMSpeed = 7.2, u.DZStep = -1, u.DZStepT = oSym.Now + 220, u.FreeSetbodyTime = 0, SetBlock(o))
       };
       b||!d.canWalk(d,l)? (oSym.addTask(b, func, [l, a]), c += b) : func(l, a);
-	Number(d.num)==0&&d.ExchangeLR(d,0);
+	!d.num&&d.jinyin&&d.ExchangeLR(d,0);
       oSym.addTask(c,
         function(o) {
           var t = $Z[o];
-          t && !(t.num==0)&&t.beAttacked && !t.isAttacking && t.NormalAttack(o)
+          t &&!(!t.num&&t.jinyin)&&t.beAttacked && !t.isAttacking && t.NormalAttack(o)
         },
         [d.id])
     },
