@@ -2311,7 +2311,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         var a = function(d, b) {
             var c = d.HP;
             switch (true) {
-                case (d.HP = c -= b) < 60:
+                case (d.HP = c -=b*c.jianshang) < 60:
                     d.GoingDie();
                     d.getHit0 = d.getHit1 = d.getHit2 = d.getHit3 = function(d,b) {(d.HP-=b)<0&&d.NormalDie()};
                     return;
