@@ -1355,6 +1355,15 @@ Birth: function() {
         GoingDieHead: function(c, a, b) {
             oSym.addTask(200, ClearChild, [NewImg(0, a[b.HeadGif] + Math.random(), "left:" + b.X + "px;top:" + (b.pixelTop - 20) + "px;z-index:" + b.zIndex, EDPZ)])
         },
+		  bedevil: function(c) {
+    !(c.jinyin && c.NormalAttack != CZombies.prototype.NormalAttack) && c.ExchangeLR(c, 1);
+    c.JudgeAttack = c.JudgeAttackH;
+    c.PZ = 0;
+    c.WalkDirection = 1;
+    c.ZX = c.AttackedRX;
+    c.ChkActs = c.ChkActs1;
+    oP.MonPrgs()
+  },
         JudgeAttack: function() {
             var g = this,
                 b = g.ZX,
@@ -1374,12 +1383,29 @@ Birth: function() {
                }
 			}
         },
-        jinyinAct:function(a){
-			a.ExchangeLR(a,1);
-		},
-		AttackZombie:function(d,c){
-			$Z[d]&&($Z[d].JudgeAttack=CZombies.prototype.JudgeAttack,$Z[d].NormalAttack(d,c,c.ZX))
-		},
+  JudgeAttackH: function() {
+    var e = this,
+      d = oZ.getZ0(e.ZX + 74, e.R),
+      f = e.id,
+      c;
+    d && d.AttackedLX < oS.W && d.Altitude == 1 && !e.isAttacking && (e.JudgeAttack = CZombies.prototype.JudgeAttackH, e.NormalAttack(f, c = d.id, d.ZX))
+  },
+  jinyinAct: function(a) {
+    a.ExchangeLR(a, 1);
+  },
+  JudgeAttackH1: function() {
+    var e = this,
+      d = oZ.getHZ1(e.ZX - 74, e.R),
+      f = e.id,
+      c;
+    if (d && d.Altitude == 1) {
+      !e.isAttacking && (e.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1, e.JudgeAttack = CZombies.prototype.JudgeAttack, e.NormalAttack(f, c = d.id, d.ZX))
+      return d
+    }
+  },
+  AttackZombie: function(d, c) {
+    $Z[d] && ($Z[d].NormalAttack(d, c, d.ZX))
+  },
         getCrushed: function(a) {
             this.NormalAttack(this.id, a.id, a.AttackedLX);
             this.getCrushed = function() {
@@ -1429,13 +1455,13 @@ Birth: function() {
                     C = GetC(h.ZX);
                     h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = q = k.AttackedRX) - h.beAttackedPointL) + h.beAttackedPointR, SetStyle(i, {
                         left: h.X + "px"
-					}),n.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", SetVisible(l), h.isAttacking = 0, h.Altitude = 1, h.OSpeed = h.Speed = 1.6, h.NormalGif = 9, h.LostHeadGif = 10, h.NormalAttack = (r = CZombies.prototype).NormalAttack, h.getCrushed = r.getCrushed, h.getFreeze = r.getFreeze, h.getRaven = r.getRaven) : (h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g) - h.beAttackedPointR) + h.beAttackedPointL, SetStyle(i, {
+					}),n.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", SetVisible(l), h.isAttacking = 0, h.Altitude = 1, h.OSpeed = h.Speed = 1.6, h.NormalGif = 9, h.LostHeadGif = 10, h.NormalAttack = (r = CZombies.prototype).NormalAttack,h.AttackZombie = r.AttackZombie, h.getCrushed = r.getCrushed, h.getFreeze = r.getFreeze, h.getRaven = r.getRaven) : (h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g) - h.beAttackedPointR) + h.beAttackedPointL, SetStyle(i, {
                         left: h.X + "px"
                     }), n.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump2.gif" + $Random + Math.random(), SetVisible(l), oSym.addTask(80,
                         function(s, v) {
                             var u = $Z[s],
                                 t;
-                            u && (v.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", u.isAttacking = 0, u.Altitude = 1, u.OSpeed = u.Speed = 1.6, u.NormalGif = 9, u.LostHeadGif = 10, u.NormalAttack = (t = CZombies.prototype).NormalAttack, u.getCrushed = t.getCrushed, u.getFreeze = t.getFreeze, u.getRaven = t.getRaven)
+                            u && (v.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", u.isAttacking = 0, u.Altitude = 1, u.OSpeed = u.Speed = 1.6, u.NormalGif = 9, u.LostHeadGif = 10,u.AttackZombie = t.AttackZombie, u.NormalAttack = (t = CZombies.prototype).NormalAttack, u.getCrushed = t.getCrushed, u.getFreeze = t.getFreeze, u.getRaven = t.getRaven)
                         },
                         [m, n])));
 			if(h.jinyin){
