@@ -2110,7 +2110,7 @@ jinyinAttackGif2: 8,
                 a = c + "_Bullet";
             while (e--) {
                 (g = d[e]).Altitude < 2 && g.getHit1(g, f.Attack);
-		if(f.jinyin){
+		if(f.jinyin&&g){
 			do{
 				var jinyinHit=oZ.getArZ(g.ZX,g.AttackedRX,lastR),
 				Zlength = jinyinHit.length;
