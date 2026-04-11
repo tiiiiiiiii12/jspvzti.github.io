@@ -2064,7 +2064,7 @@ jinyinAttackGif2: 8,
         BookHandBack: 2,
 		Shroom:true,
         SleepGif: 3,
-		Attack:20,
+		Attack:25,
         PicArr: ["images/Card/Plants/FumeShroom.png", "images/Plants/FumeShroom/0.gif", "images/Plants/FumeShroom/FumeShroom.gif", "images/Plants/FumeShroom/FumeShroomSleep.gif", "images/Plants/FumeShroom/FumeShroomAttack.gif", "images/Plants/FumeShroom/FumeShroomBullet.gif"],
         AudioArr: ["fume"],
         Tooltip: "喷射可以穿过门板的气液",
@@ -2111,6 +2111,8 @@ jinyinAttackGif2: 8,
             while (e--) {
                 (g = d[e]).Altitude < 2 && g.getHit1(g, f.Attack);
 		if(f.jinyin&&g){
+			oSym.addTask(50,ClearChild,[NewImg(0,"images/Plants/ShroomBulletHit.gif",
+          "left:"+g.ZX+"px;width:104px;height:92px;top:" + (f.pixelTop + 20) + "px;z-index:" + (f.zIndex + 2),EDPZ)]);
 			do{
 				var jinyinHit=oZ.getArZ(g.ZX,g.AttackedRX,lastR),
 				Zlength = jinyinHit.length;
