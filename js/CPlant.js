@@ -1580,9 +1580,9 @@ NormalAttack1: function() {
 		jinyinAct:function(a){
 			a.PrivateDie=function(a){
 			for (i=1;i<=oS.R;i++){
-				var b=CustomZombie(oJackinTheBoxZombie,i,a.C-2,1);
-				b.Privatenum=0;
+				var b=CustomZombie(oJackinTheBoxZombie,i,Math.max(a.C-2,0),1);
 				b.jinyinnum=100;
+				b.Privatenum=0;
 			}
 		}
 		},
