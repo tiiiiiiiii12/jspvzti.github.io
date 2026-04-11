@@ -2108,9 +2108,8 @@ jinyinAttackGif2: 8,
                 b = $(c),
 				lastR=Math.max(1,f.R-1),
                 a = c + "_Bullet";
-            while (e--) {
-                (g = d[e]).Altitude < 2 && g.getHit1(g, f.Attack);
-		if(f.jinyin&&g){
+            while (e--) {      
+		if(f.jinyin){
 			oSym.addTask(50,ClearChild,[NewImg(0,"images/Plants/ShroomBulletHit.gif",
           "left:"+g.ZX+"px;width:104px;height:92px;top:" + (f.pixelTop + 20) + "px;z-index:" + (f.zIndex + 2),EDPZ)]);
 			do{
@@ -2121,6 +2120,7 @@ jinyinAttackGif2: 8,
 				}
 			}while(lastR++<Math.min(oS.R,f.R+1))
 		}
+			(g = d[e]).Altitude < 2 && g.getHit1(g, f.Attack);
             }
             b.childNodes[1].src = "images/Plants/FumeShroom/FumeShroomAttack.gif";
             SetVisible($(a));
