@@ -2105,7 +2105,7 @@ jinyinAttackGif2: 8,
 				var jinyinHit=oZ.getArZ(g.ZX,g.AttackedRX,lastR),
 				Zlength = jinyinHit.length;
 				while (Zlength--) {
-                (h = jinyinHit[Zlength]).Altitude < 2&&(h!=g)&& h.getHit1(h, 25)
+                (h = jinyinHit[Zlength]).Altitude < 2&&(lastR!=f.R)&& h.getHit1(h, 25)
 				}
 			}while(lastR++<Math.min(oS.R,f.R+1))
 		}
