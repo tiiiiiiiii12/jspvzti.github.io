@@ -4,7 +4,7 @@ var oIZombie=InheritO(oZombie,{
         a.tasktime*=0.5
     }
 });
-var oINewspaperZombie=InheritO(oZombie,{
+var oINewspaperZombie=InheritO(oNewspaperZombie,{
     EName:"oINewspaperZombie",
     SunNum:125
 });
