@@ -1388,7 +1388,7 @@ Birth: function() {
       d = oZ.getZ0(e.ZX + 74, e.R),
       f = e.id,
       c;
-    d && d.AttackedLX < oS.W && d.Altitude == 1 && !e.isAttacking && (e.JudgeAttack = CZombies.prototype.JudgeAttackH, e.NormalAttack(f, c = d.id, d.ZX))
+    d && d.AttackedLX < oS.W && d.Altitude == 1 && !e.isAttacking && (e.JudgeAttack = CZombies.prototype.JudgeAttackH, e.NormalAttack(f, c = d.id, d.ZX+20))
   },
   jinyinAct: function(a) {
     a.ExchangeLR(a, 1);
@@ -1399,7 +1399,7 @@ Birth: function() {
       f = e.id,
       c;
     if (d && d.Altitude == 1) {
-      !e.isAttacking && (e.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1, e.JudgeAttack = CZombies.prototype.JudgeAttack, e.NormalAttack(f, c = d.id, d.ZX))
+      !e.isAttacking && (e.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1, e.JudgeAttack = CZombies.prototype.JudgeAttack, e.NormalAttack(f, c = d.id, d.ZX-20))
       return d
     }
   },
