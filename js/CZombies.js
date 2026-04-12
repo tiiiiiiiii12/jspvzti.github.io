@@ -3376,6 +3376,22 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
     ];
   })(),
   AudioArr: ["zombie_entering_water"],
+jinyinAct:function(a){
+	a.Act=function(a){
+		var z=oZ.getZ0(a.ZX,a.R);
+		!(a.pushZ&&$Z[a.pushZ.id])?(a.ZX>=320&&(a.pushZ=z,SetStyle(z.EleBody, {
+                    top: (z.height*0.1)+"px",
+                    clip: "rect(0,auto,"+(z.height*0.9)+"px,0)"
+                }),z.Altitude=4,
+			z.FreeSetbodyTime=1,SetHidden(z.EleShadow))):(
+			$Z[a.id]&&a.ZX>=320?a.pushZ.getr(a.pushZ,-a.Speed):(a.pushZ=null,SetStyle(a.pushZ.EleBody, {
+                    top: a.pushZ.height+"px",
+                    clip: "rect(0,auto,0px,0)"
+                }),
+			a.pushZ.Altitude=1,
+			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow)))
+	}
+},
   Go_Up: function(a, WD) {
     // WD: 方向，1右0左
     a.isUp = 1; //a.Ifgc=0;
@@ -3429,7 +3445,6 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   ChkActs: function(f, d, g, c) {
     // 到了左边自己钻出来
     if (f.Altitude == 0 && f.AttackedRX < GetX(1) - 40) return f.Go_Up(f, 1), 1;
- 
     var b, a, e;
     !(f.FreeFreezeTime || f.FreeSetbodyTime) ?
     (f.beAttacked && !f.isAttacking && f.JudgeAttack_Dig(),
@@ -3450,6 +3465,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
         (e = 1)) :
       (e = 1)) :
     (e = 1);
+	  f.Act(f)
     return e;
   },
   CanDig: {
