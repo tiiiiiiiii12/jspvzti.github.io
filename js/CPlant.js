@@ -2112,8 +2112,10 @@ jinyinAttackGif2: 8,
 		if(f.jinyin){
 			oSym.addTask(50,ClearChild,[NewImg(0,"images/Plants/ShroomBulletHit.gif",
           "left:"+(g = d[e]).ZX+"px;width:104px;height:92px;top:" + (f.pixelTop + 20) + "px;z-index:" + (f.zIndex + 2),EDPZ)]);
+			var minX=g.ZX;
+			var maxX=g.AttackedRX;
 			do{
-				var jinyinHit=oZ.getArZ(g.ZX,g.AttackedRX,lastR),
+				var jinyinHit=oZ.getArZ(minX,maxX,lastR),
 				Zlength = jinyinHit.length;
 				while (Zlength--) {
                 (h = jinyinHit[Zlength]).Altitude < 2&&(lastR!=f.R)&& h.getHit1(h, 15)
