@@ -18,7 +18,7 @@ var oIPeaZombie=InheritO(oPeaZombie,{
 });
 oS.Init({
     PName: [oIZombie, oBucketheadZombie, oPeaZombie,oImp],
-    ZName: [oZombie, oINewspaperZombie,oIPeaZombie,oConeheadZombie,oImp],
+    ZName: [oZombie, oINewspaperZombie,oPoleVaultingZombie,oConeheadZombie,oImp],
     PicArr: ["images/interface/background1.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background1.jpg",
     ShowScroll: false,
