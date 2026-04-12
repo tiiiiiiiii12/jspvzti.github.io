@@ -3392,6 +3392,7 @@ jinyinAct:function(a){
 			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow),a.pushZ=null))
 	}
 },
+	Act:function(){},
   Go_Up: function(a, WD) {
     // WD: 方向，1右0左
     a.isUp = 1; //a.Ifgc=0;
