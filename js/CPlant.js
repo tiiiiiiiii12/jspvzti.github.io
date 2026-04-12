@@ -1770,7 +1770,7 @@ NormalAttack1: function() {
   NormalAttack: function(b, a) {
     var c = $Z[b];
     c.getHit2(c, a.Attack, 0);
-	Math.random()*100>15&&c.getr(c,a.rpx);
+	Math.random()*100>85&&c.getr(c,a.rpx);
     var Left = parseInt($(a.id).style.left);
     a.jinyin&&a.plusrange < 80 && (a.plusrange += 4,
       a.width += 8,
