@@ -14,10 +14,11 @@ var oINewspaperZombie=InheritO(oNewspaperZombie,{
 var oIPeaZombie=InheritO(oPeaZombie,{
     EName:"oINewspaperZombie",
     SunNum:75,
+	jinyinnum:0,
 	coolTime:7.5,
 });
 oS.Init({
-    PName: [oIZombie, oBucketheadZombie, oPeaZombie,oImp],
+    PName: [oIZombie, oBucketheadZombie, oIPeaZombie,oImp],
     ZName: [oZombie, oINewspaperZombie,oPoleVaultingZombie,oConeheadZombie,oImp],
     PicArr: ["images/interface/background1.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background1.jpg",
