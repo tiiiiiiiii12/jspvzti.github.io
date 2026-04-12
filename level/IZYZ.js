@@ -1,6 +1,16 @@
+var oIZombie=InteritO(oZombie,{
+    EName:"oIZombie",
+    jinyinAct:function(a){
+        a.tasktime*=0.5
+    }
+});
+var oINewspaperZombie=InteritO(oZombie,{
+    EName:"oINewspaperZombie",
+    SunNum:125
+});
 oS.Init({
-    PName: [oZombie, oZombie2, oBucketheadZombie, oPeaZombie,oImp],
-    ZName: [oZombie, oNewspaperZombie,oPeaZombie,oConeheadZombie],
+    PName: [oIZombie, oBucketheadZombie, oPeaZombie,oImp],
+    ZName: [oZombie, oINewspaperZombie,oPeaZombie,oConeheadZombie,oImp],
     PicArr: ["images/interface/background1.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background1.jpg",
     ShowScroll: false,
@@ -16,7 +26,7 @@ oS.Init({
         ArC: [1, 4],
         ArR: [1, 5],
         Auto: 1,
-        P: [0, 0, 1, 1, 1, 0, 3, 3, 3, 2, 2, 0, 2, 4, 1, 0, 1, 0, 1, 4]
+        P: [0, 0, 0, 0, 0, 2, 2, 2, 2, 1, 1, 0, 1, 3, 0, 3, 3, 0, 0, 3]
     },
     RiddleAutoGrow: function() {
         var k = oS.ArP,
@@ -54,7 +64,7 @@ oS.Init({
     AutoSelectCard: function() {
         var c = oS.ArCard,
             b = -1,
-            a = c.length;
+            a = c.length-1;
         while (++b < a) {
             SelectCard(c[b].prototype.EName)
         }
