@@ -1,7 +1,10 @@
 var oIZombie=InheritO(oZombie,{
     EName:"oIZombie",
     jinyinAct:function(a){
-        a.tasktime*=0.5
+        	a.NormalGif=a.jinyinGif;
+			a.AttackGif=a.jinyinAttackGif;
+			a.EleBody.src=a.PicArr[a.NormalGif];
+			a.tasktime*=0.5;
     }
 });
 var oINewspaperZombie=InheritO(oNewspaperZombie,{
