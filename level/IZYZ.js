@@ -4,7 +4,7 @@ oS.Init({
     PicArr: ["images/interface/background1.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background1.jpg",
     ShowScroll: false,
-    SunNum: 500,
+    SunNum: 300,
     BrainsNum: 5,
     ProduceSun: false,
     CardKind: 1,
@@ -36,6 +36,7 @@ oS.Init({
                 CustomSpecial(oBrains, i, 0);
                 for (a = g; a <= b; a++) {
                     (back = CustomZombie(d[e[c = Math.floor(Math.random() * e.length)]], i, a, 1)).Speed = back.OSpeed = back.LostPaperSpeed = 0;
+                      (back.EName=="oZombie"||back.EName=="oZombie2")&&back.jinyinnum=0
                       back.PrivateDie=function(a){AppearSun(a.ZX,a.pixelTop+60,100)}
                     e.splice(c, 1)
                 }++i
