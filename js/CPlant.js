@@ -2111,7 +2111,7 @@ jinyinAttackGif2: 8,
             while (e--) {      
 		if(f.jinyin){
 			oSym.addTask(50,ClearChild,[NewImg(0,"images/Plants/ShroomBulletHit.gif",
-          "left:"+g.ZX+"px;width:104px;height:92px;top:" + (f.pixelTop + 20) + "px;z-index:" + (f.zIndex + 2),EDPZ)]);
+          "left:"+(g = d[e]).ZX+"px;width:104px;height:92px;top:" + (f.pixelTop + 20) + "px;z-index:" + (f.zIndex + 2),EDPZ)]);
 			do{
 				var jinyinHit=oZ.getArZ(g.ZX,g.AttackedRX,lastR),
 				Zlength = jinyinHit.length;
