@@ -1,10 +1,10 @@
-var oIZombie=InteritO(oZombie,{
+var oIZombie=InheritO(oZombie,{
     EName:"oIZombie",
     jinyinAct:function(a){
         a.tasktime*=0.5
     }
 });
-var oINewspaperZombie=InteritO(oZombie,{
+var oINewspaperZombie=InheritO(oZombie,{
     EName:"oINewspaperZombie",
     SunNum:125
 });
