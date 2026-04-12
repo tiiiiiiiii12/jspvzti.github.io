@@ -1642,7 +1642,7 @@ Birth: function() {
                             i = k.OSpeed = k.LostPaperSpeed;
                         k.ChkActs =!k.WalkDirection?j.ChkActs:j.ChkActs1;
                         k.ChkActs1 = j.ChkActs1;
-						k.tasktime*=0.4;
+						k.tasktime*=0.4; 
 						!k.jinyin&&(k.jianshang=0.5);
 						k.jinyin&&(k.PrivateAct=function(h) {
                    var num = 0;
@@ -3379,17 +3379,17 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
 jinyinAct:function(a){
 	a.Act=function(a){
 		var z=oZ.getZ0(a.ZX,a.R);
-		!(a.pushZ&&$Z[a.pushZ.id])?(a.ZX>=320&&(a.pushZ=z,SetStyle(z.EleBody, {
+		!(a.pushZ&&$Z[a.pushZ.id])?(a.ZX>=400&&(a.pushZ=z,SetStyle(z.EleBody, {
                     top: (z.height*0.1)+"px",
                     clip: "rect(0,auto,"+(z.height*0.9)+"px,0)"
                 }),z.Altitude=4,
 			z.FreeSetbodyTime=1,SetHidden(z.EleShadow))):(
-			$Z[a.id]&&a.ZX>=320?a.pushZ.getr(a.pushZ,-a.Speed):(a.pushZ=null,SetStyle(a.pushZ.EleBody, {
+			$Z[a.id]&&a.ZX>=400?a.pushZ.getr(a.pushZ,-a.Speed):(SetStyle(a.pushZ.EleBody, {
                     top: a.pushZ.height+"px",
                     clip: "rect(0,auto,0px,0)"
                 }),
 			a.pushZ.Altitude=1,
-			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow)))
+			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow),a.pushZ=null))
 	}
 },
   Go_Up: function(a, WD) {
