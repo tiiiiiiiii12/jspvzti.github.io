@@ -2211,7 +2211,7 @@ SelectModal = function(g) {
 	AllAudioStop();
 	PausedAudioArr = [];
 	g == undefined && (g = $User.Visitor.Progress);
-	if (g > 35) {
+	if (g > 36) {
 		alert("本关卡暂未开放！");
 		SelectModal(0);
 		return
@@ -2248,7 +2248,7 @@ InitGame = function() {
 	c = $User.Server,
 	b = c.List,
 	a = $("dProcess2"); ! $("dText1") && a.insertBefore(NewEle("dText1", "div", 0, {
-		innerHTML: '<span style="line-height:23px;font-size:15px;font-family:&#x9ED1;&#x4F53;;color:#F60;top:32px">欢迎来到<span style="font-family:Verdana;font-weight:700">JS</span>版植物大战僵尸,程序是个人作品,与任何公司无关。<span style="font-family:Verdana;font-weight:700">LonelyStar</span>保留对该程序版权所有,素材归POPCAP公司所有</span><br><br><div style="text-align:center"><b><a style="color:#FF0;font-size:15px;text-decoration:none" href="http://www.lonelystar.org/" target="_blank">作者主页</a>&nbsp;&nbsp;&nbsp;<a style="color:#FF0;font-size:15px;text-decoration:none" href="http://blog.lonelystar.org/view" target="_blank">给我留言</a></b></div>'
+		innerHTML: '<span style="line-height:23px;font-size:15px;font-family:&#x9ED1;&#x4F53;;color:#F60;top:32px">欢迎来到<span style="font-family:Verdana;font-weight:700">jspvz-tiiiiiiiii</span>版植物大战僵尸,程序是个人作品,与任何公司无关，本作永久完全免费，素材归POPCAP公司所有</span><br><br><div style="text-align:center"><b><a style="color:#FF0;font-size:15px;text-decoration:none" href="https://space.bilibili.com/3546657895483396" target="_blank">作者主页</a>&nbsp;&nbsp;&nbsp;</b></div>'
 	},
 	0), a.firstChild);
 
