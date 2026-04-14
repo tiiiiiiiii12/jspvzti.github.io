@@ -3389,7 +3389,7 @@ jinyinAct:function(a){
                     clip: "rect(0,auto,"+a.pushZ.height+"px,0)"
                 }),
 			a.pushZ.Altitude=1,
-			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow),a.pushZ=null):a.pushZ=null))
+			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow),a.pushZ=null)):a.pushZ=null)
 	}
 },
 	Act:function(){},
