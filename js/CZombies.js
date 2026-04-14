@@ -3379,17 +3379,17 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
 jinyinAct:function(a){
 	a.Act=function(a){
 		var z=oZ.getZ0(a.ZX,a.R);
-		!(a.pushZ&&$Z[a.pushZ.id]&&z.id!=a.id)?(a.ZX>=400&&(a.pushZ=z,SetStyle(z.EleBody, {
+		!(a.pushZ&&z.id=a.id)?(a.ZX>=400&&(a.pushZ=z,SetStyle(z.EleBody, {
                     top: (z.height*0.9)+"px",
                     clip: "rect(0,auto,"+(z.height*0.1)+"px,0)"
                 }),z.Altitude=4,
 			z.FreeSetbodyTime=1,SetHidden(z.EleShadow))):(
-			$Z[a.id]&&a.ZX>=400?a.pushZ.getr(a.pushZ,-a.Speed):(SetStyle(a.pushZ.EleBody, {
+			$Z[a.pushZ.id]?($Z[a.id]&&a.ZX>=400?a.pushZ.getr(a.pushZ,-a.Speed):(SetStyle(a.pushZ.EleBody, {
                     top: "0px",
                     clip: "rect(0,auto,"+a.pushZ.height+"px,0)"
                 }),
 			a.pushZ.Altitude=1,
-			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow),a.pushZ=null))
+			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow),a.pushZ=null):a.pushZ=null))
 	}
 },
 	Act:function(){},
