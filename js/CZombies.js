@@ -3466,7 +3466,7 @@ jinyinAct:function(a){
         (e = 1)) :
       (e = 1)) :
     (e = 1);
-	  f.Act(f)
+	  f.Act(f);
     return e;
   },
   CanDig: {
