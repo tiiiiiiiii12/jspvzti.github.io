@@ -3383,7 +3383,7 @@ jinyinAct:function(a){
 		z&&z.EName!=a.EName&&(!a.pushZ&&(z.Altitude==1)?(a.ZX>=400&&(a.pushZ=z,SetStyle(z.EleBody, {
                     top: (z.height*0.7)+"px",
                     clip: "rect(0,auto,"+(z.height*0.3)+"px,0)"
-                }),z.Altitude=4,
+                }),z.Altitude=4,z.isAttacking=0,
 			z.FreeSetbodyTime=1,SetHidden(z.EleShadow))):(
 			a.ZX>=400&&a.pushZ.HP?a.pushZ.getr(a.pushZ,-a.Speed,1):(a.pushZ.HP&&(SetStyle(a.pushZ.EleBody, {
                     top: "0px",
