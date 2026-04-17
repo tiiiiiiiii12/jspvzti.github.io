@@ -3378,8 +3378,8 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   AudioArr: ["zombie_entering_water"],
 jinyinAct:function(a){
 	a.Act=function(a){
-		var z=oZ.getZ0(a.ZX-1,a.R);
-		!a.pushZ&&z&&(z.Altitude==1)?(a.ZX>=400&&(a.pushZ=z,SetStyle(z.EleBody, {
+		var z=oZ.getZ0(a.ZX,a.R);
+		z&&z.EName!=a.EName&&(!a.pushZ&&(z.Altitude==1)?(a.ZX>=400&&(a.pushZ=z,SetStyle(z.EleBody, {
                     top: (z.height*0.7)+"px",
                     clip: "rect(0,auto,"+(z.height*0.3)+"px,0)"
                 }),z.Altitude=4,
@@ -3389,7 +3389,7 @@ jinyinAct:function(a){
                     clip: "rect(0,auto,"+a.pushZ.height+"px,0)"
                 }),
 			a.pushZ.Altitude=1,
-			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow)),a.pushZ=null))
+			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow)),a.pushZ=null)))
 	}
 },
 	PrivateDie:function(a){
