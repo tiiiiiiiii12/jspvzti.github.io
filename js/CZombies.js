@@ -2311,7 +2311,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         var a = function(d, b) {
             var c = d.HP;
             switch (true) {
-                case (d.HP = c -=b*c.jianshang) < 60:
+                case (d.HP = c -=b*d.jianshang) < 60:
                     d.GoingDie();
                     d.getHit0 = d.getHit1 = d.getHit2 = d.getHit3 = function(d,b) {(d.HP-=b)<0&&d.NormalDie()};
                     return;
@@ -3294,7 +3294,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   BoomDieGif: 8,
   LostHeadGif: 5,
   LostHeadAttackGif: 5,
-  Produce: '这种僵尸通过挖地来绕过防线。<p>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><BR>弱点：<font color="#FF0000">分裂射手，磁力菇</font></p>最近，他一直在听奥特曼的主题曲，据他所述，他好像是在某一处听到这首歌，觉得很好听，于是他现在也不挖土了，天天循环播放这首歌',
+  Produce: '这种僵尸通过挖地来绕过防线。<p>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，磁力菇</font><br>精英形态：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列</font></p>最近，他一直在听奥特曼的主题曲，据他所述，他好像是在某一处听到这首歌，觉得很好听，于是他现在也不挖土了，天天循环播放这首歌',
   BirthCallBack: function(f) {
     var e = f.delayT,
       d = f.id,
