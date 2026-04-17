@@ -3379,19 +3379,27 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
 jinyinAct:function(a){
 	a.Act=function(a){
 		var z=oZ.getZ0(a.ZX-1,a.R);
-		!a.pushZ?(a.ZX>=400&&(a.pushZ=z,SetStyle(z.EleBody, {
-                    top: (z.height*0.9)+"px",
-                    clip: "rect(0,auto,"+(z.height*0.1)+"px,0)"
+		!a.pushZ&&z&&(z.Altitude==1)?(a.ZX>=400&&(a.pushZ=z,SetStyle(z.EleBody, {
+                    top: (z.height*0.7)+"px",
+                    clip: "rect(0,auto,"+(z.height*0.3)+"px,0)"
                 }),z.Altitude=4,
 			z.FreeSetbodyTime=1,SetHidden(z.EleShadow))):(
-			$Z[a.pushZ.id]?($Z[a.id]&&a.ZX>=400?a.pushZ.getr(a.pushZ,-a.Speed):(SetStyle(a.pushZ.EleBody, {
+			a.ZX>=400&&a.pushZ.HP?a.pushZ.getr(a.pushZ,-a.Speed):(a.pushZ.HP&&(SetStyle(a.pushZ.EleBody, {
                     top: "0px",
                     clip: "rect(0,auto,"+a.pushZ.height+"px,0)"
                 }),
 			a.pushZ.Altitude=1,
-			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow),a.pushZ=null)):a.pushZ=null)
+			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow)),a.pushZ=null))
 	}
 },
+	PrivateDie:function(a){
+		a.pushZ&&(SetStyle(a.pushZ.EleBody, {
+                    top: "0px",
+                    clip: "rect(0,auto,"+a.pushZ.height+"px,0)"
+                }),
+			a.pushZ.Altitude=1,
+			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow),a.pushZ=null)
+	},
 	Act:function(){},
   Go_Up: function(a, WD) {
     // WD: 方向，1右0左
