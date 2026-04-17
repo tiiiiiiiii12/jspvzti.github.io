@@ -3384,7 +3384,7 @@ jinyinAct:function(a){
                     clip: "rect(0,auto,"+(z.height*0.3)+"px,0)"
                 }),z.Altitude=4,
 			z.FreeSetbodyTime=1,SetHidden(z.EleShadow))):(
-			a.ZX>=400&&a.pushZ.HP?a.pushZ.getr(a.pushZ,-a.Speed):(a.pushZ.HP&&(SetStyle(a.pushZ.EleBody, {
+			a.ZX>=400&&a.pushZ.HP?a.pushZ.getr(a.pushZ,-a.Speed,1):(a.pushZ.HP&&(SetStyle(a.pushZ.EleBody, {
                     top: "0px",
                     clip: "rect(0,auto,"+a.pushZ.height+"px,0)"
                 }),
