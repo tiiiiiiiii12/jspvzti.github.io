@@ -1357,7 +1357,7 @@ Birth: function() {
         },
 		  bedevil: function(c) {
     !(c.jinyin && c.NormalAttack != CZombies.prototype.NormalAttack) && c.ExchangeLR(c, 1);
-    c.JudgeAttack = c.JudgeAttackH;
+c.JudgeAttack = (c.NormalAttack != CZombies.prototype.NormalAttack?c.JudgeAttackH:CZombies.prototype.JudgeAttackH);
     c.PZ = 0;
     c.WalkDirection = 1;
     c.ZX = c.AttackedRX;
@@ -1388,7 +1388,7 @@ Birth: function() {
       d = oZ.getZ0(e.ZX + 74, e.R),
       f = e.id,
       c;
-    d && d.AttackedLX < oS.W && d.Altitude == 1 && !e.isAttacking && (e.JudgeAttack = CZombies.prototype.JudgeAttackH, e.NormalAttack(f, c = d.id, d.ZX+20))
+    d && d.AttackedLX < oS.W && d.Altitude == 1 && !e.isAttacking && (e.JudgeAttack=e.JudgeAttackH = CZombies.prototype.JudgeAttackH, e.NormalAttack(f, c = d.id, d.ZX+20))
   },
   jinyinAct: function(a) {
     a.ExchangeLR(a, 1);
@@ -3368,13 +3368,14 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
       a + "Walk3.gif",
       a + "Attack1.gif",
       a + "Attack2.gif",
-      "images/Plants/Peashooter/NonePeashooter.gif" + $Random,
+      "images/Zombies/Zombie/Zombie.gif" + $Random,
       a + "Die.gif" + $Random,
       a + "Up.gif" + $Random,
       a + "Down.gif" + $Random,
       a + "BoomDie.gif" + $Random,
     ];
   })(),
+GoingDieHead:function(){},
   AudioArr: ["zombie_entering_water"],
 jinyinAct:function(a){
 	a.Act=function(a){
@@ -3478,7 +3479,7 @@ jinyinAct:function(a){
     return e;
   },
   CanDig: {
-    oPotatoMine,oWallnut: true
+    oPotatoMine,oWallNut: true
   },
   JudgeAttack_Dig: function() {
     var g = this,
