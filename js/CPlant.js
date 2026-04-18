@@ -298,6 +298,9 @@ var CPlants = NewO({
         },
         PicArr: ["images/Card/Plants/Starfruit.png", "images/Plants/Starfruit/0.gif", "images/Plants/Starfruit/Starfruit.gif", "images/Plants/Starfruit/Star.gif"],
         Tooltip: "向五个方向发射小杨桃",
+		jinyinAct:function(a){
+			a.canEat=0
+		},
         Produce: '杨桃可以向五个方向发射小杨桃。<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">五个方向</font></p>杨桃：“嘿，哥们，有一天我去看牙医，他说我有四个牙洞。我一数，我就只有一颗牙齿！一颗牙齿长了四个牙洞？怎么会这样啊？”',
         getTriggerRange: function(e, g, f) {
             var a = this.R,
