@@ -425,6 +425,27 @@ Birth: function() {
                     oP.MonPrgs()
                 },
 			    jianshang:1,
+	AppearDownZ: function(z, t) {
+    t ? oSym.addTask(0,
+      function(l, k, i, j, z) {
+        k = Math.min(k + j, z.height);
+        SetStyle(l, {
+          top: k + "px",
+          clip: "rect(0,auto," + (i = Math.max(i - j, 0)) + "px,0)"
+        });
+        i ? oSym.addTask(5, arguments.callee, [l, k, i, j, z]) : SetHidden(z.Ele)
+      },
+      [z.EleBody, 0, z.height, z.height * 0.1, z]) : (SetVisible(z.Ele), oSym.addTask(0,
+      function(l, k, i, j, z) {
+        k = Math.max(k - j, 0);
+        SetStyle(l, {
+          top: k + "px",
+          clip: "rect(0,auto," + (i += j) + "px,0)"
+        });
+        k && oSym.addTask(5, arguments.callee, [l, k, i, j])
+      },
+      [z.EleBody, z.height, 0, z.height * 0.1]))
+  },
                 SetAlpha: $User.Browser.IE ?
                     function(f, d, e, c) {
                         d.style.filter = (f.CSS_alpha = "alpha(opacity=" + e + ")") + f.CSS_fliph
@@ -1242,11 +1263,11 @@ Birth: function() {
 				var Z=oZ.getArZ(a.ZX+20,a.ZX+100,a.R),
 					len=Z.length;
 				while(len--){
-					Z[len]&&(Z[len].EName!="oDuckyTubeZombie2")&&(Z[len].EName!="oConeheadZombie")&&a.Ornaments&&(
+					Z[len]&&(Z[len].EName!="oDuckyTubeZombie2")&&(Z[len].EName!="oConeheadZombie")&&(Z[len].Altitude==1)&&a.Ornaments&&(
 						Z[len].ChangeR(Z[len]),Z[len].ChangeR=function(){},
 						oSym.addTask(500,function(Z,len){
 							Z[len].ChangeR=CZombies.prototype.ChangeR
-						},[Z,len]))
+						},[Z,len]))// 5s转向冷却
 				}
 			}
 		},
@@ -3268,7 +3289,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
         },
         prepareBirth: oZomboni.prototype.prepareBirth
     }),
-	oDiggerZombie = InheritO(OrnNoneZombies, {
+oDiggerZombie = InheritO(OrnNoneZombies, {
   EName: "oDiggerZombie",
   CName: "矿工僵尸",
   Lvl: 4,
@@ -3341,8 +3362,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
           i;
         while (h--) {
           if ((i = g[d + h]) && i.canEat) {
-            return i.AttackedRX >= c && i.AttackedLX <= c ?
-              [f.id, i.id] :
+            return i.AttackedRX >= c && i.AttackedLX <= c ? [f.id, i.id] :
               false;
           }
         }
@@ -3357,8 +3377,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
           i;
         while (h--) {
           if ((i = g[d + h]) && i.canEat) {
-            return i.AttackedRX >= c && i.AttackedLX <= c ?
-              [f.id, i.id] :
+            return i.AttackedRX >= c && i.AttackedLX <= c ? [f.id, i.id] :
               false;
           }
         }
@@ -3382,27 +3401,31 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
       a + "BoomDie.gif" + $Random,
     ];
   })(),
-GoingDieHead:function(){},
-  AudioArr: ["wakeup"],
-jinyinAct:function(a){
-	a.Act=function(a){
-		var z=oZ.getZ0(a.ZX,a.R);
-		z&&z.EName!=a.EName&&(!a.pushZ?(a.ZX>=400&&(a.pushZ=z,z.Altitude=4,z.isAttacking=0,
-			z.FreeSetbodyTime=1,SetHidden(z.Ele))):(
-			a.ZX>=400&&a.pushZ&&a.pushZ.HP?a.pushZ.getr(a.pushZ,-a.Speed,1):(a.pushZ.HP&&(
-			a.pushZ.Altitude=1,
-			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.Ele)),a.pushZ=null)))
-	}
-},
-	PrivateDie:function(a){
-		a.pushZ&&(SetStyle(a.pushZ.EleBody, {
-                    top: "0px",
-                    clip: "rect(0,auto,"+a.pushZ.height+"px,0)"
-                }),
-			a.pushZ.Altitude=1,
-			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow),a.pushZ=null)
-	},
-	Act:function(){},
+  GoingDieHead: function() {},
+  AudioArr: ["dirt_rise","wakeup"],
+  jinyinAct: function(a) {
+    a.Act = function(a) {
+      var z = oZ.getZ0(a.ZX, a.R);
+      (a.pushZ || (z &&(z.Lvl<=3)&& z.EName != a.EName)) && (!a.pushZ ? (a.ZX >= 420 && (a.pushZ = z,PlayAudio("dirt_rise"), 
+		NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (z.ZX) + "px;top:" + (GetY(z.R)-155) + "px", EDPZ),																			 
+		z.Altitude = 4, z.isAttacking = 0, a.AppearDownZ(z, 1),
+        z.FreeSetbodyTime = 1)) : (
+        a.ZX >= 420 && a.pushZ && a.pushZ.HP ? a.pushZ.getr(a.pushZ, -a.Speed, 1) : (a.pushZ.HP && (
+          a.pushZ.Altitude = 1,
+		  PlayAudio("wakeup"),
+		NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (a.pushZ.ZX) + "px;top:" + (GetY(a.pushZ.R)-155) + "px", EDPZ),
+          a.pushZ.FreeSetbodyTime = 0, a.AppearDownZ(z)), a.pushZ = null)))
+    }
+  },
+  PrivateDie: function(a) {
+    a.pushZ && a.pushZ.HP && (
+      a.pushZ.Altitude = 1,
+		PlayAudio("wakeup"),
+		NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (a.pushZ.ZX) + "px;top:" + (GetY(a.pushZ.R)-155) + "px", EDPZ),
+      a.pushZ.FreeSetbodyTime = 0,a.AppearDownZ(z));
+    a.pushZ = null
+  },
+  Act: function() {},
   Go_Up: function(a, WD) {
     // WD: 方向，1右0左
     a.isUp = 1; //a.Ifgc=0;
@@ -3476,11 +3499,15 @@ jinyinAct:function(a){
         (e = 1)) :
       (e = 1)) :
     (e = 1);
-	  f.Act(f);
+    f.Act(f);
     return e;
   },
   CanDig: {
-    oPotatoMine,oWallNut,oTallNut,oChomper,oPumpkinHead: true
+    oPotatoMine,
+    oWallNut,
+    oTallNut,
+    oChomper,
+    oPumpkinHead: true
   },
   JudgeAttack_Dig: function() {
     var g = this,
