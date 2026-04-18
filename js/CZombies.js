@@ -1739,12 +1739,12 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
         var C = GetC(a.ZX);
     for (i = 3; i >= 0; i--) {
         var p = oGd.$[a.R + "_" + C + "_" + i];
-          a.PZ && p && p.canEat && $(p.id) && (p.C == C) && (PlantKind = p.PKind, NewC = p.C + 1, p.AttackedLX += 80, p.pixelRight += 80, p.AttackedRX += 80, p.pixelLeft += 80, $(p.id).style.left = (p.pixelLeft) + "px",
+          a.PZ&&a.canWalk(a,a.id)&& p && p.canEat && $(p.id) && (p.C == C) && (PlantKind = p.PKind, NewC = p.C + 1, p.AttackedLX += 80, p.pixelRight += 80, p.AttackedRX += 80, p.pixelLeft += 80, $(p.id).style.left = (p.pixelLeft) + "px",
 			(p.EName== "oBrains"||p.C>9)?p.Die():(delete oGd.$[p.R + "_" + p.C + "_" + p.PKind], p.C = NewC, oGd.add(p, a.R + "_" + NewC + "_" + PlantKind,
 		p.oTrigger&&oT.delP(p),p.InitTrigger(p,p.id,p.R,p.C,p.AttackedLX,p.AttackedRX),PlayAudio("shovel"))));//重置植物列数并重置索敌
         }
         var z = oZ["get" + (a.PZ ? "HZ1" : "Z0")](a.ZX, a.R);
-        z && (z.getr(z, 80), z.getHit0(z, 100, 0),PlayAudio("shovel"))
+        z &&a.canWalk(a,a.id)&&(z.getr(z, 80), z.getHit0(z, 100, 0),PlayAudio("shovel"))
       }!(a.PZ == a.check) && (a.Ornaments && (a.num && EditEle($(a.id + "_Bullet"), 0, {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
             left: (a.PZ ? "-250" : "40") + "px"
@@ -2353,7 +2353,6 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
             Speed: 2.5,
             AKind: 2,
             Attack: 50,
-			tasktime:40,
             Produce: '冰车僵尸运用冰雪，碾过你的植物。<br>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">碾压植物，留下条冰道</font><br>精英形态一：<font color="#FF0000">辣椒冰车，重度损伤时加速</font><br>精英形态二：<font color="#FF0000">寒冰菇冰车，每隔10s冻结周围植物5s并对其造成伤害，有20%减伤</font><br>经常被误以为是在驾驶着冰车的僵尸，但事实上冰车僵尸是种完全不同的生物形式，他与太空兽人联系更紧密而不是僵尸。',
             PicArr: (function() {
                 var b = "images/Zombies/Zomboni/";
@@ -2402,6 +2401,14 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
                 return m
             },
 			PrivateAct:function(){},
+			AttackZombie:function(){
+				var a=this;
+				var z=oZ[a.PZ?"getArZ":"getArHZ"](d.AttackedLX,d.AttackedRX,a.R);
+				zl=z.length;
+				while(zl--){
+					z[zl].Altitude==1&&z[zl].getHit0(z[zl],2,0)
+				}
+			},
             ChkActs1: function(f, d, g, c) {
                 var b, e;
                 f.JudgeAttack();
@@ -2786,7 +2793,7 @@ oImp = InheritO(OrnNoneZombies, {
     z.appendChild(Ja);
     a.PrivateAct = function(a) {
       var p = a.Ele;
-      if (!a.bool && a.beAttacked&&$Z[a.id]) {
+      if (!a.bool && a.beAttacked&&a.canWalk(a,a.id)) {
         for (i = 3; i >= 1; i--) {
           var tp = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
           var tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 40, a.ZX + 40, a.R);
@@ -3380,17 +3387,11 @@ GoingDieHead:function(){},
 jinyinAct:function(a){
 	a.Act=function(a){
 		var z=oZ.getZ0(a.ZX,a.R);
-		z&&z.EName!=a.EName&&(!a.pushZ?(a.ZX>=400&&(a.pushZ=z,SetStyle(z.EleBody, {
-                    top: (z.height*0.7)+"px",
-                    clip: "rect(0,auto,"+(z.height*0.3)+"px,0)"
-                }),z.Altitude=4,z.isAttacking=0,
-			z.FreeSetbodyTime=1,SetHidden(z.EleShadow))):(
-			a.ZX>=400&&a.pushZ&&a.pushZ.HP?a.pushZ.getr(a.pushZ,-a.Speed,1):(a.pushZ.HP&&(SetStyle(a.pushZ.EleBody, {
-                    top: "0px",
-                    clip: "rect(0,auto,"+a.pushZ.height+"px,0)"
-                }),
+		z&&z.EName!=a.EName&&(!a.pushZ?(a.ZX>=400&&(a.pushZ=z,z.Altitude=4,z.isAttacking=0,
+			z.FreeSetbodyTime=1,SetHidden(z.Ele))):(
+			a.ZX>=400&&a.pushZ&&a.pushZ.HP?a.pushZ.getr(a.pushZ,-a.Speed,1):(a.pushZ.HP&&(
 			a.pushZ.Altitude=1,
-			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.EleShadow)),a.pushZ=null)))
+			a.pushZ.FreeSetbodyTime=0,SetVisible(a.pushZ.Ele)),a.pushZ=null)))
 	}
 },
 	PrivateDie:function(a){
@@ -3408,7 +3409,7 @@ jinyinAct:function(a){
     a.beAttacked &&
       ((a.WalkDirection = WD),
         (a.BoomDieGif = 12),
-        PlayAudio("zombie_entering_water"),
+        PlayAudio("wakeup"),
         (a.Altitude = 4),
         SetVisible(a.EleShadow),
         (a.EleBody.src = a.PicArr[a.UpGif] + Math.random()),
@@ -3479,7 +3480,7 @@ jinyinAct:function(a){
     return e;
   },
   CanDig: {
-    oPotatoMine,oWallNut: true
+    oPotatoMine,oWallNut,oTallNut,oChomper,oPumpkinHead: true
   },
   JudgeAttack_Dig: function() {
     var g = this,
