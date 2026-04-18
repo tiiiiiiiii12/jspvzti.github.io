@@ -11,18 +11,18 @@ oS.Init({
         ]
     }(),
     Coord: 2,
-    SunNum: 50,
+    SunNum: 150,
     LF: [0, 1, 1, 2, 2, 1, 1],
     backgroundImage: 'images/interface/background4.jpg',
     CanSelectCard: 1,
     DKind: 0,
-    HaveFog: 5, //有5排雾
+    HaveFog: 3, //有5排雾
     LevelName: '关卡 4-7',
     LvlEName: 37,
     LargeWaveFlag: {
         10: $('imgFlag3'),
         20: $('imgFlag2'),
-        10: $('imgFlag1')
+        30: $('imgFlag1')
     },
     UserDefinedFlagFunc: function($T) {
         oP.FlagNum == oP.FlagZombies && oP.SetTimeoutWaterZombie(6, 9, 3, [oDuckyTubeZombie1, oDuckyTubeZombie2, oDuckyTubeZombie3])
