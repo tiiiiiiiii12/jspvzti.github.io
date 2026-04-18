@@ -2406,7 +2406,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
 				var z=oZ[a.PZ?"getArHZ":"getArZ"](a.AttackedLX,a.AttackedRX,a.R);
 				zl=z.length;
 				while(zl--){
-					z[zl].Altitude==1&&z[zl].getHit0(z[zl],2,0)
+					z[zl].Altitude==1&&z[zl].getHit2(z[zl],30,0)
 				}
 			},
             ChkActs1: function(f, d, g, c) {
