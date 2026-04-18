@@ -503,7 +503,7 @@ var CPlants = NewO({
                         },
                         0, EDPZ), a])
             })("StarB" + Math.random());
-	g.jinyin&&Math.random()*100<2&&(oSym.addTask(300,function(h) {
+	g.jinyin&&Math.random()*100<4&&(oSym.addTask(300,function(h) {
 	  if(!$P[g.id])return;
       oSym.addTask(1,
         function(j) {
