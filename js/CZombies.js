@@ -1826,6 +1826,9 @@ PrivateDie:function(a){
         DieGif: 7,
         WalkGif0: 2,
         WalkGif1: 3,
+		CheckOrnHP:function(a,b,c,d){
+			a.getHit0(a,d,0)
+		},
         CanPass: function(b, a) {
             return a == 2
         },
@@ -3413,7 +3416,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
           a.pushZ.Altitude = 1,
 		  PlayAudio("wakeup"),
 		oSym.addTask(220,ClearChild,[NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (a.pushZ.ZX-20) + "px;top:" + (GetY(a.pushZ.R)-155) + "px", EDPZ)]),
-          a.pushZ.FreeSetbodyTime = 0, a.AppearDownZ(z)), a.pushZ = null)))
+          a.pushZ.FreeSetbodyTime = 0, a.AppearDownZ(a.pushZ)), a.pushZ = null)))
     }
   },
   PrivateDie: function(a) {
@@ -3421,7 +3424,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
       a.pushZ.Altitude = 1,
 		PlayAudio("wakeup"),
 		oSym.addTask(220,ClearChild,[NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (a.pushZ.ZX-20) + "px;top:" + (GetY(a.pushZ.R)-155) + "px", EDPZ)]),
-      a.pushZ.FreeSetbodyTime = 0,a.AppearDownZ(z));
+      a.pushZ.FreeSetbodyTime = 0,a.AppearDownZ(a.pushZ));
     a.pushZ = null
   },
   Act: function() {},
