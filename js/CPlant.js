@@ -367,16 +367,46 @@ var CPlants = NewO({
             var c = d.pixelLeft + 38,
                 b = c - 15,
                 a = d.pixelTop + 20;
-            d.BulletEle = NewImg(0, "images/Plants/Starfruit/Star.gif", "left:" + b + "px;top:" + a + "px;z-index:" + (d.zIndex + 2))
+            d.BulletEle = NewImg(0, "images/Plants/Starfruit/Star.gif", "left:" + b + "px;top:" + a + "px;z-index:" + (d.zIndex + 2));
+			d.BulletEle1= NewImg(1, "images/Plants/Starfruit/Star.gif", "width:320px;height:320px;left:240px;top:-40px;z-index:" + (d.zIndex + 2))
         },
         PrivateDie: function(a) {
-            a.BulletEle = null
+            a.BulletEle =a.BulletEle1= null
         },
         getHurt: function(d, b, a) {
             var c = this;
             b != 3 && c.NormalAttack();
             (c.HP -= a) < 1 && c.Die()
         },
+	SpecialHit: function(a) {
+    var Ele = "Boom_" + a.id;
+    NewEle(Ele, "div", "position:absolute;overflow:hidden;z-index:150;width:283px;height:324px;left:450px;top:80px;background:url(images/Plants/DoomShroom/Boom.png) no-repeat", 0, EDPZ);
+    oSym.addTask(20,
+      function(i) {
+        ClearChild(i)
+      },
+      [NewEle(Ele, "div", "position:absolute;z-index:20;width:900px;height:600px;left:0px;top:0px;background:#FFF;*filter:alpha(opacity=50);opacity:.5", 0, EDPZ)]);
+    ImgSpriter(Ele, a.id, [
+        ["0 0", 10, 1],
+        ["-283px 0", 10, 2],
+        ["-566px 0", 10, 3],
+        ["-849px 0", 10, 4],
+        ["-1132px 0", 10, 5],
+        ["-1415px 0", 10, 6],
+        ["-1698px 0", 10, 7],
+        ["-1981px 0", 10, 8],
+        ["-2264px 0", 10, 9],
+        ["-2547px 0", 10, -1]
+      ], 0,
+      function(i, p) {
+        ClearChild($(i));
+      });
+    PlayAudio("cherrybomb");
+    for (z in $Z) {
+      let u = $Z[z];
+      u && u.PZ && u.getHit0(u, 800, 0)
+    }
+  },
         NormalAttack: function() {
             var g = this,
                 f = g.pixelLeft + 38,
@@ -385,7 +415,7 @@ var CPlants = NewO({
                 c = g.R,
                 e = f + 15,
                 a = function(j, i, h) {
-                    return (j && j.Altitude == 1 ? (j.getPea(j, 20, i), ClearChild(h), false) : true)
+                    return (j && j.Altitude == 1 ? (j.getPea(j,40, i), ClearChild(h), false) : true)
                 };
             (function(h) {
                 oSym.addTask(15,
@@ -472,7 +502,27 @@ var CPlants = NewO({
                             id: h
                         },
                         0, EDPZ), a])
-            })("StarB" + Math.random())
+            })("StarB" + Math.random());
+	g.jinyin&&Math.random()*100<2&&(oSym.addTask(300,function(h) {
+	  if(!$P[g.id])return;
+      oSym.addTask(1,
+        function(j) {
+          var i = $(j);
+          i && SetVisible(i)
+        },
+        [h]);
+      oSym.addTask(1,
+        function(n, m, k, i) {
+          ((n += 8) > 550 || (k += 6) > 350 ? (ClearChild(i), g.SpecialHit(g)) : (SetStyle(i, {
+            left: (m += 8) + "px",
+            top: k + "px"
+          }), oSym.addTask(1, arguments.callee, [n, m, k, i])))
+        },
+        [240, 255, -40, EditEle(g.BulletEle1.cloneNode(false), {
+            id: h
+          },
+          0, EDPZ)])
+    },["StarB" + Math.random()]))
         }
     }),
     oPeashooter = InheritO(CPlants, {
