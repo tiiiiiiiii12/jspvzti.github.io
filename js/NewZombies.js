@@ -175,7 +175,7 @@ var oGargantuar = InheritO(oZombie, {
         }, 0),
         h.check = h.PZ);
     }
-	h.hasthrew < h.throwImpnum && (GetC(h.ZX) > 3 || !h.PZ) && !h.isAttacking && (h.HP <= 1500) && $Z[h.id] && h.throwImp(h);
+	h.canWalk(h,h.id)&&h.hasthrew < h.throwImpnum && (GetC(h.ZX) > 3 || !h.PZ) && !h.isAttacking && (h.HP <= h.MaxHP*0.5) && h.throwImp(h);
   },
   jinyinAct: function(a) {
     var z = $(a.id);
@@ -377,6 +377,10 @@ PrivateDie:function(a){
     oSym.addTask(k.shootPeaSpeed, function(k,m) {
       k.canWalk(k,m) && k.beAttacked && k.shootPea(k);
       $Z[k.id] ? oSym.addTask(k.shootPeaSpeed, arguments.callee, [k,m]) : k.BulletEle = null;
+    }, [k,m]);
+	k.jinyin&&oSym.addTask(400, function(k,m) {
+      k.canWalk(k,m) && k.beAttacked &&(CustomZombie(oPeaZombie,Math.min(oS.R,Math.round(Math.random()*2+Math.max(k.R-1,1))),GetC(k.ZX)+2,!k.PZ).shootPeaSpeed/=0.5);
+      $Z[k.id]&&oSym.addTask(400, arguments.callee, [k,m]);
     }, [k,m]);
                         k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
                         if (!k.beAttacked) {
