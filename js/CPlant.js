@@ -1004,6 +1004,7 @@ NormalAttack1: function() {
         height: 74,
         beAttackedPointR: 53,
         SunNum: 50,
+		MaxDropSunNum:0,
         PicArr: ["images/Card/Plants/SunFlower.png", "images/Plants/SunFlower/0.gif", "images/Plants/SunFlower/SunFlower1.gif", "images/Plants/SunFlower/SunFlower.gif"],
         Tooltip: "提供你额外的阳光",
         Produce: '向日葵，为你生产额外阳光的经济作物。尝试尽可能多种植吧！</font></p>精英形态：每次多生产1～2个小阳光<p>阳光产量：<font color="#FF0000">中等</font></p>向日葵情不自禁地和着节拍起舞。是什么节拍呢？嗨，是大地自己用来提神的爵士节拍，这种频率的节拍，只有向日葵才能听到。',
@@ -1012,7 +1013,6 @@ NormalAttack1: function() {
             d.src = "images/Plants/SunFlower/SunFlower.gif";
             d.style.clip = "rect(0,auto,74px,0)";
             d.style.height = "148px";
-			c.MaxDropSunNum=200;
             EditEle(b, {
                     id: e
                 },
@@ -1043,7 +1043,7 @@ NormalAttack1: function() {
                         },
                         [d, c, b, arguments.callee]))
                 },
-                [a.id, GetX(a.C) - 40, GetY(a.R)]) : a.getHurt = function(f, c, b) {
+                [a.id, GetX(a.C) - 40, GetY(a.R)]) : (a.getHurt = function(f, c, b) {
                 var e = this;
                 switch (c) {
                     case 0:
@@ -1080,7 +1080,7 @@ NormalAttack1: function() {
 						e.MaxDropSunNum=0;
                         e.Die();
                 }
-            }
+            },a.MaxDropSunNum=200)
         },
 		PrivateDie:function(a){
 			a.MaxDropSunNum>0&&AppearSun(Math.floor(GetX(a.C) - 40 + Math.random() * 41), GetY(a.R), a.MaxDropSunNum, 0)
