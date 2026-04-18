@@ -3407,13 +3407,13 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
     a.Act = function(a) {
       var z = oZ.getZ0(a.ZX, a.R);
       (a.pushZ || (z &&(z.Lvl<=3)&& z.EName != a.EName)) && (!a.pushZ ? (a.ZX >= 420 && (a.pushZ = z,PlayAudio("dirt_rise"), 
-		NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (z.ZX) + "px;top:" + (GetY(z.R)-155) + "px", EDPZ),																			 
+		oSym.addTask(220,ClearChild,NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (z.ZX) + "px;top:" + (GetY(z.R)-155) + "px", EDPZ)),																			 
 		z.Altitude = 4, z.isAttacking = 0, a.AppearDownZ(z, 1),
         z.FreeSetbodyTime = 1)) : (
         a.ZX >= 420 && a.pushZ && a.pushZ.HP ? a.pushZ.getr(a.pushZ, -a.Speed, 1) : (a.pushZ.HP && (
           a.pushZ.Altitude = 1,
 		  PlayAudio("wakeup"),
-		NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (a.pushZ.ZX) + "px;top:" + (GetY(a.pushZ.R)-155) + "px", EDPZ),
+		oSym.addTask(220,ClearChild,NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (a.pushZ.ZX) + "px;top:" + (GetY(a.pushZ.R)-155) + "px", EDPZ)),
           a.pushZ.FreeSetbodyTime = 0, a.AppearDownZ(z)), a.pushZ = null)))
     }
   },
@@ -3421,7 +3421,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
     a.pushZ && a.pushZ.HP && (
       a.pushZ.Altitude = 1,
 		PlayAudio("wakeup"),
-		NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (a.pushZ.ZX) + "px;top:" + (GetY(a.pushZ.R)-155) + "px", EDPZ),
+		oSym.addTask(220,ClearChild,NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (a.pushZ.ZX) + "px;top:" + (GetY(a.pushZ.R)-155) + "px", EDPZ)),
       a.pushZ.FreeSetbodyTime = 0,a.AppearDownZ(z));
     a.pushZ = null
   },
