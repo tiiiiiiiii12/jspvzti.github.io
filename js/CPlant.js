@@ -292,7 +292,7 @@ oStarfruit = InheritO(CPlants, {
   width: 77,
   height: 70,
   beAttackedPointR: 57,
-  SunNum: 125,
+  SunNum: 175,
   GetDY: function(b, c, a) {
     return a[0] ? -17 : -10
   },
@@ -384,7 +384,7 @@ oStarfruit = InheritO(CPlants, {
   },
   SpecialHit: function(a) {
     var Ele = "Boom_" + a.id;
-    NewEle(Ele, "div", "position:absolute;overflow:hidden;z-index:150;width:283px;height:324px;left:520px;top:80px;background:url(images/Plants/DoomShroom/Boom.png) no-repeat", 0, EDPZ);
+    NewEle(Ele, "div", "position:absolute;overflow:hidden;z-index:150;width:283px;height:324px;left:550px;top:80px;background:url(images/Plants/DoomShroom/Boom.png) no-repeat", 0, EDPZ);
     oSym.addTask(20,
       function(i) {
         ClearChild(i)
@@ -405,7 +405,7 @@ oStarfruit = InheritO(CPlants, {
       function(i, p) {
         ClearChild($(i));
       });
-    PlayAudio("cherrybomb");
+    PlayAudio("doomshroom");
     for (z in $Z) {
       let u = $Z[z];
       u && u.PZ && u.getHit0(u, 800, 0)
@@ -429,13 +429,14 @@ oStarfruit = InheritO(CPlants, {
         },
         [h]);
       oSym.addTask(1,
-        function(m, k, l, i, j) {
-          j(oZ.getZ1(m, k), 4, i) && ((m -= 5) < 100 ? ClearChild(i) : (i.style.left = (l -= 5) + "px", oSym.addTask(1, arguments.callee, [m, k, l, i, j])))
+        function(m, k, l, i, j,Dire) {
+          j(oZ["getZ"+Dire](m, k), 4, i) && ((m -= Dire?5:-5) < 100 ? ClearChild(i) : (i.style.left = (l -= Dire?5:-5) + "px", oSym.addTask(1, arguments.callee, [m, k, l, i, j,Dire]),
+		Dire&&oSym.addTask(90,function(Dire){Dire=0},[Dire])))
         },
         [f, c, d, EditEle(g.BulletEle.cloneNode(false), {
             id: h
           },
-          0, EDPZ), a])
+          0, EDPZ), a,1])
     })("StarB" + Math.random());
     (function(h) {
       oSym.addTask(15,
