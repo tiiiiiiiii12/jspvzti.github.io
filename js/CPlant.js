@@ -522,7 +522,7 @@ var CPlants = NewO({
             top: k + "px"
           }), oSym.addTask(1, arguments.callee, [n, m, k, i])))
         },
-        [240, 255, -40, EditEle(g.BulletEle1.cloneNode(false), {
+        [450, 465, -100, EditEle(g.BulletEle1.cloneNode(false), {
             id: h
           },
           0, EDPZ)])
