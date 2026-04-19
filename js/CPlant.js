@@ -372,7 +372,7 @@ var CPlants = NewO({
                 b = c - 15,
                 a = d.pixelTop + 20;
             d.BulletEle = NewImg(0, "images/Plants/Starfruit/Star.gif", "left:" + b + "px;top:" + a + "px;z-index:" + (d.zIndex + 2));
-			d.BulletEle1= NewImg(1, "images/Plants/Starfruit/Star.gif", "width:320px;height:320px;left:240px;top:-40px;z-index:" + (d.zIndex + 2))
+			d.BulletEle1= NewImg(1, "images/Plants/Starfruit/Star.gif", "width:320px;height:320px;left:160px;top:-100px;z-index:" + (d.zIndex + 2))
         },
         PrivateDie: function(a) {
             a.BulletEle =a.BulletEle1= null
@@ -517,8 +517,8 @@ var CPlants = NewO({
         [h]);
       oSym.addTask(1,
         function(n, m, k, i) {
-          ((n += 8) > 550 || (k += 6) > 350 ? (ClearChild(i), g.SpecialHit(g)) : (SetStyle(i, {
-            left: (m += 8) + "px",
+          ((n += 4) > 550 || (k += 3) > 350 ? (ClearChild(i), g.SpecialHit(g)) : (SetStyle(i, {
+            left: (m += 4) + "px",
             top: k + "px"
           }), oSym.addTask(1, arguments.callee, [n, m, k, i])))
         },
