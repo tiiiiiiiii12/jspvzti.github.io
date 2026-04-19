@@ -3412,7 +3412,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
 		oSym.addTask(220,ClearChild,[NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (z.ZX-20) + "px;top:" + (GetY(z.R)-155) + "px", EDPZ)]),																			 
 		z.Altitude = 4, z.isAttacking = 0, a.AppearDownZ(z, 1),
         z.FreeSetbodyTime = 1)) : (
-        a.ZX >= 420 && a.pushZ && a.pushZ.HP ? a.pushZ.getr(a.pushZ, -a.Speed, 1) : (a.pushZ.HP && (
+        a.ZX >= 420 && a.pushZ && a.pushZ.HP ? (a.canWalk(a,a.id)&&!a.isAttacking&&a.pushZ.getr(a.pushZ, -a.Speed, 1)) : (a.pushZ.HP && (
           a.pushZ.Altitude = 1,
 		  PlayAudio("wakeup"),
 		oSym.addTask(220,ClearChild,[NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (a.pushZ.ZX-20) + "px;top:" + (GetY(a.pushZ.R)-155) + "px", EDPZ)]),
