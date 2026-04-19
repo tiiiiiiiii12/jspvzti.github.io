@@ -431,7 +431,7 @@ oStarfruit = InheritO(CPlants, {
       oSym.addTask(1,
         function(m, k, l, i, j,Dire) {
           j(oZ["getZ"+Dire](m, k), 4, i) && ((m -= Dire?5:-5) < 100 ? ClearChild(i) : (i.style.left = (l -= Dire?5:-5) + "px", oSym.addTask(1, arguments.callee, [m, k, l, i, j,Dire]),
-		Dire&&oSym.addTask(90,function(Dire){Dire=0},[Dire])))
+		Dire&&oSym.addTask(40,function(Dire){Dire=0},[Dire])))
         },
         [f, c, d, EditEle(g.BulletEle.cloneNode(false), {
             id: h
