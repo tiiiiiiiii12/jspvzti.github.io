@@ -2455,7 +2455,7 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
         for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX)+1; i++) {
           for (let l = 0; l <= 3; l++) {
             var m = oGd.$[LR + "_" + i + "_" + l];
-            a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500),m.getHurt(m,3,50*a.level),a.SetAlpha(m,$(m.id),50,0.5)),
+            a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500),a.SetAlpha(m,$(m.id),50,0.5),m.getHurt(m,3,50*a.level)),
 			oSym.addTask(500, function(a,m) {m&&a.SetAlpha(m,$(m.id),100,1)},[a,m]));
           }
         }
