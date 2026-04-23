@@ -1460,8 +1460,8 @@ c.JudgeAttack = c.JudgeAttackH;
                 c = f.EleShadow,
                 e = f.EleBody;
 			f&&(f.PrivateAct=function(){});
-			f.PZ&&f.jinyin&&f.ExchangeLR(f,0);
-            e.src = f.jinyin&&!f.num?"images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump.gif" + $Random + Math.random():"images/Zombies/PoleVaultingZombie/jinyinjump.gif" + $Random + Math.random();
+			f.PZ&&f.num&&f.ExchangeLR(f,0);
+            e.src = !(f.jinyin&&!f.num)?"images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump.gif" + $Random + Math.random():"images/Zombies/PoleVaultingZombie/jinyinjump.gif" + $Random + Math.random();
             PlayAudio("grassstep");
             SetHidden(c);
             f.isAttacking = 1;
