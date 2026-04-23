@@ -1363,10 +1363,11 @@ Birth: function() {
         },
         Lvl: 2,
         SunNum: 75,
+		jinyinGif:14,
         BookHandPosition: "-30px 70%",
         PicArr: (function() {
             var a = "images/Zombies/PoleVaultingZombie/";
-            return ["images/Card/Zombies/PoleVaultingZombie.png", a + "0.gif", a + "PoleVaultingZombie.gif", a + "PoleVaultingZombieAttack.gif", a + "PoleVaultingZombieLostHead.gif", a + "PoleVaultingZombieLostHeadAttack.gif", a + "PoleVaultingZombieHead.gif" + $Random, a + "PoleVaultingZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "PoleVaultingZombieWalk.gif", a + "PoleVaultingZombieLostHeadWalk.gif", a + "PoleVaultingZombieJump.gif", a + "PoleVaultingZombieJump2.gif", a + "1.gif"]
+            return ["images/Card/Zombies/PoleVaultingZombie.png", a + "0.gif", a + "PoleVaultingZombie.gif", a + "PoleVaultingZombieAttack.gif", a + "PoleVaultingZombieLostHead.gif", a + "PoleVaultingZombieLostHeadAttack.gif", a + "PoleVaultingZombieHead.gif" + $Random, a + "PoleVaultingZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "PoleVaultingZombieWalk.gif", a + "PoleVaultingZombieLostHeadWalk.gif", a + "PoleVaultingZombieJump.gif", a + "PoleVaultingZombieJump2.gif", a + "1.gif", a + "jinyinrun.gif",a + "jinyinjump.gif"]
         })(),
         AudioArr: ["polevault", "grassstep"],
         Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<p>韧性：<font color="#FF0000">中（600)</font><br>精英形态：反向，跳跃完毕后于跳跃前位置的3×3植物上召唤血量极低的普通撑杆<br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font></p>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为非凡。那就是撑杆僵尸。',
@@ -1413,11 +1414,13 @@ c.JudgeAttack = c.JudgeAttackH;
   },
   jinyinAct: function(a) {
 	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
+	a.NormalGif=a.jinyinGif;
+	a.EleBody.src=a.PicArr[a.NormalGif];
     a.num?a.ExchangeLR(a, 1):(a.PrivateAct=function(a){
 	for (let i = GetC(a.ZX);i>=2;i--) {
         for (let j = 0; j < 4; j++) {
           let g = oGd.$[a.R + "_" + i + "_" + j];
-          GetC(a.ZX)<=7&&!a.isAttacking&&g&&a.NormalAttack(a,g.id,g.AttackedRX)
+          GetC(a.ZX)<=7&&!a.isAttacking&&g&&a.NormalAttack(a.id,g.id,g.AttackedRX)
         }
       }	
 	});
@@ -1459,7 +1462,7 @@ c.JudgeAttack = c.JudgeAttackH;
                 e = f.EleBody;
 			f&&(f.PrivateAct=function(){});
 			f.PZ&&f.jinyin&&f.ExchangeLR(f,0);
-            e.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump.gif" + $Random + Math.random();
+            e.src = f.jinyin&&!f.num?"images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump.gif" + $Random + Math.random():"images/Zombies/PoleVaultingZombie/jinyinjump.gif" + $Random + Math.random();
             PlayAudio("grassstep");
             SetHidden(c);
             f.isAttacking = 1;
