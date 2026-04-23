@@ -1414,8 +1414,6 @@ c.JudgeAttack = c.JudgeAttackH;
   },
   jinyinAct: function(a) {
 	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
-	a.NormalGif=a.jinyinGif;
-	a.EleBody.src=a.PicArr[a.NormalGif];
     a.num?a.ExchangeLR(a, 1):(a.PrivateAct=function(a){
 	for (let i = GetC(a.ZX);i>=2;i--) {
         for (let j = 0; j < 4; j++) {
@@ -1423,7 +1421,8 @@ c.JudgeAttack = c.JudgeAttackH;
           GetC(a.ZX)<=7&&!a.isAttacking&&g&&a.NormalAttack(a.id,g.id,g.AttackedRX)
         }
       }	
-	});
+	},a.NormalGif=a.jinyinGif,
+	a.EleBody.src=a.PicArr[a.NormalGif]);
   },
   JudgeAttackH1: function() {
     var e = this,
