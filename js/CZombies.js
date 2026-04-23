@@ -1377,8 +1377,8 @@ Birth: function() {
             oSym.addTask(200, ClearChild, [NewImg(0, a[b.HeadGif] + Math.random(), "left:" + b.X + "px;top:" + (b.pixelTop - 20) + "px;z-index:" + b.zIndex, EDPZ)])
         },
 		  bedevil: function(c) {
-    !(c.jinyin && c.NormalAttack != CZombies.prototype.NormalAttack) && c.ExchangeLR(c, 1);
-c.JudgeAttack = (c.NormalAttack != CZombies.prototype.NormalAttack?c.JudgeAttackH:CZombies.prototype.JudgeAttackH);
+    !(c.num && c.NormalAttack != CZombies.prototype.NormalAttack) && c.ExchangeLR(c, 1);
+c.JudgeAttack = c.JudgeAttackH;
     c.PZ = 0;
     c.WalkDirection = 1;
     c.ZX = c.AttackedRX;
@@ -1400,7 +1400,7 @@ c.JudgeAttack = (c.NormalAttack != CZombies.prototype.NormalAttack?c.JudgeAttack
                     continue
                 }
                 for (a = 2; a > -1;
-                    (p = h[d + f + "_" + a--]) && (p.EName != "oBrains" ? p.AttackedRX >= e && p.AttackedLX < b && p.canEat && (a = -1, g.JudgeAttackH1= CZombies.prototype.JudgeAttackH1,g.JudgeAttack = CZombies.prototype.JudgeAttack, g.NormalAttack(g.id, p.id, p.AttackedLX)) : p.AttackedRX >= b && p.AttackedLX < b && (a = -1, g.JudgeAttack = CZombies.prototype.JudgeAttack, g.JudgeAttackH1= CZombies.prototype.JudgeAttackH1,(g.NormalAttack = CZombies.prototype.NormalAttack)(g.id, p.id)))) {}
+                    (p = h[d + f + "_" + a--]) && (p.EName != "oBrains" ? p.AttackedRX >= e && p.AttackedLX < b && p.canEat && (a = -1, g.JudgeAttackH1= CZombies.prototype.JudgeAttackH1, g.JudgeAttackH= CZombies.prototype.JudgeAttackH,g.JudgeAttack = CZombies.prototype.JudgeAttack, g.NormalAttack(g.id, p.id, p.AttackedLX)) : p.AttackedRX >= b && p.AttackedLX < b && (a = -1, g.JudgeAttack = CZombies.prototype.JudgeAttack, g.JudgeAttackH1= CZombies.prototype.JudgeAttackH1,(g.NormalAttack = CZombies.prototype.NormalAttack)(g.id, p.id)))) {}
                }
 			}
         },
@@ -1412,7 +1412,15 @@ c.JudgeAttack = (c.NormalAttack != CZombies.prototype.NormalAttack?c.JudgeAttack
     d && d.AttackedLX < oS.W && d.Altitude == 1 && !e.isAttacking && (e.JudgeAttack=e.JudgeAttackH = CZombies.prototype.JudgeAttackH, e.NormalAttack(f, c = d.id, d.ZX+20))
   },
   jinyinAct: function(a) {
-    a.ExchangeLR(a, 1);
+	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
+    a.num?a.ExchangeLR(a, 1):(a.PrivateAct=function(a){
+	for (let i = GetC(a.ZX);i>=2;i--) {
+        for (let j = 0; j < 4; j++) {
+          let g = oGd.$[a.R + "_" + i + "_" + j];
+          GetC(a.ZX)<=7&&!a.isAttacking&&g&&a.NormalAttack(a,g.id,g.AttackedRX)
+        }
+      }	
+	});
   },
   JudgeAttackH1: function() {
     var e = this,
@@ -1449,6 +1457,7 @@ c.JudgeAttack = (c.NormalAttack != CZombies.prototype.NormalAttack?c.JudgeAttack
                 a = f.Ele,
                 c = f.EleShadow,
                 e = f.EleBody;
+			f&&(f.PrivateAct=function(){});
 			f.PZ&&f.jinyin&&f.ExchangeLR(f,0);
             e.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump.gif" + $Random + Math.random();
             PlayAudio("grassstep");
@@ -1485,7 +1494,7 @@ c.JudgeAttack = (c.NormalAttack != CZombies.prototype.NormalAttack?c.JudgeAttack
                             u && (v.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", u.isAttacking = 0, u.Altitude = 1, u.OSpeed = u.Speed = 1.6, u.NormalGif = 9, u.LostHeadGif = 10,u.NormalAttack = (t = CZombies.prototype).NormalAttack, u.AttackZombie = t.AttackZombie, u.getCrushed = t.getCrushed, u.getFreeze = t.getFreeze, u.getRaven = t.getRaven)
                         },
                         [m, n])));
-			if(h.jinyin){
+			if(h.num){
 			for(let i = R;i <= RM;i++){
                     for(let j = C - 1;j <= C + 1;j++){
                         for(let k = 0;k <= 3;k++){
