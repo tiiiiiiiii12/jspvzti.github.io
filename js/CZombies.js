@@ -1474,7 +1474,7 @@ c.JudgeAttack = c.JudgeAttackH;
 				var P=oGd.$[f.R+"_"+(GetC(f.ZX)-10)+"_"+k];
 				P&&P.getHurt(P,3,1800)
 			}
-			var Z=oZ[h.PZ?"getArHZ":"getArZ"](f.ZX-20,f.ZX+40,f.R);
+			var Z=oZ[f.PZ?"getArHZ":"getArZ"](f.ZX-20,f.ZX+40,f.R);
 				      Zl=Z.length;
 				      while(Zl--){
 						  f&&f.canWalk(f,d)&&Z[Zl].getThump(1800);
