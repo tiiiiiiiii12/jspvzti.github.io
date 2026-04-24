@@ -1469,15 +1469,15 @@ c.JudgeAttack = c.JudgeAttackH;
             f.getFreeze = function() {
                 f.getSnowPea(f, 20)
             };
-			if(h&&h.jinyin&&!h.num){
+			if(f&&f.jinyin&&!f.num){
 			for(let k = 0;k <= 3;k++){
-				var P=oGd.$[h.R+"_"+(GetC(h.ZX)-10)+"_"+k];
+				var P=oGd.$[f.R+"_"+(GetC(f.ZX)-10)+"_"+k];
 				P&&P.getHurt(P,3,1800)
 			}
-			var Z=oZ[h.PZ?"getArHZ":"getArZ"](h.ZX-20,h.ZX+40,h.R);
+			var Z=oZ[h.PZ?"getArHZ":"getArZ"](f.ZX-20,f.ZX+40,f.R);
 				      Zl=Z.length;
 				      while(Zl--){
-						  h&&h.canWalk(h,m)&&Z[Zl].getThump(1800);
+						  f&&f.canWalk(f,d)&&Z[Zl].getThump(1800);
 					  }
 			}
             oSym.addTask(50,
