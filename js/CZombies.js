@@ -1347,7 +1347,7 @@ Birth: function() {
     oPoleVaultingZombie = InheritO(OrnNoneZombies, {
         EName: "oPoleVaultingZombie",
         CName: "撑杆僵尸",
-        HP: 600,
+        HP: 500,
         width: 348,
         height: 218,
         OSpeed: 3.2,
@@ -1370,7 +1370,7 @@ Birth: function() {
             return ["images/Card/Zombies/PoleVaultingZombie.png", a + "0.gif", a + "PoleVaultingZombie.gif", a + "PoleVaultingZombieAttack.gif", a + "PoleVaultingZombieLostHead.gif", a + "PoleVaultingZombieLostHeadAttack.gif", a + "PoleVaultingZombieHead.gif" + $Random, a + "PoleVaultingZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "PoleVaultingZombieWalk.gif", a + "PoleVaultingZombieLostHeadWalk.gif", a + "PoleVaultingZombieJump.gif", a + "PoleVaultingZombieJump2.gif", a + "1.gif", a + "jinyinrun.gif",a + "jinyinjump.gif"]
         })(),
         AudioArr: ["polevault", "grassstep"],
-        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<p>韧性：<font color="#FF0000">中（600)</font><br>精英形态：反向，跳跃完毕后于跳跃前位置的3×3植物上召唤血量极低的普通撑杆<br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font></p>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为非凡。那就是撑杆僵尸。',
+        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<p>韧性：<font color="#FF0000">中（500)</font><br>精英形态一：反向，跳跃完毕后于跳跃前位置的3×3植物上召唤血量极低的普通撑杆<br>精英形态二：箭头撑杆，自身行进至第八列时自动锁定本行最靠右的植物并跳过它，跳跃时碾压身下的植物<br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font></p>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为非凡。那就是撑杆僵尸。',
         getShadow: function(a) {
             return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 35) + "px"
         },
@@ -1418,9 +1418,12 @@ c.JudgeAttack = c.JudgeAttackH;
 	for (let i = GetC(a.ZX);i>=2;i--) {
         for (let j = 0; j < 4; j++) {
           let g = oGd.$[a.R + "_" + i + "_" + j];
-          GetC(a.ZX)<=7&&!a.isAttacking&&g&&a.NormalAttack(a.id,g.id,g.AttackedRX)
+        GetC(a.ZX-20)<=7&&a.canWalk(a,a.id)&&!a.isAttacking&&g&&(a.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1,
+			  a.JudgeAttackH= CZombies.prototype.JudgeAttackH,
+			  a.JudgeAttack = CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"],
+			a.NormalAttack(a.id,g.id,g.AttackedLX));
         }
-      }	
+      }
 	},a.NormalGif=a.jinyinGif,
 	a.EleBody.src=a.PicArr[a.NormalGif]);
   },
@@ -1430,12 +1433,9 @@ c.JudgeAttack = c.JudgeAttackH;
       f = e.id,
       c;
     if (d && d.Altitude == 1) {
-      !e.isAttacking && (e.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1, e.JudgeAttack = CZombies.prototype.JudgeAttack, e.NormalAttack(f, c = d.id, d.ZX-20))
+      !e.isAttacking && (e.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1,e.JudgeAttackH=CZombies.prototype.JudgeAttackH,e.JudgeAttack = CZombies.prototype.JudgeAttack, e.NormalAttack(f, c = d.id, d.ZX-20))
       return d
     }
-  },
-  AttackZombie: function(d, c) {
-    $Z[d] && ($Z[d].NormalAttack(d, c, d.ZX))
   },
         getCrushed: function(a) {
             this.NormalAttack(this.id, a.id, a.AttackedLX);
@@ -1469,6 +1469,17 @@ c.JudgeAttack = c.JudgeAttackH;
             f.getFreeze = function() {
                 f.getSnowPea(f, 20)
             };
+			if(h&&h.jinyin&&!h.num){
+			for(let k = 0;k <= 3;k++){
+				var P=oGd.$[h.R+"_"+(GetC(h.ZX)-10)+"_"+k];
+				P&&P.getHurt(P,3,1800)
+			}
+			var Z=oZ[h.PZ?"getArHZ":"getArZ"](h.ZX-20,h.ZX+40,h.R);
+				      Zl=Z.length;
+				      while(Zl--){
+						  h&&h.canWalk(h,m)&&Z[Zl].getThump(1800);
+					  }
+			}
             oSym.addTask(50,
                 function(h) {
                     $Z[h] && PlayAudio("polevault")
@@ -1481,10 +1492,7 @@ c.JudgeAttack = c.JudgeAttackH;
                         q,
                         r,
 						Z,
-						Z2,
-					    R = Math.max(h.R - 1,1),
-                        RM = h.R + 1 <= oS.R ? h.R + 1 : oS.R,
-                    C = GetC(h.ZX);
+						Z2;
                     h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = q = k.AttackedRX) - h.beAttackedPointL) + h.beAttackedPointR, SetStyle(i, {
                         left: h.X + "px"
 					}),n.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", SetVisible(l), h.isAttacking = 0, h.Altitude = 1, h.OSpeed = h.Speed = 1.6, h.NormalGif = 9, h.LostHeadGif = 10, h.NormalAttack = (r = CZombies.prototype).NormalAttack,h.AttackZombie = r.AttackZombie, h.getCrushed = r.getCrushed, h.getFreeze = r.getFreeze, h.getRaven = r.getRaven) : (h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g) - h.beAttackedPointR) + h.beAttackedPointL, SetStyle(i, {
@@ -1496,7 +1504,10 @@ c.JudgeAttack = c.JudgeAttackH;
                             u && (v.src = "images/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif", u.isAttacking = 0, u.Altitude = 1, u.OSpeed = u.Speed = 1.6, u.NormalGif = 9, u.LostHeadGif = 10,u.NormalAttack = (t = CZombies.prototype).NormalAttack, u.AttackZombie = t.AttackZombie, u.getCrushed = t.getCrushed, u.getFreeze = t.getFreeze, u.getRaven = t.getRaven)
                         },
                         [m, n])));
+					var C = GetC(h.ZX);
 			if(h.num){
+					var R = Math.max(h.R - 1,1),
+                        RM = h.R + 1 <= oS.R ? h.R + 1 : oS.R;
 			for(let i = R;i <= RM;i++){
                     for(let j = C - 1;j <= C + 1;j++){
                         for(let k = 0;k <= 3;k++){
