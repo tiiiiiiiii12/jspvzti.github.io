@@ -1370,7 +1370,7 @@ Birth: function() {
             return ["images/Card/Zombies/PoleVaultingZombie.png", a + "0.gif", a + "PoleVaultingZombie.gif", a + "PoleVaultingZombieAttack.gif", a + "PoleVaultingZombieLostHead.gif", a + "PoleVaultingZombieLostHeadAttack.gif", a + "PoleVaultingZombieHead.gif" + $Random, a + "PoleVaultingZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "PoleVaultingZombieWalk.gif", a + "PoleVaultingZombieLostHeadWalk.gif", a + "PoleVaultingZombieJump.gif", a + "PoleVaultingZombieJump2.gif", a + "1.gif", a + "jinyinrun.gif",a + "jinyinjump.gif"]
         })(),
         AudioArr: ["polevault", "grassstep"],
-        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<br>韧性：<font color="#FF0000">中（500)</font><br>精英形态一：反向，跳跃完毕后于跳跃前位置的3×3植物上召唤血量极低的普通撑杆<br>精英形态二：箭头撑杆，自身行进至第八列时自动锁定本行最靠右的植物并跳过它，跳跃时碾压身下的植物<br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font><br>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为非凡。那就是撑杆僵尸。',
+        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<br>韧性：<font color="#FF0000">中（500)</font><br>精英形态一：反向，跳跃完毕后于3×3植物上召唤血量低的普通撑杆<br>精英形态二：箭头撑杆，自身行进至第七列时自动锁定本行最靠右的植物并跳过它，跳跃时碾压身下的植物<br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font><br>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为非凡。那就是撑杆僵尸。',
         getShadow: function(a) {
             return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 35) + "px"
         },
@@ -1471,7 +1471,7 @@ c.JudgeAttack = c.JudgeAttackH;
             };
 			if(f&&f.jinyin&&!f.num){
 			for(let k = 0;k <= 3;k++){
-				var P=oGd.$[f.R+"_"+(GetC(f.ZX)-75)+"_"+k];
+				var P=oGd.$[f.R+"_"+GetC(f.ZX-75)+"_"+k];
 				P&&P.getHurt(P,3,1800)
 			}
 			var Z=oZ[f.PZ?"getArHZ":"getArZ"](f.ZX-75,f.ZX+75,f.R);
