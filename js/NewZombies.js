@@ -230,7 +230,7 @@ oPeaZombie = InheritO(oZombie, {
     return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif"]
   })(),
 shootPeaSpeed:140,
-canGrow:CZombies.prototype.canGrow,
+CanPass:CZombies.prototype.CanPass,
    HP:300,
   jinyinAct:function(a){a.Ele.style.opacity=0.5,a.HP*=1.5},
   GoingDieHead:function(){},
