@@ -1351,7 +1351,7 @@ NormalAttack1: function() {
                 (a = c[f]).Altitude < 2 && a.getThump(1400)
             }
         for(i=g.C;i<=9;i++){
-            num++<2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0);
+            ++num<2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0);
         }
             g.Die(1);
             PlayAudio("potato_mine");
@@ -1665,7 +1665,7 @@ NormalAttack1: function() {
 			var b;
 			oSym.addTask(0,function(a,b,num,maxnum){
 				(b=CustomZombie(oJackinTheBoxZombie,Math.round(Math.random()*5+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=0,b.AppearDownZ(b);
-				num++<maxnum&&oSym.addTask(0,arguments.callee,[a,b,num,maxnum]);
+				++num<maxnum&&oSym.addTask(0,arguments.callee,[a,b,num,maxnum]);
 			},[a,b,0,Math.round(Math.random()*3+3)])
 		 }
 		},
