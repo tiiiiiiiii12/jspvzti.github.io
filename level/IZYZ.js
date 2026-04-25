@@ -21,7 +21,7 @@ oS.Init({
     PName: [oIZombie, oBucketheadZombie, oIPeaZombie,oImp],
     ZName: [oZombie, oINewspaperZombie,oPoleVaultingZombie,oConeheadZombie,oImp],
     PicArr: ["images/interface/background1.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
-    backgroundImage: "images/interface/background1.jpg",
+    backgroundImage: "images/interface/background2.jpg",
     ShowScroll: false,
     SunNum: 300,
     BrainsNum: 5,
