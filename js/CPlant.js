@@ -46,7 +46,7 @@ var CPlants = NewO({
                 j = e.zIndex += 3 * h,
                 f = NewEle(0, "div", "position:absolute");
                 e.randomnum=Math.random()*100;
-            NewImg(0, ShadowPNG, e.getShadow(e), f);
+            e.EleShadow=NewImg(0, ShadowPNG, e.getShadow(e), f);
             NewImg(0, e.PicArr[e.NormalGif], "", f);
             e.pixelLeft = k;
             e.pixelRight = k + e.width;
