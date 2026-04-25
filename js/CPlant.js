@@ -1959,7 +1959,7 @@ NormalAttack1: function() {
         InitTrigger: function() {},
         HurtStatus: 0,
 		PrivateBirth:function(a){
-			var b=NewEle("oAttack_" + a.id,"div","left:0px;top:0px;position:absolute;width:97px;height:87px;z-index:350",0,$(a.id));
+			var b=NewEle("oAttack_" + a.id,"div","left:0px;top:0px;position:absolute;width:97px;height:87px;z-index:600",0,$(a.id));
 			b.onclick=function(){
 				a.changeZ=(a.changeZ?0:1);
 				$(a.id).style.transform =(a.changeZ?'rotateX(180deg)':'rotateX(0deg)');
@@ -1971,11 +1971,11 @@ NormalAttack1: function() {
 				var Ch=oZ.getArZ(a.AttackedLX,a.AttackedRX+200,lastR),
 				Zlength = Ch.length;
 				while (Zlength--) {
-                (h = Ch[Zlength]).Altitude==1&&a.changeZ&&h.ChangeR({R: h.R,ar: [a.R]})
+                $P[a.id]&&(h = Ch[Zlength]).Altitude==1&&a.changeZ&&h.ChangeR({R: h.R,ar: [a.R]})
 				  }
 				}
 			}while(lastR++<Math.min(oS.R,a.R+1));
-			oSym.addTask(100, arguments.callee, [a]);
+			$P[a.id]&&oSym.addTask(100, arguments.callee, [a]);
 		  },[a]);
 		},
         getHurt: function(e, b, a) {
