@@ -62,6 +62,7 @@ var CPlants = NewO({
                     zIndex: j
                 },
                 n);
+			e.Ele=$(e.id);
         e.randomnum<e.jinyinnum&&(
                     e.jinyin=true,
                     e.jinyinAct&&e.jinyinAct(e)   
@@ -195,6 +196,10 @@ var CPlants = NewO({
         GetDY: function(b, c, a) {
             return -30
         },
+		jinyinAct:function(a){
+			a.ExchangeLR2=CZombies.prototype.ExchangeLR2;
+			CZombies.prototype.ExchangeLR(a,0)
+		},
         InitTrigger: function() {},
         Tooltip: "把它种在墓碑上用来吞噬墓碑",
         Produce: '墓地苔用来吃掉墓碑。<p>使用方法：<font color="#FF0000">单次使用，只对墓碑生效。</font><br>特点：<font color="#FF0000">吞噬墓碑。</font><br>精英形态：使墓碑反向，出魅惑僵尸（墓碑可种植物）</p>尽管墓地苔的外表十分吓人，但他想要所有人都知道，其实他喜欢小猫咪，而且利用业余时间，在一家僵尸康复中心做志愿者。“我只是在做正确的事情，”他说。',
@@ -207,7 +212,7 @@ var CPlants = NewO({
                         d,
                         f;
                     e && (d = e.R, f = e.C, delete oGd.$Tombstones[c = d + "_" + f], e.Die(), !e.jinyin?ClearChild($("dTombstones" + c)):($("dTombstones" + c).style.transform="rotateY(180deg)",oGd.$Tombstones1[c]=1),
-                          oS.StaticCard && AppearSun(Math.floor(GetX(f) + Math.random() * 41), GetY(d), 25, 0))
+                          oS.StaticCard && AppearSun(Math.floor(GetX(f) + Math.random() * 41), GetY(d), 40, 0))
                 },
                 [a.id])
         }
@@ -302,7 +307,7 @@ oStarfruit = InheritO(CPlants, {
     a.canEat = 0;
     $(a.id).style.opacity = 0.5
   },
-  Produce: '杨桃可以向五个方向发射小杨桃。<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">五个方向</font></p>杨桃：“嘿，哥们，有一天我去看牙医，他说我有四个牙洞。我一数，我就只有一颗牙齿！一颗牙齿长了四个牙洞？怎么会这样啊？”',
+  Produce: '杨桃可以向五个方向发射小杨桃。<p>伤害：<font color="#FF0000">中等</font><br>精英形态：攻击时有概率召唤杨桃陨石砸向地面，对全场僵尸造成较高伤害<br>范围：<font color="#FF0000">五个方向</font></p>杨桃：“嘿，哥们，有一天我去看牙医，他说我有四个牙洞。我一数，我就只有一颗牙齿！一颗牙齿长了四个牙洞？怎么会这样啊？”',
   getTriggerRange: function(e, g, f) {
     var a = this.R,
       b = GetY(a),
@@ -419,7 +424,7 @@ oStarfruit = InheritO(CPlants, {
       c = g.R,
       e = f + 15,
       a = function(j, i, h) {
-        return (j && j.Altitude == 1 ? (j.getPea(j, 40, i), ClearChild(h), false) : true)
+        return (j && j.Altitude == 1 ? (j.getPea(j, 30, i), ClearChild(h), false) : true)
       };
     (function(h) {
       oSym.addTask(15,
@@ -430,8 +435,11 @@ oStarfruit = InheritO(CPlants, {
         [h]);
       oSym.addTask(1,
         function(m, k, l, i, j,Dire) {
-          j(oZ["getZ"+Dire](m, k), 4, i) && ((m -= Dire?5:-5) < 100 ? ClearChild(i) : (i.style.left = (l -= Dire?5:-5) + "px", oSym.addTask(1, arguments.callee, [m, k, l, i, j,Dire]),
-		Dire&&oSym.addTask(40,function(Dire){Dire=0},[Dire])))
+          j(oZ["getZ"+Dire](m, k), 4, i) && ((m -= Dire?5:-5) < 100 ? ClearChild(i) : (i.style.left = (l -= Dire?5:-5) + "px",
+		Dire&&oSym.addTask(40,function(Dire){
+			  Dire&&(Dire=0)
+		},[Dire]),
+		oSym.addTask(1, arguments.callee, [m, k, l, i, j,Dire])))
         },
         [f, c, d, EditEle(g.BulletEle.cloneNode(false), {
             id: h
@@ -541,7 +549,7 @@ oStarfruit = InheritO(CPlants, {
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         PicArr: ["images/Card/Plants/Peashooter.png", "images/Plants/Peashooter/0.gif", "images/Plants/Peashooter/Peashooter.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         Tooltip: "向敌人射出豌豆",
-        Produce: '豌豆射手，你的第一道防线。它们通过发射豌豆来攻击僵尸。<br>精英形态：点击可额外发射豌豆，但会扣自身10血<p>伤害：<font color="#FF0000">中等</font></p>一棵植物，怎么能如此快地生长，并发射如此多的豌豆呢？豌豆射手：“努力工作，奉献自己，再加上一份阳光，高纤维和氧化碳均衡搭配，这种健康早餐让一切成为可能。”',
+        Produce: '豌豆射手，你的第一道防线。它们通过发射豌豆来攻击僵尸。<br>精英形态：点击可额外发射豌豆，但会扣自身10血，若被点击死亡则召唤一个非精英豌豆射手僵尸<p>伤害：<font color="#FF0000">中等</font></p>一棵植物，怎么能如此快地生长，并发射如此多的豌豆呢？豌豆射手：“努力工作，奉献自己，再加上一份阳光，高纤维和氧化碳均衡搭配，这种健康早餐让一切成为可能。”',
         PrivateBirth: function(a) {
             a.BulletEle = NewImg(0, a.PicArr[3], "left:" + (a.AttackedLX - 40) + "px;top:" + (a.pixelTop + 3) + "px;visibility:hidden;z-index:" + (a.zIndex + 2))
         },
@@ -1209,7 +1217,7 @@ NormalAttack1: function() {
         width: 72,
         height: 68,
         beAttackedPointR: 52,
-        SunNum: 25,
+        SunNum: 0,
         BookHandBack: 5,
         PicArr: ["images/Card/Plants/FlowerPot.png", "images/Plants/FlowerPot/0.gif", "images/Plants/FlowerPot/FlowerPot.gif"],
         PKind: 0,
@@ -1343,8 +1351,7 @@ NormalAttack1: function() {
                 (a = c[f]).Altitude < 2 && a.getThump(1400)
             }
         for(i=g.C;i<=9;i++){
-            num<2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0,
-                num+=1);
+            num++<2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0);
         }
             g.Die(1);
             PlayAudio("potato_mine");
@@ -1372,17 +1379,38 @@ NormalAttack1: function() {
         height: 83,
         beAttackedPointR: 53,
         SunNum: 175,
+		HP:500,
 		getFreeze:function(){},
         PicArr: ["images/Card/Plants/Torchwood.png", "images/Plants/Torchwood/0.gif", "images/Plants/Torchwood/Torchwood.gif", "images/Plants/PB00.gif", "images/Plants/PB01.gif", "images/Plants/PB10.gif", "images/Plants/PB11.gif", "images/Plants/Torchwood/SputteringFire.gif"],
         AudioArr: ["firepea", "ignite", "ignite2"],
         Tooltip: "通过火炬树桩的豌豆将变为火球",
-        Produce: '火炬树桩可以把穿过他的豌豆变成火球，可以造成两倍伤害。<p>特点：<font color="#FF0000">让穿过他的火球造成两倍伤害。火球也会对附近僵尸造成溅射伤害</font></p>每个人都喜欢并敬重火炬树桩。他们喜欢他的诚实和坚贞的友谊，以及增强豌豆伤害的能力。但他也有自己的秘密：他不识字！',
+        Produce: '火炬树桩可以把穿过他的豌豆变成火球，可以造成两倍伤害。<p>特点：<font color="#FF0000">让穿过他的火球造成两倍伤害。火球也会对附近僵尸造成溅射伤害</font><br>精英形态：对附近僵尸造成灼烧伤害</p>每个人都喜欢并敬重火炬树桩。他们喜欢他的诚实和坚贞的友谊，以及增强豌豆伤害的能力。但他也有自己的秘密：他不识字！',
         PrivateBirth: function(c) {
             var a = c.R,
                 b = c.C;
             oGd.$Torch[a + "_" + b] = c.id;
             oS.HaveFog && oGd.GatherFog(a, b, 1, 1, 0)
         },
+		jinyinAct:function(a){
+			a.HP*=2;
+			a.HitZ(a);
+		},
+		HitZ:function(c){
+			oSym.addTask(0, function(id) {
+                if (!$P[id]) return;
+                let d = $P[id],
+                    r = d.R,
+                    c = d.C,
+                    b, e;
+                for (let i = Math.max(1, r - 1); i <= Math.min(r + 1, oS.R); i++) {
+                    b = oZ.getArZ(GetX(c - 1), GetX(c + 1), i), e = b.length;
+                    while (e--) {
+                        b[e].getHit2(b[e],20,0);
+                    }
+                }
+                oSym.addTask(100, arguments.callee, [id]);
+            }, [c.id])
+		},
         InitTrigger: function() {},
         PrivateDie: function(c) {
             var a = c.R,
@@ -1604,7 +1632,7 @@ NormalAttack1: function() {
         JudgeHurtCustom:function(c){
                 var d;
                 c.HP < 1 ? CustomZombie(oGargantuar,c.R,c.C,1): 
-                c.HP < 2000? c.CustomStatus < 3 && (c.CustomStatus = 3,(d=CustomZombie(oScreenDoorZombie,c.R,c.C,1)).OrnHP*=1.5,d.jinyinnum=100):
+                c.HP < 2000? c.CustomStatus < 3 && (c.CustomStatus = 3,(d=CustomZombie(oFootballZombie,c.R,c.C,1)).OrnHP*=1.5,d.jinyinnum=100):
                 c.HP < 4000? c.CustomStatus < 2 && (c.CustomStatus = 2,CustomZombie(oConeheadZombie,c.R,c.C,1).jinyinnum=100):
                 c.HP < 6000 && c.CustomStatus < 1 && (c.CustomStatus = 1, (d=CustomZombie(oZombie,c.R,c.C,1)).HP*=3,d.jinyinnum=100)
         },
@@ -1629,17 +1657,17 @@ NormalAttack1: function() {
         PicArr: ["images/Card/Plants/CherryBomb.png", "images/Plants/CherryBomb/0.gif", "images/Plants/CherryBomb/CherryBomb.gif", "images/Plants/CherryBomb/Boom.gif" + $Random],
         AudioArr: ["cherrybomb"],
         Tooltip: "炸掉一定区域内的所有僵尸",
-        Produce: '樱桃炸弹，能炸掉一定区域内所有僵尸。他们一种下就会立刻引爆。所以请把他们种在僵尸们的身边。<br>精英形态：爆炸后在后面召唤一列精英樱桃炸弹小丑僵尸<br>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">一个中等区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，立即爆炸</font></p>“我要‘爆’开了。”樱桃一号说。“不，我们是要‘炸’开了！”它哥哥樱桃二号说。经过激烈的商议之后，他们才统一“爆炸这个说法。”',
+        Produce: '樱桃炸弹，能炸掉一定区域内所有僵尸。他们一种下就会立刻引爆。所以请把他们种在僵尸们的身边。<br>精英形态：爆炸后随机在场上召唤几只精英樱桃炸弹小丑僵尸<br>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">一个中等区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，立即爆炸</font></p>“我要‘爆’开了。”樱桃一号说。“不，我们是要‘炸’开了！”它哥哥樱桃二号说。经过激烈的商议之后，他们才统一“爆炸这个说法。”',
         InitTrigger: function() {},
         getHurt: function() {},
 		jinyinAct:function(a){
-			a.PrivateDie=function(a){
-			for (i=1;i<=oS.R;i++){
-				var b=CustomZombie(oJackinTheBoxZombie,i,Math.max(a.C-2,0),1);
-				b.jinyinnum=100;
-				b.Privatenum=0;
-			}
-		}
+		a.PrivateDie=function(a){
+			var b;
+			oSym.addTask(0,function(a,b,num,maxnum){
+				(b=CustomZombie(oJackinTheBoxZombie,Math.round(Math.random()*5+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=0,b.AppearDownZ(b);
+				num++<maxnum&&oSym.addTask(0,arguments.callee,[a,b,num,maxnum]);
+			},[a,b,0,Math.round(Math.random()*3+3)])
+		 }
 		},
         PrivateBirth: function(a) {
             oSym.addTask(63,
@@ -1743,8 +1771,14 @@ NormalAttack1: function() {
         PicArr: ["images/Card/Plants/Jalapeno.png", "images/Plants/Jalapeno/0.gif", "images/Plants/Jalapeno/Jalapeno.gif", "images/Plants/Jalapeno/JalapenoAttack.gif"],
         AudioArr: ["jalapeno"],
         Tooltip: "消灭整行的敌人",
-        Produce: '火爆辣椒可以摧毁一整条线上的敌人。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">整条线上的僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font></p>“嘎嘎嘎嘎嘎嘎嘎！！！”火爆辣椒说。他现在不会爆炸，还不到时候，不过快了，喔~，快了快了，快来了。他知道，他感受到了，他一生都是在等待这个时刻！',
+        Produce: '火爆辣椒可以摧毁一整条线上的敌人。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">整条线上的僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>精英形态：给全屏非魅惑僵尸附上三倍易伤</p>“咕咕嘎嘎！！！”火爆辣椒说。他现在不会爆炸，还不到时候，不过快了，喔~，快了快了，快来了。他知道，他感受到了，他一生都是在等待这个时刻！',
 		jinyinAct:function(){},
+		PrivateDie:function(a){
+			for (i in $Z){
+				u=$Z[i];
+				u&&u.PZ&&a.jinyin&&(u.jianshang=3,u.EleBody.style.filter = 'grayscale(50%)');
+			}
+		},
         PrivateBirth: function(a) {
             oSym.addTask(72,
                 function(j) {
@@ -1758,7 +1792,7 @@ NormalAttack1: function() {
                             g = oGd.$Ice[f],
                             d = oGd.$Crater;
                         while (e--) {
-                            c[e].getExplosion()
+                            c[e].getExplosion(1600)
                         }
                         h.Die(1);
                         EditEle(b.childNodes[1], {
@@ -1875,6 +1909,11 @@ NormalAttack1: function() {
             var c = b[1];
             return c && c.EName == "oSpikeweed"
         },
+		  NormalAttack: function(b, a) {
+    var c = $Z[b];
+    c.getHit2(c, a.Attack, 0);
+	Math.random()*100>85&&c.getr(c,a.rpx);
+  },
         GetDY: function(b, c, a) {
             return 0
         },
@@ -1907,10 +1946,10 @@ NormalAttack1: function() {
         height: 59,
         beAttackedPointR: 40,
         SunNum: 50,
-        HP: 500,
+        HP: 400,
         PicArr: ["images/Card/Plants/Garlic.png", "images/Plants/Garlic/0.gif", "images/Plants/Garlic/Garlic.gif", "images/Plants/Garlic/Garlic_body2.gif", "images/Plants/Garlic/Garlic_body3.gif"],
         Tooltip: "将僵尸赶到其它的横行",
-        Produce: '大蒜可以让僵尸改变前进的路线。<p>范围：<font color="#FF0000">近距离接触</font><br>特点：<font color="#FF0000">改变僵尸的前进路线</font></p>路线转向，这不仅仅是大蒜的专业，更是他的热情所在。他在布鲁塞尔大学里，获得了转向学的博士学位。他能把路线向量和反击阵列，讲上一整天。他甚至会把家里的东西，推到街上去。不知道为啥，他老婆还可以忍受这些。',
+        Produce: '大蒜可以让僵尸改变前进的路线。<p>范围：<font color="#FF0000">近距离接触</font><br>特点：<font color="#FF0000">有正常和翻转两种形态（可点击切换），正常形态同原版，翻转形态吸引上下两路僵尸来到本行</font></p>路线转向，这不仅仅是大蒜的专业，更是他的热情所在。他在布鲁塞尔大学里，获得了转向学的博士学位。他能把路线向量和反击阵列，讲上一整天。他甚至会把家里的东西，推到街上去。不知道为啥，他老婆还可以忍受这些。',
         CanGrow: function(c, b, f) {
             var a = b + "_" + f,
                 d = c[1],
@@ -1919,10 +1958,30 @@ NormalAttack1: function() {
         },
         InitTrigger: function() {},
         HurtStatus: 0,
+		PrivateBirth:function(a){
+			var b=NewEle("oAttack_" + a.id,"div","left:0px;top:0px;position:absolute;width:97px;height:87px;z-index:350",0,$(a.id));
+			b.onclick=function(){
+				a.changeZ=(a.changeZ?0:1);
+				$(a.id).style.transform =(a.changeZ?'rotateX(180deg)':'rotateX(0deg)');
+			};
+		oSym.addTask(0, function(a) {
+			var lastR=Math.max(1,a.R-1),h;
+			do{
+				if(lastR!=a.R){
+				var Ch=oZ.getArZ(a.AttackedLX,a.AttackedRX+200,lastR),
+				Zlength = Ch.length;
+				while (Zlength--) {
+                (h = Ch[Zlength]).Altitude==1&&a.changeZ&&h.ChangeR({R: h.R,ar: [a.R]})
+				  }
+				}
+			}while(lastR++<Math.min(oS.R,a.R+1));
+			oSym.addTask(100, arguments.callee, [a]);
+		  },[a]);
+		},
         getHurt: function(e, b, a) {
             var c = this,
                 d = $(c.id).childNodes[1];
-            !(b%3) ? (c.HP -=(a*0.2)) < 1 ? c.Die() : (b!=3&&e.ChangeR({
+            !(b%3) ? (c.HP -=(a*0.2)) < 1 ? c.Die() : (!c.changeZ&&b!=3&&e.ChangeR({
                 R: c.R
             }), c.HP < 134 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/Garlic/Garlic_body3.gif") : c.HP < 267 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/Garlic/Garlic_body2.gif")): c.Die()
         }
@@ -2168,7 +2227,7 @@ jinyinAttackGif2: 8,
 			oSym.addTask(50,ClearChild,[NewImg(0,"images/Plants/ShroomBulletHit.gif",
           "left:"+(g = d[e]).ZX+"px;width:104px;height:92px;top:" + (f.pixelTop + 20) + "px;z-index:" + (f.zIndex + 2),EDPZ)]);
 			do{
-				if(lastR!=f.R){
+				if(lastR!=f.R&&g){
 				var jinyinHit=oZ.getArZ(g.ZX,g.AttackedRX,lastR),
 				Zlength = jinyinHit.length;
 				while (Zlength--) {
@@ -2204,7 +2263,7 @@ jinyinAttackGif2: 8,
         height: 97,
         beAttackedPointL: 10,
         beAttackedPointR: 29,
-        SunNum: 75,
+        SunNum: 100,
         PKind: 3,
 		coolTime:15,
         canEat: 0,
@@ -2596,7 +2655,7 @@ oGloomShroom = InheritO(oFumeShroom, {
         width: 83,
         height: 75,
         beAttackedPointR: 63,
-        SunNum: 75,
+        SunNum: 100,
         coolTime: 50,
 		getFreeze:function(){},
         PicArr: ["images/Card/Plants/IceShroom.png", "images/Plants/IceShroom/0.gif", "images/Plants/IceShroom/IceShroom.gif", "images/Plants/IceShroom/IceShroomSleep.gif", "images/Plants/IceShroom/Snow.gif", "images/Plants/IceShroom/icetrap.gif"],
@@ -2788,7 +2847,7 @@ NormalAttack2: function() {
                         do {
                             k = (e = oZ.getArZ(n, m, h)).length;
                             while (k--) {
-                                e[k].getExplosion(3000)
+                                e[k].getExplosion(2700)
                             }
                         } while (h++ < f);
                         PlayAudio("doomshroom");
@@ -2987,7 +3046,7 @@ NormalAttack2: function() {
         beAttackedPointR: 145,
         coolTime: 30,
         BookHandBack: 2,
-        SunNum: 25,
+        SunNum: 75,
         PicArr: ["images/Card/Plants/Plantern.png", "images/Plants/Plantern/0.gif", "images/Plants/Plantern/Plantern.gif", "images/Plants/Plantern/light.gif"],
         Tooltip: "照亮一片区域, 让玩家可以看穿战场迷雾",
         Produce: '灯笼草，能照亮一片区域，让你看清战场迷雾<br>精英形态：提升周围植物攻速<p>范围：<font color="#FF0000">一片圆形区域</font><br>特点：<font color="#FF0000">使你看清战场迷雾</font></p>灯笼草拒绝科学，他只会埋头苦干。其他植物吃的是光，挤出的是氧气。灯笼草吃的是黑暗，挤出的却是光。对于他如何能产生光这件事，灯笼草持谨慎态度。“我不会说这是‘巫术’，我也不会使用‘黑暗力量’，我只是……我想我说得够多的了。”',
@@ -3000,13 +3059,13 @@ NormalAttack2: function() {
         },
         jinyinAct:function(c){
         var a = c.R,
-                b = c.C;
+            b = c.C;
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
                      oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime>=-50)&&(oGd.$[i + "_" + l+"_1"].AttTime-=60);
                     oSym.addTask(2000,function(f){
 						var c;
-						$P[f.id]&&((c=CustomSpecial(oPlantern,a,b)).jinyinAct(c),c.jinyin=1)
+						$P[f.id]&&((c=CustomSpecial(oPlantern,c.R,c.C)).jinyinAct(c),c.jinyin=1)
 					},[c]);
                   }
                 }
