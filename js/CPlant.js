@@ -3065,7 +3065,7 @@ NormalAttack2: function() {
                      oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime>=-50)&&(oGd.$[i + "_" + l+"_1"].AttTime-=60);
                     oSym.addTask(2000,function(f){
 						var c;
-						$P[f.id]&&((c=CustomSpecial(oPlantern,c.R,c.C)).jinyinAct(c),c.jinyin=1)
+						$P[f.id]&&((c=CustomSpecial(oPlantern,f.R,f.C)).jinyinAct(c),c.jinyin=1)
 					},[c]);
                   }
                 }
