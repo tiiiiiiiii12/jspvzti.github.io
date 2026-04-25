@@ -221,7 +221,7 @@ var oGargantuar = InheritO(oZombie, {
   CName: "伽刚特尔",
   Produce: '非常强力的僵尸<br>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态一：<font color="#FF0000">背着保护伞，扔小鬼时召唤五个空降僵尸</font><br>精英形态：<font color="#FF0000">背着小鬼卡牌，一次扔2~4个小鬼</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
 }),
-oPeaZombie = InheritO(OrnNoneZombies, {
+oPeaZombie = InheritO(oZombie, {
   EName: "oPeaZombie",
   CName:"豌豆僵尸",
   StandGif: 9,
@@ -230,6 +230,7 @@ oPeaZombie = InheritO(OrnNoneZombies, {
     return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif"]
   })(),
 shootPeaSpeed:140,
+canGrow:CZombies.prototype.canGrow,
    HP:300,
   jinyinAct:function(a){a.Ele.style.opacity=0.5,a.HP*=1.5},
   GoingDieHead:function(){},
