@@ -144,7 +144,7 @@ var oGargantuar = InheritO(oZombie, {
   hasthrew: 0,
   PrivateAct: function(h) {
 	var ImgLeft;
-    !h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
+    h.canWalk(h,h.id)&&!h.intowater && (oGd.$LF[h.R] == 2) && h.ZX < GetX(9) && h.ZX > GetX(0) && (SetStyle(h.EleBody, {
       top: "100px",
       clip: "rect(0,auto,200px,0)"
     }), h.intowater = true, 
@@ -162,7 +162,7 @@ var oGargantuar = InheritO(oZombie, {
       function(i) {
         ClearChild($(i))
       }), PlayAudio("zombie_entering_water"));
-    h.intowater && (oGd.$LF[h.R] == 2) && (h.ZX > GetX(9) || h.ZX < GetX(0)) && (SetStyle(h.EleBody, {
+    h.canWalk(h,h.id)&&h.intowater && (oGd.$LF[h.R] == 2) && (h.ZX > GetX(9) || h.ZX < GetX(0)) && (SetStyle(h.EleBody, {
       top: "0px",
       clip: "rect(0,auto,300px,0)"
     }, SetVisible(h.EleShadow)),$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.top=((ImgLeft=parseInt($(h.Ele.FumeDoor).style.top))-200)+"px"), h.intowater = false);
