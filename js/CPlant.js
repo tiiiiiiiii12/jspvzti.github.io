@@ -2227,13 +2227,13 @@ jinyinAttackGif2: 8,
 			oSym.addTask(50,ClearChild,[NewImg(0,"images/Plants/ShroomBulletHit.gif",
           "left:"+(g = d[e]).ZX+"px;width:104px;height:92px;top:" + (f.pixelTop + 20) + "px;z-index:" + (f.zIndex + 2),EDPZ)]);
 			do{
-				if(lastR!=f.R&&g){
-				var jinyinHit=oZ.getArZ(g.ZX,g.AttackedRX,lastR),
+				if(lastR!=f.R){
+				var jinyinHit=oZ.getArZ(f.AttackedLX, Math.min(f.AttackedRX + 550, oS.W),lastR),
 				Zlength = jinyinHit.length;
 				while (Zlength--) {
                 (h = jinyinHit[Zlength]).Altitude < 2&& h.getHit1(h, 15)
 				}
-				}
+			 }
 			}while(lastR++<Math.min(oS.R,f.R+1))
 		}
 			(g = d[e]).Altitude < 2 && g.getHit1(g, f.Attack);
