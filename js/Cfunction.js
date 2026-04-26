@@ -835,6 +835,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
     g = h.length,
     a,
     d = b - j + 1;
+	PlayAudio("bungee");
   a = l.length;
   c = Num;
   while (c--) {
@@ -853,6 +854,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
         g.Birth.call(g);
         SetBlock(g.Ele);
         pz && g.bedevil(g);
+		g.Altitude=4;
         let BungeeEle = NewImg(0, "images/Zombies/BungeeZombie/BungeeBringZombie.png", "z-index: " + (3 * g.R) + ";left:" + (g.ZX - 100) + "px;top:" + (Ttop + g.pixelTop - 1900) + "px", EDPZ);
         Ele.style.top = "-900px";
         oSym.addTask(5,
@@ -861,7 +863,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
             SetStyle(l, {
               top: k + "px"
             });
-            !(k == 0) && oSym.addTask(5, arguments.callee, [l, k, j])
+            !(k == 0) ? oSym.addTask(5, arguments.callee, [l, k, j]):g.Altitude=1
           },
           [g.EleBody, B = -900, -B * 0.05]);//僵尸落下
         oSym.addTask(5,
