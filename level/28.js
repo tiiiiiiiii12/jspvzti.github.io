@@ -1,6 +1,6 @@
 oS.Init({
   PName:[oPeashooter,oSunFlower,oCherryBomb,oWallNut,oPotatoMine,oSnowPea,oChomper,oRepeater,oPuffShroom,oSunShroom,oFumeShroom,oGraveBuster,oHypnoShroom,oScaredyShroom,oIceShroom,oDoomShroom,oLilyPad,oSquash,oThreepeater,oTangleKelp,oJalapeno,oSpikeweed,oTorchwood],
-  ZName:[oZombie,oZombie2,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oConeheadZombie,oDolphinRiderZombie,oNewspaperZombie],
+  ZName:[oZombie,oZombie2,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oConeheadZombie,oDolphinRiderZombie,oNewspaperZombie,oPeaZombie],
   PicArr:function(){
     var a=oTallNut.prototype,
       b=a.PicArr;return["images/interface/background3.jpg",b[a.CardGif],b[a.NormalGif]]}(),
@@ -29,6 +29,7 @@ oS.Init({
     [oDuckyTubeZombie3,1,6],
     [oConeheadZombie,1,1],
     [oNewspaperZombie,1,1],
+    [oPeaZombie,1,1],
     [oDolphinRiderZombie,1,10,[10,14,15,16,18,19,20]]
   ],
   FlagNum:20,
