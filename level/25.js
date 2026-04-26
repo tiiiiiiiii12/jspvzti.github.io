@@ -21,8 +21,8 @@ oS.Init({
     oP.FlagNum&&(oP.FlagNum%5)&&AppearTombstones(6,9,2);
     oP.FlagNum%10&&(
       oP.SetTimeoutWaterZombie(6,9,3,[oDuckyTubeZombie1]),
-      oP.SetTimeoutTomZombie([oZombie,oConeheadZombie,oPeaZomnie]),
-    oP.SetTimeoutTomZombie(6,9,3,[oZombie,oConeheadZombie,oBucketheadZombie]));
+      oP.SetTimeoutTomZombie([oZombie,oConeheadZombie]),
+    oP.SetTimeoutAirdropZombie(6,9,3,[oZombie,oConeheadZombie,oBucketheadZombie]));
   },
   StartGameMusic:"Kitanai Sekai"
 },
@@ -51,6 +51,6 @@ oS.Init({
           },
           FlagToEnd:function(){
             NewImg("imgSF","images/Card/Plants/Spikeweed.png","left:627px;top:325px;clip:rect(auto,auto,60px,auto)",EDAll,{
-              onclick:function(){GetNewCard(this,oSpikeweed,0)}});
+              onclick:function(){GetNewCard(this,oSpikeweed,27)}});
             NewImg("PointerUD","images/interface/PointerDown.gif","top:290px;left:636px",EDAll)}
         });
