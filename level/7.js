@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea],
-	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oPoleVaultingZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oPoleVaultingZombie,oPeaZombie],
 	PicArr: function() {
 		var a = oChomper.prototype,
 			b = a.PicArr;
