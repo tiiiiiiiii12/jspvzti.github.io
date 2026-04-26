@@ -3523,7 +3523,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
         (e = 1)) :
       (e = 1)) :
     (e = 1);
-    f.Act(f);
+    GetC(f.ZX)<10&&f.Act(f);
     return e;
   },
   CanDig: {
