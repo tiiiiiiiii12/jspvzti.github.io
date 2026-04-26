@@ -29,7 +29,7 @@ oS.Init({
     [oDuckyTubeZombie2,1,6],
     [oDuckyTubeZombie3,1,6],
     [oConeheadZombie,1,1],
-    [oZomboni,1,20,[10,20]]
+    [oZomboni,1,20,[10,16,17,18,19,20]]
   ],
   FlagNum:30,
   FlagToSumNum:{
