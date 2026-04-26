@@ -32,7 +32,7 @@ oS.Init({
     [oConeheadZombie,2,1],
     [oBucketheadZombie,1,1],
     [oFootballZombie,1,1],
-    [oZomboni,1,20,[20,21,25,30]],
+    [oZomboni,1,20,[20,21,25,26,27,28,29,30]],
     [oSnorkelZombie,1,15,[15,16,18,20,25,30]]
   ],
   FlagNum:30,
