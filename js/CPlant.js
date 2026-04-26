@@ -1664,7 +1664,7 @@ NormalAttack1: function() {
 		a.PrivateDie=function(a){
 			var b;
 			oSym.addTask(0,function(a,b,num,maxnum){
-				(b=CustomZombie(oJackinTheBoxZombie,Math.round(Math.random()*5+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=0,b.AppearDownZ(b);
+				((b=CustomZombie(oJackinTheBoxZombie,Math.round(Math.random()*5+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=0);
 				++num<maxnum&&oSym.addTask(0,arguments.callee,[a,b,num,maxnum]);
 			},[a,b,0,Math.round(Math.random()*3+3)])
 		 }
