@@ -858,14 +858,14 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
         let BungeeEle = NewImg(0, "images/Zombies/BungeeZombie/BungeeBringZombie.png", "z-index: " + (3 * g.R) + ";left:" + (g.ZX - 100) + "px;top:" + (Ttop + g.pixelTop - 1900) + "px", EDPZ);
         Ele.style.top = "-900px";
         oSym.addTask(5,
-          function(l, k, j) {
+          function(l, k, j,g) {
             k = Math.min(k + j, 0);
             SetStyle(l, {
               top: k + "px"
             });
-            !(k == 0) ? oSym.addTask(5, arguments.callee, [l, k, j]):g.Altitude=1
+            !(k == 0) ? oSym.addTask(5, arguments.callee, [l, k, j,g]):g.Altitude=1
           },
-          [g.EleBody, B = -900, -B * 0.05]);//僵尸落下
+          [g.EleBody, B = -900, -B * 0.05,g]);//僵尸落下
         oSym.addTask(5,
           function(l, k, j, i, Dire) {
             k = Dire ? Math.max(k - j, A) : Math.min(k + j, i);
