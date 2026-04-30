@@ -1326,23 +1326,6 @@ Birth: function() {
       }
     }
   },
-		jinyinAct:function(a){
-			a.NormalGif=a.jinyinGif;
-			a.AttackGif=a.jinyinAttackGif;
-			a.OrnHP*=1.5;
-			a.EleBody.src=a.PicArr[a.NormalGif];
-			a.PrivateAct=function(a){
-				var Z=oZ.getArZ(a.ZX+20,a.ZX+100,a.R),
-					len=Z.length;
-				while(len--){
-					Z[len]&&(Z[len].EName!="oDuckyTubeZombie2")&&(Z[len].EName!="oConeheadZombie")&&(Z[len].Altitude==1)&&a.Ornaments&&(
-						Z[len].ChangeR(Z[len]),Z[len].ChangeR=function(){},
-						oSym.addTask(500,function(Z,len){
-							Z[len].ChangeR=CZombies.prototype.ChangeR
-						},[Z,len]))// 5s转向冷却
-				}
-			}
-		},
         Produce: '他的路障头盔，使他两倍坚韧于普通僵尸。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：<font color="#FF0000">真·路障僵尸（防具HP*1.5，使其附近的其他僵尸换行）</font><br>精英形态二：<font color="#FF0000">冰头僵尸（造冰道，若在冰道上则滑步）</font><br>和其他僵尸一样，路障头僵尸盲目地向前。但某些事物却使他停下脚步，捡起一个交通路障，并固实在自己的脑袋上。是的，他很喜欢参加聚会。'
     }),
     oBucketheadZombie = InheritO(oConeheadZombie, {
@@ -2102,7 +2085,7 @@ jinyinWalkGif1: 14,
   PicArr: (function() {
     var b = "images/Zombies/DuckyTubeZombie2/",
       a = "images/Zombies/DuckyTubeZombie1/";
-    return ["images/Card/Zombies/DuckyTubeZombie1.png", b + "0.gif", b + "Walk1.gif", b + "Walk2.gif", b + "1.gif", b + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "Walk1.gif", a + "Walk2.gif", a + "Attack.gif", b + "jinyinWalk1.gif", b + "jinyinWalk2.gif", b + "jinyinAttack.gif", b + "jinyinWalk12.gif", b + "jinyinWalk22.gif", b + "jinyinAttack2.gif"]]
+    return ["images/Card/Zombies/DuckyTubeZombie1.png", b + "0.gif", b + "Walk1.gif", b + "Walk2.gif", b + "1.gif", b + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "Walk1.gif", a + "Walk2.gif", a + "Attack.gif", b + "jinyinWalk1.gif", b + "jinyinWalk2.gif", b + "jinyinAttack.gif", b + "jinyinWalk12.gif", b + "jinyinWalk22.gif", b + "jinyinAttack2.gif"]
   })(),
   jinyinAct: function(a) {
     oConeheadZombie.prototype.jinyinAct(a);
