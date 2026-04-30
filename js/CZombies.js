@@ -1246,7 +1246,7 @@ Birth: function() {
         PicArr: (function() {
             var b = "images/Zombies/ConeheadZombie/",
                 a = "images/Zombies/Zombie/";
-            return ["images/Card/Zombies/ConeheadZombie.png", b + "0.gif", b + "ConeheadZombie.gif", b + "ConeheadZombieAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "Zombie.gif", a + "ZombieAttack.gif", b + "1.gif", b + "jinyinWalk.gif", b + "jinyinAttack.gif"]
+            return ["images/Card/Zombies/ConeheadZombie.png", b + "0.gif", b + "ConeheadZombie.gif", b + "ConeheadZombieAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "Zombie.gif", a + "ZombieAttack.gif", b + "1.gif", b + "jinyinWalk.gif", b + "jinyinAttack.gif", b + "jinyinWalk2.gif", b + "jinyinAttack2.gif"]
         })(),
         AudioArr: ["plastichit"],
         PlayNormalballAudio: function() {
@@ -1254,6 +1254,78 @@ Birth: function() {
 		},
 		jinyinGif:12,
         jinyinAttackGif:13,
+		jinyinGif2:14,
+        jinyinAttackGif2:15,
+		  jinyinAct: function(a) {
+    a.num = Math.round(Math.random() * 1 + 0) || a.Privatenum;
+	a.NormalGif = a.num?a.jinyinGif:a.jinyinGif2;
+    a.AttackGif = a.num?a.jinyinAttackGif:a.jinyinAttackGif2;
+    a.EleBody.src = a.PicArr[a.NormalGif];
+    if (a.num) {
+		a.OrnHP *= 1.5;
+      a.PrivateAct = function(a) {
+        var Z = oZ.getArZ(a.ZX + 20, a.ZX + 100, a.R),
+          len = Z.length;
+        while (len--) {
+          Z[len] && (Z[len].EName != "oDuckyTubeZombie2") && (Z[len].EName != "oConeheadZombie") && (Z[len].Altitude == 1) && a.Ornaments && (
+            Z[len].ChangeR(Z[len]), Z[len].ChangeR = function() {},
+            oSym.addTask(500, function(Z, len) {
+              Z[len].ChangeR = CZombies.prototype.ChangeR
+            }, [Z, len])) // 5s转向冷却
+        }
+      }
+    } else {
+      a.PrivateBirth = function(h) {
+        var e = h.id,
+          c = h.Ele = $(e),
+          d = h.R,
+          f,
+          b = oGd.$Ice;
+        !b[d] ? (f = NewEle("dIceCar" + d, "div", "position:absolute;z-index:1;left:145px;top:" + (GetY(d) - 65) + "px;width:800px;height:72px", 0, EDPZ), NewImg("", "images/interface/blank.png", "position:absolute;clip:rect(0,auto,auto,800px);width:800px;height:72px;left:5px;background:url(images/Zombies/Zomboni/ice.png) repeat-x", f), NewImg("", "images/Zombies/Zomboni/ice_cap.png", "position:absolute;display:none;left:0", f), b[d] = [1, 11, h.AttackedLX]) : ++b[d][0];
+      };
+      a.PrivateAct = function(e) {
+        var b, r, m, g, j = e.R,
+          n = oGd.$Ice[j],
+          d, h, f, c, l = $("dIceCar" + j);
+        if (l == null) { // 对没有冰道的情况下特判
+          l = NewEle("dIceCar" + j, "div", "position:absolute;z-index:2;left:65px;top:" + (GetY(e.R) - 65) + "px;width:800px;height:72px", 0, EDPZ); // 生成新的冰道
+          NewImg("", "images/interface/blank.png", "position:absolute;clip:rect(0,auto,auto,800px);width:800px;height:72px;left:-35px;background:url(images/Zombies/Zomboni/ice.png) repeat-x", l);
+          NewImg("", "images/Zombies/Zomboni/ice_cap.png", "position:absolute;display:none;left:-40px", l);
+          n = oGd.$Ice[j] = [1, 11, e.AttackedLX];
+        }
+        d = e.X;
+        h = d + 40;
+        f = d + 20;
+        c = GetC(h);
+        c > -1 && c < n[1] && (oGd.$Crater[j + "_" + c] = 1, n[1] = c);
+        h > 120 && h < n[2] && (n[2] = h, l.firstChild.style.clip = "rect(0,auto,auto," + f + "px)", l.childNodes[1].style.left = Math.max(0, f) + "px");
+        e.AttackedLX > n[2] && e.getr(e, e.PZ ? -e.Speed : e.Speed)//冰道上滑步
+      };
+      a.PrivateDie = function() {
+        var d = this,
+          b = d.R,
+          e = $("dIceCar" + b),
+          c = oGd.$Ice[b];
+        if (d.PointZombie) return; // 如果冰车已经进入家门，则不产冰
+        e && e.childNodes[1] && SetBlock(e.childNodes[1]);
+        (--c[0]) <= 0 && oSym.addTask(3000,
+          function(k, h) {
+            var j = oGd.$Ice[h],
+              g,
+              f = oGd.$Crater;
+            if (j && j[0] <= 0 && k) {
+              ClearChild(k);
+              g = j[1];
+              while (g < 11) {
+                delete f[h + "_" + g++];
+                delete oGd.$Ice[h]
+              }
+            }
+          },
+          [e, b])
+      }
+    }
+  },
 		jinyinAct:function(a){
 			a.NormalGif=a.jinyinGif;
 			a.AttackGif=a.jinyinAttackGif;
@@ -1271,7 +1343,7 @@ Birth: function() {
 				}
 			}
 		},
-        Produce: '他的路障头盔，使他两倍坚韧于普通僵尸。<p>韧性：<font color="#FF0000">中</font><br>精英形态：<font color="#FF0000">真·路障僵尸（防具600，使其附近的其他僵尸换行）</font></p>和其他僵尸一样，路障头僵尸盲目地向前。但某些事物却使他停下脚步，捡起一个交通路障，并固实在自己的脑袋上。是的，他很喜欢参加聚会。'
+        Produce: '他的路障头盔，使他两倍坚韧于普通僵尸。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：<font color="#FF0000">真·路障僵尸（防具HP*1.5，使其附近的其他僵尸换行）</font><br>精英形态二：<font color="#FF0000">冰头僵尸（造冰道，若在冰道上则滑步）</font><br>和其他僵尸一样，路障头僵尸盲目地向前。但某些事物却使他停下脚步，捡起一个交通路障，并固实在自己的脑袋上。是的，他很喜欢参加聚会。'
     }),
     oBucketheadZombie = InheritO(oConeheadZombie, {
         EName: "oBucketheadZombie",
@@ -2024,15 +2096,18 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
   jinyinWalkGif1: 11,
   jinyinGif: 12,
   jinyinAttackGif: 13,
+jinyinWalkGif1: 14,
+  jinyinGif: 15,
+  jinyinAttackGif: 16,
   PicArr: (function() {
     var b = "images/Zombies/DuckyTubeZombie2/",
       a = "images/Zombies/DuckyTubeZombie1/";
-    return ["images/Card/Zombies/DuckyTubeZombie1.png", b + "0.gif", b + "Walk1.gif", b + "Walk2.gif", b + "1.gif", b + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "Walk1.gif", a + "Walk2.gif", a + "Attack.gif", b + "jinyinWalk1.gif", b + "jinyinWalk2.gif", b + "jinyinAttack.gif"]
+    return ["images/Card/Zombies/DuckyTubeZombie1.png", b + "0.gif", b + "Walk1.gif", b + "Walk2.gif", b + "1.gif", b + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "Walk1.gif", a + "Walk2.gif", a + "Attack.gif", b + "jinyinWalk1.gif", b + "jinyinWalk2.gif", b + "jinyinAttack.gif", b + "jinyinWalk12.gif", b + "jinyinWalk22.gif", b + "jinyinAttack2.gif"]]
   })(),
   jinyinAct: function(a) {
-    a.WalkGif1 = a.jinyinGif;
-    a.WalkGif0 = a.jinyinWalkGif1;
     oConeheadZombie.prototype.jinyinAct(a);
+	a.WalkGif1 = a.num?a.jinyinGif:a.jinyinGif2;
+    a.WalkGif0 = a.num?a.jinyinWalkGif1:a.jinyinWalkGif12;
     a.EleBody.src = a.PicArr[a.intowater ? a.jinyinGif : a.jinyinWalkGif1]
   },
   AudioArr: ["plastichit", "zombie_entering_water"],
