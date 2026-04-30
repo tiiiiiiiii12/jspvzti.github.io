@@ -2079,9 +2079,9 @@ oDuckyTubeZombie2 = InheritO(oDuckyTubeZombie1, {
   jinyinWalkGif1: 11,
   jinyinGif: 12,
   jinyinAttackGif: 13,
-jinyinWalkGif1: 14,
-  jinyinGif: 15,
-  jinyinAttackGif: 16,
+jinyinWalkGif12: 14,
+  jinyinGif2: 15,
+  jinyinAttackGif2: 16,
   PicArr: (function() {
     var b = "images/Zombies/DuckyTubeZombie2/",
       a = "images/Zombies/DuckyTubeZombie1/";
