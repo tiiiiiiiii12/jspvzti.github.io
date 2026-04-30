@@ -1299,7 +1299,7 @@ Birth: function() {
         c = GetC(h);
         c > -1 && c < n[1] && (oGd.$Crater[j + "_" + c] = 1, n[1] = c);
         h > 120 && h < n[2] && (n[2] = h, l.firstChild.style.clip = "rect(0,auto,auto," + f + "px)", l.childNodes[1].style.left = Math.max(0, f) + "px");
-        e.AttackedLX > n[2] && e.getr(e, e.PZ ? -e.Speed : e.Speed)//冰道上滑步
+        e.AttackedLX > n[2]+40 && e.getr(e, e.PZ ? -e.Speed : e.Speed)//冰道上滑步
       };
       a.PrivateDie = function() {
         var d = this,
