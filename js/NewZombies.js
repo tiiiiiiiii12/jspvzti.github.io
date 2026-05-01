@@ -171,7 +171,7 @@ var oGargantuar = InheritO(oZombie, {
       var P = $(h.id);
       !h.hasthrew&&!(h.PZ == h.check) && (
         EditImg($(P.FumeDoor), 0,"images/interface/target.png", {
-          transform: h.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
+          transform: h.PZ ? "rotateY(0deg)" : "rotateY(180deg)",
           left: h.PZ ? "125px" : "-50px"
         }, 0),
         h.check = h.PZ);
