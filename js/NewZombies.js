@@ -25,6 +25,7 @@ var oGargantuar = InheritO(oZombie, {
   BreakPoint: 1,
   NormalDie: function() {
     var c = this;
+	c.PrivateDie(c);
     PlayAudio("GargantuarDie");
     c.EleBody.src = c.PicArr[c.DieGif];
     oSym.addTask(400, ClearChild, [c.Ele]);
@@ -169,7 +170,7 @@ var oGargantuar = InheritO(oZombie, {
     if (h.jinyin) {
       var P = $(h.id);
       !h.hasthrew&&!(h.PZ == h.check) && (
-        EditImg($(P.FumeDoor), 0, h.num?"images/Card/Zombies/Imp.png":"images/Plants/san.gif", {
+        EditImg($(P.FumeDoor), 0,"images/interface/target.png", {
           transform: h.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
           left: h.PZ ? "100px" : "-80px"
         }, 0),
@@ -179,11 +180,14 @@ var oGargantuar = InheritO(oZombie, {
   },
   jinyinAct: function(a) {
     var z = $(a.id);
-	a.num=Math.round(Math.random()*1+0)||a.PrivateNum;
+	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, a.num?"images/Card/Zombies/Imp.png":"images/Plants/san.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:100px;top:"+(a.num?"40px;":"-80px;"), 0);
+    var Sh = NewImg(z.FumeDoor, "images/interface/target.png", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:100px;top:"+(a.num?"40px;":"-80px;"), 0);
     z.appendChild(Sh);
-	a.num&&(a.throwImpnum = Math.round(Math.random() * 2 + 2))
+	oSym.addTask(750,function(b){
+		$Z[b.id]&&b.hasthrew < b.throwImpnum &&(oP.SetTimeoutAirdropZombie(5, 9, 1, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie,oNewspaperZombie,oJackinTheBoxZombie,oPoleVaultingZombie], !b.PZ),
+		oSym.addTask(750,arguments.callee,[b]));		
+	},[a])
   },
   PrivateDie: oScreenDoorZombie.prototype.PrivateDie,
   throwImp: function(g) {
@@ -219,7 +223,7 @@ var oGargantuar = InheritO(oZombie, {
   SunNum: 275,
   EName: "oGargantuar",
   CName: "伽刚特尔",
-  Produce: '非常强力的僵尸<br>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态一：<font color="#FF0000">背着保护伞，扔小鬼时召唤五个空降僵尸</font><br>精英形态：<font color="#FF0000">背着小鬼卡牌，一次扔2~4个小鬼</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
+  Produce: '非常强力的僵尸<br>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态一：<font color="#FF0000">背着保护伞，扔小鬼前每7.5秒空降一只僵尸，扔小鬼时召唤五个空降僵尸</font><br>精英形态：<font color="#FF0000">背着小鬼卡牌，一次扔2~4个小鬼</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
 }),
 oPeaZombie = InheritO(oZombie, {
   EName: "oPeaZombie",
@@ -320,8 +324,10 @@ PrivateDie:function(a){
             return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（450，发怒后50%减伤）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>精英形态：<font color="#FF0000">发怒后，每隔4秒召唤双倍攻速的豌豆僵尸</font></p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
-		jinyinAct:function(a){},
+        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（450，发怒后50%减伤）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后2.5倍(失去报纸后)<br>精英形态：<font color="#FF0000">1.5倍本体血量，发怒后，每隔4秒召唤双倍攻速的豌豆僵尸</font></p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+		jinyinAct:function(a){
+			a.HP*=1.5;
+		},
 		bedevil:oPeaZombie.prototype.bedevil,
 		  shootPea: function() {
     var a = this,
