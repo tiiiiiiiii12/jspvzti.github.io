@@ -172,7 +172,7 @@ var oGargantuar = InheritO(oZombie, {
       !h.hasthrew&&!(h.PZ == h.check) && (
         EditImg($(P.FumeDoor), 0,"images/interface/target.png", {
           transform: h.PZ ? "rotateY(0deg)" : "rotateY(180deg)",
-          left: h.PZ ? "150px" : "0px"
+          left: h.PZ ? "175px" : "20px"
         }, 0),
         h.check = h.PZ);
     }
@@ -182,11 +182,11 @@ var oGargantuar = InheritO(oZombie, {
     var z = $(a.id);
 	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, "images/interface/target.png", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:150px;top:100px", 0);
+    var Sh = NewImg(z.FumeDoor, "images/interface/target.png", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:175px;top:80px", 0);
     z.appendChild(Sh);
-	oSym.addTask(750,function(b){
+	oSym.addTask(1000,function(b){
 		$Z[b.id]&&b.hasthrew < b.throwImpnum &&(oP.SetTimeoutAirdropZombie(5, 9, 1, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie,oNewspaperZombie,oJackinTheBoxZombie,oPoleVaultingZombie], !b.PZ),
-		oSym.addTask(750,arguments.callee,[b]));		
+		oSym.addTask(1000,arguments.callee,[b]));		
 	},[a])
   },
   PrivateDie: oScreenDoorZombie.prototype.PrivateDie,
@@ -223,7 +223,7 @@ var oGargantuar = InheritO(oZombie, {
   SunNum: 275,
   EName: "oGargantuar",
   CName: "伽刚特尔",
-  Produce: '非常强力的僵尸<br>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态一：<font color="#FF0000">背着标靶，扔小鬼前每7.5秒空降一只僵尸，扔小鬼时召唤五个空降僵尸</font><br>精英形态：<font color="#FF0000">背着小鬼卡牌，一次扔2~4个小鬼</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
+  Produce: '非常强力的僵尸<br>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态一：<font color="#FF0000">背着标靶，扔小鬼前每10秒空降一只僵尸，扔小鬼时召唤五个空降僵尸</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
 }),
 oPeaZombie = InheritO(oZombie, {
   EName: "oPeaZombie",
