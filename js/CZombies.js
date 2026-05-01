@@ -2026,24 +2026,28 @@ PrivateDie:function(a){
                 [a])
         },
         ExplosionDie: function() {
+			this.PrivateDie&&this.PrivateDie(this);
             ClearChild(this.Ele);
             this.HP = 0;
             delete $Z[this.id];
             this.PZ && oP.MonPrgs()
         },
         DisappearDie: function() {
+			this.PrivateDie&&this.PrivateDie(this);
             ClearChild(this.Ele);
             this.HP = 0;
             delete $Z[this.id];
             this.PZ && oP.MonPrgs()
         },
         CrushDie: function() {
+			this.PrivateDie&&this.PrivateDie(this);
             ClearChild(this.Ele);
             this.HP = 0;
             delete $Z[this.id];
             this.PZ && oP.MonPrgs()
         },
         NormalDie: function() {
+			this.PrivateDie&&this.PrivateDie(this);
             this.HP = 0;
             delete $Z[this.id];
             this.PZ && oP.MonPrgs()
@@ -3051,7 +3055,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
           function(f) {
             var e = $Z[f],
               d;
-            e && (PlayAudio("explosion"),e.num ? (oGd.$Crater[e.R + "_" + Math.max(GetC(e.ZX),1)] = 2,
+            e && (PlayAudio("explosion"),e.num ? (e.PZ&&(oGd.$Crater[e.R + "_" + Math.max(GetC(e.ZX),1)] = 2),
               NewEle(f + "_Boom", "div", "position:absolute;overflow:hidden;z-index:" + (e.zIndex + 2) + ";width:283px;height:324px;left:" + (e.ZX - 60) + "px;top:" + (e.pixelTop - 100) + "px;background:url(images/Plants/DoomShroom/Boom.png) no-repeat", 0, EDPZ),
               oSym.addTask(20,
                 function(i) {
@@ -3072,7 +3076,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
                 ], 0,
                 function(i, p) {
                   ClearChild($(i));
-                  oDoomShroom.prototype.setCrater(f + "_crater", e.R, Math.max(GetC(e.ZX),1), f.pixelLeft + 3, f.pixelTop + 100)
+                  $Z[p]&&$Z[p].PZ&&oDoomShroom.prototype.setCrater(f + "_crater", e.R, Math.max(GetC(e.ZX),1), f.pixelLeft + 3, f.pixelTop + 100)
                 })) : (d = NewImg("", "images/interface/blank.png", "width:306px;height:300px;left:" + (e.X - 16) + "px;top:" + (e.pixelTop - 90) + "px;z-index:20"),
               d.src = e.PicArr[8] + Math.random(), EDPZ.appendChild(d), oSym.addTask(70, ClearChild, [d])), e.PZ&&(function(k, g) {
               var q = Math.max(1, e.num ? k - 2 : k - 1),
