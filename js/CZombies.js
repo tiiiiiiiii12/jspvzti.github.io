@@ -1299,7 +1299,7 @@ Birth: function() {
         c = GetC(h);
         c > -1 && c < n[1] && (oGd.$Crater[j + "_" + c] = 1, n[1] = c);
         h > 120 && h < n[2] && (n[2] = h, l.firstChild.style.clip = "rect(0,auto,auto," + f + "px)", l.childNodes[1].style.left = Math.max(0, f) + "px");
-        e.AttackedLX > n[2]+40 && e.getr(e, e.PZ ? -e.Speed : e.Speed)//冰道上滑步
+        e.AttackedLX > n[2]+60 && e.getr(e, e.PZ ? -e.Speed : e.Speed)//冰道上滑步
       };
       a.PrivateDie = function() {
         var d = this,
@@ -2091,7 +2091,7 @@ jinyinWalkGif12: 14,
     oConeheadZombie.prototype.jinyinAct(a);
 	a.WalkGif1 = a.num?a.jinyinGif:a.jinyinGif2;
     a.WalkGif0 = a.num?a.jinyinWalkGif1:a.jinyinWalkGif12;
-    a.EleBody.src = a.PicArr[a.intowater ? a.jinyinGif : a.jinyinWalkGif1]
+    a.EleBody.src = a.PicArr[a.intowater ? a.WalkGif1 : a.WalkGif0]
   },
   AudioArr: ["plastichit", "zombie_entering_water"],
   getHit: OrnIZombies.prototype.getHit,
