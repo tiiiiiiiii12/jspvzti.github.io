@@ -1792,7 +1792,7 @@ c.JudgeAttack = c.JudgeAttackH;
                  oGd.$[i + "_" + l + "_" + "1"] && (oGd.$[i + "_" + l + "_" + "1"].EName != "oPlantern")&&(PLeng=1)
               }
             }
-			h.xianxing=Pleng;
+			h.xianxing=PLeng;
           });
                         k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
                         if (!k.beAttacked) {
