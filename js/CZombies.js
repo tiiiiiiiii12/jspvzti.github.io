@@ -1355,7 +1355,27 @@ Birth: function() {
 			a.OSpeed*=0.5
 		  }
 		},
-		PrivateAct:function(a){},
+		PrivateAct:function(a){			(t.OrnHP<1)&&(t.beAttacked)&&($Z[t.id])&&(t.PZ==a.PZ)) {
+			    t&&(t.OrnHP = 1100,
+                  t.getHit0 = (s = OrnIZombies.prototype).getHit0,
+                  t.getHit1 = s.getHit1,
+                  t.getHit2 = s.getHit2,
+                  t.getHit3 = s.getHit3,
+				t.OrnLostNormalGif = 9,
+                  t.OrnLostAttackGif = 10,
+				t.Ornaments=1,
+				t.PlayNormalballAudio = oBucketheadZombie.prototype.PlayNormalballAudio);
+             (t.CName!=="路障鸭子救生圈僵尸")&&(t.CName!== "鸭子救生圈僵尸")&&(t.CName!== "铁桶鸭子救生圈僵尸")?(t.NormalGif = 2,
+                  t.AttackGif = 3,
+                  t.PicArr = oBucketheadZombie.prototype.PicArr,
+                  t.EleBody.src = t.isAttacking ? t.PicArr[3] : t.PicArr[2]):
+				 (t.NormalGif = 3,
+                  t.AttackGif = 5,
+                  t.PicArr = oDuckyTubeZombie3.prototype.PicArr,
+                  t.EleBody.src = t.isAttacking ? t.PicArr[5] : t.PicArr[3])
+			}
+          }
+        }},
         Produce: '他的铁桶头盔，能极大程度的承受伤害。<p>韧性：<font color="#FF0000">高</font><br>精英形态：铁桶被打掉后，原地生成墓碑</font><br>弱点：<font color="#FF0000">磁力菇</font></p>铁桶头僵尸经常戴着水桶，在冷漠的世界里显得独一无二。但事实上，他只是忘记了，那铁桶还在他头上而已。'
     }, {
         PicArr: {
