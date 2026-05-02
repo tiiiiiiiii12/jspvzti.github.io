@@ -62,6 +62,7 @@ var CPlants = NewO({
                     zIndex: j
                 },
                 n);
+			e.EleBody=($(b));
 			e.Ele=$(e.id);
         e.randomnum<e.jinyinnum&&(
                     e.jinyin=true,
