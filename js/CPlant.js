@@ -199,7 +199,7 @@ var CPlants = NewO({
         },
 		jinyinAct:function(a){
 			a.ExchangeLR2=CZombies.prototype.ExchangeLR2;
-			CZombies.prototype.ExchangeLR(a,0)
+			CZombies.prototype.ExchangeLR(a,1)
 		},
         InitTrigger: function() {},
         Tooltip: "把它种在墓碑上用来吞噬墓碑",
