@@ -52,7 +52,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         delete oS.LvlVar.ScrollScreen
     },
     StartGame: function() {
-        NewEle("dButton", "button", "position:absolute;left:250px;top:20px;width:100px;height:35px;z-index:255", {
+        NewEle("dButton1", "button", "position:absolute;left:250px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
             onclick: function() {
             var h=1,
@@ -66,7 +66,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             }
         }, EDAll);
-        NewEle("dButton", "button", "position:absolute;left:350px;top:20px;width:100px;height:35px;z-index:255", {
+        NewEle("dButton2", "button", "position:absolute;left:350px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "秒杀正常僵尸",
             onclick: function() {
             var h=1,
@@ -80,7 +80,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             }
         }, EDAll);
-       NewEle("dButton", "button", "position:absolute;left:450px;top:20px;width:100px;height:35px;z-index:255", {
+       NewEle("dButton3", "button", "position:absolute;left:450px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "秒杀魅惑僵尸",
             onclick: function() {
             var h=1,
@@ -94,7 +94,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             }
         }, EDAll);
-        NewEle("dButton", "button", "position:absolute;left:550px;top:20px;width:100px;height:35px;z-index:255", {
+        NewEle("dButton4", "button", "position:absolute;left:550px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "读报解封",
             onclick: function() {
             var h=1,
@@ -125,7 +125,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                         while (k--) {
                            n[k].getr(n[k],800,1)
                         }
-                     c = (m = oZ.getArHZ(780,1100, h)).length;
+                     c = (m = oZ.getArHZ(880,1100, h)).length;
                         while (c--) {
                             m[c].getr(m[c],-800,1)
                         }
