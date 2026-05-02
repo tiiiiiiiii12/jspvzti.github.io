@@ -1256,7 +1256,7 @@ Birth: function() {
         jinyinAttackGif:13,
 		jinyinGif2:14,
         jinyinAttackGif2:15,
-		  jinyinAct: function(a) {
+	jinyinAct: function(a) {
     a.num = Math.round(Math.random() * 1 + 0) || a.Privatenum;
 	a.NormalGif = a.num?a.jinyinGif:a.jinyinGif2;
     a.AttackGif = a.num?a.jinyinAttackGif:a.jinyinAttackGif2;
@@ -1338,6 +1338,8 @@ Birth: function() {
             PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)])
         },
 		jinyinAct:function(a){
+			a.num=Math.random()*1+0||a.Privatenum;
+			if(!a.num){
 			a.NormalGif=a.jinyinGif;
 			a.AttackGif=a.jinyinAttackGif;
 			a.EleBody.src=a.PicArr[a.NormalGif];
@@ -1347,7 +1349,13 @@ Birth: function() {
 					a.bool=1;
 				}
 			}
+		  }else{
+			a.HP*=3;
+			a.Speed*=0.5;
+			a.OSpeed*=0.5
+		  }
 		},
+		PrivateAct:function(a){},
         Produce: '他的铁桶头盔，能极大程度的承受伤害。<p>韧性：<font color="#FF0000">高</font><br>精英形态：铁桶被打掉后，原地生成墓碑</font><br>弱点：<font color="#FF0000">磁力菇</font></p>铁桶头僵尸经常戴着水桶，在冷漠的世界里显得独一无二。但事实上，他只是忘记了，那铁桶还在他头上而已。'
     }, {
         PicArr: {
@@ -1397,7 +1405,7 @@ Birth: function() {
         getShadow: function(a) {
             return "left:" + (a.beAttackedPointL + 15) + "px;top:" + (a.height - 22) + "px"
         },
-        Produce: '橄榄球僵尸的表演秀。<p>韧性：<font color="#FF0000">极高</font><br>精英形态：黑橄榄，两倍头盔血量，速度减慢，免疫冻结<br>速度：<font color="#FF0000">快</font><br>弱点：<font color="#FF0000">磁力菇</font><br>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么<br>黑橄榄贴图来源：江南游戏'
+        Produce: '橄榄球僵尸的表演秀。<br>韧性：<font color="#FF0000">极高</font><br>精英形态：黑橄榄，两倍头盔血量，速度减慢，免疫冻结<br>速度：<font color="#FF0000">快</font><br>弱点：<font color="#FF0000">磁力菇</font><br>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么<br>黑橄榄贴图来源：江南游戏'
     }),
     oPoleVaultingZombie = InheritO(OrnNoneZombies, {
         EName: "oPoleVaultingZombie",
@@ -1619,12 +1627,12 @@ c.JudgeAttack = c.JudgeAttackH;
             return ["images/Card/Zombies/NewspaperZombie.png","images/Zombies/NewspaperZombie/0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadWalk0.gif", a + "LostHeadWalk0.gif", a + "LostHeadWalk0.gif", "images/Zombies/NewspaperZombie/Head.gif" + $Random, a + "Die.gif" + $Random,"images/Zombies/NewspaperZombie/BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（370，发怒后50%减伤）</font><br>精英形态：破报犹豫时间变长，无减伤，破报后虚化（可被路灯花显形）<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)</p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（370，发怒后50%减伤）</font><br>精英形态一：破报进入假死状态，无减伤，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：破报犹豫时间变长，1.5倍速度和伤害，破报后拿出路牌碾压植物<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
         getShadow: function(a) {
             return "left:75px;top:" + (a.height - 25) + "px"
         },
         GoingDie: function(b) {
-            var a = this,
+            var a = this;
                 c = a.id;
             a.EleBody.src = b;
             oSym.addTask(200, ClearChild, [NewImg(0, a.PicArr[a.HeadGif] + Math.random(), "left:" + a.AttackedLX + "px;top:" + (a.pixelTop - 20) + "px;z-index:" + a.zIndex, EDPZ)]);
@@ -1757,19 +1765,20 @@ c.JudgeAttack = c.JudgeAttackH;
                         k.ChkActs =!k.WalkDirection?j.ChkActs:j.ChkActs1;
                         k.ChkActs1 = j.ChkActs1;
 						k.tasktime*=0.4; 
-						!k.num?(k.jianshang=0.5):(k.PrivateAct=function(h) {
-                   var num = 0;
+				!k.num?(k.jianshang=0.5):(k.PrivateAct=function(h) {
+                   var Num = 0;
                 !h.xianxing ? (h.Altitude = 4,
                 h.Ele.style.opacity = 0.1) : (h.Altitude = 1,
               h.Ele.style.opacity = 1);
             var a = h.R,
+				PLeng=0,
               b = GetC(h.ZX);
             for (let i = a - 1; i <= a + 1; i++) {
               for (let l = b - 2; l <= b + 2; l++) {
-                !num && h.xianxing && oGd.$[i + "_" + l + "_" + "1"] && (oGd.$[i + "_" + l + "_" + "1"].EName != "oPlantern") && (h.xianxing = 0);
-                !num && !h.xianxing && oGd.$[i + "_" + l + "_" + "1"] && (oGd.$[i + "_" + l + "_" + "1"].EName == "oPlantern") && (h.xianxing = true, num = 1)
+                 oGd.$[i + "_" + l + "_" + "1"] && (oGd.$[i + "_" + l + "_" + "1"].EName != "oPlantern")&&(PLeng=1)
               }
             }
+			h.xianxing=Pleng;
           });
                         k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
                         if (!k.beAttacked) {
@@ -1811,7 +1820,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
     a.num && (NewEle(a.id + "_Bullet",
       "div", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "visibility:hidden;width:343px;height:62px;left:" + (a.PZ ? "-250" : "40") + "px;top:70px;background:url(images/Plants/FumeShroom/FumeShroomBullet.gif);z-index:" + (a.zIndex + 1), 0, $(a.id)), oSym.addTask(1, function(a, h, z) {
       if (a.Ornaments && $Z[a.id]) {
-        let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.PZ ? a.ZX - 300 : a.ZX, a.PZ ? a.ZX : a.ZX + 300, a.R),
+        let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.PZ ? a.ZX - 240 : a.ZX, a.PZ ? a.ZX : a.ZX + 240, a.R),
           Tz = A.length;
         for (let i = GetC(a.ZX + 20) - 3; i <= GetC(a.ZX + 20); i++) {
           for (let l = 0; l <= 3; l++) {
@@ -1853,7 +1862,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
     for (i = 3; i >= 0; i--) {
         var p = oGd.$[a.R + "_" + C + "_" + i];
           a.PZ&&a.canWalk(a,a.id)&& p && p.canEat && $(p.id) && (p.C == C) && (PlantKind = p.PKind, NewC = p.C + 1, p.AttackedLX += 80, p.pixelRight += 80, p.AttackedRX += 80, p.pixelLeft += 80, $(p.id).style.left = (p.pixelLeft) + "px",
-			(p.EName== "oBrains"||p.C>9)?p.Die():(delete oGd.$[p.R + "_" + p.C + "_" + p.PKind], p.C = NewC, oGd.add(p, a.R + "_" + NewC + "_" + PlantKind,
+			(p.EName== "oBrains"||p.C>=9)?p.Die():(delete oGd.$[p.R + "_" + p.C + "_" + p.PKind], p.C = NewC, oGd.add(p, a.R + "_" + NewC + "_" + PlantKind,
 		p.oTrigger&&oT.delP(p),p.InitTrigger(p,p.id,p.R,p.C,p.AttackedLX,p.AttackedRX),PlayAudio("shovel"))));//重置植物列数并重置索敌
         }
         var z = oZ["get" + (a.PZ ? "HZ1" : "Z0")](a.ZX, a.R);
