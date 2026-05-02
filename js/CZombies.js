@@ -1789,7 +1789,7 @@ c.JudgeAttack = c.JudgeAttackH;
               b = GetC(h.ZX);
             for (let i = a - 1; i <= a + 1; i++) {
               for (let l = b - 2; l <= b + 2; l++) {
-                 oGd.$[i + "_" + l + "_" + "1"] && (oGd.$[i + "_" + l + "_" + "1"].EName != "oPlantern")&&(PLeng=1)
+                 oGd.$[i + "_" + l + "_" + "1"] && (oGd.$[i + "_" + l + "_" + "1"].EName== "oPlantern")&&(PLeng=1)
               }
             }
 			h.xianxing=PLeng;
