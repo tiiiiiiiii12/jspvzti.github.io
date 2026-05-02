@@ -1614,6 +1614,10 @@ c.JudgeAttack = c.JudgeAttackH;
             var a = "images/Zombies/NewspaperZombie/";
             return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
+		PicArr2: (function() {
+            var a = "images/Zombies/jinyinNewspaperZombie/";
+            return ["images/Card/Zombies/NewspaperZombie.png","images/Zombies/NewspaperZombie/0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadWalk0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", "images/Zombies/NewspaperZombie/Head.gif" + $Random, a + "Die.gif" + $Random,"images/Zombies/NewspaperZombie/BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
+        })(),
         AudioArr: ["newspaper_rarrgh2"],
         Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（370，发怒后50%减伤）</font><br>精英形态：破报犹豫时间变长，无减伤，破报后虚化（可被路灯花显形）<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)</p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
         getShadow: function(a) {
@@ -1721,7 +1725,19 @@ c.JudgeAttack = c.JudgeAttackH;
                 },
                 [b.id]))
         },
-		jinyinAct:function(a){a.LostPaperGif=a.DieGif},
+		jinyinAct:function(a){
+			a.num=Math.round(Math.random()*1+0)||a.Privatenum;
+			a.num?(a.LostPaperGif=a.DieGif,a.Ele.style.opacity=0.7):(
+				a.tasktime*=0.5,a.OSpeed*=1.5,a.Speed*=1.5,a.LostPaperSpeed*=1.5,a.PicArr=a.PicArr2,a.EleBody.src=a.PicArr2[a.NormalGif],
+				a.PrivateAct=function(a){
+            if(!a.Ornaments){
+				for(i=1;i<=3;i++){
+                let p = oGd.$[a.R+"_"+GetC(a.ZX)+"_"+i];
+                p && p.canEat && p.getHurt(p,1,1000)
+				}
+            }
+        })
+		},
         CheckOrnHP: function(g, h, d, c, f, b, a) {
             var e = OrnNoneZombies.prototype;
             (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.ChkActs = function() {
@@ -1741,8 +1757,7 @@ c.JudgeAttack = c.JudgeAttackH;
                         k.ChkActs =!k.WalkDirection?j.ChkActs:j.ChkActs1;
                         k.ChkActs1 = j.ChkActs1;
 						k.tasktime*=0.4; 
-						!k.jinyin&&(k.jianshang=0.5);
-						k.jinyin&&(k.PrivateAct=function(h) {
+						!k.num?(k.jianshang=0.5):(k.PrivateAct=function(h) {
                    var num = 0;
                 !h.xianxing ? (h.Altitude = 4,
                 h.Ele.style.opacity = 0.1) : (h.Altitude = 1,
