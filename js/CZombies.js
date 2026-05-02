@@ -1351,13 +1351,10 @@ Birth: function() {
 			}
 		  }else{
 			a.HP*=3;
-			a.Speed*=0.8;
-			a.OSpeed*=0.8
-		  }
-		},
-		PrivateAct:function(a){
+			a.Speed*=0.75;
+			a.OSpeed*=0.75;
 			oSym.addTask(1000,function(t){
-			!t.Ornaments&&(t.beAttacked)&&$Z[t.id]) {
+			if(!t.Ornaments&&(t.beAttacked)&&$Z[t.id]){
 			    t.OrnHP = 1100;
                 t.getHit=t.getHit1=t.getHit2=t.getHit3=t.getHit0=OrnIZombies.prototype.getHit0;
 				t.Ornaments=1,
@@ -1371,7 +1368,8 @@ Birth: function() {
 			}
 			$Z[t.id]&&oSym.addTask(1000,arguments.callee,[t])
 			},[a])
-          },
+		  }
+		},
         Produce: '他的铁桶头盔，能极大程度的承受伤害。<p>韧性：<font color="#FF0000">高</font><br>精英形态一：铁桶被打掉后，原地生成墓碑</font><br>精英形态二：每隔一段时间给自己续铁桶</font><br>弱点：<font color="#FF0000">磁力菇</font></p>铁桶头僵尸经常戴着水桶，在冷漠的世界里显得独一无二。但事实上，他只是忘记了，那铁桶还在他头上而已。'
     }, {
         PicArr: {
