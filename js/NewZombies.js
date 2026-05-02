@@ -172,7 +172,7 @@ var oGargantuar = InheritO(oZombie, {
       !h.hasthrew&&!(h.PZ == h.check) && (
         EditImg($(P.FumeDoor), 0,"images/interface/target.png", {
           transform: h.PZ ? "rotateY(0deg)" : "rotateY(180deg)",
-          left: h.PZ ? "175px" : "20px"
+          left: h.PZ ? "185px" : "25px"
         }, 0),
         h.check = h.PZ);
     }
@@ -182,7 +182,7 @@ var oGargantuar = InheritO(oZombie, {
     var z = $(a.id);
 	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, "images/interface/target.png", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:175px;top:80px", 0);
+    var Sh = NewImg(z.FumeDoor, "images/interface/target.png", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:185px;top:80px", 0);
     z.appendChild(Sh);
 	oSym.addTask(1000,function(b){
 		$Z[b.id]&&b.hasthrew < b.throwImpnum &&(oP.SetTimeoutAirdropZombie(5, 9, 1, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie,oNewspaperZombie,oJackinTheBoxZombie,oPoleVaultingZombie], !b.PZ),
