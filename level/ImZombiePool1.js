@@ -1,6 +1,6 @@
 oS.Init({
     PName: [oFumeShroom, oPumpkinHead, oHypnoShroom, oPotatoMine, oSunFlower, oStarfruit, oScaredyShroom, oCactus, oPeashooter, oSnowPea, oGloomShroom, oGarlic, oPlantern,oIceShroom,oWallNut,oChomper,oRepeater],
-    ZName: [oZombie, oScreenDoorZombie, oDuckyTubeZombie1, oDuckyTubeZombie3, oDolphinRiderZombie,oPoleVaultingZombie,oGargantuar,oSnorkelZombie,oDiggerZombie],
+    ZName: [oZombie, oNewspaperZombie, oDuckyTubeZombie1, oDuckyTubeZombie3, oDolphinRiderZombie,oPoleVaultingZombie,oGargantuar,oSnorkelZombie,oDiggerZombie],
     PicArr: ["images/interface/background4.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background4.jpg",
     Coord: 2,
