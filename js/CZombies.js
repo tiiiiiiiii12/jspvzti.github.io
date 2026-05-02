@@ -1733,7 +1733,7 @@ c.JudgeAttack = c.JudgeAttackH;
             if(!a.Ornaments){
 				for(i=1;i<=3;i++){
                 let p = oGd.$[a.R+"_"+GetC(a.ZX)+"_"+i];
-                p && p.canEat && p.getHurt(p,1,1000)
+                p && p.canEat&&a.beAttacked&&a.PZ&& p.getHurt(a,1,1000)
 				}
             }
         })
