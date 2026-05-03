@@ -968,15 +968,7 @@ NormalAttack1: function() {
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "优先锁定场上血量最高的僵尸，每5秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害",
         Produce: '狙击手锁定场上血量最高的僵尸，每5秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害<br>伤害：<font color="#FF0000">高(300/1000)</font><p>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
-        NormalAttack:function(a) {
-	(!a.Target||(a.Target&&(!$Z[a.target.id]||!a.Target.beAttacked||!a.PZ)))&&a.checkTarget(a);
-		PlayAudio("potato_mine");
-		a.Target&&(++a.Boom>=19?(a.Target.getExplosion(1000),a.Boom=0,PlayAudio("cherrybomb"),
-oSym.addTask(100, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" +(a.target.ZX+10)+ "px;top:" +(a.target.pixelTop+20)+ "px;height:93px;width:132px;z-index:25;", EDPZ)]))
-				   :a.Target.getHit0(a.Target,300,0));
-		(!a.Target||(a.Target&&(!$Z[a.target.id]||!a.Target.beAttacked||!a.PZ)))&&a.checkTarget(a);
-        },
-checkTarget:function(a){
+		checkTarget:function(a){
 var TargeteachR=[];
 PlayAudio("portal");
 for (let i = 1; i <=oS.R; i++) {
@@ -994,6 +986,14 @@ for (let i = 1; i <=oS.R; i++) {
 		a.Target=TargeteachR[0];
 	NewImg(0,a.Boom+1>=19?"images/Plants/PotatoMine/PotatoMineNotReady.gif":"images/Plants/PB00.gif", "left:" +(a.target.ZX+10)+ "px;top:" +(a.target.pixelTop+80)+ "px;height:93px;width:132px;z-index:25;", EDPZ)
 		},
+        NormalAttack:function(a) {
+	(!a.Target||(a.Target&&(!$Z[a.target.id]||!a.Target.beAttacked||!a.PZ)))&&a.checkTarget(a);
+		PlayAudio("potato_mine");
+		a.Target&&(++a.Boom>=19?(a.Target.getExplosion(1000),a.Boom=0,PlayAudio("cherrybomb"),
+oSym.addTask(100, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" +(a.target.ZX+10)+ "px;top:" +(a.target.pixelTop+20)+ "px;height:93px;width:132px;z-index:25;", EDPZ)]))
+				   :a.Target.getHit0(a.Target,300,0));
+		(!a.Target||(a.Target&&(!$Z[a.target.id]||!a.Target.beAttacked||!a.PZ)))&&a.checkTarget(a);
+        },
 		PrivateBirth:function(a){
 			a.EleBody.style.filter = 'brightness(10%)';
 		},
