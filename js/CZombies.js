@@ -1338,7 +1338,7 @@ Birth: function() {
             PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)])
         },
 		jinyinAct:function(a){
-			a.num=Math.random()*1+0||a.Privatenum;
+			a.num=Math.round(Math.random()*1+0)||a.Privatenum;
 			if(!a.num){
 			a.NormalGif=a.jinyinGif;
 			a.AttackGif=a.jinyinAttackGif;
