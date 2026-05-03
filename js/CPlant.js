@@ -985,6 +985,9 @@ NormalAttack1: function() {
   var BulletImg = NewImg(0, a.Boom + 1 >= 19 ? "images/Plants/PotatoMine/PotatoMineNotReady.gif" : "images/Plants/PB00.gif", "left:60px;top:80px;z-index:25;", a.Target.Ele);
   BulletImg.id = "P_" + a.id;
 },
+	PrivateDie:function(a){
+		ClearChild($("P_" + a.id));
+	},
 NormalAttack:function(a){
   var a = this,
     b = a.id;
@@ -994,10 +997,16 @@ NormalAttack:function(a){
       (!$Z[a.Target.id] || !a.Target.beAttacked) && ClearChild($("P_" + a.id)),
       oSym.addTask(100, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.Target.ZX + 10) + "px;top:" + (a.Target.pixelTop + 20) + "px;z-index:25;", EDPZ)])) :
     a.Target.getHit0(a.Target, 300, 0), (!$Z[a.Target.id] || !a.Target.beAttacked) && ClearChild($("P_" + a.id)));
+	a.Boom + 1 >= 19&&($("P_" + a.id).src="images/Plants/PotatoMine/PotatoMineNotReady.gif");
   (!a.Target || (a.Target && (!$Z[a.Target.id] || !a.Target.beAttacked || !a.Target.PZ))) && a.checkTarget(a);
 },
+		getTriggerRange: function(a, b, c) {
+            return [
+                [0, oS.W, 0]
+            ]
+        },
 		PrivateBirth:function(a){
-			a.EleBody.style.filter = 'brightness(10%)';
+			a.EleBody.style.filter = 'brightness(30%)';
 		},
 		getTriggerR:function(a){
            return [1,oS.R]
