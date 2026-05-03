@@ -1006,7 +1006,7 @@ NormalAttack:function(a){
             ]
         },
 		PrivateBirth:function(a){
-			a.EleBody.style.filter = 'brightness(30%)';
+			a.EleBody.style.filter = 'brightness(50%)';
 		},
 		getTriggerR:function(a){
            return [1,oS.R]
