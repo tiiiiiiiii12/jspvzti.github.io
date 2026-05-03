@@ -962,7 +962,6 @@ NormalAttack1: function() {
         SunNum: 250,
         coolTime: 50,
 		AttTime:360,//360+140cs
-		Target:[],
 		Boom:0,
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
