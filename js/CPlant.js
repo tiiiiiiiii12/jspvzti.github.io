@@ -987,6 +987,7 @@ for (let i = 1; i <=oS.R; i++) {
 	NewImg(0,a.Boom+1>=19?"images/Plants/PotatoMine/PotatoMineNotReady.gif":"images/Plants/PB00.gif", "left:" +(a.target.ZX+10)+ "px;top:" +(a.target.pixelTop+80)+ "px;height:93px;width:132px;z-index:25;", EDPZ)
 		},
         NormalAttack:function(a) {
+			var a=this;
 	(!a.Target||(a.Target&&(!$Z[a.target.id]||!a.Target.beAttacked||!a.Target.PZ)))&&a.checkTarget(a);
 		PlayAudio("potato_mine");
 		a.Target&&(++a.Boom>=19?(a.Target.getExplosion(1000),a.Boom=0,PlayAudio("cherrybomb"),
