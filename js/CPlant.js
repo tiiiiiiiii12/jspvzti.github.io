@@ -953,6 +953,56 @@ NormalAttack1: function() {
                 [this.id, 5])
         }
     }),
+	oSniperPea=InheritO(CPlants,{
+		EName: "oSniperPea",
+        CName: "狙击手",
+        width: 88,
+        height: 84,
+        beAttackedPointR: 68,
+        SunNum: 250,
+        coolTime: 50,
+		AttTime:360,//360+140cs
+		Target:[],
+		Boom:0,
+        PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
+        AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
+        Tooltip: "优先锁定场上血量最高的僵尸，每5秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害",
+        Produce: '狙击手锁定场上血量最高的僵尸，每5秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害<br>伤害：<font color="#FF0000">高(300/1000)</font><p>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
+        NormalAttack:function(a) {
+	(!a.Target||(a.Target&&(!$Z[a.target.id]||!a.Target.beAttacked||!a.PZ)))&&a.checkTarget(a);
+		PlayAudio("potato_mine");
+		a.Target&&(++a.Boom>=19?(a.Target.getExplosion(1000),a.Boom=0,PlayAudio("cherrybomb"),
+oSym.addTask(100, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" +(a.target.ZX+10)+ "px;top:" +(a.target.pixelTop+20)+ "px;height:93px;width:132px;z-index:25;", EDPZ)]))
+				   :a.Target.getHit0(a.Target,300,0));
+		(!a.Target||(a.Target&&(!$Z[a.target.id]||!a.Target.beAttacked||!a.PZ)))&&a.checkTarget(a);
+        },
+checkTarget:function(a){
+var TargeteachR=[];
+PlayAudio("portal");
+for (let i = 1; i <=oS.R; i++) {
+    var b = oZ.getArZ(0, oS.W,i);
+	b.sort(function(d, c) {
+      return (c.HP + c.OrnHP) - (d.OrnHP + d.HP)
+    });
+	if(!b.length)return;
+	TargeteachR.push(b[0])
+}
+	TargeteachR.sort(function(d, c) {
+      return (c.HP + c.OrnHP) - (d.OrnHP + d.HP)
+    });
+	if(!TargeteachR.length)return;
+		a.Target=TargeteachR[0];
+	NewImg(0,a.Boom+1>=19?"images/Plants/PotatoMine/PotatoMineNotReady.gif":"images/Plants/PB00.gif", "left:" +(a.target.ZX+10)+ "px;top:" +(a.target.pixelTop+80)+ "px;height:93px;width:132px;z-index:25;", EDPZ)
+		},
+		PrivateBirth:function(a){
+			a.EleBody.style.filter = 'brightness(10%)';
+		},
+		getTriggerR:function(a){
+           return [1,oS.R]
+        },
+        jinyinAct:function(a){	
+		}
+	}),
     oSplitPea = InheritO(oPeashooter, {
         EName: "oSplitPea",
         CName: "分裂射手",
@@ -1307,7 +1357,7 @@ NormalAttack1: function() {
         AudioArr: ["potato_mine"],
         canTrigger: 0,
         BirthStyle: function(d, e, c, b, a) {
-            c.childNodes[1].src = !a ? "images/Plants/PotatoMine/PotatoMineNotReady.gif" : (~
+            c.childNodes[1].src = !a ? "images/Plants/PotatoMine/PotatoMineNotReady.gif" : (
                 function() {
                     d.Status = 1;
                     d.canTrigger = 1;
@@ -1352,7 +1402,7 @@ NormalAttack1: function() {
                 (a = c[f]).Altitude < 2 && a.getThump(1400)
             }
         for(i=g.C;i<=9;i++){
-            ++num<2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0);
+            num++<=2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0);
         }
             g.Die(1);
             PlayAudio("potato_mine");
