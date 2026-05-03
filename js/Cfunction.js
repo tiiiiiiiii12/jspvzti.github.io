@@ -653,7 +653,7 @@ oP = {
 				SunNum: oS.SunNum,
 				Lvl: s,
 				T: oSym.Now - oS.StartTime
-			}), !isNaN(Math.floor(s)) && ($User.Visitor.Progress = ++s,PauseGame($("dMenu0"), 1)))
+			}), !isNaN(Math.floor(s)) && ($User.Visitor.Progress = ++s),PauseGame($("dMenu0"), 1)))
 		}) : r.MonPrgs = function() {}; (!a || !a.FlagToEnd) && (r.FlagToEnd = function() {
 			NewImg("imgSF", "images/interface/trophy.png", "left:417px;top:233px;z-index:256", EDAll, {
 				onclick: function() {
