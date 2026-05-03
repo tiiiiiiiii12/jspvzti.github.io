@@ -982,7 +982,7 @@ NormalAttack1: function() {
   });
   if (!TargeteachR.length) return;
   a.Target = TargeteachR[0];
-  var BulletImg = NewImg(0, a.Boom + 1 >= 19 ? "images/Plants/PotatoMine/PotatoMineNotReady.gif" : "images/Plants/PB00.gif", "left:60px;top:80px;z-index:25;", a.Target.Ele);
+  var BulletImg = NewImg(0, a.Boom + 1 >= 19 ? "images/Plants/PotatoMine/PotatoMineNotReady.gif" : "images/Plants/PB00.gif", "z-index:25;"+a.Target.getShadow(a.Target), a.Target.Ele);
   BulletImg.id = "P_" + a.id;
 },
 	PrivateDie:function(a){
@@ -994,7 +994,7 @@ NormalAttack:function(a){
   (!a.Target || (a.Target && (!$Z[a.Target.id] || !a.Target.beAttacked || !a.Target.PZ))) && a.checkTarget(a);
   PlayAudio("potato_mine");
   a.Target && (++a.Boom >= 19 ? (a.Target.getExplosion(1000), a.Boom = 0, PlayAudio("cherrybomb"),
-      (!$Z[a.Target.id] || !a.Target.beAttacked) && ClearChild($("P_" + a.id)),
+      (!$Z[a.Target.id] || !a.Target.beAttacked)?ClearChild($("P_" + a.id)):$("P_" + a.id).src="images/Plants/PB00.gif",
       oSym.addTask(100, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.Target.ZX + 10) + "px;top:" + (a.Target.pixelTop + 20) + "px;z-index:25;", EDPZ)])) :
     a.Target.getHit0(a.Target, 300, 0), (!$Z[a.Target.id] || !a.Target.beAttacked) && ClearChild($("P_" + a.id)));
 	a.Boom + 1 >= 19&&($("P_" + a.id).src="images/Plants/PotatoMine/PotatoMineNotReady.gif");
