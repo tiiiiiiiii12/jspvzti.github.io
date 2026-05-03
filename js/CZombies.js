@@ -1126,7 +1126,8 @@ Birth: function() {
 			a.NormalGif=a.jinyinGif;
 			a.AttackGif=a.jinyinAttackGif;
 			a.EleBody.src=a.PicArr[a.NormalGif];
-			a.OSpeed=a.Speed=3.6;
+			a.OSpeed*=2;
+			a.Speed*=2;
 			a.tasktime*=0.5;
 		},
         Produce: '韧性：<font color="#FF0000">低</font><br>精英形态：红眼，两倍速度，两倍伤害<br>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
