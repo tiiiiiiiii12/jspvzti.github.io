@@ -2,16 +2,16 @@
 	let Normal_Zombie_Wave = [3, 5, 10, 15, 20, 25, 30, 35, 40]; // 默认僵尸出现的波 
 
 	oS.Init({
-		PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oHypnoShroom, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit, oPumpkinHead, oFlowerPot, oCoffeeBean, oGarlic,oGloomShroom,oTwinSunflower],
-		ZName: [oBackupDancer, oZombie, oZombie2, oZombie3, oPoleVaultingZombie, oConeheadZombie, oBucketheadZombie, oNewspaperZombie, oScreenDoorZombie, oFootballZombie, oDancingZombie, oDuckyTubeZombie1, oDuckyTubeZombie2, oDuckyTubeZombie3, oDolphinRiderZombie, oSnorkelZombie, oZomboni, oJackinTheBoxZombie, oBalloonZombie],
+		PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oHypnoShroom, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit, oPumpkinHead, oFlowerPot, oCoffeeBean, oGarlic,oGloomShroom,oTwinSunflower,oSniperPea],
+		ZName: [oBackupDancer, oZombie, oZombie2, oZombie3, oPoleVaultingZombie, oConeheadZombie, oBucketheadZombie, oNewspaperZombie, oScreenDoorZombie, oFootballZombie, oDancingZombie, oDuckyTubeZombie1, oDuckyTubeZombie2, oDuckyTubeZombie3, oDolphinRiderZombie, oSnorkelZombie, oZomboni, oJackinTheBoxZombie, oBalloonZombie,oWallNutZombie,oTallNutZombie,oPeaZombie,oGatlingPeaZombie],
 		StageCard_1: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater],
 		StageCard_2: [oSunFlower, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oHypnoShroom, oScaredyShroom, oIceShroom, oDoomShroom],
-		StageCard_3: [oCherryBomb, oDoomShroom, oSunFlower, oRepeater, oFumeShroom, oGloomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oTwinSunflower],
-		StageCard_4: [oCherryBomb, oSunFlower, oRepeater, oFumeShroom, oSpikeweed,oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit, oPumpkinHead],
-		StageZCard_1: [oZombie, oPoleVaultingZombie, oConeheadZombie, oBucketheadZombie],
-		StageZCard_2: [oNewspaperZombie, oScreenDoorZombie, oFootballZombie, oDancingZombie],
-		StageZCard_3: [oDuckyTubeZombie1, oDuckyTubeZombie2, oDuckyTubeZombie3, oDolphinRiderZombie, oSnorkelZombie],
-		StageZCard_4: [oZomboni, oJackinTheBoxZombie, oBalloonZombie],
+		StageCard_3: [oCherryBomb, oDoomShroom, oSunFlower, oRepeater, oFumeShroom, oGloomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oTwinSunflower,oSniperPea],
+		StageCard_4: [oCherryBomb, oSunFlower, oRepeater, oFumeShroom, oSpikeweed,oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit, oPumpkinHead,oSniperPea],
+		StageZCard_1: [oZombie, oPoleVaultingZombie, oConeheadZombie, oBucketheadZombie,oPeaZombie],
+		StageZCard_2: [oNewspaperZombie, oScreenDoorZombie, oFootballZombie, oDancingZombie,oWallNutZombie],
+		StageZCard_3: [oDuckyTubeZombie1, oDuckyTubeZombie2, oDuckyTubeZombie3, oDolphinRiderZombie, oSnorkelZombie,oWallNutZombie,oPeaZombie],
+		StageZCard_4: [oZomboni, oJackinTheBoxZombie, oBalloonZombie,oTallNutZombie,oGatlingPeaZombie],
 		PicArr: (function() { // 加载的图片
 			var b = oBlover.prototype, c = b.PicArr, a = "images/interface/fog", d = $User.Browser.IE && !$User.Browser.IE9 ? "gif": "png";
 			return ["images/interface/background4.jpg", c[b.CardGif], c[b.NormalGif], a + "0." + d, a + "1." + d, a + "2." + d, a + "3." + d];
@@ -87,11 +87,11 @@
 			})
 		}
 	}, {
-		AZ: [[oZombie, 4, 1, Normal_Zombie_Wave], [oZombie2, 3, 1, Normal_Zombie_Wave], [oZombie3, 2, 1, [1, 3, 5, 8, 10, 13, 15, 17, 20, 25, 30, 35, 40]], [oPoleVaultingZombie, 2, 3, Normal_Zombie_Wave], [oConeheadZombie, 4, 1, Normal_Zombie_Wave], [oBucketheadZombie, 2, 1, Normal_Zombie_Wave],  [oNewspaperZombie, 2, 11, [11, 12, 13, 14, 17, 20, 31, 32, 34, 36, 38, 40]], [oScreenDoorZombie, 1, 15, [15, 16, 17, 19, 25, 30, 35, 39, 40]], [oFootballZombie, 2, 17, [17, 20, 24, 28, 30, 34, 38, 40]], [oDancingZombie, 1, 19, [19, 20, 30, 40]], [oDuckyTubeZombie1, 1, 21, [21, 23, 25, 28, 30, 32, 33, 34, 35, 36, 38, 40]], [oDuckyTubeZombie2, 1, 22, [22, 27, 28, 37, 39, 40]], [oDuckyTubeZombie3, 1, 24, [24, 29, 32, 38, 40]], [oDolphinRiderZombie, 1, 26, [26, 29, 30, 31, 35, 39, 40]], [oSnorkelZombie, 1, 29, [30, 34, 40]], [oZomboni, 1, 31, [31, 35, 36, 37, 40]], [oJackinTheBoxZombie, 1, 34, [34, 35, 38, 39, 40]], [oBalloonZombie, 1, 35, [38, 40]]],
+		AZ: [[oZombie, 4, 1, Normal_Zombie_Wave], [oZombie2, 3, 1, Normal_Zombie_Wave], [oZombie3, 2, 1, [1, 3, 5, 8, 10, 13, 15, 17, 20, 25, 30, 35, 40]], [oPoleVaultingZombie, 2, 3, Normal_Zombie_Wave], [oConeheadZombie, 4, 1, Normal_Zombie_Wave], [oBucketheadZombie, 2, 1, Normal_Zombie_Wave], [oPeaZombie, 2, 1, Normal_Zombie_Wave], [oWallNutZombie, 2, 1, Normal_Zombie_Wave], [oNewspaperZombie, 2, 11, [11, 12, 13, 14, 17, 20, 31, 32, 34, 36, 38, 40]], [oScreenDoorZombie, 1, 15, [15, 16, 17, 19, 25, 30, 35, 39, 40]], [oFootballZombie, 2, 17, [17, 20, 24, 28, 30, 34, 38, 40]], [oDancingZombie, 1, 19, [19, 20, 30, 40]], [oGatlingPeaZombie, 1, 19, [19, 20, 30, 40]], [oDuckyTubeZombie1, 1, 21, [21, 23, 25, 28, 30, 32, 33, 34, 35, 36, 38, 40]], [oDuckyTubeZombie2, 1, 22, [22, 27, 28, 37, 39, 40]], [oDuckyTubeZombie3, 1, 24, [24, 29, 32, 38, 40]], [oDolphinRiderZombie, 1, 26, [26, 29, 30, 31, 35, 39, 40]], [oSnorkelZombie, 1, 29, [30, 34, 40]], [oZomboni, 1, 31, [31, 35, 36, 37, 40]], [oJackinTheBoxZombie, 1, 34, [34, 35, 38, 39, 40]], [oBalloonZombie, 1, 35, [38, 40]]],
 		FlagNum: 40, ZTimeStep: 10, // 移动速度增加
 		FlagToSumNum: {
-			a1: [   3,  5,  9, 10, 12, 15, 19, 20, 23, 25, 29, 30, 32, 36, 38, 39],
-			a2: [6, 9, 14, 25, 20, 24, 30, 50, 36, 42, 48, 60, 50, 60, 70, 80, 95]
+			a1: [3,  5,  9, 10, 12, 15, 19, 20, 23, 25, 29, 30, 32, 36, 38, 39],
+			a2: [6, 9, 14, 25, 20, 24, 30, 50, 36, 56, 64, 80, 60, 70, 80, 100, 125]
 		},
 		FlagToMonitor: {
 			9: [ShowLargeWave, 0],
@@ -100,7 +100,7 @@
 			39: [ShowFinalWave, 0]
 		},
 		FlagToEnd: function() {
-			if(oS.SunNum < 4000) return ClearChild(DivA), GameOver("囧rz，失败乃兵家常事<br>阳光未达标，请再接再厉！");
+			if(oS.SunNum < 4000) return ClearChild(DivA), GameOver("失败乃兵家常事<br>阳光未达标，请再接再厉！");
 			NewImg("imgSF", "images/interface/trophy.png", "left:43.5%;top:220px", EDAll, { onclick: function() { SelectModal(0), PlayAudio("winmusic"); } });
 			NewImg("PointerUD", "images/interface/PointerDown.gif", "top:185px;left:51%", EDAll);
 		}
@@ -145,9 +145,6 @@
 		},
 		ViewPlantTitle: function(a) {},
 		MonitorCard: function(a) {},
-		SummonZombie: function(id, e, b) { ++oP.NumZombies, asyncInnerHTML((a = new id).CustomBirth(e, b, 1, "auto"), function(n, m) { EDPZ.appendChild(n); m.Birth(); }, a); return a; }
+		SummonZombie: function(id, e, b) { ++oP.NumZombies, asyncInnerHTML((a = new id).CustomBirth(e, b, 1, "auto"), function(n, m) { EDPZ.appendChild(n); m.Birth();Math.random()*100<20&&m.bedevil()}, a); return a; }
 	});
-
 })();
-
-
