@@ -323,7 +323,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
   Lvl:3,
 PicArr: (function() {
     var a = "images/Zombies/Zombie/";
-    return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", b + "1.gif"]
+    return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif"]
 })(),
 Boom: function(a) {
     var e = $Z[a.id],
@@ -367,7 +367,7 @@ Boom: function(a) {
   PrivateBirth: function() {
     var c = this;
 	var z = $(c.id);
-    z.NutHead = "Pea" + Math.random();
+    z.NutHead = "Nut" + Math.random();
     var pea = NewImg(z.NutHead,a.HeadGifPic[2],"position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
     z.appendChild(Nut);
 	a.OrnBreakPoint1=a.MaxOrnHP*0.66;
