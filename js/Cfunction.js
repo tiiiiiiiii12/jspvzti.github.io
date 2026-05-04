@@ -1502,7 +1502,7 @@ InitHandBookPCard = function() {
 InitHandBookZCard = function() {
 	PlayAudio("gravebutton");
 	var d = "",
-	g, f, e = [oZombie, oFlagZombie, oConeheadZombie, oPoleVaultingZombie, oBucketheadZombie, oNewspaperZombie,oScreenDoorZombie,oFootballZombie,oDancingZombie,oBackupDancer,oDuckyTubeZombie1,oSnorkelZombie,oZomboni,oDolphinRiderZombie,oImp,oJackinTheBoxZombie,oBalloonZombie,oDiggerZombie,oGargantuar,oPeaZombie,oGatlingPeaZombie],
+	g, f, e = [oZombie, oFlagZombie, oConeheadZombie, oPoleVaultingZombie, oBucketheadZombie, oNewspaperZombie,oScreenDoorZombie,oFootballZombie,oDancingZombie,oBackupDancer,oDuckyTubeZombie1,oSnorkelZombie,oZomboni,oDolphinRiderZombie,oImp,oJackinTheBoxZombie,oBalloonZombie,oDiggerZombie,oGargantuar,oPeaZombie,oWallNutZombie,oTallNutZombie,oGatlingPeaZombie],
 	a = e.length,
 	b = 0,
 	c;
