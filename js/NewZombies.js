@@ -318,13 +318,12 @@ oWallNutZombie = InheritO(oConeheadZombie, {
   CName:"坚果僵尸",
   OrnHP:1100,
   SunNum:150,
-  HeadGifPic:[oWallNut.prototype.PicArr[2],oWallNut.prototype.PicArr[3],oWallNut.prototype.PicArr[4]],
   StandGif: 11,
   Lvl:3,
   check:1,
 PicArr: (function() {
     var a = "images/Zombies/Zombie/";
-    return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif"]
+    return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif","images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif"]
 })(),
 Boom: function(a) {
     var e = $Z[a.id],
@@ -369,7 +368,7 @@ Boom: function(a) {
     var c = this;
 	var z = $(c.id);
     z.NutHead = "Nut" + Math.random();
-    var Nut = NewImg(z.NutHead,a.HeadGifPic[0],"position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
+    var Nut = NewImg(z.NutHead,a.PicArr[12],"position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
     z.appendChild(Nut);
 	a.OrnBreakPoint1=a.MaxOrnHP*0.66;
 	a.OrnBreakPoint2=a.MaxOrnHP*0.33;
@@ -378,7 +377,7 @@ check:1,
 jinyinAct:function(a){
 	a.OSpeed*=2;
 	a.Speed*=2;
-	a.HeadGifPic[0]=a.HeadGifPic[1]=a.HeadGifPic[2]=oBoomNutBowling.prototype.PicArr[2];
+	a.PicArr[12]=a.PicArr[13]=a.PicArr[14]="images/Plants/WallNut/BoomWallNutRoll.gif";
 	a.NormalAttack=function(a,b){
 		$P[b]&&$P[b].getHurt(a,3,2000)
 	}
@@ -388,10 +387,10 @@ var z=a.Ele;
 	var c = a.HP;
             switch (true) {
                 case c < a.OrnBreakPoint2:
-					$(z.NutHead).src = a.HeadGifPic[2]
+					$(z.NutHead).src = a.PicArr[13]
                     return;
                 case c < a.OrnBreakPoint1:
-                    $(z.NutHead).src = a.HeadGifPic[1]
+                    $(z.NutHead).src = a.PicArr[14]
             }
 	if($Z[a.id]&&!a.isDie){
 	!(a.PZ==a.check)&&
@@ -412,14 +411,17 @@ oTallNutZombie = InheritO(oWallNutZombie, {
   OrnHP:2200,
   SunNum:225,
   Boom:function(){},
-  HeadGifPic:oTallNut.prototype.PicArr[2],
-  HeadBreakGifPic1:oTallNut.prototype.PicArr[3],
-  HeadBreakGifPic2:oTallNut.prototype.PicArr[4],
   StandGif: 11,
   Lvl:5,
 jinyinAct:function(){},
 Boom:function(){},
   Produce: '韧性：<font color="#FF0000">极高(2200+270)</font><br>精英形态：暂无</p>太好了，高仁僵尸来了'
+},{
+ PicArr:{
+	 12:"images/Plants/TallNut/TallNut.gif",
+	 13:"images/Plants/TallNut/TallNut_cracked1.gif",
+	 14:"images/Plants/TallNut/TallNut_cracked2.gif"
+ }
 }),
     oGatlingPeaZombie = InheritO(oNewspaperZombie, {
         EName: "oGatlingPeaZombie",
