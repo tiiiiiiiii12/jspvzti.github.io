@@ -719,7 +719,7 @@ while (e--) {
           height: "46px"
         })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ? 5 : -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g])) : ClearChild(j)
       },
-      [b, $(b), 25, 0, a.AttackedLX, a.R, Math.random() * 100 > 10 ? -1 : 0, 0, a.AttackedLX - 40, oGd.$Torch])
+      [b, $(b), 25, 0, a.AttackedLX, a.R, Math.random() * 100 > 5 ? -1 : 0, 0, a.AttackedLX - 40, oGd.$Torch])
   }
 }),
     oRepeater = InheritO(oPeashooter, {
@@ -758,7 +758,7 @@ while (e--) {
                         "-1": "getSnowPea",
                         0: "getPea",
                         1: "getFirePea"
-                    } [m]](d,h*(BSpeed+1),c),(SetStyle(j, {
+                    } [m]](d,Math.round(h*(BSpeed+1)),c),(SetStyle(j, {
                         left: o + 28 + "px",
                         width: "52px",
                         height: "46px"
@@ -965,8 +965,8 @@ NormalAttack1: function() {
 		Boom:0,
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
-        Tooltip: "优先锁定场上血量最高的僵尸，每5秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害",
-        Produce: '狙击手锁定场上血量最高的僵尸，每5秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害<br>伤害：<font color="#FF0000">高(300/1000)</font><p>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
+        Tooltip: "优先锁定场上血量最高的僵尸，每5秒对其造成250伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害",
+        Produce: '狙击手锁定场上血量最高的僵尸，每5秒对其造成250伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害<br>伤害：<font color="#FF0000">高(300/1000)</font><p>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
 		checkTarget:function(a) {
   var TargeteachR = [];
   PlayAudio("portal");
@@ -996,7 +996,7 @@ NormalAttack:function(a){
   a.Target && (++a.Boom >= 19 ? (a.Target.getExplosion(1000), a.Boom = 0, PlayAudio("cherrybomb"),
       (!$Z[a.Target.id] || !a.Target.beAttacked)?ClearChild($("P_" + a.id)):$("P_" + a.id).src="images/Plants/PB00.gif",
       oSym.addTask(100, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.Target.ZX + 10) + "px;top:" + (a.Target.pixelTop + 20) + "px;z-index:25;", EDPZ)])) :
-    a.Target.getHit0(a.Target, 300, 0), (!$Z[a.Target.id] || !a.Target.beAttacked) && ClearChild($("P_" + a.id)));
+    a.Target.getHit0(a.Target, 250, 0), (!$Z[a.Target.id] || !a.Target.beAttacked) && ClearChild($("P_" + a.id)));
 	a.Boom + 1 >= 19&&($("P_" + a.id).src="images/Plants/PotatoMine/PotatoMineNotReady.gif");
   (!a.Target || (a.Target && (!$Z[a.Target.id] || !a.Target.beAttacked || !a.Target.PZ))) && a.checkTarget(a);
 },
@@ -1019,7 +1019,7 @@ NormalAttack:function(a){
         height: 72,
         beAttackedPointR: 72,
         SunNum: 175,
-        PicArr: ["images/Card/Plants/SplitPea.png", "images/Plants/SplitPea/0.gif", "images/Plants/SplitPea/SplitPea.gif", "images/Plants/PB00.gif", "images/Plants/PB01.gif", "images/Plants/PeaBulletHit.gif"],
+        PicArr: ["images/Card/Plants/SplitPea.png", "images/Plants/SplitPea/0.gif", "images/Plants/SplitPea/SplitPea.gif", "images/Plants/PB-10.gif", "images/Plants/PB01.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "前后双向发射豌豆",
         Produce: '分裂射手，可以向前后两个方向发射豌豆。<br>精英形态：向后发射的子弹可以回弹<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">前面和后面</font><br>发射速度：<font color="#FF0000">前面为正常或两倍速度，后面为两倍速度</font></p>分裂射手：“没错，我就是双子座。我知道，这的确很令人惊奇。不过，有两个头，或者实际上，长着一个头和一个类似头的东西，在背上，对我这条线上的防守帮助很大。',
@@ -1115,7 +1115,7 @@ NormalAttack:function(a){
                             })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [m])) : (q += (o = !f ? 5 : -5)) < oS.W && q > 100 ? (m.style.left = (r += o) + "px", oSym.addTask(1, arguments.callee, [i, m, k, f, q, l, p, n, r, j])) : 
 							f&&d.jinyin?(f=0,m.src=d.PicArr[(f+3)],m.style.left = (r += o) + "px", oSym.addTask(1, arguments.callee, [i, m, k, f, q, l, p, n, r, j])):ClearChild(m)
                         },
-                        [e, $(e), 20, c, d.AttackedLX, d.R, 0, 0, a, oGd.$Torch])
+                        [e, $(e), 20, c, d.AttackedLX, d.R, c-1, 0, a, oGd.$Torch])
                 };
             b()
         }
@@ -1411,7 +1411,7 @@ NormalAttack:function(a){
                 (a = c[f]).Altitude < 2 && a.getThump(1400)
             }
         for(i=g.C;i<=9;i++){
-            num++<=2&&!oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0);
+            !oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&num++<3&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0);
         }
             g.Die(1);
             PlayAudio("potato_mine");
@@ -1795,11 +1795,11 @@ NormalAttack:function(a){
             switch (true) {
                 case c && c < 3:
 					d.getHurt=function(){};
-                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):Math.random()*100>15?d.Die():d.NormalAttack(d,0);
+                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):Math.random()*100>10?d.Die():d.NormalAttack(d,0);
                     break;
                 case (d.HP -= b) < 1:
 					d.getHurt=function(){};
-                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):Math.random()*100>15?d.Die():d.NormalAttack(d,0);
+                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):Math.random()*100>10?d.Die():d.NormalAttack(d,0);
                     break;
                 case d.HP < 1334:
                     d.HurtStatus < 2 && (d.HurtStatus = 2, a.childNodes[1].src = "images/Plants/PumpkinHead/pumpkin_damage2.gif");
@@ -2191,7 +2191,7 @@ jinyinAttackGif2: 8,
                     var Z = oZ.getArZ(j.AttackedLX, Math.min(j.AttackedRX + 160,oS.W), R);
                     var zl = Z.length;
                     while (zl--) {
-                      Z[zl].Altitude == 1 && j && Z[zl].getHit1(Z[zl], 40, 0)
+                      Z[zl].Altitude == 1 && j && Z[zl].getHit0(Z[zl], 40, 0)
                     }
                   } while (R++ < Math.min(j.R + 1, oS.R))
                   j && (j.canTrigger = 1, $(i).childNodes[1].src = j.PicArr[j.NormalGif])
@@ -2445,7 +2445,7 @@ oGloomShroom = InheritO(oFumeShroom, {
     for (g = k.MinR; g <= f; g++) {
       e = oZ.getArZ(c, b, g);
       for (h = e.length; h--;
-        (a = e[h]).Altitude < 2 && (a.getHit1(a, 50), k.yuansu ? (num > 95 && (a.OrnHP = 0), a.getHit1(a, 50)) : (a.getSlow(a, a.id, 1000), num > 80 && a.getr(a, 15)))) {}
+        (a = e[h]).Altitude < 2 && (a.getHit1(a,40), k.yuansu ? (num > 95 && (a.OrnHP = 0), a.getHit1(a, 40)) : (a.getSlow(a, a.id, 1000), num > 80 && a.getr(a, 15)))) {}
     }
     oSym.addTask(100,
       function(i) {
@@ -2628,7 +2628,7 @@ oGloomShroom = InheritO(oFumeShroom, {
                     var f = $(g);
                     f && SetVisible(f);
                     c.AttTime-=3;
-                    oSym.addTask(130+Math.max(c.AttTime,-80),
+                    oSym.addTask(130+Math.max(c.AttTime,-70),
                         function(h) {
                             var i = $P[h];
                             i && (i.Attacking = 0)
@@ -2668,9 +2668,9 @@ oGloomShroom = InheritO(oFumeShroom, {
         Tooltip: "让一只僵尸为你作战",
         num:0,
 		PrivateBirth:function(a){
-			oSym.addTask(2000,function(a){
+			oSym.addTask(3000,function(a){
 				$P[a.id]&&oP.SetTimeoutTomZombies1([oZombie]);
-				$P[a.id]&&oSym.addTask(2000,arguments.callee,[a])
+				$P[a.id]&&oSym.addTask(3000,arguments.callee,[a])
 			},[a]);
 		},
         Produce: '当僵尸吃下魅惑菇后，他将会掉转方向为你作战，每隔一段时间使场上的魅惑墓碑出僵尸<br>精英形态：使被其魅惑的僵尸发射豌豆，本体被啃咬次数越多，僵尸发射豌豆速度越快<p>使用方法：<font color="#FF0000">单独使用，接触生效</font><br>特点：<font color="#FF0000">让一只僵尸为你作战<br>白天睡觉</font></p>魅惑菇声称：“僵尸们是我们的朋友，他们被严重误解了，僵尸们在我们的生态环境里扮演着重要角色。我们可以也应当更努力地让他们学会用我们的方式来思考。”',
@@ -2824,7 +2824,7 @@ NormalAttack2: function() {
                 a, EDPZ)
         },
         ProduceSun: function(a, c, b) {
-            AppearSun(Math.floor(c + Math.random() * 41), b, !a.Status ? 15 : 25, 0),
+            AppearSun(Math.floor(c + Math.random() * 41), b, !a.Status ? 15 : 30, 0),
                 oSym.addTask(2400,
                     function(g, f, e) {
                         var d = $P[g];
@@ -3065,9 +3065,13 @@ NormalAttack2: function() {
         BookHandBack: 3,
         getTriggerRange: function(a, b, c) {
             return [
-                [b, Math.min(c + 250, oS.W), 0]
+                [b, Math.min(c + 500, oS.W), 0]
             ]
         },
+		jinyinAct:function(a){
+			oSeaShroom.prototype.coolTime>10&&(oSeaShroom.prototype.coolTime-=5);
+			AppearCard(a.pixelLeft,a.pixelTop,oPuffShroom,0,1500)
+		},
         PicArr: ["images/Card/Plants/SeaShroom.png", "images/Plants/SeaShroom/0.gif", "images/Plants/SeaShroom/SeaShroom.gif", "images/Plants/SeaShroom/SeaShroomSleep.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         CanGrow: function(c, b, d) {
             var a = b + "_" + d,
@@ -3082,7 +3086,7 @@ NormalAttack2: function() {
             return "left:0:top:0;display:none"
         },
         Tooltip: "发射短距离孢子的水生植物",
-        Produce: '海蘑菇，能够发射短程孢子的水生植物。<p>伤害：<font color="#FF0000">普通</font><br>射程：<font color="#FF0000">短<br>必须种在水上<br>白天睡觉</font></p>海蘑菇从来没看到过大海，大海就在他的名字里，他总听到关于大海的事。他只是没找到合适的时间，总有一天……是的，他会见到海的。'
+        Produce: '海蘑菇，能够发射短程孢子的水生植物。<p>伤害：<font color="#FF0000">普通</font><br>种下后使自身的冷却减少，最少10s，同时生成小喷菇卡牌<br>射程：<font color="#FF0000">短<br>必须种在水上<br>白天睡觉</font></p>海蘑菇从来没看到过大海，大海就在他的名字里，他总听到关于大海的事。他只是没找到合适的时间，总有一天……是的，他会见到海的。'
     }),
     oPlantern = InheritO(CPlants, {
         EName: "oPlantern",
@@ -3109,7 +3113,8 @@ NormalAttack2: function() {
             b = c.C;
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
-                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime>=-50)&&(oGd.$[i + "_" + l+"_1"].AttTime-=60);
+					var P=oGd.$[i + "_" + l+"_1"];
+                     P&&!P.Plan&&(P.AttTime>=-50)&&(P.Plan=true,P.AttTime-=60);
                     oSym.addTask(2000,function(f){
 						var c;
 						$P[f.id]&&((c=CustomSpecial(oPlantern,f.R,f.C)).jinyinAct(c),c.jinyin=1)
@@ -3125,7 +3130,8 @@ NormalAttack2: function() {
         if(c.jinyin){
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
-                     oGd.$[i + "_" + l+"_1"]&&(oGd.$[i + "_" + l+"_1"].AttTime<=-60)&&(oGd.$[i + "_" + l+"_1"].AttTime+=60);
+					var P=oGd.$[i + "_" + l+"_1"];
+                     P&&P.Plan&&(P.Plan=0,P.AttTime+=60);
                   }
                 }
             }
@@ -3306,7 +3312,7 @@ NormalAttack2: function() {
                 if(num>75){
                     e && e.Altitude == 1&&(e.getHit0(e, 3, d)),(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
                 }else{
-                e && e.Altitude == 1?(num>50&&e.getr(e,30),e.getPea(e,20,d), ClearChild(i)):(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
+                e && e.Altitude == 1?(num>50&&e.getr(e,20),e.getPea(e,20,d), ClearChild(i)):(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
                 }
                 },
                 [c, $(c), 0, b.AttackedLX, b.R, b.AttackedLX - 40])
