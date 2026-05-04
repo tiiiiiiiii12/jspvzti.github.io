@@ -310,7 +310,63 @@ PrivateDie:function(a){
       },
       [b, $(b), a.ZX, a.R, a.ZX - 40])
   },
-  Produce: '韧性：<font color="#FF0000">低(300)</font><br>精英形态：450血，攻速变快，但每次攻击扣自己10血</p>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
+Lvl:2,
+  Produce: '韧性：<font color="#FF0000">低(300)</font><br>精英形态：450血，攻速变快，但每次攻击扣自己10血</p>只是一只普普通通的小豌豆僵尸'
+}),
+oWallNutZombie = InheritO(oConeheadZombie, {
+  EName: "oWallNutZombie",
+  CName:"坚果僵尸",
+  OrnHP:1100,
+  HeadGifPic:oWallNut.prototype.PicArr,
+  StandGif: 11,
+  Lvl:3,
+PicArr: (function() {
+    var a = "images/Zombies/Zombie/";
+    return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", b + "1.gif"]
+})(),
+  GoingDieHead:function(){},
+  PrivateBirth: function() {
+    var c = this;
+	var z = $(c.id);
+    z.NutHead = "Pea" + Math.random();
+    var pea = NewImg(z.NutHead,a.HeadGifPic[2],"position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
+    z.appendChild(Nut);
+	a.OrnBreakPoint1=a.MaxOrnHP*0.66;
+	a.OrnBreakPoint2=a.MaxOrnHP*0.33;
+  },
+check:1,
+  PrivateAct:function(a){
+var z=a.Ele;
+	var c = a.HP;
+            switch (true) {
+                case c < a.OrnBreakPoint2:
+					$(z.NutHead).src = a.HeadGifPic[4]
+                    return;
+                case c < a.OrnBreakPoint1:
+                    $(z.NutHead).src = a.HeadGifPic[3]
+            }
+	if($Z[a.id]&&!a.isDie){
+	!(a.PZ==a.check)&&(
+	EditImg($(z.NutHead),0,a.HeadGif,{
+		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"
+	},0));
+	!a.beAttacked&&(ClearChild($(z.NutHead)),a.isDie=true);
+	  }
+  },
+PrivateDie:function(a){
+	var z=a.Ele;
+	$(z.NutHead)&&ClearChild($(z.NutHead))
+},
+  Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态：暂无</p>他有限的感官，只能让他在被植物打时感到一种麻麻的感觉'
+}),
+oTallNut = InheritO(oWallNutZombie, {
+  EName: "oWallNutZombie",
+  CName:"高坚果僵尸",
+  OrnHP:2200,
+  HeadGifPic:oTallNut.prototype.PicArr,
+  StandGif: 11,
+  Lvl:5,
+  Produce: '韧性：<font color="#FF0000">极高(2200+270)</font><br>精英形态：暂无</p>太好了，高仁僵尸来了'
 }),
     oGatlingPeaZombie = InheritO(oNewspaperZombie, {
         EName: "oGatlingPeaZombie",
