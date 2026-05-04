@@ -1,7 +1,7 @@
 // VaseKillerNew2
 oS.Init({
 	PName: [oCherryBomb, oFumeShroom, oScaredyShroom, oCactus, oSeaShroom, oPeashooter, oPumpkinHead, oStarfruit, oLilyPad, oTangleKelp, oPlantern, oPotatoMine], 
-	ZName: [oZombie, oZombie2, oConeheadZombie, oScreenDoorZombie, oPoleVaultingZombie, oBucketheadZombie, oJackinTheBoxZombie, oDuckyTubeZombie1, oDuckyTubeZombie2], 
+	ZName: [oZombie, oZombie2, oConeheadZombie, oScreenDoorZombie, oPoleVaultingZombie, oBucketheadZombie, oJackinTheBoxZombie, oDuckyTubeZombie1, oDuckyTubeZombie2,oPeaZombie], 
 	PicArr: ["images/interface/background4.jpg","images/interface/trophy.png","images/interface/PointerDown.gif","images/interface/Stripe.png"], 
 	backgroundImage: "images/interface/background4.jpg", 
 	DKind: 0, ShowScroll: false, ProduceSun: false, 
@@ -72,8 +72,8 @@ oS.Init({
 
 	VaseArP : {
 		GreenNum: Infinity, ZombieNum: 0, Left: 5, Right: 9, 
-		ZombieP: [0, 1, 2, 3, 4, 5, 6], 
-		WaterZombieP: [7, 8, 8], 
+		ZombieP: [0, 1, 2, 3, 4, 5, 6,9], 
+		WaterZombieP: [7, 8], 
 		PlantP: [1, 1, 1, 1, 1, 1, 1, 2, 3, 4, 5, 6, 6, 6, 7, 8, 8, 8, 9], 
 		SunP: [50] 
 	}
