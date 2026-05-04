@@ -1,7 +1,7 @@
 // VaseKillerNew3
 oS.Init({
 	PName: [oCherryBomb, oPuffShroom, oFumeShroom, oHypnoShroom, oScaredyShroom, oIceShroom, oDoomShroom, oSeaShroom, oGloomShroom, oCoffeeBean, oLilyPad],
-	ZName: [oZombie, oZombie2, oZombie3, oDuckyTubeZombie1, oDuckyTubeZombie3, oFootballZombie, oScreenDoorZombie, oJackinTheBoxZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oDuckyTubeZombie1, oDuckyTubeZombie3, oFootballZombie, oScreenDoorZombie, oJackinTheBoxZombie,oWallNutZombie],
 	PicArr: ["images/interface/background3.jpg","images/interface/trophy.png","images/interface/PointerDown.gif","images/interface/Stripe.png"], 
 	backgroundImage: "images/interface/background3.jpg", 
 	DKind: 1, ShowScroll: false, ProduceSun: false, 
@@ -72,7 +72,7 @@ oS.Init({
 
 	VaseArP : {
 		GreenNum: 2, ZombieNum: 2, Left: 4, Right: 9, 
-		ZombieP: [6, 6, 6, 6, 6, 7, 7, 5], 
+		ZombieP: [6, 6, 6, 6, 8, 7, 8, 5], 
 		WaterZombieP: [4, 4, 4, 4, 3, 3], 
 		PlantP: [1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 7, 7, 8, 8, 8], 
 		SunP: [] 
@@ -82,5 +82,3 @@ oS.Init({
 		SelectCard("oCoffeeBean"), SelectCard("oLilyPad"), SelectCard("oCherryBomb");
 	}
 });
-
-
