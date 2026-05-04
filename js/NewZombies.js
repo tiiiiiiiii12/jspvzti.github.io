@@ -318,7 +318,9 @@ oWallNutZombie = InheritO(oConeheadZombie, {
   CName:"坚果僵尸",
   OrnHP:1100,
   SunNum:150,
-  HeadGifPic:oWallNut.prototype.PicArr,
+  HeadGifPic:oWallNut.prototype.PicArr[2],
+  HeadBreakGifPic1:oWallNut.prototype.PicArr[3],
+  HeadBreakGifPic2:oWallNut.prototype.PicArr[4],
   StandGif: 11,
   Lvl:3,
 PicArr: (function() {
@@ -368,7 +370,7 @@ Boom: function(a) {
     var c = this;
 	var z = $(c.id);
     z.NutHead = "Nut" + Math.random();
-    var pea = NewImg(z.NutHead,a.HeadGifPic[2],"position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
+    var pea = NewImg(z.NutHead,a.HeadGifPic,"position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
     z.appendChild(Nut);
 	a.OrnBreakPoint1=a.MaxOrnHP*0.66;
 	a.OrnBreakPoint2=a.MaxOrnHP*0.33;
@@ -377,7 +379,7 @@ check:1,
 jinyinAct:function(a){
 	a.OSpeed*=2;
 	a.Speed*=2;
-	a.HeadGifPic[2]=a.HeadGifPic[3]=a.HeadGifPic[4]=oBoomNutBowling.prototype.PicArr[2];
+	a.HeadGifPic=a.HeadBreakGifPic1=a.HeadBreakGifPic2=oBoomNutBowling.prototype.PicArr[2];
 	a.NormalAttack=function(a,b){
 		$P[b]&&$P[b].getHurt(a,3,2000)
 	}
@@ -387,14 +389,14 @@ var z=a.Ele;
 	var c = a.HP;
             switch (true) {
                 case c < a.OrnBreakPoint2:
-					$(z.NutHead).src = a.HeadGifPic[4]
+					$(z.NutHead).src = a.HeadBreakGifPic2
                     return;
                 case c < a.OrnBreakPoint1:
-                    $(z.NutHead).src = a.HeadGifPic[3]
+                    $(z.NutHead).src = a.HeadBreakGifPic1
             }
 	if($Z[a.id]&&!a.isDie){
 	!(a.PZ==a.check)&&(
-	EditImg($(z.NutHead),0,a.HeadGif,{
+	EditImg($(z.NutHead),0,$(z.NutHead).src,{
 		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"
 	},0));
 	!a.beAttacked&&(ClearChild($(z.NutHead)),a.isDie=true);
@@ -413,7 +415,9 @@ oTallNutZombie = InheritO(oWallNutZombie, {
   OrnHP:2200,
   SunNum:225,
   Boom:function(){},
-  HeadGifPic:oTallNut.prototype.PicArr,
+  HeadGifPic:oTallNut.prototype.PicArr[2],
+  HeadBreakGifPic1:oTallNut.prototype.PicArr[3],
+  HeadBreakGifPic2:oTallNut.prototype.PicArr[4],
   StandGif: 11,
   Lvl:5,
 jinyinAct:function(){},
