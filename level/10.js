@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater],
-	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oPoleVaultingZombie, oBucketheadZombie,oImp,oPeaZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oPoleVaultingZombie, oBucketheadZombie,oImp,oPeaZombie,oWallNutZombie],
 	PicArr: ["images/interface/background1.jpg", "images/interface/trophy.png"],
 	backgroundImage: "images/interface/background1.jpg",
 	CanSelectCard: 0,
@@ -72,6 +72,7 @@ oS.Init({
 		[oPoleVaultingZombie, 2, 1],
 		[oImp, 2, 1],
 		[oPeaZombie, 2, 1],
+		[oWallNutZombie, 2, 1],
 		[oBucketheadZombie, 5, 1]
 	],
 	FlagNum: 20,
