@@ -318,7 +318,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
   CName:"坚果僵尸",
   OrnHP:1100,
   SunNum:150,
-  HeadGifPic:(function(){return [oWallNut.prototype.PicArr[2],oWallNut.prototype.PicArr[3],oWallNut.prototype.PicArr[4]]})(),
+  HeadGifPic:[oWallNut.prototype.PicArr[2],oWallNut.prototype.PicArr[3],oWallNut.prototype.PicArr[4]],
   StandGif: 11,
   Lvl:3,
   check:1,
