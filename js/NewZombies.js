@@ -388,8 +388,8 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     PrivateAct: function(a) {
       var z = a.Ele;
       var c = a.HP;
-      a.checkHP(z, a);
       if ($Z[a.id] && a.beAttacked) {
+		a.checkHP(z, a);
         !(a.PZ == a.check) &&
         ($(z.NutHead).style.transform = a.PZ ? "rotateY(180deg)" : "rotateY(0deg)")
       }!a.beAttacked && (ClearChild($(z.NutHead)));
