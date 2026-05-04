@@ -1,6 +1,6 @@
 oS.Init({
   PName:[oPeashooter,oSunFlower,oCherryBomb,oWallNut,oPotatoMine,oSnowPea,oChomper,oRepeater,oPuffShroom,oSunShroom,oFumeShroom,oGraveBuster,oHypnoShroom,oScaredyShroom,oIceShroom,oDoomShroom,oLilyPad,oSquash,oThreepeater,oTangleKelp,oJalapeno,oSpikeweed,oTorchwood,oTallNut,oSeaShroom,oPlantern],
-  ZName:[oZombie,oZombie2,oDuckyTubeZombie1,oConeheadZombie,oFootballZombie,oJackinTheBoxZombie,oNewspaperZombie,oImp,oGatlingPeaZombie],
+  ZName:[oZombie,oZombie2,oDuckyTubeZombie1,oConeheadZombie,oFootballZombie,oJackinTheBoxZombie,oNewspaperZombie,oImp,oGatlingPeaZombie,oWallNutZombie],
   PicArr:function(){
     var b=oCactus.prototype,
       c=b.PicArr,
