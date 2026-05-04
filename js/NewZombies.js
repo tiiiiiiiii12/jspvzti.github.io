@@ -323,6 +323,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
   HeadBreakGifPic2:oWallNut.prototype.PicArr[4],
   StandGif: 11,
   Lvl:3,
+  check:1,
 PicArr: (function() {
     var a = "images/Zombies/Zombie/";
     return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif"]
@@ -396,9 +397,7 @@ var z=a.Ele;
             }
 	if($Z[a.id]&&!a.isDie){
 	!(a.PZ==a.check)&&(
-	EditImg($(z.NutHead),0,$(z.NutHead).src,{
-		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"
-	},0));
+	$(z.NutHead).style.transform=a.PZ?"rotateY(180deg)":"rotateY(0deg)",
 	!a.beAttacked&&(ClearChild($(z.NutHead)),a.isDie=true);
 	  }
 	  a.jinyin&&a.isAttacking&&a.Boom(a);
