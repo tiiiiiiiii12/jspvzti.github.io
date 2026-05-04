@@ -59,7 +59,7 @@ backgroundImage: "images/interface/background1.jpg",
 	}
 },
 {
-	AZ: [[oZombie,1,1],[oZombie2,1,1],[oZombie3,1,1],[oConeheadZombie,1,5],[oBucketheadZombie,1,10],[oPoleVaultingZombie,1, 15],[oWallNutZombie,1, 8]],
+	AZ: [[oZombie,1,1],[oZombie2,1,1],[oZombie3,1,1],[oConeheadZombie,1,5],[oBucketheadZombie,1,10],[oPoleVaultingZombie,1, 15],[oPeaZombie,1, 8]],
 	FlagNum: 20,
 	FlagToSumNum:{a1:[3,5,9,10,13,15,19],a2:[3,6,12,20,14,26,38,50]}, //代表第1-3波强度是1，4-5是2，6-9是3，其余是10
 	FlagToMonitor:{9:[ShowLargeWave,0],19:[ShowFinalWave,0]}
