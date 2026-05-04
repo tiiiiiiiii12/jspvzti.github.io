@@ -370,7 +370,7 @@ Boom: function(a) {
     var c = this;
 	var z = $(c.id);
     z.NutHead = "Nut" + Math.random();
-    var pea = NewImg(z.NutHead,a.HeadGifPic,"position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
+    var Nut = NewImg(z.NutHead,a.HeadGifPic,"position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
     z.appendChild(Nut);
 	a.OrnBreakPoint1=a.MaxOrnHP*0.66;
 	a.OrnBreakPoint2=a.MaxOrnHP*0.33;
