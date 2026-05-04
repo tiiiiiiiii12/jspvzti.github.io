@@ -35,6 +35,7 @@ oS.Init({
     [oGatlingPeaZombie,1,1],
     [oImp,1,1],
     [oJackinTheBoxZombie,1,10,[10,20]],
+    [oWallNutZombie,1,1],
     [oFootballZombie,1,10]
   ],
   FlagNum:20,
