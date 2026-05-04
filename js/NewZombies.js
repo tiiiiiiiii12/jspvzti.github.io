@@ -407,8 +407,8 @@ PrivateDie:function(a){
 },
   Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态：爆炸坚果，碰到植物产生爆炸并且自身死亡</p>他有限的感官，只能让他在被植物打时感到一种麻麻的感觉'
 }),
-oTallNut = InheritO(oWallNutZombie, {
-  EName: "oWallNutZombie",
+oTallNutZombie = InheritO(oWallNutZombie, {
+  EName: "oTallNutZombie",
   CName:"高坚果僵尸",
   OrnHP:2200,
   SunNum:225,
