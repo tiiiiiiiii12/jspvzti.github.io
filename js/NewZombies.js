@@ -368,10 +368,10 @@ Boom: function(a) {
     var c = this;
 	var z = $(c.id);
     z.NutHead = "Nut" + Math.random();
-    var Nut = NewImg(z.NutHead,a.PicArr[12],"position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
+    var Nut = NewImg(z.NutHead,c.PicArr[12],"position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
     z.appendChild(Nut);
-	a.OrnBreakPoint1=a.MaxOrnHP*0.66;
-	a.OrnBreakPoint2=a.MaxOrnHP*0.33;
+	c.OrnBreakPoint1=c.MaxOrnHP*0.66;
+	c.OrnBreakPoint2=c.MaxOrnHP*0.33;
   },
 check:1,
 jinyinAct:function(a){
