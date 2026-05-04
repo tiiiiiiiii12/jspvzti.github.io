@@ -396,8 +396,8 @@ var z=a.Ele;
                     $(z.NutHead).src = a.HeadBreakGifPic1
             }
 	if($Z[a.id]&&!a.isDie){
-	!(a.PZ==a.check)&&(
-	$(z.NutHead).style.transform=a.PZ?"rotateY(180deg)":"rotateY(0deg)",
+	!(a.PZ==a.check)&&
+	($(z.NutHead).style.transform=a.PZ?"rotateY(180deg)":"rotateY(0deg)"),
 	!a.beAttacked&&(ClearChild($(z.NutHead)),a.isDie=true);
 	  }
 	  a.jinyin&&a.isAttacking&&a.Boom(a);
