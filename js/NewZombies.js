@@ -400,10 +400,9 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       $(z.NutHead) && ClearChild($(z.NutHead))
     },
     checkHP: function(z, a) {
+	if(!$Z[a.id]&&a.beAttacked)return;
       var c = a.OrnHP;
       switch (true) {
-        case !a.beAttacked:
-          return;
         case c < a.OrnBreakPoint2:
           $(z.NutHead).src = a.PicArr[14]
           break;
@@ -411,7 +410,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
           $(z.NutHead).src = a.PicArr[13]
       }
     },
-    Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态：爆炸坚果，碰到植物产生爆炸并且自身死亡</p>他有限的感官，只能让他在被植物打时感到一种麻麻的感觉'
+    Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态：爆炸坚果，碰到植物产生爆炸并自身死亡</p>他有限的感官，只能让他在被植物打时感到一种麻麻的感觉'
   }),
   oTallNutZombie = InheritO(oWallNutZombie, {
     EName: "oTallNutZombie",
