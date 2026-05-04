@@ -324,6 +324,44 @@ PicArr: (function() {
     var a = "images/Zombies/Zombie/";
     return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", b + "1.gif"]
 })(),
+Boom: function(a) {
+    var e = $Z[a.id],
+              d;
+            e && (PlayAudio("cherrybomb"),(d = NewImg("", "images/interface/blank.png", "width:306px;height:300px;left:" + (e.X - 16) + "px;top:" + (e.pixelTop - 90) + "px;z-index:20"),
+              d.src = "images/Plants/CherryBomb/Boom.gif", EDPZ.appendChild(d), oSym.addTask(70, ClearChild, [d])), e.PZ&&(function(k, g) {
+              var q = Math.max(1, k - 1),
+				q = Math.max(1, k - 1),
+                o = Math.min(oS.R,k + 1),
+                n = Math.max(1, g - 1),
+                h = Math.min(oS.C,g + 1),
+                r = oGd.$,
+                l,
+                j = "",
+                m;
+              do {
+                g = n;
+                do {
+                  j = q + "_" + g + "_";
+                  for (l = 0; l < 4; l++) {
+                    (m = r[j + l]) && m.BoomDie()
+                  }
+                } while (g++ < h)
+              } while (q++ < o)
+            })(e.R, GetC(e.ZX)), (function(j, l) {
+              var m = j - 120,
+                o = j+120,
+                h = Math.max(1, l - 1),
+                g = Math.min(oS.R, l + 1),
+                n,
+                k;
+              do {
+                k = (n = oZ["getAr" + (e.PZ ? "HZ" : "Z")](m, o, h)).length;
+                while (k--) {
+                  n[k].getExplosion(1600)
+                }
+              } while (h++ < g)
+            })(e.ZX, e.R), e.NormalDie())
+  },
   GoingDieHead:function(){},
   PrivateBirth: function() {
     var c = this;
@@ -335,6 +373,14 @@ PicArr: (function() {
 	a.OrnBreakPoint2=a.MaxOrnHP*0.33;
   },
 check:1,
+jinyinAct:function(a){
+	a.OSpeed*=2;
+	a.Speed*=2;
+	a.HeadGifPic[2]=a.HeadGifPic[3]=a.HeadGifPic[4]=oBoomNutBowling.prototype.PicArr[2];
+	a.NormalAttack=function(a,b){
+		$P[b]&&$P[b].getHurt(a,3,2000)
+	}
+},
   PrivateAct:function(a){
 var z=a.Ele;
 	var c = a.HP;
@@ -352,20 +398,24 @@ var z=a.Ele;
 	},0));
 	!a.beAttacked&&(ClearChild($(z.NutHead)),a.isDie=true);
 	  }
+	  a.jinyin&&a.isAttacking&&a.Boom(a);
   },
 PrivateDie:function(a){
 	var z=a.Ele;
 	$(z.NutHead)&&ClearChild($(z.NutHead))
 },
-  Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态：暂无</p>他有限的感官，只能让他在被植物打时感到一种麻麻的感觉'
+  Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态：爆炸坚果，碰到植物产生爆炸并且自身死亡</p>他有限的感官，只能让他在被植物打时感到一种麻麻的感觉'
 }),
 oTallNut = InheritO(oWallNutZombie, {
   EName: "oWallNutZombie",
   CName:"高坚果僵尸",
   OrnHP:2200,
+  Boom:function(){},
   HeadGifPic:oTallNut.prototype.PicArr,
   StandGif: 11,
   Lvl:5,
+jinyinAct:function(){},
+Boom:function(){},
   Produce: '韧性：<font color="#FF0000">极高(2200+270)</font><br>精英形态：暂无</p>太好了，高仁僵尸来了'
 }),
     oGatlingPeaZombie = InheritO(oNewspaperZombie, {
