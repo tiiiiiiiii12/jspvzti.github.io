@@ -3068,9 +3068,17 @@ NormalAttack2: function() {
                 [b, Math.min(c + 500, oS.W), 0]
             ]
         },
+		WakeUP:function(d){
+			$(d.id).childNodes[1].src = d.PicArr[d.NormalGif];
+			d.canTrigger = 1;
+			d.Sleep = 0;
+			d.jinyinAct(d);
+		},
 		jinyinAct:function(a){
+			if(!a.Sleep){
 			oSeaShroom.prototype.coolTime>10&&(oSeaShroom.prototype.coolTime-=5);
-			AppearCard(a.pixelLeft,a.pixelTop,oPuffShroom,0,1500)
+			!a.Sleep&&AppearCard(a.pixelLeft,a.pixelTop,oPuffShroom,0,1500)
+			}
 		},
         PicArr: ["images/Card/Plants/SeaShroom.png", "images/Plants/SeaShroom/0.gif", "images/Plants/SeaShroom/SeaShroom.gif", "images/Plants/SeaShroom/SeaShroomSleep.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         CanGrow: function(c, b, d) {
@@ -3086,7 +3094,7 @@ NormalAttack2: function() {
             return "left:0:top:0;display:none"
         },
         Tooltip: "发射短距离孢子的水生植物",
-        Produce: '海蘑菇，能够发射短程孢子的水生植物。<p>伤害：<font color="#FF0000">普通</font><br>种下后使自身的冷却减少，最少10s，同时生成小喷菇卡牌<br>射程：<font color="#FF0000">短<br>必须种在水上<br>白天睡觉</font></p>海蘑菇从来没看到过大海，大海就在他的名字里，他总听到关于大海的事。他只是没找到合适的时间，总有一天……是的，他会见到海的。'
+        Produce: '海蘑菇，能够发射短程孢子的水生植物。<p>伤害：<font color="#FF0000">普通</font><br>精英形态：<br>种下若未睡觉则使自身的冷却减少（最少减至10s），同时生成小喷菇卡牌，若睡觉时被唤醒也可正常触发<br>射程：<font color="#FF0000">短<br>必须种在水上<br>白天睡觉</font></p>海蘑菇从来没看到过大海，大海就在他的名字里，他总听到关于大海的事。他只是没找到合适的时间，总有一天……是的，他会见到海的。'
     }),
     oPlantern = InheritO(CPlants, {
         EName: "oPlantern",
