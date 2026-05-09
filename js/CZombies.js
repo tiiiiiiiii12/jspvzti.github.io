@@ -597,6 +597,7 @@ Birth: function() {
 		jinyinAct:function(a){
 			a.ChangeChkActsTo0=function(){};
 			a.ChangeChkActsTo1(a,a.id,a.EleBody);
+			a.EleBody.style.filter = 'grayscale(400%)';
 			a.PrivateAct=function(a){
 			a.canWalk(a,a.id)&&!a.isAttacking&&a.getr(a,a.PZ?-a.Speed*2:a.Speed*2);
 			}
@@ -724,6 +725,8 @@ Birth: function() {
                         }
                     }()
                 }
+			}else{
+				a.EleBody.style.filter = 'grayscale(400%)'
 			}
 		},
         addSpotlight: (function() {
@@ -890,10 +893,9 @@ Birth: function() {
       ];
       func = function(t, o) {
         var u = $Z[t];
-        u && (u.ExchangeLR(d, 1), u.DZMSpeed = 7.2, u.DZStep = -1, u.DZStepT = oSym.Now + 220, u.FreeSetbodyTime = 0, SetBlock(o))
+        u && (!(!u.num&&u.jinyin)&&u.ExchangeLR(d, 1), u.DZMSpeed = 7.2, u.DZStep = -1, u.DZStepT = oSym.Now + 220, u.FreeSetbodyTime = 0, SetBlock(o))
       };
       b||!d.canWalk(d,l)? (oSym.addTask(b, func, [l, a]), c += b) : func(l, a);
-	!d.num&&d.jinyin&&d.ExchangeLR(d,0);
       oSym.addTask(c,
         function(o) {
           var t = $Z[o];
@@ -1043,6 +1045,7 @@ Birth: function() {
       d.ChkTmp = b;
       a.src = "images/Zombies/DancingZombie/Summon1.gif";
       PlayAudio("dancer");
+	  PlayAudio("dirt_rise");
       oSym.addTask(10,
         function(f, e) {
           var g = $Z[f];
@@ -1295,7 +1298,7 @@ Birth: function() {
           n = oGd.$Ice[j] = [1, 11, e.AttackedLX];
         }
         d = e.X;
-        h = d + 40;
+        h = d + 140;
         f = d + 20;
         c = GetC(h);
         c > -1 && c < n[1] && (oGd.$Crater[j + "_" + c] = 1, n[1] = c);
@@ -1496,7 +1499,7 @@ c.JudgeAttack = c.JudgeAttackH;
 	for (let i = GetC(a.ZX);i>=2;i--) {
         for (let j = 0; j < 4; j++) {
           let g = oGd.$[a.R + "_" + i + "_" + j];
-        GetC(a.ZX-20)<=7&&a.canWalk(a,a.id)&&!a.isAttacking&&g&&(a.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1,
+        GetC(a.ZX-40)<=7&&a.canWalk(a,a.id)&&!a.isAttacking&&g&&g.canEat&&(a.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1,
 			  a.JudgeAttackH= CZombies.prototype.JudgeAttackH,
 			  a.JudgeAttack = CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"],
 			a.NormalAttack(a.id,g.id,g.AttackedLX));
@@ -1596,7 +1599,7 @@ c.JudgeAttack = c.JudgeAttackH;
 				  var Z=oZ[h.PZ?"getArHZ":"getArZ"](h.ZX-100,h.ZX+100,i);
 				      Zl=Z.length;
 				      while(Zl--){
-						  h&&h.canWalk(h,m)&&((Z2=CustomZombie(oPoleVaultingZombie,i,GetC(Z[Zl].ZX),!h.PZ)).HP=Math.max(h.MaxHP*=0.25,150),Z2.jinyinnum=0);
+						  h&&h.canWalk(h,m)&&((Z2=CustomZombie(oPoleVaultingZombie,i,GetC(Z[Zl].ZX),!h.PZ)).HP=h.MaxHP*=0.1,Z2.BreakPoint=40,Z2.jinyinnum=0);
 					  }
                    }
 			}
