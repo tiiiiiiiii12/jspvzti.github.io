@@ -2499,7 +2499,7 @@ oGloomShroom = InheritO(oFumeShroom, {
             a.BulletEle = NewImg(0, "images/Plants/ShroomBullet.gif", "left:" + (a.AttackedLX - 46) + "px;top:" + (a.pixelTop + 40) + "px;visibility:hidden;z-index:" + (a.zIndex + 2))
         },
         PrivateDie: function(a) {
-			a.NormalAttack(1);
+			a.NormalAttack();
             a.BulletEle = null;
         },
         NormalAttack: function(A) {
@@ -2521,7 +2521,7 @@ oGloomShroom = InheritO(oFumeShroom, {
                 function(j, d, e, f, g,A) {
                     var i = GetC(e),
                         h = oZ.getZ0(e, f);
-                    h && h.Altitude == 1 ? (A&&h.getr(h,80),h.getPea(h,A?60:20, 0), (SetStyle(d, {
+                    h && h.Altitude == 1 ? (h.getPea(h,20, 0), (SetStyle(d, {
                         left: g + 38 + "px",
                         width: "52px",
                         height: "46px"
