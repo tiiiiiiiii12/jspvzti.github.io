@@ -517,7 +517,7 @@ oStarfruit = InheritO(CPlants, {
           },
           0, EDPZ), a])
     })("StarB" + Math.random());
-    g.jinyin && Math.random() * 100 < 3 && (PlayAudio("portal"),oSym.addTask(300, function(h) {
+    g.jinyin && Math.random() * 100 < 2 && (PlayAudio("portal"),oSym.addTask(300, function(h) {
       if (!$P[g.id]) return;
       oSym.addTask(1,
         function(j) {
@@ -1303,6 +1303,7 @@ NormalAttack:function(a){
         CName: "睡莲",
         width: 79,
         height: 58,
+		SunNum:25,
         beAttackedPointR: 59,
         PicArr: ["images/Card/Plants/LilyPad.png", "images/Plants/LilyPad/0.gif", "images/Plants/LilyPad/LilyPad.gif"],
         getShadow: function(a) {
@@ -1411,7 +1412,7 @@ NormalAttack:function(a){
                 (a = c[f]).Altitude < 2 && a.getThump(1400)
             }
         for(i=g.C;i<=9;i++){
-            !oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&num++<3&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0);
+            !oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&num++<2&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0);
         }
             g.Die(1);
             PlayAudio("potato_mine");
@@ -2269,7 +2270,6 @@ jinyinAttackGif2: 8,
             ]
         },
 		jinyinAct:function(a){
-			a.Attack*=2;
 		},
         NormalAttack: function() {
             PlayAudio("fume");
@@ -2499,9 +2499,10 @@ oGloomShroom = InheritO(oFumeShroom, {
             a.BulletEle = NewImg(0, "images/Plants/ShroomBullet.gif", "left:" + (a.AttackedLX - 46) + "px;top:" + (a.pixelTop + 40) + "px;visibility:hidden;z-index:" + (a.zIndex + 2))
         },
         PrivateDie: function(a) {
-            a.BulletEle = null
+			a.NormalAttack(1);
+            a.BulletEle = null;
         },
-        NormalAttack: function() {
+        NormalAttack: function(e) {
             PlayAudio("puff");
             var b = this,
                 c = "PSB" + Math.random(),
@@ -2517,16 +2518,16 @@ oGloomShroom = InheritO(oFumeShroom, {
                 },
                 [c]);
             oSym.addTask(1,
-                function(j, d, e, f, g) {
+                function(j, d, e, f, g,s) {
                     var i = GetC(e),
                         h = oZ.getZ0(e, f);
-                    h && h.Altitude == 1 ? (h.getPea(h, 20, 0), (SetStyle(d, {
+                    h && h.Altitude == 1 ? (s&&h.getr(h,80),h.getPea(h,s?20:60, 0), (SetStyle(d, {
                         left: g + 38 + "px",
                         width: "52px",
                         height: "46px"
-                    })).src = "images/Plants/ShroomBulletHit.gif", oSym.addTask(10, ClearChild, [d])) : (e += 5) < oS.W ? (d.style.left = (g += 5) + "px", oSym.addTask(1, arguments.callee, [j, d, e, f, g])) : ClearChild(d)
+                    })).src = "images/Plants/ShroomBulletHit.gif", oSym.addTask(10, ClearChild, [d])) : (e += 5) < oS.W ? (d.style.left = (g += 5) + "px", oSym.addTask(1, arguments.callee, [j, d, e, f, g,e])) : ClearChild(d)
                 },
-                [c, $(c), a, b.R, a - 46])
+                [c, $(c), a, b.R, a - 46,e])
         }
     }),
     oScaredyShroom = InheritO(oFumeShroom, {
@@ -2684,7 +2685,7 @@ oGloomShroom = InheritO(oFumeShroom, {
                 case 0:
                     c.num+=1;
                     !c.Sleep && (d.bedevil(d),
-        c.jinyin&&(d.BulletEle = NewImg(0, "images/Plants/PB00.gif","left:" + (d.AttackedLX - 40) + "px;top:" + (d.pixelTop + 30) + "px;visibility:hidden;z-index:" + (d.zIndex + 2)), 
+        c.jinyin&&(d.getr(d,-200),d.BulletEle = NewImg(0, "images/Plants/PB00.gif","left:" + (d.AttackedLX - 40) + "px;top:" + (d.pixelTop + 30) + "px;visibility:hidden;z-index:" + (d.zIndex + 2)), 
         d.NormalAttack=oPeashooter.prototype.NormalAttack, oSym.addTask(1, function(d) {
         d.NormalAttack(),
         $Z[d.id] && d.beAttacked ? oSym.addTask(140/c.num,arguments.callee, [d]): d.BulletEle = null;
