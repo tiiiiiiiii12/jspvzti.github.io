@@ -2502,7 +2502,7 @@ oGloomShroom = InheritO(oFumeShroom, {
 			a.NormalAttack(1);
             a.BulletEle = null;
         },
-        NormalAttack: function(e) {
+        NormalAttack: function(A) {
             PlayAudio("puff");
             var b = this,
                 c = "PSB" + Math.random(),
@@ -2518,16 +2518,16 @@ oGloomShroom = InheritO(oFumeShroom, {
                 },
                 [c]);
             oSym.addTask(1,
-                function(j, d, e, f, g,s) {
+                function(j, d, e, f, g,A) {
                     var i = GetC(e),
                         h = oZ.getZ0(e, f);
-                    h && h.Altitude == 1 ? (s&&h.getr(h,80),h.getPea(h,s?60:20, 0), (SetStyle(d, {
+                    h && h.Altitude == 1 ? (A&&h.getr(h,80),h.getPea(h,A?60:20, 0), (SetStyle(d, {
                         left: g + 38 + "px",
                         width: "52px",
                         height: "46px"
-                    })).src = "images/Plants/ShroomBulletHit.gif", oSym.addTask(10, ClearChild, [d])) : (e += 5) < oS.W ? (d.style.left = (g += 5) + "px", oSym.addTask(1, arguments.callee, [j, d, e, f, g,s])) : ClearChild(d)
+                    })).src = "images/Plants/ShroomBulletHit.gif", oSym.addTask(10, ClearChild, [d])) : (e += 5) < oS.W ? (d.style.left = (g += 5) + "px", oSym.addTask(1, arguments.callee, [j, d, e, f, g,A])) : ClearChild(d)
                 },
-                [c, $(c), a, b.R, a - 46,e])
+                [c, $(c), a, b.R, a - 46,A])
         }
     }),
     oScaredyShroom = InheritO(oFumeShroom, {
