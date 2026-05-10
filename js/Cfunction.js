@@ -715,6 +715,7 @@ oP = {
 		g.FlagPrgs(d)
 	},
 	SelectFlagZombie: function(j, d) {
+		j*=oS.plusZombie;
 		var e = oP,
 		m = e.ArZ,
 		k = e.AZ,
@@ -927,7 +928,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
 	},
 	FlagPrgs: function() {
 		var f = oP,
-		c = f.FlagZombies*oS.plusZombie,
+		c = f.FlagZombies,
 		e = f.FlagToSumNum,
 		a = 139 - c * f.FlagHeadStep,
 		d = $SSml(c, e.a1, e.a2),
