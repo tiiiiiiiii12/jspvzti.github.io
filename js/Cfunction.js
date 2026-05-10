@@ -138,6 +138,7 @@ oS = {
 	C: 9,
 	LawnMowerX: 70,
 	Lvl: 0,
+	plusZombie:1,
 	MaxSunNum: 114514,
 	GlobalVariables: {},
 	LvlVariables: {},
@@ -195,7 +196,6 @@ oS = {
 		this.SunNum == d && (this.SunNum =200);
 		this.CanSelectCard == d && (this.CanSelectCard = 1);
 		this.DKind == d && (this.DKind = 1);
-		this.CleanerFlagZombie=0;
 		this.StaticCard == d && (this.StaticCard = 1);
 		this.ShowScroll == d && (this.ShowScroll = true);
 		this.ProduceSun == d && (this.ProduceSun = true);
@@ -927,7 +927,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
 	},
 	FlagPrgs: function() {
 		var f = oP,
-		c = f.FlagZombies,
+		c = f.FlagZombies*oS.plusZombie,
 		e = f.FlagToSumNum,
 		a = 139 - c * f.FlagHeadStep,
 		d = $SSml(c, e.a1, e.a2),
