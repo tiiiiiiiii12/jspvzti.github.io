@@ -1549,6 +1549,12 @@ ViewCardTitle = function(b, c) {
 		visibility: "visible"
 	})
 },
+SetPlusZombie:function(){
+	let a=prompt("请输入出怪倍率（2～20的整数）");
+	if(a<2||a>20||parseInt(a)!=a||Math.floor(a)!=a)return alert("请输入2～20的整数!");
+	oS.plusZombie=a;
+	alert("已设置为"+a+"倍出怪");
+},
 PrivateTombstones=function(h,b){
 	var f;
 	if(!oGd.$Tombstones[h+ "_" +b]){
