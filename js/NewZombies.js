@@ -184,10 +184,16 @@ var oGargantuar = InheritO(oZombie, {
     z.FumeDoor = "Fume" + Math.random();
     var Sh = NewImg(z.FumeDoor, "images/interface/target.png", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:185px;top:80px", 0);
     z.appendChild(Sh);
+		var z=oS.ZName;
+	  a.zl=[];
+	for (i=0;i<z.length;i++){
+		z[i].Lvl<4&&z[i].CanSelect&&a.zl.push[z[i]];
+	}
+	!a.zl.length&&(a.zl=[oZombie]);
 	oSym.addTask(1000,function(b){
-		$Z[b.id]&&b.hasthrew < b.throwImpnum &&(oP.SetTimeoutAirdropZombie(5, 9, 1, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie,oNewspaperZombie,oJackinTheBoxZombie,oPoleVaultingZombie], !b.PZ),
+		$Z[b.id]&&b.hasthrew < b.throwImpnum &&(oP.SetTimeoutAirdropZombie(5, 9, 1, b.zl, !b.PZ),
 		oSym.addTask(1000,arguments.callee,[b]));		
-	},[a])
+	},[a]);
   },
   PrivateDie: oScreenDoorZombie.prototype.PrivateDie,
   throwImp: function(g) {
@@ -211,7 +217,7 @@ var oGargantuar = InheritO(oZombie, {
           k && k.jinyin && ClearChild($(k.Ele.FumeDoor));
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
-            k && k.jinyin&&(k.throwImpnum==1)&& oP.SetTimeoutAirdropZombie(5, 9, 5, [oImp, oZombie, oConeheadZombie, oPeaZombie, oScreenDoorZombie, oZombie2, oZombie3, oBucketheadZombie,oNewspaperZombie,oJackinTheBoxZombie,oPoleVaultingZombie], !k.PZ)
+            k && k.jinyin&&(k.throwImpnum==1)&& oP.SetTimeoutAirdropZombie(5, 9, 5,k.zl, !k.PZ)
           }, [k]);
           var j = CZombies.prototype;
           k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
