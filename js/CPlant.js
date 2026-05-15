@@ -37,6 +37,7 @@ var CPlants = NewO({
             return this.height
         },
 	    getLadder:function(a){
+		if(!a)return;
 		var c=oZ.getArZ(a.AttackedRX-30,a.AttackedRX,a.R);
 			b=c.length;
 			while (c--){
