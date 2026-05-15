@@ -37,12 +37,12 @@ var CPlants = NewO({
             return this.height
         },
 	    getLadder:function(d){
-		var a=$P[d.id];
-		if(!$P[d.id])return;
+		var a=$P[d];
+		if(!a)return;
 		var c=oZ.getArZ(a.AttackedRX-30,a.AttackedRX,a.R);
 			b=c.length;
 			while (c--){
-				a&&!c[b].WalkOnLadder&&(c[b].WalkToLadder(c[b]));
+				a&&!c[b].FreeSetbodyTime&&(c[b].WalkToLadder(c[b]));
 			}
 		a&&oSym.addTask(1,arguments.callee,[d]);
 		},
