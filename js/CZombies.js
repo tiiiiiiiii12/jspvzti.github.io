@@ -1593,13 +1593,13 @@ c.JudgeAttack = c.JudgeAttackH;
                     for(let j = C - 1;j <= C + 1;j++){
                         for(let k = 0;k <= 3;k++){
                             let p = oGd.$[i+"_"+j+"_"+k];
-							h&&h.PZ&&h.canWalk(h,m)&&p&&((Z=CustomZombie(oPoleVaultingZombie,i,j,!h.PZ)).HP=h.MaxHP*=0.1,Z.BreakPoint=40,Z.jinyinnum=0);
+							h&&h.PZ&&h.canWalk(h,m)&&p&&((Z=CustomZombie(oPoleVaultingZombie,i,j,!h.PZ)).HP=h.MaxHP*=0.2,Z.BreakPoint=40,Z.jinyinnum=0);
                         }
                     }
 				  var Z=oZ[h.PZ?"getArHZ":"getArZ"](h.ZX-100,h.ZX+100,i);
 				      Zl=Z.length;
 				      while(Zl--){
-						  h&&h.canWalk(h,m)&&((Z2=CustomZombie(oPoleVaultingZombie,i,GetC(Z[Zl].ZX),!h.PZ)).HP=h.MaxHP*=0.1,Z2.BreakPoint=40,Z2.jinyinnum=0);
+						  h&&h.canWalk(h,m)&&((Z2=CustomZombie(oPoleVaultingZombie,i,GetC(Z[Zl].ZX),!h.PZ)).HP=h.MaxHP*=0.2,Z2.BreakPoint=40,Z2.jinyinnum=0);
 					  }
                    }
 			}
@@ -1627,7 +1627,7 @@ c.JudgeAttack = c.JudgeAttackH;
         CName: "读报僵尸",
         OrnHP: 150,
         Lvl: 3,
-		HP:370,
+		HP:450,
 		SunNum:75,
         LostPaperGif: 13,
         StandGif: 14,
@@ -1645,7 +1645,7 @@ c.JudgeAttack = c.JudgeAttackH;
             return ["images/Card/Zombies/NewspaperZombie.png","images/Zombies/NewspaperZombie/0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadWalk0.gif", a + "LostHeadWalk0.gif", a + "LostHeadWalk0.gif", "images/Zombies/NewspaperZombie/Head.gif" + $Random, a + "Die.gif" + $Random,"images/Zombies/NewspaperZombie/BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（370，发怒后50%减伤）</font><br>精英形态一：破报进入假死状态，无减伤，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：破报犹豫时间变长，1.5倍速度和伤害，破报后拿出路牌碾压植物<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（450）</font><br>精英形态一：破报进入假死状态，无减伤，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：破报犹豫时间变长，1.5倍速度和伤害，破报后拿出路牌碾压植物，发怒后50%减伤<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
         getShadow: function(a) {
             return "left:75px;top:" + (a.height - 25) + "px"
         },
@@ -1783,7 +1783,8 @@ c.JudgeAttack = c.JudgeAttackH;
                         k.ChkActs =!k.WalkDirection?j.ChkActs:j.ChkActs1;
                         k.ChkActs1 = j.ChkActs1;
 						k.tasktime*=0.4; 
-				!k.num?(k.jianshang=0.5):(k.PrivateAct=function(h) {
+				k.jinyin&&!k.num&&(k.jianshang=0.5);
+					k.num&&(k.PrivateAct=function(h) {
                    var Num = 0;
                 !h.xianxing ? (h.Altitude = 4,
                 h.Ele.style.opacity = 0.1) : (h.Altitude = 1,
@@ -2573,7 +2574,7 @@ jinyinWalkGif12: 14,
     z.FumeDoor = "Fume" + Math.random();
     var Sh = NewImg(z.FumeDoor, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:125px;top:280px;", 0);
     z.appendChild(Sh);
-    !a.num && (a.jianshang=0.8,oSym.addTask(500, function(a) {
+    !a.num && (a.jianshang*=0.8,oSym.addTask(500, function(a) {
 		var LR=Math.max(a.R-1,1);
 		do{
         let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.ZX - 120,a.ZX + 120, LR),
@@ -3070,7 +3071,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   OpenBox: function(b) {
     var a = $Z[b];
     a.EleBody.src = a.PicArr[7];
-    a.HP = 400;
+    a.HP = a.MaxHP;
     a.GoingDie = a.NormalDie;
     a.ChkActs = a.ChkActs1 = function() {
       return 1
@@ -3534,7 +3535,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
   AudioArr: ["dirt_rise","wakeup"],  jinyinAct: function(a) {
     a.Act = function(a) {
       var z = oZ.getZ0(a.ZX, a.R);
-      (a.pushZ || (z &&(z.Lvl<=4)&& z.EName != a.EName)) && (!a.pushZ ? (a.ZX >= 420 && (a.pushZ = z,PlayAudio("dirt_rise"), 
+      (a.pushZ || (z &&(z.Lvl<4)&& z.EName != a.EName)) && (!a.pushZ ? (a.ZX >= 420 && (a.pushZ = z,PlayAudio("dirt_rise"), 
 		oSym.addTask(220,ClearChild,[NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (z.ZX-20) + "px;top:" + (GetY(z.R)-155) + "px", EDPZ)]),																			 
 		z.Altitude = 4, z.isAttacking = 0, a.AppearDownZ(z, 1),
         z.FreeSetbodyTime = 1)) : (
