@@ -568,10 +568,11 @@ JudgeAttack: function() {
                         h = oGd.$,
 						a,
                         c;
-			(a=g.JudgeAttackH1())||(c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h)) ? (!g.isAttacking&&(g.isAttacking = 1, g.EleBody.src = g.PicArr[g.canLadderList[$P[c[1]].EName]?g.LadGif:g.AttackGif]),!a&&(g.canLadderList[$P[c[1]].EName]?g.throwLadder(c[0], c[1]):g.NormalAttack(c[0], c[1]))) : g.isAttacking && (g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif])
+			(a=g.JudgeAttackH1())||(c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h)) ? (!g.isAttacking&&(g.isAttacking = 1, g.EleBody.src = g.PicArr[g.AttackGif]),!a&&(g.canLadderList[$P[c[1]].EName]?g.throwLadder(c[0], c[1]):g.NormalAttack(c[0], c[1]))) : g.isAttacking && (g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif])
         },
 throwLadder:function(c,b){
 	var a=$Z[c];
+	a.EleBody.src=a.PicArr[a.LadGif];
 	oSym.addTask(50,function(a,b){
 		a&&$P[b]&&($P[b].canEat=0,$P[b].getLadder(b),a.getHit0(a,a.OrnHP,0),a.isAttacking=0);
 	},[a,b])
