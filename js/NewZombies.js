@@ -525,4 +525,62 @@ oWallNutZombie = InheritO(oConeheadZombie, {
                     },
                     [h, f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]]]))
         }
-    })
+    }),
+oLadderZombie = InheritO(oScreenDoorZombie, {
+  EName: "oLadderZombie",
+  CName: "扶梯僵尸",
+  OrnHP: 500,
+  Lvl: 4,
+  HP:340,
+  BreakPoint:1,
+  SunNum: 125,
+  StandGif: 13,
+LadGif:14,
+  width: 166,
+  height: 144,
+  beAttackedPointL: 60,
+  beAttackedPointR: 116,
+  check: 1,
+  OSpeed:6.4,
+  Speed:6.4,
+  LostLadderSpeed: 1.6,
+  PicArr: (function() {
+    var a = "images/Zombies/LadderZombie/",
+      b = "images/Zombies/Zombie/";
+    return ["images/Card/Zombies/LadderZombie.png", a + "1.gif", a + "Walk.gif", a + "Attack.gif", a + "Die.gif", a + "LostHeadAttack1.gif", a + "LostLadderWalk.gif", a + "LostLadderAttack.gif", a + "Die.gif", a + "Die.gif", b + "ZombieHead.gif" + $Random, a + "Die.gif" + $Random, b + "BoomDie.gif" + $Random, a + "1.gif", a + "throwLadder.gif"]
+  })(),
+  jinyinAct: function(a) {
+  },
+PrivateDie:function(a){
+},
+    GoingDie: function(d) {
+                    var c = this,
+                        e = c.id;
+                    c.beAttacked = 0;
+                    c.FreeFreezeTime = c.FreeSetbodyTime = c.FreeSlowTime = 0;
+                    c.AutoReduceHP(e)
+                },
+JudgeAttack: function() {
+                    var g = this,
+                        d = g.ZX,
+                        e = g.R + "_",
+                        f = GetC(d),
+                        h = oGd.$,
+						a,
+                        c;
+			(a=g.JudgeAttackH1())||(c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h)) ? (!g.isAttacking&&(g.isAttacking = 1, g.EleBody.src = g.PicArr[g.canLadderList[$P[c[1]].EName]?g.LadGif:g.AttackGif]),!a&&(g.canLadderList[$P[c[1]].EName]?g.throwLadder(c[0], c[1]):g.NormalAttack(c[0], c[1]))) : g.isAttacking && (g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif])
+        },
+throwLadder:function(c,b){
+	var a=$Z[c];
+	oSym.addTask(50,function(a,b){
+		a&&$P[b]&&($P[b].canEat=0,$P[b].getLadder($P[b]),a.getHit0(a,a.OrnHP,0));
+	},[a,b];
+},
+canLadderList:{oWallNut,oTallNut,oPumpkinHead,oGarlic:true},
+  Produce: '他的扶梯是有效的盾牌，遇到防御植物可将梯子搭在上面<br>韧性：<font color="#FF0000">中</font><br>扶梯韧性：<font color="#FF0000">中(500)</font><br>弱点：大喷菇<br>这架梯子花了他$114514。',
+  GoingDie: CZombies.prototype.GoingDie,
+  CheckOrnHP: function(g, h, d, c, f, b, a) {
+    var e = OrnNoneZombies.prototype;
+    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio,g.JudgeAttack=CZombies.prototype.JudgeAttack,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
+  }
+})
