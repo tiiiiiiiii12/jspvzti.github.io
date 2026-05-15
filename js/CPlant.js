@@ -36,6 +36,15 @@ var CPlants = NewO({
         GetDBottom: function() {
             return this.height
         },
+	    getLadder:function(){
+		var a=this;
+		var c=oZ.getArZ(a.AttackedRX-30,a.AttackedRX,a.R);
+			b=c.length;
+			while (c--){
+				$P[a.id]&&!c[b].WalkOnLadder&&(c[b].WalkToLadder(c[b]));
+			}
+			$P[a.id]&&oSym.addTask(10,arguments.callee,[]);
+		},
         Birth: function(d, c, h, a, m, n) {
             var e = this,
                 k = d + e.GetDX(),
