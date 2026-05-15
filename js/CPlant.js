@@ -975,12 +975,12 @@ NormalAttack1: function() {
     b.sort(function(d, c) {
       return (c.HP + c.OrnHP) - (d.OrnHP + d.HP)
     });
-    b.length && TargeteachR.push(b[0])
+    b.length&&b[0].beAttacked&& TargeteachR.push(b[0])
   }
   TargeteachR.sort(function(d, c) {
     return (c.HP + c.OrnHP) - (d.OrnHP + d.HP)
   });
-  if (!TargeteachR.length) return;
+  if (!TargeteachR.length) return;		
   a.Target = TargeteachR[0];
   var BulletImg = NewImg(0, a.Boom + 1 >= 19 ? "images/Plants/PotatoMine/PotatoMineNotReady.gif" : "images/Plants/PB00.gif", "z-index:25;"+a.Target.getShadow(a.Target), a.Target.Ele);
   BulletImg.id = "P_" + a.id;
@@ -1006,7 +1006,7 @@ NormalAttack:function(a){
             ]
         },
 		PrivateBirth:function(a){
-			a.EleBody.style.filter = 'brightness(50%)';
+			$(a.id).childNodes[1].style.filter = 'brightness(50%)';
 		},
 		getTriggerR:function(a){
            return [1,oS.R]
@@ -2344,9 +2344,9 @@ jinyinAttackGif2: 8,
                     PlayAudio("wakeup");
                     var d = oGd.$[c],
                         b;
-					a.jinyin&&(EDAll.style.opacity=0.5,CPlants.prototype.randomnum=0);
+					a.jinyin&&(EDAll.style.opacity=0.5,CPlants.prototype.randomnum=100);
 			oSym.addTask(1000,function() {
-                CPlants.prototype.randomnum=100;
+                CPlants.prototype.randomnum=Math.random()*100;
 				EDAll.style.opacity=1;
                 },[]);
                     d && (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
