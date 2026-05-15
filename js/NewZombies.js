@@ -187,7 +187,7 @@ var oGargantuar = InheritO(oZombie, {
 		var z=oS.ZName;
 	  a.zl=[];
 	for (i=0;i<z.length;i++){
-		z[i].Lvl<4&&z[i].CanSelect&&a.zl.push[z[i]];
+		z[i].Lvl<4&&z[i].CanSelect&&a.zl.push(z[i]);
 	}
 	!a.zl.length&&(a.zl=[oZombie]);
 	oSym.addTask(1000,function(b){
