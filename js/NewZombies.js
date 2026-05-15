@@ -537,12 +537,12 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
   StandGif: 13,
 LadGif:14,
   width: 166,
-  height: 144,
+  height: 164,
   beAttackedPointL: 60,
   beAttackedPointR: 116,
   check: 1,
-  OSpeed:6.4,
-  Speed:6.4,
+  OSpeed:4.8,
+  Speed:4.8,
   LostLadderSpeed: 1.6,
   PicArr: (function() {
     var a = "images/Zombies/LadderZombie/",
@@ -580,6 +580,6 @@ canLadderList:{oWallNut,oTallNut,oPumpkinHead,oGarlic:true},
   Produce: '他的扶梯是有效的盾牌，遇到防御植物可将梯子搭在上面<br>韧性：<font color="#FF0000">中</font><br>扶梯韧性：<font color="#FF0000">中(500)</font><br>弱点：大喷菇<br>这架梯子花了他$114514。',
   CheckOrnHP: function(g, h, d, c, f, b, a) {
     var e = OrnNoneZombies.prototype;
-    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio,g.JudgeAttack=e.JudgeAttack,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
+    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering,g.Speed/=3,g.OSpeed/=3,g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio,g.JudgeAttack=e.JudgeAttack,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
   }
 })
