@@ -69,6 +69,23 @@ var CZombies = function(b, a) {
                     g.PrivateAct&&g.PrivateAct(g);
                     return f
                 },
+			WalkToLadder:function(a){
+				if(!a.PZ)return;
+				a.WalkOnLadder=true;
+        oSym.addTask(5,
+          function(l, k, j, a) {
+			if(!$Z[a.id])return;
+            k = Math.max(k - j, B);
+            SetStyle(l, {
+              top: k + "px"
+            });
+			a.getr(a,-a.Speed);
+            !(k == B) ? oSym.addTask(5, arguments.callee, [l, k, j, a]): (a.WalkOnLadder = false,SetStyle(l, {
+              top: "0px"
+            }))
+          },
+          [a.EleBody, B = -50, -B * 0.05, a]);
+			},
                 GetDX: function() {
                     return -110
                 },
