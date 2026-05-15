@@ -184,10 +184,10 @@ var oGargantuar = InheritO(oZombie, {
     z.FumeDoor = "Fume" + Math.random();
     var Sh = NewImg(z.FumeDoor, "images/interface/target.png", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:185px;top:80px", 0);
     z.appendChild(Sh);
-		var z=oP.ZName;
+		var z=oS.ZName;
 	  a.zl=[];
 	for (i=0;i<z.length;i++){
-		z[i].Lvl<4&&z[i].CanSelect&&a.zl.push(z[i]);
+		z[i].prototype.Lvl<4&&z[i].prototype.CanSelect&&a.zl.push(z[i]);
 	}
 	!a.zl.length&&(a.zl=[oZombie]);
 	oSym.addTask(1000,function(b){
