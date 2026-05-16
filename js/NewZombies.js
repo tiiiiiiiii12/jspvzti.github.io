@@ -574,7 +574,7 @@ throwLadder:function(c,b){
 	var a=$Z[c];
 	a.EleBody.src=a.PicArr[a.LadGif];
 	oSym.addTask(50,function(a,b){
-		a&&$P[b]&&($P[b].canEat=0,$P[b].getLadder(b),a.getHit0(a,a.OrnHP,0),a.isAttacking=0);
+		a&&$P[b]&&($P[b].canEat=0,$P[b].getLadder(b,$P[b].AttackedRX-40,$P[b].AttackedRX),a.getHit0(a,a.OrnHP,0),a.isAttacking=0);
 	},[a,b])
 },
 canLadderList:{oWallNut,oTallNut,oPumpkinHead,oGarlic:true},
