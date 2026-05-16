@@ -41,7 +41,7 @@ var CPlants = NewO({
 		oSym.addTask(1,function(a,d){
 		var c=oZ.getArZ(a.pixelRight-40,a.pixelRight,a.R);
 			b=c.length;
-			while (c--){
+			while (b--){
 				!c[b].FreeSetbodyTime&&(c[b].WalkToLadder(c[b]));
 			}
 		$P[d]&&oSym.addTask(1,arguments.callee,[a,d]);
