@@ -552,6 +552,8 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
   jinyinAct: function(a) {
     a.OSpeed /= 2;
     a.Speed /= 2;
+	a.OrnHP*=1.5;
+	a.canLadderList=[];
     var z = $(a.id);
     z.FumeDoor = "Fume" + Math.random();
     var Sh = NewImg(z.FumeDoor, "images/Plants/CobCannon/noReady.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:-70px;top:-110px;", 0);
@@ -608,7 +610,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
           do {
             j = q + "_" + g + "_";
             for (l = 0; l < 4; l++) {
-              (m = r[j + l]) && m.getHurt(m, 3, 1000)
+              (m = r[j + l]) && m.getHurt(m, 3, 1600)
             }
           } while (g++ < h)
         } while (q++ < o)
@@ -623,7 +625,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
         do {
           k = (n = oZ["getAr" + (b.PZ ? "HZ" : "Z")](m, o, h)).length;
           while (k--) {
-            n[k].getExplosion(1000)
+            n[k].getExplosion(1600)
           }
         } while (h++ < g)
       })(a.AttackedLX, a.R);
