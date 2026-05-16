@@ -39,15 +39,15 @@ var CPlants = NewO({
 	    getLadder:function(){
 		var a=this,
 			d=this.id;
-		NewImg(0, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:50px;top:-10px;z-index:300;", $(d));
-		oSym.addTask(1,function(){
+		NewImg(0, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:30px;top:-10px;z-index:300;", $(d));
+		oSym.addTask(1,function(a,d){
 		var c=oZ.getArZ(a.pixelRight-40,a.pixelRight,a.R);
 			b=c.length;
 			while (c--){
 				!c[b].FreeSetbodyTime&&(c[b].WalkToLadder(c[b]));
 			}
-		$P[d]&&oSym.addTask(1,arguments.callee,[]);
-		},[]);
+		$P[d]&&oSym.addTask(1,arguments.callee,[a,d]);
+		},[a,d]);
 		},
         Birth: function(d, c, h, a, m, n) {
             var e = this,
