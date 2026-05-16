@@ -37,7 +37,7 @@ var CPlants = NewO({
             return this.height
         },
 	    getLadder:function(d,c,b,a){
-		var c=oZ.getArZ(c,b,a);
+		var c=oZ.getArZ(c,b,this.R);
 			b=c.length;
 			while (c--){
 				!c[b].FreeSetbodyTime&&(c[b].WalkToLadder(c[b]));
