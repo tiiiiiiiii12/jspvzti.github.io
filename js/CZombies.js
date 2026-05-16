@@ -71,6 +71,7 @@ var CZombies = function(b, a) {
                 },
 			WalkToLadder:function(a){
 				a.FreeSetbodyTime=1;
+				var B;
         oSym.addTask(5,
           function(l, k, j, a) {
 			if(!$Z[a.id])return;
@@ -83,7 +84,7 @@ var CZombies = function(b, a) {
               top: "0px"
             }))
           },
-          [a.EleBody, B = -50, -B * 0.05, a]);
+          [a.EleBody, 0, -(B=50) * 0.05, a]);
 			},
                 GetDX: function() {
                     return -110
