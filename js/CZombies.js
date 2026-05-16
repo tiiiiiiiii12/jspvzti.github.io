@@ -1612,13 +1612,13 @@ c.JudgeAttack = c.JudgeAttackH;
                     for(let j = C - 1;j <= C + 1;j++){
                         for(let k = 0;k <= 3;k++){
                             let p = oGd.$[i+"_"+j+"_"+k];
-							h&&h.PZ&&h.canWalk(h,m)&&p&&((Z=CustomZombie(oPoleVaultingZombie,i,j,!h.PZ)).HP=h.MaxHP*=0.2,Z.BreakPoint=40,Z.jinyinnum=0);
+							h&&h.PZ&&h.canWalk(h,m)&&p&&((Z=CustomZombie(oPoleVaultingZombie,i,j,!h.PZ)).HP*=0.2,Z.BreakPoint=40,Z.jinyinnum=0);
                         }
                     }
 				  var Z=oZ[h.PZ?"getArHZ":"getArZ"](h.ZX-100,h.ZX+100,i);
 				      Zl=Z.length;
 				      while(Zl--){
-						  h&&h.canWalk(h,m)&&((Z2=CustomZombie(oPoleVaultingZombie,i,GetC(Z[Zl].ZX),!h.PZ)).HP=h.MaxHP*=0.2,Z2.BreakPoint=40,Z2.jinyinnum=0);
+						  h&&h.canWalk(h,m)&&((Z2=CustomZombie(oPoleVaultingZombie,i,GetC(Z[Zl].ZX),!h.PZ)).HP*=0.2,Z2.BreakPoint=40,Z2.jinyinnum=0);
 					  }
                    }
 			}
