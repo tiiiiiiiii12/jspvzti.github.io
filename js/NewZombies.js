@@ -531,18 +531,18 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
   CName: "扶梯僵尸",
   OrnHP: 500,
   Lvl: 4,
-  HP:340,
-  BreakPoint:1,
+  HP: 340,
+  BreakPoint: 1,
   SunNum: 125,
   StandGif: 13,
-LadGif:14,
+  LadGif: 14,
   width: 166,
   height: 164,
   beAttackedPointL: 60,
   beAttackedPointR: 116,
   check: 1,
-  OSpeed:4.8,
-  Speed:4.8,
+  OSpeed: 4.8,
+  Speed: 4.8,
   LostLadderSpeed: 1.6,
   PicArr: (function() {
     var a = "images/Zombies/LadderZombie/",
@@ -550,37 +550,133 @@ LadGif:14,
     return ["images/Card/Zombies/LadderZombie.png", a + "1.gif", a + "Walk.gif", a + "Attack.gif", a + "Die.gif", a + "LostHeadAttack1.gif", a + "LostLadderWalk.gif", a + "LostLadderAttack.gif", a + "Die.gif", a + "Die.gif", b + "ZombieHead.gif" + $Random, a + "Die.gif" + $Random, b + "BoomDie.gif" + $Random, a + "1.gif", a + "throwLadder.gif"]
   })(),
   jinyinAct: function(a) {
+    a.OSpeed /= 2;
+    a.Speed /= 2;
+    var z = $(a.id);
+    z.FumeDoor = "Fume" + Math.random();
+    var Sh = NewImg(z.FumeDoor, "images/Plants/CobCannon/noReady.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:-70px;top:-110px;", 0);
+    z.appendChild(Sh);
+    a.Ready(a);
+    a.PrivateAct = function(b) {
+      !(b.PZ == b.check) && (b.Ornaments && (
+        SetStyle($(b.Ele.FumeDoor), {
+          "left": b.PZ ? "-70px" : "40px",
+          transform: b.PZ ? "rotateY(180deg)" : "rotateY(0deg)"
+        }),
+        b.check = b.PZ));
+      !b.Ornaments && ClearChild($(b.Ele.FumeDoor));
+      b.CanShoot && b.Ornaments && b.checkP(b);
+    }
   },
-PrivateDie:function(a){
-},
-    GoingDie: function(d) {
-                    var c = this,
-                        e = c.id;
-                    c.beAttacked = 0;
-                    c.FreeFreezeTime = c.FreeSetbodyTime = c.FreeSlowTime = 0;
-                    c.AutoReduceHP(e)
-                },
-JudgeAttack: function() {
-                    var g = this,
-                        d = g.ZX,
-                        e = g.R + "_",
-                        f = GetC(d),
-                        h = oGd.$,
-						a,
-                        c;
-			(a=g.JudgeAttackH1())||(c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h)) ? (!g.isAttacking&&(g.isAttacking = 1, g.EleBody.src = g.PicArr[g.AttackGif]),!a&&(g.canLadderList[$P[c[1]].EName]?g.throwLadder(c[0], c[1]):g.NormalAttack(c[0], c[1]))) : g.isAttacking && (g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif])
-        },
-throwLadder:function(c,b){
-	var a=$Z[c];
-	a.EleBody.src=a.PicArr[a.LadGif];
-	oSym.addTask(50,function(a,b){
-		a&&$P[b]&&($P[b].canEat=0,$P[b].getLadder(),a.getHit0(a,a.OrnHP,0),a.JudgeAttack());
-	},[a,b])
-},
-canLadderList:{oWallNut,oTallNut,oPumpkinHead,oGarlic:true},
-  Produce: '他的扶梯是有效的盾牌，遇到防御植物可将梯子搭在上面<br>韧性：<font color="#FF0000">中</font><br>扶梯韧性：<font color="#FF0000">中(500)</font><br>弱点：大喷菇<br>这架梯子花了他$114514。',
+  checkP: function(b) {
+    let a = [];
+    for (let i in oGd.$) {
+      let p = oGd.$[i];
+      if (p.EName != "oLawnCleaner" && p.EName != "oPoolCleaner" && p.EName != "oBrains") {
+        b.PZ && a.push(oGd.$[i]);
+      }
+    }
+    for (let l in $Z) {
+      let Z = $Z[l];
+      Z && Z.PZ != b.PZ && Z.beAttacked && a.push(Z);
+    }
+    if (!a.length) return;
+    var i = Math.floor(Math.random() * a.length);
+    b.Boom(a[i], b)
+  },
+  Boom: function(a, b) {
+    b.CanShoot = 0;
+    $(b.Ele.FumeDoor).src = "images/Plants/CobCannon/shoot.gif";
+    oSym.addTask(200, function(a, b) {
+      if (!$Z[b.id] || !b.Ornaments || !b.beAttacked) return;
+      let l = a.AttackedRX - 160,
+        t = GetY(a.R) - 450;
+      var Img = NewImg(0, "images/Plants/CobCannon/Boom.gif", "left:" + l + "px;top:" + t + "px;z-index:25;", EDPZ);
+      oSym.addTask(100, ClearChild, [Img]);
+      PlayAudio("cherrybomb");
+      b.PZ && (function(k, g) {
+        var q = Math.max(1, k - 1),
+          o = Math.min(oS.R, k + 1),
+          n = Math.max(1, g - 1),
+          h = Math.min(oS.C, g + 1),
+          r = oGd.$,
+          l,
+          j = "",
+          m;
+        do {
+          g = n;
+          do {
+            j = q + "_" + g + "_";
+            for (l = 0; l < 4; l++) {
+              (m = r[j + l]) && m.getHurt(m, 3, 1000)
+            }
+          } while (g++ < h)
+        } while (q++ < o)
+      })(a.R, GetC(a.AttackedLX + 20));
+      (function(j, l) {
+        var m = j - 120,
+          o = j + 120,
+          h = Math.max(1, l - 1),
+          g = Math.min(oS.R, l + 1),
+          n,
+          k;
+        do {
+          k = (n = oZ["getAr" + (b.PZ ? "HZ" : "Z")](m, o, h)).length;
+          while (k--) {
+            n[k].getExplosion(1000)
+          }
+        } while (h++ < g)
+      })(a.AttackedLX, a.R);
+      b.HP > b.BreakPoint && b.Ornaments && (b.Ready(b), $(b.Ele.FumeDoor).src = "images/Plants/CobCannon/noReady.gif");
+    }, [a, b]);
+  },
+  Ready: function(b) {
+    oSym.addTask(2000, function(b) {
+      if (!$Z[b.id] || !b.Ornaments || !b.beAttacked) return;
+      $(b.Ele.FumeDoor).src = "images/Plants/CobCannon/beReady.gif";
+      oSym.addTask(50, function(b) {
+        if (!$Z[b.id] || !b.Ornaments || !b.beAttacked) return;
+        $(b.Ele.FumeDoor).src = "images/Plants/CobCannon/CobCannonReady.gif";
+        b.CanShoot = 1;
+      }, [b])
+    }, [b])
+  },
+  GoingDie: function(d) {
+    var c = this,
+      e = c.id;
+    c.beAttacked = 0;
+    c.FreeFreezeTime = c.FreeSetbodyTime = c.FreeSlowTime = 0;
+    c.AutoReduceHP(e)
+  },
+  JudgeAttack: function() {
+    var g = this,
+      d = g.ZX,
+      e = g.R + "_",
+      f = GetC(d),
+      h = oGd.$,
+      a,
+      c;
+    (a = g.JudgeAttackH1()) || (c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h)) ? (!g.isAttacking && (g.isAttacking = 1, g.EleBody.src = g.PicArr[g.AttackGif]), !a && (g.canLadderList[$P[c[1]].EName] ? g.throwLadder(c[0], c[1]) : g.NormalAttack(c[0], c[1]))) : g.isAttacking && (g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif])
+  },
+  throwLadder: function(c, b) {
+    var a = $Z[c];
+    a.EleBody.src = a.PicArr[a.LadGif];
+    oSym.addTask(50, function(a, b) {
+      a && $P[b] && ($P[b].getLadder(), a.getHit0(a, a.OrnHP, 0), a.JudgeAttack());
+      for (i = 1; i <= 3; i++) {
+        oGd.$[$P[b].R + "_" + $P[b].C + "_" + i] && (oGd.$[$P[b].R + "_" + $P[b].C + "_" + i].canEat = 0)
+      }
+    }, [a, b])
+  },
+  canLadderList: {
+    oWallNut,
+    oTallNut,
+    oPumpkinHead,
+    oGarlic: true
+  },
+  Produce: '他的扶梯是有效的盾牌，遇到防御植物可将梯子搭在上面<br>韧性：<font color="#FF0000">中</font><br>扶梯韧性：<font color="#FF0000">中(500)</font><br>精英形态：扶梯→玉米加农炮，速度变慢，每隔一段时间朝随机一颗植物发射炮弹，对该植物的3*3范围造成1000伤害<br>弱点：大喷菇<br>这架梯子花了他$114514。',
   CheckOrnHP: function(g, h, d, c, f, b, a) {
     var e = OrnNoneZombies.prototype;
-    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering,g.Speed/=3,g.OSpeed/=3,g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio,g.JudgeAttack=e.JudgeAttack,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
+    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, !g.jinyin && (g.Speed /= 3, g.OSpeed /= 3), g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.JudgeAttack = e.JudgeAttack, g.Boom = function() {}, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
   }
 })
