@@ -21,6 +21,7 @@ var oGargantuar = InheritO(oZombie, {
   beAttackedPointR: 285,
   ImplessAttackGif: 10,
   HP: 3000,
+  WalkToLadder:function(){},//不走梯子
   height: 300,
   BreakPoint: 1,
   NormalDie: function() {
