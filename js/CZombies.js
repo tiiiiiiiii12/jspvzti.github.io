@@ -76,7 +76,7 @@ var CZombies = function(b, a) {
         oSym.addTask(5,
           function(l, k, j, a,Dire){
 			if(!$Z[a.id])return;
-			a.getr(a,-a.Speed*2,1);
+			a.getr(a,Math.min(-a.Speed,-3.2),1);
             k = Dire?Math.min(k + j, 0):Math.max(k - j, B);
             SetStyle(l, {
               top: k + "px"
