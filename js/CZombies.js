@@ -80,7 +80,7 @@ var CZombies = function(b, a) {
             SetStyle(l, {
               top: k + "px"
             });
-            !(k == B) && (Dire=1);
+            k == B && (Dire=1);
 			k ? oSym.addTask(5, arguments.callee, [l, k, j, a,Dire]): (a.FreeSetbodyTime = 0,SetStyle(l, {
               top: "0px"
             }))
