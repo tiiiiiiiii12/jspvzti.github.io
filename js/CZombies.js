@@ -71,11 +71,12 @@ var CZombies = function(b, a) {
                 },
 			WalkToLadder:function(a){
 				a.FreeSetbodyTime=1;
+				a.isAttacking=0;
 				var B;
         oSym.addTask(5,
           function(l, k, j, a,Dire){
 			if(!$Z[a.id])return;
-			a.getr(a,-a.Speed,1);
+			a.getr(a,-a.Speed*2,1);
             k = Dire?Math.min(k + j, 0):Math.max(k - j, B);
             SetStyle(l, {
               top: k + "px"
