@@ -37,7 +37,7 @@ var CPlants = NewO({
             return this.height
         },
 	    getLadder:function(){
-		NewImg(0, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:20px;top:-10px;z-index:300;", $(this.id));
+		NewImg(0, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:20px;top:-20px;z-index:300;", $(this.id));
 		oSym.addTask(1,function(a,d){
 		var c=oZ.getArZ(a.pixelRight-20,a.pixelRight+15,a.R);
 			b=c.length;
