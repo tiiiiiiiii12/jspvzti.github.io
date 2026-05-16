@@ -38,14 +38,14 @@ var CPlants = NewO({
         },
 	    getLadder:function(d,c,b,a){
 		NewImg(0, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:50px;top:-10px;z-index:300;", $(d));
-		oSym.addTask(1,function(d,c,b,a){
-		var c=oZ.getArZ(c,b,this.R);
+		oSym.addTask(1,function(d,c,b,a,e){
+		var c=oZ.getArZ(c,b,e);
 			b=c.length;
 			while (c--){
 				!c[b].FreeSetbodyTime&&(c[b].WalkToLadder(c[b]));
 			}
-		$P[d]&&oSym.addTask(1,arguments.callee,[d]);
-		},[d,c,b,a]);
+		$P[d]&&oSym.addTask(1,arguments.callee,[d,c,b,a,e]);
+		},[d,c,b,a,this.R]);
 		},
         Birth: function(d, c, h, a, m, n) {
             var e = this,
