@@ -73,19 +73,20 @@ var CZombies = function(b, a) {
 				a.FreeSetbodyTime=1;
 				var B;
         oSym.addTask(5,
-          function(l, k, j, a) {
+          function(l, k, j, a,Dire){
 			if(!$Z[a.id])return;
 			a.getr(a,-a.Speed);
-            k = Math.max(k - j, B);
+            k = Dire?Math.min(k + j, 0):Math.max(k - j, B);
             SetStyle(l, {
               top: k + "px"
             });
-            !(k == B) ? oSym.addTask(5, arguments.callee, [l, k, j, a]): (a.FreeSetbodyTime = 0,SetStyle(l, {
+            !(k == B) && (Dire=1);
+			k ? oSym.addTask(5, arguments.callee, [l, k, j, a,Dire]): (a.FreeSetbodyTime = 0,SetStyle(l, {
               top: "0px"
             }))
           },
-          [a.EleBody, 0, -(B=-50) * 0.05, a]);
-			},
+          [a.EleBody, 0, -(B=-50) * 0.05, a,0]);
+		},
                 GetDX: function() {
                     return -110
                 },
