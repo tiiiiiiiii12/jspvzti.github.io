@@ -70,16 +70,15 @@ var CZombies = function(b, a) {
                     return f
                 },
 			WalkToLadder:function(a){
-				if(!a.PZ)return;
 				a.FreeSetbodyTime=1;
         oSym.addTask(5,
           function(l, k, j, a) {
 			if(!$Z[a.id])return;
+			a.getr(a,-a.Speed);
             k = Math.max(k - j, B);
             SetStyle(l, {
               top: k + "px"
             });
-			a.getr(a,-a.Speed);
             !(k == B) ? oSym.addTask(5, arguments.callee, [l, k, j, a]): (a.FreeSetbodyTime = 0,SetStyle(l, {
               top: "0px"
             }))
