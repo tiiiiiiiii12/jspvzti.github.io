@@ -530,7 +530,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
   EName: "oLadderZombie",
   CName: "扶梯僵尸",
   OrnHP: 500,
-  Lvl: 4,
+  Lvl:3,
   HP: 340,
   BreakPoint: 1,
   SunNum: 125,
@@ -541,6 +541,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
   beAttackedPointL: 60,
   beAttackedPointR: 116,
   check: 1,
+  CobCoolTime:2500,
   OSpeed: 4.8,
   Speed: 4.8,
   LostLadderSpeed: 1.6,
@@ -590,11 +591,12 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     b.CanShoot = 0;
     $(b.Ele.FumeDoor).src = "images/Plants/CobCannon/shoot.gif";
     oSym.addTask(200, function(a, b) {
-      if (!$Z[b.id] || !b.Ornaments || !b.beAttacked) return;
+      if (!$Z[b.id] || !b.Ornaments || !b.beAttacked||!a) return;
       let l = a.AttackedRX - 160,
         t = GetY(a.R) - 450;
       var Img = NewImg(0, "images/Plants/CobCannon/Boom.gif", "left:" + l + "px;top:" + t + "px;z-index:25;", EDPZ);
-      oSym.addTask(100, ClearChild, [Img]);
+	  oSym.addTask(50,function(a,b){
+	  if (!a) return;
       PlayAudio("cherrybomb");
       b.PZ && (function(k, g) {
         var q = Math.max(1, k - 1),
@@ -630,10 +632,12 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
         } while (h++ < g)
       })(a.AttackedLX, a.R);
       b.HP > b.BreakPoint && b.Ornaments && (b.Ready(b), $(b.Ele.FumeDoor).src = "images/Plants/CobCannon/noReady.gif");
+	},[a,b]);
+    oSym.addTask(80,ClearChild,[Img]);
     }, [a, b]);
   },
   Ready: function(b) {
-    oSym.addTask(2000, function(b) {
+    oSym.addTask(b.CobCoolTime, function(b) {
       if (!$Z[b.id] || !b.Ornaments || !b.beAttacked) return;
       $(b.Ele.FumeDoor).src = "images/Plants/CobCannon/beReady.gif";
       oSym.addTask(50, function(b) {
