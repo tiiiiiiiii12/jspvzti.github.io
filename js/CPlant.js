@@ -36,16 +36,18 @@ var CPlants = NewO({
         GetDBottom: function() {
             return this.height
         },
-	    getLadder:function(d,c,b,a){
+	    getLadder:function(){
+		var a=this,
+			d=this.id;
 		NewImg(0, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:50px;top:-10px;z-index:300;", $(d));
-		oSym.addTask(1,function(d,c,b,a,e){
-		var c=oZ.getArZ(c,b,e);
+		oSym.addTask(1,function(){
+		var c=oZ.getArZ(a.pixelRight-40,a.pixelRight,a.R);
 			b=c.length;
 			while (c--){
 				!c[b].FreeSetbodyTime&&(c[b].WalkToLadder(c[b]));
 			}
-		$P[d]&&oSym.addTask(1,arguments.callee,[d,c,b,a,e]);
-		},[d,c,b,a,this.R]);
+		$P[d]&&oSym.addTask(1,arguments.callee,[]);
+		},[]);
 		},
         Birth: function(d, c, h, a, m, n) {
             var e = this,
