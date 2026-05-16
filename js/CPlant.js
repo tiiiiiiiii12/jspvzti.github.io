@@ -39,7 +39,7 @@ var CPlants = NewO({
 	    getLadder:function(){
 		NewImg(0, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:20px;top:-10px;z-index:300;", $(this.id));
 		oSym.addTask(1,function(a,d){
-		var c=oZ.getArZ(a.pixelRight-40,a.pixelRight,a.R);
+		var c=oZ.getArZ(a.pixelRight-40,a.pixelRight+15,a.R);
 			b=c.length;
 			while (b--){
 				!c[b].FreeSetbodyTime&&(c[b].WalkToLadder(c[b]));
