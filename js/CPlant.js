@@ -980,7 +980,7 @@ NormalAttack1: function() {
                 function(d, b) {
                     var c = $P[d];
                     c && (c.NormalAttack1(),
-                          c.jinyin==true&&(c.PeaKind=Math.floor(Math.random()*3-1),
+                          c.jinyin==true&&(c.PeaKind=Math.floor(Math.random()*2-1),
                         c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif"));
                     --b && oSym.addTask(15, arguments.callee, [d, b])
                 },
