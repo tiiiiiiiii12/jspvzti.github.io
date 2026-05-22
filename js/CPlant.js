@@ -921,6 +921,7 @@ NormalAttack1: function() {
         beAttackedPointR: 68,
         SunNum: 250,
         coolTime: 50,
+		back:0,
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次发射五颗豌豆<br>(需要双发射手)",
@@ -963,6 +964,14 @@ NormalAttack1: function() {
 		}
         },
         PeaKind:0,
+		JudgeHeadPostition:function(c){
+			var getZLeft=oZ.getArZ(100,c.AttackedLX,c.R);
+			var zl=getZLeft.length;
+			while(zl--){
+				getZLeft[zl].Altitude==1&&(c.back=1);
+			}
+			c.back?(c.Ele.style.transform="rotateY(180deg)",c.PeaDire=c.back):(c.Ele.style.transform="rotateY(0deg)",c.PeaDire=c.back=0)
+		},
         NormalAttack1: oPeashooter.prototype.NormalAttack,
         NormalAttack: function(a) {
             oSym.addTask(0,
@@ -970,6 +979,7 @@ NormalAttack1: function() {
                     var c = $P[d];
                     c && (c.NormalAttack1(),
                           c.jinyin==true&&(c.PeaKind=Math.floor(Math.random()*3-1),
+						c.JudgeHeadPostition(c),
                         c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif"));
                     --b && oSym.addTask(15, arguments.callee, [d, b])
                 },
@@ -2295,6 +2305,7 @@ jinyinAttackGif2: 8,
             ]
         },
 		jinyinAct:function(a){
+			a.Attack*=1.6
 		},
         NormalAttack: function() {
             PlayAudio("fume");
@@ -2308,6 +2319,17 @@ jinyinAttackGif2: 8,
 				lastR=Math.max(1,f.R-1),
                 a = c + "_Bullet";
             while (e--) {
+			if(f.jinyin){
+for (let i = Math.max(1, f.R - 1); i <= Math.min(f.R + 1, oS.R); i++) {
+			oSym.addTask(50,ClearChild,[NewImg(0,"images/Plants/ShroomBulletHit.gif",
+          "left:"+(g = d[e]).ZX+"px;width:104px;height:92px;top:" + (f.pixelTop + 20) + "px;z-index:" + (f.zIndex + 2),EDPZ)]);
+				var jinyinHit=oZ.getArZ(g.ZX,g.AttackedRX,lastR),
+				Zlength = jinyinHit.length;
+				while (Zlength--) {
+                (h = jinyinHit[Zlength]).Altitude < 2&&(i!=f.R)&& h.getHit1(h, 20)
+				}
+          }
+			}
 			(g = d[e]).Altitude < 2 && g.getHit1(g, f.Attack);
             }
             b.childNodes[1].src = "images/Plants/FumeShroom/FumeShroomAttack.gif";
