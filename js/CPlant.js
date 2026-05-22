@@ -909,7 +909,7 @@ NormalAttack1: function() {
                             height: "46px"
                         })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [l])) : (p += (n = !e ? 5 : -5)) < oS.W && p > 100 ? (l.style.left = (q += n) + "px", oSym.addTask(1, arguments.callee, [h, l, j, e, p, k, o, m, q, i,P])) : ClearChild(l)
                     },
-                    [d, $(d), 20, a.PeaDire, c.AttackedLX, a,a.PeaKind,0,c.AttackedLX - 40,oGd.$Torch,c.PeaKind])
+                    [d, $(d), 20, c.PeaDire, c.AttackedLX, a,0,0,c.AttackedLX - 40,oGd.$Torch,c.PeaKind])
             }
         }
     }),
