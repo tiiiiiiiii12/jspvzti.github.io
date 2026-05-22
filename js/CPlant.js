@@ -1034,7 +1034,7 @@ NormalAttack:function(a){
   a.Target && (++a.Boom >= 19 ? (a.Target.getExplosion(a.BoomAttack), a.Boom = 0, PlayAudio("cherrybomb"),
       (!$Z[a.Target.id] || !a.Target.beAttacked)?ClearChild($("P_" + a.id)):$("P_" + a.id).src="images/Plants/PB00.gif",
       oSym.addTask(100, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.Target.ZX + 10) + "px;top:" + (a.Target.pixelTop + 20) + "px;z-index:25;", EDPZ)])) :
-    a.Target.getHit0(a.Target, a.Attack, 0), (!$Z[a.Target.id] || !a.Target.beAttacked) && ClearChild($("P_" + a.id)));
+    a.Target.getHit0(a.Target, 300, 0), (!$Z[a.Target.id] || !a.Target.beAttacked) && ClearChild($("P_" + a.id)));
 	a.Boom + 1 >= 19&&$("P_" + a.id)&&($("P_" + a.id).src="images/Plants/PotatoMine/PotatoMineNotReady.gif");
   (!a.Target || (a.Target && (!$Z[a.Target.id] || !a.Target.beAttacked || !a.Target.PZ))) && a.checkTarget(a);
 },
