@@ -558,6 +558,9 @@ oStarfruit = InheritO(CPlants, {
         beAttackedPointR: 51,
         SunNum: 100,
         BKind: 0,
+		PeaDire:0,
+		PeaKind:0,
+		level:1,
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         PicArr: ["images/Card/Plants/Peashooter.png", "images/Plants/Peashooter/0.gif", "images/Plants/Peashooter/Peashooter.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         Tooltip: "向敌人射出豌豆",
@@ -613,13 +616,13 @@ oStarfruit = InheritO(CPlants, {
                         "-1": "getSnowPea",
                         0: "getPea",
                         1: "getFirePea"
-                    } [m]](d, h,c),(SetStyle(j, {
+                    } [m]](d, h*a.level,c),(SetStyle(j, {
                         left: o + 28 + "px",
                         width: "52px",
                         height: "46px"
                     })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ? 5 : -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g])) : ClearChild(j)
                 },
-                [b, $(b), 20, 0, a.AttackedLX, a.R, 0, 0, a.AttackedLX - 40, oGd.$Torch])
+                [b, $(b), 20, a.PeaDire, a.AttackedLX, a.R, a.PeaKind, 0, a.AttackedLX - 40, oGd.$Torch])
         }
     }),
 oSnowPea = InheritO(oPeashooter, {
@@ -730,7 +733,7 @@ while (e--) {
           height: "46px"
         })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ? 5 : -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g])) : ClearChild(j)
       },
-      [b, $(b), 25, 0, a.AttackedLX, a.R, Math.random() * 100 > 5 ? -1 : 0, 0, a.AttackedLX - 40, oGd.$Torch])
+      [b, $(b), 25, a.PeaDire, a.AttackedLX, a.R, Math.random() * 100 > 5 ? -1 : 0, 0, a.AttackedLX - 40, oGd.$Torch])
   }
 }),
     oRepeater = InheritO(oPeashooter, {
@@ -775,7 +778,7 @@ while (e--) {
                         height: "46px"
                     })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : (n += (l = !c ?BSpeed:-BSpeed)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, h, c, n, i, m, k, o, g,BSpeed])) : ClearChild(j)
                 },
-                [b, $(b), 5,a.PeaDire, a.AttackedLX, a.R, 0, 0, a.AttackedLX - 40, oGd.$Torch,Math.random()*3+3])
+                [b, $(b), 5,a.PeaDire, a.AttackedLX, a.R, a.PeaKind, 0, a.AttackedLX - 40, oGd.$Torch,Math.random()*3+3])
         },
         NormalAttack: function(a) {
             oSym.addTask(0,
@@ -906,7 +909,7 @@ NormalAttack1: function() {
                             height: "46px"
                         })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [l])) : (p += (n = !e ? 5 : -5)) < oS.W && p > 100 ? (l.style.left = (q += n) + "px", oSym.addTask(1, arguments.callee, [h, l, j, e, p, k, o, m, q, i,P])) : ClearChild(l)
                     },
-                    [d, $(d), 20, 0, c.AttackedLX, a,0,0,c.AttackedLX - 40,oGd.$Torch,c.Pea])
+                    [d, $(d), 20, a.PeaDire, c.AttackedLX, a,a.PeaKind,0,c.AttackedLX - 40,oGd.$Torch,c.PeaKind])
             }
         }
     }),
@@ -922,8 +925,7 @@ NormalAttack1: function() {
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次发射五颗豌豆<br>(需要双发射手)",
         Produce: '机枪射手可以一次发射五颗豌豆</font></p>精英形态：三条线各发射五颗豌豆，且本行有概率是冰豆或火豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
-        PrivateBirth:this.jinyin?oThreepeater.prototype.PrivateBirth:
-                function(c) {
+        PrivateBirth:function(c) {
             var b = c.AttackedLX,
                 a = b - 40;
             c.BulletClass = NewO({
@@ -936,7 +938,13 @@ NormalAttack1: function() {
                 pixelLeft: a,
                 F: oGd.MB1
             });
-            c.BulletEle = NewImg(0, "images/Plants/PB00.gif", "left:" + a + "px;top:" + (c.pixelTop + 8) + "px;visibility:hidden;z-index:" + (c.zIndex + 2))
+            c.BulletEle = NewImg(0, "images/Plants/PB00.gif", "left:" + a + "px;top:" + (c.pixelTop + 8) + "px;visibility:hidden;z-index:" + (c.zIndex + 2));
+			c.isjinyin=c.jinyin;
+			oSym.addTask(1,function(c){
+				var P=oGd.$[c.R+"_"+(c.C-1)+"_"+1],d;
+				!c.SpecialPlant&&P&&P.EName=="oSniperPea"&&(PlayAudio("wakeup"),!c.jinyin&&c.jinyinAct(c),c.jinyin=true,c.AttTime-=30,c.SpecialPlant=true);
+				$P[c.id]&&oSym.addTask(1,arguments.callee,[c])
+			},[c])
         },
         CanGrow: function(b, a, d) {
             var c = b[1];
@@ -948,17 +956,21 @@ NormalAttack1: function() {
         jinyinAct:function(a){
         a.PrivateBirth=oThreepeater.prototype.PrivateBirth;
         a.NormalAttack1=oThreepeater.prototype.NormalAttack;
-        a.PrivateDie=oThreepeater.prototype.PrivateDie
+        a.PrivateDie=function(a){
+			oThreepeater.prototype.PrivateDie(a);
+			var P=oGd.$[a.R+"_"+(a.C-1)+"_"+1];
+			P&&P.EName=="oSniperPea"&&P.SpecialPlant&&(P.canEat=1,P.Boom=18,P.Ele.style.opacity=1,P.AttTime+=100,P.SpecialPlant=false)
+		}
         },
-        Pea:0,
+        PeaKind:0,
         NormalAttack1: oPeashooter.prototype.NormalAttack,
         NormalAttack: function(a) {
             oSym.addTask(0,
                 function(d, b) {
                     var c = $P[d];
                     c && (c.NormalAttack1(),
-                          c.jinyin==true&&(c.Pea=Math.floor(Math.random()*3-1),
-                        c.PicArr[3]="images/Plants/PB"+c.Pea+"0.gif"));
+                          c.jinyin==true&&(c.PeaKind=Math.floor(Math.random()*3-1),
+                        c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif"));
                     --b && oSym.addTask(15, arguments.callee, [d, b])
                 },
                 [this.id, 5])
@@ -974,6 +986,8 @@ NormalAttack1: function() {
         coolTime: 50,
 		AttTime:360,//360+140cs
 		Boom:0,
+		Attack:300,
+		BoomAttack:1000,
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "优先锁定场上血量最高的僵尸，每5秒对其造成250伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害",
@@ -998,16 +1012,18 @@ NormalAttack1: function() {
 },
 	PrivateDie:function(a){
 		ClearChild($("P_" + a.id));
+		var P=oGd.$[a.R+"_"+(a.C+1)+"_"+1];
+		P&&P.EName=="oGatlingPea"&&P.SpecialPlant&&(P.AttTime+=30,P.SpecialPlant=false);
 	},
 NormalAttack:function(a){
   var a = this,
     b = a.id;
   (!a.Target || (a.Target && (!$Z[a.Target.id] || !a.Target.beAttacked || !a.Target.PZ))) && a.checkTarget(a);
   PlayAudio("potato_mine");
-  a.Target && (++a.Boom >= 19 ? (a.Target.getExplosion(1000), a.Boom = 0, PlayAudio("cherrybomb"),
+  a.Target && (++a.Boom >= 19 ? (a.Target.getExplosion(a.BoomAttack), a.Boom = 0, PlayAudio("cherrybomb"),
       (!$Z[a.Target.id] || !a.Target.beAttacked)?ClearChild($("P_" + a.id)):$("P_" + a.id).src="images/Plants/PB00.gif",
       oSym.addTask(100, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.Target.ZX + 10) + "px;top:" + (a.Target.pixelTop + 20) + "px;z-index:25;", EDPZ)])) :
-    a.Target.getHit0(a.Target, 250, 0), (!$Z[a.Target.id] || !a.Target.beAttacked) && ClearChild($("P_" + a.id)));
+    a.Target.getHit0(a.Target, a.Attack, 0), (!$Z[a.Target.id] || !a.Target.beAttacked) && ClearChild($("P_" + a.id)));
 	a.Boom + 1 >= 19&&($("P_" + a.id).src="images/Plants/PotatoMine/PotatoMineNotReady.gif");
   (!a.Target || (a.Target && (!$Z[a.Target.id] || !a.Target.beAttacked || !a.Target.PZ))) && a.checkTarget(a);
 },
@@ -1018,6 +1034,11 @@ NormalAttack:function(a){
         },
 		PrivateBirth:function(a){
 			$(a.id).childNodes[1].style.filter = 'brightness(50%)';
+			oSym.addTask(1,function(c){
+				var P=oGd.$[c.R+"_"+(c.C+1)+"_"+1],d;
+				!c.SpecialPlant&&P&&P.EName=="oGatlingPea"&&(PlayAudio("wakeup"),c.canEat=0,c.Boom=18,c.Ele.style.opacity=0.5,c.AttTime-=100,c.SpecialPlant=true);
+				$P[c.id]&&oSym.addTask(1,arguments.callee,[c])
+			},[a])
 		},
 		getTriggerR:function(a){
            return [1,oS.R]
@@ -1030,7 +1051,7 @@ NormalAttack:function(a){
         height: 72,
         beAttackedPointR: 72,
         SunNum: 175,
-        PicArr: ["images/Card/Plants/SplitPea.png", "images/Plants/SplitPea/0.gif", "images/Plants/SplitPea/SplitPea.gif", "images/Plants/PB-10.gif", "images/Plants/PB01.gif", "images/Plants/PeaBulletHit.gif"],
+        PicArr: ["images/Card/Plants/SplitPea.png", "images/Plants/SplitPea/0.gif", "images/Plants/SplitPea/SplitPea.gif", "images/Plants/PB00.gif", "images/Plants/PB01.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "前后双向发射豌豆",
         Produce: '分裂射手，可以向前后两个方向发射豌豆。<br>精英形态：向后发射的子弹可以回弹<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">前面和后面</font><br>发射速度：<font color="#FF0000">前面为正常或两倍速度，后面为两倍速度</font></p>分裂射手：“没错，我就是双子座。我知道，这的确很令人惊奇。不过，有两个头，或者实际上，长着一个头和一个类似头的东西，在背上，对我这条线上的防守帮助很大。',
@@ -1080,7 +1101,8 @@ NormalAttack:function(a){
         },
         CheckLoop: function(a, b) {
             this.NormalAttack(b);
-            oSym.addTask(140,
+			this.NormalAttack(b);
+            oSym.addTask(140+this.AttTime,
                 function(c, e, g) {
                     var f;
                     (f = $P[c]) && f.AttackCheck1(e, g)
@@ -1090,15 +1112,7 @@ NormalAttack:function(a){
         NormalAttack: function(c) {
             var d = this,
                 e,
-				a=c?(oSym.addTask(15,
-                    function(f) {
-                        $P[f] && b(1)
-                    },
-                    [d.id]), d.AttackedRX - 16) : (oSym.addTask(15,
-                    function(f) {
-                        $P[f] && b(0)
-                    },
-                    [d.id]), d.AttackedLX - 40);
+				a=c? d.AttackedRX - 16 : d.AttackedLX - 40;
                var b = function() {
                     EditEle(d.BulletEle[c].cloneNode(false), {
                             id: e = "PB" + Math.random()
@@ -1736,7 +1750,7 @@ NormalAttack:function(a){
 		a.PrivateDie=function(a){
 			var b;
 			oSym.addTask(0,function(a,b,num,maxnum){
-				((b=CustomZombie(oJackinTheBoxZombie,Math.round(Math.random()*5+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=0);
+				((b=CustomZombie(oJackinTheBoxZombie,Math.round(Math.random()*5+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=0,b.PrivateBirth=function(b){b.AppearDownZ(b,1)});
 				++num<maxnum&&oSym.addTask(0,arguments.callee,[a,b,num,maxnum]);
 			},[a,b,0,Math.round(Math.random()*3+3)])
 		 }
@@ -2376,6 +2390,8 @@ oGloomShroom = InheritO(oFumeShroom, {
   coolTime: 50,
   yuansu: 0,
   power: 0,
+  IceAttack:45,
+FireAttack:90,
   PicArr: ["images/Card/Plants/GloomShroom.png", "images/Plants/GloomShroom/0.gif", "images/Plants/GloomShroom/GloomShroom.gif", "images/Plants/GloomShroom/GloomShroomSleep.gif", "images/Plants/GloomShroom/GloomShroomAttack.gif", "images/Plants/GloomShroom/GloomShroomBullet.gif"],
   AudioArr: ["kernelpult", "kernelpult2"],
   Tooltip: "围绕自身释放大量绵羊音<br>(需要大喷菇)",
@@ -2456,7 +2472,7 @@ oGloomShroom = InheritO(oFumeShroom, {
     for (g = k.MinR; g <= f; g++) {
       e = oZ.getArZ(c, b, g);
       for (h = e.length; h--;
-        (a = e[h]).Altitude < 2 && (a.getHit1(a,40), k.yuansu ? (num > 95 && (a.OrnHP = 0), a.getHit1(a, 40)) : (a.getSlow(a, a.id, 1000), num > 80 && a.getr(a, 15)))) {}
+        (a = e[h]).Altitude < 2 && (k.yuansu ? (num > 95 && (a.OrnHP = 0), a.getHit1(a, a.FireAttack)) : (a.getHit1(a,a.IceAttack),a.getSlow(a, a.id, 1000), num > 80 && a.getr(a, 15)))) {}
     }
     oSym.addTask(100,
       function(i) {
@@ -2510,10 +2526,9 @@ oGloomShroom = InheritO(oFumeShroom, {
             a.BulletEle = NewImg(0, "images/Plants/ShroomBullet.gif", "left:" + (a.AttackedLX - 46) + "px;top:" + (a.pixelTop + 40) + "px;visibility:hidden;z-index:" + (a.zIndex + 2))
         },
         PrivateDie: function(a) {
-			a.NormalAttack();
             a.BulletEle = null;
         },
-        NormalAttack: function(A) {
+        NormalAttack: function() {
             PlayAudio("puff");
             var b = this,
                 c = "PSB" + Math.random(),
