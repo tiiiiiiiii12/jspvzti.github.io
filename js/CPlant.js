@@ -940,10 +940,9 @@ NormalAttack1: function() {
                 F: oGd.MB1
             });
             c.BulletEle = NewImg(0, "images/Plants/PB00.gif", "left:" + a + "px;top:" + (c.pixelTop + 8) + "px;visibility:hidden;z-index:" + (c.zIndex + 2));
-			c.isjinyin=c.jinyin;
 			oSym.addTask(1,function(c){
 				var P=oGd.$[c.R+"_"+(c.C-1)+"_"+1],d;
-				!c.SpecialPlant&&P&&P.EName=="oSniperPea"&&(PlayAudio("wakeup"),!c.jinyin&&c.jinyinAct(c),c.jinyin=true,c.AttTime-=30,c.SpecialPlant=true);
+				!c.SpecialPlant&&P&&P.EName=="oSniperPea"&&(PlayAudio("wakeup"),oThreepeater.prototype.PrivateBirth(c),!c.jinyin&&c.jinyinAct(c),c.jinyin=true,c.AttTime-=30,c.SpecialPlant=true);
 				$P[c.id]&&oSym.addTask(1,arguments.callee,[c])
 			},[c])
         },
@@ -1034,7 +1033,7 @@ NormalAttack:function(a){
       (!$Z[a.Target.id] || !a.Target.beAttacked)?ClearChild($("P_" + a.id)):$("P_" + a.id).src="images/Plants/PB00.gif",
       oSym.addTask(100, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.Target.ZX + 10) + "px;top:" + (a.Target.pixelTop + 20) + "px;z-index:25;", EDPZ)])) :
     a.Target.getHit0(a.Target, a.Attack, 0), (!$Z[a.Target.id] || !a.Target.beAttacked) && ClearChild($("P_" + a.id)));
-	a.Boom + 1 >= 19&&($("P_" + a.id).src="images/Plants/PotatoMine/PotatoMineNotReady.gif");
+	a.Boom + 1 >= 19&&$("P_" + a.id)&&($("P_" + a.id).src="images/Plants/PotatoMine/PotatoMineNotReady.gif");
   (!a.Target || (a.Target && (!$Z[a.Target.id] || !a.Target.beAttacked || !a.Target.PZ))) && a.checkTarget(a);
 },
 		getTriggerRange: function(a, b, c) {
