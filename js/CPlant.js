@@ -926,26 +926,32 @@ NormalAttack1: function() {
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次发射五颗豌豆<br>(需要双发射手)",
         Produce: '机枪射手可以一次发射五颗豌豆</font></p>精英形态：三条线各发射五颗豌豆，且本行有概率是冰豆或火豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
-        PrivateBirth:function(c) {
-            var b = c.AttackedLX,
-                a = b - 40;
-            c.BulletClass = NewO({
-                X: b,
-                R: c.R,
-                D: 0,
-                Attack: 20,
-                Kind: c.BKind,
-                ChangeC: 0,
-                pixelLeft: a,
-                F: oGd.MB1
-            });
-            c.BulletEle = NewImg(0, "images/Plants/PB00.gif", "left:" + a + "px;top:" + (c.pixelTop + 8) + "px;visibility:hidden;z-index:" + (c.zIndex + 2));
+        PrivateBirth: function(f) {
+            var e = f.AttackedLX,
+                d = e - 40,
+                a, c = f.oTrigger,
+                b;
+            f.BulletClass = [];
+            f.BulletEle = [];
+            for (b in c) {
+                f.BulletClass.push(NewO({
+                    X: e,
+                    R: b,
+                    D: 0,
+                    Attack: 20,
+                    Kind: 0,
+                    ChangeC: 0,
+                    pixelLeft: d,
+                    F: oGd.MB1
+                }));
+                f.BulletEle.push(NewImg(0, "images/Plants/PB00.gif", "left:" + d + "px;top:" + (GetY(b) - 80) + "px;visibility:hidden;z-index:" + (3 * b + 2)))
+            }
 			oSym.addTask(1,function(c){
 				var P=oGd.$[c.R+"_"+(c.C-1)+"_"+1],d;
 				c.JudgeHeadPostition(c);
-				!c.SpecialPlant&&P&&P.EName=="oSniperPea"&&(PlayAudio("wakeup"),!c.jinyin&&oThreepeater.prototype.PrivateBirth(c),!c.jinyin&&c.jinyinAct(c),c.jinyin=true,c.AttTime-=30,c.SpecialPlant=true);
+				!c.SpecialPlant&&P&&P.EName=="oSniperPea"&&(PlayAudio("wakeup"),c.jinyin=true,c.AttTime-=30,c.SpecialPlant=true);
 				$P[c.id]&&oSym.addTask(1,arguments.callee,[c])
-			},[c])
+			},[f])
         },
         CanGrow: function(b, a, d) {
             var c = b[1];
@@ -954,23 +960,20 @@ NormalAttack1: function() {
         getTriggerR:function(a){
            return [a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]
         },
-        jinyinAct:function(a){
-        a.PrivateBirth=oThreepeater.prototype.PrivateBirth;
-        a.NormalAttack1=oThreepeater.prototype.NormalAttack;
-        a.PrivateDie=function(a){
+		NormalAttack1:oThreepeater.prototype.NormalAttack,
+		PrivateDie:function(a){
 			oThreepeater.prototype.PrivateDie(a);
 			var P=oGd.$[a.R+"_"+(a.C-1)+"_"+1];
 			P&&P.EName=="oSniperPea"&&P.SpecialPlant&&(P.canEat=1,P.Boom=18,P.Ele.style.opacity=1,P.AttTime+=100,P.SpecialPlant=false)
-		}
-        },
+		},
         PeaKind:0,
 		JudgeHeadPostition:function(c){
 			var getZLeft=oZ.getArZ(100,c.AttackedLX,c.R);
-			var zl=getZLeft.length;
+			var zl=getZLeft.length,back;
 			while(zl--){
-				getZLeft[zl].Altitude==1&&(c.back=1);
+				getZLeft[zl].Altitude==1&&(back=1);
 			}
-			c.back?(c.Ele.style.transform="rotateY(180deg)",c.PeaDire=c.back):(c.Ele.style.transform="rotateY(0deg)",c.PeaDire=c.back=0)
+			back?(c.Ele.style.transform="rotateY(180deg)",c.PeaDire=1):(c.Ele.style.transform="rotateY(0deg)",c.PeaDire=0)
 		},
         NormalAttack1: oPeashooter.prototype.NormalAttack,
         NormalAttack: function(a) {
@@ -978,7 +981,7 @@ NormalAttack1: function() {
                 function(d, b) {
                     var c = $P[d];
                     c && (c.NormalAttack1(),
-                          c.jinyin==true&&(c.PeaKind=Math.floor(Math.random()*3-1),
+                          c.jinyin==true&&(c.PeaKind=Math.floor(Math.random()*3+0),
                         c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif"));
                     --b && oSym.addTask(15, arguments.callee, [d, b])
                 },
