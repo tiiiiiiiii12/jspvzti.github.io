@@ -975,7 +975,6 @@ NormalAttack1: function() {
 			}
 			back?(c.Ele.style.transform="rotateY(180deg)",c.PeaDire=1):(c.Ele.style.transform="rotateY(0deg)",c.PeaDire=0)
 		},
-        NormalAttack1: oPeashooter.prototype.NormalAttack,
         NormalAttack: function(a) {
             oSym.addTask(0,
                 function(d, b) {
