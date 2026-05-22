@@ -942,7 +942,8 @@ NormalAttack1: function() {
             c.BulletEle = NewImg(0, "images/Plants/PB00.gif", "left:" + a + "px;top:" + (c.pixelTop + 8) + "px;visibility:hidden;z-index:" + (c.zIndex + 2));
 			oSym.addTask(1,function(c){
 				var P=oGd.$[c.R+"_"+(c.C-1)+"_"+1],d;
-				!c.SpecialPlant&&P&&P.EName=="oSniperPea"&&(PlayAudio("wakeup"),oThreepeater.prototype.PrivateBirth(c),!c.jinyin&&c.jinyinAct(c),c.jinyin=true,c.AttTime-=30,c.SpecialPlant=true);
+				c.JudgeHeadPostition(c);
+				!c.SpecialPlant&&P&&P.EName=="oSniperPea"&&(PlayAudio("wakeup"),!c.jinyin&&oThreepeater.prototype.PrivateBirth(c),!c.jinyin&&c.jinyinAct(c),c.jinyin=true,c.AttTime-=30,c.SpecialPlant=true);
 				$P[c.id]&&oSym.addTask(1,arguments.callee,[c])
 			},[c])
         },
@@ -978,7 +979,6 @@ NormalAttack1: function() {
                     var c = $P[d];
                     c && (c.NormalAttack1(),
                           c.jinyin==true&&(c.PeaKind=Math.floor(Math.random()*3-1),
-						c.JudgeHeadPostition(c),
                         c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif"));
                     --b && oSym.addTask(15, arguments.callee, [d, b])
                 },
