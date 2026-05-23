@@ -2567,16 +2567,16 @@ FireAttack:90,
                 },
                 [c]);
             oSym.addTask(1,
-                function(j, d, e, f, g,A) {
+                function(j, d, e, f, g) {
                     var i = GetC(e),
                         h = oZ.getZ0(e, f);
                     h && h.Altitude == 1 ? (h.getPea(h,20, 0), (SetStyle(d, {
                         left: g + 38 + "px",
                         width: "52px",
                         height: "46px"
-                    })).src = "images/Plants/ShroomBulletHit.gif", oSym.addTask(10, ClearChild, [d])) : (e += 5) < oS.W ? (d.style.left = (g += 5) + "px", oSym.addTask(1, arguments.callee, [j, d, e, f, g,A])) : ClearChild(d)
+                    })).src = "images/Plants/ShroomBulletHit.gif", oSym.addTask(10, ClearChild, [d])) : (e += 5) < oS.W ? (d.style.left = (g += 5) + "px", oSym.addTask(1, arguments.callee, [j, d, e, f, g])) : ClearChild(d)
                 },
-                [c, $(c), a, b.R, a - 46,A])
+                [c, $(c), a, b.R, a - 46])
         }
     }),
     oScaredyShroom = InheritO(oFumeShroom, {
