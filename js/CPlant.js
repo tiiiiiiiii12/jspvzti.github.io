@@ -2495,7 +2495,7 @@ FireAttack:90,
     for (g = k.MinR; g <= f; g++) {
       e = oZ.getArZ(c, b, g);
       for (h = e.length; h--;
-        (a = e[h]).Altitude < 2 && (k.yuansu ? (num > 95 && (a.OrnHP = 0), a.getHit1(a, a.FireAttack)) : (a.getHit1(a,a.IceAttack),a.getSlow(a, a.id, 1000), num > 80 && a.getr(a, 15)))) {}
+        (a = e[h]).Altitude < 2 && (k.yuansu ? (num > 95 && (a.OrnHP = 0), a.getHit1(a, k.FireAttack)) : (a.getHit1(a,k.IceAttack),a.getSlow(a, a.id, 1000), num > 80 && a.getr(a, 15)))) {}
     }
     oSym.addTask(100,
       function(i) {
