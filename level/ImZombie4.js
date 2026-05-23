@@ -9,7 +9,7 @@ oS.Init({
     CardKind: 1,
     DKind: 0,
     ShowScroll:false,
-    CanSelectCard: 1,
+    CanSelectCard: 0,
     LevelName: "解谜模式：最终决战!",
     LvlEName: "ImZombie4",
     LoadMusic: "2.75",
