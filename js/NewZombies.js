@@ -264,6 +264,7 @@ CanPass:CZombies.prototype.CanPass,
     c.WalkDirection = 1;
     c.ZX = c.AttackedRX;
     c.ChkActs = c.ChkActs1;
+	c.PeaDire=0;
     c.shootPea = oPeashooter.prototype.NormalAttack;
     oP.MonPrgs()
   },
