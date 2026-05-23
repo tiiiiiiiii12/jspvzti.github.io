@@ -18,7 +18,7 @@ oS.Init({
         ArC: [1, 6],
         ArR: [1, 5],
         Auto: 1,
-        P: [0, 1, 1, 1, 3, 3, 4, 5, 6, 6, 7, 8, 1, 9, 8, 9, 10, 11, 12, 12, 13, 1, 13, 14, 15, 15, 16, 17, 17, 18]
+        P: [0, 1, 1, 1, 3, 3, 4, 5, 6, 6, 7, 8, 1, 9, 8, 9, 10, 11, 12, 12, 13, 1, 13, 14, 15, 15, 16, 2, 3, 7]
     },
     RiddleAutoGrow: function() {
         var k = oS.ArP,
@@ -42,9 +42,10 @@ oS.Init({
         }
         NewImg("iStripe", "images/interface/Stripe.png", "left:" + (GetX1X2(7)[0] - 11) + "px;top:65px", EDAll)
     },
-    StartGame: function() {
-        oP.Monitor();
-        BeginCool();
-        SetVisible($("dFlagMeter"), $("dFlagMeterContent"));
-    }
+  StartGame:function(){
+    oP.Monitor();
+    BeginCool();
+    SetVisible($("dFlagMeter"),$("dFlagMeterContent"),$("dTop"));
+    oS.RiddleAutoGrow()
+  }
 });
