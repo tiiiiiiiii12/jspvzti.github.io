@@ -2735,7 +2735,7 @@ FireAttack:90,
                     c.num+=1;
                     !c.Sleep && (d.bedevil(d),
         c.jinyin&&(d.getr(d,-200),d.BulletEle = NewImg(0, "images/Plants/PB00.gif","left:" + (d.AttackedLX - 40) + "px;top:" + (d.pixelTop + 30) + "px;visibility:hidden;z-index:" + (d.zIndex + 2)), 
-        d.NormalAttack=oPeashooter.prototype.NormalAttack, oSym.addTask(1, function(d) {
+        d.PeaKind=d.PeaDire=0,d.NormalAttack=oPeashooter.prototype.NormalAttack, oSym.addTask(1, function(d) {
         d.NormalAttack(),
         $Z[d.id] && d.beAttacked ? oSym.addTask(140/c.num,arguments.callee, [d]): d.BulletEle = null;
           }, [d])));
