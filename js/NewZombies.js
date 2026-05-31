@@ -171,8 +171,8 @@ var oGargantuar = InheritO(oZombie, {
       var P = $(h.id);
       !h.hasthrew&&(h.WalkDirection == h.check) && (
         EditImg($(P.FumeDoor), 0,"images/interface/target.png", {
-          transform: h.PZ ? "rotateY(0deg)" : "rotateY(180deg)",
-          left: h.PZ ? "185px" : "25px"
+          transform: !h.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)",
+          left: !h.WalkDirection ? "185px" : "25px"
         }, 0),
         h.check = h.WalkDirection?0:1);
     }
@@ -263,19 +263,18 @@ CanPass:CZombies.prototype.CanPass,
     c.ChkActs = c.ChkActs1;
 	c.PeaDire=c.PeaKind=0;
     c.shootPea = oPeashooter.prototype.NormalAttack;
-	if(a){
+	if(!a){
     c.JudgeAttack = c.JudgeAttackH;
     c.PZ = 0;
     oP.MonPrgs()
 	}
   },
-check:1,
   PrivateAct:function(a){
 var z=a.Ele;
 	  if($Z[a.id]&&!a.isDie){
 	a.WalkDirection==a.check&&(
 	EditImg($(z.PeaHead),0,"images/Plants/Peashooter/Peashooter.gif",{
-		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"
+		transform:!a.WalkDirection?"rotateY(180deg)":"rotateY(0deg)"
 	},0),a.check=a.WalkDirection?0:1);
 	!a.beAttacked&&(ClearChild($(z.PeaHead)),a.isDie=true);
 	  }
@@ -398,7 +397,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       if ($Z[a.id] && a.beAttacked) {
 		a.checkHP(z, a);
         a.WalkDirection == a.check &&
-        ($(z.NutHead).style.transform = a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",a.check=(a.WalkDirection?0:1))
+        ($(z.NutHead).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",a.check=(a.WalkDirection?0:1))
       }!a.beAttacked && (ClearChild($(z.NutHead)));
       a.jinyin && a.isAttacking && a.Boom(a);
     },
@@ -564,8 +563,8 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     a.PrivateAct = function(b) {
       (b.WalkDirection == b.check) && (b.Ornaments && (
         SetStyle($(b.Ele.FumeDoor), {
-          "left": b.PZ ? "-70px" : "30px",
-          transform: b.PZ ? "rotateY(180deg)" : "rotateY(0deg)"
+          "left": !b.WalkDirection ? "-70px" : "30px",
+          transform: !b.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)"
         }),
         b.check=(b.WalkDirection?0:1)));
       !b.Ornaments && ClearChild($(b.Ele.FumeDoor));
