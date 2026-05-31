@@ -440,12 +440,19 @@ Birth: function() {
                     c.ExchangeLR(c, 1);
                     c.WalkDirection = 1;
                     c.ZX = c.AttackedRX;
+					c.ChkActs0=c.ChkActs;
                     c.ChkActs = c.ChkActs1;
 					if(!a){
 					c.JudgeAttack = c.JudgeAttackH;
                     c.PZ = 0;
                     oP.MonPrgs();
 					}
+                },
+			    reNormal: function(c,a) {
+                    c.ExchangeLR(c, 0);
+                    c.WalkDirection = 0;
+                    c.ZX = c.AttackedLX;
+                    c.ChkActs = c.ChkActs0;
                 },
 			    jianshang:1,
 	AppearDownZ: function(z, t) {
@@ -1903,12 +1910,12 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
         z &&a.canWalk(a,a.id)&&(z.getr(z, 80), z.getHit0(z, 100, 0),PlayAudio("shovel"))
       }
 		(a.WalkDirection == a.check) && (a.Ornaments && (a.num && EditEle($(a.id + "_Bullet"), 0, {
-            transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
-            left: (a.PZ ? "-250" : "40") + "px"
+            transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
+            left: (!a.WalkDirection ? "-250" : "40") + "px"
           }, $(a.id), 0),
           EditImg($(P.FumeDoor), 0, a.num ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/Shovel.png", {
-            transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
-            left: a.PZ ? "25px" : "40px"
+            transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
+            left: !a.WalkDirection ? "25px" : "40px"
           }, 0)),
         a.check = a.WalkDirection?0:1);
 		!a.Ornaments&&ClearChild($(a.Ele.FumeDoor))
@@ -2611,8 +2618,8 @@ jinyinWalkGif12: 14,
 		var P=$(a.id);
 		(a.WalkDirection == a.check) && (
      EditImg($(P.FumeDoor), 0, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", {
-            transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
-            left: a.PZ ? "125px" : "270px"
+            transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
+            left: !a.WalkDirection ? "125px" : "270px"
           }, 0),a.check = a.WalkDirection?0:1);
 	}
 			},
@@ -2982,8 +2989,8 @@ oImp = InheritO(OrnNoneZombies, {
 		a.bool&&(ClearChild($(p.JaHead)),PlayAudio("potato_mine"),a.JudgeAttack=CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"]);
       } a.WalkDirection==a.check&& !a.bool && a.beAttacked && (
         EditImg($(p.JaHead), 0, "images/Plants/PotatoMine/PotatoMine.gif", {
-          transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
-          left: a.PZ ? "20px" : "0px"
+          transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
+          left: !a.WalkDirection ? "20px" : "0px"
         }, 0),
         a.check = a.WalkDirection?0:1);
       !a.beAttacked && ClearChild($(p.JaHead));
@@ -3060,8 +3067,8 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
       var p = a.Ele;
       a.WalkDirection == a.check&& (
         EditImg($(p.JaHead), 0, a.num ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/CherryBomb/CherryBomb.gif", {
-          transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
-          left: a.PZ ? "60px" : "20px"
+          transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
+          left: !a.WalkDirection ? "60px" : "20px"
         }, 0),
         a.check = a.WalkDirection?0:1);
 		!a.beAttacked&&$Z[a.id]&&ClearChild($(p.JaHead));
