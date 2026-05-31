@@ -1835,7 +1835,6 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   height: 144,
   beAttackedPointL: 60,
   beAttackedPointR: 116,
-  check: 1,
   LostPaperSpeed: 1.6,
   PicArr: (function() {
     var a = "images/Zombies/ScreenDoorZombie/",
@@ -1900,7 +1899,8 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
         }
         var z = oZ["get" + (a.PZ ? "HZ1" : "Z0")](a.ZX, a.R);
         z &&a.canWalk(a,a.id)&&(z.getr(z, 80), z.getHit0(z, 100, 0),PlayAudio("shovel"))
-      }!(a.PZ == a.check) && (a.Ornaments && (a.num && EditEle($(a.id + "_Bullet"), 0, {
+      }
+		(a.WalkDirection == a.check) && (a.Ornaments && (a.num && EditEle($(a.id + "_Bullet"), 0, {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
             left: (a.PZ ? "-250" : "40") + "px"
           }, $(a.id), 0),
@@ -1908,7 +1908,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
             left: a.PZ ? "25px" : "40px"
           }, 0)),
-        a.check = a.PZ);
+        a.check = a.WalkDirection?0:1);
 		!a.Ornaments&&ClearChild($(a.Ele.FumeDoor))
     }
   },
@@ -2581,7 +2581,6 @@ jinyinWalkGif12: 14,
 				f.PrivateAct(f);
                 return e
             },
-			check:1,
 			jinyinAct:function(a){
 				a.num=Math.round(Math.random()*1+0)||a.Privatenum;
 				var z=$(a.id);
@@ -2608,11 +2607,11 @@ jinyinWalkGif12: 14,
     }, [a]));
 	a.PrivateAct=function(a){
 		var P=$(a.id);
-		!(a.PZ == a.check) && (
+		(a.WalkDirection == a.check) && (
      EditImg($(P.FumeDoor), 0, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", {
             transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
             left: a.PZ ? "125px" : "270px"
-          }, 0),a.check = a.PZ);
+          }, 0),a.check = a.WalkDirection?0:1);
 	}
 			},
             getPea: function(c, b) {
@@ -2979,12 +2978,12 @@ oImp = InheritO(OrnNoneZombies, {
           }
         }
 		a.bool&&(ClearChild($(p.JaHead)),PlayAudio("potato_mine"),a.JudgeAttack=CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"]);
-      }!a.PZ == a.check && !a.bool && a.beAttacked && (
+      } a.WalkDirection==a.check&& !a.bool && a.beAttacked && (
         EditImg($(p.JaHead), 0, "images/Plants/PotatoMine/PotatoMine.gif", {
           transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
           left: a.PZ ? "20px" : "0px"
         }, 0),
-        a.check = a.PZ);
+        a.check = a.WalkDirection?0:1);
       !a.beAttacked && ClearChild($(p.JaHead));
     }
   },
@@ -3049,7 +3048,6 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
     var a = "images/Zombies/JackinTheBoxZombie/";
     return ["images/Card/Zombies/JackboxZombie.png", a + "0.gif", a + "Attack.gif", a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif", a + "Walk.gif", a + "OpenBox.gif", a + "Boom.gif" + $Random, a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random]
   })(),
-  check: 1,
   jinyinAct: function(a) {
     a.num=Math.round(Math.random()*1+0)||a.Privatenum;
     var z = a.Ele;
@@ -3058,12 +3056,12 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
     z.appendChild(Ja);
     a.PrivateAct = function(a) {
       var p = a.Ele;
-      !(a.PZ == a.check) && (
+      a.WalkDirection == a.check&& (
         EditImg($(p.JaHead), 0, a.num ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/CherryBomb/CherryBomb.gif", {
           transform: a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",
           left: a.PZ ? "60px" : "20px"
         }, 0),
-        a.check = a.PZ);
+        a.check = a.WalkDirection?0:1);
 		!a.beAttacked&&$Z[a.id]&&ClearChild($(p.JaHead));
       if (!a.num&&a.jinyin&& !a.opennum) {
         a.canWalk(a, a.id) && $Z[a.id].beAttacked && ($Z[a.id].HP < 240) && (a.OpenBox(a.id), a.opennum = 1)
