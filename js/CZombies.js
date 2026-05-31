@@ -434,14 +434,16 @@ Birth: function() {
                     } : function(e, c, d) {
                         c.className = d ? "fliph" : ""
                     },
-                bedevil: function(c) {
+                bedevil: function(c,a) {
                     c.ExchangeLR(c, 1);
-                    c.JudgeAttack = c.JudgeAttackH;
-                    c.PZ = 0;
                     c.WalkDirection = 1;
                     c.ZX = c.AttackedRX;
                     c.ChkActs = c.ChkActs1;
-                    oP.MonPrgs()
+					if(a){
+					c.JudgeAttack = c.JudgeAttackH;
+                    c.PZ = 0;
+                    oP.MonPrgs();
+					}
                 },
 			    jianshang:1,
 	AppearDownZ: function(z, t) {
@@ -552,17 +554,6 @@ Birth: function() {
             var a = "images/Zombies/BackupDancer/";
             return ["images/Card/Zombies/BackupDancer.png", a + "0.gif", a + "BackupDancer.gif", a + "Attack.gif", a + "LostHead.gif", a + "LostHeadAttack.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "Dancing.gif" + $Random, a + "LostHeadDancing.gif" + $Random, a + "Mound.gif" + $Random]
         })(),
-        bedevil: function(a) {
-            a.ExchangeLR(a, 1);
-            a.JudgeAttack = a.JudgeAttackH;
-            a.PZ = 0;
-            a.WalkDirection = 1;
-            a.ZX = a.AttackedRX;
-            a.ChkActs = a.ChkActs1;
-            a.Speed = 3.5;
-            a.ChangeChkActsTo1(a, a.id, a.EleBody);
-            oP.MonPrgs()
-        },
         getSlow: function(f, d, e) {
             var b = oSym.Now + e,
                 c = f.FreeSlowTime,
@@ -806,18 +797,20 @@ Birth: function() {
             delete $Z[a.id];
             a.PZ && oP.MonPrgs()
         },
-    bedevil: function(b) {
+    bedevil: function(b,c) {
       var a = b.id;
       b.ExchangeLR(b, 1);
-      b.JudgeAttack = b.JudgeAttackH;
-      b.PZ = 0;
       b.WalkDirection = 1;
       b.ZX = b.AttackedRX;
       b.ChkActs = b.ChkActs1;
       b.ResetBackupDancer(b);
       b.havelight&&($(a + "_spotlightCon").style.left = "20px",
       $(a + "_spotlight2Con").style.left = "25px");
+	if(c){
+	b.JudgeAttack = b.JudgeAttackH;
+      b.PZ = 0;
       oP.MonPrgs()
+	}
     },
     ResetBackupDancer: function(f) {
       var g = f.ArDZ,
@@ -1477,14 +1470,16 @@ Birth: function() {
         GoingDieHead: function(c, a, b) {
             oSym.addTask(200, ClearChild, [NewImg(0, a[b.HeadGif] + Math.random(), "left:" + b.X + "px;top:" + (b.pixelTop - 20) + "px;z-index:" + b.zIndex, EDPZ)])
         },
-		  bedevil: function(c) {
+		  bedevil: function(c,a) {
     !(c.num && c.NormalAttack != CZombies.prototype.NormalAttack) && c.ExchangeLR(c, 1);
-c.JudgeAttack = c.JudgeAttackH;
-    c.PZ = 0;
     c.WalkDirection = 1;
     c.ZX = c.AttackedRX;
     c.ChkActs = c.ChkActs1;
+	if(a){
+	c.JudgeAttack = c.JudgeAttackH;
+    c.PZ = 0;
     oP.MonPrgs()
+	}
   },
         JudgeAttack: function() {
             var g = this,
