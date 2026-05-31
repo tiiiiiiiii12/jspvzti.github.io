@@ -441,7 +441,7 @@ Birth: function() {
                     c.WalkDirection = 1;
                     c.ZX = c.AttackedRX;
                     c.ChkActs = c.ChkActs1;
-					if(a){
+					if(!a){
 					c.JudgeAttack = c.JudgeAttackH;
                     c.PZ = 0;
                     oP.MonPrgs();
@@ -808,7 +808,7 @@ Birth: function() {
       b.ResetBackupDancer(b);
       b.havelight&&($(a + "_spotlightCon").style.left = "20px",
       $(a + "_spotlight2Con").style.left = "25px");
-	if(c){
+	if(!c){
 	b.JudgeAttack = b.JudgeAttackH;
       b.PZ = 0;
       oP.MonPrgs()
@@ -1477,7 +1477,7 @@ Birth: function() {
     c.WalkDirection = 1;
     c.ZX = c.AttackedRX;
     c.ChkActs = c.ChkActs1;
-	if(a){
+	if(!a){
 	c.JudgeAttack = c.JudgeAttackH;
     c.PZ = 0;
     oP.MonPrgs()
