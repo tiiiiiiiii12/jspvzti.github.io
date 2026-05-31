@@ -416,7 +416,8 @@ Birth: function() {
                                 g;
                             h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((g = $P[e]) && g.getHurt(h, h.AKind, h.Attack), h.JudgeAttack())
                         },
-                        [d, c])
+                        [d, c]);
+					$Z[d]&&$Z[d].PrivateAttack&&$Z[d].PrivateAttack($Z[d],c);
                 },
                 PZ: 1,
                 ExchangeLR: function(f, d) {
