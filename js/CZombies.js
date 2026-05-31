@@ -69,6 +69,7 @@ var CZombies = function(b, a) {
                     g.PrivateAct&&g.PrivateAct(g);
                     return f
                 },
+			check:0,
 			WalkToLadder:function(a){
 				a.FreeSetbodyTime=1;
 				a.isAttacking=0;
