@@ -329,7 +329,6 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     SunNum: 150,
     StandGif: 11,
     Lvl: 3,
-    check: 1,
     OrnGif: 12,
     OrnLeft: 42,
     OrnTop: 12,
@@ -398,7 +397,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       var c = a.HP;
       if ($Z[a.id] && a.beAttacked) {
 		a.checkHP(z, a);
-        a.PZ == a.check &&
+        a.WalkDirection == a.check &&
         ($(z.NutHead).style.transform = a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",a.check=(a.WalkDirection?0:1))
       }!a.beAttacked && (ClearChild($(z.NutHead)));
       a.jinyin && a.isAttacking && a.Boom(a);
