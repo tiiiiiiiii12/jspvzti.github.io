@@ -3,7 +3,6 @@ var oGargantuar = InheritO(oZombie, {
     var a = "images/Zombies/Gargantuar/";
     return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif" + $Random, a + "ImpToLand.gif", a + "throwImp.gif", a + "ImplessDie.gif", a + "Die.gif", a + "ImplessWalk.gif", a + "0.gif", a + "ImplessAttack.gif" + $Random]
   })(),
-  check: 1,
   throwImpGif: 5,
   ImpToLandGif: 4,
   ImplessDieGif: 6,
@@ -170,12 +169,12 @@ var oGargantuar = InheritO(oZombie, {
     }, SetVisible(h.EleShadow)),$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.top=((ImgLeft=parseInt($(h.Ele.FumeDoor).style.top))-200)+"px"), h.intowater = false);
     if (h.jinyin) {
       var P = $(h.id);
-      !h.hasthrew&&!(h.PZ == h.check) && (
+      !h.hasthrew&&(h.WalkDirection == h.check) && (
         EditImg($(P.FumeDoor), 0,"images/interface/target.png", {
           transform: h.PZ ? "rotateY(0deg)" : "rotateY(180deg)",
           left: h.PZ ? "185px" : "25px"
         }, 0),
-        h.check = h.PZ);
+        h.check = h.WalkDirection?0:1);
     }
 	h.canWalk(h,h.id)&&h.hasthrew < h.throwImpnum && (GetC(h.ZX) > 3 || !h.PZ) && !h.isAttacking && (h.HP <= h.MaxHP*0.5) && h.throwImp(h);
   },
@@ -257,25 +256,27 @@ CanPass:CZombies.prototype.CanPass,
     var pea = NewImg(z.PeaHead,"images/Plants/Peashooter/Peashooter.gif","position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
     z.appendChild(pea);
   },
-  bedevil: function(c) {
+  bedevil: function(c,a) {
     c.ExchangeLR(c, 1);
-    c.JudgeAttack = c.JudgeAttackH;
-    c.PZ = 0;
-    c.WalkDirection = 1;
+	c.WalkDirection = 1;
     c.ZX = c.AttackedRX;
     c.ChkActs = c.ChkActs1;
 	c.PeaDire=c.PeaKind=0;
     c.shootPea = oPeashooter.prototype.NormalAttack;
+	if(a){
+    c.JudgeAttack = c.JudgeAttackH;
+    c.PZ = 0;
     oP.MonPrgs()
+	}
   },
 check:1,
   PrivateAct:function(a){
 var z=a.Ele;
 	  if($Z[a.id]&&!a.isDie){
-	!(a.PZ==a.check)&&(
+	a.WalkDirection==a.check&&(
 	EditImg($(z.PeaHead),0,"images/Plants/Peashooter/Peashooter.gif",{
 		transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"
-	},0));
+	},0),a.check=a.WalkDirection?0:1);
 	!a.beAttacked&&(ClearChild($(z.PeaHead)),a.isDie=true);
 	  }
   },
@@ -383,7 +384,6 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       c.OrnBreakPoint1 = c.MaxOrnHP * 0.66;
       c.OrnBreakPoint2 = c.MaxOrnHP * 0.33;
     },
-    check: 1,
     jinyinAct: function(a) {
       a.OSpeed *= 2;
       a.Speed *= 2;
@@ -398,8 +398,8 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       var c = a.HP;
       if ($Z[a.id] && a.beAttacked) {
 		a.checkHP(z, a);
-        !(a.PZ == a.check) &&
-        ($(z.NutHead).style.transform = a.PZ ? "rotateY(180deg)" : "rotateY(0deg)")
+        a.PZ == a.check &&
+        ($(z.NutHead).style.transform = a.PZ ? "rotateY(180deg)" : "rotateY(0deg)",a.check=(a.WalkDirection?0:1))
       }!a.beAttacked && (ClearChild($(z.NutHead)));
       a.jinyin && a.isAttacking && a.Boom(a);
     },
@@ -542,7 +542,6 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
   height: 164,
   beAttackedPointL: 60,
   beAttackedPointR: 116,
-  check: 1,
   CobCoolTime:2500,
   OSpeed: 4.8,
   Speed: 4.8,
@@ -564,12 +563,12 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     z.appendChild(Sh);
     a.Ready(a);
     a.PrivateAct = function(b) {
-      !(b.PZ == b.check) && (b.Ornaments && (
+      (b.WalkDirection == b.check) && (b.Ornaments && (
         SetStyle($(b.Ele.FumeDoor), {
           "left": b.PZ ? "-70px" : "30px",
           transform: b.PZ ? "rotateY(180deg)" : "rotateY(0deg)"
         }),
-        b.check = b.PZ));
+        b.check=(b.WalkDirection?0:1)));
       !b.Ornaments && ClearChild($(b.Ele.FumeDoor));
       b.CanShoot && b.Ornaments && b.checkP(b);
     }
