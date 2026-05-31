@@ -2626,8 +2626,8 @@ FireAttack:90,
 	A==0&&(b.getPea(b, 20, 0));
     A == 1 &&(oS.StaticCard&&!oS.CardKind&&(AppearSun(b.ZX, b.pixelTop + 120, 5,0)),b.getPea(b, 20, 0));
     A == 2 && (b.getPea(b, 80, 0), delete oGd.$Crater[c + "_" + d], ClearChild($(c + "_" + d + "_crater")));
-    A == 3 &&(!b.WalkDirection&&(b.ExchangeLR(b, 1), b.ZX = b.AttackedRX, b.ChkActs = b.ChkActs1, b.WalkDirection = 1),b.getPea(b, 20, 0));
-    A == 4 && (b.getThump(1500));
+    A == 3 &&(!b.WalkDirection&&(b.bedevil(b, 1));
+    A == 4 && (b.getThump(1000));
     A == 5 && (!oS.CardKind && oP.FlagToEnd(),b.getPea(b, 20, 0))
        },
     NormalAttack: function() {
