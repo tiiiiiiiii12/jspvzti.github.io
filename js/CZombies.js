@@ -1876,7 +1876,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
               PlayAudio("fume"),
               SetVisible($(h)),
               oSym.addTask(50, function(a, z) {
-                a && a.Ornaments && EditImg($(z.FumeDoor), 0, "images/Plants/FumeShroom/FumeShroom.gif", {}, 0)
+                a.Ornaments && EditImg($(z.FumeDoor), 0, "images/Plants/FumeShroom/FumeShroom.gif", {}, 0)
               }, [a, z]),
               ImgSpriter(h, a.id, [
                   ["0 0", 5, 1],
@@ -1904,7 +1904,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
     }); //大喷技能
     a.PrivateAct = function(a) {
 		a.jinyin && !a.num&&(!a.nowHP&&(a.nowHP=a.MaxHP),a.canWalk(a,a.id)&&a.Ornaments&&(a.HP!=a.nowHP)&&(a.ChangeR(a),a.nowHP=a.HP));
-      a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && a.jinyin && !a.num && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.PZ ? a.reNormal(a) : a.bedevil(a, 1), a.Speed /= 3, a.OSpeed /= 3, CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ).jinyinnum = 100);
+      a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && a.jinyin && !a.num && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.tasktime/=2,a.HP+=(300*a.level),CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ).jinyinnum = 100);
       var P = a.Ele;
       (a.WalkDirection == a.check) && (a.Ornaments && (a.num && EditEle($(a.id + "_Bullet"), 0, {
             transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
@@ -1924,7 +1924,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   PlayNormalballAudio: function() {
     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
   },
-  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态：<br>1.手持大喷菇，对前方三格植物造成每次25伤害，但防具血量只有500<br>2.带着脑子，防具掉落后逃跑到后方，将要出场时召唤一个非精英铁门并回头，若在啃咬血量较高的植物时会缓慢向前移动<br>弱点：大喷菇<br>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
+  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态：<br>1.手持大喷菇，对前方三格植物造成每次25伤害，但防具血量只有500<br>精英形态二：带着脑子，有以下特性：<br>1.防具掉落后加速逃跑到后方，将要出场时召唤一个精英铁门并回头，回复自身血量并提高伤害<br>2.若在啃咬血量较高的植物时会缓慢向前移动<br>3.有铁门时若本体受到伤害则换行<br>弱点：大喷菇<br>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
   GoingDie: CZombies.prototype.GoingDie,
   getFirePea: function(c, a, b) {
     PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
