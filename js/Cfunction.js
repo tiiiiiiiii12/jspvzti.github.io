@@ -1525,7 +1525,7 @@ ViewProducePlant = function(b) {
 	PlayAudio("plant1");
 	var a = b.prototype;
 	$("pHandBookPlant").style.backgroundImage = "url(" + a.PicArr[a.StaticGif] + ")";
-	$("dProducePlant").innerHTML = "<div>"+a.Produce+"</div>";
+	$("dProducePlant").innerHTML =a.Produce;
 	innerText($("dHandBookPlantName"), a.CName);
 	innerText($("spSunNum"), a.SunNum);
 	innerText($("spCoolTime"), a.coolTime + "秒");
@@ -1535,7 +1535,7 @@ ViewProduceZombie = function(b) {
 	PlayAudio("plant1");
 	var a = b.prototype;
 	$("pHandBookZombie").style.background = "url(" + a.PicArr[a.jinyinGif?(Math.random()*100>a.jinyinnum?a.StaticGif:a.jinyinGif):a.StaticGif] + ") no-repeat scroll " + a.BookHandPosition;
-	$("dProduceZombie").innerHTML = "<div>"+a.Produce+"</div>";
+	$("dProduceZombie").innerHTML = a.Produce;
 	innerText($("dHandBookZombieName"), a.CName);
 	$("pZombieBack").style.backgroundPosition = -200 * a.BookHandBack + "px 0"
 },
