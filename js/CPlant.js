@@ -948,7 +948,6 @@ NormalAttack1: function() {
             }
 			oSym.addTask(1,function(c){
 				var P=oGd.$[c.R+"_"+(c.C-1)+"_"+1],d;
-				c.JudgeHeadPostition(c);
 				!c.SpecialPlant&&P&&P.EName=="oSniperPea"&&(PlayAudio("wakeup"),c.jinyin=true,c.AttTime-=30,c.SpecialPlant=true);
 				$P[c.id]&&oSym.addTask(1,arguments.callee,[c])
 			},[f])
@@ -967,14 +966,6 @@ NormalAttack1: function() {
 			P&&P.EName=="oSniperPea"&&P.SpecialPlant&&(P.canEat=1,P.Boom=18,P.Ele.style.opacity=1,P.AttTime+=100,P.SpecialPlant=false)
 		},
         PeaKind:0,
-		JudgeHeadPostition:function(c){
-			var getZLeft=oZ.getArZ(100,c.AttackedLX,c.R);
-			var zl=getZLeft.length,back;
-			while(zl--){
-				getZLeft[zl].Altitude==1&&(back=1);
-			}
-			back?(c.Ele.style.transform="rotateY(180deg)",c.PeaDire=1):(c.Ele.style.transform="rotateY(0deg)",c.PeaDire=0)
-		},
         NormalAttack: function(a) {
             oSym.addTask(0,
                 function(d, b) {
