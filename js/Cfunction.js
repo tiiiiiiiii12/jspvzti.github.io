@@ -1525,7 +1525,7 @@ ViewProducePlant = function(b) {
 	PlayAudio("plant1");
 	var a = b.prototype;
 	$("pHandBookPlant").style.backgroundImage = "url(" + a.PicArr[a.StaticGif] + ")";
-	$("dProducePlant").innerHTML = a.Produce;
+	$("dProducePlant").innerHTML = "<div>"+a.Produce+"</div>";
 	innerText($("dHandBookPlantName"), a.CName);
 	innerText($("spSunNum"), a.SunNum);
 	innerText($("spCoolTime"), a.coolTime + "秒");
@@ -1534,8 +1534,8 @@ ViewProducePlant = function(b) {
 ViewProduceZombie = function(b) {
 	PlayAudio("plant1");
 	var a = b.prototype;
-	$("pHandBookZombie").style.background = "url(" + a.PicArr[a.StaticGif] + ") no-repeat scroll " + a.BookHandPosition;
-	$("dProduceZombie").innerHTML = a.Produce;
+	$("pHandBookZombie").style.background = "url(" + a.PicArr[a.jinyinGif?(Math.random()*100>a.jinyinnum?a.StaticGif:a.jinyinGif):a.StaticGif] + ") no-repeat scroll " + a.BookHandPosition;
+	$("dProduceZombie").innerHTML = "<div>"+a.Produce+"</div>";
 	innerText($("dHandBookZombieName"), a.CName);
 	$("pZombieBack").style.backgroundPosition = -200 * a.BookHandBack + "px 0"
 },
@@ -2394,10 +2394,10 @@ ShowRiddle0 = function() {
 	PlayAudio("gravebutton");
 	SetNone($("dRiddleInx"));
 	SetBlock($("dRiddle0"));
-	$("dRiddleTitle").innerHTML = "益智模式单机版"
+	$("dRiddleTitle").innerHTML = "益智模式"
 },
 ShowRiddle1 = function() {
-	$User.isAuthorWebsite ? (PlayAudio("gravebutton"), SetNone($("dRiddleInx")), SetBlock($("dRiddle1")), $("dRiddleTitle").innerHTML = "益智模式对战版") : GotoAuthorWebsite("益智模式对战的功能")
+	$User.isAuthorWebsite ? (PlayAudio("gravebutton"), SetNone($("dRiddleInx")), SetBlock($("dRiddle1")), $("dRiddleTitle").innerHTML = "益智模式") : GotoAuthorWebsite("益智模式对战的功能")
 },
 ReturnRiddleInx = function() {
 	PlayAudio("tap");
@@ -2630,19 +2630,7 @@ Ajax = function(a, e, d, c) {
 		b.readyState == 4 && b.status == 200 && c(b.responseText)
 	}), b.open(e, a, true), e == "get" ? b.send(null) : (b.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"), b.send(d)))
 },
-ShowAD = function(b, a) {
-	document.write(oS.CenterContent = '<div id="dAdFlash">' + oS.adFlash + "</div>");
-	oS.CenterContent = 1;
-	SetBlock($("dAdFlash"), $("dAD2")); (function() {
-		var d = document.createElement("script"),
-		c = document.getElementsByTagName("script")[0];
-		d.type = "text/javascript";
-		d.async = true;
-		d.defer = "defer";
-		d.src = ("https:" == document.location.protocol ? "https://ssl": "http://www") + ".google-analytics.com/ga.js";
-		c.parentNode.insertBefore(d, c)
-	})()
-},
+ShowAD = function() {},
 ViewChat = function(a) {
 	a.value == "显示聊天" ? (SetBlock($("IF2"), $("dChatView")), a.value = "关闭聊天") : (SetNone($("IF2"), $("dChatView")), a.value = "显示聊天")
 };
