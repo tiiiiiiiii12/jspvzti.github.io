@@ -553,7 +553,6 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
 	a.num=Math.round(Math.random*1+0)||a.Privatenum;
     a.OSpeed /= 2;
     a.Speed /= 2;
-	a.OrnHP*=1.5;
 	a.canLadderList=[];
     var z = $(a.id);
     z.FumeDoor = "Fume" + Math.random();
@@ -669,9 +668,6 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     a&&(a.EleBody.src = a.PicArr[a.LadGif]);
     oSym.addTask(50, function(a, b) {
       a&&a.Ornaments&& $P[b] && ($P[b].getLadder(), a.getHit0(a, a.OrnHP, 0), a.JudgeAttack());
-      for (i = 1; i <= 3; i++) {
-        oGd.$[$P[b].R + "_" + $P[b].C + "_" + i] && (oGd.$[$P[b].R + "_" + $P[b].C + "_" + i].canEat = 0)
-      }
     }, [a, b])
   },
   canLadderList: {
