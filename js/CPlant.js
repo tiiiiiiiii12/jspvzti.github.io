@@ -37,6 +37,9 @@ var CPlants = NewO({
             return this.height
         },
 	    getLadder:function(){
+	for (i = 1; i <= 3; i++) {
+        oGd.$[this.R + "_" + this.C + "_" + i] && (oGd.$[this.R + "_" + this.C + "_" + i].canEat = 0)
+      }
 		NewImg(0, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:20px;top:-20px;z-index:300;", $(this.id));
 		oSym.addTask(1,function(a,d){
 		var c=oZ.getArZ(a.pixelRight-20,a.pixelRight+15,a.R);
@@ -73,7 +76,7 @@ var CPlants = NewO({
                     zIndex: j
                 },
                 n);
-			e.EleBody=($(b));
+			e.EleBody=$(e.id).childNodes[1];
 			e.Ele=$(e.id);
         e.randomnum<e.jinyinnum&&(
                     e.jinyin=true,
@@ -316,7 +319,6 @@ oStarfruit = InheritO(CPlants, {
   PicArr: ["images/Card/Plants/Starfruit.png", "images/Plants/Starfruit/0.gif", "images/Plants/Starfruit/Starfruit.gif", "images/Plants/Starfruit/Star.gif"],
   Tooltip: "向五个方向发射小杨桃",
   jinyinAct: function(a) {
-    a.canEat = 0;
     $(a.id).style.opacity = 0.5
   },
   Produce: '杨桃可以向五个方向发射小杨桃。<p>伤害：<font color="#FF0000">中等</font><br>精英形态：攻击时有概率召唤杨桃陨石砸向地面，对全场僵尸造成较高伤害<br>范围：<font color="#FF0000">五个方向</font></p>杨桃：“嘿，哥们，有一天我去看牙医，他说我有四个牙洞。我一数，我就只有一颗牙齿！一颗牙齿长了四个牙洞？怎么会这样啊？”',
@@ -975,7 +977,7 @@ NormalAttack1: function() {
                         c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif"));
                     --b && oSym.addTask(15, arguments.callee, [d, b])
                 },
-                [this.id, 5])
+                [this.id,4])
         }
     }),
 	oSniperPea=InheritO(CPlants,{
@@ -1103,7 +1105,6 @@ NormalAttack:function(a){
         },
         CheckLoop: function(a, b) {
             this.NormalAttack(b);
-			this.NormalAttack(b);
             oSym.addTask(140+this.AttTime,
                 function(c, e, g) {
                     var f;
@@ -1752,7 +1753,7 @@ NormalAttack:function(a){
 		a.PrivateDie=function(a){
 			var b;
 			oSym.addTask(0,function(a,b,num,maxnum){
-				((b=CustomZombie(oJackinTheBoxZombie,Math.round(Math.random()*5+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=0,b.PrivateBirth=function(b){b.AppearDownZ(b,1)});
+				((b=CustomZombie(oJackinTheBoxZombie,Math.round(Math.random()*5+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=0,b.PrivateBirth=function(b){b.EleBody.style.top=b.height+"px";b.AppearDownZ(b)});
 				++num<maxnum&&oSym.addTask(0,arguments.callee,[a,b,num,maxnum]);
 			},[a,b,0,Math.round(Math.random()*3+3)])
 		 }
