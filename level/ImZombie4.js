@@ -2,7 +2,7 @@ var ojinyinJackinTheBoxZombie=InheritO(oJackinTheBoxZombie,{
     EName:"ojinyinJackinTheBoxZombie",
     CName:"精英玩偶匣僵尸",
     jinyinnum:100,
-    SunNum:200
+    SunNum:175
 });
 oS.Init({
     PName: [oThreepeater, oSunFlower, oSnowPea, oSpikeweed, oStarfruit, oPuffShroom, oTorchwood, oRepeater, oPotatoMine, oWallNut, oSpikerock, oGarlic, oCactus, oChomper, oSquash, oScaredyShroom, oTallNut],
