@@ -1876,7 +1876,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
               PlayAudio("fume"),
               SetVisible($(h)),
               oSym.addTask(50, function(a, z) {
-                a.Ornaments && EditImg($(z.FumeDoor), 0, "images/Plants/FumeShroom/FumeShroom.gif", {}, 0)
+                $Z[a.id]&&a.Ornaments && EditImg($(z.FumeDoor), 0, "images/Plants/FumeShroom/FumeShroom.gif", {}, 0)
               }, [a, z]),
               ImgSpriter(h, a.id, [
                   ["0 0", 5, 1],
@@ -2607,7 +2607,7 @@ jinyinWalkGif12: 14,
           for (let l = 0; l <= 3; l++) {
             var m = oGd.$[LR + "_" + i + "_" + l];
             a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500),a.SetAlpha(m,$(m.id),50,0.5),m.getHurt(m,3,50*a.level)),
-			oSym.addTask(500, function(a,m) {m&&a.SetAlpha(m,$(m.id),100,1)},[a,m]));
+			oSym.addTask(500, function(a,m) {$P[m.id]&&a.SetAlpha(m,$(m.id),100,1)},[a,m]));
           }
         }
         while (Tz--) {
