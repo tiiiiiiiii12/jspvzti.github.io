@@ -1924,7 +1924,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   PlayNormalballAudio: function() {
     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
   },
-  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：<br>手持大喷菇，对前方三格植物造成每次25伤害，但防具血量只有500<br>精英形态二：带着脑子，有以下特性：<br>1.防具掉落后加速逃跑到后方，将要出场时召唤一个精英铁门并回头，回复自身血量并提高伤害<br>2.若在啃咬血量较高的植物时会缓慢向前移动<br>3.有铁门时若本体受到伤害则换行<br>弱点：大喷菇<br>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
+  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：手持大喷菇，对前方植物造成每次25伤害，防具血量降低<br>精英形态二：带着脑子，有以下特性：<br>1.防具掉落后加速逃跑到后方，将要出场时召唤一个精英铁门并回头<br>2.若在啃咬血量较高的植物时会缓慢向前移动<br>3.有铁门时若本体受到伤害则换行<br>弱点：大喷菇<br>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
   GoingDie: CZombies.prototype.GoingDie,
   getFirePea: function(c, a, b) {
     PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
