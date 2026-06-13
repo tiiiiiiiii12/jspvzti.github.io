@@ -386,6 +386,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       a.OSpeed *= 2;
       a.Speed *= 2;
       a.OrnGif = 15;
+	  a.OrnHP*=0.5;
       a.checkHP = function() {};
       a.NormalAttack = function(a, b) {
         $P[b] && $P[b].getHurt(a, 3, 2000)
@@ -667,7 +668,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     var a = $Z[c];
     a&&(a.EleBody.src = a.PicArr[a.LadGif]);
     oSym.addTask(50, function(a, b) {
-      a&&a.Ornaments&& $P[b] && ($P[b].getLadder(), a.getHit0(a, a.OrnHP, 0), a.JudgeAttack());
+      a&&a.beAttacked&&a.Ornaments&& $P[b] && ($P[b].getLadder(), a.getHit0(a, a.OrnHP, 0), a.JudgeAttack());
     }, [a, b])
   },
   canLadderList: {
