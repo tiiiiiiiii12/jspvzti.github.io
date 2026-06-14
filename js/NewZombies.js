@@ -465,6 +465,9 @@ oNutZombie = InheritO(oWallNutZombie, {
 	GoingDie:function(a){
 		this.DisappearDie();
 	},
+	getr:function(){},
+	getSlow:function(){},
+	getFreeze:function(){},
 	ExplosionDie:function(a){
 		this.DisappearDie();
 	},
