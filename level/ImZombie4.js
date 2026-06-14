@@ -6,7 +6,7 @@ var ojinyinJackinTheBoxZombie=InheritO(oJackinTheBoxZombie,{
 });
 oS.Init({
     PName: [oThreepeater, oSunFlower, oSnowPea, oSpikeweed, oStarfruit, oPuffShroom, oTorchwood, oRepeater, oPotatoMine, oWallNut, oSpikerock, oGarlic, oCactus, oChomper, oSquash, oScaredyShroom, oTallNut],
-    ZName: [oScreenDoorZombie, oZombie3, oFlagZombie, oZomboni, oConeheadZombie, oFootballZombie, oPeaZombie, oPoleVaultingZombie,ojinyinJackinTheBoxZombie, oDiggerZombie, oBucketheadZombie],
+    ZName: [oScreenDoorZombie, oZombie3, oFlagZombie, oZomboni, oConeheadZombie, oFootballZombie, oPoleVaultingZombie,ojinyinJackinTheBoxZombie, oDiggerZombie, oBucketheadZombie],
     PicArr: ["images/interface/background2.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background2.jpg",
     SunNum: 800,
