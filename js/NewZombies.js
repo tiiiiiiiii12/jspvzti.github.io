@@ -475,8 +475,14 @@ oNutZombie = InheritO(oTallNutZombie, {
 	ExplosionDie:function(a){
 		this.DisappearDie();
 	},
-	ChkActs:function(){return 1},
-	ChkActs1:function(){return 1},
+	ChkActs:function(a){
+		a.PrivateAct(a);
+		return 1
+	},
+	ChkActs1:function(a){
+		a.PrivateAct(a);
+		return 1
+	},
     jinyinAct: function(){
 		SetHidden(this.EleBody);
 	},
