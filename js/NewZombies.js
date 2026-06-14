@@ -432,7 +432,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     jinyinAct: function(c) {      
 	  var z = $(c.id);
       z.NutHead = "Nut" + Math.random();
-      var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:-80px;", 0);
+      var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
       z.appendChild(Nut);
 	  oSym.addTask(1500,function(c){
 		  c.canWalk(c,c.id)&&c.beAttacked&&(CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(1500,arguments.callee,[c]));
@@ -453,9 +453,9 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 oNutZombie = InheritO(oTallNutZombie, {
     EName: "oNutZombie",
     CName: "坚果障碍",
-    OrnHP: 0,
+    OrnHP: 1100,
     SunNum: 75,
-	HP:1100,
+	HP:1,
     Boom: function() {},
     StandGif: 11,
     OrnTop: 80,
