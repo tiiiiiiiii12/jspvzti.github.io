@@ -450,11 +450,11 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       14: "images/Plants/TallNut/TallnutCracked2.gif"
     }
   }),
-oNutZombie = InheritO(oWallNutZombie, {
+oNutZombie = InheritO(oTallNutZombie, {
     EName: "oNutZombie",
     CName: "坚果障碍",
     OrnHP: 0,
-    SunNum: 225,
+    SunNum: 75,
 	HP:1100,
     Boom: function() {},
     StandGif: 11,
@@ -462,6 +462,10 @@ oNutZombie = InheritO(oWallNutZombie, {
     OrnLeft: 80,
 	jinyinnum:100,
     Lvl: 3,
+	PicArr: (function() {
+      var a = "images/Zombies/Zombie/";
+      return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
+    })(),
 	GoingDie:function(a){
 		this.DisappearDie();
 	},
