@@ -429,15 +429,51 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     OrnTop: -40,
     OrnLeft: 20,
     Lvl: 5,
-    jinyinAct: function() {},
+    jinyinAct: function(c) {      
+	  var z = $(c.id);
+      z.NutHead = "Nut" + Math.random();
+      var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:-80px;", 0);
+      z.appendChild(Nut);
+	  oSym.addTask(1500,function(c){
+		  c.canWalk(c,c.id)&&c.beAttacked&&(CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(1500,arguments.callee,[c]));
+	  },[c]);
+	},
+	PriavteDie:function(c){
+		ClearChild(c.Ele.NutHead2);
+	},
     Boom: function() {},
-    Produce: '韧性：<font color="#FF0000">极高(2200+270)</font><br>精英形态：暂无</p>太好了，高仁僵尸来了'
+    Produce: '韧性：<font color="#FF0000">极高(2200+270)</font><br>精英形态：每隔一段时间在场上放置一个坚果障碍</p>太好了，高仁僵尸来了'
   }, {
     PicArr: {
       12: "images/Plants/TallNut/TallNut.gif",
       13: "images/Plants/TallNut/TallnutCracked1.gif",
       14: "images/Plants/TallNut/TallnutCracked2.gif"
     }
+  }),
+oNutZombie = InheritO(oWallNutZombie, {
+    EName: "oNutZombie",
+    CName: "坚果障碍",
+    OrnHP: 0,
+    SunNum: 225,
+	HP:1100,
+    Boom: function() {},
+    StandGif: 11,
+    OrnTop: 80,
+    OrnLeft: 80,
+	jinyinnum:100,
+    Lvl: 3,
+	GoingDie:function(a){
+		this.DisappearDie();
+	},
+	ExplosionDie:function(a){
+		this.DisappearDie();
+	},
+	ChkActs:function(){return 1},
+	ChkActs1:function(){return 1},
+    jinyinAct: function(){
+		SetHidden(this.EleBody);
+	},
+    Produce: '韧性：<font color="#FF0000">1100</font><br>精英形态：暂无</p>由精英高坚果僵尸召唤'
   }),
     oGatlingPeaZombie = InheritO(oNewspaperZombie, {
         EName: "oGatlingPeaZombie",
@@ -451,7 +487,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
             return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（450，发怒后50%减伤）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后2.5倍(失去报纸后)<br>精英形态：<font color="#FF0000">1.5倍本体血量，发怒后，每隔4秒召唤双倍攻速的豌豆僵尸</font></p>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（450，发怒后50%减伤）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后2.5倍(失去报纸后)<br>精英形态：<font color="#FF0000">暂无</font></p>读报僵尸总是误伤别人',
 		jinyinAct:function(a){
 			a.HP*=1.5;
 		},
@@ -511,10 +547,6 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     oSym.addTask(k.shootPeaSpeed, function(k,m) {
       k.canWalk(k,m) && k.beAttacked && k.shootPea(k);
       $Z[k.id] ? oSym.addTask(k.shootPeaSpeed, arguments.callee, [k,m]) : k.BulletEle = null;
-    }, [k,m]);
-	k.jinyin&&oSym.addTask(400, function(k,m) {
-      k.canWalk(k,m) && k.beAttacked &&(CustomZombie(oPeaZombie,Math.min(oS.R,Math.round(Math.random()*2+Math.max(k.R-1,1))),Math.max(Math.min(GetC(k.ZX)+2,11),1),!k.PZ).shootPeaSpeed*=0.5);
-      $Z[k.id]&&oSym.addTask(400, arguments.callee, [k,m]);
     }, [k,m]);
                         k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
                         if (!k.beAttacked) {
