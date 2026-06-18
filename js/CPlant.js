@@ -926,8 +926,8 @@ NormalAttack1: function() {
 		back:0,
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
-        Tooltip: "一次发射五颗豌豆<br>(需要双发射手)",
-        Produce: '机枪射手可以一次发射五颗豌豆</font></p>精英形态：三条线各发射五颗豌豆，且本行有概率是冰豆或火豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
+        Tooltip: "一次发射四颗豌豆<br>(需要双发射手)",
+        Produce: '机枪射手可以一次三条线发射四颗豌豆</font></p>精英形态：本行有概率是冰豆或火豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
         PrivateBirth: function(f) {
             var e = f.AttackedLX,
                 d = e - 40,
@@ -1746,7 +1746,7 @@ NormalAttack:function(a){
         PicArr: ["images/Card/Plants/CherryBomb.png", "images/Plants/CherryBomb/0.gif", "images/Plants/CherryBomb/CherryBomb.gif", "images/Plants/CherryBomb/Boom.gif" + $Random],
         AudioArr: ["cherrybomb"],
         Tooltip: "炸掉一定区域内的所有僵尸",
-        Produce: '樱桃炸弹，能炸掉一定区域内所有僵尸。他们一种下就会立刻引爆。所以请把他们种在僵尸们的身边。<br>精英形态：爆炸后随机在场上召唤几只精英樱桃炸弹小丑僵尸<br>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">一个中等区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，立即爆炸</font></p>“我要‘爆’开了。”樱桃一号说。“不，我们是要‘炸’开了！”它哥哥樱桃二号说。经过激烈的商议之后，他们才统一“爆炸这个说法。”',
+        Produce: '樱桃炸弹，能炸掉一定区域内所有僵尸。他们一种下就会立刻引爆。所以请把他们种在僵尸们的身边。<br>精英形态：爆炸后随机在场上召唤几只精英小丑僵尸<br>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">一个中等区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，立即爆炸</font></p>“我要‘爆’开了。”樱桃一号说。“不，我们是要‘炸’开了！”它哥哥樱桃二号说。经过激烈的商议之后，他们才统一“爆炸这个说法。”',
         InitTrigger: function() {},
         getHurt: function() {},
 		jinyinAct:function(a){
@@ -2271,7 +2271,7 @@ jinyinAttackGif2: 8,
         PicArr: ["images/Card/Plants/FumeShroom.png", "images/Plants/FumeShroom/0.gif", "images/Plants/FumeShroom/FumeShroom.gif", "images/Plants/FumeShroom/FumeShroomSleep.gif", "images/Plants/FumeShroom/FumeShroomAttack.gif", "images/Plants/FumeShroom/FumeShroomBullet.gif"],
         AudioArr: ["fume"],
         Tooltip: "喷射可以穿过门板的气液",
-        Produce: '大喷菇喷出的臭气可以穿透铁丝网门。<br>精英形态：暂无<br>伤害：<font color="#FF0000">普通，可穿透铁丝网门</font><br>范围：<font color="#FF0000">臭气中的所有僵尸<br>白天睡觉</font></p>“我以前那份没前途的工作，是为一个面包房生产酵母孢，”大喷菇说。“然后小喷菇，上帝保佑它，告诉了我这个喷杀僵尸的机会。现在我真觉得自己完全不同了。”',
+        Produce: '大喷菇喷出的臭气可以穿透铁丝网门。<br>精英形态：伤害提高，且每次攻击能对上下两路僵尸造成溅射伤害<br>伤害：<font color="#FF0000">普通，可穿透铁丝网门</font><br>范围：<font color="#FF0000">臭气中的所有僵尸<br>白天睡觉</font></p>“我以前那份没前途的工作，是为一个面包房生产酵母孢，”大喷菇说。“然后小喷菇，上帝保佑它，告诉了我这个喷杀僵尸的机会。现在我真觉得自己完全不同了。”',
         GetDY: function(b, c, a) {
             return a[0] ? -18 : -10
         },
@@ -2897,7 +2897,7 @@ NormalAttack2: function() {
         SunNum: 125,
         PicArr: ["images/Card/Plants/DoomShroom.png", "images/Plants/DoomShroom/0.gif", "images/Plants/DoomShroom/DoomShroom.gif", "images/Plants/DoomShroom/Sleep.gif", "images/Plants/DoomShroom/BeginBoom.gif", "images/Plants/DoomShroom/crater10.png", "images/Plants/DoomShroom/crater11.png", "images/Plants/DoomShroom/crater20.png", "images/Plants/DoomShroom/crater21.png", "images/Plants/DoomShroom/crater30.png", "images/Plants/DoomShroom/crater31.png", "images/Plants/DoomShroom/Boom.png"],
         Tooltip: "造成大规模的伤害, 但会在原地留下一个坑, 坑中无法种植物",
-        Produce: '毁灭菇可以摧毁大范围的僵尸，并留下一个不能种植物的大弹坑。<p>伤害：<font color="#FF0000">极高(3000)</font><br>范围：<font color="#FF0000">大范围内的所有僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">留下一个弹坑<br>白天睡觉</font></p>“你很幸运，我是和你一伙的，”毁灭菇说，“我能摧毁任何你所珍视的东西，小菜一碟。”',
+        Produce: '毁灭菇可以摧毁大范围的僵尸，并留下一个不能种植物的大弹坑。<p>伤害：<font color="#FF0000">极高(2700)</font><br>范围：<font color="#FF0000">大范围内的所有僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">留下一个弹坑<br>白天睡觉</font></p>“你很幸运，我是和你一伙的，”毁灭菇说，“我能摧毁任何你所珍视的东西，小菜一碟。”',
         InitTrigger: function() {},
         AudioArr: ["doomshroom"],
         BirthStyle: function(c, d, b, a) {
@@ -2925,8 +2925,8 @@ NormalAttack2: function() {
                             l = d.R,
                             h = l > 3 ? l - 2 : 1,
                             f = Math.min(oS.R, l + 2),
-                            n = d.pixelLeft - 240,
-                            m = d.pixelRight + 240,
+                            n = d.pixelLeft - 360,
+                            m = d.pixelRight + 360,
                             e,
                             k,
                             b = GetC(d.AttackedLX),
