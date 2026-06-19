@@ -2814,7 +2814,7 @@ jinyinWalkGif12: 14,
             return ["images/Card/Zombies/DolphinRiderZombie.png", a + "0.gif", a + "Walk1.gif", a + "Walk2.gif", a + "1.gif", a + "Attack.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Jump.gif" + $Random, a + "Jump2.gif" + $Random, a + "Walk3.gif", a + "Walk4.gif", a + "Die2.gif" + $Random, a + "Jump3.gif" + $Random]
         })(),
         AudioArr: ["dolphin_before_jumping", "dolphin_appears", "zombie_entering_water"],
-        Produce: '海豚骑士僵尸善于利用你水池防御的弱点。<p>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快，慢（跳越后）</font><br>特点：<font color="#FF0000">跃过他所遇到的第一株植物，出场时有5秒无敌</font><br>精英形态：<font color="#FF0000">跳跃距离更远</font><br>只在水池关卡出现</font></p>那海豚其实也是个僵尸。',
+        Produce: '海豚骑士僵尸善于利用你水池防御的弱点。<p>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快，慢（跳越后）</font><br>特点：<font color="#FF0000">跃过他所遇到的第一株植物，出场时有5秒无敌</font><br>精英形态：<font color="#FF0000">跳跃后给跳过的植物搭上梯子</font><br>只在水池关卡出现</font></p>那海豚其实也是个僵尸。',
         BirthCallBack: function(a) {
             PlayAudio("dolphin_appears");
 			a.jianshang=0;
@@ -2833,6 +2833,9 @@ jinyinWalkGif12: 14,
                 return 1
             })
         },
+		jinyinAct:function(a){
+			a.EleBody.style.filter = 'grayscale(400%)'
+		},
         ChkActsL1: function(d, c, e, b) {
             if (d.JumpTime <= 0) {
                 d.Jump(d);
@@ -2914,7 +2917,7 @@ jinyinWalkGif12: 14,
                         };
                     h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = r = k.AttackedRX) - (h.beAttackedPointL = 45)) + (h.beAttackedPointR = 100), SetStyle(i, {
                         left: h.X + "px"
-                    }), h.EleShadow.style.left = "45px", n()) : (h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g-(h.jinyin?100:0)) - (h.beAttackedPointR = 100)) + (h.beAttackedPointL = 45), SetStyle(i, {
+                    }), h.EleShadow.style.left = "45px", n()) : (k&&k.getLadder(k),h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g) - (h.beAttackedPointR = 100)) + (h.beAttackedPointL = 45), SetStyle(i, {
                         left: h.X + "px"
                     }), h.EleShadow.style.left = "45px", q.src = h.PicArr[13] + Math.random(), oSym.addTask(170,
                         function(t, w) {
@@ -3261,6 +3264,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
             return c
         },
 		jinyinAct:function(a){
+			a.EleBody.style.top="30px";
 			    a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
                         d += --e + "_";
@@ -3328,6 +3332,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
 			if(a.OrnHP>0){return}
             PlayAudio("balloon_pop");
             a.EleBody.src = "images/Zombies/BalloonZombie/Drop.gif" + $Random + Math.random();
+			a.EleBody.style.top="0px";
             a.ChkActs = function() {
                 return 1
             };
