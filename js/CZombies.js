@@ -1320,7 +1320,7 @@ Birth: function() {
         }
         d = e.X;
         h = d + 140;
-        f = d + 20;
+        f = d + 160;
         c = GetC(h);
         c > -1 && c < n[1] && (oGd.$Crater[j + "_" + c] = 1, n[1] = c);
         h > 120 && h < n[2] && (n[2] = h, l.firstChild.style.clip = "rect(0,auto,auto," + f + "px)", l.childNodes[1].style.left = Math.max(0, f) + "px");
@@ -1805,7 +1805,7 @@ Birth: function() {
                             i = k.OSpeed = k.LostPaperSpeed;
                         k.ChkActs =!k.WalkDirection?j.ChkActs:j.ChkActs1;
                         k.ChkActs1 = j.ChkActs1;
-						k.tasktime*=0.4; 
+						k.tasktime*=0.25; 
 				k.jinyin&&!k.num&&(k.jianshang=0.5);
 					k.num&&(k.PrivateAct=function(h) {
                    var Num = 0;
@@ -1900,11 +1900,11 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
       }
       a && oSym.addTask(140, arguments.callee, [a, a.id + "_Bullet", z])
     }, [a, a.id + "_Bullet", z])) : (a.PrivateAttack = function(a, b) {
-      a && a.canWalk && $P[b] && ($P[b].HP >= 1000) && a.getr(a, -10)
+      a && a.canWalk && $P[b] && ($P[b].HP >= 1000) && a.getr(a, a.WalkDirection?100:-10)
     }); //大喷技能
     a.PrivateAct = function(a) {
-		a.jinyin && !a.num&&(!a.nowHP&&(a.nowHP=a.MaxHP),a.canWalk(a,a.id)&&a.Ornaments&&(a.HP!=a.nowHP)&&(a.ChangeR(a),a.nowHP=a.HP));
-      a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && a.jinyin && !a.num && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.tasktime/=2,a.HP+=(300*a.level),CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ).jinyinnum = 100);
+	a.jinyin && !a.num&&(!a.nowHP&&(a.nowHP=a.MaxHP),a.canWalk(a,a.id)&&a.Ornaments&&(a.HP!=a.nowHP)&&(a.ChangeR(a),a.nowHP=a.HP));
+      a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && a.jinyin && !a.num && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.bedevil=CZombies.prototype.bedevil,a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.tasktime/=2,a.HP+=(300*a.level),CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ).jinyinnum = 100);
       var P = a.Ele;
       (a.WalkDirection == a.check) && (a.Ornaments && (a.num && EditEle($(a.id + "_Bullet"), 0, {
             transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
@@ -1950,6 +1950,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   back: function(a) {
     a.PZ ? a.bedevil(a, 1) : a.reNormal(a);
     a.Speed *= 3;
+	a.bedevil=function(){},
     a.OSpeed *= 3;
   },
   CheckOrnHP: function(g, h, d, c, f, b, a) {
