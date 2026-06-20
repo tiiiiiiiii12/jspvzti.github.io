@@ -597,7 +597,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     return ["images/Card/Zombies/LadderZombie.png", a + "1.gif", a + "Walk.gif", a + "Attack.gif", a + "Die.gif", a + "LostHeadAttack1.gif", a + "LostLadderWalk.gif", a + "LostLadderAttack.gif", a + "Die.gif", a + "Die.gif", b + "ZombieHead.gif" + $Random, a + "Die.gif" + $Random, b + "BoomDie.gif" + $Random, a + "1.gif", a + "throwLadder.gif"]
   })(),
   jinyinAct: function(a) {
-	a.num=Math.round(Math.random*1+0)||a.Privatenum;
+	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
 	if(!a.num){
     a.OSpeed /= 2;
     a.Speed /= 2;
