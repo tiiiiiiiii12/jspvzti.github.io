@@ -483,6 +483,7 @@ oNutZombie = InheritO(oTallNutZombie, {
 		a.PrivateAct(a);
 		return 1
 	},
+	ChangeR:function(){},
     jinyinAct: function(){
 		SetHidden(this.EleBody);
 	},
@@ -589,7 +590,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
   CobCoolTime:2500,
   OSpeed: 4.8,
   Speed: 4.8,
-  LostLadderSpeed: 1.6,
+  LostPaperSpeed: 1.6,
   PicArr: (function() {
     var a = "images/Zombies/LadderZombie/",
       b = "images/Zombies/Zombie/";
@@ -597,6 +598,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
   })(),
   jinyinAct: function(a) {
 	a.num=Math.round(Math.random*1+0)||a.Privatenum;
+	if(!a.num){
     a.OSpeed /= 2;
     a.Speed /= 2;
 	a.canLadderList=[];
@@ -605,8 +607,19 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     var Sh = NewImg(z.FumeDoor, "images/Plants/CobCannon/noReady.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:-70px;top:-110px;", 0);
     z.appendChild(Sh);
     a.Ready(a);
+	}else{
+		a.EleBody.style.filter = "sepia(1) hue-rotate(20deg) brightness(5)";
+		oSym.addTask(500,function(a){
+		var Z=oZ[a.PZ?"getArZ":"getArHZ"](a.ZX-100,a.ZX+100,a.R);
+			Zl=Z.length;
+		while(Zl--){
+		a.canWalk(a,a.id)&&a.beAttacked&&(Z[Zl].jianshang>=1)&&(a.getAid(Z[Zl]));
+		  }
+		oSym.addTask(750,arguments.callee,[a])
+		},[a]);
+	}
     a.PrivateAct = function(b) {
-      (b.WalkDirection == b.check) && (b.Ornaments && (
+      (b.WalkDirection == b.check) && (!b.num&&b.Ornaments && (
         SetStyle($(b.Ele.FumeDoor), {
           "left": !b.WalkDirection ? "-70px" : "30px",
           transform: !b.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)"
@@ -616,6 +629,13 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
       b.CanShoot && b.Ornaments && b.checkP(b);
     }
   },
+ getAid:function(a){
+	 a.jianshang*=0.5;
+	 a.EleBody.style.filter = "sepia(1) hue-rotate(20deg) brightness(5)";
+	 oSym.addTask(500,function(a){
+		$Z[a.id]&&(a.jiangshang/=0.5,a.EleBody.style.filter = "sepia(0) hue-rotate(0deg) brightness(1)");
+	 },[a])
+ },
   checkP: function(b) {
     let a = [];
     for (let i in oGd.$) {
@@ -713,7 +733,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     var a = $Z[c];
     a&&(a.EleBody.src = a.PicArr[a.LadGif]);
     oSym.addTask(50, function(a, b) {
-      a&&a.beAttacked&&a.Ornaments&& $P[b] && ($P[b].getLadder(), a.getHit0(a, a.OrnHP, 0), a.JudgeAttack());
+      a&&a.beAttacked&&a.Ornaments&& $P[b] && ($P[b].getLadder(), !a.num&&a.getHit0(a, a.OrnHP, 0), a.JudgeAttack());
     }, [a, b])
   },
   canLadderList: {
@@ -722,9 +742,9 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     oPumpkinHead,
     oGarlic: true
   },
-  Produce: '他的扶梯是有效的盾牌，遇到防御植物可将梯子搭在上面<br>韧性：<font color="#FF0000">中</font><br>扶梯韧性：<font color="#FF0000">中(500)</font><br>精英形态：扶梯→玉米加农炮，速度变慢，每隔一段时间朝随机一颗植物发射炮弹，对该植物的3*3范围造成1600伤害<br>弱点：大喷菇<br>这架梯子花了他$114514。',
+  Produce: '他的扶梯是有效的盾牌，遇到防御植物可将梯子搭在上面<br>韧性：<font color="#FF0000">中</font><br>扶梯韧性：<font color="#FF0000">中(500)</font><br>精英形态一：<font color="#FF0000">扶梯→玉米加农炮，速度变慢，每隔一段时间朝随机一颗植物发射炮弹，对该植物的3*3范围造成1600伤害</font><br>精英形态二：<font color="#FF0000">金色扶梯，无限搭梯，每隔一段时间给周围僵尸附上一半减伤</font><br>弱点：<br>这架梯子花了他$114514。',
   CheckOrnHP: function(g, h, d, c, f, b, a) {
     var e = OrnNoneZombies.prototype;
-    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, !g.jinyin && (g.Speed /= 3, g.OSpeed /= 3), g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.canLadderList = [], g.Boom = function() {}, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
+    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering,g.OSpeed=g.LostPaperSpeed,g.Speed=g.LostPaperSpeed*(g.FreeSlowTime?0.5:1),g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.canLadderList = [], g.Boom = function() {}, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
   }
 })
