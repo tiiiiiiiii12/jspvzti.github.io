@@ -1519,10 +1519,10 @@ Birth: function() {
   jinyinAct: function(a) {
 	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
     a.num?a.ExchangeLR(a, 1):(a.PrivateAct=function(a){
-	for (let i = GetC(a.ZX);i>=2;i--) {
+	for (let i = GetC(a.ZX-30);i>=2;i--) {
         for (let j = 0; j < 4; j++) {
           let g = oGd.$[a.R + "_" + i + "_" + j];
-        GetC(a.ZX-40)<=7&&a.canWalk(a,a.id)&&!a.isAttacking&&g&&g.canEat&&(a.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1,
+        GetC(a.ZX+30)<=8&&a.canWalk(a,a.id)&&a.PZ&&!a.isAttacking&&g&&g.canEat&&(a.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1,
 			  a.JudgeAttackH= CZombies.prototype.JudgeAttackH,
 			  a.JudgeAttack = CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"],
 			a.NormalAttack(a.id,g.id,g.AttackedLX));
@@ -2607,8 +2607,7 @@ jinyinWalkGif12: 14,
         for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX)+1; i++) {
           for (let l = 0; l <= 3; l++) {
             var m = oGd.$[LR + "_" + i + "_" + l];
-            a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500),a.SetAlpha(m,$(m.id),50,0.5),m.getHurt(m,3,50*a.level)),
-			oSym.addTask(500, function(a,m) {m&&a.SetAlpha(m,$(m.id),100,1)},[a,m]));
+            a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500),a.SetAlpha(m,$(m.id),50,0.5),m.getHurt(m,3,50*a.level)))
           }
         }
         while (Tz--) {
