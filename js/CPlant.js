@@ -87,11 +87,12 @@ var CPlants = NewO({
             e.PrivateBirth(e, n)
         },
 	    getFreeze: function(d, c,a) {
+			d.Ele.style.opacity*=0.5;
                     oSym.addTask(a||400,
                         function(g, f, e) {
                             ClearChild(e);
                             var h = $P[g];
-                            h && h.FreeFreezeTime == f && (h.FreeFreezeTime=0)
+                            h && h.FreeFreezeTime == f && (h.FreeFreezeTime=0,h.Ele.style.opacity*=2)
                         },
                         [c, d.FreeFreezeTime = oSym.Now + (a||400), NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", d.getShadow(d), $(d.id))])
                 },
