@@ -613,7 +613,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
 		var Z=oZ[a.PZ?"getArZ":"getArHZ"](a.ZX-100,a.ZX+100,a.R);
 			Zl=Z.length;
 		while(Zl--){
-		a.canWalk(a,a.id)&&a.beAttacked&&(Z[Zl].jianshang>=1)&&(a.getAid(Z[Zl]));
+		a.canWalk(a,a.id)&&a.beAttacked&&(Z[Zl].jianshang>=1)&&(a.getAid(Z[Zl],a.id));
 		  }
 		oSym.addTask(750,arguments.callee,[a])
 		},[a]);
@@ -629,12 +629,12 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
       b.CanShoot && b.Ornaments && b.checkP(b);
     }
   },
- getAid:function(a){
+ getAid:function(a,d){
 	 a.jianshang*=0.5;
 	 a.EleBody.style.filter = "sepia(1) hue-rotate(20deg) brightness(5)";
-	 oSym.addTask(500,function(a){
-		$Z[a.id]&&(a.jiangshang/=0.5,a.EleBody.style.filter = "sepia(0) hue-rotate(0deg) brightness(1)");
-	 },[a])
+	 oSym.addTask(500,function(a,d){
+		$Z[a.id]&&(a.jianshang/=0.5,a.id!=d&&(a.EleBody.style.filter = "sepia(0) hue-rotate(0deg) brightness(1)"));
+	 },[a,d])
  },
   checkP: function(b) {
     let a = [];
