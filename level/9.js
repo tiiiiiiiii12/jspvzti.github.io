@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater],
-	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oPoleVaultingZombie, oBucketheadZombie,oImp,oPeaZombie,oWallNutZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oPoleVaultingZombie, oBucketheadZombie,oImp,oPeaZombie],
 	PicArr: ["images/interface/background1.jpg", "images/interface/ZombieNoteSmall.png", "images/interface/ZombieNote1.png"],
 	backgroundImage: "images/interface/background1.jpg",
 	CanSelectCard: 1,
@@ -17,7 +17,6 @@ oS.Init({
 		[oZombie2, 2, 1],
 		[oZombie3, 2, 1],
 		[oConeheadZombie, 2, 1],
-		[oWallNutZombie, 2, 1],
 		[oPoleVaultingZombie, 1, 1],
 		[oImp, 1, 1],
 		[oPeaZombie, 1, 1]
