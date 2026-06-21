@@ -1223,11 +1223,12 @@ Birth: function() {
 					a,
                     b;
                 ((a=f.JudgeAttackH1())&&a.beAttacked)||(b = f.JudgeLR(f, d, e, c, g) || f.JudgeSR(f, d, e, c, g))&&!(a&&a.beAttacked)&&f.NormalAttack(b[0], b[1])
-            },
+            };
 			a.NormalAttack=function(c, b) {
                 var d = $Z[c];
                 $P[b].getHurt(d, 2, d.Attack)
-            },
+            };
+			a.WalkToLadder=function(){};
 			a.Speed*=2;
 			a.OSpeed*=2;
 			a.getSnowPea=OrnNoneZombies.prototype.getPea;
@@ -1319,7 +1320,7 @@ Birth: function() {
           n = oGd.$Ice[j] = [1, 11, e.AttackedLX];
         }
         d = e.X;
-        h = d + 140;
+        h = d + 40;
         f = d + 160;
         c = GetC(h);
         c > -1 && c < n[1] && (oGd.$Crater[j + "_" + c] = 1, n[1] = c);
@@ -2593,6 +2594,7 @@ jinyinWalkGif12: 14,
 				f.PrivateAct(f);
                 return e
             },
+			WalkToLadder:function(){},
 			jinyinAct:function(a){
 				a.num=Math.round(Math.random()*1+0)||a.Privatenum;
 				var z=$(a.id);
@@ -3297,6 +3299,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
             var a = "images/Zombies/BalloonZombie/";
             return ["images/Card/Zombies/Balloonzombie.png", a + "0.gif", a + "1.gif", a + "Attack.gif", a + "Walk2.gif", a + "Attack2.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Boom.gif", a + "Walk.gif", a + "Drop.gif", a + "Boom2.gif"]
         })(),
+		WalkToLadder:function(){},
         Produce: '气球僵尸漂浮在空中，躲过大多数攻击。<p>韧性：<font color="#FF0000">低</font><br>精英形态：<font color="#FF0000">飞行时仍能啃食部分植物</font><br>特点：<font color="#FF0000">飞行</font><br>弱点：<font color="#FF0000">仙人掌和三叶草</font></p>气球僵尸真幸运。气球有很多功效，而其他僵尸都不曾捡到过。',
         BirthCallBack: function(e) {
             var d = e.delayT,
@@ -3344,6 +3347,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
                     if (c) {
                         c.BoomDieGif = 11;
                         c.Altitude = 1;
+						c.WalkToLadder=CZombies.prototype.WalkToLadder;
                         c.OSpeed = c.Speed = 1.6;
                         c.getFreeze = OrnIZombies.prototype.getFreeze;
                         c.EleBody.src = "images/Zombies/BalloonZombie/Walk.gif";
@@ -3526,6 +3530,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
         }
       })();
   },
+WalkToLadder:function(){},
   JudgeSR: function(f, d, e, c, g) {
     return e > 9 ?
       false :
@@ -3624,6 +3629,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
               (b.EleBody.src =
                 b.PicArr[(b.NormalGif = WD ? b.WalkGif1 : b.WalkGif2)]),
               (b.OSpeed = b.Speed = 1.6),
+			  (b.WalkToLadder=CZombies.prototype.WalkToLadder),
               (b.ChkActs =
                 OrnNoneZombies["prototype"][WD ? "ChkActs1" : "ChkActs"]);
             },
