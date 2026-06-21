@@ -87,7 +87,7 @@ var CZombies = function(b, a) {
               top: "0px"
             }))
           },
-          [a.EleBody, 0, -(B=-50)*Math.min(-a.Speed,-3.2)*-3.2*0.05, a,0]);
+          [a.EleBody, 0, -(B=-50)*Math.min(-a.Speed,-3.2)/(-3.2*20), a,0]);
 		},
                 GetDX: function() {
                     return -110
