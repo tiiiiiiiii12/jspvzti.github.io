@@ -36,20 +36,21 @@ var CPlants = NewO({
         GetDBottom: function() {
             return this.height
         },
-	    getLadder:function(){
-	for (i = 1; i <= 3; i++) {
-        oGd.$[this.R + "_" + this.C + "_" + i] && (oGd.$[this.R + "_" + this.C + "_" + i].canEat = 0)
-      }
-		NewImg(0, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:20px;top:-20px;z-index:300;", $(this.id));
-		oSym.addTask(1,function(a,d){
-		var c=oZ.getArZ(a.pixelRight-10,a.pixelRight+15,a.R);
-			b=c.length;
-			while (b--){
-				!c[b].FreeSetbodyTime&&(c[b].WalkToLadder(c[b]));
-			}
-		$P[d]&&oSym.addTask(1,arguments.callee,[a,d]);
-		},[this,this.id]);
-		},
+getLadder:function() {
+  var a = this;
+  for (i = 1; i <= 3; i++) {
+    oGd.$[a.R + "_" + a.C + "_" + i] && (oGd.$[a.R + "_" + a.C + "_" + i].canEat = 0)
+  }
+  NewImg("ladder_" + a.R + "_" + a.C, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:" + (GetX(a.C) - 20) + "px;top:" + (GetY(a.R) - 120) + "px;z-index:" + (a.zIndex + 3), EDPZ);
+  oSym.addTask(1, function(a, d) {
+    var c = oZ.getArZ(a.pixelRight - 10, a.pixelRight + 10, a.R);
+    b = c.length;
+    while (b--) {
+      !c[b].FreeSetbodyTime && (c[b].WalkToLadder(c[b]));
+    }
+    $P[d] ? oSym.addTask(1, arguments.callee, [a, d]) : ClearChild($("ladder_" + a.R + "_" + a.C));
+  }, [a, a.id]);
+},
         Birth: function(d, c, h, a, m, n) {
             var e = this,
                 k = d + e.GetDX(),
