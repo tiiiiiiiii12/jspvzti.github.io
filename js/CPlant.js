@@ -41,7 +41,7 @@ getLadder:function() {
   for (i = 1; i <= 3; i++) {
     oGd.$[a.R + "_" + a.C + "_" + i] && (oGd.$[a.R + "_" + a.C + "_" + i].canEat = 0)
   }
-  NewImg("ladder_" + a.R + "_" + a.C, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:" + (GetX(a.C) - 20) + "px;top:" + (GetY(a.R) - 120) + "px;z-index:" + (a.zIndex + 3), EDPZ);
+  NewImg("ladder_" + a.R + "_" + a.C, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:" + (GetX(a.C) - 20) + "px;top:" + (GetY(a.R) - 120) + "px;z-index:" + (a.zIndex + 1), EDPZ);
   oSym.addTask(1, function(a, d) {
     var c = oZ.getArZ(a.pixelRight - 10, a.pixelRight + 10, a.R);
     b = c.length;
