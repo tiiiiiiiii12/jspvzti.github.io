@@ -87,7 +87,7 @@ var CZombies = function(b, a) {
               top: "0px"
             }))
           },
-          [a.EleBody, 0, -(B=-50)*Math.min(-a.Speed,-3.2)/(-3.2*20), a,0]);
+          [a.EleBody, 0, -(B=-40)*Math.min(-a.Speed,-3.2)/(-3.2*20), a,0]);
 		},
                 GetDX: function() {
                     return -110
@@ -1669,7 +1669,7 @@ Birth: function() {
             return ["images/Card/Zombies/NewspaperZombie.png","images/Zombies/NewspaperZombie/0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadWalk0.gif", a + "LostHeadWalk0.gif", a + "LostHeadWalk0.gif", "images/Zombies/NewspaperZombie/Head.gif" + $Random, a + "Die.gif" + $Random,"images/Zombies/NewspaperZombie/BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（450）</font><br>精英形态一：破报进入假死状态，无减伤，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：破报犹豫时间变长，1.5倍速度和伤害，破报后拿出路牌碾压植物，发怒后50%减伤<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（450）</font><br>精英形态一：破报进入假死状态，无减伤，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：破报犹豫时间变长，1.5倍速度和伤害，破报后拿出路牌碾压植物，发怒后50%减伤，发怒时使全场读报类僵尸解封<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
         getShadow: function(a) {
             return "left:75px;top:" + (a.height - 25) + "px"
         },
@@ -1747,29 +1747,29 @@ Birth: function() {
                 [f.id]))
         },
         getHit0: function(c, a, b) {
-			if(c.OrnHP+c.HP<=a) return c.NormalDie();
-            c.CheckOrnHP(c, c.id, c.OrnHP, a, c.PicArr, c.isAttacking, 1), c.SetAlpha(c, c.EleBody, 50, 0.5), oSym.addTask(10,
+			if(c.OrnHP+c.HP<=a*c.jiangshang) return c.NormalDie();
+            c.CheckOrnHP(c, c.id, c.OrnHP, a*c.jiangshang, c.PicArr, c.isAttacking, 1), c.SetAlpha(c, c.EleBody, 50, 0.5), oSym.addTask(10,
                 function(e, d) {
                     (d = $Z[e]) && d.SetAlpha(d, d.EleBody, 100, 1)
                 },
                 [c.id])
         },
         getHit1: function(b, a) {
-            (b.HP -= a) < b.BreakPoint ? (b.GoingDie(b.PicArr[[b.LostHeadGif, b.LostHeadAttackGif][b.isAttacking]]), b.getFirePea = OrnNoneZombies.prototype.getFirePea, b.getSnowPea = OrnNoneZombies.prototype.getSnowPea, b.getHit = b.getHit0 = b.getHit1 = b.getHit2 = b.getHit3 = function() {}) : (b.CheckOrnHP(b, b.id, b.OrnHP, a, b.PicArr, b.isAttacking, 0), b.SetAlpha(b, b.EleBody, 50, 0.5), oSym.addTask(10,
+            (b.HP -= a*b.jiangshang) < b.BreakPoint ? (b.GoingDie(b.PicArr[[b.LostHeadGif, b.LostHeadAttackGif][b.isAttacking]]), b.getFirePea = OrnNoneZombies.prototype.getFirePea, b.getSnowPea = OrnNoneZombies.prototype.getSnowPea, b.getHit = b.getHit0 = b.getHit1 = b.getHit2 = b.getHit3 = function() {}) : (b.CheckOrnHP(b, b.id, b.OrnHP, a*b.jiangshang, b.PicArr, b.isAttacking, 0), b.SetAlpha(b, b.EleBody, 50, 0.5), oSym.addTask(10,
                 function(d, c) {
                     (c = $Z[d]) && c.SetAlpha(c, c.EleBody, 100, 1)
                 },
                 [b.id]))
         },
         getHit2: function(b, a) {
-            (b.HP -= a) < b.BreakPoint ? (b.GoingDie(b.PicArr[[b.LostHeadGif, b.LostHeadAttackGif][b.isAttacking]]), b.getFirePea = OrnNoneZombies.prototype.getFirePea, b.getSnowPea = OrnNoneZombies.prototype.getSnowPea, b.getHit = b.getHit0 = b.getHit1 = b.getHit2 = b.getHit3 = function() {}) : (b.SetAlpha(b, b.EleBody, 50, 0.5), oSym.addTask(10,
+            (b.HP -= a*b.jiangshang) < b.BreakPoint ? (b.GoingDie(b.PicArr[[b.LostHeadGif, b.LostHeadAttackGif][b.isAttacking]]), b.getFirePea = OrnNoneZombies.prototype.getFirePea, b.getSnowPea = OrnNoneZombies.prototype.getSnowPea, b.getHit = b.getHit0 = b.getHit1 = b.getHit2 = b.getHit3 = function() {}) : (b.SetAlpha(b, b.EleBody, 50, 0.5), oSym.addTask(10,
                 function(d, c) {
                     (c = $Z[d]) && c.SetAlpha(c, c.EleBody, 100, 1)
                 },
                 [b.id]))
         },
         getHit3: function(b, a) {
-            (b.HP -= a) < b.BreakPoint ? (b.GoingDie(b.PicArr[[b.LostHeadGif, b.LostHeadAttackGif][b.isAttacking]]), b.getFirePea = OrnNoneZombies.prototype.getFirePea, b.getSnowPea = OrnNoneZombies.prototype.getSnowPea, b.getHit = b.getHit0 = b.getHit1 = b.getHit2 = b.getHit3 = function() {}) : (b.CheckOrnHP(b, b.id, b.OrnHP, a, b.PicArr, b.isAttacking, 0), b.SetAlpha(b, b.EleBody, 50, 0.5), oSym.addTask(10,
+            (b.HP -= a*b.jiangshang) < b.BreakPoint ? (b.GoingDie(b.PicArr[[b.LostHeadGif, b.LostHeadAttackGif][b.isAttacking]]), b.getFirePea = OrnNoneZombies.prototype.getFirePea, b.getSnowPea = OrnNoneZombies.prototype.getSnowPea, b.getHit = b.getHit0 = b.getHit1 = b.getHit2 = b.getHit3 = function() {}) : (b.CheckOrnHP(b, b.id, b.OrnHP, a, b.PicArr, b.isAttacking, 0), b.SetAlpha(b, b.EleBody, 50, 0.5), oSym.addTask(10,
                 function(d, c) {
                     (c = $Z[d]) && c.SetAlpha(c, c.EleBody, 100, 1)
                 },
@@ -1806,8 +1806,14 @@ Birth: function() {
                             i = k.OSpeed = k.LostPaperSpeed;
                         k.ChkActs =!k.WalkDirection?j.ChkActs:j.ChkActs1;
                         k.ChkActs1 = j.ChkActs1;
-						k.tasktime*=0.25; 
-				k.jinyin&&!k.num&&(k.jianshang=0.5);
+						k.tasktime*=0.25;
+						if(k.jinyin&&!k.num){
+							k.jianshang=0.5;
+							for (i in $Z){
+								u=$Z[i];
+								u&&u.PZ==k.PZ&&(u.EName=="oNewspaperZombie"||u.EName=="oGatlingPeaZombie")&&u.Ornaments&&u.getHit0(u,u.OrnHP,0)//全场读报类僵尸解封
+							}
+						}
 					k.num&&(k.PrivateAct=function(h) {
                    var Num = 0;
                 !h.xianxing ? (h.Altitude = 4,
@@ -1941,8 +1947,8 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
     c.getHit0(c, a, b)
   },
   getHit0: function(c, a, b) {
-    if (c.OrnHP + c.HP <= a) return c.NormalDie();
-    c.CheckOrnHP(c, c.id, c.OrnHP, a, c.PicArr, c.isAttacking, 1), c.SetAlpha(c, c.EleBody, 50, 0.5), oSym.addTask(10,
+    if (c.OrnHP + c.HP <= a*c.jiangshang) return c.NormalDie();
+    c.CheckOrnHP(c, c.id, c.OrnHP, a*c.jiangshang, c.PicArr, c.isAttacking, 1), c.SetAlpha(c, c.EleBody, 50, 0.5), oSym.addTask(10,
       function(e, d) {
         (d = $Z[e]) && d.SetAlpha(d, d.EleBody, 100, 1)
       },
