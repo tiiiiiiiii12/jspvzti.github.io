@@ -1810,7 +1810,7 @@ Birth: function() {
 						if(k.jinyin&&!k.num){
 							k.jianshang=0.5;
 							for (i in $Z){
-								u=$Z[i];
+								let u=$Z[i];
 								u&&u.PZ==k.PZ&&(u.EName=="oNewspaperZombie"||u.EName=="oGatlingPeaZombie")&&u.Ornaments&&u.getHit0(u,u.OrnHP,0)//全场读报类僵尸解封
 							}
 						}
