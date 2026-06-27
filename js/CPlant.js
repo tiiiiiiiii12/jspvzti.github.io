@@ -1056,11 +1056,11 @@ NormalAttack:function(a){
         width: 92,
         height: 72,
         beAttackedPointR: 72,
-        SunNum: 175,
+        SunNum: 125,
         PicArr: ["images/Card/Plants/SplitPea.png", "images/Plants/SplitPea/0.gif", "images/Plants/SplitPea/SplitPea.gif", "images/Plants/PB00.gif", "images/Plants/PB01.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "前后双向发射豌豆",
-        Produce: '分裂射手，可以向前后两个方向发射豌豆。<br>精英形态：向后发射的子弹可以回弹<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">前面和后面</font><br>发射速度：<font color="#FF0000">前面为正常或两倍速度，后面为两倍速度</font></p>分裂射手：“没错，我就是双子座。我知道，这的确很令人惊奇。不过，有两个头，或者实际上，长着一个头和一个类似头的东西，在背上，对我这条线上的防守帮助很大。',
+        Produce: '分裂射手，可以向前后两个方向发射豌豆。<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">前面和后面</font><br>发射速度：<font color="#FF0000">前面为正常速度，后面为两倍速度</font><br>精英形态：<font color="#FF0000">真·分裂射手，种植时在本行左侧生成豌豆射手，在本行右侧生成反向双发，均不会被僵尸索敌</font></p>分裂射手：“没错，我就是双子座。我知道，这的确很令人惊奇。不过，有两个头，或者实际上，长着一个头和一个类似头的东西，在背上，对我这条线上的防守帮助很大。',
         GetDX: function() {
             return -55
         },
@@ -1069,7 +1069,7 @@ NormalAttack:function(a){
         },
         getTriggerRange: function(a, b, c) {
             return [
-                [100, oS.W, 1],
+                [100, b + 25, 1],
                 [b + 26, oS.W, 0]
             ]
         },
@@ -1082,7 +1082,6 @@ NormalAttack:function(a){
         PrivateDie: function(a) {
             a.BulletEle.length = 0
         },
-		jinyinAct:function(){},
         TriggerCheck: function(b, a) {
             if (this.aTri[a]) {
                 return
@@ -1105,9 +1104,13 @@ NormalAttack:function(a){
             }
             e.canTrigger = e.aTri[0] && e.aTri[1] ? 0 : 1
         },
+		jinyinAct:function(a){
+			CustomSpecial(oPeashooter,a.R,0).jinyinnum=0;
+			CustomSpecial(oRepeater2,a.R,10).jinyinnum=0
+		},
         CheckLoop: function(a, b) {
             this.NormalAttack(b);
-            oSym.addTask(140+this.AttTime,
+            oSym.addTask(140,
                 function(c, e, g) {
                     var f;
                     (f = $P[c]) && f.AttackCheck1(e, g)
@@ -1116,9 +1119,12 @@ NormalAttack:function(a){
         },
         NormalAttack: function(c) {
             var d = this,
-                e,
-				a=c? d.AttackedRX - 16 : d.AttackedLX - 40;
-               var b = function() {
+                e, a = c ? (oSym.addTask(15,
+                    function(f) {
+                        $P[f] && b(1)
+                    },
+                    [d.id]), d.AttackedRX - 16) : d.AttackedLX - 40,
+                b = function() {
                     EditEle(d.BulletEle[c].cloneNode(false), {
                             id: e = "PB" + Math.random()
                         },
@@ -1142,10 +1148,9 @@ NormalAttack:function(a){
                                 left: r + 28 + "px",
                                 width: "52px",
                                 height: "46px"
-                            })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [m])) : (q += (o = !f ? 5 : -5)) < oS.W && q > 100 ? (m.style.left = (r += o) + "px", oSym.addTask(1, arguments.callee, [i, m, k, f, q, l, p, n, r, j])) : 
-							f&&d.jinyin?(f=0,m.src=d.PicArr[(f+3)],m.style.left = (r += o) + "px", oSym.addTask(1, arguments.callee, [i, m, k, f, q, l, p, n, r, j])):ClearChild(m)
+                            })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [m])) : (q += (o = !f ? 5 : -5)) < oS.W && q > 100 ? (m.style.left = (r += o) + "px", oSym.addTask(1, arguments.callee, [i, m, k, f, q, l, p, n, r, j])) : ClearChild(m)
                         },
-                        [e, $(e), 20, c, d.AttackedLX, d.R, c-1, 0, a, oGd.$Torch])
+                        [e, $(e), 20, c, d.AttackedLX, d.R, 0, 0, a, oGd.$Torch])
                 };
             b()
         }
