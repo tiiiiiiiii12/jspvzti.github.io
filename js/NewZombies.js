@@ -559,7 +559,8 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ImpHead.gi
 	var n = oZ["getAr"+(this.PZ?"HZ":"Z")](0, oS.W, y);
 	var k = n.length;
                 while (k--) {
-                  n[k].getExplosion(1600*this.level)
+                  n[k].getExplosion(1600*this.level);
+				  n[k].HP<=0&&this.PrivateCustom(GetC(n[k].ZX))
                 }
 		if(this.PZ){
       for (let i = 1; i <= oS.C; i++) {
