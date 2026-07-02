@@ -614,14 +614,45 @@ Birth: function() {
       return e.getHTML(e.id = b, e.X, e.pixelTop = f, e.zIndex = 3 * g + 1, "none", j || 0, e.height + "px", e.PicArr[e.StandGif]);
     },
 		jinyinAct:function(a){
+			a.num=Math.random()*100||a.Privatenum;
+			if(a.num>=50){
 			a.ChangeChkActsTo0=function(){};
 			a.ChangeChkActsTo1(a,a.id,a.EleBody);
 			a.EleBody.style.filter = 'grayscale(400%)';
 			a.PrivateAct=function(a){
 			a.canWalk(a,a.id)&&!a.isAttacking&&a.getr(a,a.PZ?-a.Speed*2:a.Speed*2);
 			}
+		 }else{
+			a.HP*=2;
+			a.AttackZombie=function(d, c) {
+            PlayAudio("zaji");
+            oSym.addTask(125,
+                function(f, e) {
+                    var h = $Z[f],
+                        g;
+                    h && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((g = $Z[e]) && g.getHit0(g, 1000, 0),
+                        oSym.addTask(40, function(h) {
+                            $Z[f] && h.JudgeAttack()
+                        }, [h]))
+                },
+                [d, c])
+        };
+        a.NormalAttack=function(d, c) {
+            PlayAudio("zaji");
+            oSym.addTask(125, function(f, e) {
+                var h = $Z[f];
+                var tp;
+                for (i = -1; i <= 3; i++) {
+                    h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50),
+                        oSym.addTask(40, function(h) {
+                            $Z[f] && h.JudgeAttack()
+                        }, [h]))
+                }
+            }, [d, c]);
+        }
+		 }
 		},
-        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态：不跳舞，三倍速度<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
+        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态一：灰色，不跳舞，三倍速度<br>精英形态二：两倍血量，变为巨人攻击方式<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
         BirthCallBack: function(e) {
             var d = e.delayT,
                 c = e.id,
@@ -1320,8 +1351,8 @@ Birth: function() {
           n = oGd.$Ice[j] = [1, 11, e.AttackedLX];
         }
         d = e.X;
-        h = d + 40;
-        f = d + 160;
+        h = d + 250;
+        f = d + 100;
         c = GetC(h);
         c > -1 && c < n[1] && (oGd.$Crater[j + "_" + c] = 1, n[1] = c);
         h > 120 && h < n[2] && (n[2] = h, l.firstChild.style.clip = "rect(0,auto,auto," + f + "px)", l.childNodes[1].style.left = Math.max(0, f) + "px");
