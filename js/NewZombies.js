@@ -519,7 +519,7 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpH
 	!a.beAttacked&&(ClearChild($(z.jinyinImg)),ClearChild($(z.JaHead)),a.isDie=true);
 	  }
 	},
-	canBoomR[],
+	canBoomR:[],
 	jinyinAct:function(a){
 		a.num=Math.random()*100||a.Privatenum;
 		a.BirthImg(a);
