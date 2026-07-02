@@ -9,10 +9,10 @@ var oIZombie=InheritO(oZombie,{
 });
 var oINewspaperZombie=InheritO(oNewspaperZombie,{
     EName:"oINewspaperZombie",
-    SunNum:125
+    SunNum:100
 });
 var oIPeaZombie=InheritO(oPeaZombie,{
-    EName:"oINewspaperZombie",
+    EName:"oIPeaZomnie",
     SunNum:75,
 	jinyinnum:0,
 	coolTime:7.5,
