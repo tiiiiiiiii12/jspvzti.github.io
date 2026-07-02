@@ -497,24 +497,24 @@ oNutZombie = InheritO(oTallNutZombie, {
 	SunNum: 125,
 	BirthImg: function(a) {
     var z = a.Ele;
-    var Sh = NewImg(z.jinyinImg, a.num>=50 ? "images/Zombies/Imp/ImpHead.gif" : "images/Plants/Jalapeno/Jalapeno.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:20px;", 0);
+    var Sh = NewImg(z.jinyinImg, a.num>=50 ? "images/Zombies/Imp/ImpHead.gif" : "images/Plants/Jalapeno/Jalapeno.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:40px;top:40px;", 0);
     z.appendChild(Sh);
   },
 	GoingDieHead:function(){},
     PrivateBirth:function(a) {
 		var z=a.Ele;
 		z.JaHead = "Ja" + Math.random();
-      var Ja = NewImg(z.JaHead,"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:60px;top:0px;",0);
+      var Ja = NewImg(z.JaHead,"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:50px;top:0px;",0);
       z.appendChild(Ja);
 		oSym.addTask(Math.random()*700+2000,function(a){
-			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.canBoomR.length&&a.BoomFire(Math.floor(Math.random() * a.canBoomR.length)),a.DisappearDie())
+			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.DisappearDie())
 		},[a])
 			},
-		PrivateAct:function(){     
+		PrivateAct:function(a){     
 		var z=a.Ele;
 	  if($Z[a.id]&&!a.isDie){
 	a.WalkDirection==a.check&&(
-EditImg($(z.JaHead),0,"images/Plants/Jalapeno/Jalapeno.gif",{transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"},0),
+EditImg($(z.JaHead),0,"images/Plants/Jalapeno/Jalapeno.gif",{transform:!a.WalkDirection?"rotateY(180deg)":"rotateY(0deg)"},0),
 z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ImpHead.gif" : "images/Plants/Jalapeno/Jalapeno.gif", {transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"},0),a.check=a.WalkDirection?0:1);
 	!a.beAttacked&&(ClearChild($(z.PeaHead)),a.isDie=true);
 	  }
@@ -526,7 +526,7 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ImpHead.gi
 		if(a.num>=50){
 			a.PrivateCustom=function(i){
 				try{
-					CustomZombie(oImp,this.R,i).jinyinnum=0
+					CustomZombie(oImp,this.R,i,!this.PZ).jinyinnum=0
 				}catch{}
 			}
 		}else{
