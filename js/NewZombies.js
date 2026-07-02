@@ -430,7 +430,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     OrnLeft: 20,
     Lvl: 5,
     jinyinAct: function(c) {      
-	  var z = $(c.id);
+	  var z = c.Ele;
       z.NutHead = "Nut" + Math.random();
       var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
       z.appendChild(Nut);
@@ -489,6 +489,91 @@ oNutZombie = InheritO(oTallNutZombie, {
 	},
     Produce: '韧性：<font color="#FF0000">1100</font><br>精英形态：暂无</p>由精英高坚果僵尸召唤'
   }),
+	oJalapenoZombie= InheritO(oZombie,{
+	EName: "oJalapenoZombie",
+	CName: "辣椒僵尸",
+	Lvl: 4,
+	HP:500,
+	SunNum: 125,
+	BirthImg: function(a) {
+    var z = a.Ele;
+    var Sh = NewImg(z.jinyinImg, a.num>=50 ? "images/Zombies/Imp/ImpHead.gif" : "images/Plants/Jalapeno/Jalapeno.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:20px;", 0);
+    z.appendChild(Sh);
+  },
+	GoingDieHead:function(){},
+    PrivateBirth:function(a) {
+		var z=a.Ele;
+		z.JaHead = "Ja" + Math.random();
+      var Ja = NewImg(z.JaHead,"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:60px;top:0px;",0);
+      z.appendChild(Ja);
+		oSym.addTask(Math.random()*700+2000,function(a){
+			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.canBoomR.length&&a.BoomFire(Math.floor(Math.random() * a.canBoomR.length)),a.DisappearDie())
+		},[a])
+			},
+		PrivateAct:function(){     
+		var z=a.Ele;
+	  if($Z[a.id]&&!a.isDie){
+	a.WalkDirection==a.check&&(
+EditImg($(z.JaHead),0,"images/Plants/Jalapeno/Jalapeno.gif",{transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"},0),
+z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ImpHead.gif" : "images/Plants/Jalapeno/Jalapeno.gif", {transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"},0),a.check=a.WalkDirection?0:1);
+	!a.beAttacked&&(ClearChild($(z.PeaHead)),a.isDie=true);
+	  }
+	},
+	canBoomR:[],
+	jinyinAct:function(a){
+		a.num=Math.random()*100||a.Privatenum;
+		a.BirthImg(a);
+		if(a.num>=50){
+			a.PrivateCustom=function(i){
+				try{
+					CustomZombie(oImp,this.R,i).jinyinnum=0
+				}catch{}
+			}
+		}else{
+			for(i=1;i<=oS.R;i++){
+			i!=a.R&&a.canBoomR.push(i)
+			}
+		}
+		a.PrivateDie=function(a){
+			ClearChild($(a.Ele.jinyinImg))
+		}
+	},
+	PrivateCustom:function(){},
+    BoomFire: function (y) {
+      PlayAudio("jalapeno");
+      fireid = "fire_" + Math.random();
+	  var CZC=[];
+      NewImg(
+        fireid,
+        "images/Plants/Jalapeno/JalapenoAttack.gif",
+        "width:755px;height:131px;left:120px;top:" + (GetY(y - 1) - 42) + "px",
+        EDAll
+      );
+      oSym.addTask(
+        135,
+        (id) => {
+          ClearChild($(id));
+        },
+        [fireid]
+      );
+	var n = oZ["getAr"+(this.PZ?"HZ":"Z")](0, oS.W, y);
+	var k = n.length;
+                while (k--) {
+                  n[k].getExplosion(1600*this.level)
+                }
+		if(this.PZ){
+      for (let i = 1; i <= oS.C; i++) {
+        for (let j = 0; j < 4; j++) {
+          let g = oGd.$[y + "_" + i + "_" + j];
+          g&&g.getHurt(this,3,1600*this.level);
+		  !g&&this.PrivateCustom(i)//精英小鬼辣椒僵尸释放技能
+        }
+      }
+	}
+    },
+	PicArr:oPeaZombie.prototype.PicArr,
+	Produce: '他过一段时间会给你的阵容以“火热”的惊喜<p>韧性：<font color="#FF0000">中（500）</font><br>特点：<font color="#FF0000">过段时间爆炸</font><br>精英形态一：<font color="#FF0000">在本路爆炸时，另外随机一行产生爆炸</font><br>精英形态二：<font color="#FF0000">爆炸烧死植物时在植物的格子召唤一个小鬼僵尸</font><br>他对待什么都是热情似火'
+}),
     oGatlingPeaZombie = InheritO(oNewspaperZombie, {
         EName: "oGatlingPeaZombie",
         CName: "机枪读报僵尸",
