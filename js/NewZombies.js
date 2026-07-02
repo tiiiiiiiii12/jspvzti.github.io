@@ -542,7 +542,6 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ImpHead.gi
     BoomFire: function (y) {
       PlayAudio("jalapeno");
       fireid = "fire_" + Math.random();
-	  var CZC=[];
       NewImg(
         fireid,
         "images/Plants/Jalapeno/JalapenoAttack.gif",
@@ -567,7 +566,7 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ImpHead.gi
         for (let j = 0; j < 4; j++) {
           let g = oGd.$[y + "_" + i + "_" + j];
           g&&g.getHurt(this,3,1600*this.level);
-		  !g&&this.PrivateCustom(i)//精英小鬼辣椒僵尸释放技能
+		  !oGd.$[y + "_" + i + "_" + j]&&this.PrivateCustom(i)//精英小鬼辣椒僵尸释放技能
         }
       }
 	}
