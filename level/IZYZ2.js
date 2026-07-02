@@ -15,7 +15,7 @@ var oIPeaZombie=InheritO(oPeaZombie,{
 });
 oS.Init({
     PName: [oIZombie, oNewspaperZombie, oConeheadZombie,oIPeaZombie,oFootballZombie,oGatlingPeaZombie,oTallNutZombie],
-    ZName: [oZombie, oJalapenoZombie,oPoleVaultingZombie,oDancingZombie,oBackupDancer,oNewspaperZombie,oFootballZombie,oGatlingPeaZombie,oTallNutZombie],
+    ZName: [oZombie, oJalapenoZombie,oPoleVaultingZombie,oDancingZombie,oBackupDancer,oNewspaperZombie,oFootballZombie,oIPeaZombie,oGatlingPeaZombie,oTallNutZombie],
     PicArr: ["images/interface/background1.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background2.jpg",
     ShowScroll: false,
@@ -56,7 +56,7 @@ oS.Init({
                 }++i
             }
         }
-        NewImg("iStripe", "images/interface/Stripe.png", "left:" + (GetX1X2(5)[0] - 11) + "px;top:65px", EDAll)
+        NewImg("iStripe", "images/interface/Stripe.png", "left:" + (GetX1X2(7)[0] - 11) + "px;top:65px", EDAll)
     },
     StartGame: function() {
         oP.Monitor();
@@ -71,7 +71,7 @@ oS.Init({
     AutoSelectCard: function() {
         var c = oS.ArCard,
             b = -1,
-            a = c.length-5;
+            a = c.length-6;
         while (++b < a) {
             SelectCard(c[b].prototype.EName)
         }
