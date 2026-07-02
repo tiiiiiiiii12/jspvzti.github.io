@@ -507,7 +507,7 @@ oNutZombie = InheritO(oTallNutZombie, {
       var Ja = NewImg(z.JaHead,"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:50px;top:0px;",0);
       z.appendChild(Ja);
 		oSym.addTask(Math.random()*700+2000,function(a){
-			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.DisappearDie())
+			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.DisappearDie())
 		},[a])
 			},
 		PrivateAct:function(a){     
@@ -516,10 +516,10 @@ oNutZombie = InheritO(oTallNutZombie, {
 	a.WalkDirection==a.check&&(
 EditImg($(z.JaHead),0,"images/Plants/Jalapeno/Jalapeno.gif",{transform:!a.WalkDirection?"rotateY(180deg)":"rotateY(0deg)"},0),
 z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ImpHead.gif" : "images/Plants/Jalapeno/Jalapeno.gif", {transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"},0),a.check=a.WalkDirection?0:1);
-	!a.beAttacked&&(ClearChild($(z.PeaHead)),a.isDie=true);
+	!a.beAttacked&&(ClearChild($(z.jinyinImg)),ClearChild($(z.JaHead)),a.isDie=true);
 	  }
 	},
-	canBoomR:[],
+	canBoomR[],
 	jinyinAct:function(a){
 		a.num=Math.random()*100||a.Privatenum;
 		a.BirthImg(a);
@@ -565,8 +565,7 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ImpHead.gi
       for (let i = 1; i <= oS.C; i++) {
         for (let j = 0; j < 4; j++) {
           let g = oGd.$[y + "_" + i + "_" + j];
-          g&&g.getHurt(this,3,1600*this.level);
-		  !oGd.$[y + "_" + i + "_" + j]&&this.PrivateCustom(i)//精英小鬼辣椒僵尸释放技能
+          g&&(g.getHurt(this,3,1600*this.level),g.HP<=0&&this.PrivateCustom(i))//精英小鬼辣椒僵尸释放技能
         }
       }
 	}
