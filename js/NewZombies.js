@@ -497,7 +497,7 @@ oNutZombie = InheritO(oTallNutZombie, {
 	SunNum: 125,
 	BirthImg: function(a) {
     var z = a.Ele;
-    var Sh = NewImg(z.jinyinImg, a.num>=50 ? "images/Zombies/Imp/ImpHead.gif" : "images/Plants/Jalapeno/Jalapeno.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:40px;top:40px;", 0);
+    var Sh = NewImg(z.jinyinImg, a.num>=50 ? "images/Zombies/Imp/ZombieImpHead.png" : "images/Plants/Jalapeno/Jalapeno.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:40px;top:40px;", 0);
     z.appendChild(Sh);
   },
 	GoingDieHead:function(){},
@@ -515,7 +515,7 @@ oNutZombie = InheritO(oTallNutZombie, {
 	  if($Z[a.id]&&!a.isDie){
 	a.WalkDirection==a.check&&(
 EditImg($(z.JaHead),0,"images/Plants/Jalapeno/Jalapeno.gif",{transform:!a.WalkDirection?"rotateY(180deg)":"rotateY(0deg)"},0),
-z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ImpHead.gif" : "images/Plants/Jalapeno/Jalapeno.gif", {transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"},0),a.check=a.WalkDirection?0:1);
+z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpHead.png" : "images/Plants/Jalapeno/Jalapeno.gif", {transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"},0),a.check=a.WalkDirection?0:1);
 	!a.beAttacked&&(ClearChild($(z.jinyinImg)),ClearChild($(z.JaHead)),a.isDie=true);
 	  }
 	},
