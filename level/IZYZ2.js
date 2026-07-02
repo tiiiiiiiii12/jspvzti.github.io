@@ -15,7 +15,7 @@ var oIPeaZombie=InheritO(oPeaZombie,{
 });
 oS.Init({
     PName: [oIZombie, oNewspaperZombie, oConeheadZombie,oIPeaZombie,oFootballZombie,oGatlingPeaZombie,oTallNutZombie],
-    ZName: [oZombie, oJalapenoZombie,oPoleVaultingZombie,oDancingZombie,oBackupDancer,oNewspaperZombie,oFootballZombie,oIPeaZombie,oGatlingPeaZombie,oTallNutZombie],
+    ZName: [oZombie, oJalapenoZombie,oPoleVaultingZombie,oDancingZombie,oBackupDancer,oNewspaperZombie,oFootballZombie,oIPeaZombie,oGatlingPeaZombie,oTallNutZombie,oConeheadZombie],
     PicArr: ["images/interface/background1.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background2.jpg",
     ShowScroll: false,
@@ -69,7 +69,7 @@ oS.Init({
     AutoSelectCard: function() {
         var c = oS.ArCard,
             b = -1,
-            a = c.length-6;
+            a = c.length-7;
         while (++b < a) {
             SelectCard(c[b].prototype.EName)
         }
