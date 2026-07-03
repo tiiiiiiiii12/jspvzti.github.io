@@ -46,7 +46,7 @@ getLadder:function() {
     var c = oZ.getArZ(a.pixelRight - 10, a.pixelRight + 10, a.R);
     b = c.length;
     while (b--) {
-      !c[b].FreeSetbodyTime && (c[b].WalkToLadder(c[b]));
+      !c[b].WalkDirection&&!c[b].FreeSetbodyTime && (c[b].WalkToLadder(c[b]));
     }
     $P[d] ? oSym.addTask(1, arguments.callee, [a, d]) : ClearChild($("ladder_" + a.R + "_" + a.C));
   }, [a, a.id]);
