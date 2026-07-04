@@ -531,7 +531,7 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpH
 			}
 		}
 		a.PrivateDie=function(a){
-			ClearChild($(a.Ele.jinyinImg))
+			a.Ele.jinyinImg&&ClearChild($(a.Ele.jinyinImg))
 		}
 	},
 	checkBoomR:function(a){
@@ -694,7 +694,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     a.Ready(a);
 	}else{
 		a.EleBody.style.filter = "sepia(1) hue-rotate(20deg) brightness(5)";
-		a.jianshang*=0.5;
+		a.jianshang*=0.75;
 		a.getFreeze=a.getSlow=function(){};
 		a.getr=oGargantuar.prototype.getr;
 		oSym.addTask(500,function(a){
@@ -719,10 +719,10 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     }
   },
  getAid:function(a,d){
-	 a.jianshang*=0.5;
+	 a.jianshang*=0.75;
 	 a.EleBody.style.filter = "sepia(1) hue-rotate(20deg) brightness(5)";
 	 oSym.addTask(500,function(a,d){
-		$Z[a.id]&&(a.id!=d)&&(a.jianshang/=0.5,a.EleBody.style.filter = "sepia(0) hue-rotate(0deg) brightness(1)");
+		$Z[a.id]&&(a.id!=d)&&(a.jianshang/=0.75,a.EleBody.style.filter = "sepia(0) hue-rotate(0deg) brightness(1)");
 	 },[a,d])
  },
   checkP: function(b) {
@@ -822,7 +822,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     var a = $Z[c];
     a&&(a.EleBody.src = a.PicArr[a.LadGif]);
     oSym.addTask(50, function(a, b) {
-      a&&a.beAttacked&&a.Ornaments&& $P[b] && ($P[b].getLadder(), !a.num&&a.getHit0(a, a.OrnHP, 0), a.JudgeAttack());
+      a&&a.beAttacked&&$P[b] && (a.Ornaments&&$P[b].getLadder(), !a.num&&a.getHit0(a, a.OrnHP, 0), a.JudgeAttack());
     }, [a, b])
   },
   canLadderList: {
@@ -831,9 +831,9 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     oPumpkinHead,
     oGarlic: true
   },
-  Produce: '他遇到防御植物可将梯子搭在上面<br>韧性：<font color="#FF0000">中</font><br>扶梯韧性：<font color="#FF0000">中(500)</font><br>精英形态一：<font color="#FF0000">扶梯→玉米加农炮，速度变慢，每隔一段时间朝随机一颗植物发射炮弹，对该植物的3*3范围造成1600伤害</font><br>精英形态二：<font color="#FF0000">金色扶梯，无限搭梯，自身有一半减伤，免疫减速、冻结、击退，每隔一段时间给周围僵尸附上一半减伤</font><br>这架梯子花了他$114514。',
+  Produce: '他遇到防御植物可将梯子搭在上面<br>韧性：<font color="#FF0000">中</font><br>扶梯韧性：<font color="#FF0000">中(500)</font><br>精英形态一：<font color="#FF0000">扶梯→玉米加农炮，速度变慢，每隔一段时间朝随机一颗植物发射炮弹，对该植物的3*3范围造成1600伤害</font><br>精英形态二：<font color="#FF0000">金色扶梯，无限搭梯，自身有25%减伤，免疫减速、冻结、击退，每隔一段时间给周围僵尸附上25%减伤</font><br>这架梯子花了他$114514。',
   CheckOrnHP: function(g, h, d, c, f, b, a) {
     var e = OrnNoneZombies.prototype;
-    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering,g.OSpeed=g.LostPaperSpeed,g.Speed=g.LostPaperSpeed*(g.FreeSlowTime?0.5:1),g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.canLadderList = [], g.Boom = function() {}, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
+    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering,g.OSpeed=g.LostPaperSpeed,g.Speed=g.LostPaperSpeed*(g.FreeSlowTime?0.5:1),!g.num&&(g.getSnowPea = e.getSnowPea), g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.canLadderList = [], g.Boom = function() {}, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
   }
 })
