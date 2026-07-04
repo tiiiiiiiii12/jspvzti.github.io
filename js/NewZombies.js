@@ -507,7 +507,7 @@ oNutZombie = InheritO(oTallNutZombie, {
       var Ja = NewImg(z.JaHead,"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:50px;top:0px;",0);
       z.appendChild(Ja);
 		oSym.addTask(Math.random()*700+2000,function(a){
-			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.DisappearDie())
+			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.DisappearDie())
 		},[a])
 			},
 		PrivateAct:function(a){     
@@ -529,13 +529,14 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpH
 					CustomZombie(oImp,this.R,i,!this.PZ).jinyinnum=0
 				}catch{}
 			}
-		}else{
-			for(i=1;i<=oS.R;i++){
-			i!=a.R&&a.canBoomR.push(i)
-			}
 		}
 		a.PrivateDie=function(a){
 			ClearChild($(a.Ele.jinyinImg))
+		}
+	},
+	checkBoomR:function(a){
+		for(i=1;i<=oS.R;i++){
+			i!=a.R&&a.canBoomR.push(i)
 		}
 	},
 	PrivateCustom:function(){},
