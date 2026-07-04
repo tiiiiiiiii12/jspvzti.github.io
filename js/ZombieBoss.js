@@ -71,7 +71,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
           oP.NumZombies += 6;
 			}catch{};
         }
-		oSym.addTask(1500 + (a.HP * 0.01),arguments.callee,[a])
+		$Z[a.id]&&oSym.addTask(1500 + (a.HP * 0.01),arguments.callee,[a])
       }, [a])
   },
   Skill: [
