@@ -171,7 +171,7 @@ func:function(a){
           k.ChkActs1 = j.ChkActs1;
           k.EleBody.src=l;
         },
-        [g.id, g.PicArr[g.WalkGif]])
+        [g.id, g.PicArr[g.NormalGif]])
   },
   SunNum: 1000,
   coolTime:Infinity,
