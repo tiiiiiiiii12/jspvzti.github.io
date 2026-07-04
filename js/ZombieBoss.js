@@ -32,16 +32,51 @@ var oGargantuarBoss = InheritO(oGargantuar, {
     }, [d, c]);
   },
   CheckSkill:function(a){
-   a.cannotCheck = 1;
-    oSym.addTask(1300 + (a.HP * 0.01), function(a) {
+	for(i=1;i<=oS.R){
+		PrivateTombstones(i,a.PZ?9,1)
+	}
+    oSym.addTask(10000, function(a) {
+		if($Z[a.id]){
 	var Num=Math.floor(Math.random() * a.Skill.length);
       a.Skill[Num].func(a);
       a.HP<20000&&a.Skill[Math.floor(Math.random() * a.Skill.length)].func(a);
-      a.cannotCheck = 0;
 	NewEle("DivTeach", "div", 0, 0, EDAll);
 	innerText($("DivTeach"),a.Skill[Num].name);
 	oSym.addTask(500, ClearChild,[$("DivTeach")]);
+	oSym.addTask(12000 + (a.HP * 0.01),arguments.callee,[a])
+	}
     }, [a])
+  },
+  SetZombie: function(a) {
+      oSym.addTask(1500 + (a.OrnHP * 0.01), function(a) {
+		a.getr(a,5,1);
+        a.ChangeR(a);
+        if (a.HP >= 80000) {
+			try{
+          oP.SetTimeoutZombie([oZombie, oZombie2, oZombie3], 0);
+		  oP.SetTimeoutTomZombie([oZombie]);
+          oP.NumZombies += 3;
+		}catch{};
+        } else if (a.HP >= 60000) {
+			try{
+          oP.SetTimeoutZombie([oNewspaperZombie, oConeheadZombie,oZombie, oZombie2, oPoleVaultingZombie,oPeaZombie], 0);
+          oP.SetTimeoutTomZombie([oZombie]);
+          oP.NumZombies += 6;
+				}catch{};
+        } else if (a.HP >= 40000) {
+          try{AppearTombstones(8, 9, 1);
+          oP.SetTimeoutZombie([oJackinTheBoxZombie, oWallNutZombie,oBucketheadZombie,oDancingZombie,oJalapenoZombie,oFootballZombie], 0);
+          oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
+			}catch{};
+          oP.NumZombies += 6;
+        } else if (a.HP >= 10000) {
+          try{AppearTombstones(6, 9, 2);
+          oP.SetTimeoutZombie([oFootballZombie, oZomboni, oGargantuar, oTallNutZombie,oGatlingPeaZombie,oFlagZombie], 0);
+          oP.SetTimeoutTomZombie([oZombie,oFootballZombie,oScreenDoorZombie,oBucketheadZombie]);
+          oP.NumZombies += 6;
+			}catch{};
+        }
+      }, [a])
   },
   Skill: [{
       name: "墓碑炸弹",
@@ -90,33 +125,28 @@ var oGargantuarBoss = InheritO(oGargantuar, {
     },
     {
       name: "狂暴",
-      tip: "使全场僵尸能踩植物，此技能持续10秒",
+      tip: "使全场僵尸能踩植物，此技能持续12秒",
       func: function(a) {
-		  a.EleBody.style.filter = 'saturate(25%)',
-        a.PrivateAct = function(a) {
-            for (u in $Z) {
-              e = $Z[u];	
-			if(e.color!==1){
-				 e.PZ&&e.beAttacked && (!e.FreeSetbodyTime)&&(
-					e.color=1);
-			e.caiPlants = function(a) {
-		    if(a.PZ&&a.beAttacked&&(!a.FreeSetbodyTime)){
-				for (let i = 0; i < 4; i++) {
-				let p = oGd.$[a.R + "_" + GetC(a.ZX - 10) + "_" + i];
-                    p && (p.canEat) && p.getHurt(a, 1, 100);
-				        }
-			        }
-                return 1;
-				}
-			}
-		}
-	};
-          $Z[a.id] && oSym.addTask(1000, function(a) {
-            a.PrivateAct = function() {};
-			a.EleBody.style.filter = 'saturate(100%)';
+a.PrivateAct=function(a){
             for (u in $Z) {
               e = $Z[u];
-                e.caiPlants =function(){return 0};
+			if(!e.color){
+				 e.PZ&&e.beAttacked&&(e.EleBody.style.filter = 'saturate(25%)',
+					e.color=1);
+			}
+		    if(e.PZ&&e.beAttacked&&e.canWalk(e,u)){
+				for (let i = 0; i < 4; i++) {
+				let p = oGd.$[e.R + "_" + GetC(e.ZX - 10) + "_" + i];
+                    p && (p.canEat) && p.getHurt(e, 1, 100);
+				        }
+			        }
+			}
+	};
+  oSym.addTask(1200, function(a) {
+            a.PrivateAct = function() {};
+            for (u in $Z) {
+              e = $Z[u];
+				e.EleBody.style.filter = 'saturate(100%)';
 				e.color=0;
             }
           }, [a])
@@ -129,6 +159,27 @@ func:function(a){
 for (u in $P) e = $P[u], e && e.getFreeze(e,u,700);
 for (i in $Z) Z = $Z[i], Z&&(Z.PZ!=a.PZ)&&Z.ZX<oS.W&&Z.ZX>100&&Z.getFreeze(Z,i,700)
 }
+},
+	{
+name:"脑旗号角",
+tip:"在本行最后一列召唤一个10倍血量旗帜僵尸，在20000血以上为非精英，20000血以下为精英",
+func:function(a){
+	var b=CustomZombie(oFlagZombie,a.R,!a.PZ?1:9,!a.PZ);
+	b.HP*=10;
+	b.jinyinnum=(a.HP>=20000?0:100)
+}
+},
+{
+name:"小鬼狂潮",
+tip:"用更大的力气丢出小鬼并换行，持续五次，若血量小于20000则持续七次",
+func:function(a){
+	a.hasthrew=0;
+	a.throwImpnum=a.HP<20000?7:5;
+	a.throwImp(a);
+	a.PrivateAct=function(a){
+		a.throwImpnum>a.hasthrew&&a.canWalk(a,a.id)&&(a.throwImp(a),a.ChangeR(a))
+	}
+}
 }
   ],
   getr: function(e, l, c) {
@@ -139,7 +190,7 @@ for (i in $Z) Z = $Z[i], Z&&(Z.PZ!=a.PZ)&&Z.ZX<oS.W&&Z.ZX>100&&Z.getFreeze(Z,i,7
   Boss:1,
   hasthrew: 0,
   PrivateAct: function(h){
-      !h.Walkin&&(h.PZ?h.ZX<=700:h.ZX>=150)&&(h.OSpeed=h.Speed=0,h.Walkin=1,h.CheckSkill(h))
+      !h.Walkin&&(h.PZ?h.ZX<=700:h.ZX>=150)&&(h.OSpeed=h.Speed=0,h.Walkin=1,h.CheckSkill(h),h.SetZombie(h))
     },
   jinyinnum:100,
   jinyinAct: function(a) {},
@@ -151,7 +202,7 @@ for (i in $Z) Z = $Z[i], Z&&(Z.PZ!=a.PZ)&&Z.ZX<oS.W&&Z.ZX>100&&Z.getFreeze(Z,i,7
       g.ChkActs1 = function() {
         return 1
       },
-      g.hasthrew += 1,
+	g.hasthrew+=1,
       g.EleBody.src = g.PicArr[g.throwImpGif], oSym.addTask(100,
         function(m, l) {
           var k = $Z[m];
@@ -159,7 +210,7 @@ for (i in $Z) Z = $Z[i], Z&&(Z.PZ!=a.PZ)&&Z.ZX<oS.W&&Z.ZX>100&&Z.getFreeze(Z,i,7
             return
           }
           PlayAudio("ImpToLand");
-          var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
+          var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 2);
           oSym.addTask(100, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 150) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)]);
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
