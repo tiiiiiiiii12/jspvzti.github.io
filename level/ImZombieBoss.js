@@ -46,6 +46,6 @@ ArP: {
     BeginCool();
     SetVisible($("dFlagMeter"),$("dFlagMeterContent"),$("dTop"));
     oS.RiddleAutoGrow()
-  },0,{AutoSelectCard:function(){
+  }},0,{AutoSelectCard:function(){
     var c=oS.ArCard;SelectCard(c[0].prototype.EName)
   }});
