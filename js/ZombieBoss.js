@@ -58,13 +58,13 @@ var oGargantuarBoss = InheritO(oGargantuar, {
 		  oP.SetTimeoutTomZombie([oZombie]);
           oP.NumZombies += 3;
 		}catch{};
-        } else if (a.HP >= 50000) {
+        } else if (a.HP >= 15000) {
           try{AppearTombstones(8, 9, 1);
           oP.SetTimeoutZombie([oJackinTheBoxZombie, oWallNutZombie,oBucketheadZombie,oDancingZombie,oJalapenoZombie,oFootballZombie], 0);
           oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
 			}catch{};
           oP.NumZombies += 6;
-        } else if (a.HP >= 10000) {
+        } else {
           try{AppearTombstones(6, 9, 2);
           oP.SetTimeoutZombie([oFootballZombie, oZomboni, oGargantuar, oTallNutZombie,oGatlingPeaZombie,oFlagZombie], 0);
           oP.SetTimeoutTomZombie([oZombie,oFootballZombie,oScreenDoorZombie,oBucketheadZombie]);
