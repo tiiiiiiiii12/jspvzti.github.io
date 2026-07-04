@@ -52,13 +52,13 @@ var oGargantuarBoss = InheritO(oGargantuar, {
       oSym.addTask(500, function(a) {
 		a.getr(a,5,1);
         a.ChangeR(a);
-        if (a.HP >= 60000) {
+        if (a.HP >= 40000) {
 			try{
           oP.SetTimeoutZombie([oZombie, oZombie2, oZombie3], 0);
 		  oP.SetTimeoutTomZombie([oZombie]);
           oP.NumZombies += 3;
 		}catch{};
-        } else if (a.HP >= 15000) {
+        } else if (a.HP >= 20000) {
           try{AppearTombstones(8, 9, 1);
           oP.SetTimeoutZombie([oJackinTheBoxZombie, oWallNutZombie,oBucketheadZombie,oDancingZombie,oJalapenoZombie,oFootballZombie], 0);
           oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
