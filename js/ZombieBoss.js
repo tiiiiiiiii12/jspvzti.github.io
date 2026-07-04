@@ -36,7 +36,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
 		PrivateTombstones(i,a.PZ?9:1)
 	}
 	PlayAudio("explosion");
-    oSym.addTask(10000, function(a) {
+    oSym.addTask(1000, function(a) {
 		if($Z[a.id]){
 	var Num=Math.floor(Math.random() * a.Skill.length);
       a.Skill[Num].func(a);
@@ -49,7 +49,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
     }, [a])
   },
   SetZombie: function(a) {
-      oSym.addTask(1500 + (a.HP * 0.01), function(a) {
+      oSym.addTask(500, function(a) {
 		a.getr(a,5,1);
         a.ChangeR(a);
         if (a.HP >= 80000) {
