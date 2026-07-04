@@ -78,51 +78,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
         }
       }, [a])
   },
-  Skill: [{
-      name: "墓碑炸弹",
-      tip: "向前发射并向上下各散射两个墓碑吞噬者，击中植物或魅惑僵尸直接在当格生成墓碑",
-      func: function(a) {
-        let i = 0,
-          max = 5;
-        var timer = setInterval(function() {
-            i++;
-            let z = $(a.id);
-            let div = $n("div");
-            let d = "tPea" + Math.random();
-            div.id = d;
-            div.innerHTML = '<img src="images/Plants/GraveBuster/GraveBuster.gif">';
-            EditEle(div, 0, {
-              position: "absolute",
-              transform: "rotateY(20deg)",
-              zIndex: "24",
-              left: a.ZX + "px",
-              top: a.pixelTop + 160 + "px"
-            }, EDPZ, 0);
-            oSym.addTask(1, function(z, d, a, i) {
-                let pea = $(d);
-                let y = (i <= 2 ? (Math.random() * 4 + 0) : (i <= 4 ? 0 : Math.random() * 0 - 4));
-                $(d).style.left = $(d).offsetLeft - 5 + "px";
-                $(d).style.top = $(d).offsetTop - y + "px";
-                let C = GetC(a.ZX + 40);
-                for (let i = 3; i >= 0; i--) {
-                  for (let j = 1; j <= C; j++) {
-                    let p = oGd.$[GetR($(d).offsetTop + 100) + "_" + j + "_" + i];
-                    p && (p.canEat) && (p.EName != "oLawnCleaner" && p.EName != "oPoolCleaner" && p.EName != "oBrains") && (p.AttackedLX < $(d).offsetLeft) && (p.AttackedRX > $(d).offsetLeft) && (PlayAudio("explosion"), (PrivateTombstones(p.R, p.C)), ($(d) && ClearChild($(d))));
-                    let Z = oZ.getHZ1($(d).offsetLeft, GetR($(d).offsetTop + 100));
-                    Z && (Z.Altitude == 1) && ((Z.DisappearDie(), (PrivateTombstones(Z.R, GetC(Z.ZX))), ($(d) && ClearChild($(d)))))
-                  }
-                }
-                if ($(d).offsetLeft <= 0 || ($(d).offsetTop <= GetY(0) - 100) || ($(d).offsetTop >= GetY(oS.R) + 250)) {
-                  ClearChild($(d));
-                }
-                oSym.addTask(1, arguments.callee, [z, d, a, i])
-              },
-              [z, d, a, i]);
-            (i > max) && clearInterval(timer);
-          },
-          100);
-      }
-    },
+  Skill: [
     {
       name: "狂暴",
       tip: "使全场僵尸能踩植物，此技能持续12秒",
@@ -162,10 +118,10 @@ for (i in $Z) Z = $Z[i], Z&&(Z.PZ!=a.PZ)&&Z.ZX<oS.W&&Z.ZX>100&&Z.getFreeze(Z,i,7
 },
 	{
 name:"脑旗号角",
-tip:"在本行最后一列召唤一个10倍血量旗帜僵尸，在20000血以上为非精英，20000血以下为精英",
+tip:"在本行最后一列召唤一个5倍血量旗帜僵尸，在20000血以上为非精英，20000血以下为精英",
 func:function(a){
 	var b=CustomZombie(oFlagZombie,a.R,!a.PZ?1:9,!a.PZ);
-	b.HP*=10;
+	b.HP*=5;
 	b.jinyinnum=(a.HP>=20000?0:100)
 }
 },
