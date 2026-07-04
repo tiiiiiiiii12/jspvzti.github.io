@@ -52,7 +52,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
       oSym.addTask(500, function(a) {
 		a.getr(a,5,1);
         a.ChangeR(a);
-        if (a.HP >= 40000) {
+        if (a.HP >= 60000) {
 			try{
           oP.SetTimeoutZombie([oZombie, oZombie2, oZombie3], 0);
 		  oP.SetTimeoutTomZombie([oZombie]);
