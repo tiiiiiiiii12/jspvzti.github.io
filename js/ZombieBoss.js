@@ -52,24 +52,31 @@ var oGargantuarBoss = InheritO(oGargantuar, {
       oSym.addTask(500, function(a) {
 		a.getr(a,5,1);
         a.ChangeR(a);
-        if (a.HP >= 50000) {
+        if (a.HP >= 55000) {
 			try{
-          oP.SetTimeoutZombie([oZombie, oZombie2, oConeheadZombie], 0);
+          oP.SetTimeoutZombie([oZombie, oPeaZombie, oConeheadZombie], 0);
 		  oP.SetTimeoutTomZombie([oZombie]);
           oP.NumZombies += 3;
 		}catch{};
-        } else if (a.HP >= 20000) {
+        } else if (a.HP >= 40000) {
           try{
-          oP.SetTimeoutZombie([oJackinTheBoxZombie, oWallNutZombie,oBucketheadZombie,oDancingZombie,oJalapenoZombie,oFootballZombie], 0);
+          oP.SetTimeoutZombie([oScreenDoorZombie, oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie], 0);
           oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
 		  AppearTombstones(8, 9, 1);
+			oP.NumZombies += 5;
 			}catch{};
-          oP.NumZombies += 6;
-        } else {
+} else if (a.HP >= 20000) {
           try{
-          oP.SetTimeoutZombie([oFootballZombie, oZomboni, oGargantuar, oTallNutZombie,oGatlingPeaZombie,oFlagZombie], 0);
+          oP.SetTimeoutZombie([oJackinTheBoxZombie, oZomboni,oBucketheadZombie,oLadderZombie,oDancingZombie,oPoleVaultingZombie,oFootballZombie], 0);
+          oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
+		oP.NumZombies += 7;
+		  AppearTombstones(8, 9, 1);
+			}catch{};
+}else {
+          try{
+          oP.SetTimeoutZombie([oLadderZombie,oFootballZombie, oZomboni, oGargantuar, oTallNutZombie,oGatlingPeaZombie,oFlagZombie,oJalapenoZombie], 0);
           oP.SetTimeoutTomZombie([oZombie,oFootballZombie,oScreenDoorZombie,oBucketheadZombie]);
-          oP.NumZombies += 6;
+          oP.NumZombies += 8;
 		  AppearTombstones(6, 9, 2);
 			}catch{};
         }
@@ -79,7 +86,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
   Skill: [
     {
       name: "狂暴",
-      tip: "使全场僵尸能踩植物，此技能持续12秒",
+      tip: "使全场僵尸能踩植物，此技能持续10秒",
       func: function(a) {
 a.PrivateAct=function(a){
             for (u in $Z) {
@@ -107,15 +114,15 @@ a.PrivateAct=function(a){
     },
 {
 name:"The world",
-tip:"使场上植物被冻结,持续7秒",
+tip:"使场上植物被冻结,持续5秒",
 func:function(a){
-for (u in $P) e = $P[u], e && e.getFreeze(e,u,700);
-for (i in $Z) Z = $Z[i], Z&&(Z.PZ!=a.PZ)&&Z.ZX<oS.W&&Z.ZX>100&&Z.getFreeze(Z,i,700)
+for (u in $P) e = $P[u], e && e.getFreeze(e,u,500);
+for (i in $Z) Z = $Z[i], Z&&(Z.PZ!=a.PZ)&&Z.ZX<oS.W&&Z.ZX>100&&Z.getFreeze(Z,i,500)
 }
 },
 	{
 name:"脑旗号角",
-tip:"在本行最后一列召唤一个5倍血量旗帜僵尸，在20000血以上为非精英，20000血以下为精英",
+tip:"在本行最后一列召唤加强血量旗帜僵尸，在20000血以上为非精英，20000血以下为精英",
 func:function(a){
 	var b=CustomZombie(oFlagZombie,a.R,!a.PZ?1:9,!a.PZ);
 	b.HP*=5/(a.HP/6000);
@@ -125,7 +132,7 @@ func:function(a){
 },
 {
 name:"小鬼狂潮",
-tip:"用更大的力气丢出小鬼并换行，持续五次，若血量小于20000则持续七次",
+tip:"用更大的力气丢出小鬼并换行，持续三次，若血量小于20000则持续五次",
 func:function(a){
 	a.hasthrew=0;
 	a.throwImpnum=a.HP<20000?7:5;
