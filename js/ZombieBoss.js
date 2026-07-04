@@ -59,16 +59,18 @@ var oGargantuarBoss = InheritO(oGargantuar, {
           oP.NumZombies += 3;
 		}catch{};
         } else if (a.HP >= 20000) {
-          try{AppearTombstones(8, 9, 1);
+          try{
           oP.SetTimeoutZombie([oJackinTheBoxZombie, oWallNutZombie,oBucketheadZombie,oDancingZombie,oJalapenoZombie,oFootballZombie], 0);
           oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
+		  AppearTombstones(8, 9, 1);
 			}catch{};
           oP.NumZombies += 6;
         } else {
-          try{AppearTombstones(6, 9, 2);
+          try{
           oP.SetTimeoutZombie([oFootballZombie, oZomboni, oGargantuar, oTallNutZombie,oGatlingPeaZombie,oFlagZombie], 0);
           oP.SetTimeoutTomZombie([oZombie,oFootballZombie,oScreenDoorZombie,oBucketheadZombie]);
           oP.NumZombies += 6;
+		  AppearTombstones(6, 9, 2);
 			}catch{};
         }
 		$Z[a.id]&&oSym.addTask(1500 + (a.HP * 0.01),arguments.callee,[a])
