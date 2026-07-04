@@ -32,9 +32,10 @@ var oGargantuarBoss = InheritO(oGargantuar, {
     }, [d, c]);
   },
   CheckSkill:function(a){
-	for(i=1;i<=oS.R){
+	for(i=1;i<=oS.R;i++){
 		PrivateTombstones(i,a.PZ?9,1)
 	}
+	PlayAudio("explosion");
     oSym.addTask(10000, function(a) {
 		if($Z[a.id]){
 	var Num=Math.floor(Math.random() * a.Skill.length);
