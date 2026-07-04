@@ -54,7 +54,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
         a.ChangeR(a);
         if (a.HP >= 50000) {
 			try{
-          oP.SetTimeoutZombie([oZombie, oZombie2, oZombie3], 0);
+          oP.SetTimeoutZombie([oZombie, oZombie2, oConeheadZombie], 0);
 		  oP.SetTimeoutTomZombie([oZombie]);
           oP.NumZombies += 3;
 		}catch{};
