@@ -44,7 +44,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
 	NewEle("DivTeach", "div", 0, 0, EDAll);
 	innerText($("DivTeach"),a.Skill[Num].name);
 	oSym.addTask(500, ClearChild,[$("DivTeach")]);
-	oSym.addTask(12000 + (a.HP * 0.01),arguments.callee,[a])
+	oSym.addTask(1200 + (a.HP * 0.01),arguments.callee,[a])
 	}
     }, [a])
   },
@@ -52,19 +52,13 @@ var oGargantuarBoss = InheritO(oGargantuar, {
       oSym.addTask(500, function(a) {
 		a.getr(a,5,1);
         a.ChangeR(a);
-        if (a.HP >= 80000) {
+        if (a.HP >= 60000) {
 			try{
           oP.SetTimeoutZombie([oZombie, oZombie2, oZombie3], 0);
 		  oP.SetTimeoutTomZombie([oZombie]);
           oP.NumZombies += 3;
 		}catch{};
-        } else if (a.HP >= 60000) {
-			try{
-          oP.SetTimeoutZombie([oNewspaperZombie, oConeheadZombie,oZombie, oZombie2, oPoleVaultingZombie,oPeaZombie], 0);
-          oP.SetTimeoutTomZombie([oZombie]);
-          oP.NumZombies += 6;
-				}catch{};
-        } else if (a.HP >= 40000) {
+        } else if (a.HP >= 50000) {
           try{AppearTombstones(8, 9, 1);
           oP.SetTimeoutZombie([oJackinTheBoxZombie, oWallNutZombie,oBucketheadZombie,oDancingZombie,oJalapenoZombie,oFootballZombie], 0);
           oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
