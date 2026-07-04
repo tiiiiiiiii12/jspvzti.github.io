@@ -33,7 +33,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
   },
   CheckSkill:function(a){
 	for(i=1;i<=oS.R;i++){
-		PrivateTombstones(i,a.PZ?9,1)
+		PrivateTombstones(i,a.PZ?9:1)
 	}
 	PlayAudio("explosion");
     oSym.addTask(10000, function(a) {
@@ -49,7 +49,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
     }, [a])
   },
   SetZombie: function(a) {
-      oSym.addTask(1500 + (a.OrnHP * 0.01), function(a) {
+      oSym.addTask(1500 + (a.HP * 0.01), function(a) {
 		a.getr(a,5,1);
         a.ChangeR(a);
         if (a.HP >= 80000) {
@@ -77,6 +77,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
           oP.NumZombies += 6;
 			}catch{};
         }
+		oSym.addTask(1500 + (a.HP * 0.01),arguments.callee,[a])
       }, [a])
   },
   Skill: [
@@ -88,8 +89,7 @@ a.PrivateAct=function(a){
             for (u in $Z) {
               e = $Z[u];
 			if(!e.color){
-				 e.PZ&&e.beAttacked&&(e.EleBody.style.filter = 'saturate(25%)',
-					e.color=1);
+				 e.PZ&&e.beAttacked&&(e.EleBody.style.filter = 'saturate(25%)',e.color=1);
 			}
 		    if(e.PZ&&e.beAttacked&&e.canWalk(e,u)){
 				for (let i = 0; i < 4; i++) {
