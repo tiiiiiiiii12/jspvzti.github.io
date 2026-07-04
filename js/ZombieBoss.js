@@ -118,7 +118,8 @@ name:"脑旗号角",
 tip:"在本行最后一列召唤一个5倍血量旗帜僵尸，在20000血以上为非精英，20000血以下为精英",
 func:function(a){
 	var b=CustomZombie(oFlagZombie,a.R,!a.PZ?1:9,!a.PZ);
-	b.HP*=5;
+	b.HP*=5/(a.HP/6000);
+	b.Speed=b.OSpeed=0;
 	b.jinyinnum=(a.HP>=20000?0:100)
 }
 },
