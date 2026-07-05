@@ -125,7 +125,7 @@ name:"脑旗号角",
 tip:"在本行最后一列召唤加强血量旗帜僵尸，在20000血以上为非精英，20000血以下为精英",
 func:function(a){
 	var b=CustomZombie(oFlagZombie,a.R,!a.PZ?1:9,!a.PZ);
-	b.HP*=5/(a.HP/6000);
+	b.HP*=5/Math.max(Math.round(a.HP/6000),1);
 	b.Speed=b.OSpeed=0;
 	b.jinyinnum=(a.HP>=20000?0:100)
 }
@@ -135,7 +135,7 @@ name:"小鬼狂潮",
 tip:"用更大的力气丢出小鬼并换行，持续三次，若血量小于20000则持续五次",
 func:function(a){
 	a.hasthrew=0;
-	a.throwImpnum=a.HP<20000?7:5;
+	a.throwImpnum=a.HP<20000?5:3;
 	a.throwImp(a);
 	a.PrivateAct=function(a){
 		a.throwImpnum>a.hasthrew&&a.canWalk(a,a.id)&&(a.throwImp(a),a.ChangeR(a))
@@ -154,6 +154,7 @@ func:function() {
       },
       0, EDPZ);
 	PlayAudio("zaji");
+	a.EleBody.src=a.PicArr[a.AttackGif];
 	a.isAttacking=1;
 	oSym.addTask(125,function(a,b){
 	if(!$Z[a.id])return;
