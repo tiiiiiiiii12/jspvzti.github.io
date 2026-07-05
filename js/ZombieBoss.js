@@ -126,7 +126,7 @@ tip:"在本行最后一列召唤加强血量旗帜僵尸，在20000血以上为�
 func:function(a){
 	var b=CustomZombie(oFlagZombie,a.R,!a.PZ?1:9,!a.PZ);
 	b.HP*=5/Math.max(Math.round(a.HP/6000),1);
-	b.Speed=b.OSpeed=0;
+	b.Speed=b.OSpeed=1.1;
 	b.jinyinnum=(a.HP>=20000?0:100)
 }
 },
