@@ -31,6 +31,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
       }
     }, [d, c]);
   },
+getFreeze:function(){},
   CheckSkill:function(a){
 	for(i=1;i<=oS.R;i++){
 		PrivateTombstones(i,a.PZ?9:1)
@@ -50,6 +51,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
   },
   SetZombie: function(a) {
       oSym.addTask(500, function(a) {
+		if(!$Z[a.id])return;
 		a.getr(a,5,1);
         a.ChangeR(a);
         if (a.HP >= 55000) {
@@ -65,7 +67,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
 		  AppearTombstones(8, 9, 1);
 			oP.NumZombies += 5;
 			}catch{};
-} else if (a.HP >= 10000) {
+} else if (a.HP >= 15000) {
           try{
           oP.SetTimeoutZombie([oJackinTheBoxZombie, oBucketheadZombie,oLadderZombie,oDancingZombie,oPoleVaultingZombie,oFootballZombie], 0);
           oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
