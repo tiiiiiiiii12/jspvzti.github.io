@@ -154,12 +154,12 @@ func:function() {
       },
       0, EDPZ);
 	PlayAudio("zaji");
-	a.EleBody.src=a.PicArr[a.AttackGif];
+	a.EleBody.src=a.PicArr[3];
 	a.isAttacking=1;
 	oSym.addTask(125,function(a,b){
 	if(!$Z[a.id])return;
 	oSym.addTask(40,function(a){
-		$Z[a.id]&&(a.EleBody.src=a.PicArr[a.NormalGif],a.isAttacking=0)
+		$Z[a.id]&&(a.EleBody.src=a.PicArr[2],a.isAttacking=0)
 	},[a]);
     oSym.addTask(1,
       function(d) {
