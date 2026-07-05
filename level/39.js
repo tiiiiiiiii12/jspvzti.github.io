@@ -38,7 +38,7 @@ oS.Init({
         [oDuckyTubeZombie3, 1, 4],
         [oConeheadZombie, 2, 4],
         [oBucketheadZombie, 1, 4],
-        [oJalapenoZombie, 1, 4],
+        [oJalapenoZombie, 1, 1],
         [oLadderZombie, 1, 2],
         [oDolphinRiderZombie, 1, 2],
         [oDiggerZombie, 1, 7, [7, 10]]
