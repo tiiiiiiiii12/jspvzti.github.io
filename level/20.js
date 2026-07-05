@@ -43,7 +43,7 @@ oS.Init({
 									SetHidden($("dTitle"))
 								},
 								onclick: function(g) {
-									ChosePlant(g, oS.ChoseCard, f)
+									ChosePlant(g, oS.ChoseCard, oS.ChoseCard)
 								}
 							})
 						}
