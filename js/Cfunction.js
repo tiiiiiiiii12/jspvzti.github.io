@@ -2220,7 +2220,7 @@ SelectModal = function(g) {
 	AllAudioStop();
 	PausedAudioArr = [];
 	g == undefined && (g = $User.Visitor.Progress);
-	if (g > 37) {
+	if (g > 40) {
 		alert("本关卡暂未开放！");
 		SelectModal(0);
 		return
@@ -2631,9 +2631,7 @@ Ajax = function(a, e, d, c) {
 	}), b.open(e, a, true), e == "get" ? b.send(null) : (b.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"), b.send(d)))
 },
 ShowAD = function() {},
-ViewChat = function(a) {
-	a.value == "显示聊天" ? (SetBlock($("IF2"), $("dChatView")), a.value = "关闭聊天") : (SetNone($("IF2"), $("dChatView")), a.value = "显示聊天")
-};
+ViewChat = function(a) {};
 Date.prototype.format = function(b) {
 	var c = {
 		"M+": this.getMonth() + 1,
