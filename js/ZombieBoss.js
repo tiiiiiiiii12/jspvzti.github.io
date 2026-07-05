@@ -141,6 +141,46 @@ func:function(a){
 		a.throwImpnum>a.hasthrew&&a.canWalk(a,a.id)&&(a.throwImp(a),a.ChangeR(a))
 	}
 }
+},
+	{
+name:"穿刺重弹",
+tip:"砸地产生能造成穿透伤害的子弹",
+func:function() {
+    var a = this,
+      b = "PB" + Math.random();
+	a.BulletEle = NewImg(0, "images/Plants/Cactus/Projectile" + ($User.Browser.IE6 ? 8 : 32) + ".png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 20) + "px;width:60px;height:32px;visibility:hidden;z-index:" + (a.zIndex + 2));
+    EditEle(a.BulletEle.cloneNode(false), {
+        id: b
+      },
+      0, EDPZ);
+	PlayAudio("zaji");
+	a.isAttacking=1;
+	oSym.addTask(125,function(a,b){
+	if(!$Z[a.id])return;
+	oSym.addTask(40,function(a){
+		$Z[a.id]&&(a.EleBody.src=a.PicArr[a.NormalGif],a.isAttacking=0)
+	},[a])
+    oSym.addTask(1,
+      function(d) {
+        var c = $(d);
+        c && SetVisible(c)
+      },
+      [b]);
+    oSym.addTask(1,
+      function(f, j, n, i, o) {
+        var l, e = GetC(n);
+        var Kind = 3,
+			Z = oZ[a.PZ?"getHZ1":"getZ0"](n,i),
+          d, isHit;
+		Z && Z.Altitude == 1 && (Z.getHit0(Z,15,0));
+        while (Kind--) {
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && a.PZ&&(d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (d.getHurt(a, 3, 15))
+        }
+(n += (l = !a.PZ?5:-5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 140) + "px",j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : (ClearChild(j),a.BulletEle=null)
+      },
+      [b, $(b), a.ZX, a.R, a.ZX - 40])
+	},[a,b])
+  }
 }
   ],
   getr: function(e, l, c) {
