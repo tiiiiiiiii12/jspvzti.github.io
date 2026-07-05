@@ -23,7 +23,7 @@ oS.Init({
         10: $('imgFlag1')
     },
     UserDefinedFlagFunc: function($T) {
-        oP.FlagNum >9 && oP.SetTimeoutWaterZombie(6, 9, 3, [oDuckyTubeZombie1, oDuckyTubeZombie2])
+        oP.FlagZombies >9 && oP.SetTimeoutWaterZombie(6, 9, 3, [oDuckyTubeZombie1, oDuckyTubeZombie2])
     },
     StartGameMusic: 'Loonboon'
 }, {
