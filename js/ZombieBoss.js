@@ -172,9 +172,9 @@ func:function(a) {
         var Kind = 3,
 			Z = oZ[a.PZ?"getHZ1":"getZ0"](n,i),
           d;
-		Z && Z.Altitude == 1 && (Z.getHit0(Z,30,0));
+		Z && Z.Altitude == 1 && (Z.getHit0(Z,50,0));
         while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && a.PZ&&(d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (d.getHurt(a, 3, 30))
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && a.PZ&&(d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (d.getHurt(a, 3, 50))
         }
 (n += (l = !a.PZ?5:-5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : (ClearChild(j),a.BulletEle=null)
       },
