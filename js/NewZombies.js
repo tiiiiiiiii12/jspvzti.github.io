@@ -506,12 +506,12 @@ oNutZombie = InheritO(oTallNutZombie, {
 		z.JaHead = "Ja" + Math.random();
       var Ja = NewImg(z.JaHead,"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:50px;top:0px;",0);
       z.appendChild(Ja);
-		oSym.addTask(Math.random()*700+2000,function(a){
-			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.DisappearDie())
-		},[a])
 			},
 		PrivateAct:function(a){     
 		var z=a.Ele;
+		a.ZX<=850&&!a.intograss&&(oSym.addTask(Math.random()*700+2000,function(a){
+			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.DisappearDie())
+		},[a]),a.intograss=true);
 	  if($Z[a.id]&&!a.isDie){
 	a.WalkDirection==a.check&&(
 EditImg($(z.JaHead),0,"images/Plants/Jalapeno/Jalapeno.gif",{transform:!a.WalkDirection?"rotateY(180deg)":"rotateY(0deg)"},0),
