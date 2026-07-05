@@ -16,9 +16,9 @@ oS.Init({
     backgroundImage: 'images/interface/background4.jpg',
     CanSelectCard: 1,
     DKind: 0,
-    HaveFog: 3, //有5排雾
+    HaveFog: 4, //有5排雾
     LevelName: '关卡 4-9',
-    LvlEName: 37,
+    LvlEName: 39,
     LargeWaveFlag: {
         10: $('imgFlag3'),
         20: $('imgFlag2'),
