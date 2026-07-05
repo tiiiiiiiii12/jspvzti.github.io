@@ -160,7 +160,7 @@ func:function() {
 	if(!$Z[a.id])return;
 	oSym.addTask(40,function(a){
 		$Z[a.id]&&(a.EleBody.src=a.PicArr[a.NormalGif],a.isAttacking=0)
-	},[a])
+	},[a]);
     oSym.addTask(1,
       function(d) {
         var c = $(d);
