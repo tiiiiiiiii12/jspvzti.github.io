@@ -52,5 +52,13 @@ oS.Init({
         9: [ShowLargeWave, 0],
       19: [ShowLargeWave, 0],
         29: [ShowFinalWave, 0]
-    }
+    },
+    FlagToEnd: function() {
+		NewImg("imgSF", "images/interface/trophy.png", "left:260px;top:233px", EDAll, {
+			onclick: function() {
+				SelectModal(11)
+			}
+		});
+		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:198px;left:269px", EDAll)
+	}
 });
