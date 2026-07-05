@@ -195,7 +195,7 @@ func:function(a) {
     },
   jinyinnum:100,
   jinyinAct: function(a) {},
-  PrivateDie: CZombies.prototype.PrivateDie,
+  PrivateDie: function(){},
   throwImp: function(g) {
     g.ChkActs = function() {
         return 1
