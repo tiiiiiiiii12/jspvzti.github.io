@@ -56,7 +56,6 @@ oS.Init({
 						}
 						oSym.addTask(5, arguments.callee, [])
 					})();
-					AppearTombstones(4, 9, 13)
 				},
 				ar: []
 			});
