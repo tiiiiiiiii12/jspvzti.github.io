@@ -11,14 +11,14 @@ oS.Init({
         ]
     }(),
     Coord: 2,
-    SunNum: 50,
+    SunNum: 75,
     LF: [0, 1, 1, 2, 2, 1, 1],
     backgroundImage: 'images/interface/background4.jpg',
     CanSelectCard: 1,
     DKind: 0,
     HaveFog: 4, //有4排雾
-    LevelName: '关卡 4-6',
-    LvlEName: 36,
+    LevelName: '关卡 4-8',
+    LvlEName: 38,
     LargeWaveFlag: {
         10: $('imgFlag1')
     },
