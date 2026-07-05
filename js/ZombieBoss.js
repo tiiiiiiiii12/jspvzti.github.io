@@ -58,14 +58,14 @@ var oGargantuarBoss = InheritO(oGargantuar, {
 		  oP.SetTimeoutTomZombie([oZombie]);
           oP.NumZombies += 3;
 		}catch{};
-        } else if (a.HP >= 40000) {
+        } else if (a.HP >= 35000) {
           try{
           oP.SetTimeoutZombie([oScreenDoorZombie, oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie], 0);
           oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
 		  AppearTombstones(8, 9, 1);
 			oP.NumZombies += 5;
 			}catch{};
-} else if (a.HP >= 20000) {
+} else if (a.HP >= 10000) {
           try{
           oP.SetTimeoutZombie([oJackinTheBoxZombie, oZomboni,oBucketheadZombie,oLadderZombie,oDancingZombie,oPoleVaultingZombie,oFootballZombie], 0);
           oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
@@ -147,7 +147,7 @@ name:"穿刺重弹",
 tip:"砸地产生能造成穿透伤害的子弹",
 func:function(a) {
     var b = "PB" + Math.random();
-	a.BulletEle = NewImg(0, "images/Plants/Cactus/Projectile" + ($User.Browser.IE6 ? 8 : 32) + ".png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 20) + "px;width:60px;height:32px;visibility:hidden;z-index:" + (a.zIndex + 2));
+	a.BulletEle = NewImg(0, "images/Plants/Cactus/Projectile" + ($User.Browser.IE6 ? 8 : 32) + ".png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 20) + "px;width:60px;height:32px;transform:rotateY(180deg);visibility:hidden;z-index:" + (a.zIndex + 2));
     EditEle(a.BulletEle.cloneNode(false), {
         id: b
       },
@@ -171,14 +171,14 @@ func:function(a) {
         var l, e = GetC(n);
         var Kind = 3,
 			Z = oZ[a.PZ?"getHZ1":"getZ0"](n,i),
-          d, isHit;
-		Z && Z.Altitude == 1 && (Z.getHit0(Z,15,0));
+          d;
+		Z && Z.Altitude == 1 && (Z.getHit0(Z,30,0));
         while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && a.PZ&&(d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (d.getHurt(a, 3, 15))
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && a.PZ&&(d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (d.getHurt(a, 3, 30))
         }
-(n += (l = !a.PZ?5:-5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 140) + "px",j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : (ClearChild(j),a.BulletEle=null)
+(n += (l = !a.PZ?5:-5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : (ClearChild(j),a.BulletEle=null)
       },
-      [b, $(b), a.ZX, a.R, a.ZX - 40])
+      [b, $(b), a.ZX, a.R, a.ZX - 20])
 	},[a,b])
   }
 }
