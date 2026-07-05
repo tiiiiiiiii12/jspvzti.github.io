@@ -147,7 +147,7 @@ name:"穿刺重弹",
 tip:"砸地产生能造成穿透伤害的子弹",
 func:function(a) {
     var b = "PB" + Math.random();
-	a.BulletEle = NewImg(0, "images/Plants/Cactus/Projectile" + ($User.Browser.IE6 ? 8 : 32) + ".png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 20) + "px;width:60px;height:32px;transform:rotateY(180deg);visibility:hidden;z-index:" + (a.zIndex + 2));
+	a.BulletEle = NewImg(0, "images/Plants/Cactus/Projectile" + ($User.Browser.IE6 ? 8 : 32) + ".png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 120) + "px;width:60px;height:32px;transform:rotateY(180deg);visibility:hidden;z-index:" + (a.zIndex + 2));
     EditEle(a.BulletEle.cloneNode(false), {
         id: b
       },
