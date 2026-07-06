@@ -56,30 +56,27 @@ getFreeze:function(){},
         a.ChangeR(a);
         if (a.HP >= 55000) {
 			try{
-          oP.SetTimeoutZombie([oZombie, oPeaZombie, oConeheadZombie], 0);
+          oP.SetTimeoutAirdropZombie(8,9,4,[oZombie, oPeaZombie, oConeheadZombie,oPoleVaultingZombie,oBucketheadZombie]);
 		  oP.SetTimeoutTomZombie([oZombie]);
-          oP.NumZombies += 3;
 		}catch{};
         } else if (a.HP >= 35000) {
           try{
-          oP.SetTimeoutZombie([oScreenDoorZombie, oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie], 0);
+          oP.SetTimeoutAirdropZombie(7,9,6,[oZombie,oPeaZombie,oScreenDoorZombie,oBucketheadZombie,oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie]);
           oP.SetTimeoutTomZombie([oZombie, oPeaZombie, oConeheadZombie]);
-		  AppearTombstones(8, 9, 1);
-			oP.NumZombies += 5;
 			}catch{};
 } else if (a.HP >= 15000) {
           try{
-          oP.SetTimeoutZombie([oJackinTheBoxZombie, oBucketheadZombie,oLadderZombie,oDancingZombie,oPoleVaultingZombie,oFootballZombie], 0);
+          oP.SetTimeoutAirdropZombie(7,9,8,[oJalapenoZombie,oJackinTheBoxZombie, oBucketheadZombie,oLadderZombie,oDancingZombie,oPoleVaultingZombie,oFootballZombie]);
           oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
-		oP.NumZombies += 6;
 		  AppearTombstones(8, 9, 1);
 			}catch{};
 }else {
           try{
-          oP.SetTimeoutZombie([oLadderZombie,oFootballZombie, oZomboni, oGargantuar, oTallNutZombie,oGatlingPeaZombie,oFlagZombie,oJalapenoZombie], 0);
+          oP.SetTimeoutZombie([oZomboni, oGargantuar], 0);
+		  oP.SetTimeoutAirdropZombie(6,8,10,[oJalapenoZombie,oJackinTheBoxZombie, oBucketheadZombie,oLadderZombie,oTallNutZombie,oGatlingPeaZombie,oPoleVaultingZombie,oFootballZombie]);
           oP.SetTimeoutTomZombie([oZombie,oFootballZombie,oScreenDoorZombie,oBucketheadZombie]);
-          oP.NumZombies += 8;
-		  AppearTombstones(6, 9, 2);
+          oP.NumZombies += 2;
+		  AppearTombstones(6, 9, 3);
 			}catch{};
         }
 		$Z[a.id]&&oSym.addTask(1500 + (a.HP * 0.01),arguments.callee,[a])
