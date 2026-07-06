@@ -18,6 +18,7 @@ oS.Init({
 		PlayMusic(oS.LoadMusic = oS.StartGameMusic);
 		SetVisible($("tdShovel"), $("dFlagMeter"), $("dTop"));
 		SetHidden($("dSunNum"));
+		AppearTombstones(4,9,7);
 		PrepareGrowPlants(function() {
 			oP.Monitor({
 				f: function() {
@@ -85,38 +86,25 @@ oS.Init({
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:198px;left:269px", EDAll)
 	}
 }, {
-	GetChoseCard: function(b) {
-		var a = ArCard.length;
-		while (a--) {
-			ArCard[a].DID == b && (oS.ChoseCard = a, a = 0)
-		}
-		return oS.ChoseCard
-	},
-	ChosePlant: function(a, b) {
-		PlayAudio("seedlift");
-		a = window.event || a;
-		var f = ArCard[oS.ChoseCard],
-			e = a.clientX - EDAlloffsetLeft + EBody.scrollLeft || EElement.scrollLeft,
-			d = a.clientY + EBody.scrollTop || EElement.scrollTop,
-			c = f.PName.prototype;
-		oS.Chose = 1;
-		EditImg(NewImg("MovePlant", c.PicArr[c.StaticGif], "left:" + e - 0.5 * (c.beAttackedPointL + c.beAttackedPointR) + "px;top:" + d + 20 - c.height + "px;z-index:254", EDAll).cloneNode(false), "MovePlantAlpha", "", {
-			visibility: "hidden",
-			filter: "alpha(opacity=40)",
-			opacity: 0.4,
-			zIndex: 30
-		}, EDAll);
-		SetAlpha($(f.DID), 50, 0.5);
-		SetHidden($("dTitle"));
-		GroundOnmousemove = GroundOnmousemove1
-	},
-	CancelPlant: function() {
-		ClearChild($("MovePlant"), $("MovePlantAlpha"));
-		oS.Chose = 0;
-		SetAlpha($(ArCard[oS.ChoseCard].DID), 100, 1);
-		oS.ChoseCard = "";
-		GroundOnmousemove = function() {}
-	},
+		GetChoseCard: function(b) {
+			var a = ArCard.length;
+			while (a--) ArCard[a].DID == b && (oS.ChoseCard = a, a = 0);
+			return oS.ChoseCard
+		},
+		ChosePlant: function(a, b) {
+			PlayAudio("seedlift"); a = window.event || a;
+			var f = ArCard[oS.ChoseCard = b], e = a.clientX - EDAlloffsetLeft + EBody.scrollLeft || EElement.scrollLeft, d = a.clientY + EBody.scrollTop || EElement.scrollTop, c = f.PName.prototype;
+			EditImg(NewImg("MovePlant", c.PicArr[c.StaticGif], "left:" + e - 0.5 * (c.beAttackedPointL + c.beAttackedPointR) + "px;top:" + d + 20 - c.height + "px;z-index:254", EDAll).cloneNode(false), "MovePlantAlpha", "", { visibility: "hidden", filter: "alpha(opacity=40)", opacity: 0.4, zIndex: 30 }, EDAll);
+			SetAlpha($(f.DID), 50, 0.5);
+			SetHidden($("dTitle"));
+			oS.Chose = 1, GroundOnmousemove = GroundOnmousemove1;
+		},
+		CancelPlant: function() {
+			ClearChild($("MovePlant"), $("MovePlantAlpha"));
+			oS.Chose = 0, oS.ChoseCard = "";
+			for(let Idx of ArCard) SetAlpha($(Idx.DID), 100, 1);		
+			GroundOnmousemove = function() {};
+		},
 	GrowPlant: function(l, c, b, f, a) {
 		var j = oS.ChoseCard,
 			g = ArCard[j],
