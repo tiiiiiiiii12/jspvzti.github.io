@@ -8,7 +8,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
   },
   beAttackedPointL: 154,
   beAttackedPointR: 285,
-  HP:60000,
+  HP:70000,
   level:1,
   WalkToLadder:function(){},//不走梯子
   height: 300,
@@ -54,29 +54,32 @@ getFreeze:function(){},
 		if(!$Z[a.id])return;
 		a.getr(a,5,1);
         a.ChangeR(a);
-        if (a.HP >= 55000) {
+        if (a.HP >= 60000) {
 			try{
-          oP.SetTimeoutAirdropZombie(8,9,4,[oZombie, oPeaZombie, oConeheadZombie,oPoleVaultingZombie,oBucketheadZombie]);
-		  oP.SetTimeoutTomZombie([oZombie]);
+          oP.SetTimeoutZombie([oZombie, oPeaZombie, oConeheadZombie,oPoleVaultingZombie], 0);
+		  oP.SetTimeoutTomZombie([oZombie,oPeaZombie]);
+          oP.NumZombies += 4;
 		}catch{};
-        } else if (a.HP >= 35000) {
+        } else if (a.HP >= 40000) {
           try{
-          oP.SetTimeoutAirdropZombie(7,9,6,[oZombie,oPeaZombie,oScreenDoorZombie,oBucketheadZombie,oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie]);
+          oP.SetTimeoutZombie([oScreenDoorZombie, oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie], 0);
           oP.SetTimeoutTomZombie([oZombie, oPeaZombie, oConeheadZombie]);
+		  AppearTombstones(8, 9, 1);
+			oP.NumZombies += 5;
 			}catch{};
-} else if (a.HP >= 15000) {
+} else if (a.HP >= 20000) {
           try{
-          oP.SetTimeoutAirdropZombie(7,9,8,[oJalapenoZombie,oJackinTheBoxZombie, oBucketheadZombie,oLadderZombie,oDancingZombie,oPoleVaultingZombie,oFootballZombie]);
+          oP.SetTimeoutZombie([oJackinTheBoxZombie, oBucketheadZombie,oLadderZombie,oDancingZombie,oPoleVaultingZombie,oFootballZombie], 0);
           oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
+		oP.NumZombies += 6;
 		  AppearTombstones(8, 9, 1);
 			}catch{};
 }else {
           try{
-          oP.SetTimeoutZombie([oZomboni, oGargantuar], 0);
-		  oP.SetTimeoutAirdropZombie(6,8,10,[oJalapenoZombie,oJackinTheBoxZombie, oBucketheadZombie,oLadderZombie,oTallNutZombie,oGatlingPeaZombie,oPoleVaultingZombie,oFootballZombie]);
+          oP.SetTimeoutZombie([oLadderZombie,oFootballZombie, oZomboni, oGargantuar, oTallNutZombie,oGatlingPeaZombie,oFlagZombie,oJalapenoZombie], 0);
           oP.SetTimeoutTomZombie([oZombie,oFootballZombie,oScreenDoorZombie,oBucketheadZombie]);
-          oP.NumZombies += 2;
-		  AppearTombstones(6, 9, 3);
+          oP.NumZombies += 8;
+		  AppearTombstones(6, 9, 2);
 			}catch{};
         }
 		$Z[a.id]&&oSym.addTask(1500 + (a.HP * 0.01),arguments.callee,[a])
