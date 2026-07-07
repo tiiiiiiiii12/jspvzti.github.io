@@ -431,7 +431,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     Lvl: 5,
     jinyinAct: function(c) {      
 	  var z = c.Ele;
-      z.NutHead = "Nut" + Math.random();
+      z.NutHead2 = "nut" + Math.random();
       var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
       z.appendChild(Nut);
 	  oSym.addTask(1500,function(c){
@@ -497,6 +497,7 @@ oNutZombie = InheritO(oTallNutZombie, {
 	SunNum: 125,
 	BirthImg: function(a) {
     var z = a.Ele;
+	z.jinyinImg = "jinyin_" + Math.random();
     var Sh = NewImg(z.jinyinImg, a.num>=50 ? "images/Zombies/Imp/ZombieImpHead.png" : "images/Plants/Jalapeno/Jalapeno.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:40px;top:40px;", 0);
     z.appendChild(Sh);
   },
