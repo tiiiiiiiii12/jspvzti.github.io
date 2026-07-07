@@ -2239,6 +2239,7 @@ jinyinWalkGif12: 14,
         beAttackedPointL: 40,
         beAttackedPointR: 100,
         OSpeed: 3.2,
+		intoWaterSpeed:2,
         Speed: 3.2,
         Altitude: 1,
         Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击，啃食时每秒回30血<br>精英形态：将他所遇到的第一株植物变为它的防具<br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
@@ -2247,6 +2248,7 @@ jinyinWalkGif12: 14,
 			a.cangetOrn=1;
 			a.OrnLostNormalGif=a.NormalGif;
 			a.OrnLostAttackGif=a.AttackGif;
+			a.intoWaterSpeed*=1.5;
 			a.PrivateAct=function(a){
 			var z=a.Ele;
 			if ($Z[a.id] && a.beAttacked&&(a.OrnHP>=1)) {
@@ -2260,10 +2262,12 @@ jinyinWalkGif12: 14,
 			var z = a.Ele;
             z.NutHead = "nut" + Math.random();
             var Nut = NewImg(z.NutHead, c, "position:absolute;transform:"+(!a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)")+";left:30px;top:90px;", 0);
-            z.appendChild(Nut);
+            z.appendChild(Nut);//防具贴图
+			a.Speed/=1.5;
+			a.OSpeed/=1.5;
 			a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(c,d){
 				OrnIZombies.prototype.getHit0(c,d);
-				c.OrnHP<1&&(ClearChild($(c.Ele.NutHead)),oSym.addTask(1000,function(c){c.cangetOrn=1},[c]));
+				c.OrnHP<1&&(ClearChild($(c.Ele.NutHead)),oSym.addTask(1000,function(c){$Z[c.id]&&(c.cangetOrn=1,c.Speed*=1.5,c.OSpeed*=1.5)},[c]));
 			  }
 			}
 		},
@@ -2284,7 +2288,7 @@ jinyinWalkGif12: 14,
         Jump: function(a) {
             a.beAttacked && (PlayAudio("zombie_entering_water"), a.Altitude = 2, SetHidden(a.EleShadow), a.EleBody.src = a.PicArr[8] + Math.random(), oSym.addTask(160,
                 function(c, b) {
-                    $Z[c] && b.beAttacked && (b.WalkStatus = 1, b.Altitude = 0, b.OSpeed = b.Speed = 2, b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = b.ChkActsL2)
+                    $Z[c] && b.beAttacked && (b.WalkStatus = 1, b.Altitude = 0, b.OSpeed = b.Speed = b.intoWaterSpeed, b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = b.ChkActsL2)
                 },
                 [a.id, a]), a.ChkActs = function() {
                 return 1
@@ -2331,7 +2335,7 @@ jinyinWalkGif12: 14,
                 function(d, c) {
                     var f = $Z[d],
                         e;
-                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && (e.HP<1000&&f.cangetOrn?(f.getOrn(f,e.HP,e.EleBody.src),e.getHurt(f, 1, f.Attack)):e.getHurt(f, 0, f.Attack)),!f.jinyin&&f.HP<500&&(f.HP+=30),f.JudgeAttack())
+                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && (e.HP<1000&&f.cangetOrn?(f.getOrn(f,e.HP,e.EleBody.src),e.getHurt(f, 1, f.Attack)):e.getHurt(f, 0, f.Attack)),!f.OrnHP&&f.HP<500&&(f.HP+=30),f.JudgeAttack())
                 },
                 [b, a])
         },
@@ -2357,7 +2361,7 @@ jinyinWalkGif12: 14,
                 function(g, e, d, f) {
                     $Z[e] && g.beAttacked && ((f = $Z[d]) && f.beAttacked ? (g.EleBody.src = g.PicArr[g.AttackGif], g.Altitude = 1, oSym.addTask(10,
                         function(k, i, j, h) {
-                            $Z[i] && k.beAttacked && !k.FreeFreezeTime && !k.FreeSetbodyTime && ($Z[h] && j.beAttacked ? (k.cangetOrn&&(j.HP+j.OrnHP)*j.jianshang<1000?(k.getOrn(k,(j.OrnHP+j.HP)*j.jianshang,j.EleBody.src),j.DisappearDie()):j.getHit0(j, 10, 0),!k.jinyin&&k.HP<500&&(k.HP+=3),oSym.addTask(10, arguments.callee, [k, i, j, h])) : (k.EleBody.src = k.PicArr[10] + Math.random(), k.Altitude = 0, oSym.addTask(70,
+                            $Z[i] && k.beAttacked && !k.FreeFreezeTime && !k.FreeSetbodyTime && ($Z[h] && j.beAttacked ? (k.cangetOrn&&(j.HP+j.OrnHP)*j.jianshang<1000?(k.getOrn(k,(j.OrnHP+j.HP)*j.jianshang,j.EleBody.src),j.DisappearDie()):j.getHit0(j, 10, 0),!k.OrnHP&&k.HP<500&&(k.HP+=3),oSym.addTask(10, arguments.callee, [k, i, j, h])) : (k.EleBody.src = k.PicArr[10] + Math.random(), k.Altitude = 0, oSym.addTask(70,
                                 function(l, m) {
                                     $Z[l] && m.beAttacked && (m.isAttacking = 0, m.EleBody.src = m.PicArr[m.NormalGif])
                                 },
