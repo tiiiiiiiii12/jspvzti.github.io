@@ -439,7 +439,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 	  },[c]);
 	},
 	PriavteDie:function(c){
-		ClearChild(c.Ele.NutHead2);
+		ClearChild($(c.Ele.NutHead2));
 	},
     Boom: function() {},
     Produce: '韧性：<font color="#FF0000">极高(2200+270)</font><br>精英形态：每隔一段时间在场上放置一个坚果障碍</p>太好了，高仁僵尸来了'
