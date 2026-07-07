@@ -2248,6 +2248,7 @@ jinyinWalkGif12: 14,
 			a.OrnLostNormalGif=a.NormalGif;
 			a.OrnLostAttackGif=a.AttackGif;
 			a.PrivateAct=function(a){
+			var z=a.Ele;
 			if ($Z[a.id] && a.beAttacked&&(a.OrnHP>=1)) {
                 a.WalkDirection == a.check &&
                     ($(z.NutHead).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)", a.check = (a.WalkDirection ? 0 : 1))
@@ -2300,10 +2301,10 @@ jinyinWalkGif12: 14,
             return 1
         },
 		PrivateAct:function(){},
-		cangetOrn:1,
+		cangetOrn:0,
         ChkActsL2: function(d, c, e, b) {
             var a;
-            !(d.FreeFreezeTime || d.FreeSetbodyTime) && (d.AttackedLX > GetX(0) ? (!d.jinyin&&d.beAttacked && !d.isAttacking && d.JudgeAttack(), !d.isAttacking && (d.AttackedRX -= (a = d.Speed), d.ZX = d.AttackedLX -= a, d.Ele.style.left = Math.floor(d.X -= a) + "px")) : (d.beAttacked && (d.WalkStatus = 0, d.Altitude = 1, d.EleBody.src = d.PicArr[d.NormalGif = d.WalkGif0], SetVisible(d.EleShadow), d.ChkActs = d.ChkActsL3)));
+            !(d.FreeFreezeTime || d.FreeSetbodyTime) && (d.AttackedLX > GetX(0) ? (d.beAttacked && !d.isAttacking && d.JudgeAttack(), !d.isAttacking && (d.AttackedRX -= (a = d.Speed), d.ZX = d.AttackedLX -= a, d.Ele.style.left = Math.floor(d.X -= a) + "px")) : (d.beAttacked && (d.WalkStatus = 0, d.Altitude = 1, d.EleBody.src = d.PicArr[d.NormalGif = d.WalkGif0], SetVisible(d.EleShadow), d.ChkActs = d.ChkActsL3)));
 			d.PrivateAct(d);
             return 1
         },
@@ -2330,7 +2331,7 @@ jinyinWalkGif12: 14,
                 function(d, c) {
                     var f = $Z[d],
                         e;
-                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && (e.HP<500&&f.cangetOrn?(f.getOrn(f,e.HP,e.EleBody.src),e.getHurt(f, 1, f.Attack)):e.getHurt(f, 0, f.Attack)),!f.jinyin&&f.HP<500&&(f.HP+=30),f.JudgeAttack())
+                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && (e.HP<1000&&f.cangetOrn?(f.getOrn(f,e.HP,e.EleBody.src),e.getHurt(f, 1, f.Attack)):e.getHurt(f, 0, f.Attack)),!f.jinyin&&f.HP<500&&(f.HP+=30),f.JudgeAttack())
                 },
                 [b, a])
         },
@@ -2356,7 +2357,7 @@ jinyinWalkGif12: 14,
                 function(g, e, d, f) {
                     $Z[e] && g.beAttacked && ((f = $Z[d]) && f.beAttacked ? (g.EleBody.src = g.PicArr[g.AttackGif], g.Altitude = 1, oSym.addTask(10,
                         function(k, i, j, h) {
-                            $Z[i] && k.beAttacked && !k.FreeFreezeTime && !k.FreeSetbodyTime && ($Z[h] && j.beAttacked ? (k.cangetOrn&&(j.HP+j.OrnHP)*j.jianshang<1000?(k.getOrn(k,(j.OrnHP+j.HP)*j.jianshang,j.EleBody.stc),j.DisappearDie()):j.getHit0(j, 10, 0),!k.jinyin&&k.HP<500&&(k.HP+=3),oSym.addTask(10, arguments.callee, [k, i, j, h])) : (k.EleBody.src = k.PicArr[10] + Math.random(), k.Altitude = 0, oSym.addTask(70,
+                            $Z[i] && k.beAttacked && !k.FreeFreezeTime && !k.FreeSetbodyTime && ($Z[h] && j.beAttacked ? (k.cangetOrn&&(j.HP+j.OrnHP)*j.jianshang<1000?(k.getOrn(k,(j.OrnHP+j.HP)*j.jianshang,j.EleBody.src),j.DisappearDie()):j.getHit0(j, 10, 0),!k.jinyin&&k.HP<500&&(k.HP+=3),oSym.addTask(10, arguments.callee, [k, i, j, h])) : (k.EleBody.src = k.PicArr[10] + Math.random(), k.Altitude = 0, oSym.addTask(70,
                                 function(l, m) {
                                     $Z[l] && m.beAttacked && (m.isAttacking = 0, m.EleBody.src = m.PicArr[m.NormalGif])
                                 },
