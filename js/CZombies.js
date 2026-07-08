@@ -2361,7 +2361,7 @@ jinyinWalkGif12: 14,
                 function(g, e, d, f) {
                     $Z[e] && g.beAttacked && ((f = $Z[d]) && f.beAttacked ? (g.EleBody.src = g.PicArr[g.AttackGif], g.Altitude = 1, oSym.addTask(10,
                         function(k, i, j, h) {
-                            $Z[i] && k.beAttacked && !k.FreeFreezeTime && !k.FreeSetbodyTime && ($Z[h] && j.beAttacked ? (k.cangetOrn&&((j.HP+j.OrnHP)*j.jianshang<1000)?(k.getOrn(k,(j.OrnHP+j.HP)*j.jianshang,j.EleBody.src),j.DisappearDie()):j.getHit0(j, 10, 0),k.OrnHP<1&&k.HP<500&&(k.HP+=3),oSym.addTask(10, arguments.callee, [k, i, j, h])) : (k.EleBody.src = k.PicArr[10] + Math.random(), k.Altitude = 0, oSym.addTask(70,
+                            $Z[i] && k.beAttacked && !k.FreeFreezeTime && !k.FreeSetbodyTime && ($Z[h] && j.beAttacked ? (k.cangetOrn&&((j.HP+j.OrnHP)<1000)?(k.getOrn(k,j.OrnHP+j.HP,j.EleBody.src),j.DisappearDie()):j.getHit0(j, 10, 0),k.OrnHP<1&&k.HP<500&&(k.HP+=3),oSym.addTask(10, arguments.callee, [k, i, j, h])) : (k.EleBody.src = k.PicArr[10] + Math.random(), k.Altitude = 0, oSym.addTask(70,
                                 function(l, m) {
                                     $Z[l] && m.beAttacked && (m.isAttacking = 0, m.EleBody.src = m.PicArr[m.NormalGif])
                                 },
@@ -2905,7 +2905,11 @@ jinyinWalkGif12: 14,
             })
         },
 		jinyinAct:function(a){
-			a.EleBody.style.filter = 'grayscale(400%)'
+			a.PicArr=(function() {
+            var a = "images/Zombies/DolphinRiderZombie/";
+            return ["images/Card/Zombies/DolphinRiderZombie.png", a + "0.gif", a + "jinyinWalk1.gif", a + "jinyinWalk2.gif", a + "1.gif", a + "Attack.gif", a + "Head.gif" + $Random, a + "jinyinDie.gif" + $Random, a + "jinyinJump.gif" + $Random, a + "jinyinJump2.gif" + $Random, a + "Walk3.gif", a + "Walk4.gif", a + "Die2.gif" + $Random, a + "jinyinJump3.gif" + $Random]
+        })();
+		a.EleBody.src=(a.Altitude==1?a.PicArr[9]:a.PicArr[6])
 		},
         ChkActsL1: function(d, c, e, b) {
             if (d.JumpTime <= 0) {
