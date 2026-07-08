@@ -382,7 +382,10 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       c.OrnBreakPoint1 = c.MaxOrnHP * 0.66;
       c.OrnBreakPoint2 = c.MaxOrnHP * 0.33;
     },
+	PlayNormalballAudio:OrnNoneZombies.prototype.PlayNormalballAudio,
     jinyinAct: function(a) {
+	a.num=Math.random()*100||a.Privatenum;
+	if(a.num>=50){
       a.OSpeed *= 2;
       a.Speed *= 2;
       a.OrnGif = 15;
@@ -391,7 +394,26 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       a.NormalAttack = function(a, b) {
         $P[b] && $P[b].getHurt(a, 3, 2000)
       }
+	}else{
+		a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(a,b){
+			OrnIZombies.prototype.getHit0(a,b);
+			a.DamagePlant(a);
+		}
+	}
     },
+	DamagePlant:function(a){
+		for (let l=GetC(a.ZX-10)-1;l<=GetC(a.ZX-10)+1;l++){
+		    for (let i = 0; i < 4; i++) {
+                    let p = oGd.$[a.R + "_" + l + "_" + i];
+                    a.PZ&& p && p.getHurt(a, 3, 15);
+            };
+		    var n = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.ZX-80,a.ZX+80, l);
+            var k = n.length;
+            while (k--) {
+                n[k].getHit1(n[k],15,0);
+            }
+		}
+	},
     PrivateAct: function(a) {
       var z = a.Ele;
       var c = a.HP;
@@ -400,7 +422,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
         a.WalkDirection == a.check &&
         ($(z.NutHead).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",a.check=(a.WalkDirection?0:1))
       }!a.beAttacked && (ClearChild($(z.NutHead)));
-      a.jinyin && a.isAttacking && a.Boom(a);
+      a.num>=50 && a.isAttacking && a.Boom(a);
     },
     PrivateDie: function(a) {
       var z = a.Ele;
@@ -417,7 +439,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
           $(z.NutHead).src = a.PicArr[13]
       }
     },
-    Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态：爆炸坚果，碰到植物产生爆炸并自身死亡</p>他有限的感官，只能让他在被植物打时感到一种麻麻的感觉'
+    Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态一：<font color="#FF0000">爆炸坚果，碰到植物产生爆炸并自身死亡</font><br>精英形态二：<font color="#FF0000">一类防具存在时每次受伤反伤1x3的植物15点</font></p>他有限的感官，只能让他在被植物打时感到一种麻麻的感觉'
   }),
   oTallNutZombie = InheritO(oWallNutZombie, {
     EName: "oTallNutZombie",
@@ -823,7 +845,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     var a = $Z[c];
     a&&(a.EleBody.src = a.PicArr[a.LadGif]);
     oSym.addTask(50, function(a, b) {
-      a&&a.beAttacked&&$P[b] && (a.Ornaments&&$P[b].getLadder(), !a.num&&a.getHit0(a, a.OrnHP, 0), a.JudgeAttack());
+      a&&a.beAttacked&&($P[b] &&a.Ornaments&&$P[b].getLadder(), !a.num&&a.getHit0(a, a.OrnHP, 0), a.JudgeAttack());
     }, [a, b])
   },
   canLadderList: {
