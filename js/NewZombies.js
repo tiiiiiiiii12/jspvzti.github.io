@@ -407,7 +407,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
                     let p = oGd.$[a.R + "_" + l + "_" + i];
                     a.PZ&& p && p.getHurt(a, 3, 15);
             };
-		    var n = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.ZX-80,a.ZX+80, l);
+		    var n = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.ZX-80,a.ZX+80, a.R);
             var k = n.length;
             while (k--) {
                 n[k].getHit1(n[k],15,0);
