@@ -333,7 +333,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     OrnTop: 12,
     PicArr: (function() {
       var a = "images/Zombies/Zombie/";
-      return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
+      return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif",a+"jinyinNutZombie.gif",a+"jinyinNutZombieAttack.gif"]
     })(),
     Boom: function(a) {
       var e = $Z[a.id],
@@ -395,6 +395,9 @@ oWallNutZombie = InheritO(oConeheadZombie, {
         $P[b] && $P[b].getHurt(a, 3, 2000)
       }
 	}else{
+		a.NormalGif=a.PicArr[16];
+		a.AttackGif=a.PicArr[17];
+		a.EleBody.src=a.PicArr[16];
 		a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(a,b){
 			OrnIZombies.prototype.getHit0(a,b);
 			a.DamagePlant(a);
