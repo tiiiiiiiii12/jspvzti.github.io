@@ -38,7 +38,7 @@ var CPlants = NewO({
         },
 getLadder:function() {
   var a = this;
-  for (i = 1; i <= 3; i++) {
+  for (i = 0; i <= 3; i++) {
     oGd.$[a.R + "_" + a.C + "_" + i] && (oGd.$[a.R + "_" + a.C + "_" + i].canEat = 0)
   }
   NewImg("ladder_" + a.R + "_" + a.C, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:" + (GetX(a.C) - 20) + "px;top:" + (GetY(a.R) - 120) + "px;z-index:" + (a.zIndex + 1), EDPZ);
