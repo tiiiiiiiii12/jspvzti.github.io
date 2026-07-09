@@ -247,6 +247,7 @@ getLadder:function() {
         NormalGif: 0,
         canEat: 0,
         Stature: 1,
+		getHurt:function(){},
         getTriggerRange: function(a, b, c) {
             return [
                 [b, c, 0]
@@ -293,6 +294,7 @@ getLadder:function() {
         PicArr: ["images/interface/brain.png"],
         Tooltip: "美味的脑子",
         NormalGif: 0,
+		Stature:1,
         InitTrigger: function() {},
         PrivateBirth: function(a) {
             a.PrivateDie = oS.BrainsNum ? (a.DieStep = Math.floor(150 / oS.BrainsNum),
@@ -400,7 +402,7 @@ oStarfruit = InheritO(CPlants, {
   },
   getHurt: function(d, b, a) {
     var c = this;
-    b != 3 && c.NormalAttack();
+    b ==1 && c.NormalAttack();
     (c.HP -= a) < 1 && c.Die()
   },
   SpecialHit: function(a) {
@@ -776,7 +778,7 @@ while (e--) {
                         "-1": "getSnowPea",
                         0: "getPea",
                         1: "getFirePea"
-                    } [m]](d,Math.round(h*(BSpeed+1)),c),(SetStyle(j, {
+                    } [m]](d,Math.round(h*BSpeed,c),(SetStyle(j, {
                         left: o + 28 + "px",
                         width: "52px",
                         height: "46px"
@@ -990,14 +992,14 @@ NormalAttack1: function() {
         beAttackedPointR: 68,
         SunNum: 250,
         coolTime: 50,
-		AttTime:360,//360+140cs
+		AttTime:460,//460+140cs
 		Boom:0,
 		Attack:300,
 		BoomAttack:1000,
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
-        Tooltip: "优先锁定场上血量最高的僵尸，每5秒对其造成250伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害",
-        Produce: '狙击手锁定场上血量最高的僵尸，每5秒对其造成250伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害<br>伤害：<font color="#FF0000">高(300/1000)</font><p>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
+        Tooltip: "优先锁定场上血量最高的僵尸，每6秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害",
+        Produce: '狙击手锁定场上血量最高的僵尸，每6秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害<br>伤害：<font color="#FF0000">高(300/1000)</font><p>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
 		checkTarget:function(a) {
   var TargeteachR = [];
   PlayAudio("portal");
@@ -1105,8 +1107,8 @@ NormalAttack:function(a){
             e.canTrigger = e.aTri[0] && e.aTri[1] ? 0 : 1
         },
 		jinyinAct:function(a){
-			CustomSpecial(oPeashooter,a.R,0).jinyinnum=0;
-			CustomSpecial(oRepeater2,a.R,10).jinyinnum=0
+			CustomSpecial(oPeashooter,a.R,0).jinyin=0;
+			CustomSpecial(oRepeater2,a.R,10).jinyin=0
 		},
         CheckLoop: function(a, b) {
             this.NormalAttack(b);
@@ -1762,7 +1764,7 @@ NormalAttack:function(a){
 			oSym.addTask(0,function(a,b,num,maxnum){
 				((b=CustomZombie(oJackinTheBoxZombie,Math.round(Math.random()*5+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=0,b.PrivateBirth=function(b){b.EleBody.style.top=b.height+"px";b.AppearDownZ(b)});
 				++num<maxnum&&oSym.addTask(0,arguments.callee,[a,b,num,maxnum]);
-			},[a,b,0,Math.round(Math.random()*3+3)])
+			},[a,b,0,Math.round(Math.random()*3+4)])
 		 }
 		},
         PrivateBirth: function(a) {
@@ -2055,7 +2057,7 @@ NormalAttack:function(a){
         InitTrigger: function() {},
         HurtStatus: 0,
 		PrivateBirth:function(a){
-			var b=NewEle("oAttack_" + a.id,"div","left:0px;top:0px;position:absolute;width:97px;height:87px;z-index:600",0,$(a.id));
+			var b=NewEle("oAttack_" + a.id,"div","left:"+(a.AttackedLX+40)+"px;top:"+(a.pixelTop+50)+"px;position:absolute;width:97px;height:87px;z-index:600",0,EDPZ);
 			b.onclick=function(){
 				a.changeZ=(a.changeZ?0:1);
 				$(a.id).style.transform =(a.changeZ?'rotateX(180deg)':'rotateX(0deg)');
@@ -3125,7 +3127,7 @@ NormalAttack2: function() {
 		},
 		jinyinAct:function(a){
 			if(!a.Sleep){
-			oSeaShroom.prototype.coolTime>10&&(oSeaShroom.prototype.coolTime-=5);
+			oSeaShroom.prototype.coolTime>5&&(oSeaShroom.prototype.coolTime-=5);
 			!a.Sleep&&AppearCard(a.pixelLeft,a.pixelTop,oPuffShroom,0,1500)
 			}
 		},
@@ -3143,7 +3145,7 @@ NormalAttack2: function() {
             return "left:0:top:0;display:none"
         },
         Tooltip: "发射短距离孢子的水生植物",
-        Produce: '海蘑菇，能够发射短程孢子的水生植物。<p>伤害：<font color="#FF0000">普通</font><br>精英形态：<br>种下若未睡觉则使自身的冷却减少（最少减至10s），同时生成小喷菇卡牌，若睡觉时被唤醒也可正常触发<br>射程：<font color="#FF0000">短<br>必须种在水上<br>白天睡觉</font></p>海蘑菇从来没看到过大海，大海就在他的名字里，他总听到关于大海的事。他只是没找到合适的时间，总有一天……是的，他会见到海的。'
+        Produce: '海蘑菇，能够发射短程孢子的水生植物。<p>伤害：<font color="#FF0000">普通</font><br>精英形态：<br>种下若未睡觉则使自身的冷却减少（最少减至5s），同时生成小喷菇卡牌，若睡觉时被唤醒也可正常触发<br>射程：<font color="#FF0000">短<br>必须种在水上<br>白天睡觉</font></p>海蘑菇从来没看到过大海，大海就在他的名字里，他总听到关于大海的事。他只是没找到合适的时间，总有一天……是的，他会见到海的。'
     }),
     oPlantern = InheritO(CPlants, {
         EName: "oPlantern",
