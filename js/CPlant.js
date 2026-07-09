@@ -2057,7 +2057,7 @@ NormalAttack:function(a){
         InitTrigger: function() {},
         HurtStatus: 0,
 		PrivateBirth:function(a){
-			var b=NewEle("oAttack_" + a.id,"div","left:"+(a.AttackedLX)+"px;top:"+(a.pixelTop)+"px;position:absolute;width:97px;height:87px;z-index:600",0,EDPZ);
+			var b=NewEle("oAttack_" + a.id,"div","left:"+(a.AttackedLX)+"px;top:"+(a.pixelTop)+"px;position:absolute;width:97px;height:87px;z-index:10",0,EDPZ);
 			b.onclick=function(){
 				a.changeZ=(a.changeZ?0:1);
 				$(a.id).style.transform =(a.changeZ?'rotateX(180deg)':'rotateX(0deg)');
