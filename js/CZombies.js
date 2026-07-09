@@ -2909,7 +2909,7 @@ jinyinWalkGif12: 14,
             var a = "images/Zombies/DolphinRiderZombie/";
             return ["images/Card/Zombies/DolphinRiderZombie.png", a + "0.gif", a + "jinyinWalk1.gif", a + "jinyinWalk2.gif", a + "1.gif", a + "Attack.gif", a + "Head.gif" + $Random, a + "jinyinDie.gif" + $Random, a + "jinyinJump.gif" + $Random, a + "jinyinJump2.gif" + $Random, a + "Walk3.gif", a + "Walk4.gif", a + "Die2.gif" + $Random, a + "jinyinJump3.gif" + $Random]
         })();
-		a.EleBody.src=(a.Altitude==1?a.PicArr[9]:a.PicArr[6])
+		a.EleBody.src=(a.Altitude==1?a.PicArr[2]:a.PicArr[8])
 		},
         ChkActsL1: function(d, c, e, b) {
             if (d.JumpTime <= 0) {
