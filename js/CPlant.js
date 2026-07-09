@@ -778,7 +778,7 @@ while (e--) {
                         "-1": "getSnowPea",
                         0: "getPea",
                         1: "getFirePea"
-                    } [m]](d,Math.round(h*BSpeed,c),(SetStyle(j, {
+                    } [m]](d,Math.round(h*BSpeed),c),(SetStyle(j, {
                         left: o + 28 + "px",
                         width: "52px",
                         height: "46px"
