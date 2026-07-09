@@ -2679,12 +2679,12 @@ jinyinWalkGif12: 14,
         for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX)+1; i++) {
           for (let l = 0; l <= 3; l++) {
             var m = oGd.$[LR + "_" + i + "_" + l];
-            a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500),a.SetAlpha(m,$(m.id),50,0.5),m.getHurt(m,3,50*a.level)))
+            a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500),m.getHurt(m,3,50*a.level)))
           }
-        }
+        };
         while (Tz--) {
           (t = A[Tz])&&a.canWalk(a,a.id)&& (t.getFreeze(t,t.id,500),t.getHit2(t,50*a.level))
-        }
+        };
 		PlayAudio("frozen");
 	}while(LR++ < Math.min(a.R+1,oS.R))
       $Z[a.id]&&oSym.addTask(1000, arguments.callee, [a])
