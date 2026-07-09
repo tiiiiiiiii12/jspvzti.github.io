@@ -456,6 +456,7 @@ Birth: function() {
                 },
 			    jianshang:1,
 	AppearDownZ: function(z, t) {
+	oSym.addTask(220,ClearChild,[NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (z.ZX-20) + "px;top:" + (GetY(z.R)-155) + "px", EDPZ)]);
     t ? oSym.addTask(0,
       function(l, k, i, j, z) {
         k = Math.min(k + j, z.height);
@@ -2684,6 +2685,7 @@ jinyinWalkGif12: 14,
         while (Tz--) {
           (t = A[Tz])&&a.canWalk(a,a.id)&& (t.getFreeze(t,t.id,500),t.getHit2(t,50*a.level))
         }
+		PlayAudio("frozen");
 	}while(LR++ < Math.min(a.R+1,oS.R))
       $Z[a.id]&&oSym.addTask(1000, arguments.callee, [a])
     }, [a]));
@@ -3042,15 +3044,15 @@ oImp = InheritO(OrnNoneZombies, {
     var z = a.Ele;
     z.JaHead = "Ja" + Math.random();
 	a.JudgeAttack=function(){};
-    var Ja = NewImg(z.JaHead, "images/Plants/PotatoMine/PotatoMine.gif", "position:absolute;transform:rotateY(180deg);left:0px;top:20px;", 0);
+    var Ja = NewImg(z.JaHead, "images/Plants/PotatoMine/PotatoMineNotReady.gif", "position:absolute;transform:rotateY(180deg);left:0px;top:20px;", 0);
     z.appendChild(Ja);
+	oSym.addTask(200,function(a,z){
+	z.JaHead&&($(z.JaHead).src="images/Plants/PotatoMine/PotatoMine.gif");
     a.PrivateAct = function(a) {
       var p = a.Ele;
       if (!a.bool && a.beAttacked&&a.canWalk(a,a.id)) {
-        for (i = 3; i >= 1; i--) {
+        for (i = 3; i >= 0; i--) {
           var tp = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
-          var tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 40, a.ZX + 40, a.R);
-          var tzl = tz.length;
           if (tp && tp.canEat && a.PZ) {
             let l = GetX(tp.C) - 80,
               t = GetY(tp.R) - 80;
@@ -3058,14 +3060,16 @@ oImp = InheritO(OrnNoneZombies, {
             a.bool = 1;
             tp.getHurt(a, 3, 1000*a.level);
           }
+		}
+		  var tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 40, a.ZX + 40, a.R);
+          var tzl = tz.length;
           while (tzl--) {
             if (tz[tzl] && (tz[tzl].Altitude == 1) && tz[tzl].beAttacked) {
               a.bool = 1;
               oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.ZX - 80) + "px;top:" + (a.pixelTop + 40) + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
-              tz[tzl].getHit0(tz[tzl], 500*a.level, 0);
+              tz[tzl].getHit0(tz[tzl], 1000*a.level, 0);
             }
           }
-        }
 		a.bool&&(ClearChild($(p.JaHead)),PlayAudio("potato_mine"),a.JudgeAttack=CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"]);
       } a.WalkDirection==a.check&& !a.bool && a.beAttacked && (
         EditImg($(p.JaHead), 0, "images/Plants/PotatoMine/PotatoMine.gif", {
@@ -3075,11 +3079,12 @@ oImp = InheritO(OrnNoneZombies, {
         a.check = a.WalkDirection?0:1);
       !a.beAttacked && ClearChild($(p.JaHead));
     }
+	},[a,z]);
   },
   getShadow: function(a) {
     return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 32) + "px"
   },
-  Produce: '小淘气们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。<br>精英形态：携带土豆雷，对植物或敌对僵尸造成1000范围伤害<p>韧性：<font color="#FF0000">低</font><br>小淘气虽然瘦小，却很结实。他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴。',
+  Produce: '小淘气们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。<br>精英形态：携带土豆雷，2秒后出土，对植物或敌对僵尸造成1000范围伤害<p>韧性：<font color="#FF0000">低</font><br>小淘气虽然瘦小，却很结实。他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴。',
   GoingDie: function() {
     var b = this,
       c = b.id,
@@ -3339,7 +3344,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
             return c
         },
 		jinyinAct:function(a){
-			a.EleBody.style.top="30px";
+			a.EleBody.style.top="40px";
 			    a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
                         d += --e + "_";
@@ -3603,7 +3608,6 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
         }
       })();
   },
-WalkToLadder:function(){},
   JudgeSR: function(f, d, e, c, g) {
     return e > 9 ?
       false :
@@ -3638,17 +3642,17 @@ WalkToLadder:function(){},
     ];
   })(),
   GoingDieHead: function() {},
-  AudioArr: ["dirt_rise","wakeup"],  jinyinAct: function(a) {
+  AudioArr: ["dirt_rise","wakeup"],  
+jinyinAct: function(a) {
+	a.JudgeAttack=function(){};
     a.Act = function(a) {
       var z = oZ.getZ0(a.ZX, a.R);
-      (a.pushZ || (z &&(z.Lvl<4)&& z.EName != a.EName)) && (!a.pushZ ? (a.ZX >= 420 && (a.pushZ = z,PlayAudio("dirt_rise"), 
-		oSym.addTask(220,ClearChild,[NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (z.ZX-20) + "px;top:" + (GetY(z.R)-155) + "px", EDPZ)]),																			 
+      (a.pushZ || (z &&(z.Lvl<4)&&z.Altitude==1&&z.EName != a.EName)) && (!a.pushZ ? (a.ZX >= 420 && (a.pushZ = z,PlayAudio("dirt_rise"), 																	 
 		z.Altitude = 4, z.isAttacking = 0, a.AppearDownZ(z, 1),
         z.FreeSetbodyTime = 1)) : (
-        a.ZX >= 420 && a.pushZ && a.pushZ.HP ? (a.canWalk(a,a.id)&&!a.isAttacking&&a.pushZ.getr(a.pushZ, -a.Speed, 1)) : (a.pushZ.HP && (
+        a.ZX >= 400 && a.pushZ && a.pushZ.HP ? (a.canWalk(a,a.id)&&!a.isAttacking&&a.pushZ.getr(a.pushZ, -a.Speed, 1)) : (a.pushZ.HP && (
           a.pushZ.Altitude = 1,
 		  PlayAudio("wakeup"),
-		oSym.addTask(220,ClearChild,[NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (a.pushZ.ZX-20) + "px;top:" + (GetY(a.pushZ.R)-155) + "px", EDPZ)]),
           a.pushZ.FreeSetbodyTime = 0, a.AppearDownZ(a.pushZ)), a.pushZ = null)))
     }
   },
@@ -3656,7 +3660,6 @@ WalkToLadder:function(){},
     a.pushZ && a.pushZ.HP && (
       a.pushZ.Altitude = 1,
 		PlayAudio("wakeup"),
-		oSym.addTask(220,ClearChild,[NewImg("", "images/Zombies/BackupDancer/Mound.gif" + $Random + Math.random(), "z-index:150;left:" + (a.pushZ.ZX-20) + "px;top:" + (GetY(a.pushZ.R)-155) + "px", EDPZ)]),
       a.pushZ.FreeSetbodyTime = 0,a.AppearDownZ(a.pushZ));
     a.pushZ = null
   },
