@@ -395,8 +395,8 @@ oWallNutZombie = InheritO(oConeheadZombie, {
         $P[b] && $P[b].getHurt(a, 3, 2000)
       }
 	}else{
-		a.NormalGif=a.PicArr[16];
-		a.AttackGif=a.PicArr[17];
+		a.NormalGif=16;
+		a.AttackGif=17;
 		a.EleBody.src=a.PicArr[16];
 		a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(a,b){
 			OrnIZombies.prototype.getHit0(a,b);
