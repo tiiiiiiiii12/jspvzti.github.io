@@ -117,10 +117,10 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             var PL = oS.PNameList; // 引用对象
             { // 负责生成每张卡片
                 var NormalLeft = 20,
-                    NormalTop = 30,
-                    LeftAdd = 140,
-                    TopAdd = 80,
-                    LineMax = 6;
+                    NormalTop = 20,
+                    LeftAdd = 120,
+                    TopAdd = 70,
+                    LineMax = 7;
                 var Left = NormalLeft,
                     Top = NormalTop,
                     Obj,
@@ -137,7 +137,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                             ViewCardTitle(PL[this.value], event);
                         },
                         "onclick": function(i) {
-                            SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"), $("dCardList")),SetNone(dChoosePlant),ChosePlant(i,this.value);
+                            SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"), $("dCardList")),SetNone(dChoosePlant),AppearCard(200,400,PL[this.value],0,Infinity);
                         }
                     }, dChoosePlantBoard);
                     var dImg = NewImg("dImg_" + _, Obj.PicArr[Obj.CardGif], "width:100;height:120;top:0px", dCard);
