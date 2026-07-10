@@ -797,7 +797,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
           } while (g++ < h)
         } while (q++ < o)
       })(a.R, GetC(a.AttackedLX + 20));
-      (function(j, l) {
+      (function(j, l,b) {
         var m = j - 120,
           o = j + 120,
           h = Math.max(1, l - 1),
@@ -810,7 +810,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
             n[k].getExplosion(1600)
           }
         } while (h++ < g)
-      })(a.AttackedLX, a.R);
+      })(a.AttackedLX, a.R,b);
       b.HP > b.BreakPoint && b.Ornaments && (b.Ready(b), $(b.Ele.FumeDoor).src = "images/Plants/CobCannon/noReady.gif");
 	},[a,b]);
     oSym.addTask(80,ClearChild,[Img]);
