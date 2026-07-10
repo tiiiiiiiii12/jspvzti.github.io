@@ -218,7 +218,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         NewEle("dButton5", "button", "position:absolute;left:150px;top:580px;width:80px;height:20px;z-index:255", {
             innerHTML: "种植植物",
             onclick: function() {
-                PlayAudio("tap"), SetNone($("dCardList")), SetVisible(dChoosePlant)
+                PlayAudio("tap"), SetNone($("dCardList")), SetBlock(dChoosePlant)
             }
         }, EDAll);
         oSym.addTask(1,function(){
