@@ -385,7 +385,7 @@ Birth: function() {
                     d && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif], e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) : e.isAttacking && (e.isAttacking = 0, e.EleBody.src = e.PicArr[e.NormalGif])
 				},
 	getr:function(e,l){
-		GetC(e.ZX)<10&&l>0&&(e.ZX +=l,
+		(GetC(e.ZX)<10||l>0)&&(e.ZX +=l,
 			e.AttackedLX += l, 
 			e.AttackedRX += l, 
 			e.X += l, 
