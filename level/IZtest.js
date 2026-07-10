@@ -215,27 +215,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             }
         }, EDAll);
-        NewEle("dButton5", "button", "position:absolute;left:550px;top:20px;width:100px;height:35px;z-index:255", {
-            innerHTML: "读报解封",
-            onclick: function() {
-            var h=1,
-                k,
-                c,
-                m,
-                n;
-                do {
-                    k = (n = oZ.getArZ(0,oS.W, h)).length;
-                        while (k--) {
-                           (n[k].EName=="oNewspaperZombie"||n[k].EName=="oGatlingPeaZombie")&&n[k].getHit0(n[k],n[k].OrnHP,0)
-                        }
-                     c = (m = oZ.getArHZ(0,oS.W, h)).length;
-                        while (c--) {
-                            (m[c].EName=="oNewspaperZombie"||m[c].EName=="oGatlingPeaZombie")&&m[c].getHit0(m[c],m[c].OrnHP,0)
-                        }
-                   } while (h++ < oS.R)
-            }
-        }, EDAll);
-        NewEle("dButton6", "button", "position:absolute;left:150px;top:580px;width:80px;height:20px;z-index:255", {
+        NewEle("dButton5", "button", "position:absolute;left:150px;top:580px;width:80px;height:20px;z-index:255", {
             innerHTML: "种植植物",
             onclick: function() {
                 PlayAudio("tap"), SetNone($("dCardList")), SetVisible(dChoosePlant)
