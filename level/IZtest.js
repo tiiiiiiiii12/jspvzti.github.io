@@ -152,7 +152,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         delete oS.LvlVar.ScrollScreen
     },
     StartGame: function() {
-        Plant();
+        oS.Plant();
         NewEle("dButton1", "button", "position:absolute;left:250px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
             onclick: function() {
