@@ -144,7 +144,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                     var dPrice = NewEle("dPrice_" + _, "span", "text-align:right;cursor:pointer;position:absolute;left:62px;top:40px;width:34px;height:20px;font-family:Fixedsys;font-size:11pt;font-weight:bold", {
                         "innerText": Obj.SunNum
                     }, dCard);
-                    SetVisible($("dPrice_" + _));
+                    SetVisible(dPrice);
                     Left += LeftAdd, ++LineNum; // 偏移下一个卡片的位置
                     if (LineNum % LineMax == 0) LineNum = 0, Left = NormalLeft, Top += TopAdd; // 如果超过，则下一个就换行
                 }
