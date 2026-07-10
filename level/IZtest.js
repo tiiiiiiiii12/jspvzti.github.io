@@ -108,7 +108,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             });
             var dChoosePlantBack = NewEle("dChoosePlantBack", "input", "position:absolute;left:5px;top:550px;width:225px;height:35px;border-radius:12.5px;white-space:pre;background:rgba(0,0,0,0.733);color:rgb(255,255,255);font-family:楷体;font-size:22px;font-weight:bold;cursor:pointer;visibility:visible;", {
                 onclick: function() {
-                    PlayAudio("tap"), SetBlock($("dCardList")), SetNone(dChoosePlant);
+                    PlayAudio("tap"), SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"), $("dCardList")), SetNone(dChoosePlant);
                 }
             }, dChoosePlant, {
                 "type": "button",
@@ -126,6 +126,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                     LineMax = 6;
                 var Left = NormalLeft,
                     Top = NormalTop,
+                    Obj,
                     LineNum = 0;
                 // 生成卡片元素
                 for (var _ = 0; _ < oS.PNameList.length; ++_) {
@@ -139,7 +140,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                             ViewCardTitle(PList[this.value], event);
                         },
                         "onclick": function(i) {
-                            SetBlock($("dCardList")),SetNone(dChoosePlant),ChosePlant(i,this.value);
+                            SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"), $("dCardList")),SetNone(dChoosePlant),ChosePlant(i,this.value);
                         }
                     }, dChoosePlantBoard);
                     Left += LeftAdd, ++LineNum; // 偏移下一个卡片的位置
@@ -218,7 +219,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         NewEle("dButton5", "button", "position:absolute;left:150px;top:580px;width:80px;height:20px;z-index:255", {
             innerHTML: "种植植物",
             onclick: function() {
-                PlayAudio("tap"), SetNone($("dCardList")), SetBlock(dChoosePlant)
+                PlayAudio("tap"), SetNone($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),  $("dCardList")), SetBlock(dChoosePlant)
             }
         }, EDAll);
         oSym.addTask(1,function(){
