@@ -43,7 +43,7 @@ getLadder:function() {
   }
   NewImg("ladder_" + a.R + "_" + a.C, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:" + (GetX(a.C) - 20) + "px;top:" + (GetY(a.R) - 120) + "px;z-index:" + (a.zIndex + 1), EDPZ);
   oSym.addTask(1, function(a, d) {
-    var c = oZ.getArZ(a.pixelRight - 10, a.pixelRight + 10, a.R);
+    var c = oZ.getArZ(a.pixelRight-5, a.pixelRight + 10, a.R);
     b = c.length;
     while (b--) {
       !c[b].WalkDirection&&c[b].Altitude==1&&!c[b].FreeSetbodyTime && (c[b].WalkToLadder(c[b]));
@@ -402,10 +402,10 @@ oStarfruit = InheritO(CPlants, {
   },
   getHurt: function(d, b, a) {
     var c = this;
-    b ==1 && c.NormalAttack();
-    (c.HP -= a) < 1 && c.Die()
+    !b && c.NormalAttack();
+    ((c.HP -= a) < 1||b) && c.Die()
   },
-  SpecialHit: function(a) {
+  SpecialHit: function(a) {//流星砸下来
     var Ele = "Boom_" + a.id;
     NewEle(Ele, "div", "position:absolute;overflow:hidden;z-index:150;width:283px;height:324px;left:550px;top:80px;background:url(images/Plants/DoomShroom/Boom.png) no-repeat", 0, EDPZ);
     oSym.addTask(20,
@@ -641,7 +641,7 @@ oSnowPea = InheritO(oPeashooter, {
   PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
   AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
   Tooltip: "寒冰射手可造成伤害, 同时又有减速效果",
-  Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<br>精英形态：攻击有概率发射整行的减速喷雾<br>精英特殊技能：点击它花费150阳光发射500伤害整行的减速喷雾，有冷却提示<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
+  Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<br>精英形态：攻击有概率发射整行的减速喷雾<br>精英特殊技能：点击它花费150阳光发射400伤害整行的减速喷雾，有冷却提示<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
   LoadingComplelete: function(a) {
     $("oAttack_" + a.id).onclick = function() {
       (oS.SunNum>=150 || !oS.StaticCard) && (
@@ -691,7 +691,7 @@ oSnowPea = InheritO(oPeashooter, {
       g,
       a = f.id + "_Bullet";
 while (e--) {
-        (g = d[e]).Altitude < 2 && (g.getSlow(g, g.id, 1500), g.getHit1(g, !A ? 500 : 20))
+        (g = d[e]).Altitude < 2 && (g.getSlow(g, g.id, 1500), g.getHit1(g, !A ? 400 : 20))
       }
     oSym.addTask(1, function(f, d, g, e, a) {
       SetVisible($(a));
@@ -1656,8 +1656,8 @@ NormalAttack:function(a){
                 n > c ? b.Die() : (j = GetC(b.pixelRight += 2), b.AttackedLX = n += 2, b.AttackedRX = m += 2, g.style.left = (b.pixelLeft += 2) + "px", j != h && (b.C = j, oGd.del({
                     R: l,
                     C: h,
-                    PKind: 1
-                }), oGd.add(b, l + "_" + j + "_1")), oSym.addTask(1, arguments.callee, [b, c, n, m, e, g]))
+                    PKind: 10
+                }), oGd.add(b, l + "_" + j + "_10")), oSym.addTask(1, arguments.callee, [b, c, n, m, e, g]))
             })(a, oS.W, a.AttackedLX, a.AttackedRX, a.R, $(a.id))
         }
     }),
@@ -1702,8 +1702,8 @@ NormalAttack:function(a){
                     }), l != p && (s.C = l, oGd.del({
                         R: v,
                         C: p,
-                        PKind: 1
-                    }), oGd.add(s, v + "_" + l + "_1")), oSym.addTask(1, arguments.callee, [s, q, s.AttackedLX, s.AttackedRX, m]))
+                        PKind: 10
+                    }), oGd.add(s, v + "_" + l + "_10")), oSym.addTask(1, arguments.callee, [s, q, s.AttackedLX, s.AttackedRX, m]))
                 }
             })(a, oS.W, a.AttackedLX, a.AttackedRX, $(a.id))
         }
@@ -2057,7 +2057,7 @@ NormalAttack:function(a){
         InitTrigger: function() {},
         HurtStatus: 0,
 		PrivateBirth:function(a){
-			var b=NewEle("oAttack_" + a.id,"div","left:"+(a.AttackedLX)+"px;top:"+(a.pixelTop)+"px;position:absolute;width:97px;height:87px;z-index:10",0,EDPZ);
+			var b=NewEle("oAttack_" + a.id,"div","left:"+(a.AttackedLX-20)+"px;top:"+(a.pixelTop-20)+"px;position:absolute;width:97px;height:87px;z-index:10",0,EDPZ);
 			b.onclick=function(){
 				a.changeZ=(a.changeZ?0:1);
 				$(a.id).style.transform =(a.changeZ?'rotateX(180deg)':'rotateX(0deg)');
