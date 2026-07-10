@@ -47,7 +47,8 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             }
         }, EDAll);
     },
-            PNameList: {
+    PList:{
+            "PNameList": {
                 "oPeashooter": 0,
                 "oSunFlower": 1,
                 "oCherryBomb": 2,
@@ -94,7 +95,8 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 "oRepeater2": 43,
                 "oSniperPea": 44,
                 "oPoolCleaner": 45
-            },
+            }
+    },
         Plant: function() {
             var dChoosePlant = NewEle("dChoosePlant", "div", "z-index:200;display:none;position:absolute;left:0px;top:0px", 0, EDAll, {
                 "class": "Almanac_PlantBack"
@@ -115,7 +117,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             var dChoosePlantBoard = NewEle("dChoosePlantBoard", "div", "position:relative;width:850px;height:455px;left:25px;", 0, dChoosePlant, {
                 "class": "dPCard"
             });
-            var PList = PNameList; // 引用对象
+            var PL = PList.PNameList; // 引用对象
             { // 负责生成每张卡片
                 var NormalLeft = 20,
                     NormalTop = 30,
@@ -127,15 +129,15 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                     Obj,
                     LineNum = 0;
                 // 生成卡片元素
-                for (var _ = 0; _ < PNameList.length; ++_) {
-                    Obj = PNameList[_].prototype; // 获取当前的卡片数据
+                for (var _ = 0; _ < PL.length; ++_) {
+                    Obj = PL[_].prototype; // 获取当前的卡片数据
                     var dCard = NewEle("dCard_" + _, "div", "position:absolute;width:100;height:60;overflow:hidden;left:" + Left + "px;top:" + Top + "px;cursor:pointer;", {
                         value: _,
                         "onmouseout": function() {
                             SetHidden($("dTitle"));
                         },
                         "onmousemove": function(event) {
-                            ViewCardTitle(PList[this.value], event);
+                            ViewCardTitle(PL[this.value], event);
                         },
                         "onclick": function(i) {
                             SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"), $("dCardList")),SetNone(dChoosePlant),ChosePlant(i,this.value);
