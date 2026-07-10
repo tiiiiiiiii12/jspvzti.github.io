@@ -971,6 +971,7 @@ NormalAttack1: function() {
 			var P=oGd.$[a.R+"_"+(a.C-1)+"_"+1];
 			P&&P.EName=="oSniperPea"&&P.SpecialPlant&&(P.canEat=1,P.Boom=18,P.Ele.style.opacity=1,P.AttTime+=100,P.SpecialPlant=false)
 		},
+		jinyinAct:function(){},
         PeaKind:0,
         NormalAttack: function(a) {
             oSym.addTask(0,
