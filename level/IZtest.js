@@ -47,8 +47,27 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             }
         }, EDAll);
     },
-    PList:{
-            "PNameList": {
+        Plant: function() {
+            var dChoosePlant = NewEle("dChoosePlant", "div", "z-index:200;display:none;position:absolute;left:0px;top:0px", 0, EDAll, {
+                "class": "Almanac_PlantBack"
+            });
+            var dChoosePlantTitle = NewEle("dchoosePlantTitle", "div", "position:relative;text-align:center;line-height:88px;height:88px;width:100%;font-size:30px;font-weight:bold;font-family:黑体;color:#fff", {
+                innerHTML: "选  择  植  物"
+            }, dChoosePlant, {
+                "class": "dRiddleTitle"
+            });
+            var dChoosePlantBack = NewEle("dChoosePlantBack", "input", "position:absolute;left:5px;top:550px;width:225px;height:35px;border-radius:12.5px;white-space:pre;background:rgba(0,0,0,0.733);color:rgb(255,255,255);font-family:楷体;font-size:22px;font-weight:bold;cursor:pointer;visibility:visible;", {
+                onclick: function() {
+                    PlayAudio("tap"), SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"), $("dCardList")), SetNone(dChoosePlant);
+                }
+            }, dChoosePlant, {
+                "type": "button",
+                "value": "返回"
+            });
+            var dChoosePlantBoard = NewEle("dChoosePlantBoard", "div", "position:relative;width:850px;height:455px;left:25px;", 0, dChoosePlant, {
+                "class": "dPCard"
+            });
+            var PNameList: {
                 "oPeashooter": 0,
                 "oSunFlower": 1,
                 "oCherryBomb": 2,
@@ -95,29 +114,8 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 "oRepeater2": 43,
                 "oSniperPea": 44,
                 "oPoolCleaner": 45
-            }
-    },
-        Plant: function() {
-            var dChoosePlant = NewEle("dChoosePlant", "div", "z-index:200;display:none;position:absolute;left:0px;top:0px", 0, EDAll, {
-                "class": "Almanac_PlantBack"
-            });
-            var dChoosePlantTitle = NewEle("dchoosePlantTitle", "div", "position:relative;text-align:center;line-height:88px;height:88px;width:100%;font-size:30px;font-weight:bold;font-family:黑体;color:#fff", {
-                innerHTML: "选  择  植  物"
-            }, dChoosePlant, {
-                "class": "dRiddleTitle"
-            });
-            var dChoosePlantBack = NewEle("dChoosePlantBack", "input", "position:absolute;left:5px;top:550px;width:225px;height:35px;border-radius:12.5px;white-space:pre;background:rgba(0,0,0,0.733);color:rgb(255,255,255);font-family:楷体;font-size:22px;font-weight:bold;cursor:pointer;visibility:visible;", {
-                onclick: function() {
-                    PlayAudio("tap"), SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"), $("dCardList")), SetNone(dChoosePlant);
-                }
-            }, dChoosePlant, {
-                "type": "button",
-                "value": "返回"
-            });
-            var dChoosePlantBoard = NewEle("dChoosePlantBoard", "div", "position:relative;width:850px;height:455px;left:25px;", 0, dChoosePlant, {
-                "class": "dPCard"
-            });
-            var PL = PList.PNameList; // 引用对象
+            };
+            var PL = PNameList; // 引用对象
             { // 负责生成每张卡片
                 var NormalLeft = 20,
                     NormalTop = 30,
