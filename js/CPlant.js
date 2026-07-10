@@ -1296,7 +1296,7 @@ NormalAttack:function(a){
                             AppearSun(Math.floor(h + Math.random() * 21), j, 25, 0),
                             AppearSun(Math.floor(g + Math.random() * 21), j, 25, 0),
                             AppearSun(Math.floor(g + Math.random() * 21), j, 50, 0),
-                        Math.random()*100>98&&AppearCard(a.pixelLeft, a.pixelTop, oSunFlower, 0, 1500),
+                        Math.random()*100>96&&AppearCard(a.pixelLeft, a.pixelTop, oSunFlower, 0, 1500),
                                 oSym.addTask(100,
                                     function(l) {
                                         $P[l] && a.ChangePosition($(l), 0)
