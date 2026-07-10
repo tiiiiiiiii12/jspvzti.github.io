@@ -140,10 +140,11 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                             SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"), $("dCardList")),SetNone(dChoosePlant),ChosePlant(i,this.value);
                         }
                     }, dChoosePlantBoard);
-                    var dImg = NewImg("dImg_" + _, Obj.PicArr[Obj.CardGif], "width:100;height:120;", dCard);
+                    var dImg = NewImg("dImg_" + _, Obj.PicArr[Obj.CardGif], "width:100;height:120;top:0px", dCard);
                     var dPrice = NewEle("dPrice_" + _, "span", "text-align:right;cursor:pointer;position:absolute;left:62px;top:40px;width:34px;height:20px;font-family:Fixedsys;font-size:11pt;font-weight:bold", {
                         "innerText": Obj.SunNum
                     }, dCard);
+                    SetVisible($("dPrice_" + _));
                     Left += LeftAdd, ++LineNum; // 偏移下一个卡片的位置
                     if (LineNum % LineMax == 0) LineNum = 0, Left = NormalLeft, Top += TopAdd; // 如果超过，则下一个就换行
                 }
