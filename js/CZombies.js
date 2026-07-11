@@ -3204,7 +3204,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
           function(f) {
             var e = $Z[f],
               d;
-            e && (PlayAudio("explosion"),e.num ? (e.PZ&&(oGd.$Crater[e.R + "_" + Math.max(GetC(e.ZX),1)] = 2),
+            e && (PlayAudio("explosion"),e.num>=50 ? (e.PZ&&(oGd.$Crater[e.R + "_" + Math.max(GetC(e.ZX),1)] = 2),
               NewEle(f + "_Boom", "div", "position:absolute;overflow:hidden;z-index:" + (e.zIndex + 2) + ";width:283px;height:324px;left:" + (e.ZX - 60) + "px;top:" + (e.pixelTop - 100) + "px;background:url(images/Plants/DoomShroom/Boom.png) no-repeat", 0, EDPZ),
               oSym.addTask(20,
                 function(i) {
@@ -3246,8 +3246,8 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
                 } while (g++ < h)
               } while (q++ < o)
             })(e.R, GetC(e.ZX)), (function(j, l) {
-              var m = e.num ? j - 240 : j - 120,
-                o = e.num ? j+240 : j+120,
+              var m = e.num>=50 ? j - 240 : j - 120,
+                o = e.num>=50 ? j+240 : j+120,
                 h = Math.max(1, e.num ? l - 2 : l - 1),
                 g = Math.min(oS.R, e.num ? l + 2 : l + 1),
                 n,
