@@ -2057,6 +2057,9 @@ NormalAttack:function(a){
         },
         InitTrigger: function() {},
         HurtStatus: 0,
+		PrivateDie:function(a){
+			ClearChild($("oAttack_" + a.id))
+		},
 		PrivateBirth:function(a){
 			var b=NewEle("oAttack_" + a.id,"div","left:"+(a.AttackedLX-20)+"px;top:"+(a.pixelTop-20)+"px;position:absolute;width:97px;height:87px;z-index:10",0,EDPZ);
 			b.onclick=function(){
