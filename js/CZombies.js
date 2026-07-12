@@ -1892,7 +1892,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   HP: 270,
   BirthImg: function(a) {
     var z = a.Ele;
-    var Sh = NewImg(z.FumeDoor, a.num>=50 ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/brain.png", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:" + (a.num ? 50 : 80) + "px;", 0);
+    var Sh = NewImg(z.FumeDoor, a.num>=50 ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/brain.png", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:" + (a.num>=50 ? 50 : 80) + "px;", 0);
     z.appendChild(Sh);
   },
   jinyinAct: function(a) {
