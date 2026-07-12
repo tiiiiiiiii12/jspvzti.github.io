@@ -3228,10 +3228,10 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
                   $Z[p]&&$Z[p].PZ&&oDoomShroom.prototype.setCrater(f + "_crater", e.R, Math.max(GetC(e.ZX),1), f.pixelLeft + 3, f.pixelTop + 100)
                 })) : (d = NewImg("", "images/interface/blank.png", "width:306px;height:300px;left:" + (e.X - 16) + "px;top:" + (e.pixelTop - 90) + "px;z-index:20"),
               d.src = e.PicArr[8] + Math.random(), EDPZ.appendChild(d), oSym.addTask(70, ClearChild, [d])), e.PZ&&(function(k, g) {
-              var q = Math.max(1, e.num ? k - 2 : k - 1),
-                o = Math.min(oS.R, e.num ? k + 2 : k + 1),
-                n = Math.max(1, e.num ? g - 2 : g - 1),
-                h = Math.min(oS.C, e.num ? g + 2 : g + 1),
+              var q = Math.max(1, e.num>=50 ? k - 2 : k - 1),
+                o = Math.min(oS.R, e.num>=50 ? k + 2 : k + 1),
+                n = Math.max(1, e.num>=50 ? g - 2 : g - 1),
+                h = Math.min(oS.C, e.num>=50 ? g + 2 : g + 1),
                 r = oGd.$,
                 l,
                 j = "",
@@ -3248,8 +3248,8 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
             })(e.R, GetC(e.ZX)), (function(j, l) {
               var m = e.num>=50 ? j - 240 : j - 120,
                 o = e.num>=50 ? j+240 : j+120,
-                h = Math.max(1, e.num ? l - 2 : l - 1),
-                g = Math.min(oS.R, e.num ? l + 2 : l + 1),
+                h = Math.max(1, e.num>=50 ? l - 2 : l - 1),
+                g = Math.min(oS.R, e.num>=50 ? l + 2 : l + 1),
                 n,
                 k;
               do {
