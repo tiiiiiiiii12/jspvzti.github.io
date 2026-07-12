@@ -1994,7 +1994,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   },
   CheckOrnHP: function(g, h, d, c, f, b, a) {
     var e = OrnNoneZombies.prototype;
-    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, g.jinyin && !g.num && g.back(g))
+    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, g.jinyin && g.num<50 && g.back(g))
   },
   getFireball: function(c, a, b) {
     b != c.WalkDirection ? (c.FreeSlowTime = 0, c.Attack = 100, c.Speed != c.OSpeed ? (c.PlayNormalballAudio(), c.Speed = c.OSpeed) : c.PlayFireballAudio()) : c.PlayNormalballAudio()
@@ -2201,8 +2201,8 @@ jinyinWalkGif12: 14,
   })(),
   jinyinAct: function(a) {
     oConeheadZombie.prototype.jinyinAct(a);
-	a.WalkGif1 = a.num?a.jinyinGif:a.jinyinGif2;
-    a.WalkGif0 = a.num?a.jinyinWalkGif1:a.jinyinWalkGif12;
+	a.WalkGif1 = a.num>=50?a.jinyinGif:a.jinyinGif2;
+    a.WalkGif0 = a.num>=50?a.jinyinWalkGif1:a.jinyinWalkGif12;
     a.EleBody.src = a.PicArr[a.intowater ? a.WalkGif1 : a.WalkGif0]
   },
   AudioArr: ["plastichit", "zombie_entering_water"],
