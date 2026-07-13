@@ -1316,8 +1316,8 @@ Birth: function() {
         jinyinAttackGif2:15,
 	jinyinAct: function(a) {
     a.num = Math.random() * 100|| a.Privatenum;
-	a.NormalGif = a.num?a.jinyinGif:a.jinyinGif2;
-    a.AttackGif = a.num?a.jinyinAttackGif:a.jinyinAttackGif2;
+	a.NormalGif = a.num>=50?a.jinyinGif:a.jinyinGif2;
+    a.AttackGif = a.num>=50?a.jinyinAttackGif:a.jinyinAttackGif2;
     a.EleBody.src = a.PicArr[a.NormalGif];
     if (a.num>=50) {
 		a.OrnHP *= 1.5;
