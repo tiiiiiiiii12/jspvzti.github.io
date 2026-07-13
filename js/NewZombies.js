@@ -463,7 +463,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 		  c.canWalk(c,c.id)&&c.beAttacked&&(CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(1500,arguments.callee,[c]));
 	  },[c]);
 	},
-	PriavteDie:function(c){
+	PrivateDie:function(c){
 		ClearChild($(c.Ele.NutHead2));
 	},
     Boom: function() {},
@@ -599,6 +599,85 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpH
     },
 	PicArr:oPeaZombie.prototype.PicArr,
 	Produce: '他过一段时间会给你的阵容以“火热”的惊喜<p>韧性：<font color="#FF0000">中（500）</font><br>特点：<font color="#FF0000">过段时间爆炸</font><br>精英形态一：<font color="#FF0000">在本路爆炸时，另外随机一行产生爆炸</font><br>精英形态二：<font color="#FF0000">爆炸烧死植物时在植物的格子召唤一个小鬼僵尸</font><br>他对待什么都是热情似火'
+}),
+oPeaShooterZombie=oPeaZombie,
+oSquashZombie = InheritO(oScreenDoorZombie, {
+  EName: "oSquashZombie",
+  CName: "窝瓜铁门僵尸",
+  SunNum: 100,
+  StandGif: 13,
+  width: 166,
+  height: 144,
+  OSpeed: 4,
+  Speed: 4,
+  beAttackedPointL: 60,
+  beAttackedPointR: 116,
+  PicArr: (function() {
+    var a = "images/Zombies/ScreenDoorZombie/",
+      b = "images/Zombies/Zombie/";
+    return ["images/Card/Zombies/ScreenDoorZombie.png", a + "0.gif", a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieHead.gif" + $Random, b + "ZombieDie.gif" + $Random, b + "BoomDie.gif" + $Random, a + "1.gif"]
+  })(),
+  GoingDieHead: function() {},
+  JudgeAttack: function() {},
+  JudgeAttackH: function() {},
+  PrivateBirth: function(a) {
+    var z = a.Ele;
+    z.SquashHeadId = "Squash" + Math.random();
+    let squash = NewImg(z.SquashHeadId, "images/Plants/Squash/Squash.gif", "position:absolute;left:40px;top:-150px;", 0);
+    z.appendChild(squash);
+  },
+  PrivateAct: function(a) {
+    let z = a.Ele;
+    let s = $(z.SquashHeadId);
+    if (!a.beAttacked) {
+      return ClearChild(s)
+    }
+    for (let i = 3; i >= 0; i--) {
+      let p = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
+      Z = oZ[a.PZ ? "getHZ1" : "getZ0"](a.ZX, a.R);
+      if ((p && p.canEat && a.PZ) || (Z && Z.beAttacked)) {
+        a.canHit = true;
+      }
+    }
+    a.canHit && a.HitPlant(a);
+  },
+  HitPlant: function(a) {
+    var z = a.Ele;
+    var s = $(z.SquashHeadId);
+    a.OrnHP = a.jianshang = 1;
+    a.getHit0(a, 1);
+    a.ChkActs = a.ChkActs1 = function() {
+      return 1
+    };
+    a.GoingDie(a.PicArr[a.LostHeadGif]);
+    EditImg(s, 0, "images/Plants/Squash/SquashAttack.gif", {
+      left: "0px",
+      top: "-50px"
+    }, 0);
+    oSym.addTask(60, function(a, s, Z) {
+      let g = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 60, a.ZX + 60, a.R),
+        h = g.length;
+      while (h--) {
+        $Z[a.id] && g[h].getHit0(g[h], 1850, 0)
+      }
+      PlayAudio("gargantuar_thump");
+      for (let i = 3; i >= 0; i--) {
+        let p = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
+        p && $Z[a.id] && p.getHurt(a, 3, 1850);
+      }
+      oSym.addTask(20, ClearChild, [s]);
+    }, [a, s, Z]);
+  },
+  jinyinAct: function(a) {
+    var z = a.Ele;
+    a.num = Math.random() * 100 || a.Privatenum;
+  },
+  PrivateDie: function(a) {
+    ClearChild($(a.Ele.SquashHeadId))
+  },
+  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
+  GoingDie: CZombies.prototype.GoingDie,
+  back: function(a) {}
 }),
     oGatlingPeaZombie = InheritO(oNewspaperZombie, {
         EName: "oGatlingPeaZombie",
