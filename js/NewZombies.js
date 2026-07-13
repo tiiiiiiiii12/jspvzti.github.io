@@ -604,7 +604,7 @@ oPeaShooterZombie=oPeaZombie,
 oSquashZombie = InheritO(oScreenDoorZombie, {
   EName: "oSquashZombie",
   CName: "窝瓜铁门僵尸",
-  SunNum: 100,
+  SunNum: 75,
   StandGif: 13,
   width: 166,
   height: 144,
