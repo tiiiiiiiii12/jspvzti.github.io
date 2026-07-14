@@ -20,7 +20,7 @@ oS.Init({
   UserDefinedFlagFunc:function(a){
     oP.FlagZombies&&!(oP.FlagNum%5)&&AppearTombstones(6,9,2);
     oP.FlagZombies&&!(oP.FlagZombies%10)&&(
-      oP.SetTimeoutWaterZombie(6,9,3,[oDuckyTubeZombie1]),
+      oP.SetTimeoutWaterZombie(3,9,3,[oDuckyTubeZombie1]),
       oP.SetTimeoutTomZombie([oZombie,oConeheadZombie]),
     oP.SetTimeoutAirdropZombie(6,9,3,[oZombie,oConeheadZombie,oDancingZombie]));
   },
