@@ -45,7 +45,7 @@ var AppearCard = function (h, f, e, a, t) { // x, y, 植物id, 移动卡槽类�
 
 oS.Init({
 	PName: [oLilyPad, oLilyPad, oLilyPad, oPeashooter, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oFumeShroom, oHypnoShroom, oScaredyShroom, oIceShroom, oDoomShroom,oSquash,oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit, oPumpkinHead, oGarlic,oGatlingPea],
-	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oBucketheadZombie, oDuckyTubeZombie1, oDuckyTubeZombie2, oDuckyTubeZombie3, oJackinTheBoxZombie, oNewspaperZombie, oScreenDoorZombie, oFootballZombie, oZomboni, oDancingZombie, oBackupDancer,oWallNutZombie,oTallNutZombie,oPeaZombie,oGatlingPeaZombie],
+	ZName: [oZombie, oZombie2, oZombie3, oConeheadZombie, oBucketheadZombie, oDuckyTubeZombie1, oDuckyTubeZombie2, oDuckyTubeZombie3, oJackinTheBoxZombie, oNewspaperZombie, oScreenDoorZombie, oFootballZombie, oZomboni, oDancingZombie, oBackupDancer,oWallNutZombie,oTallNutZombie,oPeaZombie,oGatlingPeaZombie,oGargantuar],
 	PicArr: ["images/interface/background4.jpg","images/interface/trophy.png","images/interface/PointerDown.gif"],
 	backgroundImage: "images/interface/background4.jpg",
 	LF: [0, 1, 1, 2, 2, 1, 1],
@@ -80,7 +80,7 @@ oS.Init({
 		});
 	}
 }, {
-	AZ: [[oZombie, 2, 1], [oZombie2, 2, 1], [oZombie3, 1, 1], [oConeheadZombie, 2, 1], [oBucketheadZombie, 1, 1], [oDuckyTubeZombie1, 1, 8, [8]], [oDuckyTubeZombie2, 1, 8], [oDuckyTubeZombie3, 1, 8], [oJackinTheBoxZombie, 1, 11, [11]], [oScreenDoorZombie, 1, 14, [14]], [oFootballZombie, 1, 19, [19]],[oTallNutZombie,1,15],[oNewspaperZombie, 1, 33],[oGatlingPeaZombie, 1, 33],[oWallNutZombie,1, 10],[oPeaZombie,1, 8],[oDancingZombie, 1, 25, [10, 20, 30, 40]]],
+	AZ: [[oZombie, 2, 1], [oZombie2, 2, 1], [oZombie3, 1, 1], [oConeheadZombie, 2, 1], [oBucketheadZombie, 1, 1], [oDuckyTubeZombie1, 1, 8, [8]], [oDuckyTubeZombie2, 1, 8], [oDuckyTubeZombie3, 1, 8], [oJackinTheBoxZombie, 1, 11, [11]], [oScreenDoorZombie, 1, 14, [14]], [oFootballZombie, 1, 19, [19]],[oTallNutZombie,1,15],[oNewspaperZombie, 1, 33],[oGatlingPeaZombie, 1, 33],[oGargantuar, 1, 33],[oWallNutZombie,1, 10],[oPeaZombie,1, 8],[oDancingZombie, 1, 25, [10, 20, 30, 40]]],
 	FlagNum: 40,
 	FlagToSumNum: {
 		a1: [3, 6,  9, 10, 15, 18, 19, 20, 23, 26, 29, 30, 33, 37, 39],
