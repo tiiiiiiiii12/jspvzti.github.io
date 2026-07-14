@@ -664,12 +664,12 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
       let g = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 60, a.ZX + 60, a.R),
         h = g.length;
       while (h--) {
-        $Z[a.id] && (g[h].getHit0(g[h], 1850, 0),g[h].HP<=0&&(SunMinus?(ESSunNum.innerHTML = +ESSunNum.innerHTML-g[h].SunNum,oS.SunNum-=g[h].SunNum):AppearSun(a.ZX,GetY(a.R),g[h].SunNum)))
+        $Z[a.id] && (g[h].getHit0(g[h], 1850, 0),g[h].HP<=0&&a.jinyin&&(SunMinus?(ESSunNum.innerHTML = +ESSunNum.innerHTML-g[h].SunNum,oS.SunNum-=g[h].SunNum):AppearSun(a.ZX,GetY(a.R),g[h].SunNum)))
       }
       PlayAudio("gargantuar_thump");
       for (let i = 3; i >= 0; i--) {
         let p = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
-        p && $Z[a.id] && (p.getHurt(a, 3, 1850),p.HP<=0&&(SunMinus?(ESSunNum.innerHTML = +ESSunNum.innerHTML-p.SunNum,oS.SunNum-=p.SunNum):AppearSun(a.ZX,GetY(a.R),p.SunNum)));
+        p && $Z[a.id] && (p.getHurt(a, 3, 1850),p.HP<=0&&a.jinyin&&(SunMinus?(ESSunNum.innerHTML = +ESSunNum.innerHTML-p.SunNum,oS.SunNum-=p.SunNum):AppearSun(a.ZX,GetY(a.R),p.SunNum)));
       }
       oSym.addTask(20, ClearChild, [s,$(a.Ele.FumeDoor)]);
     }, [a, s, Z]);
