@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower],
-	ZName: [oZombie, oZombie2, oZombie3,oImp],
+	ZName: [oZombie, oZombie2, oZombie3],
 	PicArr: function() {
 		var a = oCherryBomb.prototype,
 			b = a.PicArr;
@@ -122,7 +122,6 @@ oS.Init({
 	AZ: [
 		[oZombie, 6, 1],
 		[oZombie2, 2, 1],
-		[oImp, 2, 1],
 		[oZombie3, 2, 1]
 	],
 	FlagNum: 6,
