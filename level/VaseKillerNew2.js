@@ -1,7 +1,7 @@
 // VaseKillerNew2
 oS.Init({
 	PName: [oCherryBomb, oFumeShroom, oScaredyShroom, oCactus, oSeaShroom, oPeashooter, oPumpkinHead, oStarfruit, oLilyPad, oTangleKelp, oPlantern, oPotatoMine], 
-	ZName: [oZombie, oZombie2, oConeheadZombie, oScreenDoorZombie, oPoleVaultingZombie, oBucketheadZombie, oJackinTheBoxZombie, oDuckyTubeZombie1, oDuckyTubeZombie2,oPeaZombie], 
+	ZName: [oZombie, oZombie2, oConeheadZombie, oScreenDoorZombie, oPoleVaultingZombie, oBucketheadZombie, oJackinTheBoxZombie, oDuckyTubeZombie1, oDuckyTubeZombie2,oDiggerZombie], 
 	PicArr: ["images/interface/background4.jpg","images/interface/trophy.png","images/interface/PointerDown.gif","images/interface/Stripe.png"], 
 	backgroundImage: "images/interface/background4.jpg", 
 	DKind: 0, ShowScroll: false, ProduceSun: false, 
