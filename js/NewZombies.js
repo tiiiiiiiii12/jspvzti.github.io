@@ -625,6 +625,7 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
     z.SquashHeadId = "Squash" + Math.random();
     let squash = NewImg(z.SquashHeadId, "images/Plants/Squash/Squash.gif", "position:absolute;left:40px;top:-150px;", 0);
     z.appendChild(squash);
+	a.num>=50&&SetHidden(squash);
   },
   PrivateAct: function(a) {
     let z = a.Ele;
@@ -632,13 +633,17 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
     if (!a.beAttacked) {
       return ClearChild(s)
     }
+	if(a.num>=50){
+	a.PZ&&oGd.$[a.R + "_" + GetC(a.ZX) + "_" + 1]&&oGd.$[a.R + "_" + GetC(a.ZX) + "_" + 1].EName=="oBrains"&&(a.JudgeAttack=CZombies.prototype.JudgeAttack);
+	}else{
     for (let i = 3; i >= 0; i--) {
       let p = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
       Z = oZ[a.PZ ? "getHZ1" : "getZ0"](a.ZX, a.R);
-      if ((p && p.canEat && a.PZ) || (Z && Z.beAttacked)) {
+      if ((p && p.canEat && a.PZ) || (Z && Z.beAttacked&&Z.Altitude==1)) {
         a.canHit = true;
       }
     }
+}
     a.canHit && a.HitPlant(a);
   },
   HitPlant: function(a) {
@@ -646,6 +651,7 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
     var s = $(z.SquashHeadId);
     a.OrnHP = a.jianshang = 1;
     a.getHit0(a, 1);
+	var SunMinus=(a.PZ&&!oS.CardKind&&a.num<50)?1:0;
     a.ChkActs = a.ChkActs1 = function() {
       return 1
     };
@@ -658,24 +664,30 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
       let g = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 60, a.ZX + 60, a.R),
         h = g.length;
       while (h--) {
-        $Z[a.id] && g[h].getHit0(g[h], 1850, 0)
+        $Z[a.id] && (g[h].getHit0(g[h], 1850, 0),g[h].HP<=0&&(SunMinus?(ESSunNum.innerHTML = +ESSunNum.innerHTML-g[h].SunNum,oS.SunNum-=g[h].SunNum):AppearSun(a.ZX,GetY(a.R),g[h].SunNum)))
       }
       PlayAudio("gargantuar_thump");
       for (let i = 3; i >= 0; i--) {
         let p = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
-        p && $Z[a.id] && p.getHurt(a, 3, 1850);
+        p && $Z[a.id] && (p.getHurt(a, 3, 1850),p.HP<=0&&(SunMinus?(ESSunNum.innerHTML = +ESSunNum.innerHTML-p.SunNum,oS.SunNum-=p.SunNum):AppearSun(a.ZX,GetY(a.R),p.SunNum)));
       }
-      oSym.addTask(20, ClearChild, [s]);
+      oSym.addTask(20, ClearChild, [s,$(a.Ele.FumeDoor)]);
     }, [a, s, Z]);
   },
   jinyinAct: function(a) {
     var z = a.Ele;
     a.num = Math.random() * 100 || a.Privatenum;
+	if (a.num<50){
+	z.FumeDoor = "Fume" + Math.random();
+    var Sh = NewImg(z.FumeDoor, "images/interface/Sun.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:60px;", 0);
+    z.appendChild(Sh);
+	}
   },
   PrivateDie: function(a) {
-    ClearChild($(a.Ele.SquashHeadId))
+    ClearChild($(a.Ele.SquashHeadId));
+	ClearChild($(a.Ele.FumeDoor));
   },
-  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
+  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：<font color="#FF0000">无头僵尸，完全无视植物</font><br>精英形态二：<font color="#FF0000">阳光窝瓜僵尸，砸植物扣除对应的阳光（在iz模式或魅惑状态下加对应的阳光）</font><br>窝哥变成了僵尸，顺带捎走了铁门僵尸的铁门',
   GoingDie: CZombies.prototype.GoingDie,
   back: function(a) {}
 }),
