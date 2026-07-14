@@ -1,6 +1,6 @@
 oS.Init({
   PName:[oPeashooter,oSunFlower,oCherryBomb,oWallNut,oPotatoMine,oSnowPea,oChomper,oRepeater,oPuffShroom,oSunShroom,oFumeShroom,oGraveBuster,oHypnoShroom,oScaredyShroom,oIceShroom,oDoomShroom,oLilyPad,oSquash,oThreepeater,oTangleKelp],
-  ZName:[oZombie,oZombie2,oZombie3,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oConeheadZombie,oNewspaperZombie,oBucketheadZombie,oPoleVaultingZombie,oSnorkelZombie,oFootballZombie,oGatlingPeaZombie],
+  ZName:[oZombie,oZombie2,oZombie3,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oConeheadZombie,oNewspaperZombie,oBucketheadZombie,oPoleVaultingZombie,oSnorkelZombie,oDancingZombie,oGatlingPeaZombie],
   PicArr:function(){
     var a=oJalapeno.prototype,
       b=a.PicArr;
@@ -33,7 +33,7 @@ oS.Init({
     [oDuckyTubeZombie3,1,6],
     [oConeheadZombie,1,1],
     [oBucketheadZombie,1,1],
-    [oFootballZombie,1,1],
+    [oDancingZombie,1,1],
     [oGatlingPeaZombie,1,1],
     [oSnorkelZombie,1,7,[29,30]]
   ],
