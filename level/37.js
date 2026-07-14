@@ -1,6 +1,6 @@
 oS.Init({
     PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oHypnoShroom, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit],
-    ZName: [oZombie, oZombie2, oZombie3, oDuckyTubeZombie1, oDuckyTubeZombie2, oDuckyTubeZombie3, oConeheadZombie, oBucketheadZombie, oJackinTheBoxZombie, oDiggerZombie,oPoleVaultingZombie,oDancingZombie,oBackupDancer],
+    ZName: [oZombie, oZombie2, oZombie3, oDuckyTubeZombie1, oDuckyTubeZombie2, oDuckyTubeZombie3, oConeheadZombie, oBucketheadZombie, oJackinTheBoxZombie, oDiggerZombie,oPoleVaultingZombie,oDancingZombie,oBackupDancer,oSquashZombie],
     PicArr: function() {
         var Pro = oPumpkinHead.prototype,
             PicArr = Pro.PicArr,
@@ -41,6 +41,7 @@ oS.Init({
         [oJackinTheBoxZombie, 1, 4],
         [oPoleVaultingZombie, 1, 2],
         [oDancingZombie, 1, 2],
+        [oSquashZombie, 1, 2],
         [oDiggerZombie, 1, 7, [7, 10]]
     ],
     FlagNum: 30,
