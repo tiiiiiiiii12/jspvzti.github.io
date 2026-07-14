@@ -464,6 +464,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 	  },[c]);
 	},
 	PrivateDie:function(c){
+		ClearChild($(c.Ele.NutHead));
 		ClearChild($(c.Ele.NutHead2));
 	},
     Boom: function() {},
@@ -617,6 +618,7 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
       b = "images/Zombies/Zombie/";
     return ["images/Card/Zombies/ScreenDoorZombie.png", a + "0.gif", a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieHead.gif" + $Random, b + "ZombieDie.gif" + $Random, b + "BoomDie.gif" + $Random, a + "1.gif"]
   })(),
+  CanPass:function(d,c){return c},
   GoingDieHead: function() {},
   JudgeAttack: function() {},
   JudgeAttackH: function() {},
