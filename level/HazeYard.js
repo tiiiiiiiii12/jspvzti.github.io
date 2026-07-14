@@ -1,6 +1,6 @@
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oHypnoShroom, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom],
-	ZName: [oZombie, oZombie2, oZombie3, oDuckyTubeZombie1, oConeheadZombie, oBucketheadZombie, oPoleVaultingZombie, oDolphinRiderZombie, oSnorkelZombie, oJackinTheBoxZombie, oZomboni],
+	ZName: [oZombie, oZombie2, oZombie3, oDuckyTubeZombie1, oConeheadZombie, oBucketheadZombie, oPoleVaultingZombie, oDolphinRiderZombie, oSnorkelZombie, oJackinTheBoxZombie, oZomboni,oSquashZombie],
 	PicArr: function() {
 		var a = "images/interface/fog",
 		b = $User.Browser.IE && !$User.Browser.IE9 ? "gif": "png";
@@ -26,7 +26,7 @@ oS.Init({
 	StartGameMusic: "Loonboon"
 },
 {
-	AZ: [[oZombie, 3, 1], [oZombie2, 3, 1], [oZombie3, 2, 1], [oDuckyTubeZombie1, 1, 6, [6, 7, 8, 10, 19, 20, 25, 30]], [oConeheadZombie, 4, 1], [oBucketheadZombie, 2, 1], [oPoleVaultingZombie, 1, 10], [oDolphinRiderZombie, 1, 10, [10, 14, 15, 16, 18, 19, 20]], [oSnorkelZombie, 1, 15, [15, 16, 18, 20, 25, 30]], [oJackinTheBoxZombie, 1, 5, [5, 10, 15, 20, 25, 30]], [oZomboni, 1, 20, [20, 25, 30]]],
+	AZ: [[oZombie, 3, 1], [oZombie2, 3, 1], [oZombie3, 2, 1], [oDuckyTubeZombie1, 1, 6, [6, 7, 8, 10, 19, 20, 25, 30]], [oConeheadZombie, 4, 1], [oBucketheadZombie, 2, 1], [oPoleVaultingZombie, 1, 10], [oDolphinRiderZombie, 1, 10, [10, 14, 15, 16, 18, 19, 20]], [oSnorkelZombie, 1, 15, [15, 16, 18, 20, 25, 30]], [oSquashZombie, 1, 12, [15, 16, 18, 20, 25, 30]], [oJackinTheBoxZombie, 1, 5, [5, 10, 15, 20, 25, 30]], [oZomboni, 1, 20, [20, 25, 30]]],
 	FlagNum: 30,
 	FlagToSumNum: {
 		a1: [3, 5, 9, 10, 13, 15, 19, 20, 23, 25, 29],
