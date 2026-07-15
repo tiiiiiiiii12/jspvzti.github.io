@@ -9,7 +9,7 @@ oS.Init({ // 该注释为了方便学习者快速阅读代码
 	ZF: [0, 1, 1, 1, 1, 1], // 每路僵尸可出现的type
 	LevelName: "小游戏:贫瘠之地 2", // CTitle
 	LvlEName: "PovertyOfTheSoil_2", // ETitle
-	StartGameMusic: "Ultimate battle", // 黑夜草坪BGM
+	StartGameMusic: "2.75", // 黑夜草坪BGM
 	LargeWaveFlag: { // flag html
 		10: $("imgFlag3"),
 		20: $("imgFlag2"),
