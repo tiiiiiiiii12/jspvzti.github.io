@@ -623,7 +623,7 @@ Birth: function() {
 		 }else{
 			a.HP*=2;
 			SetStyle(a.EleShadow,{
-				left:(a.beAttackedPointL - 10) + "px",
+				left:(a.beAttackedPointL - 20) + "px",
 				top:(a.height-44)+"px",
 				width:"172px",
 				height:"72px"
@@ -1396,7 +1396,7 @@ Birth: function() {
       }
     }
   },
-        Produce: '他的路障头盔，使他两倍坚韧于普通僵尸。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：<font color="#FF0000">真·路障僵尸（防具HP*1.5，使其附近的其他僵尸换行）</font><br>精英形态二：<font color="#FF0000">冰头僵尸（造冰道，若在冰道上则滑步）</font><br>和其他僵尸一样，路障头僵尸盲目地向前。但某些事物却使他停下脚步，捡起一个交通路障，并固实在自己的脑袋上。是的，他很喜欢参加聚会。'
+        Produce: '他的路障头盔，使他两倍坚韧于普通僵尸。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：<font color="#FF0000">真·路障僵尸（防具HP*1.5，使其附近的其他僵尸换行）</font><br>精英形态二：<font color="#FF0000">冰头僵尸（造冰道，若在冰道上则滑步，免疫寒冰控制）</font><br>和其他僵尸一样，路障头僵尸盲目地向前。但某些事物却使他停下脚步，捡起一个交通路障，并固实在自己的脑袋上。是的，他很喜欢参加聚会。'
     }),
     oBucketheadZombie = InheritO(oConeheadZombie, {
         EName: "oBucketheadZombie",
@@ -3590,7 +3590,6 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
   GetDTop: 20,
   beAttackedPointL: 65,
   beAttackedPointR: 90,
-  OrnHP: 100,
   OSpeed: 7.8,
   Speed: 7.8,
   Altitude: 0, // 挖矿
@@ -3611,7 +3610,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
   BoomDieGif: 8,
   LostHeadGif: 5,
   LostHeadAttackGif: 5,
-  Produce: '这种僵尸通过挖地来绕过防线。<p>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，磁力菇</font><br>精英形态：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列</font></p>最近，他一直在听奥特曼的主题曲，据他所述，他好像是在某一处听到这首歌，觉得很好听，于是他现在也不挖土了，天天循环播放这首歌',
+  Produce: '这种僵尸通过挖地来绕过防线。<p>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，杨桃</font><br>精英形态一：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列<br>精英形态二：<font color="#FF0000">挖至第三列出土向左走</font></p>矿工僵尸一周需要用两天的时间来考取他的挖掘许可证',
   BirthCallBack: function(f) {
     var e = f.delayT,
       d = f.id,
@@ -3693,7 +3692,10 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
   GoingDieHead: function() {},
   AudioArr: ["dirt_rise","wakeup"],  
 jinyinAct: function(a) {
-	a.JudgeAttack=function(){};
+	a.num=Math.random()*100||a.Privatenum;
+	if(a.num>=50){
+	a.JudgeAttack_Dig=function(){};
+	a.EleBody.style.filter = 'grayscale(500%)';
     a.Act = function(a) {
       var z = oZ.getZ0(a.ZX, a.R);
       (a.pushZ || (z &&(z.Lvl<4)&&z.Altitude==1&&z.EName != a.EName)) && (!a.pushZ ? (a.ZX >= 420 && (a.pushZ = z,PlayAudio("dirt_rise"), 																	 
@@ -3703,7 +3705,8 @@ jinyinAct: function(a) {
           a.pushZ.Altitude = 1,
 		  PlayAudio("wakeup"),
           a.pushZ.FreeSetbodyTime = 0, a.AppearDownZ(a.pushZ)), a.pushZ = null)))
-    }
+	}
+	}
   },
   PrivateDie: function(a) {
     a.pushZ && a.pushZ.HP && (
@@ -3766,6 +3769,7 @@ jinyinAct: function(a) {
   },
   ChkActs: function(f, d, g, c) {
     // 到了左边自己钻出来
+	if (f.Altitude == 0 && f.AttackedRX < GetX(3) - 40) return f.Go_Up(f, 0), 0;
     if (f.Altitude == 0 && f.AttackedRX < GetX(1) - 40) return f.Go_Up(f, 1), 1;
     var b, a, e;
     !(f.FreeFreezeTime || f.FreeSetbodyTime) ?
