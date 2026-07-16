@@ -247,7 +247,9 @@ getLadder:function() {
         NormalGif: 0,
         canEat: 0,
         Stature: 1,
-		getHurt:function(){},
+		getHurt:function(a){
+			a!=3&&(a.canTrigger = 0,a.NormalAttack(a))
+		},
         getTriggerRange: function(a, b, c) {
             return [
                 [b, c, 0]
