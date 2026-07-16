@@ -1620,7 +1620,7 @@ NormalAttack:function(a){
                             z.pixelBottom - 2 < g && (e = 1);
                             break
                     }
-                    q > y ? z.Die() : (i = GetC(z.pixelRight += 2), z.AttackedLX = q += 2, z.AttackedRX = r += 2, w = GetR(z.pixelBottom += e * 2), SetStyle(x, {
+                    q > y ? $P[z.id]&&z.Die() : (i = GetC(z.pixelRight += 2), z.AttackedLX = q += 2, z.AttackedRX = r += 2, w = GetR(z.pixelBottom += e * 2), SetStyle(x, {
                         left: (z.pixelLeft = p += 2) + "px",
                         top: (z.pixelTop += e * 2) + "px"
                     }), w != a && (z.R = w, t = true, !z.CanAttack && (z.CanAttack = 1)), i != l && (z.C = i, t = true), t && (oGd.del({
@@ -1654,7 +1654,7 @@ NormalAttack:function(a){
                 while (f--) {
                     (k = d[f]).getCrushed(b) && k.CrushDie()
                 }
-                n > c ? b.Die() : (j = GetC(b.pixelRight += 2), b.AttackedLX = n += 2, b.AttackedRX = m += 2, g.style.left = (b.pixelLeft += 2) + "px", j != h && (b.C = j, oGd.del({
+                n > c ? $P[b.id]&&b.Die() : (j = GetC(b.pixelRight += 2), b.AttackedLX = n += 2, b.AttackedRX = m += 2, g.style.left = (b.pixelLeft += 2) + "px", j != h && (b.C = j, oGd.del({
                     R: l,
                     C: h,
                     PKind: 10
@@ -1698,7 +1698,7 @@ NormalAttack:function(a){
                     });
                     oSym.addTask(65, ClearChild, [m])
                 } else {
-                    b > q ? s.Die() : (l = GetC(s.pixelRight += 2), s.AttackedLX = b += 2, s.AttackedRX = c += 2, SetStyle(m, {
+                    b > q ? $P[s.id]&&s.Die() : (l = GetC(s.pixelRight += 2), s.AttackedLX = b += 2, s.AttackedRX = c += 2, SetStyle(m, {
                         left: (s.pixelLeft += 2) + "px"
                     }), l != p && (s.C = l, oGd.del({
                         R: v,
