@@ -3769,7 +3769,7 @@ jinyinAct: function(a) {
   },
   ChkActs: function(f, d, g, c) {
     // 到了左边自己钻出来
-	if (f.Altitude == 0 && f.AttackedRX < GetX(3) - 40) return f.Go_Up(f, 0), 0;
+	if (f.jinyin&&f.num<50&&f.Altitude == 0 && f.AttackedRX < GetX(3) - 40) return f.Go_Up(f, 0), 0;
     if (f.Altitude == 0 && f.AttackedRX < GetX(1) - 40) return f.Go_Up(f, 1), 1;
     var b, a, e;
     !(f.FreeFreezeTime || f.FreeSetbodyTime) ?
