@@ -192,7 +192,7 @@ Birth: function() {
   if (c.HPlook) {
     var B = NewEle("dHP"+c.id, "div", "position:absolute;color:yellow;width:80px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
     oSym.addTask(0, function(c,B) {
-      B.innerHTML = (c.OrnHP > 0 ? c.OrnHP + "+" + c.HP : c.HP)
+      B.innerHTML = (c.OrnHP > 0 ? c.OrnHP + "+" + c.HP : c.HP) +"<br>精英："+c.jinyin
       oSym.addTask(5, arguments.callee, [c,B])
     }, [c,B]);
   }
@@ -622,6 +622,12 @@ Birth: function() {
 			}
 		 }else{
 			a.HP*=2;
+			SetStyle(a.EleShadow,{
+				left:(a.beAttackedPointL - 10) + "px",
+				top:(a.height-44)+"px",
+				width:"172px",
+				height:"72px"
+			});
 			a.AttackZombie=function(d, c) {
             PlayAudio("zaji");
             oSym.addTask(125,
@@ -650,6 +656,13 @@ Birth: function() {
         }
 		 }
 		},
+		ChkActs1: function(g, e, h, d) {
+                    var c,f;
+                    !(g.FreeFreezeTime || g.FreeSetbodyTime) ? (g.beAttacked && !g.isAttacking && g.JudgeAttack(), !g.isAttacking ? (g.AttackedLX += (c = g.Speed)) > oS.W ? (h.splice(d, 1), g.DisappearDie(), f = 0) : (g.ZX = g.AttackedRX += c, g.Ele.style.left = Math.ceil(g.X += c) + "px", f = 1) : f = 1) : f = 1;
+			g.ChkSpeed(g);
+                    g.PrivateAct&&g.PrivateAct(g);
+                    return f
+                },
         Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态一：灰色，不跳舞，三倍速度<br>精英形态二：两倍血量，变为巨人攻击方式<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
         BirthCallBack: function(e) {
             var d = e.delayT,
@@ -1330,6 +1343,8 @@ Birth: function() {
         }
       }
     } else {
+	  a.getSlow=a.getFreeze=function(){};
+	  a.getSnowPea=a.getPea;
       a.PrivateBirth = function(h) {
         var e = h.id,
           c = h.Ele = $(e),
