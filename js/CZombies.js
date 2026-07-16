@@ -1438,81 +1438,81 @@ Birth: function() {
 			13: "images/Zombies/BucketheadZombie/jinyinBucketheadAttack.gif"
         }
     }),
-    oFootballZombie = InheritO(oConeheadZombie, {
-        EName: "oFootballZombie",
-        CName: "橄榄球僵尸",
-        OrnHP: 1600,
-        Lvl: 4,
-        SunNum: 225,
-        StandGif: 11,
-        width: 154,
-        height: 160,
-        OSpeed: 3.2,
-        Speed: 3.2,
-		shootPeaSpeed:750,
-        beAttackedPointL: 40,
-        beAttackedPointR: 134,
-        PlayNormalballAudio: function() {
-            PlayAudio("plastichit")
-        },
-		jinyinAct:function(a){
-			a.num=Math.random()*100||a.Privatenum;
-			if(a.num>=50){
-			a.PicArr=a.PicArr2;
-			a.EleBody.src=a.PicArr[a.NormalGif];
-			a.Speed*=0.75;
-			a.OSpeed*=0.75;
-			a.getFreeze=function(){};
-			a.HP*=2.5;
-			a.OrnHP*=2;
-			}else{
-			a.BulletEle = NewImg(0,"images/interface/Zombie_catapult_basketball.png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 120) + "px;visibility:hidden;z-index:" + (a.zIndex + 2));
-            oSym.addTask(600, function(a) {
-                a.canWalk(a, a.id) && a.beAttacked &&a.shootPea(a);
-				$Z[a.id]?oSym.addTask(a.shootPeaSpeed,arguments.callee,[a]):a.BulletEle=null
-            }, [a]);
-			}
-		},
-		shootPea: function() {
-            var a = this,
-                b = "PB" + Math.random();
-            EditEle(a.BulletEle.cloneNode(false), {
-                    id: b
-                },
-                0, EDPZ);
-            oSym.addTask(1,
-                function(d) {
-                    var c = $(d);
-                    c && SetVisible(c)
-                },
-                [b]);
-            oSym.addTask(1,
-                function(f, j, n, i, o,BDire,isHit,PZ) {
-                    var l, e = GetC(n);
-                    var Kind = 3,
-                        Z = oZ[PZ!=BDire?"getHZ1":"getZ0"](n, i),
-                        d;
-                    Z && Z.Altitude == 1 && (PZ==BDire&&Z.getPea(Z, 75 * a.level, 0), isHit+=1,BDire=!BDire?1:0);
-                    while (Kind--) {
-                        (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && PZ && (isHit += 1,BDire=!BDire?1:0,d.getHurt(a, 3, 75 * a.level))
-                    }
-                    isHit>8 ? ClearChild(j) : (((n += (l = BDire?-5:5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px") : BDire=!BDire?1:0),oSym.addTask(1, arguments.callee, [f, j, n, i, o,BDire]))
-                },
-                [b, $(b), a.ZX, a.R, a.ZX,1,0,a.PZ])
-        },
-        PicArr: (function() {
-            var a = "images/Zombies/FootballZombie/";
-            return ["images/Card/Zombies/FootballZombie.png", a + "0.gif", a + "FootballZombie.gif", a + "Attack.gif", a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "OrnLost.gif", a + "OrnLostAttack.gif", a + "1.gif"]
-        })(),
-		PicArr2: (function() {
-            var a = "images/Zombies/BlackFootballZombie/";
-            return ["images/Card/Zombies/FootballZombie.png", a + "0.gif", a + "FootballZombie.gif", a + "Attack.gif", a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random,"images/Zombies/FootballZombie/BoomDie.gif" + $Random, a + "OrnLost.gif", a + "OrnLostAttack.gif", a + "1.gif"]
-        })(),
-        getShadow: function(a) {
-            return "left:" + (a.beAttackedPointL + 15) + "px;top:" + (a.height - 22) + "px"
-        },
-        Produce: '橄榄球僵尸的表演秀。<br>韧性：<font color="#FF0000">极高</font><br>精英形态一：黑橄榄，两倍头盔血量，速度减慢，免疫冻结<br>精英形态二：每隔一段时间射出一个篮球，篮球对植物造成伤害后回弹，回弹一定次数后销毁<br>速度：<font color="#FF0000">快</font><br>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么<br>黑橄榄贴图来源：江南游戏'
-    }),
+oFootballZombie = InheritO(oConeheadZombie, {
+  EName: "oFootballZombie",
+  CName: "橄榄球僵尸",
+  OrnHP: 1600,
+  Lvl: 4,
+  SunNum: 225,
+  StandGif: 11,
+  width: 154,
+  height: 160,
+  OSpeed: 3.2,
+  Speed: 3.2,
+  shootPeaSpeed: 750,
+  beAttackedPointL: 40,
+  beAttackedPointR: 134,
+  PlayNormalballAudio: function() {
+    PlayAudio("plastichit")
+  },
+  jinyinAct: function(a) {
+    a.num = Math.random() * 100 || a.Privatenum;
+    if (a.num >= 50) {
+      a.PicArr = a.PicArr2;
+      a.EleBody.src = a.PicArr[a.NormalGif];
+      a.Speed *= 0.75;
+      a.OSpeed *= 0.75;
+      a.getFreeze = function() {};
+      a.HP *= 2.5;
+      a.OrnHP *= 2;
+    } else {
+      a.BulletEle = NewImg(0, "images/interface/Zombie_catapult_basketball.png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 120) + "px;visibility:hidden;z-index:" + (a.zIndex + 2));
+      oSym.addTask(750, function(a) {
+        a.canWalk(a, a.id) && a.beAttacked && a.shootPea(a);
+        $Z[a.id] ? oSym.addTask(a.shootPeaSpeed, arguments.callee, [a]) : a.BulletEle = null
+      }, [a]);
+    }
+  },
+  shootPea: function() {
+    var a = this,
+      b = "PB" + Math.random();
+    EditEle(a.BulletEle.cloneNode(false), {
+        id: b
+      },
+      0, EDPZ);
+    oSym.addTask(1,
+      function(d) {
+        var c = $(d);
+        c && SetVisible(c)
+      },
+      [b]);
+    oSym.addTask(1,
+      function(f, j, n, i, o, BDire, isHit, PZ) {
+        var l, e = GetC(n);
+        var Kind = 3,
+          Z = oZ[BDire ? "getHZ1" : "getZ0"](n, i),
+          d;
+        Z && Z.Altitude == 1 && (Z.PZ != PZ && (Z.getPea(Z, 75 * a.level, 0), isHit += 1), BDire = !BDire ? 1 : 0);
+        while (Kind--) {
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && PZ && (PlayAudio("splat1"),isHit += 1, BDire = (!BDire ? 1 : 0), d.getHurt(a, 3, 75 * a.level))
+        }
+        isHit > 9 ? ClearChild(j) : (((n += (l = BDire ? -5 : 5)) > oS.W || n < 100) && (BDire = !BDire ? 1 : 0), j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o, BDire, isHit, PZ]))
+      },
+      [b, $(b), a.ZX, a.R, a.ZX, a.PZ, 0, a.PZ])
+  },
+  PicArr: (function() {
+    var a = "images/Zombies/FootballZombie/";
+    return ["images/Card/Zombies/FootballZombie.png", a + "0.gif", a + "FootballZombie.gif", a + "Attack.gif", a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "OrnLost.gif", a + "OrnLostAttack.gif", a + "1.gif"]
+  })(),
+  PicArr2: (function() {
+    var a = "images/Zombies/BlackFootballZombie/";
+    return ["images/Card/Zombies/FootballZombie.png", a + "0.gif", a + "FootballZombie.gif", a + "Attack.gif", a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, "images/Zombies/FootballZombie/BoomDie.gif" + $Random, a + "OrnLost.gif", a + "OrnLostAttack.gif", a + "1.gif"]
+  })(),
+  getShadow: function(a) {
+    return "left:" + (a.beAttackedPointL + 15) + "px;top:" + (a.height - 22) + "px"
+  },
+  Produce: '橄榄球僵尸的表演秀。<br>韧性：<font color="#FF0000">极高</font><br>精英形态一：黑橄榄，两倍头盔血量，速度减慢，免疫冻结<br>精英形态二：每隔一段时间射出一个篮球，篮球对植物造成伤害后回弹，回弹一定次数后销毁<br>速度：<font color="#FF0000">快</font><br>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么<br>黑橄榄贴图来源：江南游戏'
+}),
     oPoleVaultingZombie = InheritO(OrnNoneZombies, {
         EName: "oPoleVaultingZombie",
         CName: "撑杆僵尸",
