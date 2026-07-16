@@ -1507,10 +1507,12 @@ oFootballZombie = InheritO(oConeheadZombie, {
         var Kind = 3,
           Z = oZ[BDire ? "getHZ1" : "getZ0"](n, i),
           d;
+		if(n<oS.W&&n>100){
         Z && Z.Altitude == 1 && (Z.PZ != PZ && (Z.getPea(Z, 75 * a.level, 0), isHit += 1), BDire = !BDire ? 1 : 0);
         while (Kind--) {
           (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && PZ && (PlayAudio("splat1"),isHit += 1, BDire = (!BDire ? 1 : 0), d.getHurt(a, 3, 75 * a.level))
         }
+		}
         isHit > 5 ? ClearChild(j) : (((n += (l = BDire ? -5 : 5)) > oS.W || n < 100) && (BDire = !BDire ? 1 : 0), j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o, BDire, isHit, PZ]))
       },
       [b, $(b), a.ZX, a.R, a.ZX, a.PZ, 0, a.PZ])
