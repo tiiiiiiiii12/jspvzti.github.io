@@ -192,7 +192,7 @@ Birth: function() {
   if (c.HPlook) {
     var B = NewEle("dHP"+c.id, "div", "position:absolute;color:yellow;width:80px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
     oSym.addTask(0, function(c,B) {
-      B.innerHTML = (c.OrnHP > 0 ? c.OrnHP + "+" + c.HP : c.HP) +"<br>精英："+c.jinyin
+      B.innerHTML = (c.OrnHP > 0 ? c.OrnHP + "+" + c.HP : c.HP) +"<br>精英:"+c.jinyin
       oSym.addTask(5, arguments.callee, [c,B])
     }, [c,B]);
   }
