@@ -1464,7 +1464,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
   height: 160,
   OSpeed: 3.2,
   Speed: 3.2,
-  shootPeaSpeed: 750,
+  shootPeaSpeed: 1000,
   beAttackedPointL: 40,
   beAttackedPointR: 134,
   PlayNormalballAudio: function() {
@@ -1511,7 +1511,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
         while (Kind--) {
           (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && PZ && (PlayAudio("splat1"),isHit += 1, BDire = (!BDire ? 1 : 0), d.getHurt(a, 3, 75 * a.level))
         }
-        isHit > 9 ? ClearChild(j) : (((n += (l = BDire ? -5 : 5)) > oS.W || n < 100) && (BDire = !BDire ? 1 : 0), j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o, BDire, isHit, PZ]))
+        isHit > 5 ? ClearChild(j) : (((n += (l = BDire ? -5 : 5)) > oS.W || n < 100) && (BDire = !BDire ? 1 : 0), j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o, BDire, isHit, PZ]))
       },
       [b, $(b), a.ZX, a.R, a.ZX, a.PZ, 0, a.PZ])
   },
