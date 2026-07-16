@@ -3612,7 +3612,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
   BoomDieGif: 8,
   LostHeadGif: 5,
   LostHeadAttackGif: 5,
-  Produce: '这种僵尸通过挖地来绕过防线。<p>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，杨桃</font><br>精英形态一：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列<br>精英形态二：<font color="#FF0000">挖至第三列出土向左走</font></p>矿工僵尸一周需要用两天的时间来考取他的挖掘许可证',
+  Produce: '这种僵尸通过挖地来绕过防线。<p>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，杨桃</font><br>精英形态一：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列</font><br>精英形态二：<font color="#FF0000">挖至第三列出土向左走</font><br>矿工僵尸一周需要用两天的时间来考取他的挖掘许可证',
   BirthCallBack: function(f) {
     var e = f.delayT,
       d = f.id,
