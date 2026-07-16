@@ -163,7 +163,7 @@ position:absolute;width:900px;height:50px;top:500px;left:0;z-index:100;text-alig
 #pZombieBack{left:512px;top:111px}
 #pHandBookZombie{width:100%;height:250px;background-repeat:no-repeat;background-position:50% 70%}
 #dHandBookZombieName{width:100%;height:60px;text-align:center;line-height:60px;font-size:20px;color:#CEAA31;font-family:宋体;font-weight: bold}
-#dProduceZombie{margin-left:auto;margin-right:auto;width:76%;height:210px;text-align:left;font-size:12px;line-height:16px}
+#dProduceZombie{margin-left:auto;margin-right:auto;width:76%;height:160px;text-align:left;font-size:12px;line-height:16px}
 
 #dNewPlant{visibility:hidden;position:absolute;top:0;left:50%;margin-left:-450px;width:800px;height:600px;background:url(images/interface/AwardScreen_Back.jpg) no-repeat}
 #dNewPlant .card{position:absolute;top:100px;width:800px;height:191px;line-height:191px;text-align:center}
