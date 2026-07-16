@@ -1464,7 +1464,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
   height: 160,
   OSpeed: 3.2,
   Speed: 3.2,
-  shootPeaSpeed: 1000,
+  shootPeaSpeed: 750,
   beAttackedPointL: 40,
   beAttackedPointR: 134,
   PlayNormalballAudio: function() {
