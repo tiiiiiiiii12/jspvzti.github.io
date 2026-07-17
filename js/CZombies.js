@@ -1483,7 +1483,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
     } else {
       a.BulletEle = NewImg(0, "images/interface/Zombie_catapult_basketball.png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 120) + "px;visibility:hidden;z-index:" + (a.zIndex + 2));
       oSym.addTask(750, function(a) {
-        a.canWalk(a, a.id) && a.beAttacked && a.shootPea(a);
+        a.canWalk(a, a.id) && a.beAttacked &&a.ZX>=100&&a.ZX<=oS.W&&a.shootPea(a);
         $Z[a.id] ? oSym.addTask(a.shootPeaSpeed, arguments.callee, [a]) : a.BulletEle = null
       }, [a]);
     }
@@ -1507,13 +1507,13 @@ oFootballZombie = InheritO(oConeheadZombie, {
         var Kind = 3,
           Z = oZ[BDire ? "getHZ1" : "getZ0"](n, i),
           d;
-		if(n<oS.W&&n>100){
-        Z && Z.Altitude == 1 && (Z.PZ != PZ && (Z.getPea(Z, 75 * a.level, 0), isHit += 1), BDire = !BDire ? 1 : 0);
+		if(n<=oS.W&&n>=100){
+        Z && Z.Altitude == 1 && (Z.PZ != PZ && (Z.getPea(Z, 75 * a.level, 0)), isHit += 1, BDire = !BDire ? 1 : 0);
         while (Kind--) {
           (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && PZ && (PlayAudio("splat1"),isHit += 1, BDire = (!BDire ? 1 : 0), d.getHurt(a, 3, 75 * a.level))
         }
 		}
-        isHit > 5 ? ClearChild(j) : (((n += (l = BDire ? -5 : 5)) > oS.W || n < 100) && (BDire = !BDire ? 1 : 0), j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o, BDire, isHit, PZ]))
+        isHit > 10 ? ClearChild(j) : (((n += (l = BDire ? -5 : 5)) > oS.W || n < 100) && (BDire = !BDire ? 1 : 0), j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o, BDire, isHit, PZ]))
       },
       [b, $(b), a.ZX, a.R, a.ZX, a.PZ, 0, a.PZ])
   },
