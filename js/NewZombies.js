@@ -945,7 +945,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     var a = $Z[c];
     a&&(a.EleBody.src = a.PicArr[a.LadGif]);
     oSym.addTask(50, function(a, b) {
-      a&&a.beAttacked&&($P[b]&&(a.Ornaments&&$P[b].getLadder(), !a.num&&$P[b].canEat&&(a.OrnHP=0,a.getHit0(a, a.OrnHP, 0))), a.JudgeAttack());
+      a&&a.beAttacked&&($P[b]&&$P[b].canEat&&(a.Ornaments&&$P[b].getLadder(), !a.num&&(a.OrnHP=0,a.getHit0(a, 0, 0))), a.JudgeAttack());
     }, [a, b])
   },
   canLadderList: {
