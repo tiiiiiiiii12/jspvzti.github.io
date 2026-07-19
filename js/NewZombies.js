@@ -460,7 +460,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
       z.appendChild(Nut);
 	  oSym.addTask(1500,function(c){
-		  c.canWalk(c,c.id)&&c.beAttacked&&(CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(1500,arguments.callee,[c]));
+		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan1"),CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(1200,arguments.callee,[c]));
 	  },[c]);
 	},
 	PrivateDie:function(c){
@@ -601,7 +601,7 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpH
 	PicArr:oPeaZombie.prototype.PicArr,
 	Produce: '他过一段时间会给你的阵容以“火热”的惊喜<p>韧性：<font color="#FF0000">中（500）</font><br>特点：<font color="#FF0000">过段时间爆炸</font><br>精英形态一：<font color="#FF0000">在本路爆炸时，另外随机一行产生爆炸</font><br>精英形态二：<font color="#FF0000">爆炸烧死植物时在植物的格子召唤一个小鬼僵尸</font><br>他对待什么都是热情似火'
 }),
-oPeaShooterZombie=oPeaZombie,
+oPeashooterZombie=oPeaZombie,
 oSquashZombie = InheritO(oScreenDoorZombie, {
   EName: "oSquashZombie",
   CName: "窝瓜铁门僵尸",
@@ -705,9 +705,10 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
             return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<p>韧性：<font color="#FF0000">中（450，发怒后50%减伤）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后2.5倍(失去报纸后)<br>精英形态：<font color="#FF0000">暂无</font></p>读报僵尸总是误伤别人',
+        Produce: '他的报纸只能提供有限的防御，失去报纸后快速发射豌豆<p>韧性：<font color="#FF0000">中（450，发怒后50%减伤）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>精英形态：<font color="#FF0000">发怒后攻速减半，速度为0，几秒后射速加快，快速移动</font></p>读报僵尸总是误伤别人',
 		jinyinAct:function(a){
-			a.HP*=1.5;
+			a.shootPeaSpeed*=2;
+			a.LostPaperSpeed=0;
 		},
 		bedevil:oPeaZombie.prototype.bedevil,
 		  shootPea: function() {
@@ -759,9 +760,12 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
                             i = k.OSpeed = k.LostPaperSpeed;
                         k.ChkActs =!k.WalkDirection?j.ChkActs:j.ChkActs1;
                         k.ChkActs1 = j.ChkActs1;
-						k.tasktime*=0.4;
+						k.tasktime*=0.25;
 						k.jianshang=0.5;
     k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (k.pixelTop + 60) + "px;visibility:hidden;z-index:" + (k.zIndex + 2));
+	k.jinyin&&oSym.addTask(600,function(k){
+	    k&&(k.Speed=k.OSpeed=8.1,k.shootPeaSpeed/=5,k.tasktime/=2,PlayAudio("newspaper_rarrgh2"));
+	},[k]);
     oSym.addTask(k.shootPeaSpeed, function(k,m) {
       k.canWalk(k,m) && k.beAttacked && k.shootPea(k);
       $Z[k.id] ? oSym.addTask(k.shootPeaSpeed, arguments.callee, [k,m]) : k.BulletEle = null;
@@ -871,7 +875,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
 	  oSym.addTask(50,function(a,b){
 	  if (!a) return;
       PlayAudio("cherrybomb");
-      b.PZ && (function(k, g) {
+      b.PZ && (function(k, g,b) {
         var q = Math.max(1, k - 1),
           o = Math.min(oS.R, k + 1),
           n = Math.max(1, g - 1),
@@ -885,11 +889,11 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
           do {
             j = q + "_" + g + "_";
             for (l = 0; l < 4; l++) {
-              (m = r[j + l]) && m.getHurt(m, 3, 1600)
+              (m = r[j + l]) && m.getHurt(m, 3, 1600*b.level)
             }
           } while (g++ < h)
         } while (q++ < o)
-      })(a.R, GetC(a.AttackedLX + 20));
+      })(a.R, GetC(a.AttackedLX + 20),b);
       (function(j, l,b) {
         var m = j - 120,
           o = j + 120,
@@ -900,7 +904,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
         do {
           k = (n = oZ["getAr" + (b.PZ ? "HZ" : "Z")](m, o, h)).length;
           while (k--) {
-            n[k].getExplosion(1600)
+            n[k].getExplosion(1600*b.level)
           }
         } while (h++ < g)
       })(a.AttackedLX, a.R,b);
@@ -941,7 +945,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     var a = $Z[c];
     a&&(a.EleBody.src = a.PicArr[a.LadGif]);
     oSym.addTask(50, function(a, b) {
-      a&&a.beAttacked&&($P[b] &&a.Ornaments&&$P[b].getLadder(), !a.num&&a.getHit0(a, a.OrnHP, 0), a.JudgeAttack());
+      a&&a.beAttacked&&($P[b] &&a.Ornaments&&$P[b].getLadder(), !a.num&&(a.OrnHP=0,a.getHit0(a, a.OrnHP, 0)), a.JudgeAttack());
     }, [a, b])
   },
   canLadderList: {
