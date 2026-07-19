@@ -2612,7 +2612,7 @@ jinyinWalkGif12: 14,
             switch (true) {
                 case (d.HP = c -=b*d.jianshang) < 60:
 					if(d.num>=50){
-						d.HP=391;
+						d.HP=390;
 					}
                     d.GoingDie();
                     d.getHit0 = d.getHit1 = d.getHit2 = d.getHit3 = function(d,b) {(d.HP-=b)<0&&d.NormalDie()};
@@ -2743,7 +2743,7 @@ jinyinWalkGif12: 14,
       $Z[a.id]&&(PlayAudio("frozen"),oSym.addTask(1000, arguments.callee, [a]))
     }, [a])):(a.getExplosion=a.getThump=function(b){
 		if(b==undefined){var b=1800}
-		a.getHit0(a,Math.min(b,a.num?a.HP-391:b),0)
+		a.getHit0(a,Math.min(b,a.num?a.HP-390:b),0)
 	});
 	a.PrivateAct=function(a){
 		var P=$(a.id);
