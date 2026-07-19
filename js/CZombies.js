@@ -2611,11 +2611,14 @@ jinyinWalkGif12: 14,
             var c = d.HP;
             switch (true) {
                 case (d.HP = c -=b*d.jianshang) < 60:
+					if(d.num>=50){
+						d.HP=391;
+					}
                     d.GoingDie();
                     d.getHit0 = d.getHit1 = d.getHit2 = d.getHit3 = function(d,b) {(d.HP-=b)<0&&d.NormalDie()};
                     return;
                 case c < 391:
-					d.num&&(d.OSpeed=d.Speed=4.8,$(d.Ele.FumeDoor).src="images/Plants/PB10.gif");
+					d.num>=50&&(d.OSpeed*=2,d.Speed*=2,$(d.Ele.FumeDoor).src="images/Plants/PB10.gif",d.num=0);
                     d.EleBody.src = "images/Zombies/Zomboni/3.gif";
                     break;
                 case c < 871:
@@ -2652,7 +2655,7 @@ jinyinWalkGif12: 14,
             Speed: 2.5,
             AKind: 2,
             Attack: 50,
-            Produce: '冰车僵尸运用冰雪，碾过你的植物。<br>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">碾压植物，留下条冰道</font><br>精英形态一：<font color="#FF0000">辣椒冰车，重度损伤时加速</font><br>精英形态二：<font color="#FF0000">寒冰菇冰车，每隔10s冻结周围植物5s并对其造成伤害，有20%减伤</font><br>经常被误以为是在驾驶着冰车的僵尸，但事实上冰车僵尸是种完全不同的生物形式，他与太空兽人联系更紧密而不是僵尸。',
+            Produce: '冰车僵尸运用冰雪，碾过你的植物。<br>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">碾压植物，留下条冰道</font><br>精英形态一：<font color="#FF0000">辣椒冰车，重度损伤时加速，加速前可抗一次致命伤害</font><br>精英形态二：<font color="#FF0000">寒冰菇冰车，每隔10s冻结周围植物5s并对其造成伤害，有20%减伤</font><br>经常被误以为是在驾驶着冰车的僵尸，但事实上冰车僵尸是种完全不同的生物形式，他与太空兽人联系更紧密而不是僵尸。',
             PicArr: (function() {
                 var b = "images/Zombies/Zomboni/";
                 return ["images/Card/Zombies/Zomboni.png", b + "0.gif", b + "1.gif", b + "2.gif", b + "3.gif", b + "4.gif", b + "5.gif" + $Random, b + "BoomDie.gif" + $Random, b + "ice.png", b + "ice_cap.png"]
@@ -2717,12 +2720,12 @@ jinyinWalkGif12: 14,
             },
 			WalkToLadder:function(){},
 			jinyinAct:function(a){
-				a.num=Math.round(Math.random()*1+0)||a.Privatenum;
+				a.num=Math.random()*100||a.Privatenum;
 				var z=$(a.id);
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:125px;top:280px;", 0);
+    var Sh = NewImg(z.FumeDoor, a.num>50 ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:125px;top:280px;", 0);
     z.appendChild(Sh);
-    !a.num && (a.jianshang*=0.8,oSym.addTask(500, function(a) {
+    a.num<50 ? (a.jianshang*=0.8,oSym.addTask(500, function(a) {
 		var LR=Math.max(a.R-1,1);
 		do{
         let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.ZX - 120,a.ZX + 120, LR),
@@ -2736,10 +2739,12 @@ jinyinWalkGif12: 14,
         while (Tz--) {
           (t = A[Tz])&&a.canWalk(a,a.id)&& (t.getFreeze(t,t.id,500),t.getHit2(t,50*a.level))
         };
-		PlayAudio("frozen");
 	}while(LR++ < Math.min(a.R+1,oS.R))
-      $Z[a.id]&&oSym.addTask(1000, arguments.callee, [a])
-    }, [a]));
+      $Z[a.id]&&(PlayAudio("frozen"),oSym.addTask(1000, arguments.callee, [a]))
+    }, [a])):(a.getExplosion=a.getThump=function(b){
+		if(b==undefined){var b=1800}
+		a.getHit0(a,Math.min(b,a.num?a.HP-391:b),0)
+	});
 	a.PrivateAct=function(a){
 		var P=$(a.id);
 		(a.WalkDirection == a.check) && (
