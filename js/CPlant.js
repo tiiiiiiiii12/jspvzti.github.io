@@ -290,7 +290,7 @@ getLadder:function() {
         CName: "脑子",
         width: 32,
         height: 31,
-        beAttackedPointL: 0,
+        beAttackedPointL: -10,
         beAttackedPointR: 32,
         SunNum: 0,
         PicArr: ["images/interface/brain.png"],
