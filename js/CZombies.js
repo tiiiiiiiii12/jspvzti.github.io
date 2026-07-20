@@ -1189,14 +1189,26 @@ Birth: function() {
             return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "Zombie.gif", a + "ZombieAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif", a + "jinyinZombieWalk.gif", a + "jinyinZombieAttack.gif"]
         })(),
 		jinyinAct:function(a){
+		a.num=Math.random()*100||a.Privatenum;
+			if(a.num>=50){
 			a.NormalGif=a.jinyinGif;
 			a.AttackGif=a.jinyinAttackGif;
 			a.EleBody.src=a.PicArr[a.NormalGif];
 			a.OSpeed*=2;
 			a.Speed*=2;
 			a.tasktime*=0.5;
+			}else{
+				var b=CustomZombie(window[a.EName],a.R,Math.max(Math.round(Math.random*5+(GetC(a.ZX)-2),4),!a.PZ);
+				b.jinyinAct=function(){};
+				b.jinyinnum=100;
+				b.PrivateBirth=function(b){
+					b.EleBody.style.top=(b.height)+"px";
+					b.AppearDownZ(b);
+				}
+				a.DisappearDie();
+			}
 		},
-        Produce: '韧性：<font color="#FF0000">低</font><br>精英形态：红眼，两倍速度，两倍伤害<br>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
+        Produce: '韧性：<font color="#FF0000">低</font><br>精英形态一：<font color="#FF0000">红眼僵尸，速度和伤害翻倍</font>精英形态二：<font color="#FF0000">入场直接瞬移至场地内</font><br>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
     }),
     oZombie2 = InheritO(oZombie, {
         EName: "oZombie2"
@@ -3424,6 +3436,12 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
                     }()
                 };
 			a.ChkActs=CZombies.prototype.ChkActs;
+			a.PrivateAct=function(f){
+				if (f.Altitude == 3 && f.AttackedRX < GetX(1)) { // 气球掉落
+				f.getHit0(f,f.OrnHP);
+                f.Drop();
+              }
+			}
 		},
         AudioArr: ["ballooninflate", "balloon_pop"],
         BookHandPosition: "80% 80%",
