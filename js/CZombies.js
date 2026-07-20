@@ -2748,10 +2748,8 @@ jinyinWalkGif12: 14,
 	a.PrivateAct=function(a){
 		var P=$(a.id);
 		(a.WalkDirection == a.check) && (
-     EditImg($(P.FumeDoor), 0, a.num ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", {
-            transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
-            left: !a.WalkDirection ? "125px" : "270px"
-          }, 0),a.check = a.WalkDirection?0:1);
+     $(P.FumeDoor).style.transform=!a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
+     $(P.FumeDoor).style.left=!a.WalkDirection ? "125px" : "270px",a.check = a.WalkDirection?0:1);
 	}
 			},
             getPea: function(c, b) {
@@ -3482,7 +3480,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
                         c.BoomDieGif = 11;
                         c.Altitude = 1;
 						c.WalkToLadder=CZombies.prototype.WalkToLadder;
-                        c.OSpeed = c.Speed = 1.6;
+                        c.OSpeed = c.Speed = 2;
                         c.getFreeze = OrnIZombies.prototype.getFreeze;
                         c.EleBody.src = "images/Zombies/BalloonZombie/Walk.gif";
                         c.ChkActs = OrnIZombies.prototype.ChkActs;
