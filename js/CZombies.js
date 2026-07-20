@@ -1198,7 +1198,7 @@ oZombie = InheritO(OrnNoneZombies, {
       a.Speed *= 2;
       a.tasktime *= 0.5;
     } else {
-      var b = CustomZombie(window[a.EName], a.R, Math.min(Math.round(Math.random() * 4 + 4), GetC(a.ZX)), !a.PZ);
+      var b = CustomZombie(window[a.EName], a.R, Math.min(Math.round(Math.random() * 4 + 5), GetC(a.ZX)), !a.PZ);
       b.jinyinAct = function() {};
       b.jinyinnum = 100;
       b.PrivateBirth = function(b) {
