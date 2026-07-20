@@ -1198,7 +1198,7 @@ Birth: function() {
 			a.Speed*=2;
 			a.tasktime*=0.5;
 			}else{
-				var b=CustomZombie(window[a.EName],a.R,Math.max(Math.round(Math.random*5+(GetC(a.ZX)-2),4)),!a.PZ);
+				var b=CustomZombie(window[a.EName],a.R,Math.max(Math.round(Math.random*(GetC(a.ZX)-2)+(GetC(a.ZX)-6)),4),!a.PZ);
 				b.jinyinAct=function(){};
 				b.jinyinnum=100;
 				b.PrivateBirth=function(b){
