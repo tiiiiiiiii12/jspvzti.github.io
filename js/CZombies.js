@@ -1208,7 +1208,7 @@ Birth: function() {
 				a.DisappearDie();
 			}
 		},
-        Produce: '韧性：<font color="#FF0000">低</font><br>精英形态一：<font color="#FF0000">红眼僵尸，速度和伤害翻倍</font>精英形态二：<font color="#FF0000">入场直接瞬移至场地内</font><br>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
+        Produce: '韧性：<font color="#FF0000">低</font><br>精英形态一：<font color="#FF0000">红眼僵尸，速度和伤害翻倍</font><br>精英形态二：<font color="#FF0000">入场直接瞬移至场地内</font><br>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
     }),
     oZombie2 = InheritO(oZombie, {
         EName: "oZombie2"
