@@ -3109,8 +3109,8 @@ oImp = InheritO(OrnNoneZombies, {
     return 0
   },
   jinyinAct: function(a) {
-   a.num=Math.random()*100||a.Privatenum;
-	  if(a.num>=50){
+a.num=Math.random()*100||a.Privatenum;
+if(a.num>=50){
     var z = a.Ele;
     z.JaHead = "Ja" + Math.random();
 	a.JudgeAttack=function(){};
