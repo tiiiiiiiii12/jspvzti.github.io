@@ -757,6 +757,9 @@ while (e--) {
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次发射2~3颗豌豆",
         Produce: '双发射手可以一次发射2~3颗豌豆<br>精英形态：攻击额外发射速度不同的豌豆，速度越快伤害越高<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">2～3倍</font></p>双发射手很凶悍，他是在街头混大的。他不在乎任何人的看法，无论是植物还是僵尸，他打出豌豆，是为了让别人离他远点。其实呢，双发射手一直暗暗地渴望着爱情。',
+		jinyinAct:function(a){
+			a.AttTime=160;
+		},
         NormalAttack1: oPeashooter.prototype.NormalAttack,
 		NormalAttack2: function() {
             var a = this,
@@ -1110,8 +1113,11 @@ NormalAttack:function(a){
             e.canTrigger = e.aTri[0] && e.aTri[1] ? 0 : 1
         },
 		jinyinAct:function(a){
-			CustomSpecial(oPeashooter,a.R,0).jinyin=0;
-			CustomSpecial(oRepeater2,a.R,10).jinyin=0
+			var b=CustomSpecial(oPeashooter,a.R,0);
+			b.jinyin=b.canEat=0;
+			b.Ele.style.opacity=1;
+			var c=CustomSpecial(oRepeater2,a.R,10);
+			c.AttTime=c.canEat=c.jinyin=0
 		},
         CheckLoop: function(a, b) {
             this.NormalAttack(b);
@@ -1722,7 +1728,7 @@ NormalAttack:function(a){
         HP: 8000,
         PicArr: ["images/Card/Plants/TallNut.png", "images/Plants/TallNut/0.gif", "images/Plants/TallNut/TallNut.gif", "images/Plants/TallNut/TallnutCracked1.gif", "images/Plants/TallNut/TallnutCracked2.gif"],
         Tooltip: "不会被跳过的坚实壁垒",
-        Produce: '高坚果是重型壁垒植物，而且不会被跨过<p>韧性：<font color="#FF0000">非常高</font><br>精英形态：随血量召唤增强的特定僵尸<br>特殊：<font color="#FF0000">不会被跨过或越过</font></p>人们想知道，坚果墙和高坚果是否在竞争。高坚果以男中音的声调大声笑了。“我们之间怎么会存在竞争关系？我们是哥们儿。你知道坚果墙为我做了什么吗……”高坚果的声音越来越小，他狡黠地笑着。”',
+        Produce: '高坚果是重型壁垒植物，而且不会被跨过，能将碾压转化为2000伤害且限伤2000<p>韧性：<font color="#FF0000">非常高</font><br>精英形态：给本行的非防御植物替伤<br>特殊：<font color="#FF0000">不会被跨过或越过</font></p>人们想知道，坚果墙和高坚果是否在竞争。高坚果以男中音的声调大声笑了。“我们之间怎么会存在竞争关系？我们是哥们儿。你知道坚果墙为我做了什么吗……”高坚果的声音越来越小，他狡黠地笑着。”',
         CanGrow: function(c, b, f) {
             var a = b + "_" + f,
                 d = c[1],
@@ -1730,20 +1736,35 @@ NormalAttack:function(a){
             return e ? oGd.$LF[b] == 1 ? f > 0 && f < e.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a]==1 || d) : c[0] && !d : d && d.EName == "oTallNut" ? 1 : oGd.$LF[b] == 1 ? !(f < 1 || f > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1 || d) : c[0] && !d
         },
         Stature: 1,
-        JudgeHurtCustom:function(c){
-                var d;
-                c.HP < 1 ? CustomZombie(oGargantuar,c.R,c.C,1): 
-                c.HP < 2000? c.CustomStatus < 3 && (c.CustomStatus = 3,(d=CustomZombie(oFootballZombie,c.R,c.C,1)).OrnHP*=1.5,d.jinyinnum=100):
-                c.HP < 4000? c.CustomStatus < 2 && (c.CustomStatus = 2,CustomZombie(oConeheadZombie,c.R,c.C,1).jinyinnum=100):
-                c.HP < 6000 && c.CustomStatus < 1 && (c.CustomStatus = 1, (d=CustomZombie(oZombie,c.R,c.C,1)).HP*=3,d.jinyinnum=100)
+        jinyinAct:function(a){
+    for (let i = 1; i <= oS.C; i++) {
+      var b = oGd.$[a.R + "_" + i + "_" + 1];
+      $P[a.id]&&b && (b.getHurt == CPlants.prototype.getHurt && (b.getHurt = function(h, c, b) {
+        var d = this,
+          num,
+          a = d.id;
+        for (let i = oS.C; i >= 1; i--) {
+          var e = oGd.$[d.R + "_" + i + "_" + 1];
+          e && (e.EName == "oTallNut") && !num && (e.getHurt(h, c, b), num = 1)
+        };
+	  },
+	b.getHurt1=b.getHurt))
+    }
+    $P[a.id] && oSym.addTask(1, arguments.callee, [a]);
         },
+	PrivateDie:function(a) {
+    for (let i = 1; i <= oS.C; i++) {
+      var b = oGd.$[a.R + "_" + i + "_" + 1];
+      a.jinyin&&b&&(b.getHurt1==b.getHurt&&(b.getHurt = CPlants.prototype.getHurt))
+    }
+  },
         getHurt: function(e, b, a) {
             var c = this,
                 d = $(c.id).childNodes[1];
-            !(b % 3) ? (c.HP -= a) < 1 ? (c.Die()): 
+			b % 3 &&(a=2000,$Z[e.id]&&e.getr(e,100,1));
+             (c.HP -= Math.min(a,2000)) < 1 ? (c.Die()): 
                     c.HP < 2667 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/TallNut/TallnutCracked2.gif") : 
-                    c.HP < 5333 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/TallNut/TallnutCracked1.gif"): c.Die();
-                   c.jinyin&&c.JudgeHurtCustom(c);             
+                    c.HP < 5333 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/TallNut/TallnutCracked1.gif");          
         }
     }),
     oCherryBomb = InheritO(CPlants, {
@@ -1765,7 +1786,7 @@ NormalAttack:function(a){
 		a.PrivateDie=function(a){
 			var b;
 			oSym.addTask(0,function(a,b,num,maxnum){
-				((b=CustomZombie(oJackinTheBoxZombie,Math.round(Math.random()*5+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=0,b.PrivateBirth=function(b){b.EleBody.style.top=b.height+"px";b.AppearDownZ(b)});
+				((b=CustomZombie(oJackinTheBoxZombie,Math.round(Math.random()*5+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=30,b.PrivateBirth=function(b){b.EleBody.style.top=b.height+"px";b.AppearDownZ(b)});
 				++num<maxnum&&oSym.addTask(0,arguments.callee,[a,b,num,maxnum]);
 			},[a,b,0,Math.round(Math.random()*3+4)])
 		 }
@@ -2072,7 +2093,7 @@ NormalAttack:function(a){
 			var lastR=Math.max(1,a.R-1),h;
 			do{
 				if(lastR!=a.R){
-				var Ch=oZ.getArZ(a.AttackedLX,a.AttackedRX+200,lastR),
+				var Ch=oZ.getArZ(a.AttackedLX,a.AttackedRX+120,lastR),
 				Zlength = Ch.length;
 				while (Zlength--) {
                 $P[a.id]&&(h = Ch[Zlength]).Altitude==1&&a.changeZ&&h.ChangeR({R: h.R,ar: [a.R]})
@@ -2213,7 +2234,7 @@ jinyinAttackGif2: 8,
 		j&&(--t?oSym.addTask(1,arguments.callee,[Z,zl,t,c]):(j.canTrigger=1,$(c).childNodes[1].src = j.PicArr[j.NormalGif],
 		j.getTriggerR=oGatlingPea.prototype.getTriggerR,
 		j.oTrigger&&oT.delP(j),
-		j.InitTrigger(j,c,j.R,j.C,j.AttackedLX,j.AttackedRX)))//重置索敌
+		j&&j.InitTrigger(j,c,j.R,j.C,j.AttackedLX,j.AttackedRX)))//重置索敌
 	  },[Z,zl,20,c])
       }
     } while (R++ < Math.min(j.R + 1, oS.R))
