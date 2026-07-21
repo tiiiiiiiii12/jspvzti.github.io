@@ -1198,6 +1198,7 @@ oZombie = InheritO(OrnNoneZombies, {
       a.Speed *= 2;
       a.tasktime *= 0.5;
     } else {
+	oSym.addTask(1,function(a){
       var b = CustomZombie(window[a.EName], a.R, Math.min(Math.round(Math.random() * 4 + 5), GetC(a.ZX)), !a.PZ);
       b.jinyinAct = function() {};
       b.jinyinnum = 100;
@@ -1206,6 +1207,7 @@ oZombie = InheritO(OrnNoneZombies, {
         b.AppearDownZ(b);
       }
       a.DisappearDie();
+	},[a])
     }
   },
   Produce: '韧性：<font color="#FF0000">低</font><br>精英形态一：<font color="#FF0000">红眼僵尸，速度和伤害翻倍</font><br>精英形态二：<font color="#FF0000">入场直接瞬移至场地内</font><br>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
@@ -1235,9 +1237,9 @@ oZombie = InheritO(OrnNoneZombies, {
         CName: "旗帜僵尸",
         OSpeed: 3.3,
         Speed: 3.3,
-		HP:400,
+		HP:500,
 		increaseSpeed:1.5,
-		SunNum:200,
+		SunNum:150,
 		PrivateAct:function(a){
 			for (u in $Z) {
               e = $Z[u];	
@@ -1246,7 +1248,7 @@ oZombie = InheritO(OrnNoneZombies, {
 				e.OSpeed*=a.increaseSpeed;
 				e.Speed*=a.increaseSpeed;
 				e.LostPaperSpeed*=a.increaseSpeed;
-				e.tasktime*=a.jinyin?0.25:0.5;
+				e.tasktime*=0.5;
 			}
 		}
 	},
@@ -1258,7 +1260,7 @@ oZombie = InheritO(OrnNoneZombies, {
 				e.OSpeed/=a.increaseSpeed;
 				e.Speed/=a.increaseSpeed;
 				e.LostPaperSpeed/=a.increaseSpeed;
-				e.tasktime/=a.jinyin?0.25:0.5;
+				e.tasktime/=0.5;
 			}
 		}},
 		jinyinAct:function(a){
@@ -1321,7 +1323,7 @@ oZombie = InheritO(OrnNoneZombies, {
         CName: "路障僵尸",
         OrnHP: 370,
         Lvl: 2,
-        SunNum: 100,
+        SunNum: 75,
         StandGif: 11,
         PicArr: (function() {
             var b = "images/Zombies/ConeheadZombie/",
@@ -1470,7 +1472,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
   CName: "橄榄球僵尸",
   OrnHP: 1600,
   Lvl: 4,
-  SunNum: 225,
+  SunNum: 200,
   StandGif: 11,
   width: 154,
   height: 160,
@@ -1747,7 +1749,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
         OrnHP: 150,
         Lvl: 3,
 		HP:450,
-		SunNum:75,
+		SunNum:100,
         LostPaperGif: 13,
         StandGif: 14,
         width: 216,
@@ -3107,12 +3109,14 @@ oImp = InheritO(OrnNoneZombies, {
     return 0
   },
   jinyinAct: function(a) {
+   a.num=Math.random()*100||a.Privatenum;
+	  if(a.num>=50){
     var z = a.Ele;
     z.JaHead = "Ja" + Math.random();
 	a.JudgeAttack=function(){};
     var Ja = NewImg(z.JaHead, "images/Plants/PotatoMine/PotatoMineNotReady.gif", "position:absolute;transform:rotateY(180deg);left:0px;top:20px;", 0);
     z.appendChild(Ja);
-	oSym.addTask(300,function(a,z){
+	oSym.addTask(250,function(a,z){
 	z.JaHead&&($(z.JaHead).src="images/Plants/PotatoMine/PotatoMine.gif");
     a.PrivateAct = function(a) {
       var p = a.Ele;
@@ -3146,11 +3150,18 @@ oImp = InheritO(OrnNoneZombies, {
       !a.beAttacked && ClearChild($(p.JaHead));
     }
 	},[a,z]);
+	}else{
+		a.hiddenCard=Math.floor(Math.random()*$("dCardList").childNodes.length);
+		a.PZ&&oS.StaticCard&&(oS.CardKind?AppearCard(a.ZX,GetY(a.R),oImp,0,1500):SetHidden($("dCardList").childNodes[a.hiddenCard]));
+		a.PrivateDie=function(a){
+			SetVisible($("dCardList").childNodes[a.hiddenCard])
+		}
+	}
   },
   getShadow: function(a) {
     return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 32) + "px"
   },
-  Produce: '小淘气们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。<br>精英形态：携带土豆雷，3秒后出土，对植物或敌对僵尸造成1000范围伤害<p>韧性：<font color="#FF0000">低</font><br>小淘气虽然瘦小，却很结实。他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴。',
+  Produce: '小淘气们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。<br>精英形态一：<font color="#FF0000">携带土豆雷，2.5秒后出土，对植物或敌对僵尸造成1000范围伤害</font><br>精英形态二：<font color="#FF0000">随机隐藏一个卡槽，死亡后复原</font><br>韧性：<font color="#FF0000">低</font><br>小淘气虽然瘦小，却很结实。他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴。',
   GoingDie: function() {
     var b = this,
       c = b.id,
