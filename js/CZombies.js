@@ -3117,7 +3117,7 @@ if(a.num>=50){
     var Ja = NewImg(z.JaHead, "images/Plants/PotatoMine/PotatoMineNotReady.gif", "position:absolute;transform:rotateY(180deg);left:0px;top:20px;", 0);
     z.appendChild(Ja);
 	oSym.addTask(250,function(a,z){
-	z.JaHead&&($(z.JaHead).src="images/Plants/PotatoMine/PotatoMine.gif");
+	$(z.JaHead)&&($(z.JaHead).src="images/Plants/PotatoMine/PotatoMine.gif");
     a.PrivateAct = function(a) {
       var p = a.Ele;
       if (!a.bool && a.beAttacked&&a.canWalk(a,a.id)) {
