@@ -18,6 +18,7 @@ oS.Init({
 		[oZombie3, 2, 1],
 		[oConeheadZombie, 2, 1],
 		[oPoleVaultingZombie, 1, 1],
+		[oBucketheadZombie, 1, 1],
 		[oImp, 1, 1],
 		[oPeaZombie, 1, 1]
 	],
@@ -49,5 +50,4 @@ oS.Init({
 		});
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:185px;left:676px", EDAll)
 	}
-
 });
