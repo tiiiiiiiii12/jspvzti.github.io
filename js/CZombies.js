@@ -1199,7 +1199,7 @@ oZombie = InheritO(OrnNoneZombies, {
       a.tasktime *= 0.5;
     } else {
 	oSym.addTask(1,function(a){
-      var b = CustomZombie(window[a.EName], a.R, Math.min(Math.round(Math.random() * 4 + 5), GetC(a.ZX)), !a.PZ);
+      var b = CustomZombie(oZombie, a.R, Math.min(Math.round(Math.random() * 4 + 5), GetC(a.ZX)), !a.PZ);
       b.jinyinAct = function() {};
       b.jinyinnum = 100;
       b.PrivateBirth = function(b) {
@@ -3171,8 +3171,10 @@ if(a.num>=50){
     b.FreeFreezeTime = b.FreeSetbodyTime = b.FreeSlowTime = 0;
     b.AutoReduceHP(c)
   },
+PrivateDie:function(){},
   NormalDie: function() {
     var a = this;
+	a.PrivateDie(a);
     oSym.addTask(250, ClearChild, [a.Ele]);
     a.HP = 0;
     delete $Z[a.id];
@@ -3180,6 +3182,7 @@ if(a.num>=50){
   },
   CrushDie: function() {
     var a = this;
+	a.PrivateDie(a);
     ClearChild(a.Ele);
     a.HP = 0;
     delete $Z[a.id];
