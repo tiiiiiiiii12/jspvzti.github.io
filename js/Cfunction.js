@@ -1559,6 +1559,8 @@ SetPlusZombie=function(){
 PrivateTombstones=function(h,b){
 	var f;
 	if(!oGd.$Tombstones[h+ "_" +b]){
+	ClearChild($("dTombstones" + h+ "_" +b);
+	oGd.$Tombstones[h+ "_" +b]=0;
 for (f = 0; f < 4; f++) { (l = oGd.$[h+ "_" + b+"_"+f]) && l.Die()
 		} 
 A= NewEle("dTombstones" +h+ "_"+b, "div", "position:absolute;width:86px;height:91px;left:" + (GetX(b) - 43) + "px;top:" + (GetY(h) - 91) + "px", 0, EDAll);
@@ -1574,8 +1576,10 @@ var c;
  },
 PrivateTombstones1=function(h,b){
 	var f;
-	if(!oGd.$Tombstones[h+ "_" +b]){
-A= NewEle("dTombstones" +h+ "_"+b, "div", "position:absolute;width:86px;height:91px;transform:rotateY(180deg);left:" + (GetX(b) - 43) + "px;top:" + (GetY(h) - 91) + "px", 0, EDAll);
+	ClearChild($("dTombstones" + h+ "_" +b);
+	oGd.$Tombstones[h+ "_" +b]=0;
+	if(!oGd.$Tombstones1[h+ "_" +b]){
+A= NewEle("dTombstones1" +h+ "_"+b, "div", "position:absolute;width:86px;height:91px;transform:rotateY(180deg);left:" + (GetX(b) - 43) + "px;top:" + (GetY(h) - 91) + "px", 0, EDAll);
 oGd.$Tombstones1[h+ "_" +b] = 1;
 h = Math.floor(Math.random() * 4);
 b = Math.floor(Math.random() * 2);
