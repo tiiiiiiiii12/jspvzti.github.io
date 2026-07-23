@@ -1428,12 +1428,12 @@ oZombie = InheritO(OrnNoneZombies, {
 			a.AttackGif=a.jinyinAttackGif;
 			a.EleBody.src=a.PicArr[a.NormalGif];
 			a.PrivateAttack=function(a,b){
-				a&&$P[b]&&$P[b].HP<220&&(PrivateTombstones(a.R,GetC(a.ZX)))
+				a&&$P[b]&&$P[b].HP<220&&(PrivateTombstones($P[b].R,$P[b].C))
 			};
 			a.PrivateAct=function(a){
 				if(!a.bool){
 					var z=oZ[a.PZ?"getHZ1":"getZ0"](a.ZX,a.R);
-					a.isAttacking&&(z.OrnHP+z.HP)*z.jianshang<220&&(z.DisappearDie(),a.PZ?PrivateTombstones(a.R,GetC(a.ZX)):PrivateTombstones1(a.R,GetC(a.ZX)));
+					a.isAttacking&&(z.OrnHP+z.HP)*z.jianshang<220&&(a.PZ?PrivateTombstones(z.R,GetC(z.ZX)):PrivateTombstones1(z.R,GetC(z.ZX)),z.DisappearDie());
 					if(a.OrnHP<1){
 					a.PZ?PrivateTombstones(a.R,GetC(a.ZX)):PrivateTombstones1(a.R,GetC(a.ZX));
 					a.PrivateAttack=function(){};
