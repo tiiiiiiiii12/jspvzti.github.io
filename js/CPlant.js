@@ -228,7 +228,7 @@ getLadder:function() {
                         c,
                         d,
                         f;
-                    e && (d = e.R, f = e.C, delete oGd.$Tombstones[c = d + "_" + f], e.Die(), !e.jinyin?ClearChild($("dTombstones" + c)):($("dTombstones" + c).style.transform="rotateY(180deg)",oGd.$Tombstones1[c]=1),
+                    e && (d = e.R, f = e.C, delete oGd.$Tombstones[c = d + "_" + f], ClearChild($("dTombstones" + c)),e.jinyin&&PrivateTombstones1(d,f),e.Die(), 
                           oS.StaticCard && AppearSun(Math.floor(GetX(f) + Math.random() * 41), GetY(d), 40, 0))
                 },
                 [a.id])
