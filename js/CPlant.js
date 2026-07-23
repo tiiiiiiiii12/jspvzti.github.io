@@ -405,7 +405,7 @@ oStarfruit = InheritO(CPlants, {
   getHurt: function(d, b, a) {
     var c = this;
     !b && c.NormalAttack();
-    ((c.HP -= a) < 1||b) && c.Die()
+    ((c.HP -= a) < 1||b%3) && c.Die()
   },
   SpecialHit: function(a) {//流星砸下来
     var Ele = "Boom_" + a.id;
