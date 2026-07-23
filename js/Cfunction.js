@@ -1559,7 +1559,7 @@ SetPlusZombie=function(){
 PrivateTombstones=function(h,b){
 	var f
 	if(oGd.$Tombstones1[h+ "_" +b]){
-	ClearChild($("dTombstones1" + h+ "_" +b);
+	ClearChild($("dTombstones1" + h+ "_" +b));
 	delete oGd.$Tombstones1[h+ "_" +b];
 	}
 	if(!oGd.$Tombstones[h+ "_" +b]){
@@ -1579,7 +1579,7 @@ var c;
 PrivateTombstones1=function(h,b){
 	var f;
 	if(oGd.$Tombstones[h+ "_" +b]){
-	ClearChild($("dTombstones" + h+ "_" +b);
+	ClearChild($("dTombstones" + h+ "_" +b));
 	delete oGd.$Tombstones[h+ "_" +b];
 	}
 	if(!oGd.$Tombstones1[h+ "_" +b]){
