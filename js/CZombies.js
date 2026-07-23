@@ -1427,10 +1427,18 @@ oZombie = InheritO(OrnNoneZombies, {
 			a.NormalGif=a.jinyinGif;
 			a.AttackGif=a.jinyinAttackGif;
 			a.EleBody.src=a.PicArr[a.NormalGif];
+			a.PrivateAttack=function(a,b){
+				a&&$P[b]&&$P[b].HP<220&&(PrivateTombstones(a.R,GetC(a.ZX)))
+			};
 			a.PrivateAct=function(a){
-				if(!a.bool&&a.OrnHP<1){
+				if(!a.bool){
+					var z=oZ[a.PZ?"getHZ1":"getZ0"](a.ZX,a.R);
+					a.isAttacking&&(z.OrnHP+z.HP)*z.jianshang<220&&(z.DisappearDie(),a.PZ?PrivateTombstones(a.R,GetC(a.ZX)):PrivateTombstones1(a.R,GetC(a.ZX)));
+					if(a.OrnHP<1){
 					a.PZ?PrivateTombstones(a.R,GetC(a.ZX)):PrivateTombstones1(a.R,GetC(a.ZX));
+					a.PrivateAttack=function(){};
 					a.bool=1;
+					}
 				}
 			}
 		  }else{
@@ -1454,7 +1462,7 @@ oZombie = InheritO(OrnNoneZombies, {
 			},[a])
 		  }
 		},
-        Produce: '他的铁桶头盔，能极大程度的承受伤害。<p>韧性：<font color="#FF0000">高</font><br>精英形态一：铁桶被打掉后，原地生成墓碑</font><br>精英形态二：每隔一段时间给自己续铁桶</font><br>弱点：<font color="#FF0000">磁力菇</font></p>铁桶头僵尸经常戴着水桶，在冷漠的世界里显得独一无二。但事实上，他只是忘记了，那铁桶还在他头上而已。'
+        Produce: '他的铁桶头盔，能极大程度的承受伤害。<p>韧性：<font color="#FF0000">高</font><br>精英形态一：铁桶被打掉后，原地生成墓碑，铁桶掉落前可将前方血量低的植物变为墓碑</font><br>精英形态二：每隔一段时间给自己续铁桶</font><br>弱点：<font color="#FF0000">磁力菇</font></p>铁桶头僵尸经常戴着水桶，在冷漠的世界里显得独一无二。但事实上，他只是忘记了，那铁桶还在他头上而已。'
     }, {
         PicArr: {
             0: "images/Card/Zombies/BucketheadZombie.png",
@@ -1766,7 +1774,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
             return ["images/Card/Zombies/NewspaperZombie.png","images/Zombies/NewspaperZombie/0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadWalk0.gif", a + "LostHeadWalk0.gif", a + "LostHeadWalk0.gif", "images/Zombies/NewspaperZombie/Head.gif" + $Random, a + "Die.gif" + $Random,"images/Zombies/NewspaperZombie/BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（450）</font><br>精英形态一：破报进入假死状态，无减伤，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：破报犹豫时间变长，1.5倍速度和伤害，破报后拿出路牌碾压植物，发怒后50%减伤，发怒时使全场读报类僵尸解封<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（450）</font><br>精英形态一：破报进入假死状态，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：破报犹豫时间变长，速度提升，发怒后拿出路牌碾压植物，50%减伤生效，并使全场读报类僵尸解封<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
         getShadow: function(a) {
             return "left:75px;top:" + (a.height - 25) + "px"
         },
