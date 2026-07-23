@@ -1557,10 +1557,12 @@ SetPlusZombie=function(){
 	alert("已设置为"+a+"倍出怪");
 },
 PrivateTombstones=function(h,b){
-	var f;
+	var f
+	if(oGd.$Tombstones1[h+ "_" +b]){
+	ClearChild($("dTombstones1" + h+ "_" +b);
+	delete oGd.$Tombstones1[h+ "_" +b];
+	}
 	if(!oGd.$Tombstones[h+ "_" +b]){
-	ClearChild($("dTombstones" + h+ "_" +b);
-	oGd.$Tombstones[h+ "_" +b]=0;
 for (f = 0; f < 4; f++) { (l = oGd.$[h+ "_" + b+"_"+f]) && l.Die()
 		} 
 A= NewEle("dTombstones" +h+ "_"+b, "div", "position:absolute;width:86px;height:91px;left:" + (GetX(b) - 43) + "px;top:" + (GetY(h) - 91) + "px", 0, EDAll);
@@ -1576,8 +1578,10 @@ var c;
  },
 PrivateTombstones1=function(h,b){
 	var f;
+	if(oGd.$Tombstones[h+ "_" +b]){
 	ClearChild($("dTombstones" + h+ "_" +b);
-	oGd.$Tombstones[h+ "_" +b]=0;
+	delete oGd.$Tombstones[h+ "_" +b];
+	}
 	if(!oGd.$Tombstones1[h+ "_" +b]){
 A= NewEle("dTombstones1" +h+ "_"+b, "div", "position:absolute;width:86px;height:91px;transform:rotateY(180deg);left:" + (GetX(b) - 43) + "px;top:" + (GetY(h) - 91) + "px", 0, EDAll);
 oGd.$Tombstones1[h+ "_" +b] = 1;
