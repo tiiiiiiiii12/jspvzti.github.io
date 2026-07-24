@@ -698,25 +698,25 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
   GoingDie: CZombies.prototype.GoingDie,
   back: function(a) {}
 }),
-    oGatlingPeaZombie = InheritO(oNewspaperZombie, {
-        EName: "oGatlingPeaZombie",
-        CName: "机枪读报僵尸",
-        Lvl: 4,
-		HP:450,
-		shootPeaSpeed:15,
-		SunNum:150,
-        PicArr: (function() {
-            var a = "images/Zombies/GatlingPeaZombie/";
-            return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif", a + "1.gif"]
-        })(),
-        AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御，失去报纸后快速发射豌豆<p>韧性：<font color="#FF0000">中（450，发怒后50%减伤）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>精英形态：<font color="#FF0000">发怒后攻速减半，速度为0，几秒后射速加快，快速移动</font></p>读报僵尸总是误伤别人',
-		jinyinAct:function(a){
-			a.shootPeaSpeed*=2;
-			a.LostPaperSpeed=0;
-		},
-		bedevil:oPeaZombie.prototype.bedevil,
-		  shootPea: function() {
+oGatlingPeaZombie = InheritO(oNewspaperZombie, {
+  EName: "oGatlingPeaZombie",
+  CName: "机枪读报僵尸",
+  Lvl: 4,
+  HP: 550,
+  shootPeaSpeed: 15,
+  SunNum: 150,
+  PicArr: (function() {
+    var a = "images/Zombies/GatlingPeaZombie/";
+    return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif", a + "1.gif"]
+  })(),
+  AudioArr: ["newspaper_rarrgh2"],
+  Produce: '他的报纸只能提供有限的防御，失去报纸后快速发射豌豆<p>韧性：<font color="#FF0000">中（550）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>精英形态：<font color="#FF0000">发怒后攻速减半，速度为0，几秒后射速加快，快速移动，50%减伤生效</font></p>读报僵尸总是误伤别人',
+  jinyinAct: function(a) {
+    a.shootPeaSpeed *= 2;
+    a.LostPaperSpeed = 0;
+  },
+  bedevil: oPeaZombie.prototype.bedevil,
+  shootPea: function() {
     var a = this,
       b = "PB" + Math.random();
     EditEle(a.BulletEle.cloneNode(false), {
@@ -733,59 +733,63 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
       function(f, j, n, i, o) {
         var l, e = GetC(n);
         var Kind = 3,
-			Z = oZ["getHZ1"](n,i),
+          Z = oZ["getHZ1"](n, i),
           d, isHit;
-		Z && Z.Altitude == 1 && (Z.getPea(Z,20*a.level,0),isHit=true);
+        Z && Z.Altitude == 1 && (Z.getPea(Z, 20 * a.level, 0), isHit = true);
         while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20*a.level))
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20 * a.level))
         }
-	  isHit?((SetStyle(j, {
-            left: o + 28 + "px",
-            width: "52px",
-            height: "46px"
-          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])):((n += (l = -5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 100) + "px",j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+        isHit ? ((SetStyle(j, {
+          left: o + 28 + "px",
+          width: "52px",
+          height: "46px"
+        })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : ((n += (l = -5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 100) + "px", j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
       },
       [b, $(b), a.ZX, a.R, a.ZX - 40])
   },
-        CheckOrnHP: function(g, h, d, c, f, b, a) {
-            var e = OrnNoneZombies.prototype;
-            (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.ChkActs = function() {
-                    return 1
-                },
-                g.ChkActs1 = function() {
-                    return 1
-                },
-                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(150,
-                    function(m, l) {
-                        var k = $Z[m];
-                        if (!k) {
-                            return
-                        }
-                        var j = CZombies.prototype,
-                            i = k.OSpeed = k.LostPaperSpeed;
-                        k.ChkActs =!k.WalkDirection?j.ChkActs:j.ChkActs1;
-                        k.ChkActs1 = j.ChkActs1;
-						k.tasktime*=0.25;
-						k.jianshang=0.5;
-    k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (k.pixelTop + 60) + "px;visibility:hidden;z-index:" + (k.zIndex + 2));
-	k.jinyin&&oSym.addTask(600,function(k){
-	    k&&(k.Speed=k.OSpeed=8.1,k.shootPeaSpeed/=5,k.tasktime/=2,PlayAudio("newspaper_rarrgh2"));
-	},[k]);
-    oSym.addTask(k.shootPeaSpeed, function(k,m) {
-      k.canWalk(k,m) && k.beAttacked && k.shootPea(k);
-      $Z[k.id] ? oSym.addTask(k.shootPeaSpeed, arguments.callee, [k,m]) : k.BulletEle = null;
-    }, [k,m]);
-                        k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
-                        if (!k.beAttacked) {
-                            return
-                        }
-                        PlayAudio("newspaper_rarrgh2");
-                        k.EleBody.src = l;
-                        k.JudgeAttack()
-                    },
-                    [h, f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]]]))
-        }
-    }),
+  CheckOrnHP: function(g, h, d, c, f, b, a) {
+    var e = OrnNoneZombies.prototype;
+    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.ChkActs = function() {
+        return 1
+      },
+      g.ChkActs1 = function() {
+        return 1
+      },
+      g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(150,
+        function(m, l) {
+          var k = $Z[m];
+          if (!k) {
+            return
+          }
+          var j = CZombies.prototype,
+            i = k.OSpeed = k.LostPaperSpeed;
+          k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
+          k.ChkActs1 = j.ChkActs1;
+          k.tasktime *= 0.25;
+          k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (k.pixelTop + 60) + "px;visibility:hidden;z-index:" + (k.zIndex + 2));
+          k.jinyin && oSym.addTask(600, function(k) {
+            k && (k.jianshang*=0.5,k.Speed = k.OSpeed = 8.1, k.shootPeaSpeed /= 5, k.tasktime /= 2, PlayAudio("newspaper_rarrgh2"));
+          }, [k]);
+          oSym.addTask(k.shootPeaSpeed, function(k, m) {
+            k.canWalk(k, m) && k.beAttacked && k.shootPea(k);
+            $Z[k.id] ? oSym.addTask(k.shootPeaSpeed, arguments.callee, [k, m]) : k.BulletEle = null;
+          }, [k, m]);
+          k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
+          oSym.addTask(1, function(k, Contrast, Brightness) {
+            if (!k) return;
+            k.jinyin && (k.EleBody.style.filter = "brightness(" + (Brightness -= 0.001) + ") contrast(" + (Contrast += 0.001) + ")");
+            !k.Speed && oSym.addTask(1, arguments.callee, [k, Contrast, Brightness])
+          }, [k, 1, 1]);//精英读报黑化
+          if (!k.beAttacked) {
+            return
+          }
+          PlayAudio("newspaper_rarrgh2");
+          k.EleBody.src = l;
+          k.JudgeAttack()
+        },
+        [h, f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]]]))
+  }
+}),
 oLadderZombie = InheritO(oScreenDoorZombie, {
   EName: "oLadderZombie",
   CName: "扶梯僵尸",
