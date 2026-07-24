@@ -149,7 +149,7 @@ var oGargantuar = InheritO(oZombie, {
       top: "100px",
       clip: "rect(0,auto,200px,0)"
     }), h.intowater = true, 
-	$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.top=((ImgLeft=parseInt($(h.Ele.FumeDoor).style.top))+100)+"px"),
+	$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.top="-120px"),
 	SetHidden(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:126px;top:" + (h.height - 88) + "px;width:97px;height:88px;over-flow:hidden", 0, h.Ele), ImgSpriter(a, h.id, [
         ["0 0", 9, 1],
         ["-97px 0", 9, 2],
@@ -163,16 +163,16 @@ var oGargantuar = InheritO(oZombie, {
       function(i) {
         ClearChild($(i))
       }), PlayAudio("zombie_entering_water"));
-    h.canWalk(h,h.id)&&h.intowater && (oGd.$LF[h.R] == 2) && (h.ZX > GetX(9) || h.ZX < GetX(0)) && (SetStyle(h.EleBody, {
+    h.canWalk(h,h.id)&&h.intowater && ((oGd.$LF[h.R] == 2&& (h.ZX > GetX(9) || h.ZX < GetX(0)))||oGd.$LF[h.R] != 2) && (SetStyle(h.EleBody, {
       top: "0px",
       clip: "rect(0,auto,300px,0)"
-    }, SetVisible(h.EleShadow)),$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.top=((ImgLeft=parseInt($(h.Ele.FumeDoor).style.top))-200)+"px"), h.intowater = false);
+    }, SetVisible(h.EleShadow)),$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.top="80px"), h.intowater = false);
     if (h.jinyin) {
       var P = $(h.id);
       !h.hasthrew&&(h.WalkDirection == h.check) && (
         EditImg($(P.FumeDoor), 0,"images/interface/target.png", {
           transform: !h.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)",
-          left: !h.WalkDirection ? "185px" : "25px"
+          left: !h.WalkDirection ? "190px" : "30px"
         }, 0),
         h.check = h.WalkDirection?0:1);
     }
@@ -180,9 +180,9 @@ var oGargantuar = InheritO(oZombie, {
   },
   jinyinAct: function(a) {
     var z = $(a.id);
-	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
+	a.num=Math.random()*100||a.Privatenum;
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, "images/interface/target.png", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:185px;top:80px", 0);
+    var Sh = NewImg(z.FumeDoor, "images/interface/target.png", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:190px;top:80px", 0);
     z.appendChild(Sh);
 		var z=oS.ZName;
 	  a.zl=[];
@@ -442,7 +442,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
           $(z.NutHead).src = a.PicArr[13]
       }
     },
-    Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态一：<font color="#FF0000">爆炸坚果，碰到植物产生爆炸并自身死亡</font><br>精英形态二：<font color="#FF0000">一类防具存在时每次受伤反伤1x3的植物15点</font></p>他有限的感官，只能让他在被植物打时感到一种麻麻的感觉'
+    Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态一：<font color="#FF0000">爆炸坚果，碰到植物产生爆炸并自身死亡</font><br>精英形态二：<font color="#FF0000">一类防具存在时每次受伤反伤1x3的植物15点</font></p>他有限的感官，只能让他在被植物打时产生一种麻麻的感觉'
   }),
   oTallNutZombie = InheritO(oWallNutZombie, {
     EName: "oTallNutZombie",
@@ -460,7 +460,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
       z.appendChild(Nut);
 	  oSym.addTask(1500,function(c){
-		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan1"),CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(1200,arguments.callee,[c]));
+		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan"+Math.floor(Math.random()*5+1)),CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(1200,arguments.callee,[c]));
 	  },[c]);
 	},
 	PrivateDie:function(c){
@@ -468,7 +468,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 		ClearChild($(c.Ele.NutHead2));
 	},
     Boom: function() {},
-    Produce: '韧性：<font color="#FF0000">极高(2200+270)</font><br>精英形态：每隔一段时间在场上放置一个坚果障碍</p>太好了，高仁僵尸来了'
+    Produce: '韧性：<font color="#FF0000">极高(2200+270)</font><br>精英形态：每隔一段时间在场上放置一个坚果障碍，坚果障碍所在格不可种植植物</p>太好了，高仁僵尸来了'
   }, {
     PicArr: {
       12: "images/Plants/TallNut/TallNut.gif",
@@ -494,6 +494,7 @@ oNutZombie = InheritO(oTallNutZombie, {
     })(),
 	GoingDie:function(a){
 		this.DisappearDie();
+		delete oGd.$Crater[a.SetR+"_"+a.SetC];
 	},
 	getr:function(){},
 	getSlow:function(){},
@@ -510,10 +511,14 @@ oNutZombie = InheritO(oTallNutZombie, {
 		return 1
 	},
 	ChangeR:function(){},
+	WalkToLadder:function(){},
     jinyinAct: function(){
 		SetHidden(this.EleBody);
+		a.SetR=a.R;
+		a.SetC=GetC(a.ZX);
+		oGd.$Crater[a.SetR+"_"+a.SetC]=1;
 	},
-    Produce: '韧性：<font color="#FF0000">1100</font><br>精英形态：暂无</p>由精英高坚果僵尸召唤'
+    Produce: '韧性：<font color="#FF0000">1100</font><br>精英形态：无</p>由精英高坚果僵尸召唤'
   }),
 	oJalapenoZombie= InheritO(oZombie,{
 	EName: "oJalapenoZombie",
