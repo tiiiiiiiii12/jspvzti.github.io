@@ -218,7 +218,7 @@ var oGargantuar = InheritO(oZombie, {
             SetStyle(Img, {
               top: ITop + "px"
             });
-            k == B && (Dire=1,a.getr(a,Math.round(Math.random()*100+100),a.ChangeR({
+            k == B && (Dire=1,a.getr(a,!a.WalkDirection?Math.round(Math.random()*100-200):Math.round(Math.random()*100+100),a.ChangeR({
             R: a.R,
             ar: [Math.ceil(Math.random()*oS.R)]
           }));
@@ -262,7 +262,7 @@ var oGargantuar = InheritO(oZombie, {
   SunNum: 275,
   EName: "oGargantuar",
   CName: "伽刚特尔",
-  Produce: '非常强力的僵尸<br>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态一：<font color="#FF0000">背着标靶，扔小鬼前每10秒空降一只僵尸，扔小鬼时召唤五个空降僵尸</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
+  Produce: '非常强力的僵尸<br>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态一：<font color="#FF0000">背着标靶，扔小鬼前每10秒空降一只僵尸，扔小鬼时召唤五个空降僵尸</font><br>精英形态二：<font color="#FF0000">每隔一段时间跳到随机位置</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
 }),
 oPeaZombie = InheritO(oZombie, {
   EName: "oPeaZombie",
