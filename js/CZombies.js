@@ -1550,7 +1550,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
   getShadow: function(a) {
     return "left:" + (a.beAttackedPointL + 15) + "px;top:" + (a.height - 22) + "px"
   },
-  Produce: '橄榄球僵尸的表演秀。<br>韧性：<font color="#FF0000">极高</font><br>精英形态一：黑橄榄，两倍头盔血量，速度减慢，免疫冻结<br>精英形态二：每隔一段时间射出一个篮球，篮球对植物造成伤害后回弹，回弹一定次数后销毁<br>速度：<font color="#FF0000">快</font><br>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么<br>黑橄榄贴图来源：江南游戏'
+  Produce: '橄榄球僵尸的表演秀。<br>韧性：<font color="#FF0000">极高</font><br>精英形态一：黑橄榄，两倍头盔血量，速度减慢，免疫冻结<br>精英形态二：每隔一段时间射出一个篮球，篮球在植物与僵尸间回弹，回弹一定次数后销毁<br>速度：<font color="#FF0000">快</font><br>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么，不然他也不会去踢篮球<br>黑橄榄贴图来源：江南游戏'
 }),
     oPoleVaultingZombie = InheritO(OrnNoneZombies, {
         EName: "oPoleVaultingZombie",
@@ -1774,7 +1774,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
             return ["images/Card/Zombies/NewspaperZombie.png","images/Zombies/NewspaperZombie/0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadWalk0.gif", a + "LostHeadWalk0.gif", a + "LostHeadWalk0.gif", "images/Zombies/NewspaperZombie/Head.gif" + $Random, a + "Die.gif" + $Random,"images/Zombies/NewspaperZombie/BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（450）</font><br>精英形态一：破报进入假死状态，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：破报犹豫时间变长，速度提升，发怒后拿出路牌碾压植物，50%减伤生效，并使全场读报类僵尸解封<br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>读报僵尸，他正痴迷于完成他的数独难题。难怪他这么反常。',
+        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（450）</font><br>精英形态一：破报进入假死状态，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：速度提升，破报犹豫时间变长，发怒后碾压植物，50%减伤生效，并使全场读报类僵尸解封<br>报纸韧性：<font color="#FF0000">低</font><br>读报僵尸，他总幻想着有叱咤风云的能力，甚至为此付出实践，虽然他还是那个老头，但好歹取得了些成效',
         getShadow: function(a) {
             return "left:75px;top:" + (a.height - 25) + "px"
         },
@@ -2016,7 +2016,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
     a.PrivateAct = function(a) {
 	var SummonZ;
 	a.jinyin && a.num<50&&(!a.nowHP&&(a.nowHP=a.MaxHP),a.canWalk(a,a.id)&&a.Ornaments&&(a.HP!=a.nowHP)&&(a.ChangeR(a),a.nowHP=a.HP));
-      a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && a.jinyin && a.num<50 && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.bedevil=CZombies.prototype.bedevil,a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.tasktime/=2,a.HP+=(300*a.level),a.ChangeR(a),(SummonZ=CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ)).jinyinnum = 100,SummonZ.Privatenum=30);
+      a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && a.jinyin && a.num<50 && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.bedevil=CZombies.prototype.bedevil,a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.tasktime/=2,a.HP+=(300*a.level),a.ChangeR(a),(SummonZ=CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ)).Privatenum = 30,SummonZ.jinyinnum=30);
       var P = a.Ele;
       (a.WalkDirection == a.check) && (a.Ornaments && (a.num>=50&& EditEle($(a.id + "_Bullet"), 0, {
             transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
@@ -2036,7 +2036,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   PlayNormalballAudio: function() {
     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
   },
-  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：手持大喷菇，对前方植物造成每次25伤害，防具血量降低<br>精英形态二：带着脑子，有以下特性：<br>1.防具掉落后加速逃跑到后方，将要出场时召唤一个精英铁门并回头<br>2.若在啃咬血量较高的植物时会缓慢向前移动<br>3.有铁门时若本体受到伤害则换行<br>弱点：大喷菇<br>门板僵尸上次拜访过的房主防守并不专业，在吃掉房主的脑子后拿走了他家的铁栅门。',
+  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：手持大喷菇，对前方植物造成每次25伤害，防具血量降低<br>精英形态二：带着脑子，有以下特性：<br>1.防具掉落后逃跑，将要出场时召唤一个精英铁门并回头<br>2.在啃咬血量较高的植物时会缓慢向前移动<br>3.有铁门时若本体受伤则换行<br>弱点：大喷菇<br>脑子被吃了就是被吃了，不会有一点灵智，相比之下，或许拿着脑子更有用',
   GoingDie: CZombies.prototype.GoingDie,
   getFirePea: function(c, a, b) {
     PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
@@ -2241,7 +2241,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
         GetDY: function() {
             return 5
         },
-        Produce: '鸭子救生圈能让僵尸能浮在水面上<br><font color="#FF0000">水路铁桶无精英</font><br>韧性：<font color="#FF0000">低</font><br>只在水池关卡出现</font></p>只有特定的僵尸才能成为救生圈僵尸。并不是每个僵尸都能胜任的。有些救生圈有点漏气，但他们没能注意到，所以他们离开并放弃了对脑子的渴求。',
+        Produce: '鸭子救生圈能让僵尸能浮在水面上<br><font color="#FF0000">水路普僵、铁桶无精英</font><br>韧性：<font color="#FF0000">低</font><br>只在水池关卡出现</font></p>只有特定的僵尸才能成为救生圈僵尸。并不是每个僵尸都能胜任的。有些救生圈有点漏气，但他们没能注意到，所以他们离开并放弃了对脑子的渴求。',
         PicArr: (function() {
             var a = "images/Zombies/DuckyTubeZombie1/";
             return ["images/Card/Zombies/DuckyTubeZombie1.png", a + "0.gif", a + "Walk1.gif", a + "Walk2.gif", a + "1.gif", a + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random]
@@ -2316,7 +2316,7 @@ jinyinWalkGif12: 14,
 		intoWaterSpeed:2,
         Speed: 3.2,
         Altitude: 1,
-        Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击，啃食时每秒回30血<br>精英形态：将他所遇到的第一株植物变为它的防具<br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
+        Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击，啃食时每秒回30血</font><br>精英形态：<font color="#FF0000">将他所遇到的第一株植物变为它的防具</font><br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
         JumpTime: 40,
 		jinyinAct:function(a){
 			a.cangetOrn=1;
@@ -2362,7 +2362,7 @@ jinyinWalkGif12: 14,
         Jump: function(a) {
             a.beAttacked && (PlayAudio("zombie_entering_water"), a.Altitude = 2, SetHidden(a.EleShadow), a.EleBody.src = a.PicArr[8] + Math.random(), oSym.addTask(160,
                 function(c, b) {
-                    $Z[c] && b.beAttacked && (b.WalkStatus = 1, b.Altitude = 0, b.OSpeed = b.Speed = b.intoWaterSpeed, b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = b.ChkActsL2)
+                    $Z[c] && b.beAttacked && (b.WalkStatus = 1, b.Altitude = 0, b.OSpeed = b.Speed = b.intoWaterSpeed, b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = !b.WalkDirection?b.ChkActsL2:b.ChkActs1)
                 },
                 [a.id, a]), a.ChkActs = function() {
                 return 1
@@ -2677,7 +2677,7 @@ jinyinWalkGif12: 14,
             Speed: 2.5,
             AKind: 2,
             Attack: 50,
-            Produce: '冰车僵尸运用冰雪，碾过你的植物。<br>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">碾压植物，留下条冰道</font><br>精英形态一：<font color="#FF0000">辣椒冰车，重度损伤时加速，加速前可抗一次致命伤害</font><br>精英形态二：<font color="#FF0000">寒冰菇冰车，每隔10s冻结周围植物5s并对其造成伤害，有20%减伤</font><br>经常被误以为是在驾驶着冰车的僵尸，但事实上冰车僵尸是种完全不同的生物形式，他与太空兽人联系更紧密而不是僵尸。',
+            Produce: '冰车僵尸运用冰雪，碾过你的植物，不减速<br>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">碾压植物，留下条冰道</font><br>精英形态一：<font color="#FF0000">辣椒冰车，重度损伤时加速，加速前可抗一次致命伤害</font><br>精英形态二：<font color="#FF0000">寒冰菇冰车，每隔10s冻结周围植物5s并对其造成伤害，有20%减伤</font><br>经常被误以为是在驾驶着冰车的僵尸，但事实上冰车僵尸是种完全不同的生物形式，他与太空兽人联系更紧密而不是僵尸。',
             PicArr: (function() {
                 var b = "images/Zombies/Zomboni/";
                 return ["images/Card/Zombies/Zomboni.png", b + "0.gif", b + "1.gif", b + "2.gif", b + "3.gif", b + "4.gif", b + "5.gif" + $Random, b + "BoomDie.gif" + $Random, b + "ice.png", b + "ice_cap.png"]
@@ -2976,7 +2976,7 @@ jinyinWalkGif12: 14,
                     var c;
                     $Z[d] && b.beAttacked && (b.WalkStatus = 1, b.Altitude = 1, b.OSpeed = b.Speed = 16.2, SetStyle(b.Ele, {
                         left: (c = b.X -= 140) + "px"
-                    }), b.AttackedLX = c + (b.beAttackedPointL = 185), b.AttackedRX = c + (b.beAttackedPointR = 265), b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = b.ChkActsL2)
+                    }), b.AttackedLX = c + (b.beAttackedPointL = 185), b.AttackedRX = c + (b.beAttackedPointR = 265), b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = !b.WalkDirection?b.ChkActsL2:b.ChkActs1)
                 },
                 [a.id, a]), a.ChkActs = function() {
                 return 1
@@ -3169,7 +3169,7 @@ if(a.num>=50){
   getShadow: function(a) {
     return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 32) + "px"
   },
-  Produce: '小淘气们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。<br>精英形态一：<font color="#FF0000">携带土豆雷，2.5秒后出土，对植物或敌对僵尸造成1000范围伤害</font><br>精英形态二：<font color="#FF0000">随机隐藏一个卡槽，死亡后复原</font><br>韧性：<font color="#FF0000">低</font><br>小淘气虽然瘦小，却很结实。他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴。',
+  Produce: '小鬼们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。<br>精英形态一：<font color="#FF0000">携带土豆雷，2.5秒后出土，对植物或敌对僵尸造成1000范围伤害</font><br>精英形态二：<font color="#FF0000">随机隐藏一个卡槽，死亡后复原</font><br>韧性：<font color="#FF0000">低</font><br>小鬼虽然瘦小，也不结实，但他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴（只会一首曲子）。',
   GoingDie: function() {
     var b = this,
       c = b.id,
@@ -3224,7 +3224,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   AttackGif: 2,
   OSpeed: 3.6,
   Speed: 3.6,
-  Produce: '这种僵尸带着个会爆炸的潘多拉盒子，开盒时不无敌<br>精英形态一：樱桃炸弹，残血必开盒<br>精英形态二：毁灭菇，爆炸范围扩大至5×5并且在原地留坑<br>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快</font><br>特点：<font color="#FF0000">打开玩偶匣会爆炸</font><br>弱点：<font color="#FF0000">磁力菇</font><br>这种僵尸令人不寒而栗，不是因为他的冰冷身躯而是因为他的疯狂。',
+  Produce: '这种僵尸带着个会爆炸的惊喜<br>精英形态一：樱桃炸弹，残血必开盒<br>精英形态二：毁灭菇，爆炸范围扩大并在原地留坑<br>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快</font><br>特点：<font color="#FF0000">打开玩偶匣会爆炸</font><br>一个天天喊着"just brainz"的精神病人，根本不会意识到最大的食脑障碍来源于自己',
   AudioArr: ["jackinthebox", "jack_surprise", "explosion"],
   PicArr: (function() {
     var a = "images/Zombies/JackinTheBoxZombie/";
@@ -3313,7 +3313,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
                 ], 0,
                 function(i, p) {
                   ClearChild($(i));
-                  $Z[p]&&$Z[p].PZ&&oDoomShroom.prototype.setCrater(f + "_crater", e.R, Math.max(GetC(e.ZX),1), f.pixelLeft + 3, f.pixelTop + 100)
+                  this.PZ&&oDoomShroom.prototype.setCrater(f + "_crater", e.R, Math.max(GetC(e.ZX),1), f.pixelLeft + 3, f.pixelTop + 100)
                 })) : (d = NewImg("", "images/interface/blank.png", "width:306px;height:300px;left:" + (e.X - 16) + "px;top:" + (e.pixelTop - 90) + "px;z-index:20"),
               d.src = e.PicArr[8] + Math.random(), EDPZ.appendChild(d), oSym.addTask(70, ClearChild, [d])), e.PZ&&(function(k, g) {
               var q = Math.max(1, e.num>=50 ? k - 2 : k - 1),
@@ -3410,7 +3410,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
     oBalloonZombie = InheritO(OrnIZombies, {
         EName: "oBalloonZombie",
         CName: "气球僵尸",
-        OrnHP: 40,
+        OrnHP: 100,
         SunNum: 150,
         width: 207,
         height: 197,
@@ -3655,7 +3655,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
   BoomDieGif: 8,
   LostHeadGif: 5,
   LostHeadAttackGif: 5,
-  Produce: '这种僵尸通过挖地来绕过防线。<p>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，杨桃</font><br>精英形态一：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列</font><br>精英形态二：<font color="#FF0000">挖至第三列出土向左走</font><br>矿工僵尸一周需要用两天的时间来考取他的挖掘许可证',
+  Produce: '这种僵尸通过挖地来绕过防线。<p>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，杨桃</font><br>精英形态一：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列</font><br>精英形态二：<font color="#FF0000">挖至第五列出土向左，血量提升，速度大幅降低</font><br>矿工僵尸一周需要用两天的时间来考取他的挖掘许可证',
   BirthCallBack: function(f) {
     var e = f.delayT,
       d = f.id,
@@ -3801,7 +3801,7 @@ jinyinAct: function(a) {
               // 行走
               (b.EleBody.src =
                 b.PicArr[(b.NormalGif = WD ? b.WalkGif1 : b.WalkGif2)]),
-              (b.OSpeed = b.Speed = 1.6),
+              (b.OSpeed = b.Speed = b.LostPaperSpeed),
 			  (b.WalkToLadder=CZombies.prototype.WalkToLadder),
               (b.ChkActs =
                 OrnNoneZombies["prototype"][WD ? "ChkActs1" : "ChkActs"]);
@@ -3812,9 +3812,10 @@ jinyinAct: function(a) {
       [a.id, a]
     );
   },
+  LostPaperSpeed:1.6,
   ChkActs: function(f, d, g, c) {
     // 到了左边自己钻出来
-	if (f.jinyin&&f.num<50&&f.Altitude == 0 && f.AttackedRX < GetX(3) - 40) return f.Go_Up(f, 0), 0;
+	if (f.jinyin&&f.num<50&&f.Altitude == 0 && f.AttackedRX < GetX(6) - 40) return (f.Go_Up(f, 0),f.HP*=1.5,f.LostPaperSpeed*=0.4), 0;
     if (f.Altitude == 0 && f.AttackedRX < GetX(1) - 40) return f.Go_Up(f, 1), 1;
     var b, a, e;
     !(f.FreeFreezeTime || f.FreeSetbodyTime) ?
