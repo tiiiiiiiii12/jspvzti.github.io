@@ -1029,7 +1029,7 @@ Birth: function() {
         c, e, a;
       while (d--) {
         (e = b[d]) && (!(c = e[0]) || !(a = $Z[c])) && (d = j = 0)
-      }!h.isAttacking && (j ? f.src = h.PicArr[10] : h.Summon(h, g));
+      }!h.isAttacking &&!j&&h.Summon(h, g);
       h.ChangeChkActsTo0(h, g, f)
     },
     ChangeChkActsTo0: function(g, e, a) {
