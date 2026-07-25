@@ -149,7 +149,7 @@ var oGargantuar = InheritO(oZombie, {
       top: "100px",
       clip: "rect(0,auto,200px,0)"
     }), h.intowater = true, 
-	$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.top="280px"),
+	$(h.Ele.FumeDoor)&&($(h.Ele.FumeDoor).style.top="180px"),
 	SetHidden(h.EleShadow), NewEle(a = h.id + "_splash", "div", "position:absolute;background:url(images/interface/splash.png);left:126px;top:" + (h.height - 88) + "px;width:97px;height:88px;over-flow:hidden", 0, h.Ele), ImgSpriter(a, h.id, [
         ["0 0", 9, 1],
         ["-97px 0", 9, 2],
@@ -170,20 +170,21 @@ var oGargantuar = InheritO(oZombie, {
     if (h.jinyin) {
       var P = $(h.id);
       !h.hasthrew&&(h.WalkDirection == h.check) && (
-        EditImg($(P.FumeDoor), 0,"images/interface/target.png", {
+        EditImg($(P.FumeDoor), 0,h.num>=50?"images/interface/target.png":"images/Plants/Blover/Blover.gif", {
           transform: !h.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)",
-          left: !h.WalkDirection ? "190px" : "30px"
+          left: !h.WalkDirection ? "200px" : "20px"
         }, 0),
         h.check = h.WalkDirection?0:1);
     }
 	h.canWalk(h,h.id)&&h.hasthrew < h.throwImpnum && (GetC(h.ZX) > 3 || !h.PZ) && !h.isAttacking && (h.HP <= h.MaxHP*0.5) && h.throwImp(h);
   },
   jinyinAct: function(a) {
-    var z = $(a.id);
 	a.num=Math.random()*100||a.Privatenum;
+    var z = $(a.id);
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, "images/interface/target.png", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:190px;top:80px", 0);
+    var Sh = NewImg(z.FumeDoor,a.num>=50?"images/interface/target.png":"images/Plants/Blover/Blover.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:200px;top:80px", 0);
     z.appendChild(Sh);
+	if(a.num>=50){
 		var z=oS.ZName;
 	  a.zl=[];
 	for (i=0;i<z.length;i++){
@@ -194,6 +195,38 @@ var oGargantuar = InheritO(oZombie, {
 		$Z[b.id]&&b.hasthrew < b.throwImpnum &&(oP.SetTimeoutAirdropZombie(5, 9, 1, b.zl, !b.PZ),
 		oSym.addTask(1000,arguments.callee,[b]));		
 	},[a]);
+	}else{
+	oSym.addTask(1500,function(b){
+		$Z[b.id] &&(b.Jump(b),oSym.addTask(1500,arguments.callee,[b]));		
+	},[a]);
+	}
+  },
+  Jump:function(a){
+	  a.Altitude=4;
+	  a.isAttacking=1;
+	  PlayAudio("zaji");
+	  a.EleBody.src=a.PicArr[a.AttackGif];
+		var B;
+        oSym.addTask(1,
+          function(l, k, j, a,Dire,Img,ITop){
+			if(!$Z[a.id])return;
+            k = Dire?Math.min(k + j, 0):Math.max(k - j, B);
+            SetStyle(l, {
+              top: k + "px"
+            });
+			ITop = Dire?Math.min(ITop + j, 80):Math.max(ITop - j, -920);
+            SetStyle(Img, {
+              top: ITop + "px"
+            });
+            k == B && (Dire=1,a.getr(a,Math.round(Math.random()*100+100),a.ChangeR({
+            R: a.R,
+            ar: [Math.ceil(Math.random()*oS.R)]
+          }));
+			k ? oSym.addTask(5, arguments.callee, [l, k, j, a,Dire]): (a.Altitude = 1,a.EleBody.src=a.PicArr[a.NormalGif],a.isAttacking=0,SetStyle(l, {
+              top: "0px"
+            }))
+          },
+          [a.EleBody, 0,-(B=-1000)*0.01, a,0,$(a.Ele.FumeDoor),80]);
   },
   PrivateDie: oScreenDoorZombie.prototype.PrivateDie,
   throwImp: function(g) {
@@ -214,7 +247,7 @@ var oGargantuar = InheritO(oZombie, {
           PlayAudio("ImpToLand");
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
           oSym.addTask(100, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 150) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)]);
-          k && k.jinyin && ClearChild($(k.Ele.FumeDoor));
+          k && (k.num>=50) && ClearChild($(k.Ele.FumeDoor));
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
             k && k.jinyin&&(k.throwImpnum==1)&& oP.SetTimeoutAirdropZombie(5, 9, 5,k.zl, !k.PZ)
