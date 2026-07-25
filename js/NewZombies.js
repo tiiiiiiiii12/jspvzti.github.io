@@ -222,7 +222,7 @@ var oGargantuar = InheritO(oZombie, {
             R: a.R,
             ar: [Math.ceil(Math.random()*oS.R)]
           }));
-			k ? oSym.addTask(5, arguments.callee, [l, k, j, a,Dire]): (a.Altitude = 1,a.EleBody.src=a.PicArr[a.NormalGif],a.isAttacking=0,SetStyle(l, {
+			k ? oSym.addTask(5, arguments.callee, [l, k, j, a,Dire,Img,ITop]): (a.Altitude = 1,a.EleBody.src=a.PicArr[a.NormalGif],a.isAttacking=0,SetStyle(l, {
               top: "0px"
             }))
           },
