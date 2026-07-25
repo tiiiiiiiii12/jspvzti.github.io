@@ -8,7 +8,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
   },
   beAttackedPointL: 154,
   beAttackedPointR: 285,
-  HP:70000,
+  HP:80000,
   level:1,
   WalkToLadder:function(){},//不走梯子
   height: 300,
@@ -41,7 +41,7 @@ getFreeze:function(){},
 		if($Z[a.id]){
 	var Num=Math.floor(Math.random() * a.Skill.length);
       a.Skill[Num].func(a);
-      a.HP<20000&&a.Skill[Math.floor(Math.random() * a.Skill.length)].func(a);
+      a.HP<20000&&(a.Speed=a.OSpeed=1.6,a.jianshang*=0.5,oSym.addTask(500,function(a){a.jianshang=1},[a]));
 	NewEle("DivTeach", "div", 0, 0, EDAll);
 	innerText($("DivTeach"),a.Skill[Num].name);
 	oSym.addTask(500, ClearChild,[$("DivTeach")]);
@@ -54,13 +54,13 @@ getFreeze:function(){},
 		if(!$Z[a.id])return;
 		a.getr(a,5,1);
         a.ChangeR(a);
-        if (a.HP >= 60000) {
+        if (a.HP >= 70000) {
 			try{
           oP.SetTimeoutZombie([oZombie, oPeaZombie, oConeheadZombie,oPoleVaultingZombie], 0);
 		  oP.SetTimeoutTomZombie([oZombie,oPeaZombie]);
           oP.NumZombies += 4;
 		}catch{};
-        } else if (a.HP >= 40000) {
+        } else if (a.HP >= 45000) {
           try{
           oP.SetTimeoutZombie([oScreenDoorZombie, oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie], 0);
           oP.SetTimeoutTomZombie([oZombie, oPeaZombie, oConeheadZombie]);
@@ -127,8 +127,9 @@ name:"脑旗号角",
 tip:"在本行最后一列召唤加强血量旗帜僵尸，在20000血以上为非精英，20000血以下为精英",
 func:function(a){
 	var b=CustomZombie(oFlagZombie,a.R,!a.PZ?1:9,!a.PZ);
-	b.HP*=5/Math.max(Math.round(a.HP/6000),1);
-	b.Speed=b.OSpeed=1.1;
+	b.HP*=Math.round(5/Math.max(Math.round(a.HP/6000),1));
+	b.Speed/=3;
+	b.OSpeed/=3;
 	b.jinyinnum=(a.HP>=20000?0:100)
 }
 },
@@ -140,7 +141,7 @@ func:function(a){
 	a.throwImpnum=a.HP<20000?5:3;
 	a.throwImp(a);
 	a.PrivateAct=function(a){
-		a.throwImpnum>a.hasthrew&&a.canWalk(a,a.id)&&(a.throwImp(a),a.ChangeR(a))
+		a.throwImpnum>a.hasthrew&&a.canWalk(a,a.id)&&(a.throwImp(a),a.ChangeR(a),a.getr(a,5,1))
 	}
 }
 },
@@ -176,7 +177,7 @@ func:function(a) {
           d;
 		Z && Z.Altitude == 1 && (Z.getHit0(Z,50,0));
         while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && a.PZ&&(d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (d.getHurt(a, 3, 50))
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && a.PZ&&(d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (d.getHurt(a, 3, 100))
         }
 (n += (l = !a.PZ?5:-5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : (ClearChild(j),a.BulletEle=null)
       },
@@ -229,5 +230,5 @@ func:function(a) {
   coolTime:Infinity,
   EName: "oGargantuarBoss",
   CName: "首领巨人",
-  Produce: '他统领着一大堆僵尸，<br>韧性：<font color="#FF0000">极高(60000)</font><br>特点：<font color="#FF0000">不断丢出僵尸</font><br>那机甲似乎不会回来了，就由我来统领僵尸们踏平这座房子吧'
+  Produce: '他统领着一大堆僵尸，<br>韧性：<font color="#FF0000">极高(70000)</font><br>特点：<font color="#FF0000">不断召唤僵尸</font><br>那机甲似乎不会回来了，就由我来统领僵尸们踏平这座房子吧'
 })
