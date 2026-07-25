@@ -593,11 +593,11 @@ oStarfruit = InheritO(CPlants, {
       EDPZ);
             $(a.id).style.opacity=0.7;
             s.onclick=function(){
-                !(a.dianji||a.FreeFreezeTime)&&a.NormalAttack(a);
-                a.dianji=true;
+                !(a.dianji||a.FreeFreezeTime)&&(a.NormalAttack(a),
+                a.dianji=true,
                 oSym.addTask(50,function(a){
                 a.dianji=false
-                },[a]);
+                },[a]));
                 a.getHurt(a,0,10);
 				a.HP<=1&&(CustomZombie(oPeaZombie,a.R,a.C,1).jinyinnum=0)
             }
@@ -758,7 +758,7 @@ while (e--) {
         Tooltip: "一次发射2~3颗豌豆",
         Produce: '双发射手可以一次发射2~3颗豌豆<br>精英形态：攻击额外发射速度不同的豌豆，速度越快伤害越高<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">2～3倍</font></p>双发射手很凶悍，他是在街头混大的。他不在乎任何人的看法，无论是植物还是僵尸，他打出豌豆，是为了让别人离他远点。其实呢，双发射手一直暗暗地渴望着爱情。',
 		jinyinAct:function(a){
-			a.AttTime=160;
+			a.AttTime=140;
 		},
         NormalAttack1: oPeashooter.prototype.NormalAttack,
 		NormalAttack2: function() {
@@ -1649,6 +1649,7 @@ NormalAttack:function(a){
         beAttackedPointR: 137,
         HP: 8000,
         Stature: 1,
+		PKind:11,
         PicArr: ["images/Card/Plants/HugeWallNut.png", "images/Plants/WallNut/2.gif", "images/Plants/WallNut/HugeWallNutRoll.gif"],
         PrivateBirth: function(a) {
             PlayAudio("bowling");
@@ -1665,14 +1666,15 @@ NormalAttack:function(a){
                 n > c ? $P[b.id]&&b.Die() : (j = GetC(b.pixelRight += 2), b.AttackedLX = n += 2, b.AttackedRX = m += 2, g.style.left = (b.pixelLeft += 2) + "px", j != h && (b.C = j, oGd.del({
                     R: l,
                     C: h,
-                    PKind: 10
-                }), oGd.add(b, l + "_" + j + "_10")), oSym.addTask(1, arguments.callee, [b, c, n, m, e, g]))
+                    PKind: 11
+                }), oGd.add(b, l + "_" + j + "_11")), oSym.addTask(1, arguments.callee, [b, c, n, m, e, g]))
             })(a, oS.W, a.AttackedLX, a.AttackedRX, a.R, $(a.id))
         }
     }),
     oBoomNutBowling = InheritO(oNutBowling, {
         EName: "oBoomNutBowling",
         CName: "爆炸坚果",
+		PKind:12,
         PicArr: ["images/Card/Plants/BoomWallNut.png", "images/Plants/WallNut/1.gif", "images/Plants/WallNut/BoomWallNutRoll.gif", "images/Plants/CherryBomb/Boom.gif"],
         AudioArr: ["cherrybomb", "bowling"],
         PrivateBirth: function(a) {
@@ -1711,8 +1713,8 @@ NormalAttack:function(a){
                     }), l != p && (s.C = l, oGd.del({
                         R: v,
                         C: p,
-                        PKind: 10
-                    }), oGd.add(s, v + "_" + l + "_10")), oSym.addTask(1, arguments.callee, [s, q, s.AttackedLX, s.AttackedRX, m]))
+                        PKind: 12
+                    }), oGd.add(s, v + "_" + l + "_12")), oSym.addTask(1, arguments.callee, [s, q, s.AttackedLX, s.AttackedRX, m]))
                 }
             })(a, oS.W, a.AttackedLX, a.AttackedRX, $(a.id))
         }
@@ -1739,7 +1741,7 @@ NormalAttack:function(a){
         jinyinAct:function(a){
     for (let i = 1; i <= oS.C; i++) {
       var b = oGd.$[a.R + "_" + i + "_" + 1];
-      $P[a.id]&&b && (b.getHurt == CPlants.prototype.getHurt && (b.getHurt = function(h, c, b) {
+      $P[a.id]&& b && (b.getHurt == CPlants.prototype.getHurt && (b.getHurt = function(h, c, b) {
         var d = this,
           num,
           a = d.id;
@@ -1761,7 +1763,7 @@ NormalAttack:function(a){
         getHurt: function(e, b, a) {
             var c = this,
                 d = $(c.id).childNodes[1];
-			b % 3 &&(a=2000,$Z[e.id]&&e.getr(e,100,1));
+			b % 3 &&(a=2000,$Z[e.id]&&e.getr(e,80,1));
              (c.HP -= Math.min(a,2000)) < 1 ? (c.Die()): 
                     c.HP < 2667 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/TallNut/TallnutCracked2.gif") : 
                     c.HP < 5333 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/TallNut/TallnutCracked1.gif");          
@@ -1953,7 +1955,7 @@ NormalAttack:function(a){
 		rpx:15,
         ArZ: {},
         Tooltip: "扎破轮胎, 也能伤害走在上面的僵尸",
-        Produce: '地刺可以扎破轮胎，并对踩到他的僵尸造成伤害，有概率击退僵尸<p>伤害：<font color="#FF0000">普通</font><br>攻击时不断横向生长并增加攻击距离，最多生长至前后各一格<br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>地刺痴迷冰球，他买了包厢的季票。他一直关注着他喜欢的球员，他也始终如一的在赛后清理冰球场。但只有一个问题：他害怕冰球。',
+        Produce: '地刺可以扎破轮胎，并对踩到他的僵尸造成伤害，有概率击退僵尸<p>伤害：<font color="#FF0000">普通</font><br>精英形态：攻击时不断横向生长并增加攻击距离，最多生长至前后各一格<br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>地刺痴迷冰球，他买了包厢的季票。他一直关注着他喜欢的球员，他也始终如一的在赛后清理冰球场。但只有一个问题：他害怕冰球。',
         CanGrow: function(c, b, e) {
             var a = b + "_" + e,
                 d = oS.ArP;
@@ -2025,6 +2027,7 @@ NormalAttack:function(a){
         PicArr: ["images/Card/Plants/Spikerock.png", "images/Plants/Spikerock/0.gif", "images/Plants/Spikerock/Spikerock.gif", "images/Plants/Spikerock/2.gif", "images/Plants/Spikerock/3.gif"],
         Attack: 50,
 		rpx:20,
+		HP:450,
         Tooltip: "能扎破多个轮胎, 并伤害经过上面的僵尸<br>(需要地刺)",
         Produce: '地刺王可以扎破多个轮胎，并对踩到他的僵尸造成伤害，有概率击退僵尸<p><font color="#FF0000">必须种植在地刺上</font></p>地刺王刚刚从欧洲旅行回来。他玩的很高兴，也认识了很多有趣的人。这些都真的拓展了他的视野——他从来不知道，他们建造了这么大的博物馆，有这么多的画作。这对他来说太惊奇了。',
         CanGrow: function(b, a, d) {
@@ -2084,7 +2087,7 @@ NormalAttack:function(a){
 			ClearChild($("oAttack_" + a.id))
 		},
 		PrivateBirth:function(a){
-			var b=NewEle("oAttack_" + a.id,"div","left:"+(a.AttackedLX-20)+"px;top:"+(a.pixelTop-20)+"px;position:absolute;width:97px;height:87px;z-index:10",0,EDPZ);
+			var b=NewEle("oAttack_" + a.id,"div","left:"+(a.AttackedLX-20)+"px;top:"+(a.pixelTop-20)+"px;position:absolute;width:97px;height:87px;z-index:15",0,EDPZ);
 			b.onclick=function(){
 				a.changeZ=(a.changeZ?0:1);
 				$(a.id).style.transform =(a.changeZ?'rotateX(180deg)':'rotateX(0deg)');
@@ -2393,7 +2396,7 @@ for (let i = Math.max(1, f.R - 1); i <= Math.min(f.R + 1, oS.R); i++) {
         PicArr: ["images/Card/Plants/CoffeeBean.png", "images/Plants/CoffeeBean/0.gif", "images/Plants/CoffeeBean/CoffeeBean.gif", "images/Plants/CoffeeBean/CoffeeBeanEat.gif" + $Random],
         AudioArr: ["coffee", "wakeup"],
         Tooltip: "唤醒在白天里睡觉的蘑菇类植物",
-        Produce: '咖啡豆，可以唤醒睡眠中的蘑菇们。<br>精英形态：使后种植的植物全精英，持续10秒<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">可以种在其他植物上，用来唤醒蘑菇们</font></p>咖啡豆：“嘿，愉快的人啊！嘿，悲伤的人啊！是谁？嘿！你瞧见那个东西没？什么东西？哇！是被灌醉的小丑！”嗯，咖啡豆确定，这样可以让自己很兴奋。',
+        Produce: '咖啡豆，可以唤醒睡眠中的蘑菇们。<br>精英形态：暂无<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">可以种在其他植物上，用来唤醒蘑菇们</font></p>咖啡豆：“嘿，愉快的人啊！嘿，悲伤的人啊！是谁？嘿！你瞧见那个东西没？什么东西？哇！是被灌醉的小丑僵尸！”嗯，咖啡豆确定，这样可以让自己很兴奋。',
         InitTrigger: function() {},
         GetDBottom: function() {
             return 49
@@ -2413,18 +2416,12 @@ for (let i = Math.max(1, f.R - 1); i <= Math.min(f.R + 1, oS.R); i++) {
         },
         PrivateBirth: function(a) {
             SetHidden($(a.id).firstChild);
-            a.jinyin&&($(a.id).style.opacity=0.5);
             PlayAudio("coffee");
             oSym.addTask(240,
                 function(c) {
                     PlayAudio("wakeup");
                     var d = oGd.$[c],
                         b;
-					a.jinyin&&(EDAll.style.opacity=0.5,CPlants.prototype.randomnum=100);
-			oSym.addTask(1000,function() {
-                CPlants.prototype.randomnum=Math.random()*100;
-				EDAll.style.opacity=1;
-                },[]);
                     d && (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
                     a.Die()
                 },
