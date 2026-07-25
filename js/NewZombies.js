@@ -218,7 +218,7 @@ var oGargantuar = InheritO(oZombie, {
             SetStyle(Img, {
               top: ITop + "px"
             });
-            k == B && (Dire=1,a.getr(a,!a.WalkDirection?Math.round(Math.random()*100-200):Math.round(Math.random()*100+100),a.ChangeR({
+            k == B && (Dire=1,a.getr(a,!a.WalkDirection?Math.round(Math.random()*100-200):Math.round(Math.random()*100+100)),a.ChangeR({
             R: a.R,
             ar: [Math.ceil(Math.random()*oS.R)]
           }));
