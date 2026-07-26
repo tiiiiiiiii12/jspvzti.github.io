@@ -2617,7 +2617,7 @@ FireAttack:90,
         Attacking: 0,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         Tooltip: "它是远程射手，但敌人靠近时会蜷缩不动",
-        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子、阳光（击中僵尸生成5阳光）、草皮卷（对僵尸造成80伤害并修补弹坑）、脑子（使僵尸逃跑）、铲子（对僵尸造成高伤）、奖杯（直接过关（iz无效））六种子弹<br>尽管曾哥已经令令令申申申申申不让胆小菇去见马戏团的精神病人，经胆小菇软磨硬泡才同意，尽管如此，曾哥还是给他塞了一大堆防身用品',
+        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子、阳光（击中僵尸生成5阳光）、草皮卷（对僵尸造成80伤害并修补弹坑）、脑子（使僵尸逃跑）、铲子（对僵尸造成高伤）、奖杯（直接过关（iz无效））六种子弹<br>曾哥已经令令令申申申申申不让胆小菇去见马戏团的精神病人，经胆小菇软磨硬泡才同意了，尽管如此，曾哥还是给他塞了一大堆防身用品',
         GetDX: CPlants.prototype.GetDX,
         getTriggerRange: CPlants.prototype.getTriggerRange,
         getTriggerR: function(c) {
