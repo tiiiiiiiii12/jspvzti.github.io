@@ -222,10 +222,10 @@ var oGargantuar = InheritO(oZombie, {
         k == B && (Dire = 1, a.getr(a, !a.WalkDirection ? Math.round(Math.random() * 50 - 150) : Math.round(Math.random() * 100 + 50), 1), a.ChangeR({
           R: a.R,
           ar: [Math.ceil(Math.random() * oS.R)]
-        }));
+        }),a.EleBody.src = a.PicArr[a.AttackGif]);
         k != (!a.intowater ? 0 : 100) ? oSym.addTask(5, arguments.callee, [l, k, j, a, Dire, Img, ITop]) : (!a.intowater && SetVisible(a.EleShadow), a.FreeSetbodyTime = 0, a.Altitude = 1, a.EleBody.src = a.PicArr[a.NormalGif], a.isAttacking = 0)
       },
-      [a.EleBody, parseInt(a.EleBody.style.top), -(B = -1000) * 0.1, a, 0, $(a.Ele.FumeDoor), parseInt($(a.Ele.FumeDoor).style.top)]);
+      [a.EleBody, parseInt(a.EleBody.style.top), -(B = -1000) * 0.05, a, 0, $(a.Ele.FumeDoor), parseInt($(a.Ele.FumeDoor).style.top)]);
   },
   PrivateDie: oScreenDoorZombie.prototype.PrivateDie,
   throwImp: function(g) {
