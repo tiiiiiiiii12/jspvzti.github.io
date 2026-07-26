@@ -219,7 +219,7 @@ getLadder:function() {
 		},
         InitTrigger: function() {},
         Tooltip: "把它种在墓碑上用来吞噬墓碑",
-        Produce: '墓地苔用来吃掉墓碑。<p>使用方法：<font color="#FF0000">单次使用，只对墓碑生效。</font><br>特点：<font color="#FF0000">吞噬墓碑。</font><br>精英形态：使墓碑反向，出魅惑僵尸（墓碑可种植物）</p>尽管墓地苔的外表十分吓人，但他想要所有人都知道，其实他喜欢小猫咪，而且利用业余时间，在一家僵尸康复中心做志愿者。“我只是在做正确的事情，”他说。',
+        Produce: '墓地苔用来吃掉墓碑。<p>使用方法：<font color="#FF0000">单次使用，只对墓碑生效。</font><br>特点：<font color="#FF0000">吞噬墓碑。</font><br>精英形态：使墓碑反向，出魅惑僵尸（魅惑墓碑上可种植物）</p>尽管墓地苔的外表十分吓人，但他想要所有人都知道，其实他喜欢小猫咪，而且利用业余时间，在一家僵尸康复中心做志愿者。“我只是在做正确的事情，”他说。',
         PrivateBirth: function(a) {
             PlayAudio("gravebusterchomp");
             oSym.addTask(420,
@@ -295,6 +295,7 @@ getLadder:function() {
         SunNum: 0,
         PicArr: ["images/interface/brain.png"],
         Tooltip: "美味的脑子",
+		Produce:"就是你把僵尸引到这里来的？",
         NormalGif: 0,
 		Stature:1,
         InitTrigger: function() {},
@@ -433,7 +434,7 @@ oStarfruit = InheritO(CPlants, {
     PlayAudio("doomshroom");
     for (z in $Z) {
       let u = $Z[z];
-      u && u.PZ && u.getHit0(u, 800, 0)
+      u && u.PZ && u.ZX<oS.W&&u.getHit0(u, 800, 0)
     }
   },
   NormalAttack: function() {
@@ -812,7 +813,7 @@ while (e--) {
         PicArr: ["images/Card/Plants/Threepeater.png", "images/Plants/Threepeater/0.gif", "images/Plants/Threepeater/Threepeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次射出N行的豌豆",
-        Produce: 'N线射手可以在N条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">全图</font></p>三线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。三线射手最爱的数字是5。',
+        Produce: 'N线射手可以在N条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">全图</font></p>N线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。N线射手一直对杨桃心存爱意。',
         getTriggerR: function(a) {
             return [1,oS.R]
         },
@@ -983,7 +984,7 @@ NormalAttack1: function() {
                 function(d, b) {
                     var c = $P[d];
                     c && (c.NormalAttack1(),
-                          c.jinyin==true&&(c.PeaKind=Math.round(Math.random()*1-1),
+                          c.jinyin==true&&(c.PeaKind=Math.floor(Math.random()*3-1),
                         c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif"));
                     --b && oSym.addTask(15, arguments.callee, [d, b])
                 },
@@ -1068,7 +1069,7 @@ NormalAttack:function(a){
         PicArr: ["images/Card/Plants/SplitPea.png", "images/Plants/SplitPea/0.gif", "images/Plants/SplitPea/SplitPea.gif", "images/Plants/PB00.gif", "images/Plants/PB01.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "前后双向发射豌豆",
-        Produce: '分裂射手，可以向前后两个方向发射豌豆。<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">前面和后面</font><br>发射速度：<font color="#FF0000">前面为正常速度，后面为两倍速度</font><br>精英形态：<font color="#FF0000">真·分裂射手，种植时在本行左侧生成豌豆射手，在本行右侧生成反向双发，均不会被僵尸索敌</font></p>分裂射手：“没错，我就是双子座。我知道，这的确很令人惊奇。不过，有两个头，或者实际上，长着一个头和一个类似头的东西，在背上，对我这条线上的防守帮助很大。',
+        Produce: '分裂射手，可以向前后两个方向发射豌豆。<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">前面和后面</font><br>发射速度：<font color="#FF0000">前面为正常速度，后面为两倍速度</font><br>精英形态：<font color="#FF0000">真·分裂射手，种植时在本行左侧生成豌豆射手，在本行右侧生成反向双发，均不会被僵尸索敌</font></p>分裂射手：“没错，我就是双子座。我知道，这的确很令人惊奇。不过，有两个头，或者实际上，长着一个头和一个类似头的东西，在背上，对我这条线上的防守帮助很大。”',
         GetDX: function() {
             return -55
         },
@@ -1730,7 +1731,7 @@ NormalAttack:function(a){
         HP: 8000,
         PicArr: ["images/Card/Plants/TallNut.png", "images/Plants/TallNut/0.gif", "images/Plants/TallNut/TallNut.gif", "images/Plants/TallNut/TallnutCracked1.gif", "images/Plants/TallNut/TallnutCracked2.gif"],
         Tooltip: "不会被跳过的坚实壁垒",
-        Produce: '高坚果是重型壁垒植物，而且不会被跨过，能将碾压转化为2000伤害且限伤2000<p>韧性：<font color="#FF0000">非常高</font><br>精英形态：给本行的非防御植物替伤<br>特殊：<font color="#FF0000">不会被跨过或越过</font></p>人们想知道，坚果墙和高坚果是否在竞争。高坚果以男中音的声调大声笑了。“我们之间怎么会存在竞争关系？我们是哥们儿。你知道坚果墙为我做了什么吗……”高坚果的声音越来越小，他狡黠地笑着。”',
+        Produce: '高坚果是重型壁垒植物，而且不会被跨过，能将碾压转化为2000伤害且限伤2000<p>韧性：<font color="#FF0000">非常高</font><br>精英形态：给本行的非防御植物替伤<br>特殊：<font color="#FF0000">不会被跨过或越过</font></p>人们想知道，坚果墙和高坚果是否在竞争。高坚果以男中音的声调大声笑了。“我们之间怎么会存在竞争关系？我们是哥们儿。你知道坚果墙为我做了什么吗……”高坚果的声音越来越小，他狡黠地笑着。',
         CanGrow: function(c, b, f) {
             var a = b + "_" + f,
                 d = c[1],
@@ -1895,7 +1896,7 @@ NormalAttack:function(a){
         PicArr: ["images/Card/Plants/Jalapeno.png", "images/Plants/Jalapeno/0.gif", "images/Plants/Jalapeno/Jalapeno.gif", "images/Plants/Jalapeno/JalapenoAttack.gif"],
         AudioArr: ["jalapeno"],
         Tooltip: "消灭整行的敌人",
-        Produce: '火爆辣椒可以摧毁一整条线上的敌人。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">整条线上的僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>精英形态：给全屏非魅惑僵尸附上三倍易伤</p>“咕咕嘎嘎！！！”火爆辣椒说。他现在不会爆炸，还不到时候，不过快了，喔~，快了快了，快来了。他知道，他感受到了，他一生都是在等待这个时刻！',
+        Produce: '火爆辣椒可以摧毁一整条线上的敌人。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">整条线上的僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>精英形态：给全屏非魅惑僵尸附上三倍易伤</p>“咕咕嘎嘎！”火爆辣椒说。他现在不会爆炸，还不到时候，不过快了，喔~，快了快了，快来了。他知道，他感受到了，他一生都是在等待这个时刻！',
 		jinyinAct:function(){},
 		PrivateDie:function(a){
 			for (i in $Z){
@@ -2125,7 +2126,7 @@ NormalAttack:function(a){
         PicArr: ["images/Card/Plants/Squash.png", "images/Plants/Squash/0.gif", "images/Plants/Squash/Squash.gif", "images/Plants/Squash/SquashAttack.gif", "images/Plants/Squash/SquashL.png", "images/Plants/Squash/SquashR.png"],
         AudioArr: ["squash_hmm", "gargantuar_thump"],
         Tooltip: "压扁接近的僵尸",
-        Produce: '窝瓜会压扁第一个接近它的僵尸。<p>伤害：<font color="#FF0000">极高(1850)</font><br>精英形态：压扁一个僵尸直接生成魅惑的此僵尸的精英形态<br>范围：<font color="#FF0000">短，覆盖所有它压到的僵尸。</font><br>用法：<font color="#FF0000">单独使用</font></p>“我准备好了！”窝瓜大吼道，“干吧！！算我一份！没人比我厉害！我就是你要的人！来啊！等啥啊？要的就是这个！”',
+        Produce: '2<p>伤害：<font color="#FF0000">极高(1850)</font><br>精英形态：压扁一个僵尸直接生成魅惑的此僵尸的精英形态<br>范围：<font color="#FF0000">短，覆盖所有它压到的僵尸。</font><br>用法：<font color="#FF0000">单独使用</font></p>“我准备好了！”窝瓜大吼道，“干吧！！算我一份！没人比我厉害！我就是你要的人！来啊！等啥啊？要的就是这个！”',
         GetDY: function(b, c, a) {
             return a[0] ? -21 : -10
         },
@@ -2190,7 +2191,7 @@ oChomper = InheritO(CPlants, {
 jinyinAttackGif2: 8, 
   PicArr: ["images/Card/Plants/Chomper.png", "images/Plants/Chomper/0.gif", "images/Plants/Chomper/Chomper.gif", "images/Plants/Chomper/ChomperAttack.gif" + $Random, "images/Plants/Chomper/ChomperDigest.gif", "images/Plants/Chomper/jinyinChomper.gif", "images/Plants/Chomper/jinyinChomperDigest.gif", "images/Plants/Chomper/jinyinAttack.gif" + $Random, "images/Plants/Chomper/jinyinAttack2.gif" + $Random],
   Tooltip: "能一口气吞下一只僵尸, 但处于咀嚼状态中十分脆弱",
-  Produce: '大嘴花可以一口吞掉一整只僵尸，但是他们消化僵尸的时候很脆弱。<br>精英形态：读报大嘴花<br>破报前同普通大嘴花，报纸被打破后怒吼，对3×3的僵尸造成击退和300伤害，此后每次攻击对3×3的僵尸造成40伤害<br>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">非常近</font><br>特点：<font color="#FF0000">消化时间很长（26s+吞吃僵尸总血量）</font><br>大嘴花几乎可以去“恐怖小店”，来表演它的绝技了，不过他的经纪人压榨了他太多的钱，所以他没去成。尽管如此，大嘴花没有怨言，只说了句这只是交易的一部分。',
+  Produce: '大嘴花可以一口吞掉一整只僵尸，但是他们消化僵尸的时候很脆弱。<br>精英形态：读报大嘴花<br>破报前同普通大嘴花，报纸被打破后怒吼，对3×3的僵尸造成击退和300伤害，此后每次攻击对3×3的僵尸造成40伤害<br>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">非常近</font><br>特点：<font color="#FF0000">消化时间很长（26s+吞吃僵尸总血量）</font><br>大嘴花几乎可以去“恐怖小店”，来表演它的绝技了，不过他的经纪人压榨了他太多的钱，所以他没去成。他曾经吃过一只读报僵尸，因为报纸太难吃所以把报纸留了下来',
   GetDX: function() {
     return -40
   },
@@ -2310,7 +2311,7 @@ jinyinAttackGif2: 8,
         PicArr: ["images/Card/Plants/FumeShroom.png", "images/Plants/FumeShroom/0.gif", "images/Plants/FumeShroom/FumeShroom.gif", "images/Plants/FumeShroom/FumeShroomSleep.gif", "images/Plants/FumeShroom/FumeShroomAttack.gif", "images/Plants/FumeShroom/FumeShroomBullet.gif"],
         AudioArr: ["fume"],
         Tooltip: "喷射可以穿过门板的气液",
-        Produce: '大喷菇喷出的臭气可以穿透铁丝网门。<br>精英形态：伤害提高，且每次攻击能对上下两路僵尸造成溅射伤害<br>伤害：<font color="#FF0000">普通，可穿透铁丝网门</font><br>范围：<font color="#FF0000">臭气中的所有僵尸<br>白天睡觉</font></p>“我以前那份没前途的工作，是为一个面包房生产酵母孢，”大喷菇说。“然后小喷菇，上帝保佑它，告诉了我这个喷杀僵尸的机会。现在我真觉得自己完全不同了。”',
+        Produce: '大喷菇喷射可以穿过门板的气液<br>精英形态：伤害提高，且每次攻击能对上下两路僵尸造成溅射伤害<br>伤害：<font color="#FF0000">普通，可穿透铁丝网门</font><br>范围：<font color="#FF0000">臭气中的所有僵尸<br>白天睡觉</font><br>精英形态：伤害提高，且每次攻击能对上下两路僵尸造成溅射伤害</p>“大喷菇是非卖品！”小喷菇为自己的老大声援道，大喷菇很想找到“六二八事件”的始作俑者',
         GetDY: function(b, c, a) {
             return a[0] ? -18 : -10
         },
@@ -2443,7 +2444,7 @@ FireAttack:90,
   PicArr: ["images/Card/Plants/GloomShroom.png", "images/Plants/GloomShroom/0.gif", "images/Plants/GloomShroom/GloomShroom.gif", "images/Plants/GloomShroom/GloomShroomSleep.gif", "images/Plants/GloomShroom/GloomShroomAttack.gif", "images/Plants/GloomShroom/GloomShroomBullet.gif"],
   AudioArr: ["kernelpult", "kernelpult2"],
   Tooltip: "围绕自身释放大量绵羊音<br>(需要大喷菇)",
-  Produce: '它有两种形态，点击可切换（有冷却提示），两种形态有不同的效果<br>寒冰形态：对僵尸造成伤害和概率击退<br>火焰形态：伤害更高，有概率直接破甲(不会抵消减速)<br><font color="#FF0000">必须种植在大喷菇上</font><br>起初人们一直非议他，后来曾哥用自己独特的绵羊音横扫了宇宙拆迁办，全世界都拜倒在他的脚下。“听说有个节目叫‘快男’？”曾哥说，“没有我在他们真应该感到羞愧。”他于是决定明年去看看。',
+  Produce: '它有两种形态，点击可切换（有冷却提示），两种形态有不同的效果<br>寒冰形态：对僵尸造成伤害和概率击退<br>火焰形态：伤害更高，有概率直接破甲(不会抵消减速)<br><font color="#FF0000">必须种植在大喷菇上</font><br>起初人们一直非议他，后来曾哥用自己独特的绵羊音横扫了宇宙拆迁办，全世界都拜倒在他的脚下。“听说有个节目叫‘快男’？”曾哥说，“没有我在他们真应该感到羞愧。”他于是决定去看看。',
   CanGrow: function(b, a, d) {
     var c = b[1];
     return c && c.EName == "oFumeShroom"
@@ -2563,7 +2564,7 @@ FireAttack:90,
         PicArr: ["images/Card/Plants/PuffShroom.png", "images/Plants/PuffShroom/0.gif", "images/Plants/PuffShroom/PuffShroom.gif", "images/Plants/PuffShroom/PuffShroomSleep.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         AudioArr: ["puff"],
         Tooltip: "向敌人发射短程孢子",
-        Produce: '小喷菇是免费的，不过射程很近。<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">近<br>白天要睡觉</font></p>小喷菇：“我也是最近才知道僵尸的存在，和很多蘑菇一样，我只是把他们想象成童话和电影里的怪物。不过这次的经历已经让我大开眼界了。',
+        Produce: '小喷菇是免费的，不过射程很近。<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">近<br>白天要睡觉</font></p>小喷菇认大喷菇为老大，他们喜欢一起去参加例如“搞钱了啦”之类的活动，经常找双发射手battle，当然这是在小喷菇发现僵尸前的事了',
         GetDX: CPlants.prototype.GetDX,
         getTriggerRange: function(a, b, c) {
             return [
@@ -2616,7 +2617,7 @@ FireAttack:90,
         Attacking: 0,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         Tooltip: "它是远程射手，但敌人靠近时会蜷缩不动",
-        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子(70%)在内的六种子弹<br>阳光：击中僵尸生成5阳光(22%)<br>草皮卷：对僵尸造成80伤害并修补弹坑(17%)<br>脑子：使僵尸逃跑(2%)<br>铲子：对僵尸造成高伤(1.99%)<br>奖杯：直接过关（iz无效）(0.01%)<br>“谁在那？”胆小菇低声说，声音细微难辨。“走开！我不想见任何人。除非……除非你是马戏团的人。”',
+        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子、阳光（击中僵尸生成5阳光）、草皮卷（对僵尸造成80伤害并修补弹坑）、脑子（使僵尸逃跑）、铲子（对僵尸造成高伤）、奖杯（直接过关（iz无效））六种子弹<br>尽管曾哥已经令令令申申申申申不让胆小菇去见马戏团的精神病人，经胆小菇软磨硬泡才同意，尽管如此，曾哥还是给他塞了一大堆防身用品',
         GetDX: CPlants.prototype.GetDX,
         getTriggerRange: CPlants.prototype.getTriggerRange,
         getTriggerR: function(c) {
@@ -2674,7 +2675,7 @@ FireAttack:90,
     } else if (num < 9800) {
       c.Pea = 3;
       BulletImg = "images/interface/brain.png"
-    } else if (num < 9999) {
+    } else if (num < 9996) {
       c.Pea = 4;
       BulletImg = "images/interface/Shovel.png"
     } else {
@@ -2783,7 +2784,7 @@ FireAttack:90,
         PicArr: ["images/Card/Plants/IceShroom.png", "images/Plants/IceShroom/0.gif", "images/Plants/IceShroom/IceShroom.gif", "images/Plants/IceShroom/IceShroomSleep.gif", "images/Plants/IceShroom/Snow.gif", "images/Plants/IceShroom/icetrap.gif"],
         AudioArr: ["frozen", "wakeup"],
         Tooltip: "暂时使画面里的所有敌人停止行动",
-        Produce: '寒冰菇，能短暂的冻结屏幕上所有僵尸。<p>伤害：<font color="#FF0000">非常低，冻结僵尸</font><br>范围：<font color="#FF0000">屏幕上的所有僵尸</font><br>精英形态：自上而下散落大量冰豆<br>用法：<font color="#FF0000">单独使用，立即生效<br>白天睡觉</font></p>寒冰菇皱着眉头，倒不是因为它不高兴或不满意，只是因为，它儿时因受创伤而遗留下了面瘫。',
+        Produce: '寒冰菇，能短暂的冻结屏幕上所有僵尸。<p>伤害：<font color="#FF0000">非常低，冻结僵尸</font><br>范围：<font color="#FF0000">屏幕上的所有僵尸</font><br>精英形态：自上而下散落大量冰豆<br>用法：<font color="#FF0000">单独使用，立即生效<br>白天睡觉</font></p>寒冰菇皱着眉头，倒不是因为它不高兴或不满意，只是因为，它觉得自己“四秒钟还是太短了”。',
         GetDX: CPlants.prototype.GetDX,
         GetDY: CPlants.prototype.GetDY,
         InitTrigger: function() {},
@@ -2845,7 +2846,7 @@ NormalAttack2: function() {
                         PlayAudio("frozen");
                         var e, d, b = "Snow_" + Math.random();
                         for (d in $Z) {
-                            (e = $Z[d]).ZX < 901 && e.getFreeze(e, d)
+                            (e = $Z[d]).ZX < 901 &&e.PZ&& (e.getHit2(e,100,0),e.getFreeze(e, d))
                         }
                         oSym.addTask(40,
                             function(g) {
@@ -3448,7 +3449,7 @@ NormalAttack2: function() {
             var id = this.id,
                 z, oBalloon;
             $(id).childNodes[1].src = 'images/Plants/Blover/Blover.gif';
-            for (z in $Z) oBalloon = $Z[z],oBalloon&& oBalloon.getr(oBalloon,160),oBalloon&&this.jinyin&& oBalloon.getHit2(oBalloon,500), (oBalloon.EName == 'oBalloonZombie') && oBalloon.getDispelled(); //把气球吹跑
+            for (z in $Z) oBalloon = $Z[z],oBalloon&& oBalloon.getr(oBalloon,160),oBalloon&&this.jinyin&& oBalloon.getHit2(oBalloon,300), (oBalloon.EName == 'oBalloonZombie') && oBalloon.getDispelled(); //把气球吹跑
             if (oS.HaveFog) { // 如果场地上有雾，驱散
                 oGd.MoveFogRight(); // 驱散雾
                 oSym.addTask(2400 + 150, oGd.MoveFogLeft, []); // 24s后恢复
