@@ -1107,7 +1107,7 @@ Birth: function() {
                 h.num &&(AZlength<=9)&&$Z[i] &&$Z[i].beAttacked&&($Z[i].PZ==h.PZ)&& !$Z[i].ChkSpeed && (AZ[AZlength] = (DZid[AZlength] = new oBackupDancer).CustomBirth($Z[i].R, $Z[i].AttackedLX, 100, "Z_" + Math.random(),h.PZ), ++AZlength);
               }
                 while (r--) {
-                  (q = m[r]) && (!(l = q[0]) || !$Z[l]) && (u[o] = (w[o] = new oBackupDancer).CustomBirth(q[1], q[2](v), 100, q[0] = "Z_" + Math.random(), h.PZ), n.push(NewImg("", k, "z-index:" + q[3] + ";left:" + q[4](v) + "px;top:" + q[5] + "px", EDPZ)), ++o)
+                  (q = m[r]) && (!(l = q[0]) || !$Z[l]) && (u[o] = (w[o] = new oBackupDancer).CustomBirth(q[1], q[2](v), 100, q[0] = "Z_" + Math.random(), h.PZ), n.push(NewImg("", k, "z-index:" + q[3] + ";left:" + q[4](v) + "px;top:" + q[5] + "px", EDPZ)),w[o].masterid=h.id,++o)
                 }
                 oSym.addTask(220,
                   function() {
@@ -1122,7 +1122,6 @@ Birth: function() {
                   var B = $Z[A];
                   B && B.beAttacked && (
                     oP.AppearUP(y, z, i),
-					z[i].masterid=A,
                     B.num&&oP.AppearUP(a, b, c),
                     oSym.addTask(100,
                       function(D, C) {
