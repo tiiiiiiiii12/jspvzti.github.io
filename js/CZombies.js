@@ -1122,7 +1122,7 @@ Birth: function() {
                   var B = $Z[A];
                   B && B.beAttacked && (
                     oP.AppearUP(y, z, i),
-					z[i].masterid=A;
+					z[i].masterid=A,
                     B.num&&oP.AppearUP(a, b, c),
                     oSym.addTask(100,
                       function(D, C) {
