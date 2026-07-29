@@ -621,39 +621,13 @@ Birth: function() {
 			a.canWalk(a,a.id)&&!a.isAttacking&&a.getr(a,a.PZ?-a.Speed*2:a.Speed*2);
 			}
 		 }else{
-			a.HP*=2;
-			SetStyle(a.EleShadow,{
-				left:(a.beAttackedPointL - 20) + "px",
-				top:(a.height-44)+"px",
-				width:"172px",
-				height:"72px"
-			});
-			a.AttackZombie=function(d, c) {
-            PlayAudio("zaji");
-            oSym.addTask(125,
-                function(f, e) {
-                    var h = $Z[f],
-                        g;
-                    h && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((g = $Z[e]) && g.getHit0(g, 1000, 0),
-                        oSym.addTask(40, function(h) {
-                            $Z[f] && h.JudgeAttack()
-                        }, [h]))
-                },
-                [d, c])
-        };
-        a.NormalAttack=function(d, c) {
-            PlayAudio("zaji");
-            oSym.addTask(125, function(f, e) {
-                var h = $Z[f];
-                var tp;
-                for (i = -1; i <= 3; i++) {
-                    h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50),
-                        oSym.addTask(40, function(h) {
-                            $Z[f] && h.JudgeAttack()
-                        }, [h]))
-                }
-            }, [d, c]);
-        }
+			a.EleBody.style.filter="grayscale(100%) brightness(0) invert(1)";
+			a.PrivateDie=function(a){
+				a.masterid&&$Z[a.masterid]&&($Z[a.masterid].HP+=(a.level*200),$Z[a.masterid].tasktime*=(0.8*a.level))
+			};
+			a.PrivateAct=function(a){
+				!a.WalkDirection&&a.masterid&&!$Z[a.masterid]&&(a.bedevil(a,1),a.Speed*=2,a.OSpeed*=2)
+			}
 		 }
 		},
 		ChkActs1: function(g, e, h, d) {
@@ -663,7 +637,7 @@ Birth: function() {
                     g.PrivateAct&&g.PrivateAct(g);
                     return f
                 },
-        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态一：灰色，不跳舞，三倍速度<br>精英形态二：两倍血量，变为巨人攻击方式<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
+        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态一：灰色，不跳舞，三倍速度<br>精英形态二：狂热伴舞，死亡后为舞王加血，但舞王死后会跑路<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
         BirthCallBack: function(e) {
             var d = e.delayT,
                 c = e.id,
@@ -1148,6 +1122,7 @@ Birth: function() {
                   var B = $Z[A];
                   B && B.beAttacked && (
                     oP.AppearUP(y, z, i),
+					z[i].masterid=A;
                     B.num&&oP.AppearUP(a, b, c),
                     oSym.addTask(100,
                       function(D, C) {
@@ -2016,7 +1991,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
     a.PrivateAct = function(a) {
 	var SummonZ;
 	a.jinyin && a.num<50&&(!a.nowHP&&(a.nowHP=a.MaxHP),a.canWalk(a,a.id)&&a.Ornaments&&(a.HP!=a.nowHP)&&(a.ChangeR(a),a.nowHP=a.HP));
-      a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && a.jinyin && a.num<50 && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.bedevil=CZombies.prototype.bedevil,a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.tasktime/=2,a.HP+=(300*a.level),a.ChangeR(a),(SummonZ=CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ)).Privatenum = 30,SummonZ.jinyinnum=30);
+      a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && a.jinyin && a.num<50 && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.bedevil=CZombies.prototype.bedevil,a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.tasktime/=2,a.HP+=(300*a.level),a.ChangeR(a),(SummonZ=CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ)).Privatenum = 30,SummonZ.jinyinnum=100);
       var P = a.Ele;
       (a.WalkDirection == a.check) && (a.Ornaments && (a.num>=50&& EditEle($(a.id + "_Bullet"), 0, {
             transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
@@ -3815,7 +3790,7 @@ jinyinAct: function(a) {
   LostPaperSpeed:1.6,
   ChkActs: function(f, d, g, c) {
     // 到了左边自己钻出来
-	if (f.jinyin&&f.num<50&&f.Altitude == 0 && f.AttackedRX < GetX(6) - 40) return (f.Go_Up(f, 0),f.HP*=2.5,f.LostPaperSpeed*=0.4), 0;
+	if (f.jinyin&&f.num<50&&f.Altitude == 0 && f.AttackedRX < GetX(6) - 40) return (f.Go_Up(f, 0),f.HP*=3,f.LostPaperSpeed*=0.4), 0;
     if (f.Altitude == 0 && f.AttackedRX < GetX(1) - 40) return f.Go_Up(f, 1), 1;
     var b, a, e;
     !(f.FreeFreezeTime || f.FreeSetbodyTime) ?
