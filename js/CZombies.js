@@ -626,9 +626,23 @@ Birth: function() {
 				a.masterid&&$Z[a.masterid]&&($Z[a.masterid].HP+=(a.level*200),$Z[a.masterid].tasktime*=(0.8*a.level))
 			};
 			a.PrivateAct=function(a){
-				!a.WalkDirection&&a.masterid&&!$Z[a.masterid]&&(a.bedevil(a,1),a.Speed*=2,a.OSpeed*=2)
+				!a.WalkDirection&&a.masterid&&!$Z[a.masterid]&&(a.Boom(a))
 			}
 		 }
+		},
+		Boom:function(a){
+		PlayAudio("potatomine");
+		for (i = 3; i >= 0; i--) {
+            var tp = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
+            tp && tp.canEat && a.PZ && tp.getHurt(a, 3, 1000 * a.level);
+          }
+          var tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 40, a.ZX + 40, a.R);
+          var tzl = tz.length;
+          while (tzl--) {
+              tz[tzl].Altitude == 1&&tz[tzl].getHit0(tz[tzl], 1000 * a.level, 0);
+		  }
+		oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.ZX - 80) + "px;top:" + (a.pixelTop + 40) + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
+		a.DisappearDie();
 		},
 		ChkActs1: function(g, e, h, d) {
                     var c,f;
@@ -637,7 +651,7 @@ Birth: function() {
                     g.PrivateAct&&g.PrivateAct(g);
                     return f
                 },
-        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态一：灰色，不跳舞，三倍速度<br>精英形态二：狂热伴舞，死亡后为舞王加血，但舞王死后会跑路<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
+        Produce: '当舞王僵尸摇摆时，这种僵尸四个结伙出现。</p><p>韧性：<font color="#FF0000">低</font><br>精英形态一：灰色，不跳舞，三倍速度<br>精英形态二：狂热伴舞，死亡后为舞王加血，舞王死后原地自爆<br>伴舞僵尸曾在位于僵尸纽约城的“咀利牙”表演艺术学院钻研过六年的舞技。',
         BirthCallBack: function(e) {
             var d = e.delayT,
                 c = e.id,
