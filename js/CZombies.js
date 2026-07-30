@@ -631,17 +631,19 @@ Birth: function() {
 		 }
 		},
 		Boom:function(a){
-		PlayAudio("potatomine");
+		PlayAudio("potato_mine");
 		for (i = 3; i >= 0; i--) {
-            var tp = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
+			for (l=GetC(a.ZX)-1;l<=GetC(a.ZX)+1;l++){
+            var tp = oGd.$[a.R + "_" + l + "_" + i];
             tp && tp.canEat && a.PZ && tp.getHurt(a, 3, 1000 * a.level);
+			}
           }
-          var tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 40, a.ZX + 40, a.R);
+          var tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 100, a.ZX + 100, a.R);
           var tzl = tz.length;
           while (tzl--) {
-              tz[tzl].Altitude == 1&&tz[tzl].getHit0(tz[tzl], 1000 * a.level, 0);
+              tz[tzl].Altitude == 1&&tz[tzl].getExplosion(1000);
 		  }
-		oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.ZX - 80) + "px;top:" + (a.pixelTop + 40) + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
+		oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.ZX - 80) + "px;top:" + (a.pixelTop + 80) + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
 		a.DisappearDie();
 		},
 		ChkActs1: function(g, e, h, d) {
