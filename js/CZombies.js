@@ -626,7 +626,7 @@ Birth: function() {
 				a.masterid&&$Z[a.masterid]&&($Z[a.masterid].HP+=(a.level*200),$Z[a.masterid].tasktime*=(0.8*a.level))
 			};
 			a.PrivateAct=function(a){
-				!a.WalkDirection&&a.masterid&&!$Z[a.masterid]&&(a.Boom(a))
+				a.masterid&&!$Z[a.masterid]&&(a.Boom(a))
 			}
 		 }
 		},
