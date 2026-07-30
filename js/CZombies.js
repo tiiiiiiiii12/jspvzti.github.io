@@ -635,7 +635,7 @@ Birth: function() {
 		for (i = 3; i >= 0; i--) {
 			for (l=GetC(a.ZX)-1;l<=GetC(a.ZX)+1;l++){
             var tp = oGd.$[a.R + "_" + l + "_" + i];
-            tp && tp.canEat && a.PZ && tp.getHurt(a, 3, 1000 * a.level);
+            tp && a.PZ && tp.getHurt(a, 3, 1000 * a.level);
 			}
           }
           var tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 100, a.ZX + 100, a.R);
