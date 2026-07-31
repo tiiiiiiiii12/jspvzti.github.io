@@ -500,10 +500,10 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan"+Math.floor(Math.random()*5+1)),CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(c.SetNutTime,arguments.callee,[c]));
 	  },[c]);
 	}else{
-		c.checkHP=function(a){
-			oWallNutZombie.prototype.checkHP(a.Ele,a);
+		c.checkHP=function(z,a){
+			oWallNutZombie.prototype.checkHP(z,a);
 			var g=oGargantuar.prototype;
-			a.OrnHP<=a.OrnBreakPoint1&&a.beAttacked&&(SetStyle($(a.Ele.NutHead),{
+			a.OrnHP<=a.OrnBreakPoint1&&a.beAttacked&&(SetStyle($(z.NutHead2),{
 				src:oWallNut.prototype.PicArr[8]
 			}),a.JudgeAttack=g.JudgeAttack,a.NormalAttack=g.NormalAttack,a.AttackZombie=g.AttackZombie,a.JudgeLR=g.JudgeLR,a.JudgeSR=g.JudgeSR,a.checkHP=oWallNutZombie.prototype.checkHP)
 		}
