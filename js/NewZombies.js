@@ -1,7 +1,7 @@
 var oGargantuar = InheritO(oZombie, {
   PicArr: (function() {
     var a = "images/Zombies/Gargantuar/";
-    return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif" + $Random, a + "ImpToLand.gif", a + "throwImp.gif", a + "ImplessDie.gif", a + "Die.gif", a + "ImplessWalk.gif", a + "0.gif", a + "ImplessAttack.gif" + $Random]
+    return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif" + $Random + Math.random(), a + "ImpToLand.gif", a + "throwImp.gif", a + "ImplessDie.gif", a + "Die.gif", a + "ImplessWalk.gif", a + "0.gif", a + "ImplessAttack.gif" + $Random + Math.random()]
   })(),
   throwImpGif: 5,
   ImpToLandGif: 4,
@@ -85,7 +85,7 @@ var oGargantuar = InheritO(oZombie, {
       h = oGd.$,
       a,
       c;
-    (a = g.JudgeAttackH1()) || (c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h)) ? (!g.isAttacking && (g.isAttacking = 1, g.EleBody.src = g.PicArr[g.AttackGif] + Math.random()), !a && g.NormalAttack(c[0], c[1])) :
+    (a = g.JudgeAttackH1()) || (c = g.JudgeLR(g, e, f, d, h) || g.JudgeSR(g, e, f, d, h)) ? (!g.isAttacking && (g.isAttacking = 1, g.EleBody.src = g.PicArr[g.AttackGif]), !a && g.NormalAttack(c[0], c[1])) :
     g.isAttacking && (g.isAttacking = 0, g.EleBody.src = g.PicArr[g.NormalGif])
   },
   JudgeAttackH: function() {
@@ -93,7 +93,7 @@ var oGargantuar = InheritO(oZombie, {
       d = oZ.getZ0(e.ZX + 20, e.R),
       f = e.id,
       c;
-    d && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif] + Math.random(), e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) :
+    d && d.AttackedLX < oS.W && d.Altitude == 1 ? (!e.isAttacking ? (e.isAttacking = 1, e.EleBody.src = e.PicArr[e.AttackGif], e.AttackZombie(f, c = d.id)) : e.AttackZombie(f, d.id, 1)) :
       e.isAttacking && (e.isAttacking = 0, e.EleBody.src = e.PicArr[e.NormalGif])
   },
   JudgeLR: function(f, d, e, c, g) {
@@ -505,7 +505,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 			var g=oGargantuar.prototype;
 			a.OrnHP<=a.OrnBreakPoint1&&a.beAttacked&&(SetStyle($(z.NutHead2),{
 				src:oWallNut.prototype.PicArr[8]
-			}),a.JudgeAttack=g.JudgeAttack,a.NormalAttack=g.NormalAttack,a.AttackZombie=g.AttackZombie,a.JudgeLR=g.JudgeLR,a.JudgeSR=g.JudgeSR,a.checkHP=oWallNutZombie.prototype.checkHP)
+			}),a.JudgeAttack=a.PZ?g.JudgeAttack:g.JudgeAttack1,a.NormalAttack=g.NormalAttack,a.AttackZombie=g.AttackZombie,a.JudgeLR=g.JudgeLR,a.JudgeSR=g.JudgeSR,a.checkHP=oWallNutZombie.prototype.checkHP)
 		}
 	}
 	},
