@@ -494,13 +494,13 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       z.NutHead2 = "nut" + Math.random();
       var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
       z.appendChild(Nut);
-	  a.num=Math.random()*100||a.Privatenum;
-	if(a.num>=50){
+	  c.num=Math.random()*100||c.Privatenum;
+	if(c.num>=50){
 	  oSym.addTask(c.SetNutTime,function(c){
 		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan"+Math.floor(Math.random()*5+1)),CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(c.SetNutTime,arguments.callee,[c]));
 	  },[c]);
 	}else{
-		a.checkHP=function(a){
+		c.checkHP=function(a){
 			oWallNutZombie.prototype.checkHP(a.Ele,a);
 			var g=oGargantuar.prototype;
 			a.OrnHP<=a.OrnBreakPoint1&&a.beAttacked&&(SetStyle($(a.Ele.NutHead),{
