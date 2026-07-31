@@ -25,6 +25,7 @@ var oGargantuar = InheritO(oZombie, {
   BreakPoint: 1,
   NormalDie: function() {
     var c = this;
+	if(!c.isDie){
     c.PrivateDie(c);
     PlayAudio("GargantuarDie");
     c.EleBody.src = c.PicArr[c.DieGif];
@@ -32,6 +33,7 @@ var oGargantuar = InheritO(oZombie, {
     c.HP = 0;
     delete $Z[c.id];
     c.PZ && oP.MonPrgs()
+	}
   },
   GoingDie: function() {
     this.NormalDie()
@@ -42,8 +44,8 @@ var oGargantuar = InheritO(oZombie, {
       function(f, e) {
         var h = $Z[f],
           g;
-        h && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((g = $Z[e]) && g.getHit0(g, 1000, 0),
-          oSym.addTask(40, function(h) {
+        h && h.canWalk(h,h.id)&&h.beAttacked && ((g = $Z[e]) && g.getHit0(g, 1000, 0),
+          oSym.addTask(50, function(h) {
             $Z[f] && h.JudgeAttack()
           }, [h]))
       },
@@ -125,7 +127,7 @@ var oGargantuar = InheritO(oZombie, {
       var tp;
       for (i = -1; i <= 3; i++) {
         h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50),
-          oSym.addTask(40, function(h) {
+          oSym.addTask(50, function(h) {
             $Z[f] && h.JudgeAttack()
           }, [h]))
       }
@@ -249,7 +251,7 @@ var oGargantuar = InheritO(oZombie, {
           k && (k.num >= 50) && ClearChild($(k.Ele.FumeDoor));
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
-            k && k.jinyin && (k.throwImpnum == 1) && oP.SetTimeoutAirdropZombie(5, 9, 5, k.zl, !k.PZ)
+            k && (k.num>=50) && (k.throwImpnum == 1) && oP.SetTimeoutAirdropZombie(5, 9, 5, k.zl, !k.PZ)
           }, [k]);
           var j = CZombies.prototype;
           k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
@@ -386,7 +388,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
           do {
             j = q + "_" + g + "_";
             for (l = 0; l < 4; l++) {
-              (m = r[j + l]) && m.BoomDie()
+              (m = r[j + l]) && m.getHurt(e,3,1600*a.level)
             }
           } while (g++ < h)
         } while (q++ < o)
@@ -486,13 +488,14 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     OrnTop: -40,
     OrnLeft: 20,
     Lvl: 5,
+	SetNutTime:1200,
     jinyinAct: function(c) {      
 	  var z = c.Ele;
       z.NutHead2 = "nut" + Math.random();
       var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
       z.appendChild(Nut);
-	  oSym.addTask(1500,function(c){
-		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan"+Math.floor(Math.random()*5+1)),CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(1200,arguments.callee,[c]));
+	  oSym.addTask(c.SetNutTime,function(c){
+		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan"+Math.floor(Math.random()*5+1)),CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(c.SetNutTime,arguments.callee,[c]));
 	  },[c]);
 	},
 	PrivateDie:function(c){
@@ -519,14 +522,16 @@ oNutZombie = InheritO(oTallNutZombie, {
     OrnTop: 80,
     OrnLeft: 80,
 	jinyinnum:100,
-    Lvl: 3,
+    Lvl: 2,
 	PicArr: (function() {
       var a = "images/Zombies/Zombie/";
       return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
     })(),
 	GoingDie:function(a){
 		this.DisappearDie();
-		delete oGd.$Crater[a.SetR+"_"+a.SetC];
+		if(this.PZ){
+		delete oGd.$Crater[this.SetR+"_"+this.SetC];
+		}
 	},
 	getr:function(){},
 	getSlow:function(){},
@@ -544,11 +549,13 @@ oNutZombie = InheritO(oTallNutZombie, {
 	},
 	ChangeR:function(){},
 	WalkToLadder:function(){},
-    jinyinAct: function(){
-		SetHidden(this.EleBody);
+    jinyinAct: function(a){
+		SetHidden(a.EleBody);
 		a.SetR=a.R;
 		a.SetC=GetC(a.ZX);
-		oGd.$Crater[a.SetR+"_"+a.SetC]=1;
+		oSym.addTask(1,function(a){
+		a.PZ&&(oGd.$Crater[a.SetR+"_"+a.SetC]=1);
+		},[a])
 	},
     Produce: '韧性：<font color="#FF0000">1100</font><br>精英形态：无</p>由精英高坚果僵尸召唤'
   }),
@@ -865,7 +872,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
 		var Z=oZ[a.PZ?"getArZ":"getArHZ"](a.ZX-100,a.ZX+100,a.R);
 			Zl=Z.length;
 		while(Zl--){
-		a.canWalk(a,a.id)&&a.beAttacked&&(Z[Zl].jianshang>=1)&&(a.getAid(Z[Zl],a.id));
+		a.canWalk(a,a.id)&&a.beAttacked&&(Z[Zl].jianshang>=1)&&(a.getAid(Z[Zl],a.id,a.jianshangtime));
 		  }
 		PlayAudio("wakeup");
 		$Z[a.id]&&oSym.addTask(750,arguments.callee,[a])
@@ -882,10 +889,11 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
       b.CanShoot && b.Ornaments && b.checkP(b);
     }
   },
- getAid:function(a,d){
+jianshangtime:500,
+ getAid:function(a,d,c){
 	 a.jianshang*=0.75;
 	 a.EleBody.style.filter = "sepia(1) hue-rotate(20deg) brightness(5)";
-	 oSym.addTask(500,function(a,d){
+	 oSym.addTask(c,function(a,d){
 		$Z[a.id]&&(a.id!=d)&&(a.jianshang/=0.75,a.EleBody.style.filter = "sepia(0) hue-rotate(0deg) brightness(1)");
 	 },[a,d])
  },
@@ -1001,3 +1009,4 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering,g.OSpeed=g.LostPaperSpeed,g.Speed=g.LostPaperSpeed*(g.FreeSlowTime?0.5:1),!g.num&&(g.getSnowPea = e.getSnowPea), g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.canLadderList = [], g.Boom = function() {}, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
   }
 })
+
