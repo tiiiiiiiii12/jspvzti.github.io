@@ -494,16 +494,27 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       z.NutHead2 = "nut" + Math.random();
       var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
       z.appendChild(Nut);
+	  a.num=Math.random()*100||a.Privatenum;
+	if(a.num>=50){
 	  oSym.addTask(c.SetNutTime,function(c){
 		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan"+Math.floor(Math.random()*5+1)),CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(c.SetNutTime,arguments.callee,[c]));
 	  },[c]);
+	}else{
+		a.checkHP=function(a){
+			oWallNutZombie.prototype.checkHP(a.Ele,a);
+			var g=oGargantuar.prototype;
+			a.OrnHP<=a.OrnBreakPoint1&&a.beAttacked&&(SetStyle($(a.Ele.NutHead),{
+				src:oWallNut.prototype.PicArr[8]
+			}),a.JudgeAttack=g.JudgeAttack,a.NormalAttack=g.NormalAttack,a.AttackZombie=g.AttackZombie,a.JudgeLR=g.JudgeLR,a.JudgeSR=g.JudgeSR,a.checkHP=oWallNutZombie.prototype.checkHP)
+		}
+	}
 	},
 	PrivateDie:function(c){
 		ClearChild($(c.Ele.NutHead));
 		ClearChild($(c.Ele.NutHead2));
 	},
     Boom: function() {},
-    Produce: '韧性：<font color="#FF0000">极高(2200+270)</font><br>精英形态：每隔一段时间在场上放置一个坚果障碍，坚果障碍所在格不可种植植物</p>太好了，高仁僵尸来了'
+    Produce: '韧性：<font color="#FF0000">极高(2200+270)</font><br>精英形态一：每隔一段时间在场上放置一个坚果障碍，坚果障碍所在格不可种植植物<br>精英形态二：头部到达第一个损伤点时攻击方式变为巨人</p>太好了，高仁僵尸来了'
   }, {
     PicArr: {
       12: "images/Plants/TallNut/TallNut.gif",
@@ -1009,4 +1020,3 @@ jianshangtime:500,
     (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering,g.OSpeed=g.LostPaperSpeed,g.Speed=g.LostPaperSpeed*(g.FreeSlowTime?0.5:1),!g.num&&(g.getSnowPea = e.getSnowPea), g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.canLadderList = [], g.Boom = function() {}, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
   }
 })
-
