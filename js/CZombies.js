@@ -278,37 +278,50 @@ Birth: function() {
                 },
                 NormalDie: function() {
                     var c = this;
+					if(!c.isDie){
+					c.isDie=true;
 					c.PrivateDie&&c.PrivateDie(c);
                     c.EleBody.src = c.PicArr[c.DieGif] + Math.random();
                     oSym.addTask(250, ClearChild, [c.Ele]);
                     c.HP = 0;
                     delete $Z[c.id];
                     c.PZ && oP.MonPrgs()
+					}
                 },
                 ExplosionDie: function() {
                     var c = this;
+					if(!c.isDie){
+					c.isDie=true;
 					c.PrivateDie&&c.PrivateDie(c);
                     c.EleBody.src = c.PicArr[c.BoomDieGif] + Math.random();
                     oSym.addTask(300, ClearChild, [c.Ele]);
                     c.HP = 0;
                     delete $Z[c.id];
                     c.PZ && oP.MonPrgs()
+					}
 				},
+			isDie:0,
                 DisappearDie: function() {
+					if(!this.isDie){
+					this.isDie=true;
 					this.PrivateDie&&this.PrivateDie(this);
                     ClearChild(this.Ele);
                     this.HP = 0;
                     delete $Z[this.id];
                     this.PZ && oP.MonPrgs()
+					}
                 },
                 CrushDie: function() {
                     var c = this;
+					if(!c.isDie){
+					c.isDie=true;
 					c.PrivateDie&&c.PrivateDie(c);
                     c.GoingDieHead(c.id, c.PicArr, c);
                     ClearChild(c.Ele);
                     c.HP = 0;
                     delete $Z[c.id];
                     c.PZ && oP.MonPrgs()
+					}
                 },
                 GoingDieHead: function(e, c, d) {
                     oSym.addTask(200, ClearChild, [NewImg(0, c[d.HeadGif] + Math.random(), "left:" + d.AttackedLX + "px;top:" + (d.pixelTop - 20) + "px;z-index:" + d.zIndex, EDPZ)])
@@ -806,37 +819,49 @@ Birth: function() {
         },
         NormalDie: function() {
             var a = this;
+			if(a.isDie){
+			a.isDie=true;
             a.ResetBackupDancer(a);
             a.EleBody.src = a.PicArr[a.DieGif] + Math.random();
             oSym.addTask(250, ClearChild, [a.Ele]);
             a.HP = 0;
             delete $Z[a.id];
             a.PZ && oP.MonPrgs()
+			}
         },
         ExplosionDie: function() {
             var a = this;
+		if(!a.isDie){
+			a.isDie=true;
             a.ResetBackupDancer(a);
             a.EleBody.src = a.PicArr[a.BoomDieGif] + Math.random();
             oSym.addTask(300, ClearChild, [a.Ele]);
             a.HP = 0;
             delete $Z[a.id];
             a.PZ && oP.MonPrgs()
+		}
         },
         DisappearDie: function() {
+		if(!this.isDie){
+			this.isDie=true;
             this.ResetBackupDancer(this);
             ClearChild(this.Ele);
             this.HP = 0;
             delete $Z[this.id];
             this.PZ && oP.MonPrgs()
+		}
         },
         CrushDie: function() {
             var a = this;
+		if(!a.isDie){
+			a.isDie=true;
             a.ResetBackupDancer(a);
             a.GoingDieHead(a.id, a.PicArr, a);
             ClearChild(a.Ele);
             a.HP = 0;
             delete $Z[a.id];
             a.PZ && oP.MonPrgs()
+		}
         },
     bedevil: function(b,c) {
       var a = b.id;
@@ -2197,31 +2222,43 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
                 [a])
         },
         ExplosionDie: function() {
+		if(!this.isDie){
+			this.isDie=true;
 			this.PrivateDie&&this.PrivateDie(this);
             ClearChild(this.Ele);
             this.HP = 0;
             delete $Z[this.id];
             this.PZ && oP.MonPrgs()
+		}
         },
         DisappearDie: function() {
+		if(!this.isDie){
+			this.isDie=true;
 			this.PrivateDie&&this.PrivateDie(this);
             ClearChild(this.Ele);
             this.HP = 0;
             delete $Z[this.id];
             this.PZ && oP.MonPrgs()
+		}
         },
         CrushDie: function() {
+		if(!this.isDie){
+			this.isDie=true;
 			this.PrivateDie&&this.PrivateDie(this);
             ClearChild(this.Ele);
             this.HP = 0;
             delete $Z[this.id];
             this.PZ && oP.MonPrgs()
+		}
         },
         NormalDie: function() {
+		if(!this.isDie){
+			this.isDie=true;
 			this.PrivateDie&&this.PrivateDie(this);
             this.HP = 0;
             delete $Z[this.id];
             this.PZ && oP.MonPrgs()
+		}
         }
     }),
     oDuckyTubeZombie1 = InheritO(oAquaticZombie, {
@@ -2625,9 +2662,14 @@ jinyinWalkGif12: 14,
                 case (d.HP = c -=b*d.jianshang) < 60:
 					if(d.num>=50){
 						d.HP=390;
-					}
+						d.OSpeed*=2;
+						d.Speed*=2;
+						$(d.Ele.FumeDoor).src="images/Plants/PB10.gif";
+						d.num=0;
+					}else{
                     d.GoingDie();
-                    d.getHit0 = d.getHit1 = d.getHit2 = d.getHit3 = function(d,b) {(d.HP-=b)<0&&d.NormalDie()};
+					d.getHit0 = d.getHit1 = d.getHit2 = d.getHit3 = function(d,b) {(d.HP-=b)<0&&d.NormalDie()};
+					}
                     return;
                 case c < 391:
 					d.num>=50&&(d.OSpeed*=2,d.Speed*=2,$(d.Ele.FumeDoor).src="images/Plants/PB10.gif",d.num=0);
@@ -2795,6 +2837,8 @@ jinyinWalkGif12: 14,
             },
             NormalDie: function() {
                 var b = this;
+				if(!b.isDie){
+				b.isDie=true;
                 PlayAudio("explosion");
 				b.Ele.FumeDoor&&ClearChild($(b.Ele.FumeDoor));
                 b.EleBody.src = b.PicArr[b.DieGif] + Math.random();
@@ -2803,18 +2847,24 @@ jinyinWalkGif12: 14,
                 delete $Z[b.id];
                 b.JudgeIce();
                 b.PZ && oP.MonPrgs()
+				}
             },
             DisappearDie: function() {
                 var b = this;
+				if(!b.isDie){
+				b.isDie=true;
 				b.Ele.FumeDoor&&ClearChild($(b.Ele.FumeDoor));
                 ClearChild(b.Ele);
                 b.HP = 0;
                 delete $Z[b.id];
                 b.JudgeIce();
                 b.PZ && oP.MonPrgs()
+				}
             },
             ExplosionDie: function() {
                 var b = this;
+				if(!b.isDie){
+				b.isDie=true;
 				b.Ele.FumeDoor&&ClearChild($(b.Ele.FumeDoor));
                 b.EleBody.src = b.PicArr[b.BoomDieGif] + Math.random();
                 oSym.addTask(300, ClearChild, [b.Ele]);
@@ -2822,6 +2872,7 @@ jinyinWalkGif12: 14,
                 delete $Z[b.id];
                 b.JudgeIce();
                 b.PZ && oP.MonPrgs()
+				}
             },
             CrushDie: function() {
                 this.NormalDie()
@@ -2973,7 +3024,7 @@ jinyinWalkGif12: 14,
             })
         },
 		jinyinAct:function(a){
-			a.PicArr=(function() {
+		a.PicArr=(function() {
             var a = "images/Zombies/DolphinRiderZombie/";
             return ["images/Card/Zombies/DolphinRiderZombie.png", a + "0.gif", a + "jinyinWalk1.gif", a + "jinyinWalk2.gif", a + "1.gif", a + "Attack.gif", a + "Head.gif" + $Random, a + "jinyinDie.gif" + $Random, a + "jinyinJump.gif" + $Random, a + "jinyinJump2.gif" + $Random, a + "Walk3.gif", a + "Walk4.gif", a + "Die2.gif" + $Random, a + "jinyinJump3.gif" + $Random]
         })();
@@ -3172,19 +3223,25 @@ if(a.num>=50){
 PrivateDie:function(){},
   NormalDie: function() {
     var a = this;
+	if(!a.isDie){
+	a.isDie=true;
 	a.PrivateDie(a);
     oSym.addTask(250, ClearChild, [a.Ele]);
     a.HP = 0;
     delete $Z[a.id];
     a.PZ && oP.MonPrgs()
+	}
   },
   CrushDie: function() {
     var a = this;
+	if(!a.isDie){
+	a.isDie=true;
 	a.PrivateDie(a);
     ClearChild(a.Ele);
     a.HP = 0;
     delete $Z[a.id];
     a.PZ && oP.MonPrgs()
+	}
   },
   PicArr: (function() {
     var a = "images/Zombies/Imp/";
@@ -3360,6 +3417,8 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   },
   NormalDie: function() {
     var a = this;
+if(!a.isDie){
+	a.isDie=true;  
     a.PrivateDie && a.PrivateDie(a);
     a.Status && !--oGd.$JackinTheBox && StopAudio("jackinthebox");
     a.EleBody.src = a.PicArr[a.DieGif] + Math.random();
@@ -3367,9 +3426,12 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
     a.HP = 0;
     delete $Z[a.id];
     a.PZ && oP.MonPrgs()
+}
   },
   ExplosionDie: function() {
     var a = this;
+	if(!a.isDie){
+	a.isDie=true;
     a.PrivateDie && a.PrivateDie(a);
     a.Status && !--oGd.$JackinTheBox && StopAudio("jackinthebox");
     a.EleBody.src = a.PicArr[a.BoomDieGif] + Math.random();
@@ -3377,17 +3439,23 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
     a.HP = 0;
     delete $Z[a.id];
     a.PZ && oP.MonPrgs()
+	}
   },
   DisappearDie: function() {
+	if(!this.isDie){
+	this.isDie=true;
     this.PrivateDie && this.PrivateDie(this);
     this.Status && !--oGd.$JackinTheBox && StopAudio("jackinthebox");
     ClearChild(this.Ele);
     this.HP = 0;
     delete $Z[this.id];
     this.PZ && oP.MonPrgs()
+	}
   },
   CrushDie: function() {
     var a = this;
+	if(!a.isDie){
+	a.isDie=true;
     a.PrivateDie && a.PrivateDie(a);
     a.Status && !--oGd.$JackinTheBox && StopAudio("jackinthebox");
     a.GoingDieHead(a.id, a.PicArr, a);
@@ -3395,6 +3463,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
     a.HP = 0;
     delete $Z[a.id];
     a.PZ && oP.MonPrgs()
+	}
   }
 }),
     oBalloonZombie = InheritO(OrnIZombies, {
@@ -3514,31 +3583,18 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
                         c.getFreeze = OrnIZombies.prototype.getFreeze;
                         c.EleBody.src = "images/Zombies/BalloonZombie/Walk.gif";
                         c.ChkActs = OrnIZombies.prototype.ChkActs;
-                        c.ExplosionDie = function() {
-                            var d = this;
-                            d.EleBody.src = d.PicArr[d.BoomDieGif];
-                            oSym.addTask(200, ClearChild, [d.Ele]);
-                            d.HP = 0;
-                            delete $Z[d.id];
-                            d.PZ && oP.MonPrgs();
-                            d.MulBallNum();
-                        };
-                        c.DisappearDie = function() {
-                            ClearChild(this.Ele);
-                            this.HP = 0;
-                            delete $Z[this.id];
-                            this.PZ && oP.MonPrgs();
-                            this.MulBallNum();
-                        };
-                        c.CrushDie = function() {
-                            var d = this;
-                            d.GoingDieHead(d.id, d.PicArr, d);
-                            ClearChild(d.Ele);
-                            d.HP = 0;
-                            delete $Z[d.id];
-                            d.PZ && oP.MonPrgs();
-                            d.MulBallNum();
-                        }
+        c.CrushDie = function() {
+          var d = this;
+		if(!d.isDie){
+		  d.isDie=true;
+          d.GoingDieHead(d.id, d.PicArr, d);
+          ClearChild(d.Ele);
+          d.HP = 0;
+          delete $Z[d.id];
+          d.PZ && oP.MonPrgs();
+          d.MulBallNum();
+		}
+        }
                     }
                 },
                 [a.id])
@@ -3555,28 +3611,37 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
         },
         NormalDie: function() {
             var a = this;
+			if(!a.isDie){
+			a.isDie=true;
             a.EleBody.src = a.PicArr[a.DieGif] + Math.random();
             oSym.addTask(250, ClearChild, [a.Ele]);
             a.HP = 0;
             delete $Z[a.id];
             a.PZ && oP.MonPrgs();
             a.MulBallNum();
+			}
         },
         ExplosionDie: function() {
             var a = this;
+			if(!a.isDie){
+			a.isDie=true;
             a.EleBody.src = a.PicArr[a.BoomDieGif];
             oSym.addTask(200, ClearChild, [a.Ele]);
             a.HP = 0;
             delete $Z[a.id];
             a.PZ && oP.MonPrgs();
             a.MulBallNum();
+			}
         },
         DisappearDie: function() {
+			if(!this.isDie){
+			this.isDie=true;
             ClearChild(this.Ele);
             this.HP = 0;
             delete $Z[this.id];
             this.PZ && oP.MonPrgs();
             this.MulBallNum();
+			}
         },
         CrushDie: function() {
             this.DisappearDie()
