@@ -819,7 +819,7 @@ Birth: function() {
         },
         NormalDie: function() {
             var a = this;
-			if(a.isDie){
+			if(!a.isDie){
 			a.isDie=true;
             a.ResetBackupDancer(a);
             a.EleBody.src = a.PicArr[a.DieGif] + Math.random();
