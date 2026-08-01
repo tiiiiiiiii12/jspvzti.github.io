@@ -511,7 +511,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 		c.checkHP=function(z,a){
 			oWallNutZombie.prototype.checkHP(z,a);
 			var g=oGargantuar.prototype;
-			a.OrnHP<=a.OrnBreakPoint1&&a.beAttacked&&($(z.NutHead2).src=oWallNut.prototype.PicArr[8],a.JudgeAttack=a.PZ?g.JudgeAttack:g.JudgeAttackH,a.NormalAttack=g.NormalAttack,a.AttackZombie=g.AttackZombie,a.JudgeLR=g.JudgeLR,a.JudgeSR=g.JudgeSR,a.checkHP=oWallNutZombie.prototype.checkHP)
+			a.OrnHP<=a.OrnBreakPoint1&&a.beAttacked&&($(z.NutHead2).src=oNutBowling.prototype.PicArr[2],a.JudgeAttack=a.PZ?g.JudgeAttack:g.JudgeAttackH,a.NormalAttack=g.NormalAttack,a.AttackZombie=g.AttackZombie,a.JudgeLR=g.JudgeLR,a.JudgeSR=g.JudgeSR,a.checkHP=oWallNutZombie.prototype.checkHP)
 		}
 	}
 	},
