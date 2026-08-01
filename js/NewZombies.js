@@ -490,12 +490,12 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     Lvl: 5,
 	SetNutTime:1200,
 	PrivateAct:function(a){
-		oWallNutZombie.prototype.PrivateAct(a);
 	var z=a.Ele;
 	if ($Z[a.id] && a.beAttacked) {
         a.WalkDirection == a.check &&
-        ($(z.NutHead2).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",a.check=(a.WalkDirection?0:1))
+        ($(z.NutHead2).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)")
       }!a.beAttacked && (ClearChild($(z.NutHead2)));
+		oWallNutZombie.prototype.PrivateAct(a)
 	},
     jinyinAct: function(c) {      
 	  var z = c.Ele;
