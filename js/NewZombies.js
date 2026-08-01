@@ -489,6 +489,14 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     OrnLeft: 20,
     Lvl: 5,
 	SetNutTime:1200,
+	PrivateAct:function(a){
+		oWallNutZombie.prototype.PrivateAct(a);
+	var z=a.Ele;
+	if ($Z[a.id] && a.beAttacked) {
+        a.WalkDirection == a.check &&
+        ($(z.NutHead2).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",a.check=(a.WalkDirection?0:1))
+      }!a.beAttacked && (ClearChild($(z.NutHead2)));
+	},
     jinyinAct: function(c) {      
 	  var z = c.Ele;
       z.NutHead2 = "nut" + Math.random();
@@ -503,9 +511,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 		c.checkHP=function(z,a){
 			oWallNutZombie.prototype.checkHP(z,a);
 			var g=oGargantuar.prototype;
-			a.OrnHP<=a.OrnBreakPoint1&&a.beAttacked&&(SetStyle($(z.NutHead2),{
-				src:oWallNut.prototype.PicArr[8]
-			}),a.JudgeAttack=a.PZ?g.JudgeAttack:g.JudgeAttackH,a.NormalAttack=g.NormalAttack,a.AttackZombie=g.AttackZombie,a.JudgeLR=g.JudgeLR,a.JudgeSR=g.JudgeSR,a.checkHP=oWallNutZombie.prototype.checkHP)
+			a.OrnHP<=a.OrnBreakPoint1&&a.beAttacked&&($(z.NutHead2).src=oWallNut.prototype.PicArr[8],a.JudgeAttack=a.PZ?g.JudgeAttack:g.JudgeAttackH,a.NormalAttack=g.NormalAttack,a.AttackZombie=g.AttackZombie,a.JudgeLR=g.JudgeLR,a.JudgeSR=g.JudgeSR,a.checkHP=oWallNutZombie.prototype.checkHP)
 		}
 	}
 	},
