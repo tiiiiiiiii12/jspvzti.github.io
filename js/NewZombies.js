@@ -545,10 +545,10 @@ oNutZombie = InheritO(oTallNutZombie, {
       return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
     })(),
 	GoingDie:function(a){
-		this.DisappearDie();
 		if(this.PZ){
 		delete oGd.$Crater[this.SetR+"_"+this.SetC];
 		}
+		this.DisappearDie();
 	},
 	getr:function(){},
 	getSlow:function(){},
