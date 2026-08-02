@@ -637,7 +637,7 @@ oStarfruit = InheritO(CPlants, {
 oSnowPea = InheritO(oPeashooter, {
   EName: "oSnowPea",
   CName: "寒冰射手",
-  SunNum: 250,
+  SunNum: 225,
   BKind: -1,
   power: 20,
   getFreeze:function(){},
@@ -804,20 +804,22 @@ while (e--) {
     }),
     oThreepeater = InheritO(oPeashooter, {
         EName: "oThreepeater",
-        CName: "N线射手",
+        CName: "三线射手",
         width: 73,
         height: 80,
         beAttackedPointR: 53,
-        SunNum:375,
+        SunNum:350,
+		coolTime:15,
         PeaKind:0,
+		AttTime:100,
         PicArr: ["images/Card/Plants/Threepeater.png", "images/Plants/Threepeater/0.gif", "images/Plants/Threepeater/Threepeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
-        Tooltip: "一次射出N行的豌豆",
-        Produce: 'N线射手可以在N条线上同时射出豌豆。<p>精英形态：散射水波型子弹，攻速变慢<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">全图</font></p>N线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。N线射手一直对杨桃心存爱意。',
+        Tooltip: "散射水波型子弹，攻速变慢",
+        Produce: '散射水波型子弹，攻速变慢。<p>精英形态：三条线发射能分裂的大豌豆<br>伤害：<font color="#FF0000">普通(每颗)</font><br>范围：<font color="#FF0000">全图</font></p>N线射手喜欢读书，下棋和在公园里呆坐。他也喜欢演出，特别是现代爵士乐。“我正在寻找我生命中的另一半，”他说。N线射手一直对杨桃心存爱意。',
         getTriggerR: function(a) {
-            return [1,oS.R]
+            return [a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]
         },
-NormalAttack1: function() {
+NormalAttack: function() {
     var g = this,
       f = g.pixelLeft + 58,
       d = f - 35,
@@ -858,39 +860,82 @@ NormalAttack1: function() {
     })("StarB" + Math.random(), -5)
   },
         jinyinAct:function(a){
-          a.PrivateBirth= function(f) {
+    a.PrivateBirth=function(f) {
+    var e = f.AttackedLX,
+      d = e - 40,
+      a, c = f.oTrigger,
+      b;
+    f.BulletClass = [];
+    f.BulletEle = [];
+    for (b in c) {
+      f.BulletClass.push(NewO({
+        X: e,
+        R: b,
+        D: 0,
+        Attack: 20,
+        Kind: 0,
+        ChangeC: 0,
+        pixelLeft: d,
+        F: oGd.MB1
+      }));
+      f.BulletEle.push(NewImg(0, "images/Plants/PB00.gif", "left:" + d + "px;top:" + (GetY(b) - 80) + "px;visibility:hidden;width:84px;heiget:51px;z-index:" + (3 * b + 2)))
+    };
+    var e = f.AttackedLX,
+      b;
+    f.BulletEle1 = (NewImg(0, "images/Plants/PB00.gif", "left:" + e + "px;top:" + (GetY(b) - 50) + "px;visibility:hidden;z-index:" + (3 * b + 2)))
+  };
+          a.NormalAttack=a.NormalAttack2;
+        },
+        PrivateBirth: function(f) {
     var e = f.AttackedLX,
       b;
     f.BulletEle = (NewImg(0, "images/Plants/PB00.gif", "left:" + e + "px;top:" + (GetY(b) - 50) + "px;visibility:hidden;z-index:" + (3 * b + 2)))
-  };
-          a.NormalAttack=a.NormalAttack1;
-          a.AttTime=100;
-        },
-        PrivateBirth: function(f) {
-            var e = f.AttackedLX,
-                d = e - 40,
-                a, c = f.oTrigger,
-                b;
-            f.BulletClass = [];
-            f.BulletEle = [];
-            for (b in c) {
-                f.BulletClass.push(NewO({
-                    X: e,
-                    R: b,
-                    D: 0,
-                    Attack: 20,
-                    Kind: 0,
-                    ChangeC: 0,
-                    pixelLeft: d,
-                    F: oGd.MB1
-                }));
-                f.BulletEle.push(NewImg(0, "images/Plants/PB00.gif", "left:" + d + "px;top:" + (GetY(b) - 80) + "px;visibility:hidden;z-index:" + (3 * b + 2)))
-            }
-        },
+  },
         PrivateDie: function(a) {
-            a.BulletEle.length = 0
+            a.BulletEle.length = 0;
+			a.BulletEle1=null
         },
-        NormalAttack: function() {
+NormalAttack1: function(A, B, C, D) {
+    var g = this,
+      d = A - 30,
+      b = B - 60,
+      c = GetR(B),
+      e = A + 20,
+      a = function(j, h, a, i, Top) {
+        return (j && j.Altitude == 1 ? (j[{
+          0: "getPea",
+          1: "getFirePea"
+        } [a]](j, i, 0), (SetStyle(h, {
+          left: j.ZX - 12 + "px",
+          width: "52px",
+          top: Top + "px",
+          height: "46px"
+        })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [h]), false) : true)
+      };
+    (function(h, N, Img) {
+      if (!g.BulletEle1) return;
+      oSym.addTask(0,
+        function(j, Img) {
+          var i = $(j);
+          i && (i.src = Img, SetVisible(i))
+        },
+        [h, Img]);
+      oSym.addTask(1,
+        function(n, l, m, k, i, j, N, A, I) {
+          A == 0 && oGd.$Torch[GetR(k) + "_" + GetC(n)] && (A = 1, I = 40, i.src = "images/Plants/PB" + A + "0.gif");
+          j(oZ.getZ0(n, l), i, A, I, k) && ((n += 4) > 900 || (k += N) > 600 || k < -15 ? ClearChild(i) : (SetStyle(i, {
+            left: (m += 4) + "px",
+            top: k + "px"
+          }), oSym.addTask(0, arguments.callee, [n, GetR(k + 15), m, k, i, j, N, A, I])))
+        },
+        [A, c, d, b, EditEle(g.BulletEle1.cloneNode(false), {
+            id: h
+          },
+          0, EDPZ), a, N, C, C==1 ? 40 : 20]);
+      (N += 2) <= 2 && oSym.addTask(1, arguments.callee, ["StarB" + Math.random(), N, Img]);
+    })("StarB" + Math.random(), -2, D)
+  },
+        NormalAttack2: function() {
             var a, c = this,
                 d, b = 0;
             for (a in c.oTrigger) {
@@ -915,7 +960,7 @@ NormalAttack1: function() {
                             "-1": "getSnowPea",
                             0: "getPea",
                             1: "getFirePea"
-                        } [o]](f, j, e), (SetStyle(l, {
+                        } [o]](f, j, e), c.NormalAttack1(f.AttackedRX + 1, GetY(k), o, l.src),(SetStyle(l, {
                             left: q + 28 + "px",
                             width: "52px",
                             height: "46px"
@@ -971,7 +1016,7 @@ NormalAttack1: function() {
         getTriggerR:function(a){
            return [a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]
         },
-		NormalAttack1:oThreepeater.prototype.NormalAttack,
+		NormalAttack1:oThreepeater.prototype.NormalAttack2,
 		PrivateDie:function(a){
 			oThreepeater.prototype.PrivateDie(a);
 			var P=oGd.$[a.R+"_"+(a.C-1)+"_"+1];
@@ -984,8 +1029,8 @@ NormalAttack1: function() {
                 function(d, b) {
                     var c = $P[d];
                     c && (c.NormalAttack1(),
-                          c.jinyin==true&&(c.PeaKind=Math.floor(Math.random()*3-1),
-                        c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif"));
+                          c.PeaKind=Math.floor(Math.random()*3-1),
+                        c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif");
                     --b && oSym.addTask(15, arguments.callee, [d, b])
                 },
                 [this.id,4])
@@ -1006,7 +1051,7 @@ NormalAttack1: function() {
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "优先锁定场上血量最高的僵尸，每6秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害",
-        Produce: '狙击手锁定场上血量最高的僵尸，每6秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害<br>伤害：<font color="#FF0000">高(300/1000)</font><p>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
+        Produce: '狙击手锁定场上血量最高的僵尸，隔一段时间对其造成较高伤害，每攻击18次对下一次攻击的目标造成暴击，若前一格植物为机枪射手，两者都会得到增强<br>伤害：<font color="#FF0000">高(300/1000)</font><p>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
 		checkTarget:function(a) {
   var TargeteachR = [];
   PlayAudio("portal");
