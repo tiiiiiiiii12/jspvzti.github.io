@@ -896,7 +896,7 @@ NormalAttack: function() {
             a.BulletEle.length = 0;
 			a.BulletEle1=null
         },
-NormalAttack1: function(A, B, C, D) {
+NormalAttack1: function(A, B, C, D) {//分裂子弹
     var g = this,
       d = A - 30,
       b = B - 60,
@@ -904,6 +904,7 @@ NormalAttack1: function(A, B, C, D) {
       e = A + 20,
       a = function(j, h, a, i, Top) {
         return (j && j.Altitude == 1 ? (j[{
+		  "-1":"getSnowPea",
           0: "getPea",
           1: "getFirePea"
         } [a]](j, i, 0), (SetStyle(h, {
@@ -927,13 +928,13 @@ NormalAttack1: function(A, B, C, D) {
           j(oZ.getZ0(n, l), i, A, I, k) && ((n += 4) > 900 || (k += N) > 600 || k < -15 ? ClearChild(i) : (SetStyle(i, {
             left: (m += 4) + "px",
             top: k + "px"
-          }), oSym.addTask(0, arguments.callee, [n, GetR(k + 15), m, k, i, j, N, A, I])))
+          }), oSym.addTask(1, arguments.callee, [n, GetR(k + 15), m, k, i, j, N, A, I])))
         },
         [A, c, d, b, EditEle(g.BulletEle1.cloneNode(false), {
             id: h
           },
           0, EDPZ), a, N, C, C==1 ? 40 : 20]);
-      (N += 2) <= 2 && oSym.addTask(1, arguments.callee, ["StarB" + Math.random(), N, Img,C]);
+      (N += 2) <= 2 && oSym.addTask(0, arguments.callee, ["StarB" + Math.random(), N, Img,C]);
     })("StarB" + Math.random(), -2, D,C)
   },
         NormalAttack2: function() {
@@ -952,18 +953,17 @@ NormalAttack1: function(A, B, C, D) {
                     },
                     [d]);
                 oSym.addTask(1,
-                    function(h, l, j, e, p, k, o, m, q, i,P) {
+                    function(h, l, j, e, p, k, o, m, q, i) {
                         var n, g = GetC(p),
                             f = oZ["getZ" + e](p, k);
-                            if (k == c.R) {var o = P}
                         o == 0 && i[k + "_" + g] && m != g && (PlayAudio("firepea"), o = 1, j = 120, m = g, l.src = "images/Plants/PB" + o + e + ".gif");
                         f && f.Altitude == 1 ? (f[{
                             "-1": "getSnowPea",
                             0: "getPea",
                             1: "getFirePea"
-                        } [o]](f, j, e), c.NormalAttack1(f.AttackedRX + 1, GetY(k), o, l.src),ClearChild(l)) : (p += (n = !e ? 5 : -5)) < oS.W && p > 100 ? (l.style.left = (q += n) + "px", oSym.addTask(1, arguments.callee, [h, l, j, e, p, k, o, m, q, i,P])) : ClearChild(l)
+                        } [o]](f, j, e), c.NormalAttack1(f.AttackedRX + 1, GetY(k), o, l.src),ClearChild(l)) : (p += (n = !e ? 5 : -5)) < oS.W && p > 100 ? (l.style.left = (q += n) + "px", oSym.addTask(1, arguments.callee, [h, l, j, e, p, k, o, m, q, i])) : ClearChild(l)
                     },
-                    [d, $(d), 60, c.PeaDire, c.AttackedLX, a,0,0,c.AttackedLX - 40,oGd.$Torch,c.PeaKind])
+                    [d, $(d), 60, c.PeaDire, c.AttackedLX, a,a == c.R?c.PeaKind:0,0,c.AttackedLX - 40,oGd.$Torch])
             }
         }
     }),
@@ -1026,7 +1026,7 @@ NormalAttack1: function(A, B, C, D) {
             oSym.addTask(0,
                 function(d, b) {
                     var c = $P[d];
-                    c && (c.NormalAttack1(),
+                    c && (c.NormalAttack2(),
                           c.PeaKind=Math.floor(Math.random()*3-1),
                         c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif");
                     --b && oSym.addTask(15, arguments.callee, [d, b])
