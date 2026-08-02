@@ -45,7 +45,7 @@ var oGargantuar = InheritO(oZombie, {
         var h = $Z[f],
           g;
         h && h.canWalk(h,h.id)&&h.beAttacked && ((g = $Z[e]) && g.getHit0(g, 1000, 0),
-          oSym.addTask(50, function(h) {
+          oSym.addTask(75, function(h) {
             $Z[f] && h.JudgeAttack()
           }, [h]))
       },
@@ -127,7 +127,7 @@ var oGargantuar = InheritO(oZombie, {
       var tp;
       for (i = -1; i <= 3; i++) {
         h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50),
-          oSym.addTask(50, function(h) {
+          oSym.addTask(75, function(h) {
             $Z[f] && h.JudgeAttack()
           }, [h]))
       }
