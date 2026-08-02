@@ -860,6 +860,7 @@ NormalAttack: function() {
     })("StarB" + Math.random(), -5)
   },
         jinyinAct:function(a){
+		a.AttTime=0;
     a.PrivateBirth=function(f) {
     var e = f.AttackedLX,
       d = e - 40,
@@ -955,7 +956,7 @@ NormalAttack1: function(A, B, C, D) {
                         var n, g = GetC(p),
                             f = oZ["getZ" + e](p, k);
                             if (k == c.R) {var o = P}
-                        o == 0 && i[k + "_" + g] && m != g && (PlayAudio("firepea"), o = 1, j = 40, m = g, l.src = "images/Plants/PB" + o + e + ".gif");
+                        o == 0 && i[k + "_" + g] && m != g && (PlayAudio("firepea"), o = 1, j = 100, m = g, l.src = "images/Plants/PB" + o + e + ".gif");
                         f && f.Altitude == 1 ? (f[{
                             "-1": "getSnowPea",
                             0: "getPea",
@@ -966,7 +967,7 @@ NormalAttack1: function(A, B, C, D) {
                             height: "46px"
                         })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [l])) : (p += (n = !e ? 5 : -5)) < oS.W && p > 100 ? (l.style.left = (q += n) + "px", oSym.addTask(1, arguments.callee, [h, l, j, e, p, k, o, m, q, i,P])) : ClearChild(l)
                     },
-                    [d, $(d), 20, c.PeaDire, c.AttackedLX, a,0,0,c.AttackedLX - 40,oGd.$Torch,c.PeaKind])
+                    [d, $(d), 50, c.PeaDire, c.AttackedLX, a,0,0,c.AttackedLX - 40,oGd.$Torch,c.PeaKind])
             }
         }
     }),
@@ -1016,12 +1017,13 @@ NormalAttack1: function(A, B, C, D) {
         getTriggerR:function(a){
            return [a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]
         },
-		NormalAttack1:oThreepeater.prototype.NormalAttack2,
+		NormalAttack2:oThreepeater.prototype.NormalAttack2,
 		PrivateDie:function(a){
 			oThreepeater.prototype.PrivateDie(a);
 			var P=oGd.$[a.R+"_"+(a.C-1)+"_"+1];
 			P&&P.EName=="oSniperPea"&&P.SpecialPlant&&(P.canEat=1,P.Boom=18,P.Ele.style.opacity=1,P.AttTime+=100,P.SpecialPlant=false)
 		},
+		NormalAttack1:function(){},
 		jinyinAct:function(){},
         PeaKind:0,
         NormalAttack: function(a) {
