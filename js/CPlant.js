@@ -900,7 +900,7 @@ NormalAttack1: function(A, B, C, D) {
     var g = this,
       d = A - 30,
       b = B - 60,
-      c = GetR(B),
+      c = GetR(B-50),
       e = A + 20,
       a = function(j, h, a, i, Top) {
         return (j && j.Altitude == 1 ? (j[{
