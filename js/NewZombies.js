@@ -305,12 +305,12 @@ CanPass:CZombies.prototype.CanPass,
   },
   PrivateAct:function(a){
 var z=a.Ele;
-	  if($Z[a.id]&&!a.isDie){
+	  if($Z[a.id]&&!a.IsDie){
 	a.WalkDirection==a.check&&(
 	EditImg($(z.PeaHead),0,"images/Plants/Peashooter/Peashooter.gif",{
 		transform:!a.WalkDirection?"rotateY(180deg)":"rotateY(0deg)"
 	},0),a.check=a.WalkDirection?0:1);
-	!a.beAttacked&&(ClearChild($(z.PeaHead)),a.isDie=true);
+	!a.beAttacked&&(ClearChild($(z.PeaHead)),a.IsDie=true);
 	  }
   },
 PrivateDie:function(a){
@@ -600,11 +600,11 @@ oNutZombie = InheritO(oTallNutZombie, {
 		a.ZX<=850&&!a.intograss&&(oSym.addTask(Math.random()*700+2000,function(a){
 			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.DisappearDie())
 		},[a]),a.intograss=true);
-	  if($Z[a.id]&&!a.isDie){
+	  if($Z[a.id]&&!a.IsDie){
 	a.WalkDirection==a.check&&(
 EditImg($(z.JaHead),0,"images/Plants/Jalapeno/Jalapeno.gif",{transform:!a.WalkDirection?"rotateY(180deg)":"rotateY(0deg)"},0),
 z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpHead.png" : "images/Plants/Jalapeno/Jalapeno.gif", {transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"},0),a.check=a.WalkDirection?0:1);
-	!a.beAttacked&&(ClearChild($(z.jinyinImg)),ClearChild($(z.JaHead)),a.isDie=true);
+	!a.beAttacked&&(ClearChild($(z.jinyinImg)),ClearChild($(z.JaHead)),a.IsDie=true);
 	  }
 	},
 	canBoomR:[],
