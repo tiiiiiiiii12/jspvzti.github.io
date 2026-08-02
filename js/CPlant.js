@@ -913,7 +913,7 @@ NormalAttack1: function(A, B, C, D) {
           height: "46px"
         })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [h]), false) : true)
       };
-    (function(h, N, Img) {
+    (function(h, N, Img,C) {
       if (!g.BulletEle1) return;
       oSym.addTask(0,
         function(j, Img) {
@@ -933,8 +933,8 @@ NormalAttack1: function(A, B, C, D) {
             id: h
           },
           0, EDPZ), a, N, C, C==1 ? 40 : 20]);
-      (N += 2) <= 2 && oSym.addTask(1, arguments.callee, ["StarB" + Math.random(), N, Img]);
-    })("StarB" + Math.random(), -2, D)
+      (N += 2) <= 2 && oSym.addTask(1, arguments.callee, ["StarB" + Math.random(), N, Img,C]);
+    })("StarB" + Math.random(), -2, D,C)
   },
         NormalAttack2: function() {
             var a, c = this,
@@ -956,18 +956,14 @@ NormalAttack1: function(A, B, C, D) {
                         var n, g = GetC(p),
                             f = oZ["getZ" + e](p, k);
                             if (k == c.R) {var o = P}
-                        o == 0 && i[k + "_" + g] && m != g && (PlayAudio("firepea"), o = 1, j = 100, m = g, l.src = "images/Plants/PB" + o + e + ".gif");
+                        o == 0 && i[k + "_" + g] && m != g && (PlayAudio("firepea"), o = 1, j = 120, m = g, l.src = "images/Plants/PB" + o + e + ".gif");
                         f && f.Altitude == 1 ? (f[{
                             "-1": "getSnowPea",
                             0: "getPea",
                             1: "getFirePea"
-                        } [o]](f, j, e), c.NormalAttack1(f.AttackedRX + 1, GetY(k), o, l.src),(SetStyle(l, {
-                            left: q + 28 + "px",
-                            width: "52px",
-                            height: "46px"
-                        })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [l])) : (p += (n = !e ? 5 : -5)) < oS.W && p > 100 ? (l.style.left = (q += n) + "px", oSym.addTask(1, arguments.callee, [h, l, j, e, p, k, o, m, q, i,P])) : ClearChild(l)
+                        } [o]](f, j, e), c.NormalAttack1(f.AttackedRX + 1, GetY(k), o, l.src),ClearChild(l)) : (p += (n = !e ? 5 : -5)) < oS.W && p > 100 ? (l.style.left = (q += n) + "px", oSym.addTask(1, arguments.callee, [h, l, j, e, p, k, o, m, q, i,P])) : ClearChild(l)
                     },
-                    [d, $(d), 50, c.PeaDire, c.AttackedLX, a,0,0,c.AttackedLX - 40,oGd.$Torch,c.PeaKind])
+                    [d, $(d), 60, c.PeaDire, c.AttackedLX, a,0,0,c.AttackedLX - 40,oGd.$Torch,c.PeaKind])
             }
         }
     }),
