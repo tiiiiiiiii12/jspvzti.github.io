@@ -2359,7 +2359,7 @@ for (let i = Math.max(1, f.R - 1); i <= Math.min(f.R + 1, oS.R); i++) {
 				var jinyinHit=oZ.getArZ(g.ZX,g.AttackedRX,lastR),
 				Zlength = jinyinHit.length;
 				while (Zlength--) {
-                (h = jinyinHit[Zlength]).Altitude < 2&&(i!=f.R)&& h.getHit1(h, 20)
+                (h = jinyinHit[Zlength]).Altitude < 2&&(i!=f.R)&& h.getHit1(h, 15)
 				}
           }
 			}
@@ -2617,7 +2617,7 @@ FireAttack:90,
         Attacking: 0,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         Tooltip: "它是远程射手，但敌人靠近时会蜷缩不动",
-        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子、阳光（击中僵尸生成5阳光）、草皮卷（对僵尸造成80伤害并修补弹坑）、脑子（使僵尸逃跑）、铲子（对僵尸造成高伤）、奖杯（直接过关（iz无效））六种子弹<br>曾哥已经令令令申申申申申不让胆小菇去见马戏团的精神病人，经胆小菇软磨硬泡才同意了，尽管如此，曾哥还是给他塞了一大堆防身用品',
+        Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子、阳光（击中僵尸生成5阳光）、草皮卷（对僵尸造成80伤害并修补弹坑）、脑子（使僵尸逃跑）、铲子（对僵尸造成高伤）、奖杯（直接过关（iz无效））六种子弹<br>虽然曾哥令令令申申申申申不让胆小菇去见马戏团的精神病人，但经胆小菇软磨硬泡后还是同意了，尽管如此，曾哥还是给他塞了一大堆防身用品',
         GetDX: CPlants.prototype.GetDX,
         getTriggerRange: CPlants.prototype.getTriggerRange,
         getTriggerR: function(c) {
@@ -2871,14 +2871,16 @@ NormalAttack2: function() {
         Status: 0,
         PicArr: ["images/Card/Plants/SunShroom.png", "images/Plants/SunShroom/0.gif", "images/Plants/SunShroom/SunShroom2.gif", "images/Plants/SunShroom/SunShroomSleep.gif", "images/Plants/SunShroom/SunShroom.gif"],
         Tooltip: "开始提供少量的阳光, 一段时间后提供正常量的阳光",
-        Produce: '阳光菇开始提供少量阳光，稍后提供正常数量阳光。<br>精英形态：过一段时间死亡并生成175阳光<p>生产阳光：<font color="#FF0000">开始低，之后正常<br>白天睡觉</font></p>阳光菇讨厌阳光。恨到当它内部产生点阳光时，就尽可能快的吐出来。它就是不能忍受这个。对它来说，阳光令人厌恶。',
+        Produce: '阳光菇开始提供少量阳光，稍后提供正常数量阳光。<br>精英形态：过一段时间死亡并生成225阳光<p>生产阳光：<font color="#FF0000">开始低，之后正常<br>白天睡觉</font></p>阳光菇讨厌阳光。恨到当它内部产生点阳光时，就尽可能快的吐出来。它就是不能忍受这个。对它来说，阳光令人厌恶。',
         GetDX: CPlants.prototype.GetDX,
         GetDY: CPlants.prototype.GetDY,
         InitTrigger: function() {},
         PrivateDie: function(a) {},
         jinyinAct:function(a){
+		   $(a.id).childNodes[1].src = "images/Plants/SunShroom/SunShroom.gif";
+		   a.Status = 1;
            oSym.addTask(500,function(a){
-           $P[a.id]&&(AppearSun(a.pixelLeft,a.pixelTop,175),a.Die())
+           $P[a.id]&&(AppearSun(a.pixelLeft,a.pixelTop,225),a.Die())
          },[a])
         },
         PrivateBirth: function() {},
@@ -3148,7 +3150,7 @@ NormalAttack2: function() {
 			$(d.id).childNodes[1].src = d.PicArr[d.NormalGif];
 			d.canTrigger = 1;
 			d.Sleep = 0;
-			d.jinyinAct(d);
+			d.jinyin&&d.jinyinAct(d);
 		},
 		jinyinAct:function(a){
 			if(!a.Sleep){
@@ -3189,7 +3191,7 @@ NormalAttack2: function() {
             var a = c.R,
                 b = c.C;
             oGd.$Plantern[a + "_" + b] = c.id;
-            NewImg("", "images/Plants/Plantern/light.gif", "filter:alpha(opacity=30);opacity:"+c.jinyin?".9":".3"+";left:0;top:0;z-index:" + c.zIndex, $(c.id));
+            NewImg("", "images/Plants/Plantern/light.gif", "filter:alpha(opacity="+(c.jinyin?"60":"30")+");opacity:.3"+";left:0;top:0;z-index:" + c.zIndex, $(c.id));
             oS.HaveFog && oGd.GatherFog(a, b, 4, 6, 0), oFlowerVase.prototype.FreshXRay(); // 刷新场地上花瓶 XRAY
         },
         jinyinAct:function(c){
@@ -3198,7 +3200,7 @@ NormalAttack2: function() {
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
 					var P=oGd.$[i + "_" + l+"_1"];
-                     P&&!P.Plan&&(P.AttTime>=-50)&&(P.Plan=true,P.AttTime-=60);
+                     P&&!P.Plan&&(P.AttTime>=-50)&&(P.Plan=true,P.AttTime-=50);
                     oSym.addTask(2000,function(f){
 						var c;
 						$P[f.id]&&((c=CustomSpecial(oPlantern,f.R,f.C)).jinyinAct(c),c.jinyin=1)
@@ -3215,7 +3217,7 @@ NormalAttack2: function() {
                 for (let i=a-1;i<=a+1;i++){
                     for (let l=b-1;l<=b+1;l++){
 					var P=oGd.$[i + "_" + l+"_1"];
-                     P&&P.Plan&&(P.Plan=0,P.AttTime+=60);
+                     P&&P.Plan&&(P.Plan=0,P.AttTime+=50);
                   }
                 }
             }
