@@ -813,7 +813,7 @@ Birth: function() {
                 b = d + "spotlight2" + c + ".png" + $Random;
             return ["images/Card/Zombies/DancingZombie.png", d + "0.gif", d + "DancingZombie.gif", d + "Attack.gif", d + "LostHead.gif", d + "LostHeadAttack.gif", d + "Head.gif" + $Random, d + "Die.gif" + $Random, d + "BoomDie.gif" + $Random, d + "SlidingStep.gif" + $Random, d + "Dancing.gif" + $Random, d + "Summon1.gif", d + "Summon2.gif", d + "Summon3.gif", d + "LostHeadSlidingStep.gif" + $Random, d + "LostHeadDancing.gif" + $Random, d + "LostHeadSummon.gif" + $Random, a, b]
         })(),
-        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：一直滑步，无视植物，碰到脑子召唤伴舞（750血）<br>精英形态二：每次召唤在全场最多10个僵尸的位置复制一个伴舞<br>特点：<font color="#FF0000">召唤伴舞僵尸</font></p>舞王僵尸的最新唱片“抓住脑子啃啊啃”在僵尸界的人气正急速飙升。',
+        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：一直滑步，无视植物，碰到脑子召唤伴舞（750血）<br>精英形态二：每次召唤在全场最多10个僵尸的位置复制一个伴舞<br>特点：<font color="#FF0000">召唤伴舞僵尸</font></p>舞王僵尸的最新唱片“来个脑子啃一啃”在僵尸界的人气正急速飙升。',
         getSnowPea: function() {
             this.PlaySlowballAudio();
         },
@@ -1145,7 +1145,7 @@ Birth: function() {
               if (h && h.beAttacked) {
                 s.src = "images/Zombies/DancingZombie/Summon3.gif";
 			for (i in $Z) {
-                h.num &&(AZlength<=9)&&$Z[i] &&$Z[i].beAttacked&&($Z[i].PZ==h.PZ)&& !$Z[i].ChkSpeed && (AZ[AZlength] = (DZid[AZlength] = new oBackupDancer).CustomBirth($Z[i].R, $Z[i].AttackedLX, 100, "Z_" + Math.random(),h.PZ), ++AZlength);
+                h.num &&(AZlength<=9)&&$Z[i] &&$Z[i].beAttacked&&($Z[i].PZ==h.PZ)&& !$Z[i].ChkSpeed && (AZ[AZlength] = (DZid[AZlength] = new oBackupDancer).CustomBirth($Z[i].R, $Z[i].AttackedLX, 100, "Z_" + Math.random(),h.PZ),DZid[AZlength].masterid=h.id,++AZlength);
               }
                 while (r--) {
                   (q = m[r]) && (!(l = q[0]) || !$Z[l]) && (u[o] = (w[o] = new oBackupDancer).CustomBirth(q[1], q[2](v), 100, q[0] = "Z_" + Math.random(), h.PZ), n.push(NewImg("", k, "z-index:" + q[3] + ";left:" + q[4](v) + "px;top:" + q[5] + "px", EDPZ)),w[o].masterid=h.id,++o)
@@ -1225,7 +1225,7 @@ oZombie = InheritO(OrnNoneZombies, {
 	},[a])
     }
   },
-  Produce: '韧性：<font color="#FF0000">低</font><br>精英形态一：<font color="#FF0000">红眼僵尸，速度和伤害翻倍</font><br>精英形态二：<font color="#FF0000">入场直接瞬移至场地内</font><br>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。老而臭的脑髓？腐烂的脑髓？都没关系。僵尸需要它们。'
+  Produce: '韧性：<font color="#FF0000">低</font><br>精英形态一：<font color="#FF0000">红眼僵尸，速度和伤害翻倍</font><br>精英形态二：<font color="#FF0000">入场直接瞬移至场地内</font><br>这种僵尸喜爱脑髓，贪婪而不知足。脑髓，脑髓，脑髓，夜以继日地追求着。不过你也不必过多在意，毕竟他们就是一群最普通的僵尸，不是吗？'
 }),
     oZombie2 = InheritO(oZombie, {
         EName: "oZombie2"
@@ -1425,7 +1425,7 @@ oZombie = InheritO(OrnNoneZombies, {
       }
     }
   },
-        Produce: '他的路障头盔，使他两倍坚韧于普通僵尸。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：<font color="#FF0000">真·路障僵尸（防具HP*1.5，使其附近的其他僵尸换行）</font><br>精英形态二：<font color="#FF0000">冰头僵尸（造冰道，若在冰道上则滑步，免疫寒冰控制）</font><br>和其他僵尸一样，路障头僵尸盲目地向前。但某些事物却使他停下脚步，捡起一个交通路障，并固实在自己的脑袋上。是的，他很喜欢参加聚会。'
+        Produce: '他的路障头盔，使他两倍坚韧于普通僵尸。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：<font color="#FF0000">真·路障僵尸（防具HP*1.5，使其附近的其他僵尸换行）</font><br>精英形态二：<font color="#FF0000">冰头僵尸（造冰道，若在冰道上则滑步，免疫寒冰控制）</font><br>和其他僵尸一样，路障头僵尸盲目地向前。但某些事物却使他停下脚步，捡起一个交通路障或冰块，并固实在自己的脑袋上。是的，他很喜欢参加聚会。'
     }),
     oBucketheadZombie = InheritO(oConeheadZombie, {
         EName: "oBucketheadZombie",
@@ -1443,14 +1443,14 @@ oZombie = InheritO(OrnNoneZombies, {
 			a.AttackGif=a.jinyinAttackGif;
 			a.EleBody.src=a.PicArr[a.NormalGif];
 			a.PrivateAttack=function(a,b){
-				a&&$P[b]&&$P[b].HP<220&&(PrivateTombstones($P[b].R,$P[b].C))
+				a&&$P[b]&&$P[b].HP<220&&(PrivateTombstones($P[b].R,Math.min(Math.max($P[b].C,1))))
 			};
 			a.PrivateAct=function(a){
 				if(!a.bool){
 					var z=oZ[a.PZ?"getHZ1":"getZ0"](a.ZX,a.R);
-					z&&a.isAttacking&&(z.OrnHP+z.HP)*z.jianshang<220&&(a.PZ?PrivateTombstones(z.R,GetC(z.ZX)):PrivateTombstones1(z.R,GetC(z.ZX)),z.DisappearDie());
+					z&&a.isAttacking&&(z.OrnHP+z.HP)*z.jianshang<220&&(a.PZ?PrivateTombstones(z.R,Math.min(Math.max(GetC(z.ZX),1))):PrivateTombstones1(z.R,Math.min(Math.max(GetC(z.ZX),1),9)),z.DisappearDie());
 					if(a.OrnHP<1){
-					a.PZ?PrivateTombstones(a.R,GetC(a.ZX)):PrivateTombstones1(a.R,GetC(a.ZX));
+					a.PZ?PrivateTombstones(a.R,Math.min(Math.max(GetC(a.ZX),1))):PrivateTombstones1(a.R,Math.min(Math.max(GetC(a.ZX),1)));
 					a.PrivateAttack=function(){};
 					a.bool=1;
 					}
@@ -1477,7 +1477,7 @@ oZombie = InheritO(OrnNoneZombies, {
 			},[a])
 		  }
 		},
-        Produce: '他的铁桶头盔，能极大程度的承受伤害。<p>韧性：<font color="#FF0000">高</font><br>精英形态一：铁桶被打掉后，原地生成墓碑，铁桶掉落前可将前方血量低的植物变为墓碑</font><br>精英形态二：每隔一段时间给自己续铁桶</font><br>弱点：<font color="#FF0000">磁力菇</font></p>铁桶头僵尸经常戴着水桶，在冷漠的世界里显得独一无二。但事实上，他只是忘记了，那铁桶还在他头上而已。'
+        Produce: '他的铁桶头盔，能极大程度的承受伤害。<p>韧性：<font color="#FF0000">高</font><br>精英形态一：铁桶被打掉后，原地生成墓碑，铁桶掉落前可将前方血量低的植物变为墓碑</font><br>精英形态二：每隔一段时间给自己续铁桶</font><br>弱点：<font color="#FF0000">磁力菇</font></p>铁桶僵尸经常戴着水桶，在冷漠的世界里显得独一无二。但事实上，他只是忘记了，那铁桶还在他头上而已。'
     }, {
         PicArr: {
             0: "images/Card/Zombies/BucketheadZombie.png",
@@ -1593,7 +1593,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
             return ["images/Card/Zombies/PoleVaultingZombie.png", a + "0.gif", a + "PoleVaultingZombie.gif", a + "PoleVaultingZombieAttack.gif", a + "PoleVaultingZombieLostHead.gif", a + "PoleVaultingZombieLostHeadAttack.gif", a + "PoleVaultingZombieHead.gif" + $Random, a + "PoleVaultingZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "PoleVaultingZombieWalk.gif", a + "PoleVaultingZombieLostHeadWalk.gif", a + "PoleVaultingZombieJump.gif", a + "PoleVaultingZombieJump2.gif", a + "1.gif", a + "jinyinrun.gif",a + "jinyinjump.gif"]
         })(),
         AudioArr: ["polevault", "grassstep"],
-        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<br>韧性：<font color="#FF0000">中（500)</font><br>精英形态一：反向，跳跃完毕后于3×3植物上召唤血量低的普通撑杆<br>精英形态二：箭头撑杆，自身行进至第七列时自动锁定本行最靠右的植物并跳过它，跳跃时碾压身下的植物<br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font><br>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为非凡。那就是撑杆僵尸。',
+        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<br>韧性：<font color="#FF0000">中（500)</font><br>精英形态一：反向，跳跃完毕后于3×3植物上召唤血量低的普通撑杆<br>精英形态二：箭头撑杆，自身行进至第七列时自动锁定本行最靠右的植物并跳过它，跳跃时碾压身下的植物<br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font><br>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为……不那么普通也不至于非凡？那就是撑杆僵尸。',
         getShadow: function(a) {
             return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 35) + "px"
         },
@@ -1779,7 +1779,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
         height: 164,
         beAttackedPointL: 60,
         beAttackedPointR: 130,
-        LostPaperSpeed: 5.4,
+        LostPaperSpeed: 6.4,
         PicArr: (function() {
             var a = "images/Zombies/NewspaperZombie/";
             return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
@@ -1789,7 +1789,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
             return ["images/Card/Zombies/NewspaperZombie.png","images/Zombies/NewspaperZombie/0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadWalk0.gif", a + "LostHeadWalk0.gif", a + "LostHeadWalk0.gif", "images/Zombies/NewspaperZombie/Head.gif" + $Random, a + "Die.gif" + $Random,"images/Zombies/NewspaperZombie/BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（450）</font><br>精英形态一：破报进入假死状态，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：速度提升，破报犹豫时间变长，发怒后碾压植物，50%减伤生效，并使全场读报类僵尸解封<br>报纸韧性：<font color="#FF0000">低</font><br>读报僵尸，他总幻想着有叱咤风云的能力，甚至为此付出实践，虽然他还是那个老头，但好歹取得了些成效',
+        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（450）</font><br>精英形态一：破报进入假死状态，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：速度提升，破报犹豫时间变长，有75%减伤，发怒后碾压植物，有25%减伤，并使全场读报类僵尸解封<br>读报僵尸，他总幻想着有叱咤风云的能力，甚至为此付出实践，虽然他还是那个老头，但好歹取得了些成效',
         getShadow: function(a) {
             return "left:75px;top:" + (a.height - 25) + "px"
         },
@@ -1916,7 +1916,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
                 g.ChkActs1 = function() {
                     return 1
                 },
-                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(g.num?450:150*(1+g.jinyin),
+                g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea,g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit,!g.num&&(g.jianshang*=0.25),oSym.addTask(g.num?450:150*(1+g.jinyin),
                     function(m, l) {
                         var k = $Z[m];
                         if (!k) {
@@ -1928,7 +1928,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
                         k.ChkActs1 = j.ChkActs1;
 						k.tasktime*=0.25;
 						if(k.jinyin&&!k.num){
-							k.jianshang=0.5;
+							k.jianshang*=3;
 							for (t in $Z){
 								let u=$Z[t];
 								u&&u.PZ==k.PZ&&(u.EName=="oNewspaperZombie"||u.EName=="oGatlingPeaZombie")&&u.Ornaments&&u.getHit0(u,u.OrnHP,0)//全场读报类僵尸解封
@@ -2051,7 +2051,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   PlayNormalballAudio: function() {
     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
   },
-  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：手持大喷菇，对前方植物造成每次25伤害，防具血量降低<br>精英形态二：带着脑子，有以下特性：<br>1.防具掉落后逃跑，将要出场时召唤一个精英铁门并回头<br>2.在啃咬血量较高的植物时会缓慢向前移动<br>3.有铁门时若本体受伤则换行<br>弱点：大喷菇<br>脑子被吃了就是被吃了，不会有一点灵智，相比之下，或许拿着脑子更有用',
+  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：手持大喷菇，对前方植物造成每次25伤害，防具血量降低<br>精英形态二：带着脑子，有以下特性：<br>1.防具掉落后逃跑到后方，召唤一个精英铁门并回头<br>2.啃咬血量较高的植物时会向前移动<br>3.有铁门时若本体受伤则换行<br>弱点：大喷菇<br>脑子被吃了就是被吃了，不会启发一点灵智，相比之下，或许拿着脑子更有用',
   GoingDie: CZombies.prototype.GoingDie,
   getFirePea: function(c, a, b) {
     PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
@@ -2343,8 +2343,9 @@ jinyinWalkGif12: 14,
 		intoWaterSpeed:2,
         Speed: 3.2,
         Altitude: 1,
-        Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击，啃食时每秒回30血</font><br>精英形态：<font color="#FF0000">将他所遇到的第一株植物变为它的防具</font><br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
+        Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击，啃食时每秒回30血</font><br>精英形态：<font color="#FF0000">将他所遇到的第一株低血植物变为它的防具</font><br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
         JumpTime: 40,
+		catchCoolTime:1000,
 		jinyinAct:function(a){
 			a.cangetOrn=1;
 			a.OrnLostNormalGif=a.NormalGif;
@@ -2368,7 +2369,7 @@ jinyinWalkGif12: 14,
 			a.OSpeed/=1.5;
 			a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(c,d){
 				OrnIZombies.prototype.getHit0(c,d);
-				c.OrnHP<1&&(ClearChild($(c.Ele.NutHead)),oSym.addTask(1000,function(c){$Z[c.id]&&(c.cangetOrn=1,c.Speed*=1.5,c.OSpeed*=1.5)},[c]));
+				c.OrnHP<1&&(ClearChild($(c.Ele.NutHead)),oSym.addTask(c.catchCoolTime,function(c){$Z[c.id]&&(c.cangetOrn=1,c.Speed*=1.5,c.OSpeed*=1.5)},[c]));
 			  }
 			}
 		},
@@ -2436,7 +2437,7 @@ jinyinWalkGif12: 14,
                 function(d, c) {
                     var f = $Z[d],
                         e;
-                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && (e.HP<1000&&f.cangetOrn?(f.getOrn(f,e.HP,e.EleBody.src),e.getHurt(f, 1, f.Attack)):e.getHurt(f, 0, f.Attack)),f.HP<500&&(f.HP+=30),f.JudgeAttack())
+                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && (e.HP<1000&&f.cangetOrn?(f.getOrn(f,e.HP,e.EleBody.src),e.Die()):e.getHurt(f, 0, f.Attack)),f.HP<500&&(f.HP+=30),f.JudgeAttack())
                 },
                 [b, a])
         },
@@ -2709,7 +2710,7 @@ jinyinWalkGif12: 14,
             Speed: 2.5,
             AKind: 2,
             Attack: 50,
-            Produce: '冰车僵尸运用冰雪，碾过你的植物，不减速<br>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">碾压植物，留下条冰道</font><br>精英形态一：<font color="#FF0000">辣椒冰车，重度损伤时加速，加速前可抗一次致命伤害</font><br>精英形态二：<font color="#FF0000">寒冰菇冰车，每隔10s冻结周围植物5s并对其造成伤害，有20%减伤</font><br>经常被误以为是在驾驶着冰车的僵尸，但事实上冰车僵尸是种完全不同的生物形式，他与太空兽人联系更紧密而不是僵尸。',
+            Produce: '冰车僵尸运用冰雪，碾过你的植物，不减速<br>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">碾压植物，留下条冰道</font><br>精英形态一：<font color="#FF0000">辣椒冰车，重度损伤时加速，加速前可抗一次致命伤害</font><br>精英形态二：<font color="#FF0000">寒冰菇冰车，每隔10s冻结周围植物5s并对其造成伤害，有25%减伤</font><br>经常被误以为是在驾驶着冰车的僵尸，但事实上冰车僵尸是种完全不同的生物形式，他与太空兽人联系更紧密而不是僵尸。',
             PicArr: (function() {
                 var b = "images/Zombies/Zomboni/";
                 return ["images/Card/Zombies/Zomboni.png", b + "0.gif", b + "1.gif", b + "2.gif", b + "3.gif", b + "4.gif", b + "5.gif" + $Random, b + "BoomDie.gif" + $Random, b + "ice.png", b + "ice_cap.png"]
@@ -2779,7 +2780,7 @@ jinyinWalkGif12: 14,
     z.FumeDoor = "Fume" + Math.random();
     var Sh = NewImg(z.FumeDoor, a.num>50 ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:125px;top:280px;", 0);
     z.appendChild(Sh);
-    a.num<50 ? (a.jianshang*=0.8,oSym.addTask(500, function(a) {
+    a.num<50 ? (a.jianshang*=0.75,oSym.addTask(500, function(a) {
 		var LR=Math.max(a.R-1,1);
 		do{
         let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.ZX - 120,a.ZX + 120, LR),
@@ -2965,9 +2966,7 @@ jinyinWalkGif12: 14,
                     c = g - h.height,
                     j = 3 * d + 1,
                     i = h.id = "Z_" + Math.random();
- 
                 h.R = d, h.pixelTop = c, h.zIndex = j, h.delayT = 0; // 设置其本身不受 delayT 影响
- 
                 return h.getHTML(i, h.X, c, j, "none", "auto", h.GetDTop, h.PicArr[h.NormalGif]);
             }
         })
@@ -3341,6 +3340,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
               d;
             e && (PlayAudio("explosion"),e.num>=50 ? (e.PZ&&(oGd.$Crater[e.R + "_" + Math.max(GetC(e.ZX),1)] = 2),
               NewEle(f + "_Boom", "div", "position:absolute;overflow:hidden;z-index:" + (e.zIndex + 2) + ";width:283px;height:324px;left:" + (e.ZX - 60) + "px;top:" + (e.pixelTop - 100) + "px;background:url(images/Plants/DoomShroom/Boom.png) no-repeat", 0, EDPZ),
+			  e.PZ&&oDoomShroom.prototype.setCrater(f + "_crater", e.R, Math.max(GetC(e.ZX),1), f.pixelLeft + 3, f.pixelTop + 100),
               oSym.addTask(20,
                 function(i) {
                   ClearChild(i)
@@ -3360,7 +3360,6 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
                 ], 0,
                 function(i, p) {
                   ClearChild($(i));
-                  this.PZ&&oDoomShroom.prototype.setCrater(f + "_crater", e.R, Math.max(GetC(e.ZX),1), f.pixelLeft + 3, f.pixelTop + 100)
                 })) : (d = NewImg("", "images/interface/blank.png", "width:306px;height:300px;left:" + (e.X - 16) + "px;top:" + (e.pixelTop - 90) + "px;z-index:20"),
               d.src = e.PicArr[8] + Math.random(), EDPZ.appendChild(d), oSym.addTask(70, ClearChild, [d])), e.PZ&&(function(k, g) {
               var q = Math.max(1, e.num>=50 ? k - 2 : k - 1),
@@ -3710,7 +3709,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
   BoomDieGif: 8,
   LostHeadGif: 5,
   LostHeadAttackGif: 5,
-  Produce: '这种僵尸通过挖地来绕过防线。<p>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，杨桃</font><br>精英形态一：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列</font><br>精英形态二：<font color="#FF0000">挖至第五列出土向左，血量提升，速度大幅降低</font><br>矿工僵尸一周需要用两天的时间来考取他的挖掘许可证',
+  Produce: '这种僵尸通过挖地来绕过防线。<br>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，杨桃</font><br>精英形态一：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列</font><br>精英形态二：<font color="#FF0000">挖至第五列出土向左，血量提升，速度大幅降低</font><br>矿工僵尸一周需要用两天的时间来考取他的挖掘许可证',
   BirthCallBack: function(f) {
     var e = f.delayT,
       d = f.id,
