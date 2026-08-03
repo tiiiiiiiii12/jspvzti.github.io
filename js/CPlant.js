@@ -929,7 +929,8 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
       };
     (function(h, N, Img,C) {
       if (!g.BulletEle1) return;
-    h && (h.src = Img, SetVisible(h));
+        $(h).src = Img;
+	SetVisible($(h));
       oSym.addTask(1,
         function(n, l, m, k, i, j, N, A, I) {
           A == 0 && oGd.$Torch[GetR(k) + "_" + GetC(n)] && (A = 1, I = 40, i.src = "images/Plants/PB" + A + "0.gif");
