@@ -703,7 +703,7 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
     for (let i = 3; i >= 0; i--) {
       let p = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
       Z = oZ[a.PZ ? "getHZ1" : "getZ0"](a.ZX, a.R);
-      if ((p && p.canEat && a.PZ) || (Z && Z.beAttacked&&Z.Altitude==1)) {
+      if (a.canWalk(a,a.id)&&(p && p.canEat && a.PZ) || (Z && Z.beAttacked&&Z.Altitude==1)) {
         a.canHit = true;
       }
     }
