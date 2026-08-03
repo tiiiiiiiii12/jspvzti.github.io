@@ -45,6 +45,9 @@ for (i = 0; i <= 3; i++) {
 	LadderDie:function(a,b){
 		a.EditCanEat(a,1);
 		ClearChild($("ladder_" + a.R + "_" + a.C));
+		if(oGd.$Ladder[a.R + "_" + a.C]){
+		delete oGd.$Ladder[a.R + "_" + a.C]
+		}
 	},
 getLadder:function() {
   var a = this;
@@ -59,7 +62,7 @@ getLadder:function() {
     while (b--) {
       !c[b].WalkDirection&&c[b].Altitude==1&&!c[b].FreeSetbodyTime && (c[b].WalkToLadder(c[b]));
     }
-    $P[d] ? oSym.addTask(1, arguments.callee, [a, d]) : a.LadderDie(a);
+    oGd.$Ladder[a.R + "_" + a.C]&&$P[d] ? oSym.addTask(1, arguments.callee, [a, d]) : a.LadderDie(a);
   }, [a, a.id]);
 },
         Birth: function(d, c, h, a, m, n) {
@@ -1713,11 +1716,14 @@ NormalAttack:function(a){
                 while (f--) {
                     (k = d[f]).getCrushed(b) && k.CrushDie()
                 }
+				if(oGd.$Ladder[l+"_"+h]){
+					 delete oGd.$Ladder[l+"_"+h]
+				}
                 n > c ? $P[b.id]&&b.Die() : (j = GetC(b.pixelRight += 2), b.AttackedLX = n += 2, b.AttackedRX = m += 2, g.style.left = (b.pixelLeft += 2) + "px", j != h && (b.C = j, oGd.del({
                     R: l,
                     C: h,
                     PKind: 11
-                }), oGd.add(b, l + "_" + j + "_11")),b.LadderDie(b),oSym.addTask(1, arguments.callee, [b, c, n, m, e, g]))
+                }), oGd.add(b, l + "_" + j + "_11")),oSym.addTask(1, arguments.callee, [b, c, n, m, e, g]))
             })(a, oS.W, a.AttackedLX, a.AttackedRX, a.R, $(a.id))
         }
     }),
@@ -1748,10 +1754,7 @@ NormalAttack:function(a){
                             e[k].ExplosionDie()
                         }
 						for (i=p-1;i<=p+1;i++){
-							for (Kind=0;Kind<=3;Kind++){
-							P=oGd.$[j+"_"+i+"_"+Kind];
-							("ladder_"+j+"_"+i)&&P&&P.LadderDie(P)
-							}
+							if(oGd.$Ladder[j+"_"+i]) delete oGd.$Ladder[j+"_"+i];
 						}
                     } while (j++ < g);
                     s.Die(1);
@@ -1871,10 +1874,7 @@ NormalAttack:function(a){
                                 d[h].getExplosion()
                             }
 						for (i=c.C-1;i<=c.C+1;i++){
-							for (Kind=0;Kind<=3;Kind++){
-							P=oGd.$[g+"_"+i+"_"+Kind];
-							("ladder_"+g+"_"+i)&&P&&P.LadderDie(P)
-							}
+							if(oGd.$Ladder[g+"_"+i]) delete oGd.$Ladder[g+"_"+i]; 
 						}
                         } while (g++ < e);
                         c.Die(1);
@@ -1984,10 +1984,7 @@ NormalAttack:function(a){
                             c[e].getExplosion(1600)
                         }
 						for (i=1;i<=oS.C;i++){
-							for (Kind=0;Kind<=3;Kind++){
-							P=oGd.$[f+"_"+i+"_"+Kind];
-							("ladder_"+f+"_"+i)&&P&&P.LadderDie(P)
-							}
+                           if(oGd.$Ladder[f+"_"+i]) delete oGd.$Ladder[f+"_"+i];
 						}
                         h.Die(1);
                         EditEle(b.childNodes[1], {
@@ -3045,10 +3042,7 @@ NormalAttack2: function() {
                                 e[k].getExplosion(2700)
                             }		
 						for (i=d.C-5;i<=d.C+5;i++){
-							for (Kind=0;Kind<=3;Kind++){
-							P=oGd.$[h+"_"+i+"_"+Kind];
-							("ladder_"+h+"_"+i)&&P&&P.LadderDie(P)
-							}
+							if(oGd.$Ladder[h+"_"+i]) delete oGd.$Ladder[h+"_"+i];
 						}
                         } while (h++ < f);
                         PlayAudio("doomshroom");
