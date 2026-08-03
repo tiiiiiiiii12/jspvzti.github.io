@@ -565,6 +565,10 @@ oNutZombie = InheritO(oTallNutZombie, {
 		a.PrivateAct(a);
 		return 1
 	},
+	bedevil:function(a){
+		delete oGd.$Crater[a.SetR+"_"+a.SetC];
+		CZombies.prototype.bedevil(a);
+	},
 	ChangeR:function(){},
 	WalkToLadder:function(){},
     jinyinAct: function(a){
