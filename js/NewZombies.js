@@ -400,6 +400,9 @@ oWallNutZombie = InheritO(oConeheadZombie, {
           n,
           k;
         do {
+			for (i=GetC(l)-1;i<=GetC(l)+1;i++){
+				if(oGd.$Ladder[h+"_"+i]&&!e.PZ) delete oGd.$Ladder[h+"_"+i];
+			}
           k = (n = oZ["getAr" + (e.PZ ? "HZ" : "Z")](m, o, h)).length;
           while (k--) {
             n[k].getExplosion(1600)
@@ -657,6 +660,7 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpH
                 }
 		if(this.PZ){
       for (let i = 1; i <= oS.C; i++) {
+		if(oGd.$Ladder[y+"_"+i]&&!this.PZ) delete oGd.$Ladder[y+"_"+i];
         for (let j = 0; j < 4; j++) {
           let g = oGd.$[y + "_" + i + "_" + j];
           g&&(g.getHurt(this,3,1600*this.level),g.HP<=0&&this.PrivateCustom(i))//精英小鬼辣椒僵尸释放技能
@@ -973,6 +977,9 @@ jianshangtime:500,
           n,
           k;
         do {
+	   for (i=GetC(l)-1;i<=GetC(l)+1;i++){
+			if(oGd.$Ladder[h+"_"+i]&&!b.PZ) delete oGd.$Ladder[h+"_"+i];
+		  }
           k = (n = oZ["getAr" + (b.PZ ? "HZ" : "Z")](m, o, h)).length;
           while (k--) {
             n[k].getExplosion(1600*b.level)
