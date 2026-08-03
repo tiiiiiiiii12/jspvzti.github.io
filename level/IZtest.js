@@ -88,9 +88,6 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 oSpikerock,
                 oLawnCleaner,
                 oPoolCleaner,
-                oNutBowling,
-                oHugeNutBowling,
-                oBoomNutBowling,
                 oRepeater2,
                 oSniperPea
             ],
@@ -105,7 +102,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             });
             var dChoosePlantBack = NewEle("dChoosePlantBack", "input", "position:absolute;left:5px;top:550px;width:225px;height:35px;border-radius:12.5px;white-space:pre;background:rgba(0,0,0,0.733);color:rgb(255,255,255);font-family:楷体;font-size:22px;font-weight:bold;cursor:pointer;visibility:visible;", {
                 onclick: function() {
-                    PlayAudio("tap"), SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"), $("dCardList")), SetNone(dChoosePlant);
+                    PlayAudio("tap"), SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dCardList")), SetNone(dChoosePlant);
                 }
             }, dChoosePlant, {
                 "type": "button",
@@ -137,7 +134,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                             ViewCardTitle(PL[this.value], event);
                         },
                         "onclick": function(i) {
-                            SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"), $("dCardList")),SetNone(dChoosePlant),AppearCard(200,400,PL[this.value],0,Infinity);
+                            SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"), $("dCardList")),SetNone(dChoosePlant),AppearCard(Math.random()*400+200,400,PL[this.value],0,Infinity);
                         }
                     }, dChoosePlantBoard);
                     var dImg = NewImg("dImg_" + _, Obj.PicArr[Obj.CardGif], "width:100;height:120;top:0px", dCard);
@@ -199,29 +196,9 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             }
         }, EDAll);
         NewEle("dButton4", "button", "position:absolute;left:550px;top:20px;width:100px;height:35px;z-index:255", {
-            innerHTML: "读报解封",
-            onclick: function() {
-            var h=1,
-                k,
-                c,
-                m,
-                n;
-                do {
-                    k = (n = oZ.getArZ(0,oS.W, h)).length;
-                        while (k--) {
-                           (n[k].EName=="oNewspaperZombie"||n[k].EName=="oGatlingPeaZombie")&&n[k].getHit0(n[k],n[k].OrnHP,0)
-                        }
-                     c = (m = oZ.getArHZ(0,oS.W, h)).length;
-                        while (c--) {
-                            (m[c].EName=="oNewspaperZombie"||m[c].EName=="oGatlingPeaZombie")&&m[c].getHit0(m[c],m[c].OrnHP,0)
-                        }
-                   } while (h++ < oS.R)
-            }
-        }, EDAll);
-        NewEle("dButton5", "button", "position:absolute;left:150px;top:580px;width:80px;height:20px;z-index:255", {
             innerHTML: "种植植物",
             onclick: function() {
-                PlayAudio("tap"), SetNone($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),  $("dCardList")), SetBlock(dChoosePlant)
+                PlayAudio("tap"), SetNone($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dCardList")), SetBlock(dChoosePlant)
             }
         }, EDAll);
         oSym.addTask(1,function(){
