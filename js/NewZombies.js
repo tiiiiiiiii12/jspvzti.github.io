@@ -721,8 +721,7 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
   HitPlant: function(a) {
     var z = a.Ele;
     var s = $(z.SquashHeadId);
-    a.OrnHP = a.jianshang = 1;
-    a.getHit0(a, 1);
+    a.Ornaments&&(a.OrnHP = a.jianshang = 1,a.getHit0(a, 1));
 	var SunMinus=(a.PZ&&!oS.CardKind&&a.num<50)?1:0;
     a.ChkActs = a.ChkActs1 = function() {
       return 1
@@ -1023,7 +1022,7 @@ jianshangtime:500,
     var a = $Z[c];
     a&&(a.EleBody.src = a.PicArr[a.LadGif]);
     oSym.addTask(50, function(a, b) {
-      a&&a.beAttacked&&($P[b]&&$P[b].canEat&&(a.Ornaments&&$P[b].getLadder(), !a.num&&(a.OrnHP=0,a.getHit0(a, 0, 0))), a.JudgeAttack());
+      a&&a.beAttacked&&($P[b]&&$P[b].canEat&&(a.Ornaments&&$P[b].getLadder(), !a.num&&(a.OrnHP=0,a.getHit0(a, 0, 0))),a.EleBody.src=a.PicArr[a.NormalGif]);
     }, [a, b])
   },
   canLadderList: {
