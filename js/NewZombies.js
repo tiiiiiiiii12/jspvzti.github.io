@@ -400,7 +400,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
           n,
           k;
         do {
-			for (i=GetC(l)-1;i<=GetC(l)+1;i++){
+			for (i=GetC(j)-1;i<=GetC(j)+1;i++){
 				if(oGd.$Ladder[h+"_"+i]&&!e.PZ) delete oGd.$Ladder[h+"_"+i];
 			}
           k = (n = oZ["getAr" + (e.PZ ? "HZ" : "Z")](m, o, h)).length;
@@ -977,7 +977,7 @@ jianshangtime:500,
           n,
           k;
         do {
-	   for (i=GetC(l)-1;i<=GetC(l)+1;i++){
+	   for (i=GetC(j)-1;i<=GetC(j)+1;i++){
 			if(oGd.$Ladder[h+"_"+i]&&!b.PZ) delete oGd.$Ladder[h+"_"+i];
 		  }
           k = (n = oZ["getAr" + (b.PZ ? "HZ" : "Z")](m, o, h)).length;
