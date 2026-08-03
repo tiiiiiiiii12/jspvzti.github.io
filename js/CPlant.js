@@ -36,19 +36,30 @@ var CPlants = NewO({
         GetDBottom: function() {
             return this.height
         },
+	EditCanEat:function(a,e){
+for (i = 0; i <= 3; i++) {
+	var b=oGd.$[a.R + "_" + a.C + "_" + i];
+   b && (b.canEat = e?b.OcanEat:0)
+  }
+	},
+	LadderDie:function(a,b){
+		a.EditCanEat(a,1);
+		ClearChild($("ladder_" + a.R + "_" + a.C));
+	},
 getLadder:function() {
   var a = this;
   for (i = 0; i <= 3; i++) {
-    oGd.$[a.R + "_" + a.C + "_" + i] && (oGd.$[a.R + "_" + a.C + "_" + i].canEat = 0)
+    oGd.$[a.R + "_" + a.C + "_" + i] && (oGd.$[a.R + "_" + a.C + "_" + i].OcanEat=oGd.$[a.R + "_" + a.C + "_" + i].canEat)//先将原有的canEat存储，以备消梯
   }
-  NewImg("ladder_" + a.R + "_" + a.C, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:" + (GetX(a.C) - 20) + "px;top:" + (GetY(a.R) - 120) + "px;z-index:" + (a.zIndex + 1), EDPZ);
-  oSym.addTask(1, function(a, d) {
-    var c = oZ.getArZ(a.pixelRight-5, a.pixelRight + 10, a.R);
+  NewImg("ladder_" + a.R + "_" + a.C, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:" + (GetX(a.C) - 20) + "px;top:" + (GetY(a.R) - 120) + "px;z-index:" + a.zIndex, EDPZ);
+  oSym.addTask(0, function(a, d) {
+	a.EditCanEat(a);
+    var c = oZ.getArZ(a.pixelRight-10, a.pixelRight + 5, a.R);
     b = c.length;
     while (b--) {
       !c[b].WalkDirection&&c[b].Altitude==1&&!c[b].FreeSetbodyTime && (c[b].WalkToLadder(c[b]));
     }
-    $P[d] ? oSym.addTask(1, arguments.callee, [a, d]) : ClearChild($("ladder_" + a.R + "_" + a.C));
+    $P[d] ? oSym.addTask(1, arguments.callee, [a, d]) : a.LadderDie(a);
   }, [a, a.id]);
 },
         Birth: function(d, c, h, a, m, n) {
@@ -247,7 +258,7 @@ getLadder:function() {
         NormalGif: 0,
         canEat: 0,
         Stature: 1,
-		getHurt:function(a){
+		getHurt:function(b,a){
 			a!=3&&(a.canTrigger = 0,a.NormalAttack(a))
 		},
         getTriggerRange: function(a, b, c) {
@@ -1038,7 +1049,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
         width: 88,
         height: 84,
         beAttackedPointR: 68,
-        SunNum: 250,
+        SunNum: 200,
         coolTime: 50,
 		AttTime:460,//460+140cs
 		Boom:0,
@@ -1047,7 +1058,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "优先锁定场上血量最高的僵尸，每6秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害",
-        Produce: '狙击手锁定场上血量最高的僵尸，隔一段时间对其造成较高伤害，每攻击18次对下一次攻击的目标造成暴击，若前一格植物为机枪射手，两者都会得到增强<br>伤害：<font color="#FF0000">高(300/1000)</font><p>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
+        Produce: '狙击手锁定场上血量最高的僵尸，隔一段时间对其造成较高伤害，每攻击18次对下一次攻击的目标造成暴击，若前一格植物为机枪射手，两者都会得到增强<br>伤害：<font color="#FF0000">高(300/1000)</font><br><font color="#FF0000">只能种在双发射手上</font><br>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
 		checkTarget:function(a) {
   var TargeteachR = [];
   PlayAudio("portal");
@@ -1071,6 +1082,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
 		var P=oGd.$[a.R+"_"+(a.C+1)+"_"+1];
 		P&&P.EName=="oGatlingPea"&&P.SpecialPlant&&(P.AttTime+=30,P.SpecialPlant=false);
 	},
+	CanGrow:oGatlingPea.prototype.CanGrow,
 NormalAttack:function(a){
   var a = this,
     b = a.id;
@@ -1450,7 +1462,7 @@ NormalAttack:function(a){
         },
         PicArr: ["images/Card/Plants/PotatoMine.png", "images/Plants/PotatoMine/0.gif", "images/Plants/PotatoMine/PotatoMine.gif", "images/Plants/PotatoMine/PotatoMineNotReady.gif", "images/Plants/PotatoMine/PotatoMine_mashed.gif", "images/Plants/PotatoMine/ExplosionSpudow.gif"],
         Tooltip: "敌人接触后爆炸<br>需要时间安放",
-        Produce: '土豆雷具有强大的威力，但是他们需要点时间来武装自己。你应把他们种在僵尸前进的路上，当他们一被接触就会发生爆炸</font><br>精英形态：立刻出土，爆炸后向右在前方无植物的格子上分裂至多两个土豆雷<p>伤害：<font color="FF0000">巨大</font><br>范围：<font color="#FF0000">一个小区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，需要一定准备时间才能起作用。</font></p>一些人说土豆雷很懒，因为他总是把所有事情留到最后。土豆雷才没空理他们，他正忙着考虑他的投资战略呢。',
+        Produce: '土豆雷具有强大的威力，但是他们需要点时间来武装自己。你应把他们种在僵尸前进的路上，当他们一被接触就会发生爆炸</font><br>精英形态：立刻出土，爆炸后向右在前方无植物的格子上分裂至多两个土豆雷<br>伤害：<font color="FF0000">巨大</font><br>范围：<font color="#FF0000">一个小区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，需要一定准备时间才能起作用。</font><br>一些人说土豆雷很懒，因为他总是把所有事情留到最后。土豆雷才没空理他们，他正忙着考虑他的投资战略呢。',
         Status: 0,
         AudioArr: ["potato_mine"],
         canTrigger: 0,
@@ -1495,12 +1507,13 @@ NormalAttack:function(a){
                 c = oZ.getArZ(j, h, e),
                 f = c.length,
                 num=0,
+				maxnum=Math.floor(Math.random()*2+1),
                 a;
             while (f--) {
                 (a = c[f]).Altitude < 2 && a.getThump(1400)
             }
         for(i=g.C;i<=9;i++){
-            !oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&num++<2&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0);
+            !oGd.$[g.R+"_"+i+"_1"]&&g.jinyin&&num++<maxnum&&(CustomSpecial(oPotatoMine,g.R,i).jinyin=0);
         }
             g.Die(1);
             PlayAudio("potato_mine");
@@ -1709,7 +1722,7 @@ NormalAttack:function(a){
                     R: l,
                     C: h,
                     PKind: 11
-                }), oGd.add(b, l + "_" + j + "_11")), oSym.addTask(1, arguments.callee, [b, c, n, m, e, g]))
+                }), oGd.add(b, l + "_" + j + "_11")),b.LadderDie(b),oSym.addTask(1, arguments.callee, [b, c, n, m, e, g]))
             })(a, oS.W, a.AttackedLX, a.AttackedRX, a.R, $(a.id))
         }
     }),
@@ -1730,6 +1743,7 @@ NormalAttack:function(a){
                         g = v < oS.R ? v + 1 : oS.R,
                         u = s.pixelLeft - 80,
                         r = s.pixelLeft + 160,
+						P,
                         e,
                         k;
                     PlayAudio("cherrybomb");
@@ -1738,6 +1752,12 @@ NormalAttack:function(a){
                         while (k--) {
                             e[k].ExplosionDie()
                         }
+						for (i=p-1;i<=p+1;i++){
+							for (Kind=0;Kind<=3;Kind++){
+							P=oGd.$[j+"_"+i+"_"+Kind];
+							("ladder_"+j+"_"+i)&&P&&P.LadderDie(P)
+							}
+						}
                     } while (j++ < g);
                     s.Die(1);
                     EditEle(m.childNodes[1], {
@@ -1847,6 +1867,7 @@ NormalAttack:function(a){
                             e = j < oS.R ? j + 1 : oS.R,
                             l = c.pixelLeft - 80,
                             k = c.pixelLeft + 160,
+							P,
                             d,
                             h;
                         do {
@@ -1854,6 +1875,12 @@ NormalAttack:function(a){
                             while (h--) {
                                 d[h].getExplosion()
                             }
+						for (i=c.C-1;i<=c.C+1;i++){
+							for (Kind=0;Kind<=3;Kind++){
+							P=oGd.$[g+"_"+i+"_"+Kind];
+							("ladder_"+g+"_"+i)&&P&&P.LadderDie(P)
+							}
+						}
                         } while (g++ < e);
                         c.Die(1);
                         EditEle(f.childNodes[1], {
@@ -1956,10 +1983,17 @@ NormalAttack:function(a){
                             c = oZ.getArZ(100, oS.W, f),
                             e = c.length,
                             g = oGd.$Ice[f],
+							P,
                             d = oGd.$Crater;
                         while (e--) {
                             c[e].getExplosion(1600)
                         }
+						for (i=1;i<=oS.C;i++){
+							for (Kind=0;Kind<=3;Kind++){
+							P=oGd.$[f+"_"+i+"_"+Kind];
+							("ladder_"+f+"_"+i)&&P&&P.LadderDie(P)
+							}
+						}
                         h.Die(1);
                         EditEle(b.childNodes[1], {
                             src: "images/Plants/Jalapeno/JalapenoAttack.gif"
@@ -2825,7 +2859,7 @@ FireAttack:90,
         PicArr: ["images/Card/Plants/IceShroom.png", "images/Plants/IceShroom/0.gif", "images/Plants/IceShroom/IceShroom.gif", "images/Plants/IceShroom/IceShroomSleep.gif", "images/Plants/IceShroom/Snow.gif", "images/Plants/IceShroom/icetrap.gif"],
         AudioArr: ["frozen", "wakeup"],
         Tooltip: "暂时使画面里的所有敌人停止行动",
-        Produce: '寒冰菇，能短暂的冻结屏幕上所有僵尸。<p>伤害：<font color="#FF0000">非常低，冻结僵尸</font><br>范围：<font color="#FF0000">屏幕上的所有僵尸</font><br>精英形态：自上而下散落大量冰豆<br>用法：<font color="#FF0000">单独使用，立即生效<br>白天睡觉</font></p>寒冰菇皱着眉头，倒不是因为它不高兴或不满意，只是因为，它觉得自己“四秒钟还是太短了”。',
+        Produce: '寒冰菇，能短暂的冻结屏幕上所有僵尸。<p>伤害：<font color="#FF0000">非常低，冻结僵尸</font><br>范围：<font color="#FF0000">屏幕上的所有僵尸</font><br>精英形态：自上而下散落大量冰豆<br>用法：<font color="#FF0000">单独使用，立即生效<br>白天睡觉</font></p>寒冰菇皱着眉头，倒不是因为它不高兴或不满意，只是因为，它觉得自己四秒钟的冻结时间还是太短了。',
         GetDX: CPlants.prototype.GetDX,
         GetDY: CPlants.prototype.GetDY,
         InitTrigger: function() {},
@@ -3014,7 +3048,13 @@ NormalAttack2: function() {
                             k = (e = oZ.getArZ(n, m, h)).length;
                             while (k--) {
                                 e[k].getExplosion(2700)
-                            }
+                            }		
+						for (i=d.C-5;i<=d.C+5;i++){
+							for (Kind=0;Kind<=3;Kind++){
+							P=oGd.$[h+"_"+i+"_"+Kind];
+							("ladder_"+h+"_"+i)&&P&&P.LadderDie(P)
+							}
+						}
                         } while (h++ < f);
                         PlayAudio("doomshroom");
                         d.Die();
@@ -3213,7 +3253,7 @@ NormalAttack2: function() {
             return "left:0:top:0;display:none"
         },
         Tooltip: "发射短距离孢子的水生植物",
-        Produce: '海蘑菇，能够发射短程孢子的水生植物。<p>伤害：<font color="#FF0000">普通</font><br>精英形态：<br>种下若未睡觉则使自身的冷却减少（最少减至5s），同时生成小喷菇卡牌，若睡觉时被唤醒也可正常触发<br>射程：<font color="#FF0000">短<br>必须种在水上<br>白天睡觉</font></p>海蘑菇从来没看到过大海，大海就在他的名字里，他总听到关于大海的事。他只是没找到合适的时间，总有一天……是的，他会见到海的。'
+        Produce: '海蘑菇，能够发射短程孢子的水生植物。<p>伤害：<font color="#FF0000">普通</font><br>精英形态：种下若未睡觉则使自身的冷却减少（最少减至5s），同时生成小喷菇卡牌，若睡觉时被唤醒也可正常触发<br>射程：<font color="#FF0000">短<br>必须种在水上<br>白天睡觉</font></p>海蘑菇从来没看到过大海，大海就在他的名字里，他总听到关于大海的事。他只是没找到合适的时间，总有一天……是的，他会见到海的。'
     }),
     oPlantern = InheritO(CPlants, {
         EName: "oPlantern",
@@ -3480,7 +3520,7 @@ NormalAttack2: function() {
         SunNum: 100,
         PicArr: ["images/Card/Plants/Blover.png", "images/Plants/Blover/0.gif", "images/Plants/Blover/Blover.gif"],
         Tooltip: "能吹走所有气球和迷雾",
-        Produce: '三叶草，能吹走所有的气球僵尸，也可以把雾吹散。<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">吹走屏幕上所有的气球僵尸</font></p>当三叶草五岁生日的时候，他得到了一个闪亮的生日蛋糕。他许好愿，然后深吸一口气却只吹灭了60%的蜡烛。然而他没有放弃，小时候的那次失败促使他更加努力直到现在。',
+        Produce: '三叶草，能吹走所有的气球僵尸，也可以把雾吹散，把僵尸吹退几格<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">吹走屏幕上所有的气球僵尸</font></p>当三叶草五岁生日的时候，他得到了一个闪亮的生日蛋糕。他许好愿，然后深吸一口气却只吹灭了60%的蜡烛。然而他没有放弃，小时候的那次失败促使他更加努力直到现在。',
         AudioArr: ['blover'],
         InitTrigger: function() {},
         PrivateBirth: function(o) { // 种植后0.5秒开始吹风
