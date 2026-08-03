@@ -957,6 +957,7 @@ oGd = {
 	Init: function() {
 		this.$ = [];
 		this.$Crater = [];
+		this.$Ladder=[];
 		this.$Tombstones = {};
 		this.$Tombstones1= {};
 		this.$Torch = [];
