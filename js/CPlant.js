@@ -1160,7 +1160,7 @@ NormalAttack:function(a){
                 a;
             if (c && c.PZ && (c.R == e.R)) {
                 a = c.ZX > e.AttackedLX + 25 ? 0 : 1;
-                f == a ? (e.AttackCheck2(c) ? e.CheckLoop(b, f) : --e.aTri[f]) : (++e.aTri[a], --e.aTri[f])
+                f == a ? (e.AttackCheck2(c) ? e.CheckLoop(b, f) : --e.aTri[f]) : (e.aTri[a] < 1 && ++e.aTri[a], --e.aTri[f])
             } else {
                 --e.aTri[f]
             }
