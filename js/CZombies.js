@@ -77,7 +77,7 @@ var CZombies = function(b, a) {
         oSym.addTask(5,
           function(l, k, j, a,Dire){
 			if(!$Z[a.id])return;
-			a.getr(a,Math.min(-a.Speed,-3),1);
+			!Dire&&a.getr(a,Math.min(-a.Speed,-5.6),1);
             k = Dire?Math.min(k + j, 0):Math.max(k - j, B);
             SetStyle(l, {
               top: k + "px"
@@ -87,7 +87,7 @@ var CZombies = function(b, a) {
               top: "0px"
             }))
           },
-          [a.EleBody, 0, -(B=-40)*Math.min(-a.Speed,-3.2)/(-3.2*20), a,0]);
+          [a.EleBody, 0, -(B=-50)*Math.min(-a.Speed,-5.6)/(-5.6*20), a,0]);
 		},
                 GetDX: function() {
                     return -110
@@ -645,8 +645,9 @@ Birth: function() {
 		},
 		Boom:function(a){
 		PlayAudio("potato_mine");
-		for (i = 3; i >= 0; i--) {
-			for (l=GetC(a.ZX)-1;l<=GetC(a.ZX)+1;l++){
+		for (l=GetC(a.ZX)-1;l<=GetC(a.ZX)+1;l++){
+			if(oGd.$Ladder[a.R+"_"+l]&&!a.PZ) delete oGd.$Ladder[a.R+"_"+l];
+		      for (i = 3; i >= 0; i--) {
             var tp = oGd.$[a.R + "_" + l + "_" + i];
             tp && a.PZ && tp.getHurt(a, 3, 1000 * a.level);
 			}
@@ -3387,7 +3388,10 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
                 n,
                 k;
               do {
-                k = (n = oZ["getAr" + (e.PZ ? "HZ" : "Z")](m, o, h)).length;
+				  	for (i=(e.num>=50?GetC(l)-2:GetC(l)-1);i<=(e.num>=50?GetC(l)+2:GetC(l)+1);i++){
+							if(oGd.$Ladder[h+"_"+i]&&!e.PZ) delete oGd.$Ladder[h+"_"+i];
+					}
+                k = (n = oZ["getAr" + (e.PZ ? "HZ" : "Z")](m, o, h)).length
                 while (k--) {
                   n[k].getExplosion(1600)
                 }
