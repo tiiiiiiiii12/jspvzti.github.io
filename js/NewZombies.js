@@ -544,6 +544,7 @@ oNutZombie = InheritO(oTallNutZombie, {
       var a = "images/Zombies/Zombie/";
       return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
     })(),
+	PrivateAct:oWallNutZombie.prototype.PrivateAct,
 	GoingDie:function(a){
 		if(this.PZ){
 		delete oGd.$Crater[this.SetR+"_"+this.SetC];
