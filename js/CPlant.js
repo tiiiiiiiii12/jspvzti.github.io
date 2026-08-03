@@ -847,7 +847,7 @@ NormalAttack: function() {
         })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [h]), false) : true)
       };
     (function(h, N) {
-      oSym.addTask(0,
+    oSym.addTask(0,
         function(j) {
           var i = $(j);
           i && SetVisible(i)
@@ -925,12 +925,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
       };
     (function(h, N, Img,C) {
       if (!g.BulletEle1) return;
-      oSym.addTask(0,
-        function(j, Img) {
-          var i = $(j);
-          i && (i.src = Img, SetVisible(i))
-        },
-        [h, Img]);
+    h && (h.src = Img, SetVisible(h));
       oSym.addTask(1,
         function(n, l, m, k, i, j, N, A, I) {
           A == 0 && oGd.$Torch[GetR(k) + "_" + GetC(n)] && (A = 1, I = 40, i.src = "images/Plants/PB" + A + "0.gif");
@@ -3333,7 +3328,7 @@ NormalAttack2: function() {
             a.ES = a.Elongation
         },
         TriggerCheck: function(b, a) {
-            this.ES() && (this.canTrigger = 0, this.CheckLoop(b.id, a))
+            this.AttackCheck2(b) && this.ES() && (this.canTrigger = 0, this.CheckLoop(b.id, a))
         },
         CheckLoop: function(b, c) {
             var a = this.id;
@@ -3355,6 +3350,10 @@ NormalAttack2: function() {
         },
         [this.id, Math.round(Math.random() * 1 + 1)])
     },
+		AttackCheck2:function(c) {
+	var b = c.Altitude;
+	return b > 0
+},
         CheckLoop2: function(b, c) {
             var a = this.id;
             !this.FreeFreezeTime&&this.NormalAttack(b);
