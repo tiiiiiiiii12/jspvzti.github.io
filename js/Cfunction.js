@@ -2229,7 +2229,7 @@ SelectModal = function(g) {
 	AllAudioStop();
 	PausedAudioArr = [];
 	g == undefined && (g = $User.Visitor.Progress);
-	if (g > 40) {
+	if (g > 39) {
 		alert("本关卡暂未开放！");
 		SelectModal(0);
 		return
