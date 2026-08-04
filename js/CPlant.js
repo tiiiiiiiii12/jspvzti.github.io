@@ -58,7 +58,7 @@ getLadder:function() {
   NewImg("ladder_" + a.R + "_" + a.C, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:" + (GetX(a.C) - 20) + "px;top:" + (GetY(a.R) - 120) + "px;z-index:" + a.zIndex, EDPZ);
   oSym.addTask(0, function(a, d) {
 	a.EditCanEat(a);
-    var c = oZ.getArZ(a.pixelRight-5, a.pixelRight + 5, a.R);
+    var c = oZ.getArZ(a.pixelRight, a.pixelRight + 5, a.R);
     b = c.length;
     while (b--) {
       !c[b].WalkDirection&&c[b].Altitude==1&&!c[b].FreeSetbodyTime && (c[b].WalkToLadder(c[b]));
@@ -929,7 +929,11 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
       };
     (function(h, N, Img,C) {
       if (!g.BulletEle1) return;
-        $(h)&&($(h).src = Img,SetVisible($(h)));
+    oSym.addTask(0,
+        function(j,Img) {
+          var i = $(j);
+          i && (i.style.width!="52px"&&(i.src=Img),SetVisible(i))
+        },[h,Img]);
       oSym.addTask(1,
         function(n, l, m, k, i, j, N, A, I) {
           A == 0 && oGd.$Torch[GetR(k) + "_" + GetC(n)] && (A = 1, I = 40, i.src = "images/Plants/PB" + A + "0.gif");
