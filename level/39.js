@@ -56,7 +56,7 @@ oS.Init({
     FlagToEnd: function() {
 		NewImg("imgSF", "images/interface/trophy.png", "left:260px;top:233px", EDAll, {
 			onclick: function() {
-				SelectModal(11)
+				SelectModal(0)
 			}
 		});
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:198px;left:269px", EDAll)
