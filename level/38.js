@@ -2,7 +2,7 @@ oS.Init({
     PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oHypnoShroom, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea,oPumpkinHead,oStarfruit],
     ZName: [oZombie, oZombie2, oZombie3, oDuckyTubeZombie1, oDuckyTubeZombie2, oConeheadZombie, oLadderZombie,oImp],
     PicArr: function() {
-        var Pro = oStarfruit.prototype,
+        var Pro = oGarlic.prototype,
             PicArr = Pro.PicArr,
             s = 'images/interface/fog',
             pg = $User.Browser.IE && !$User.Browser.IE9 ? 'gif' : 'png';
@@ -49,7 +49,7 @@ oS.Init({
         NewEle("DivA", "div", "position:absolute;width:900px;height:600px;background:#FFF;filter:alpha(opacity=0);opacity:0;z-index:160", 0, EDAll);
         NewImg("imgSF", "images/Card/Plants/GatlingPea.png", "left:627px;top:325px;clip:rect(auto,auto,60px,auto)", EDAll, {
             onclick: function() {
-                GetNewCard(this, oSniperPea, 39);
+                GetNewCard(this, oGarlic, 39);
             }
         });
         NewImg("PointerUD", "images/interface/PointerDown.gif", "top:290px;left:636px", EDAll)
