@@ -869,8 +869,8 @@ NormalAttack: function() {
             id: h
           },
           0, EDPZ),a,N,0,20]);
-      ++N <= 5&&$P[g.id]&& oSym.addTask(10, arguments.callee, ["StarB" + Math.random(), N]);
-    })("StarB" + Math.random(), -5)
+      ++N <= 5&&$P[g.id]&& oSym.addTask(10, arguments.callee, ["StarB0" + Math.random(), N]);
+    })("StarB0" + Math.random(), -5)
   },
         jinyinAct:function(a){
 		a.AttTime=0;
@@ -929,8 +929,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
       };
     (function(h, N, Img,C) {
       if (!g.BulletEle1) return;
-        $(h).src = Img;
-	SetVisible($(h));
+        $(h)&&($(h).src = Img,SetVisible($(h)));
       oSym.addTask(1,
         function(n, l, m, k, i, j, N, A, I) {
           A == 0 && oGd.$Torch[GetR(k) + "_" + GetC(n)] && (A = 1, I = 40, i.src = "images/Plants/PB" + A + "0.gif");
@@ -943,8 +942,8 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
             id: h
           },
           0, EDPZ), a, N, C, C==1 ? 40 : 20]);
-      (N += 2) <= 2 && oSym.addTask(0, arguments.callee, ["StarB" + Math.random(), N, Img,C]);
-    })("StarB" + Math.random(), -2, D,C)
+      (N += 2) <= 2 && oSym.addTask(0, arguments.callee, ["StarB1" + Math.random(), N, Img,C]);
+    })("StarB1" + Math.random(), -2, D,C)
   },
         NormalAttack2: function() {
             var a, c = this,
