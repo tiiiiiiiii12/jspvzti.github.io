@@ -47,7 +47,7 @@ oS.Init({
     },
     FlagToEnd: function() {
         NewEle("DivA", "div", "position:absolute;width:900px;height:600px;background:#FFF;filter:alpha(opacity=0);opacity:0;z-index:160", 0, EDAll);
-        NewImg("imgSF", "images/Card/Plants/GatlingPea.png", "left:627px;top:325px;clip:rect(auto,auto,60px,auto)", EDAll, {
+        NewImg("imgSF", "images/Card/Plants/Garlic.png", "left:627px;top:325px;clip:rect(auto,auto,60px,auto)", EDAll, {
             onclick: function() {
                 GetNewCard(this, oGarlic, 39);
             }
