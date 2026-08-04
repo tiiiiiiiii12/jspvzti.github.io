@@ -51,9 +51,8 @@ for (i = 0; i <= 3; i++) {
 	},
 getLadder:function() {
   var a = this;
-   a.EditCanEat(a);
   for (i = 0; i <= 3; i++) {
-    oGd.$[a.R + "_" + a.C + "_" + i] && (oGd.$[a.R + "_" + a.C + "_" + i].OcanEat=oGd.$[a.R + "_" + a.C + "_" + i].canEat)//先将原有的canEat存储，以备消梯
+    oGd.$[a.R + "_" + a.C + "_" + i] && (oGd.$[a.R + "_" + a.C + "_" + i].OcanEat=oGd.$[a.R + "_" + a.C + "_" + i].canEat,oGd.$[a.R + "_" + a.C + "_" + i].canEat=0)//先将原有的canEat备份，以备消梯
   }
   oGd.$Ladder[a.R+"_"+a.C]=true;
   NewImg("ladder_" + a.R + "_" + a.C, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:" + (GetX(a.C) - 20) + "px;top:" + (GetY(a.R) - 120) + "px;z-index:" + a.zIndex, EDPZ);
