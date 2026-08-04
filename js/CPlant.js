@@ -58,7 +58,7 @@ getLadder:function() {
   NewImg("ladder_" + a.R + "_" + a.C, "images/Zombies/LadderZombie/Zombie_ladder_5.png", "left:" + (GetX(a.C) - 20) + "px;top:" + (GetY(a.R) - 120) + "px;z-index:" + a.zIndex, EDPZ);
   oSym.addTask(0, function(a, d) {
 	a.EditCanEat(a);
-    var c = oZ.getArZ(a.pixelRight-10, a.pixelRight + 5, a.R);
+    var c = oZ.getArZ(a.pixelRight-5, a.pixelRight + 5, a.R);
     b = c.length;
     while (b--) {
       !c[b].WalkDirection&&c[b].Altitude==1&&!c[b].FreeSetbodyTime && (c[b].WalkToLadder(c[b]));
