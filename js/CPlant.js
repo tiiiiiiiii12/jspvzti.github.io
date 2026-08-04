@@ -51,6 +51,7 @@ for (i = 0; i <= 3; i++) {
 	},
 getLadder:function() {
   var a = this;
+   a.EditCanEat(a);
   for (i = 0; i <= 3; i++) {
     oGd.$[a.R + "_" + a.C + "_" + i] && (oGd.$[a.R + "_" + a.C + "_" + i].OcanEat=oGd.$[a.R + "_" + a.C + "_" + i].canEat)//先将原有的canEat存储，以备消梯
   }
