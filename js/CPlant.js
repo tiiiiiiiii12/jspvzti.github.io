@@ -611,7 +611,7 @@ oStarfruit = InheritO(CPlants, {
             s.onclick=function(){
                 !(a.dianji||a.FreeFreezeTime)&&(a.NormalAttack(a),
                 a.dianji=true,
-				a.getHurt(a,0,10),a.HP<=1?(CustomZombie(oPeaZombie,a.R,a.C,1).jinyinnum=0):oSym.addTask(50,function(a){
+				a.getHurt(a,0,10),a.HP<=1?(CustomZombie(oPeaZombie,a.R,a.C,1).jinyinnum=0):oSym.addTask(30,function(a){
                 a.dianji=false
                 },[a]));
             }
