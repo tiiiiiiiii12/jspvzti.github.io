@@ -1686,7 +1686,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
                 c = f.EleShadow,
                 e = f.EleBody;
 			f&&(f.PrivateAct=function(){});
-			f.PZ&&f.num&&f.ExchangeLR(f,0);
+			f.num&&(PlayAudio("dancer"),f.PZ&&f.ExchangeLR(f,0));
             e.src = !(f.jinyin&&!f.num)?"images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump.gif" + $Random + Math.random():"images/Zombies/PoleVaultingZombie/jinyinjump.gif" + $Random + Math.random();
             PlayAudio("grassstep");
             SetHidden(c);
@@ -2080,6 +2080,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
     a.Speed *= 3;
 	a.bedevil=function(){},
     a.OSpeed *= 3;
+	PlayAudio("jack_surprise");
   },
   CheckOrnHP: function(g, h, d, c, f, b, a) {
     var e = OrnNoneZombies.prototype;
@@ -3522,6 +3523,7 @@ if(!a.isDie){
 			a.ChkActs=CZombies.prototype.ChkActs;
 			a.PrivateAct=function(f){
 				if (f.Altitude == 3 && f.AttackedRX < GetX(1)) { // 气球掉落
+				f.OrnHP=0;//无视减伤
 				f.getHit0(f,f.OrnHP);
                 f.Drop();
               }
