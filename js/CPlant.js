@@ -449,7 +449,7 @@ oStarfruit = InheritO(CPlants, {
     PlayAudio("doomshroom");
     for (z in $Z) {
       let u = $Z[z];
-      u && u.PZ && u.ZX<oS.W&&u.getHit0(u, 800, 0)
+      u && u.PZ && u.ZX<oS.W&&u.getHit0(u, 700, 0)
     }
   },
   NormalAttack: function() {
@@ -588,7 +588,7 @@ oStarfruit = InheritO(CPlants, {
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         PicArr: ["images/Card/Plants/Peashooter.png", "images/Plants/Peashooter/0.gif", "images/Plants/Peashooter/Peashooter.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         Tooltip: "向敌人射出豌豆",
-        Produce: '豌豆射手，你的第一道防线。它们通过发射豌豆来攻击僵尸。<br>精英形态：点击可额外发射豌豆，但会扣自身10血，若被点击死亡则召唤一个非精英豌豆射手僵尸<p>伤害：<font color="#FF0000">中等</font></p>一棵植物，怎么能如此快地生长，并发射如此多的豌豆呢？豌豆射手：“努力工作，奉献自己，再加上一份阳光，高纤维和氧化碳均衡搭配，这种健康早餐让一切成为可能。”',
+        Produce: '豌豆射手，你的第一道防线。它们通过发射豌豆来攻击僵尸。<br>精英形态：点击可额外发射豌豆，但会扣自身血，若被点击死亡则召唤一个非精英豌豆射手僵尸<p>伤害：<font color="#FF0000">中等</font></p>一棵植物，怎么能如此快地生长，并发射如此多的豌豆呢？豌豆射手：“努力工作，奉献自己，再加上一份阳光，高纤维和氧化碳均衡搭配，这种健康早餐让一切成为可能。”',
         PrivateBirth: function(a) {
             a.BulletEle = NewImg(0, a.PicArr[3], "left:" + (a.AttackedLX - 40) + "px;top:" + (a.pixelTop + 3) + "px;visibility:hidden;z-index:" + (a.zIndex + 2))
         },
@@ -611,7 +611,7 @@ oStarfruit = InheritO(CPlants, {
             s.onclick=function(){
                 !(a.dianji||a.FreeFreezeTime)&&(a.NormalAttack(a),
                 a.dianji=true,
-				a.getHurt(a,0,10),a.HP<=1?(CustomZombie(oPeaZombie,a.R,a.C,1).jinyinnum=0):oSym.addTask(30,function(a){
+				a.getHurt(a,0,15),a.HP<=1?(CustomZombie(oPeaZombie,a.R,a.C,1).jinyinnum=0):oSym.addTask(30,function(a){
                 a.dianji=false
                 },[a]));
             }
@@ -824,7 +824,7 @@ while (e--) {
         SunNum:350,
 		coolTime:15,
         PeaKind:0,
-		AttTime:100,
+		AttTime:140,
         PicArr: ["images/Card/Plants/Threepeater.png", "images/Plants/Threepeater/0.gif", "images/Plants/Threepeater/Threepeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "散射水波型子弹，攻速变慢",
@@ -869,8 +869,8 @@ NormalAttack: function() {
             id: h
           },
           0, EDPZ),a,N,0,20]);
-      ++N <= 5&&$P[g.id]&& oSym.addTask(10, arguments.callee, ["StarB0" + Math.random(), N]);
-    })("StarB0" + Math.random(), -5)
+      ++N <= 4&&$P[g.id]&& oSym.addTask(10, arguments.callee, ["StarB0" + Math.random(), N]);
+    })("StarB0" + Math.random(), -4)
   },
         jinyinAct:function(a){
 		a.AttTime=0;
