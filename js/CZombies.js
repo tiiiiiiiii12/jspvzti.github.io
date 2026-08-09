@@ -1540,20 +1540,20 @@ oFootballZombie = InheritO(oConeheadZombie, {
       },
       [b]);
     oSym.addTask(1,
-      function(f, j, n, i, o, BDire, isHit, PZ) {
+      function(f, j, n, i, o, BDire, isHit, PZ,HitNum) {
         var l, e = GetC(n);
         var Kind = 3,
           Z = oZ[BDire ? "getHZ1" : "getZ0"](n, i),
           d;
 		if(n<=oS.W&&n>=100){
-        Z && Z.Altitude == 1 && (Z.PZ != PZ && (Z.getPea(Z, 75 * a.level, 0)), isHit += 1, BDire = !BDire ? 1 : 0);
+        Z && Z.Altitude == 1 && (Z.PZ != PZ && (Z.getPea(Z, 75 * a.level, 0),++isHit),BDire = !BDire ? 1 : 0);
         while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && PZ && (PlayAudio("splat1"),isHit += 1, BDire = (!BDire ? 1 : 0), d.getHurt(a, 3, 75 * a.level))
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && PZ && (PlayAudio("splat1"),BDire = (!BDire ? 1 : 0),++isHit,d.getHurt(a, 3, 75 * a.level))
         }
 		}
-        isHit > 10 ? ClearChild(j) : (((n += (l = BDire ? -5 : 5)) > oS.W || n < 100) && (BDire = !BDire ? 1 : 0), j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o, BDire, isHit, PZ]))
+        isHit > HitNum ? ClearChild(j) : (((n += (l = BDire ? -5 : 5)) > oS.W || n < 100) && (BDire = !BDire ? 1 : 0), j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o, BDire, isHit, PZ,HitNum]))
       },
-      [b, $(b), a.ZX, a.R, a.ZX, a.PZ, 0, a.PZ])
+      [b, $(b), a.ZX, a.R, a.ZX, a.PZ, 0, a.PZ,Math.floor(Math.random()*3+4)])
   },
   PicArr: (function() {
     var a = "images/Zombies/FootballZombie/";
@@ -1571,7 +1571,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
     oPoleVaultingZombie = InheritO(OrnNoneZombies, {
         EName: "oPoleVaultingZombie",
         CName: "撑杆僵尸",
-        HP: 500,
+        HP: 600,
         width: 348,
         height: 218,
         OSpeed: 3.2,
@@ -1594,7 +1594,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
             return ["images/Card/Zombies/PoleVaultingZombie.png", a + "0.gif", a + "PoleVaultingZombie.gif", a + "PoleVaultingZombieAttack.gif", a + "PoleVaultingZombieLostHead.gif", a + "PoleVaultingZombieLostHeadAttack.gif", a + "PoleVaultingZombieHead.gif" + $Random, a + "PoleVaultingZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "PoleVaultingZombieWalk.gif", a + "PoleVaultingZombieLostHeadWalk.gif", a + "PoleVaultingZombieJump.gif", a + "PoleVaultingZombieJump2.gif", a + "1.gif", a + "jinyinrun.gif",a + "jinyinjump.gif"]
         })(),
         AudioArr: ["polevault", "grassstep"],
-        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<br>韧性：<font color="#FF0000">中（500)</font><br>精英形态一：反向，跳跃完毕后于3×3植物上召唤血量低的普通撑杆<br>精英形态二：箭头撑杆，自身行进至第七列时自动锁定本行最靠右的植物并跳过它，跳跃时碾压身下的植物<br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font><br>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为……不那么普通也不至于非凡？那就是撑杆僵尸。',
+        Produce: '撑杆僵尸运用标杆高高地跃过障碍物。<br>韧性：<font color="#FF0000">中（600)</font><br>精英形态一：反向，跳跃完毕后于3×3植物上召唤血量低的普通撑杆<br>精英形态二：箭头撑杆，自身行进至第七列时自动锁定本行最靠右的植物并跳过它，跳跃时碾压身下的植物<br>速度：<font color="#FF0000">快,而后慢(跳跃后)</font><BR>特点：<font color="#FF0000">跃过他所碰到的第一筑植物</font><br>一些僵尸渴望走得更远、得到更多，这也促使他们由普通成为……不那么普通也不至于非凡？那就是撑杆僵尸。',
         getShadow: function(a) {
             return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 35) + "px"
         },
@@ -1641,7 +1641,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
   jinyinAct: function(a) {
 	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
     a.num?a.ExchangeLR(a, 1):(a.PrivateAct=function(a){
-	for (let i = GetC(a.ZX-30);i>=2;i--) {
+	for (let i = GetC(a.ZX-30);i>=1;i--) {
         for (let j = 0; j < 4; j++) {
           let g = oGd.$[a.R + "_" + i + "_" + j];
         GetC(a.ZX+30)<=8&&a.canWalk(a,a.id)&&a.PZ&&!a.isAttacking&&g&&g.canEat&&(a.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1,
@@ -2338,21 +2338,21 @@ jinyinWalkGif12: 14,
         SunNum: 100,
         width: 143,
         height: 200,
-		HP:270,
+		HP:400,
         beAttackedPointL: 40,
         beAttackedPointR: 100,
         OSpeed: 3.2,
 		intoWaterSpeed:2,
         Speed: 3.2,
         Altitude: 1,
-        Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">低</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击，啃食时每秒回30血</font><br>精英形态：<font color="#FF0000">将他所遇到的第一株低血植物变为它的防具</font><br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
+        Produce: '潜水僵尸可以在水下前行。<p>韧性：<font color="#FF0000">中(400)</font><br>特点：<font color="#FF0000">潜泳以避免遭到攻击，啃食时每秒回30血</font><br>精英形态：<font color="#FF0000">将他所遇到的第一株低血植物变为它的防具</font><br>只在水池关卡出现</font></p>僵尸不呼吸。他们不需要空气。那么为什么潜水僵尸需要一套潜水装置来潜水呢？<br>答案：同行的压力。',
         JumpTime: 40,
 		catchCoolTime:1000,
 		jinyinAct:function(a){
 			a.cangetOrn=1;
 			a.OrnLostNormalGif=a.NormalGif;
 			a.OrnLostAttackGif=a.AttackGif;
-			a.intoWaterSpeed*=1.5;
+			a.intoWaterSpeed*=2;
 			a.PrivateAct=function(a){
 			var z=a.Ele;
 			if ($Z[a.id] && a.beAttacked&&(a.OrnHP>=1)) {
@@ -2367,11 +2367,11 @@ jinyinWalkGif12: 14,
             z.NutHead = "nut" + Math.random();
             var Nut = NewImg(z.NutHead, c, "position:absolute;transform:"+(!a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)")+";left:30px;top:90px;", 0);
             z.appendChild(Nut);//防具贴图
-			a.Speed/=1.5;
-			a.OSpeed/=1.5;
+			a.Speed/=2;
+			a.OSpeed/=2;
 			a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(c,d){
 				OrnIZombies.prototype.getHit0(c,d);
-				c.OrnHP<1&&(ClearChild($(c.Ele.NutHead)),oSym.addTask(c.catchCoolTime,function(c){$Z[c.id]&&(c.cangetOrn=1,c.Speed*=1.5,c.OSpeed*=1.5)},[c]));
+				c.OrnHP<1&&(ClearChild($(c.Ele.NutHead)),oSym.addTask(c.catchCoolTime,function(c){$Z[c.id]&&(c.cangetOrn=1,c.Speed*=2,c.OSpeed*=2)},[c]));
 			  }
 			}
 		},
@@ -2439,7 +2439,7 @@ jinyinWalkGif12: 14,
                 function(d, c) {
                     var f = $Z[d],
                         e;
-                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && (e.HP<1000&&f.cangetOrn?(f.getOrn(f,e.HP,e.EleBody.src),e.Die()):e.getHurt(f, 0, f.Attack)),f.HP<500&&(f.HP+=30),f.JudgeAttack())
+                    f && f.beAttacked && !f.FreeFreezeTime && !f.FreeSetbodyTime && ((e = $P[c]) && (e.HP<1000&&f.cangetOrn?(f.getOrn(f,e.HP,e.EleBody.src),e.Die()):e.getHurt(f, 0, f.Attack)),f.HP<f.MaxHP&&(f.HP+=30),f.JudgeAttack())
                 },
                 [b, a])
         },
@@ -2465,7 +2465,7 @@ jinyinWalkGif12: 14,
                 function(g, e, d, f) {
                     $Z[e] && g.beAttacked && ((f = $Z[d]) && f.beAttacked ? (g.EleBody.src = g.PicArr[g.AttackGif], g.Altitude = 1, oSym.addTask(10,
                         function(k, i, j, h) {
-                            $Z[i] && k.beAttacked && !k.FreeFreezeTime && !k.FreeSetbodyTime && ($Z[h] && j.beAttacked ? (k.cangetOrn&&((j.HP+j.OrnHP)<1000)?(k.getOrn(k,j.OrnHP+j.HP,j.EleBody.src),j.DisappearDie()):j.getHit0(j, 10, 0),k.HP<500&&(k.HP+=3),oSym.addTask(10, arguments.callee, [k, i, j, h])) : (k.EleBody.src = k.PicArr[10] + Math.random(), k.Altitude = 0, oSym.addTask(70,
+                            $Z[i] && k.beAttacked && !k.FreeFreezeTime && !k.FreeSetbodyTime && ($Z[h] && j.beAttacked ? (k.cangetOrn&&((j.HP+j.OrnHP)<1000)?(k.getOrn(k,j.OrnHP+j.HP,j.EleBody.src),j.DisappearDie()):j.getHit0(j, 10, 0),k.HP<k.MaxHP&&(k.HP+=3),oSym.addTask(10, arguments.callee, [k, i, j, h])) : (k.EleBody.src = k.PicArr[10] + Math.random(), k.Altitude = 0, oSym.addTask(70,
                                 function(l, m) {
                                     $Z[l] && m.beAttacked && (m.isAttacking = 0, m.EleBody.src = m.PicArr[m.NormalGif])
                                 },
@@ -3688,7 +3688,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
   CName: "矿工僵尸",
   Lvl: 4,
   SunNum: 125,
-  HP: 500,
+  HP: 600,
   BreakPoint: 70,
   width: 167,
   height: 170,
@@ -3715,7 +3715,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
   BoomDieGif: 8,
   LostHeadGif: 5,
   LostHeadAttackGif: 5,
-  Produce: '这种僵尸通过挖地来绕过防线。<br>韧性：<font color="#FF0000">中</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，杨桃</font><br>精英形态一：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列</font><br>精英形态二：<font color="#FF0000">挖至第五列出土向左，血量提升，速度大幅降低</font><br>矿工僵尸一周需要用两天的时间来考取他的挖掘许可证',
+  Produce: '这种僵尸通过挖地来绕过防线。<br>韧性：<font color="#FF0000">中（600）</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，杨桃</font><br>精英形态一：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列</font><br>精英形态二：<font color="#FF0000">挖至第五列出土向左，血量提升，速度大幅降低</font><br>矿工僵尸一周需要用两天的时间来考取他的挖掘许可证',
   BirthCallBack: function(f) {
     var e = f.delayT,
       d = f.id,
