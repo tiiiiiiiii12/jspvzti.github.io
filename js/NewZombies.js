@@ -484,7 +484,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
   oTallNutZombie = InheritO(oWallNutZombie, {
     EName: "oTallNutZombie",
     CName: "高坚果僵尸",
-    OrnHP: 2200,
+    OrnHP: 2400,
     SunNum: 225,
     Boom: function() {},
     StandGif: 11,
@@ -523,7 +523,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 		ClearChild($(c.Ele.NutHead2));
 	},
     Boom: function() {},
-    Produce: '韧性：<font color="#FF0000">极高(2200+270)</font><br>精英形态一：每隔一段时间在场上放置一个坚果障碍，坚果障碍所在格不可种植植物<br>精英形态二：头部到达第一个损伤点时攻击方式变为巨人</p>太好了，高仁僵尸来了'
+    Produce: '韧性：<font color="#FF0000">极高(2400+270)</font><br>精英形态一：每隔一段时间在场上放置一个坚果障碍，坚果障碍所在格不可种植植物<br>精英形态二：头部到达第一个损伤点时攻击方式变为巨人</p>太好了，高仁僵尸来了'
   }, {
     PicArr: {
       12: "images/Plants/TallNut/TallNut.gif",
@@ -681,6 +681,8 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
   height: 144,
   OSpeed: 4,
   Speed: 4,
+  HP:300,
+  BreakPoint:100,
   beAttackedPointL: 60,
   beAttackedPointR: 116,
   PicArr: (function() {
