@@ -2683,7 +2683,7 @@ NewEle("oAttack_" + c.id, "div",
                 [b, Math.min(c + 250, oS.W), 0]
             ]
         },
-	.ChangeCallback:oPeashooter.prototype.ChangeCallback,
+	ChangeCallback:oPeashooter.prototype.ChangeCallback,
         PrivateBirth: function(a) {
             a.BulletEle = NewImg(0, "images/Plants/ShroomBullet.gif", "left:" + (a.AttackedLX - 46) + "px;top:" + (a.pixelTop + 40) + "px;visibility:hidden;z-index:" + (a.zIndex + 2))
         },
