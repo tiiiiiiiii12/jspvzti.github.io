@@ -1981,17 +1981,31 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   HP: 270,
   BirthImg: function(a) {
     var z = a.Ele;
-    var Sh = NewImg(z.FumeDoor, a.num>=50 ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/brain.png", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:" + (a.num>=50 ? 50 : 80) + "px;", 0);
+	z.FumeDoor = "Fume" + Math.random();
+    var Sh = NewImg(z.FumeDoor, a.num<=100 ? "images/Plants/FumeShroom/FumeShroom.gif" : (a.num>=200?"images/interface/Shovel.png":"images/interface/brain.png"), "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:30px;top:" + (a.num<=100 ? 50 : 80) + "px;", 0);
     z.appendChild(Sh);
   },
-  jinyinAct: function(a) {
-    var z = $(a.id);
-    a.num = Math.random() * 100|| a.Privatenum;
-    z.FumeDoor = "Fume" + Math.random();
-    a.num>=50 && (a.OrnHP *= 0.75);
-    a.BirthImg(a);
-    a.num>=50 ? (NewEle(a.id + "_Bullet",
-      "div", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "visibility:hidden;width:343px;height:62px;left:" + (a.PZ ? "-250" : "40") + "px;top:70px;background:url(images/Plants/FumeShroom/FumeShroomBullet.gif);z-index:" + (a.zIndex + 1), 0, $(a.id)), oSym.addTask(1, function(a, h, z) {
+JudgeDirection:function(a){
+	var P = a.Ele;
+      (a.WalkDirection == a.check) && (a.Ornaments && SetStyle($(P.FumeDoor), {
+            transform: a.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)",
+            left: a.WalkDirection ? "40px" : "25px"
+          }),
+        a.check = a.WalkDirection ? 0 : 1);
+      !a.Ornaments && ClearChild($(P.FumeDoor))
+},
+  jinyinAct1:function(a){
+	  var z=a.Ele;
+	  a.PrivateAct=function(a){
+		       var P = a.Ele;
+      (a.WalkDirection == a.check) && a.Ornaments && (EditEle($(a.id + "_Bullet"), 0, {
+            transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
+            left: (!a.WalkDirection ? "-250" : "40") + "px"
+          }, P, 0)); 
+		  a.JudgeDirection(a);
+	  };
+	  NewEle(a.id + "_Bullet",
+      "div", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "visibility:hidden;width:343px;height:62px;left:" + (a.PZ ? "-250" : "40") + "px;top:70px;background:url(images/Plants/FumeShroom/FumeShroomBullet.gif);z-index:" + (a.zIndex + 1), 0, a.Ele), oSym.addTask(1, function(a, h, z) {
       if (a.Ornaments && $Z[a.id]) {
         let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.PZ ? a.ZX - 240 : a.ZX, a.PZ ? a.ZX : a.ZX + 240, a.R),
           Tz = A.length;
@@ -2026,25 +2040,46 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
         a.Speed = a.OSpeed = a.LostPaperSpeed;
       }
       a && oSym.addTask(140, arguments.callee, [a, a.id + "_Bullet", z])
-    }, [a, a.id + "_Bullet", z])) : (a.PrivateAttack = function(a, b) {
+    }, [a, a.id + "_Bullet", z])
+  },
+jinyinAct2:function(a){
+	a.PrivateAttack = function(a, b) {
       a && a.canWalk && $P[b] && ($P[b].HP >= 1000) && a.getr(a, a.WalkDirection?100:-10)
-    }); //大喷技能
-    a.PrivateAct = function(a) {
+    };
+a.PrivateAct = function(a) {
 	var SummonZ;
-	a.jinyin && a.num<50&&(!a.nowHP&&(a.nowHP=a.MaxHP),a.canWalk(a,a.id)&&a.Ornaments&&(a.HP!=a.nowHP)&&(a.ChangeR(a),a.nowHP=a.HP));
-      a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && a.jinyin && a.num<50 && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.bedevil=CZombies.prototype.bedevil,a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.tasktime/=2,a.HP+=(300*a.level),a.ChangeR(a),(SummonZ=CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ)).Privatenum = 30,SummonZ.jinyinnum=100);
-      var P = a.Ele;
-      (a.WalkDirection == a.check) && (a.Ornaments && (a.num>=50&& EditEle($(a.id + "_Bullet"), 0, {
-            transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
-            left: (!a.WalkDirection ? "-250" : "40") + "px"
-          }, $(a.id), 0),
-          EditImg($(P.FumeDoor), 0, a.num>=50 ? "images/Plants/FumeShroom/FumeShroom.gif" : "images/interface/brain.png", {
-            transform: a.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)",
-            left: a.WalkDirection ? "40px" : "25px"
-          }, 0)),
-        a.check = a.WalkDirection ? 0 : 1);
-      !a.Ornaments && ClearChild($(a.Ele.FumeDoor))
+	a.JudgeDirection(a);
+	!a.nowHP&&(a.nowHP=a.MaxHP);
+     a.canWalk(a,a.id)&&a.Ornaments&&(a.HP!=a.nowHP)&&(a.ChangeR(a),a.nowHP=a.HP);
+     a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.bedevil=CZombies.prototype.bedevil,a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.tasktime/=2,a.HP+=(300*a.level),a.ChangeR(a),(SummonZ=CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ)).Privatenum = 150,SummonZ.jinyinnum=100);
     }
+},
+jinyinAct3:function(a){
+	a.PrivateAct=function(a){
+		a.JudgeDirection(a);
+	};
+	a.JudgeAttack=a.JudgeAttackH=function(){};
+	a.PrivateAct = function(a) {
+      if (a.Ornaments) {
+        var C = GetC(a.ZX);
+    for (i = 3; i >= 0; i--) {
+        var p = oGd.$[a.R + "_" + C + "_" + i];
+          a.PZ&&a.canWalk(a,a.id)&& p && p.canEat && $(p.id) && (p.C == C) && (PlantKind = p.PKind, NewC = p.C + 1, p.AttackedLX += 80, p.pixelRight += 80, p.AttackedRX += 80, p.pixelLeft += 80, $(p.id).style.left = (p.pixelLeft) + "px",
+			(p.EName== "oBrains"||p.C>=9)?p.Die():(delete oGd.$[p.R + "_" + p.C + "_" + p.PKind], p.C = NewC, oGd.add(p, a.R + "_" + NewC + "_" + PlantKind),
+p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.AttackedLX,p.AttackedRX),PlayAudio("shovel")));//重置植物列数并重置索敌
+        }
+	    var z = oZ["get" + (a.PZ ? "HZ1" : "Z0")](a.ZX, a.R);
+        z &&(z.Altitude==1)&&a.canWalk(a,a.id)&&(z.getr(z, 80), z.getHit0(z, 60, 0),PlayAudio("shovel"))
+	  }
+	}
+},
+  jinyinAct: function(a) {
+    var z = a.Ele;
+    a.num = Math.random() * 300|| a.Privatenum;
+	a["jinyinAct"+Math.ceil(a.num*0.01)](a);
+    a.num<=100 && (a.OrnHP *= 0.75);
+    a.num>200 && (a.OrnHP *= 2.5);
+    a.BirthImg(a);
   },
   PrivateDie: function(a) {
     ClearChild($(a.Ele.FumeDoor))
@@ -2052,7 +2087,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   PlayNormalballAudio: function() {
     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
   },
-  Produce: '他的铁栅门是有效的盾牌。<br>韧性：<font color="#FF0000">低</font><br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：手持大喷菇，对前方植物造成每次25伤害，防具血量降低<br>精英形态二：带着脑子，有以下特性：<br>1.防具掉落后逃跑到后方，召唤一个精英铁门并回头<br>2.啃咬血量较高的植物时会向前移动<br>3.有铁门时若本体受伤则换行<br>弱点：大喷菇<br>脑子被吃了就是被吃了，不会启发一点灵智，相比之下，或许拿着脑子更有用',
+  Produce: '他的铁栅门是有效的盾牌。<br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：手持大喷菇，对前方植物造成穿透伤害，防具血量降低<br>精英形态二：带着脑子，防具掉落后会逃跑到后方，召唤一个精英铁门并回头，啃咬血量较高的植物时会向前移动，有铁门时若本体受伤则换行<br>3.手持铲子，将植物铲至身后<br>弱点：大喷菇<br>脑子被吃了就是被吃了，不会启发一点灵智，相比之下，或许拿着脑子更有用',
   GoingDie: CZombies.prototype.GoingDie,
   getFirePea: function(c, a, b) {
     PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
@@ -2084,7 +2119,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   },
   CheckOrnHP: function(g, h, d, c, f, b, a) {
     var e = OrnNoneZombies.prototype;
-    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, g.jinyin && g.num<50 && g.back(g))
+    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering, g.getSnowPea = e.getSnowPea, g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, g.jinyin&& g.num>100 && (g.num<=200) && g.back(g))
   },
   getFireball: function(c, a, b) {
     b != c.WalkDirection ? (c.FreeSlowTime = 0, c.Attack = 100, c.Speed != c.OSpeed ? (c.PlayNormalballAudio(), c.Speed = c.OSpeed) : c.PlayFireballAudio()) : c.PlayNormalballAudio()
