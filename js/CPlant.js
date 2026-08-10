@@ -140,6 +140,7 @@ getLadder:function() {
             } while (e++ != d);
             c.oTrigger = j
         },
+	    ChangeCallback:function(){},
         TriggerCheck: function(b, a) {
             this.AttackCheck2(b) && (this.canTrigger = 0, this.CheckLoop(b.id, a))
         },
@@ -415,6 +416,10 @@ oStarfruit = InheritO(CPlants, {
     d.BulletEle = NewImg(0, "images/Plants/Starfruit/Star.gif", "left:" + b + "px;top:" + a + "px;z-index:" + (d.zIndex + 2));
     d.BulletEle1 = NewImg(1, "images/Plants/Starfruit/Star.gif", "width:320px;height:320px;left:160px;top:-100px;z-index:" + (d.zIndex + 2))
   },
+  ChangeCallback:function(d){
+	  d.PrivateDie(d);
+	  d.PrivateBirth(d);
+  },
   PrivateDie: function(a) {
     a.BulletEle = a.BulletEle1 = null
   },
@@ -596,6 +601,10 @@ oStarfruit = InheritO(CPlants, {
             a.BulletEle = null;
             ClearChild($("oAttack_" + a.id));
         },
+ChangeCallback:function(d){
+	  d.PrivateDie(d);
+	  d.PrivateBirth(d);
+  },
         jinyinAct:function(a){
       let s = NewEle(
       "oAttack_" + a.id,
@@ -667,6 +676,11 @@ oSnowPea = InheritO(oPeashooter, {
         $(a.id).style.opacity = 1,
         $("oAttack_" + a.id).onclick = null)
     }
+  },
+ChangeCallback:function(b){
+	ClearChild($("oAttack_" + b.id));
+    NewEle(b.id + "_Bullet", "div", "position:absolute;visibility:hidden;width:686px;height:62px;left:" + b.AttackedRX +
+      "px;top:" + (b.pixelTop + 5) + "px;background:url(images/Plants/SnowPea/FumeShroomBullet.gif);z-index:" + (b.zIndex + 1), 0, EDPZ);
   },
   jinyinAct: function(b) {
     var B = NewEle("dskill", "div", "position:absolute;color:white;top:40px;left:10px;width:100px;font-size:16px;z-index:50", "", $(b.id));
@@ -1570,7 +1584,7 @@ NormalAttack:function(a){
                 for (let i = Math.max(1, r - 1); i <= Math.min(r + 1, oS.R); i++) {
                     b = oZ.getArZ(GetX(c - 1), GetX(c + 1), i), e = b.length;
                     while (e--) {
-                        b[e].getHit2(b[e],20,0);
+                        b[e].Altitude==1&&b[e].getHit2(b[e],20,0);
                     }
                 }
                 oSym.addTask(100, arguments.callee, [id]);
@@ -1942,6 +1956,10 @@ NormalAttack:function(a){
             }
         },
         InitTrigger: function() {},
+	    ChangeCallback:function(c){
+			c.PrivateDie(c);
+			NewImg(c.id + "2", "images/Plants/PumpkinHead/PumpkinHead2.gif", "left:" + c.pixelLeft + "px;top:" + c.pixelTop + "px;z-index:" + (c.zIndex - 2), EDPZ)
+		},
         BirthStyle: function(c, d, b, a) {
             b.childNodes[1].src = "images/Plants/PumpkinHead/PumpkinHead1.gif";
             EditEle(b, {
@@ -2158,6 +2176,12 @@ NormalAttack:function(a){
         HurtStatus: 0,
 		PrivateDie:function(a){
 			ClearChild($("oAttack_" + a.id))
+		},
+	    ChangeCallback:function(c){
+			SetStyle($("oAttack_" + c.id),{
+				left:(c.AttackedLX-20)+"px",
+				top:(c.pixelTop-20)+"px"
+			})
 		},
 		PrivateBirth:function(a){
 			var b=NewEle("oAttack_" + a.id,"div","left:"+(a.AttackedLX-20)+"px;top:"+(a.pixelTop-20)+"px;position:absolute;width:97px;height:87px;z-index:15",0,EDPZ);
@@ -2401,6 +2425,12 @@ jinyinAttackGif2: 8,
             var a = b.id;
             NewEle(a + "_Bullet", "div", "position:absolute;visibility:hidden;width:343px;height:62px;left:" + b.AttackedRX + "px;top:" + (b.pixelTop + 5) + "px;background:url(images/Plants/FumeShroom/FumeShroomBullet.gif);z-index:" + (b.zIndex + 1), 0, EDPZ)
         },
+		ChangeCallback:function(c){
+			SetStyle($(c.id + "_Bullet"),{
+				left:(c.AttackedRX)+"px",
+				top:(c.pixelTop+5)+"px"
+			})
+		},
         PrivateDie: function(a) {
             ClearChild($(a.id + "_Bullet"))
         },
@@ -2527,6 +2557,16 @@ FireAttack:90,
       id: d
     }, a, EDPZ);
   },
+  ChangeCallback:function(c){
+	SetStyle($(c.id + "_Bullet"),{
+		left:(c.AttackedLX-60)+"px",
+		top:(c.pixelTop-65)+"px"
+	});
+	ClearChild($("oAttack_" + c.id));
+NewEle("oAttack_" + c.id, "div",
+      "left:" + (c.AttackedLX - 20) + "px;top:" + (c.pixelTop - 10) +
+      "px;position:absolute;width:97px;height:87px;z-index:150", 0, EDPZ);
+},
   GetDX: CPlants.prototype.GetDX,
   PrivateBirth: function(b) {
     var a = b.id;
@@ -2643,6 +2683,7 @@ FireAttack:90,
                 [b, Math.min(c + 250, oS.W), 0]
             ]
         },
+	.ChangeCallback:oPeashooter.prototype.ChangeCallback,
         PrivateBirth: function(a) {
             a.BulletEle = NewImg(0, "images/Plants/ShroomBullet.gif", "left:" + (a.AttackedLX - 46) + "px;top:" + (a.pixelTop + 40) + "px;visibility:hidden;z-index:" + (a.zIndex + 2))
         },
@@ -2687,6 +2728,7 @@ FireAttack:90,
         Cry: 0,
         ArZ: [],
         Attacking: 0,
+		ChangeCallback:oPeashooter.prototype.ChangeCallback,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         Tooltip: "它是远程射手，但敌人靠近时会蜷缩不动",
         Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子、阳光（击中僵尸生成5阳光）、草皮卷（对僵尸造成80伤害并修补弹坑）、脑子（使僵尸逃跑）、铲子（对僵尸造成高伤）、奖杯（直接过关（iz无效））六种子弹<br>虽然曾哥令令令申申申申申不让胆小菇去见马戏团的精神病人，但经胆小菇软磨硬泡后还是同意了，尽管如此，曾哥还是给他塞了一大堆防身用品',
