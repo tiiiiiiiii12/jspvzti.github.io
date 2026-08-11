@@ -39,7 +39,7 @@ var CPlants = NewO({
 	EditCanEat:function(a,e){
 for (i = 0; i <= 3; i++) {
 	var b=oGd.$[a.R + "_" + a.C + "_" + i];
-   b && (b.canEat = e?b.OcanEat:0)
+   b && (b.canEat = e?(b.canEat||b.OcanEat):0)
   }
 	},
 	LadderDie:function(a,b){
