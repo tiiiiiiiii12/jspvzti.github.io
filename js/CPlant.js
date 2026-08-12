@@ -960,7 +960,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
             id: h
           },
           0, EDPZ), a, N, C, C==1 ? 40 : 20]);
-      (N += 2) <= 2 && oSym.addTask(0, arguments.callee, ["StarB1" + Math.random(), N, Img,C]);
+      (N += 2) < 2 && oSym.addTask(0, arguments.callee, ["StarB1" + Math.random(), N, Img,C]);
     })("StarB1" + Math.random(), -2, D,C)
   },
         NormalAttack2: function() {
@@ -2071,10 +2071,8 @@ NormalAttack:function(a){
 			a.NormalGif=3;
 			$(a.id).childNodes[1].src=a.PicArr[a.NormalGif]
 		},
-  NormalAttack: function(b, a) {
-    var c = $Z[b];
-    c.getHit2(c, a.Attack, 0);
-	Math.random()*100>85&&c.getr(c,a.rpx);
+  NormalAttack: function() {
+	  var a=this;
     var Left = parseInt($(a.id).style.left);
     a.jinyin&&a.plusrange < 80 && (a.plusrange += 4,
       a.width += 8,
@@ -2082,6 +2080,14 @@ NormalAttack:function(a){
         width: (a.width) + "px",
         height: (a.height) + "px"
       }), $(a.id).style.left = (Left - 4) + "px");
+		var d=oZ.getArZ(a.AttackedLX,a.AttackedRX,a.R),
+			b=a.length;
+	    var num=Math.random()*100>15?false:true;
+	while(b--){
+		var c = d[b];
+		num&&c.getr(c,a.rpx);
+		c.getHit2(c,a.Attack,0);
+	}
   },
         GetDY: function(b, c, a) {
             return -2
@@ -2090,17 +2096,6 @@ NormalAttack:function(a){
             return [
                 [this.pixelLeft - 160, this.pixelRight + 160, 0]
             ]
-        },
-        TriggerCheck: function(i, h) {
-            var c = i.id,
-                g = this.ArZ,
-                a, b, e, f;
-            i.PZ && !g[c] && (a = i.AttackedLX, b = i.AttackedRX, e = this.AttackedLX-this.plusrange, f = this.AttackedRX+this.plusrange, a <= f && a >= e || b <= f && b >= e || a <= e && b >= f) && this.AttackCheck2(i) && (g[c] = 1, this.NormalAttack(c,this), oSym.addTask(100,
-                function(d, j) {
-                    var k = $P[d];
-                    k && delete k.ArZ[j]
-                },
-                [this.id, c]))
         },
         AttackCheck2: function(a) {
             return a.Altitude == 1 && a.beAttacked
@@ -2118,6 +2113,7 @@ NormalAttack:function(a){
         PicArr: ["images/Card/Plants/Spikerock.png", "images/Plants/Spikerock/0.gif", "images/Plants/Spikerock/Spikerock.gif", "images/Plants/Spikerock/2.gif", "images/Plants/Spikerock/3.gif"],
         Attack: 50,
 		rpx:20,
+		jinyinAct:function(){},
 		HP:450,
         Tooltip: "能扎破多个轮胎, 并伤害经过上面的僵尸<br>(需要地刺)",
         Produce: '地刺王可以扎破多个轮胎，并对踩到他的僵尸造成伤害，有概率击退僵尸<p><font color="#FF0000">必须种植在地刺上</font></p>地刺王刚刚从欧洲旅行回来。他玩的很高兴，也认识了很多有趣的人。这些都真的拓展了他的视野——他从来不知道，他们建造了这么大的博物馆，有这么多的画作。这对他来说太惊奇了。',
@@ -2125,10 +2121,16 @@ NormalAttack:function(a){
             var c = b[1];
             return c && c.EName == "oSpikeweed"
         },
-		  NormalAttack: function(b, a) {
-    var c = $Z[b];
-    c.getHit2(c, a.Attack, 0);
-	Math.random()*100>85&&c.getr(c,a.rpx);
+		  NormalAttack: function() {
+	  var a=this;
+		var d=oZ.getArZ(a.AttackedLX,a.AttackedRX,a.R),
+			b=a.length;
+	    var num=Math.random()*100>15?false:true,c;
+	while(b--){
+		c = d[b];
+		num&&c.getr(c,a.rpx);
+		c.getHit2(c,a.Attack,0);
+	}
   },
         GetDY: function(b, c, a) {
             return 0
@@ -2141,7 +2143,7 @@ NormalAttack:function(a){
                     f.flatTire();
                     break;
                 case 1:
-                    f.getHit2(f, 40, 0)
+                    f.getHit2(f, e.Attack, 0)
             }
             switch (true) {
                 case ((d = e.HP -= b) < 1):
@@ -2499,7 +2501,7 @@ for (let i = Math.max(1, f.R - 1); i <= Math.min(f.R + 1, oS.R); i++) {
         PicArr: ["images/Card/Plants/CoffeeBean.png", "images/Plants/CoffeeBean/0.gif", "images/Plants/CoffeeBean/CoffeeBean.gif", "images/Plants/CoffeeBean/CoffeeBeanEat.gif" + $Random],
         AudioArr: ["coffee", "wakeup"],
         Tooltip: "唤醒在白天里睡觉的蘑菇类植物",
-        Produce: '咖啡豆，可以唤醒睡眠中的蘑菇们。<br>精英形态：暂无<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">可以种在其他植物上，用来唤醒蘑菇们</font></p>咖啡豆：“嘿，愉快的人啊！嘿，悲伤的人啊！是谁？嘿！你瞧见那个东西没？什么东西？哇！是被灌醉的小丑僵尸！”嗯，咖啡豆确定，这样可以让自己很兴奋。',
+        Produce: '咖啡豆，可以唤醒睡眠中的蘑菇们，并给本格植物回血<br>精英形态：暂无<p>使用方法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">可以种在其他植物上，用来唤醒蘑菇们</font></p>咖啡豆：“嘿，愉快的人啊！嘿，悲伤的人啊！是谁？嘿！你瞧见那个东西没？什么东西？哇！是被灌醉的小丑僵尸！”嗯，咖啡豆确定，这样可以让自己很兴奋。',
         InitTrigger: function() {},
         GetDBottom: function() {
             return 49
@@ -2517,6 +2519,18 @@ for (let i = Math.max(1, f.R - 1); i <= Math.min(f.R + 1, oS.R); i++) {
                 },
                 a, EDPZ)
         },
+		plusHP:function(a){
+			$(a.id).childNodes[1].src=a.PicArr[2];
+			oSym.addTask(500,function(a){
+				if(!$P[a.id])return;
+				PlayAudio("coffee");
+				for (i=1;i<=2;i++){
+					var P=oGd.$[a.R+"_"+a.C+"_"+i];
+					P&&(P.HP+=Math.min(P.maxHP-P.HP,Math.max(200,P.maxHP*0.2)))
+				}
+			oSym.addTask(500,arguments.callee,[a])
+			},[a])
+		},
         PrivateBirth: function(a) {
             SetHidden($(a.id).firstChild);
             PlayAudio("coffee");
@@ -2526,7 +2540,7 @@ for (let i = Math.max(1, f.R - 1); i <= Math.min(f.R + 1, oS.R); i++) {
                     var d = oGd.$[c],
                         b;
                     d && (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
-                    a.Die()
+                    a.plusHP(a);
                 },
                 [a.R + "_" + a.C + "_1"])
         }
@@ -3375,7 +3389,7 @@ NormalAttack2: function() {
             var a = this.id;
             !this.FreeFreezeTime&&this.NormalAttack(b);
             this.ES();
-            this.Status == 0 && oSym.addTask(140,
+            this.Status == 0 && oSym.addTask(140+this.AttTime,
                 function(e, f, h) {
                     var g;
                     (g = $P[e]) && g.ES() && g.AttackCheck1(f, h)
@@ -3399,7 +3413,7 @@ NormalAttack2: function() {
             var a = this.id;
             !this.FreeFreezeTime&&this.NormalAttack(b);
             this.ES();
-            this.Status && oSym.addTask(140,
+            this.Status && oSym.addTask(90,
                 function(e, f, h) {
                     var g;
                     (g = $P[e]) && g.ES() && g.AttackCheck12(f, h)
@@ -3525,31 +3539,31 @@ NormalAttack2: function() {
                 [c, $(c), 0, b.AttackedLX, b.R, b.AttackedLX - 40])
         },
         NormalAttack2: function() {
-            var b = this,
-                c = "CB" + Math.random(),
-                a = b.id;
-            $(a).childNodes[1].src = "images/Plants/Cactus/Attack2.gif";
-            oSym.addTask(50,
-                function(e) {
-                    var d = $(e);
-                    d && (d.childNodes[1].src = "images/Plants/Cactus/Cactus2.gif")
-                },
-                [a]);
-            NewImg(c, b.PicArr[8], "left:" + (b.AttackedRX + 125) + "px;top:" + (b.pixelTop + 33) + "px;visibility:hidden;z-index:" + (b.zIndex + 2), EDPZ);
-            oSym.addTask(20,
-                function(e) {
-                    var d = $(e);
-                    d && SetVisible(d)
-                },
-                [c]);
-            oSym.addTask(1,
-                function(g, i, d, k, h, l) {
-                    var j, f = GetC(k),
-                        e = oZ["getZ" + d](k, h);
-                    e && e.Altitude == 3&&(e.getHit0(e, 20, d), e.Drop(), ClearChild(i)),(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i)
-                },
-                [c, $(c), 0, b.AttackedLX, b.R, b.AttackedLX - 40])
-        }
+  var b = this,
+    c = "CB" + Math.random(),
+    a = b.id;
+  $(a).childNodes[1].src = "images/Plants/Cactus/Attack2.gif";
+  oSym.addTask(50,
+    function(e) {
+      var d = $(e);
+      d && (d.childNodes[1].src = "images/Plants/Cactus/Cactus2.gif")
+    },
+    [a]);
+  NewImg(c, b.PicArr[8], "left:" + (b.AttackedRX + 125) + "px;top:" + (b.pixelTop + 33) + "px;visibility:hidden;z-index:" + (b.zIndex + 2), EDPZ);
+  oSym.addTask(20,
+    function(e) {
+      var d = $(e);
+      d && SetVisible(d)
+    },
+    [c]);
+  oSym.addTask(1,
+    function(g, i, d, k, h, l) {
+      var j, f = GetC(k),
+        e = oZ["getZ" + d](k, h);
+      e && e.Altitude == 3 ? (e.getHit0(e, 20, d), e.Drop(), ClearChild(i)) : (k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i)
+    },
+    [c, $(c), 0, b.AttackedLX, b.R, b.AttackedLX - 40])
+}
     }),
     oBlover = InheritO(CPlants, {
         EName: "oBlover",
