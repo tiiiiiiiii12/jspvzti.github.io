@@ -1588,8 +1588,8 @@ NormalAttack:function(a){
 			a.SetVase(a)&&oSym.addTask(6000, arguments.callee,[a]);
         }, [a])
 		},
-		SetVase:function(c){
-		let Id=c.id;
+		SetVase:function(e){
+		let Id=e.id;
                 if (!$P[Id]) return 0;
                 let d = $P[Id],
                     r = d.R,
