@@ -3513,240 +3513,243 @@ if(!a.isDie){
 	}
   }
 }),
-    oBalloonZombie = InheritO(OrnIZombies, {
-        EName: "oBalloonZombie",
-        CName: "气球僵尸",
-        OrnHP: 100,
-        SunNum: 150,
-        width: 207,
-        height: 197,
-        beAttackedPointL: 30,
-        beAttackedPointR: 85,
-        OSpeed: 4,
-        Speed: 4,
-        Altitude: 3,
-        OrnLostNormalGif: 9,
-        OrnLostAttackGif: 3,
-        BreakBall: false, // 气球是否被戳破
-        MulBallNum: function() { // 减去气球数
-            if (!this.BreakBall) this.BreakBall = true, oGd.$Balloon[this.R] |= 0, --oGd.$Balloon[this.R];
-        },
-        getShadow: function(a) {
-            return "left:" + (a.beAttackedPointL - 10) + "px;top:" + (a.height - 32) + "px"
-        },
-        CanPass: function(d, c) {
-            return c
-        },
-		jinyinAct:function(a){
-			a.num=Math.random()*100||a.Privatenum;
-			a["jinyinAct"+(a.num>=50?"1":"2")](a)
-		},
-		jinyinAct1:function(a){
-			a.EleBody.style.top="40px";
-			    a.JudgeLR=function(f, d, e, c, g) {
-                    return e > 10 || e < 1 ? false : function() {
-                        d += --e + "_";
-                        var h = 3,
-                            i;
-                        while (h--) {
-                            if ((i = g[d + h]) && i.canEat&&(i.getHurt==CPlants.prototype.getHurt)) {
-                                return i.AttackedRX >= c && i.AttackedLX <= c ? [f.id, i.id] : false
-                            }
-                        }
-                    }()
-                };
-                a.JudgeSR=function(f, d, e, c, g) {
-                    return e > 9 ? false : function() {
-                        d += e + "_";
-                        var h = 3,
-                            i;
-                        while (h--) {
-                            if ((i = g[d + h]) && i.canEat&&(i.getHurt==CPlants.prototype.getHurt)) {
-                                return i.AttackedRX >= c && i.AttackedLX <= c ? [f.id, i.id] : false
-                            }
-                        }
-                    }()
-                };
-			a.ChkActs=CZombies.prototype.ChkActs;
-			a.PrivateAct=function(f){
-				if (f.Altitude == 3 && f.AttackedRX < GetX(1)&&f.PZ) { // 气球掉落
-				f.OrnHP=0;//无视减伤
-				f.getHit0(f,f.OrnHP);
-                f.Drop();
-              }
-			}
-		},
-		jinyinAct2:function(g){
-			g.PrivateAct=function(z){
-			   let AZ=oZ[z.PZ?"getZ0":"getHZ1"](z.ZX,z.R);
-		       AZ&&(AZ.Altitude==1)&&(z.MoveZombie(AZ,50,30,z.PZ),PlayAudio("portal"))
-			}
-		},
-        AudioArr: ["ballooninflate", "balloon_pop"],
-        BookHandPosition: "80% 80%",
-        PicArr: (function() {
-            var a = "images/Zombies/BalloonZombie/";
-            return ["images/Card/Zombies/Balloonzombie.png", a + "0.gif", a + "1.gif", a + "Attack.gif", a + "Walk2.gif", a + "Attack2.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Boom.gif", a + "Walk.gif", a + "Drop.gif", a + "Boom2.gif"]
-        })(),
-		WalkToLadder:function(){},
-        Produce: '气球僵尸漂浮在空中，躲过大多数攻击。<p>韧性：<font color="#FF0000">低</font><br>精英形态一：<font color="#FF0000">飞行时仍能啃食部分植物</font><br>精英形态二：<font color="#FF0000">传送门，飞行时根据僵尸种类传送附近的僵尸，落地时有概率传送整行的僵尸</font><br>特点：<font color="#FF0000">飞行</font><br>弱点：<font color="#FF0000">仙人掌和三叶草</font></p>气球僵尸真幸运。气球有很多功效，而其他僵尸都不曾捡到过。',
-        BirthCallBack: function(e) {
-            var d = e.delayT,
-                c = e.id,
-                a = e.Ele = $(c),
-                f = oGd.$Balloon,
-                b = e.R;
-            e.EleShadow = a.firstChild;
-            e.EleBody = a.childNodes[1];
-            d ? oSym.addTask(d, function(i, g, c) {
-                var j = $Z[i],
-                    k = oGd.$Balloon;
-                j && (j.FreeSetbodyTime = 0, SetBlock(g));
-                k[c] |= 0, ++k[c]; // 增加数量
-                PlayAudio("ballooninflate");
-            }, [c, a, b]) : (SetBlock(a), f[b] == undefined ? f[b] = 1 : ++f[b], PlayAudio("ballooninflate"));
-        },
-        ChkActs: function(f, d, g, c) {
-            var b, a, e;
-            if (f.Altitude == 3 && f.AttackedRX < GetX(1)) { // 气球掉落
-				f.getHit0(f,f.OrnHP);
-                f.Drop();
-                return 1;
-            }!(f.FreeFreezeTime || f.FreeSetbodyTime) ? ((a = f.AttackedRX -= (b = f.Speed)) < -50 ? (g.splice(c, 1), f.DisappearDie(), e = 0) : (a < 100 && !f.PointZombie && (f.PointZombie = 1, !oS.CardKind && (StopMusic(), PlayAudio("losemusic", false)), f.ChangeR({
-                R: d,
-                ar: [oS.R - 1],
-                CustomTop: 400 - f.height + f.GetDY()
-            })), f.ZX = f.AttackedLX -= b, f.Ele.style.left = Math.floor(f.X -= b) + "px", e = 1)) : e = 1;
-            return e
-        },
-        Drop: function() {
-            var a = this;
-			if(a.OrnHP>0){return}
-			if(a.jinyin&&a.num<50&&Math.random()*100>80){
-				let ARZ=oZ[a.PZ?"getArZ":"getArHZ"](100,oS.W,a.R);
-					ZL=ARZ.length;
-				while(ZL--){
-		       ARZ[ZL]&&(ARZ[ZL].Altitude==1)&&(a.MoveZombie(ARZ[ZL],90,50,a.PZ),PlayAudio("portal"))
-				}
-			}
-            PlayAudio("balloon_pop");
-            a.EleBody.src = "images/Zombies/BalloonZombie/Drop.gif" + $Random + Math.random();
-			a.EleBody.style.top="0px";
-            a.ChkActs = function() {
-                return 1
-            };
-            a.Altitude = 4;
-            a.MulBallNum();
-            oSym.addTask(120,
-                function(b) {
-                    var c = $Z[b];
-                    if (c) {
-                        c.BoomDieGif = 11;
-                        c.Altitude = 1;
-						c.WalkToLadder=CZombies.prototype.WalkToLadder;
-                        c.OSpeed/=2; 
-						c.Speed /=2;
-                        c.getFreeze = OrnIZombies.prototype.getFreeze;
-                        c.EleBody.src = "images/Zombies/BalloonZombie/Walk.gif";
-                        c.ChkActs = c.WalkDirection?OrnIZombies.prototype.ChkActs1:OrnIZombies.prototype.ChkActs;
-        c.CrushDie = function() {
-          var d = this;
-		if(!d.isDie){
-		  d.isDie=true;
-          d.GoingDieHead(d.id, d.PicArr, d);
-          ClearChild(d.Ele);
-          d.HP = 0;
-          delete $Z[d.id];
-          d.PZ && oP.MonPrgs();
-          d.MulBallNum();
-		}
+oBalloonZombie = InheritO(OrnIZombies, {
+  EName: "oBalloonZombie",
+  CName: "气球僵尸",
+  OrnHP: 100,
+  SunNum: 150,
+  width: 207,
+  height: 197,
+  beAttackedPointL: 30,
+  beAttackedPointR: 85,
+  OSpeed: 4,
+  Speed: 4,
+  Altitude: 3,
+  OrnLostNormalGif: 9,
+  OrnLostAttackGif: 3,
+  BreakBall: false, // 气球是否被戳破
+  MulBallNum: function() { // 减去气球数
+    if (!this.BreakBall) this.BreakBall = true, oGd.$Balloon[this.R] |= 0, --oGd.$Balloon[this.R];
+  },
+  getShadow: function(a) {
+    return "left:" + (a.beAttackedPointL - 10) + "px;top:" + (a.height - 32) + "px"
+  },
+  CanPass: function(d, c) {
+    return c
+  },
+  jinyinAct: function(a) {
+    a.num = Math.random() * 100 || a.Privatenum;
+    a["jinyinAct" + (a.num >= 50 ? "1" : "2")](a)
+  },
+  jinyinAct1: function(a) {
+    a.EleBody.style.top = "40px";
+    a.JudgeLR = function(f, d, e, c, g) {
+      return e > 10 || e < 1 ? false : function() {
+        d += --e + "_";
+        var h = 3,
+          i;
+        while (h--) {
+          if ((i = g[d + h]) && i.canEat && (i.getHurt == CPlants.prototype.getHurt)) {
+            return i.AttackedRX >= c && i.AttackedLX <= c ? [f.id, i.id] : false
+          }
         }
-                    }
-                },
-                [a.id])
-        },
-        getFreeze: function(b, a) {
-            b.Attack = 50;
-            b.Speed = 0.5 * b.OSpeed;
-            oSym.addTask(1500,
-                function(d, c) {
-                    var e = $Z[d];
-                    e && e.FreeSlowTime == c && (e.FreeSlowTime = 0, e.Attack = 100, e.Speed = e.OSpeed)
-                },
-                [a, b.FreeSlowTime = oSym.Now + 1500])
-        },
-		MoveZombie:function(z,max,min,PZ){//移动的僵尸，最大移动距离，最小移动距离，是否魅惑（若魅惑则反方向）
-			z.getr(z,Math.floor(Math.random()*(max-min)+min)*(PZ?z.ZKind:-z.ZKind),1)
-		},
-        NormalDie: function() {
-            var a = this;
-			if(!a.isDie){
-			a.isDie=true;
-            a.EleBody.src = a.PicArr[a.DieGif] + Math.random();
-            oSym.addTask(250, ClearChild, [a.Ele]);
-            a.HP = 0;
-            delete $Z[a.id];
-            a.PZ && oP.MonPrgs();
-            a.MulBallNum();
-			}
-        },
-        ExplosionDie: function() {
-            var a = this;
-			if(!a.isDie){
-			a.isDie=true;
-            a.EleBody.src = a.PicArr[a.BoomDieGif];
-            oSym.addTask(200, ClearChild, [a.Ele]);
-            a.HP = 0;
-            delete $Z[a.id];
-            a.PZ && oP.MonPrgs();
-            a.MulBallNum();
-			}
-        },
-        DisappearDie: function() {
-			if(!this.isDie){
-			this.isDie=true;
-            ClearChild(this.Ele);
-            this.HP = 0;
-            delete $Z[this.id];
-            this.PZ && oP.MonPrgs();
-            this.MulBallNum();
-			}
-        },
-        CrushDie: function() {
-            this.DisappearDie()
-        },
-        getDispelled: function() {
-            if (this.Altitude != 3 || this.AttackedRX < GetX(0)) {
-                return;
-            };
-            this.ChkActs = function() {
-                return 1
-            };
-            (function(id) {
-                var o = $Z[id];
-                if (!o) return;
-                var d = o.WalkDirection = 1,
-                    R = o.R,
-                    C = GetC(o.AttackedLX),
-                    sx = 50;
-                o.AttackedLX += sx;
-                o.ZX += sx;
-                o.X += sx;
-                if (o.AttackedLX > oS.W) {
-                    o.DisappearDie();
-                    return;
-                };
-                SetStyle($(id), {
-                    left: o.X + 'px'
-                });
-                oSym.addTask(2, arguments.callee, [id]);
-            })(this.id);
-        },
-        getFirePeaSputtering: function() {
-            (this.Altitude == 1) && (this.getHit0(this, 13));
-        },
-        prepareBirth: oZomboni.prototype.prepareBirth
-    }),
+      }()
+    };
+    a.JudgeSR = function(f, d, e, c, g) {
+      return e > 9 ? false : function() {
+        d += e + "_";
+        var h = 3,
+          i;
+        while (h--) {
+          if ((i = g[d + h]) && i.canEat && (i.getHurt == CPlants.prototype.getHurt)) {
+            return i.AttackedRX >= c && i.AttackedLX <= c ? [f.id, i.id] : false
+          }
+        }
+      }()
+    };
+    a.ChkActs = CZombies.prototype.ChkActs;
+    a.PrivateAct = function(f) {
+      if (f.Altitude == 3 && f.AttackedRX < GetX(1) && f.PZ) { // 气球掉落
+        f.OrnHP = 0; //无视减伤
+        f.getHit0(f, f.OrnHP);
+        f.Drop();
+      }
+    }
+  },
+  jinyinAct2: function(g) {
+    g.PrivateAct = function(z) {
+      let AZ = oZ[z.PZ ? "getZ0" : "getHZ1"](z.AttackedRX + 1, z.R);
+      AZ && AZ.ZKind && (AZ.Altitude == 1) && (z.MoveZombie(AZ, 50, 30, z.PZ), PlayAudio("portal"))
+    }
+  },
+  AudioArr: ["ballooninflate", "balloon_pop"],
+  BookHandPosition: "80% 80%",
+  PicArr: (function() {
+    var a = "images/Zombies/BalloonZombie/";
+    return ["images/Card/Zombies/Balloonzombie.png", a + "0.gif", a + "1.gif", a + "Attack.gif", a + "Walk2.gif", a + "Attack2.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Boom.gif", a + "Walk.gif", a + "Drop.gif", a + "Boom2.gif"]
+  })(),
+  WalkToLadder: function() {},
+  Produce: '气球僵尸漂浮在空中，躲过大多数攻击。<p>韧性：<font color="#FF0000">低</font><br>精英形态一：<font color="#FF0000">飞行时仍能啃食部分植物</font><br>精英形态二：<font color="#FF0000">传送门，飞行时根据僵尸种类传送附近的僵尸，落地时有概率传送整行的僵尸</font><br>特点：<font color="#FF0000">飞行</font><br>弱点：<font color="#FF0000">仙人掌和三叶草</font></p>气球僵尸真幸运。气球有很多功效，而其他僵尸都不曾捡到过。',
+  BirthCallBack: function(e) {
+    var d = e.delayT,
+      c = e.id,
+      a = e.Ele = $(c),
+      f = oGd.$Balloon,
+      b = e.R;
+    e.EleShadow = a.firstChild;
+    e.EleBody = a.childNodes[1];
+    d ? oSym.addTask(d, function(i, g, c) {
+      var j = $Z[i],
+        k = oGd.$Balloon;
+      j && (j.FreeSetbodyTime = 0, SetBlock(g));
+      k[c] |= 0, ++k[c]; // 增加数量
+      PlayAudio("ballooninflate");
+    }, [c, a, b]) : (SetBlock(a), f[b] == undefined ? f[b] = 1 : ++f[b], PlayAudio("ballooninflate"));
+  },
+  ChkActs: function(f, d, g, c) {
+    var b, a, e;
+    if (f.Altitude == 3 && f.AttackedRX < GetX(1)) { // 气球掉落
+      f.getHit0(f, f.OrnHP);
+      f.Drop();
+      return 1;
+    }!(f.FreeFreezeTime || f.FreeSetbodyTime) ? ((a = f.AttackedRX -= (b = f.Speed)) < -50 ? (g.splice(c, 1), f.DisappearDie(), e = 0) : (a < 100 && !f.PointZombie && (f.PointZombie = 1, !oS.CardKind && (StopMusic(), PlayAudio("losemusic", false)), f.ChangeR({
+      R: d,
+      ar: [oS.R - 1],
+      CustomTop: 400 - f.height + f.GetDY()
+    })), f.ZX = f.AttackedLX -= b, f.Ele.style.left = Math.floor(f.X -= b) + "px", e = 1)) : e = 1;
+    f.PrivateAct && f.PrivateAct(f);
+    return e
+  },
+  Drop: function() {
+    var a = this;
+    if (a.OrnHP > 0) {
+      return
+    }
+    if (a.jinyin && a.num < 50 && Math.random() * 100 > 80) {
+      let ARZ = oZ[a.PZ ? "getArZ" : "getArHZ"](100, oS.W, a.R);
+      ZL = ARZ.length;
+      while (ZL--) {
+        ARZ[ZL] && (ARZ[ZL].Altitude == 1) && (a.MoveZombie(ARZ[ZL], 90, 50, a.PZ), PlayAudio("portal"))
+      }
+    }
+    PlayAudio("balloon_pop");
+    a.EleBody.src = "images/Zombies/BalloonZombie/Drop.gif" + $Random + Math.random();
+    a.EleBody.style.top = "0px";
+    a.ChkActs = function() {
+      return 1
+    };
+    a.Altitude = 4;
+    a.MulBallNum();
+    oSym.addTask(120,
+      function(b) {
+        var c = $Z[b];
+        if (c) {
+          c.BoomDieGif = 11;
+          c.Altitude = 1;
+          c.WalkToLadder = CZombies.prototype.WalkToLadder;
+          c.OSpeed /= 2;
+          c.Speed /= 2;
+          c.getFreeze = OrnIZombies.prototype.getFreeze;
+          c.EleBody.src = "images/Zombies/BalloonZombie/Walk.gif";
+          c.ChkActs = c.WalkDirection ? OrnIZombies.prototype.ChkActs1 : OrnIZombies.prototype.ChkActs;
+          c.CrushDie = function() {
+            var d = this;
+            if (!d.isDie) {
+              d.isDie = true;
+              d.GoingDieHead(d.id, d.PicArr, d);
+              ClearChild(d.Ele);
+              d.HP = 0;
+              delete $Z[d.id];
+              d.PZ && oP.MonPrgs();
+              d.MulBallNum();
+            }
+          }
+        }
+      },
+      [a.id])
+  },
+  getFreeze: function(b, a) {
+    b.Attack = 50;
+    b.Speed = 0.5 * b.OSpeed;
+    oSym.addTask(1500,
+      function(d, c) {
+        var e = $Z[d];
+        e && e.FreeSlowTime == c && (e.FreeSlowTime = 0, e.Attack = 100, e.Speed = e.OSpeed)
+      },
+      [a, b.FreeSlowTime = oSym.Now + 1500])
+  },
+  MoveZombie: function(z, max, min, PZ) { //移动的僵尸，最大移动距离，最小移动距离，是否魅惑（若魅惑则反方向）
+    z.getr(z, Math.floor(Math.random() * (max - min) + min) * (PZ ? z.ZKind : -z.ZKind), 1)
+  },
+  NormalDie: function() {
+    var a = this;
+    if (!a.isDie) {
+      a.isDie = true;
+      a.EleBody.src = a.PicArr[a.DieGif] + Math.random();
+      oSym.addTask(250, ClearChild, [a.Ele]);
+      a.HP = 0;
+      delete $Z[a.id];
+      a.PZ && oP.MonPrgs();
+      a.MulBallNum();
+    }
+  },
+  ExplosionDie: function() {
+    var a = this;
+    if (!a.isDie) {
+      a.isDie = true;
+      a.EleBody.src = a.PicArr[a.BoomDieGif];
+      oSym.addTask(200, ClearChild, [a.Ele]);
+      a.HP = 0;
+      delete $Z[a.id];
+      a.PZ && oP.MonPrgs();
+      a.MulBallNum();
+    }
+  },
+  DisappearDie: function() {
+    if (!this.isDie) {
+      this.isDie = true;
+      ClearChild(this.Ele);
+      this.HP = 0;
+      delete $Z[this.id];
+      this.PZ && oP.MonPrgs();
+      this.MulBallNum();
+    }
+  },
+  CrushDie: function() {
+    this.DisappearDie()
+  },
+  getDispelled: function() {
+    if (this.Altitude != 3 || this.AttackedRX < GetX(0)) {
+      return;
+    };
+    this.ChkActs = function() {
+      return 1
+    };
+    (function(id) {
+      var o = $Z[id];
+      if (!o) return;
+      var d = o.WalkDirection = 1,
+        R = o.R,
+        C = GetC(o.AttackedLX),
+        sx = 50;
+      o.AttackedLX += sx;
+      o.ZX += sx;
+      o.X += sx;
+      if (o.AttackedLX > oS.W) {
+        o.DisappearDie();
+        return;
+      };
+      SetStyle($(id), {
+        left: o.X + 'px'
+      });
+      oSym.addTask(2, arguments.callee, [id]);
+    })(this.id);
+  },
+  getFirePeaSputtering: function() {
+    (this.Altitude == 1) && (this.getHit0(this, 13));
+  },
+  prepareBirth: oZomboni.prototype.prepareBirth
+}),
 oDiggerZombie = InheritO(OrnNoneZombies, {
   EName: "oDiggerZombie",
   CName: "矿工僵尸",
