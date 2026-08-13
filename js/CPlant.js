@@ -3677,12 +3677,10 @@ NormalAttack2: function() {
         AutoJoker: true,
         AutoSummonBase: true,
         BasePlant: null, // 是否自动改变XRay 小丑是否自爆 是否自动生成底座（如在河里生成睡莲）底座植物
- 
         AudioArr: ["VaseBreaking0", "VaseBreaking1", "VaseBreaking2", "VaseBreaking3"],
         PicArr: ["images/interface/Scary_Pot.png", "images/interface/Scary_Pot.png", "images/interface/Scary_Pot.png", "images/interface/Scary_Pot.png"],
         Tooltip: "开出一些奇奇怪怪的东西",
         Produce: "开出一些奇奇怪怪的东西<p>花瓶老哥或许就是",
- 
         SetStyle: function(Kind) { // 设置花瓶皮肤
             var self = this,
                 XRay = self.XRay; // 获取基本信息
@@ -3781,7 +3779,7 @@ NormalAttack2: function() {
  
             self.InitImage(self.PotSize, self.XRay), self.FreshXRay(true); // 初始化图片等信息
         },
- 
+		PKind:6,
         PrivateBirth: function(self) {
             var Id = self.id,
                 Ele = self.Ele; // 获取
