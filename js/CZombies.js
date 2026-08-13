@@ -3516,7 +3516,7 @@ if(!a.isDie){
 oBalloonZombie = InheritO(OrnIZombies, {
   EName: "oBalloonZombie",
   CName: "气球僵尸",
-  OrnHP: 100,
+  OrnHP: 60,
   SunNum: 150,
   width: 207,
   height: 197,
