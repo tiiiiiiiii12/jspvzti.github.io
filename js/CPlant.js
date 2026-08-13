@@ -2526,7 +2526,7 @@ for (let i = Math.max(1, f.R - 1); i <= Math.min(f.R + 1, oS.R); i++) {
 				PlayAudio("coffee");
 				for (i=1;i<=2;i++){
 					var P=oGd.$[a.R+"_"+a.C+"_"+i];
-					P&&(P.HP+=Math.min(P.maxHP-P.HP,Math.max(200,P.maxHP*0.2)))
+					P&&(P.HP+=Math.min(P.maxHP-P.HP,Math.max(200,P.MaxHP*0.2)))
 				}
 			oSym.addTask(500,arguments.callee,[a])
 			},[a])
