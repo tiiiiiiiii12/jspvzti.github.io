@@ -2535,14 +2535,14 @@ for (let i = Math.max(1, f.R - 1); i <= Math.min(f.R + 1, oS.R); i++) {
             SetHidden($(a.id).firstChild);
             PlayAudio("coffee");
             oSym.addTask(240,
-                function(c) {
+                function(c,a) {
                     PlayAudio("wakeup");
                     var d = oGd.$[c],
                         b;
                     d && (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
                     a.plusHP(a);
                 },
-                [a.R + "_" + a.C + "_1"])
+                [a.R + "_" + a.C + "_1",a])
         }
     }),
 oGloomShroom = InheritO(oFumeShroom, {
