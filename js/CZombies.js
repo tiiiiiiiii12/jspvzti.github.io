@@ -332,7 +332,6 @@ Birth: function() {
                     c.EleBody.src = d;
                     c.GoingDieHead(e, c.PicArr, c);
                     c.beAttacked = 0;
-                    c.FreeFreezeTime = c.FreeSetbodyTime = c.FreeSlowTime = 0;
                     c.AutoReduceHP(e)
                 },
                 AutoReduceHP: function(c) {
@@ -1800,7 +1799,6 @@ oFootballZombie = InheritO(oConeheadZombie, {
             a.EleBody.src = b;
             oSym.addTask(200, ClearChild, [NewImg(0, a.PicArr[a.HeadGif] + Math.random(), "left:" + a.AttackedLX + "px;top:" + (a.pixelTop - 20) + "px;z-index:" + a.zIndex, EDPZ)]);
             a.beAttacked = 0;
-            a.FreeFreezeTime = a.FreeSetbodyTime = a.FreeSlowTime = 0;
             a.AutoReduceHP(c)
         },
         getHurtOrnLost: function(j, a, g, m, c, l, k, i) {
@@ -2247,7 +2245,6 @@ p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.Attack
             b.EleBody.src = a[7] + Math.random();
             b.GoingDieHead(c, a, b);
             b.beAttacked = 0;
-            b.FreeFreezeTime = b.FreeSetbodyTime = b.FreeSlowTime = 0;
             b.AutoReduceHP(c)
         },
         AutoReduceHP: function(a) {
@@ -3166,7 +3163,6 @@ jinyinWalkGif12: 14,
             b.EleBody.src = a[b.haveDolphin ? 7 : 12] + Math.random();
             b.GoingDieHead(c, a, b);
             b.beAttacked = 0;
-            b.FreeFreezeTime = b.FreeSetbodyTime = b.FreeSlowTime = 0;
             b.AutoReduceHP(c)
         }
     }),
@@ -3253,7 +3249,6 @@ if(a.num>=50){
       a = b.PicArr;
     b.EleBody.src = a[3] + Math.random();
     b.beAttacked = 0;
-    b.FreeFreezeTime = b.FreeSetbodyTime = b.FreeSlowTime = 0;
     b.AutoReduceHP(c)
   },
 PrivateDie:function(){},
