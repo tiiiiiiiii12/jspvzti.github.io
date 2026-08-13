@@ -1589,9 +1589,9 @@ NormalAttack:function(a){
         }, [a])
 		},
 		SetVase:function(c){
-		let id=c.id;
-                if (!$P[id]) return 0;
-                let d = $P[id],
+		let Id=c.id;
+                if (!$P[Id]) return 0;
+                let d = $P[Id],
                     r = d.R,
                     c = d.C,
 		 Plist=[oPeashooter,oSunFlower,oCherryBomb,oWallNut,oPotatoMine,oSnowPea,oChomper,oRepeater,oPuffShroom,oSunShroom,oFumeShroom,oGraveBuster,oHypnoShroom,oScaredyShroom,oIceShroom,oDoomShroom,oLilyPad,oSquash,oThreepeater,oTangleKelp,oJalapeno,oSpikeweed,oTallNut,oSeaShroom,oPlantern,oCactus,oBlover,oSplitPea,oStarfruit,oPumpkinHead,oFlowerPot,oCoffeeBean,oGarlic];
