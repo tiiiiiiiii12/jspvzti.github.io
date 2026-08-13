@@ -77,6 +77,7 @@ var oGargantuar = InheritO(oZombie, {
   getRaven: function() {
     this.getHit0(this, 40)
   },
+  ZKind:-1,
   JudgeAttack: function() {
     var g = this,
       d = g.ZX,
@@ -269,6 +270,7 @@ oPeaZombie = InheritO(oZombie, {
   EName: "oPeaZombie",
   CName:"豌豆僵尸",
   StandGif: 9,
+  ZKind:1,
   PicArr: (function() {
     var a = "images/Zombies/Zombie/";
     return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif"]
@@ -365,6 +367,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     OrnGif: 12,
     OrnLeft: 42,
     OrnTop: 12,
+	ZKind:-1,
     PicArr: (function() {
       var a = "images/Zombies/Zombie/";
       return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif",a+"jinyinNutZombie.gif",a+"jinyinNutZombieAttack.gif"]
@@ -492,6 +495,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     OrnLeft: 20,
     Lvl: 5,
 	SetNutTime:1200,
+	ZKind:-1,
 	PrivateAct:function(a){
 	var z=a.Ele;
 	if ($Z[a.id] && a.beAttacked&&a.jinyin) {
@@ -590,6 +594,7 @@ oNutZombie = InheritO(oTallNutZombie, {
 	Lvl: 4,
 	HP:500,
 	SunNum: 125,
+	ZKind:2,
 	BirthImg: function(a) {
     var z = a.Ele;
 	z.jinyinImg = "jinyin_" + Math.random();
@@ -685,6 +690,7 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
   BreakPoint:100,
   beAttackedPointL: 60,
   beAttackedPointR: 116,
+  ZKind:-2,
   PicArr: (function() {
     var a = "images/Zombies/ScreenDoorZombie/",
       b = "images/Zombies/Zombie/";
@@ -771,6 +777,7 @@ oGatlingPeaZombie = InheritO(oNewspaperZombie, {
   HP: 550,
   shootPeaSpeed: 15,
   SunNum: 150,
+  ZKind:1,
   PicArr: (function() {
     var a = "images/Zombies/GatlingPeaZombie/";
     return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif", a + "1.gif"]
@@ -873,6 +880,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
   CobCoolTime:2500,
   OSpeed: 4.8,
   Speed: 4.8,
+  ZKind:-2,
   LostPaperSpeed: 1.6,
   PicArr: (function() {
     var a = "images/Zombies/LadderZombie/",
@@ -884,6 +892,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
 	if(!a.num){
     a.OSpeed /= 2;
     a.Speed /= 2;
+	a.ZKind=1;
 	a.canLadderList=[];
     var z = $(a.id);
     z.FumeDoor = "Fume" + Math.random();
