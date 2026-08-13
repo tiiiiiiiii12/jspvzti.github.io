@@ -3525,7 +3525,6 @@ if(!a.isDie){
         OSpeed: 4,
         Speed: 4,
         Altitude: 3,
-		ZKind:-2,
         OrnLostNormalGif: 9,
         OrnLostAttackGif: 3,
         BreakBall: false, // 气球是否被戳破
@@ -3539,6 +3538,10 @@ if(!a.isDie){
             return c
         },
 		jinyinAct:function(a){
+			a.num=Math.random()*100||a.Privatenum;
+			a["jinyinAct"+(a.num>=50?"1":"2")](a)
+		},
+		jinyinAct1:function(a){
 			a.EleBody.style.top="40px";
 			    a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
@@ -3566,11 +3569,17 @@ if(!a.isDie){
                 };
 			a.ChkActs=CZombies.prototype.ChkActs;
 			a.PrivateAct=function(f){
-				if (f.Altitude == 3 && f.AttackedRX < GetX(1)) { // 气球掉落
+				if (f.Altitude == 3 && f.AttackedRX < GetX(1)&&f.PZ) { // 气球掉落
 				f.OrnHP=0;//无视减伤
 				f.getHit0(f,f.OrnHP);
                 f.Drop();
               }
+			}
+		},
+		jinyinAct2:function(g){
+			g.PrivateAct=function(z){
+			   let AZ=oZ[z.PZ?"getZ0":"getHZ1"](z.ZX,z.R);
+		       AZ&&(AZ.Altitude==1)&&(z.MoveZombie(AZ,50,30,z.PZ),PlayAudio("portal"))
 			}
 		},
         AudioArr: ["ballooninflate", "balloon_pop"],
@@ -3580,7 +3589,7 @@ if(!a.isDie){
             return ["images/Card/Zombies/Balloonzombie.png", a + "0.gif", a + "1.gif", a + "Attack.gif", a + "Walk2.gif", a + "Attack2.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Boom.gif", a + "Walk.gif", a + "Drop.gif", a + "Boom2.gif"]
         })(),
 		WalkToLadder:function(){},
-        Produce: '气球僵尸漂浮在空中，躲过大多数攻击。<p>韧性：<font color="#FF0000">低</font><br>精英形态：<font color="#FF0000">飞行时仍能啃食部分植物</font><br>特点：<font color="#FF0000">飞行</font><br>弱点：<font color="#FF0000">仙人掌和三叶草</font></p>气球僵尸真幸运。气球有很多功效，而其他僵尸都不曾捡到过。',
+        Produce: '气球僵尸漂浮在空中，躲过大多数攻击。<p>韧性：<font color="#FF0000">低</font><br>精英形态一：<font color="#FF0000">飞行时仍能啃食部分植物</font><br>精英形态二：<font color="#FF0000">传送门，飞行时根据僵尸种类传送附近的僵尸，落地时有概率传送整行的僵尸</font><br>特点：<font color="#FF0000">飞行</font><br>弱点：<font color="#FF0000">仙人掌和三叶草</font></p>气球僵尸真幸运。气球有很多功效，而其他僵尸都不曾捡到过。',
         BirthCallBack: function(e) {
             var d = e.delayT,
                 c = e.id,
@@ -3613,6 +3622,13 @@ if(!a.isDie){
         Drop: function() {
             var a = this;
 			if(a.OrnHP>0){return}
+			if(a.jinyin&&a.num<50&&Math.random()*100>80){
+				let ARZ=oZ[a.PZ?"getArZ":"getArHZ"](100,oS.W,a.R);
+					ZL=ARZ.length;
+				while(ZL--){
+		       ARZ[ZL]&&(ARZ[ZL].Altitude==1)&&(a.MoveZombie(ARZ[ZL],90,50,a.PZ),PlayAudio("portal"))
+				}
+			}
             PlayAudio("balloon_pop");
             a.EleBody.src = "images/Zombies/BalloonZombie/Drop.gif" + $Random + Math.random();
 			a.EleBody.style.top="0px";
@@ -3632,7 +3648,7 @@ if(!a.isDie){
 						c.Speed /=2;
                         c.getFreeze = OrnIZombies.prototype.getFreeze;
                         c.EleBody.src = "images/Zombies/BalloonZombie/Walk.gif";
-                        c.ChkActs = OrnIZombies.prototype.ChkActs;
+                        c.ChkActs = c.WalkDirection?OrnIZombies.prototype.ChkActs1:OrnIZombies.prototype.ChkActs;
         c.CrushDie = function() {
           var d = this;
 		if(!d.isDie){
@@ -3659,6 +3675,9 @@ if(!a.isDie){
                 },
                 [a, b.FreeSlowTime = oSym.Now + 1500])
         },
+		MoveZombie:function(z,max,min,PZ){//移动的僵尸，最大移动距离，最小移动距离，是否魅惑（若魅惑则反方向）
+			z.getr(z,Math.floor(Math.random()*(max-min)+min)*(PZ?z.ZKind:-z.ZKind),1)
+		},
         NormalDie: function() {
             var a = this;
 			if(!a.isDie){
