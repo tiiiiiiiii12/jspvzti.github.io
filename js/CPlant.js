@@ -3348,7 +3348,7 @@ NormalAttack2: function() {
 					let P=oGd.$[i + "_" + l+"_1"];
                      P&&!P.Plan&&(P.AttTime>=-50)&&(P.Plan=true,P.AttTime-=50);
                     oSym.addTask(2000,function(f){
-						let c;
+						var c;
 						$P[f.id]&&((c=CustomSpecial(oPlantern,f.R,f.C)).jinyinAct(c),c.jinyin=1)
 					},[c]);
                   }
