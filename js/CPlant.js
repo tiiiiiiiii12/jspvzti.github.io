@@ -1602,6 +1602,7 @@ NormalAttack:function(a){
 }, function(O) {
   O.AutoSummonBase = false;
 });
+		return 1
 		},
         InitTrigger: function() {},
         PrivateDie: function(c) {
