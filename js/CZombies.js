@@ -3628,7 +3628,8 @@ if(!a.isDie){
                         c.BoomDieGif = 11;
                         c.Altitude = 1;
 						c.WalkToLadder=CZombies.prototype.WalkToLadder;
-                        c.OSpeed = c.Speed = 2;
+                        c.OSpeed/=2; 
+						c.Speed /=2;
                         c.getFreeze = OrnIZombies.prototype.getFreeze;
                         c.EleBody.src = "images/Zombies/BalloonZombie/Walk.gif";
                         c.ChkActs = OrnIZombies.prototype.ChkActs;
