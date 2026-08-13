@@ -2081,7 +2081,7 @@ NormalAttack:function(a){
         height: (a.height) + "px"
       }), $(a.id).style.left = (Left - 4) + "px");
 		var d=oZ.getArZ(a.AttackedLX,a.AttackedRX,a.R),
-			b=a.length;
+			b=d.length;
 	    var num=Math.random()*100>15?false:true;
 	while(b--){
 		var c = d[b];
@@ -2094,7 +2094,7 @@ NormalAttack:function(a){
         },
         getTriggerRange: function(a, b, c) {
             return [
-                [this.pixelLeft - 160, this.pixelRight + 160, 0]
+                [100, oS.W, 0]
             ]
         },
         AttackCheck2: function(a) {
@@ -2124,7 +2124,7 @@ NormalAttack:function(a){
 		  NormalAttack: function() {
 	  var a=this;
 		var d=oZ.getArZ(a.AttackedLX,a.AttackedRX,a.R),
-			b=a.length;
+			b=d.length;
 	    var num=Math.random()*100>15?false:true,c;
 	while(b--){
 		c = d[b];
