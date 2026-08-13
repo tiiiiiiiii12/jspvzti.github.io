@@ -34,6 +34,7 @@ var CZombies = function(b, a) {
                 CSS_fliph: "",
                 CSS_alpha: "",
                 AKind: 0,
+			    ZKind:0,
                 beAttacked: 1,
                 isAttacking: 0,
                 Attack: 100,
@@ -751,6 +752,7 @@ Birth: function() {
         Speed: 7.2,
         NormalGif: 9,
         GetDTop: 5,
+		ZKind:2,
         getShadow: function(a) {
             return "left:30px;top:146px"
         },
@@ -1255,6 +1257,7 @@ oZombie = InheritO(OrnNoneZombies, {
 		HP:500,
 		increaseSpeed:1.5,
 		SunNum:150,
+		ZKind:2,
 		PrivateAct:function(a){
 			for (u in $Z) {
               e = $Z[u];	
@@ -1433,6 +1436,7 @@ oZombie = InheritO(OrnNoneZombies, {
         OrnHP: 1100,
         Lvl: 3,
         SunNum: 125,
+		ZKind:-1,
         PlayNormalballAudio: function() {
             PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)])
         },
@@ -1504,6 +1508,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
   shootPeaSpeed: 750,
   beAttackedPointL: 40,
   beAttackedPointR: 134,
+  ZKind:-1,
   PlayNormalballAudio: function() {
     PlayAudio("plastichit")
   },
@@ -1587,6 +1592,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
         Lvl: 2,
         SunNum: 75,
 		jinyinGif:14,
+		ZKind:-2,
         BookHandPosition: "-30px 70%",
         PicArr: (function() {
             var a = "images/Zombies/PoleVaultingZombie/";
@@ -1780,6 +1786,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
         beAttackedPointL: 60,
         beAttackedPointR: 130,
         LostPaperSpeed: 6.4,
+		ZKind:-2,
         PicArr: (function() {
             var a = "images/Zombies/NewspaperZombie/";
             return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
@@ -1971,6 +1978,7 @@ oScreenDoorZombie = InheritO(oNewspaperZombie, {
   beAttackedPointL: 60,
   beAttackedPointR: 116,
   LostPaperSpeed: 1.6,
+  ZKind:-1,
   PicArr: (function() {
     var a = "images/Zombies/ScreenDoorZombie/",
       b = "images/Zombies/Zombie/";
@@ -2352,6 +2360,7 @@ jinyinWalkGif12: 14,
         OrnHP: 1100,
         Lvl: 3,
         SunNum: 125,
+		ZKind:2,
         PlayNormalballAudio: function() {
             PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)])
         },
@@ -2410,6 +2419,7 @@ jinyinWalkGif12: 14,
         getShadow: function(a) {
             return "left:" + a.beAttackedPointL + "px;top:" + (a.height - 45) + "px"
         },
+		ZKind:-2,
         PicArr: (function() {
             var a = "images/Zombies/SnorkelZombie/";
             return ["images/Card/Zombies/SnorkelZombie.png", a + "0.gif", a + "Walk1.gif", a + "Walk2.gif", a + "1.gif", a + "Attack.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Jump.gif" + $Random, a + "Risk.gif" + $Random, a + "Sink.gif" + $Random]
@@ -2736,6 +2746,7 @@ jinyinWalkGif12: 14,
             beAttackedPointR: 290,
             BreakPoint: 200,
             SunNum: 225,
+			ZKind:-1,
             GetDY: function() {
                 return 0
             },
@@ -3014,6 +3025,7 @@ jinyinWalkGif12: 14,
         width: 282,
         height: 210,
         Lvl: 2,
+		ZKind:-2,
         getShadow: function(a) {
             return ("left:105px;top:175px")
         },
@@ -3302,6 +3314,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   AttackGif: 2,
   OSpeed: 3.6,
   Speed: 3.6,
+  ZKind:-2,
   Produce: '这种僵尸带着个会爆炸的惊喜<br>精英形态一：樱桃炸弹，残血必开盒<br>精英形态二：毁灭菇，爆炸范围扩大并在原地留坑<br>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快</font><br>特点：<font color="#FF0000">打开玩偶匣会爆炸</font><br>一个天天喊着"just brainz"的精神病人，根本不会意识到最大的食脑障碍来源于自己',
   AudioArr: ["jackinthebox", "jack_surprise", "explosion"],
   PicArr: (function() {
@@ -3512,6 +3525,7 @@ if(!a.isDie){
         OSpeed: 4,
         Speed: 4,
         Altitude: 3,
+		ZKind:-2,
         OrnLostNormalGif: 9,
         OrnLostAttackGif: 3,
         BreakBall: false, // 气球是否被戳破
@@ -3745,6 +3759,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
   BoomDieGif: 8,
   LostHeadGif: 5,
   LostHeadAttackGif: 5,
+  ZKind:-2,
   Produce: '这种僵尸通过挖地来绕过防线。<br>韧性：<font color="#FF0000">中（600）</font><Br>速度：<font color="#FF0000">快,而后慢</font><BR>特点：<font color="#FF0000">挖地道，然后在草地的左侧现身</font><br>弱点：<font color="#FF0000">分裂射手，杨桃</font><br>精英形态一：<font color="#FF0000">挖地时可携带一只威胁等级较小的僵尸，并传送其至第四列</font><br>精英形态二：<font color="#FF0000">挖至第五列出土向左，血量提升，速度大幅降低</font><br>矿工僵尸一周需要用两天的时间来考取他的挖掘许可证',
   BirthCallBack: function(f) {
     var e = f.delayT,
