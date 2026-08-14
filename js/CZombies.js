@@ -1569,7 +1569,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
   })(),
   PicArr3: (function() {
     var a = "images/Zombies/FootballZombie/";
-    return ["images/Card/Zombies/FootballZombie.png", a + "0.gif", a + "jinyinWalk1.gif", a + "jinyinAttack1.gif", a + "jinyinLostHead.gif", a + "jinyinLostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "jinyinWalk2.gif", a + "jinyinAttack2.gif", a + "1.gif"]
+    return ["images/Card/Zombies/FootballZombie.png", a + "0.gif", a + "jinyinWalk1.gif", a + "jinyinAttack1.gif", a + "jinyinLostHeadWalk.gif", a + "jinyinLostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "jinyinWalk2.gif", a + "jinyinAttack2.gif", a + "1.gif"]
   })(),
   PicArr2: (function() {
     var a = "images/Zombies/BlackFootballZombie/";
