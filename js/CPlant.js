@@ -1571,7 +1571,7 @@ NormalAttack:function(a){
         PicArr: ["images/Card/Plants/Torchwood.png", "images/Plants/Torchwood/0.gif", "images/Plants/Torchwood/Torchwood.gif", "images/Plants/PB00.gif", "images/Plants/PB01.gif", "images/Plants/PB10.gif", "images/Plants/PB11.gif", "images/Plants/Torchwood/SputteringFire.gif"],
         AudioArr: ["firepea", "ignite", "ignite2"],
         Tooltip: "通过火炬树桩的豌豆将变为火球",
-        Produce: '火炬树桩可以把穿过他的豌豆变成火球，可以造成两倍伤害。<p>特点：<font color="#FF0000">让穿过他的火球造成两倍伤害。火球也会对附近僵尸造成溅射伤害</font><br>精英形态：对附近僵尸造成灼烧伤害</p>每个人都喜欢并敬重火炬树桩。他们喜欢他的诚实和坚贞的友谊，以及增强豌豆伤害的能力，他曾经还找制陶工去拜师学艺',
+        Produce: '火炬树桩可以把穿过他的豌豆变成火球，可以造成两倍伤害。<p>特点：<font color="#FF0000">让穿过他的火球造成两倍伤害。火球也会对附近僵尸造成溅射伤害</font><br>精英形态：每隔一段时间生产一个随机非紫卡植物罐子</p>每个人都喜欢并敬重火炬树桩。他们喜欢他的诚实和坚贞的友谊，以及增强豌豆伤害的能力，他曾经还找制陶工去拜师学艺',
         PrivateBirth: function(c) {
             var a = c.R,
                 b = c.C;
@@ -1585,7 +1585,7 @@ NormalAttack:function(a){
 		},
 		jinyinAct:function(a){
 		oSym.addTask(3000, function(a) {
-			a.SetVase(a)&&oSym.addTask(3000, arguments.callee,[a]);
+			a.SetVase(a)&&oSym.addTask(4000, arguments.callee,[a]);
         }, [a])
 		},
 		SetVase:function(e){
