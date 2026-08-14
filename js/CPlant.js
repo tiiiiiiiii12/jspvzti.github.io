@@ -2419,6 +2419,7 @@ jinyinAttackGif2: 8,
         SunNum: 125,
         BookHandBack: 2,
 		Shroom:true,
+		night:true,
         SleepGif: 3,
 		Attack:25,
         PicArr: ["images/Card/Plants/FumeShroom.png", "images/Plants/FumeShroom/0.gif", "images/Plants/FumeShroom/FumeShroom.gif", "images/Plants/FumeShroom/FumeShroomSleep.gif", "images/Plants/FumeShroom/FumeShroomAttack.gif", "images/Plants/FumeShroom/FumeShroomBullet.gif"],
@@ -2541,7 +2542,7 @@ for (let i = Math.max(1, f.R - 1); i <= Math.min(f.R + 1, oS.R); i++) {
 				PlayAudio("coffee");
 				for (i=1;i<=2;i++){
 					var P=oGd.$[a.R+"_"+a.C+"_"+i];
-					P&&(P.HP+=Math.min(P.MaxHP-P.HP,Math.max(200,P.MaxHP*0.2)))
+					P&&(P.HP+=Math.min(P.MaxHP-P.HP,Math.max(200,P.MaxHP*0.1)))
 				}
 			oSym.addTask(500,arguments.callee,[a])
 			},[a])
@@ -2554,7 +2555,7 @@ for (let i = Math.max(1, f.R - 1); i <= Math.min(f.R + 1, oS.R); i++) {
                     PlayAudio("wakeup");
                     var d = oGd.$[c],
                         b;
-                    d && (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
+                    d&&d.Shroom&&d.Sleep&& (b = d.WakeUP, (!b ? ($(d.id).childNodes[1].src = d.PicArr[d.NormalGif], d.canTrigger = 1, d.Sleep = 0) : b(d)));
                     a.plusHP(a);
                 },
                 [a.R + "_" + a.C + "_1",a])
