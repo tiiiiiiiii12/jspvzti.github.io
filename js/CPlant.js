@@ -1585,7 +1585,7 @@ NormalAttack:function(a){
 		},
 		jinyinAct:function(a){
 		oSym.addTask(3000, function(a) {
-			a.SetVase(a)&&oSym.addTask(6000, arguments.callee,[a]);
+			a.SetVase(a)&&oSym.addTask(3000, arguments.callee,[a]);
         }, [a])
 		},
 		SetVase:function(e){
