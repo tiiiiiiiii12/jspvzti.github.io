@@ -3584,6 +3584,8 @@ oBalloonZombie = InheritO(OrnIZombies, {
     }
   },
   jinyinAct2: function(g) {
+	g.NoramlGif=12;
+	g.EleBody.src=g.PicArr[g.NormalGif];
     g.PrivateAct = function(z) {
       let AZ = oZ[z.PZ ? "getZ0" : "getHZ1"](z.AttackedRX + 1, z.R);
       AZ && AZ.ZKind && (AZ.Altitude == 1) && (z.MoveZombie(AZ, 50, 30, z.PZ), PlayAudio("portal"))
@@ -3593,7 +3595,7 @@ oBalloonZombie = InheritO(OrnIZombies, {
   BookHandPosition: "80% 80%",
   PicArr: (function() {
     var a = "images/Zombies/BalloonZombie/";
-    return ["images/Card/Zombies/Balloonzombie.png", a + "0.gif", a + "1.gif", a + "Attack.gif", a + "Walk2.gif", a + "Attack2.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Boom.gif", a + "Walk.gif", a + "Drop.gif", a + "Boom2.gif"]
+    return ["images/Card/Zombies/Balloonzombie.png", a + "0.gif", a + "1.gif", a + "Attack.gif", a + "Walk2.gif", a + "Attack2.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Boom.gif", a + "Walk.gif", a + "Drop.gif", a + "Boom2.gif",a+"jinyinWalk.gif"]
   })(),
   WalkToLadder: function() {},
   Produce: '气球僵尸漂浮在空中，躲过大多数攻击。<p>韧性：<font color="#FF0000">低</font><br>精英形态一：<font color="#FF0000">飞行时仍能啃食部分植物</font><br>精英形态二：<font color="#FF0000">传送门，飞行时根据僵尸种类传送附近的僵尸，落地时有概率传送整行的僵尸</font><br>特点：<font color="#FF0000">飞行</font><br>弱点：<font color="#FF0000">仙人掌和三叶草</font></p>气球僵尸真幸运。气球有很多功效，而其他僵尸都不曾捡到过。',
@@ -3632,7 +3634,7 @@ oBalloonZombie = InheritO(OrnIZombies, {
     if (a.OrnHP > 0) {
       return
     }
-    if (a.jinyin && a.num < 50 && Math.random() * 100 > 80) {
+    if (a.jinyin && a.num < 50 && Math.random() * 100 > 50) {
       let ARZ = oZ[a.PZ ? "getArZ" : "getArHZ"](100, oS.W, a.R);
       ZL = ARZ.length;
       while (ZL--) {
