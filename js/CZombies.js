@@ -1523,6 +1523,8 @@ oFootballZombie = InheritO(oConeheadZombie, {
       a.HP *= 2.5;
       a.OrnHP *= 2;
     } else {
+      a.PicArr = a.PicArr2;
+      a.EleBody.src = a.PicArr[a.NormalGif];
       a.BulletEle = NewImg(0, "images/interface/Zombie_catapult_basketball.png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 120) + "px;visibility:hidden;z-index:" + (a.zIndex + 2));
       oSym.addTask(750, function(a) {
         a.canWalk(a, a.id) && a.beAttacked &&a.ZX>=100&&a.ZX<=oS.W&&a.shootPea(a);
@@ -1562,6 +1564,10 @@ oFootballZombie = InheritO(oConeheadZombie, {
   PicArr: (function() {
     var a = "images/Zombies/FootballZombie/";
     return ["images/Card/Zombies/FootballZombie.png", a + "0.gif", a + "FootballZombie.gif", a + "Attack.gif", a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "OrnLost.gif", a + "OrnLostAttack.gif", a + "1.gif"]
+  })(),
+  PicArr3: (function() {
+    var a = "images/Zombies/FootballZombie/";
+    return ["images/Card/Zombies/FootballZombie.png", a + "0.gif", a + "jinyinWalk1.gif", a + "jinyinAttack1.gif", a + "jinyinLostHead.gif", a + "jinyinLostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "jinyinWalk2.gif", a + "jinyinAttack2.gif", a + "1.gif"]
   })(),
   PicArr2: (function() {
     var a = "images/Zombies/BlackFootballZombie/";
