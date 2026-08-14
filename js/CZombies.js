@@ -627,6 +627,7 @@ Birth: function() {
 		jinyinAct:function(a){
 			a.num=Math.random()*100||a.Privatenum;
 			if(a.num>=50){
+			a.ZKind=-2;
 			a.ChangeChkActsTo0=function(){};
 			a.ChangeChkActsTo1(a,a.id,a.EleBody);
 			a.EleBody.style.filter = 'grayscale(400%)';
@@ -636,10 +637,10 @@ Birth: function() {
 		 }else{
 			a.EleBody.style.filter="grayscale(100%) brightness(0) invert(1)";
 			a.PrivateDie=function(a){
-				a.masterid&&$Z[a.masterid]&&($Z[a.masterid].HP+=(a.level*200),$Z[a.masterid].tasktime*=(0.8*a.level))
+				a.masterid?($Z[a.masterid]&&($Z[a.masterid].HP+=(a.level*200),$Z[a.masterid].tasktime*=(0.8*a.level))):a.Boom(a)
 			};
 			a.PrivateAct=function(a){
-				a.masterid&&!$Z[a.masterid]&&(a.Boom(a))
+				a.masterid&&!$Z[a.masterid]&&(a.Boom(a),a.DisappearDie())
 			}
 		 }
 		},
@@ -652,13 +653,12 @@ Birth: function() {
             tp && a.PZ && tp.getHurt(a, 3, 1000 * a.level);
 			}
           }
-          var tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 100, a.ZX + 100, a.R);
-          var tzl = tz.length;
+          let tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 100, a.ZX + 100, a.R);
+          let tzl = tz.length;
           while (tzl--) {
               tz[tzl].Altitude == 1&&tz[tzl].getExplosion(1000);
 		  }
 		oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.ZX - 80) + "px;top:" + (a.pixelTop + 80) + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
-		a.DisappearDie();
 		},
 		ChkActs1: function(g, e, h, d) {
                     var c,f;
@@ -752,7 +752,7 @@ Birth: function() {
         Speed: 7.2,
         NormalGif: 9,
         GetDTop: 5,
-		ZKind:2,
+		ZKind:-2,
         getShadow: function(a) {
             return "left:30px;top:146px"
         },
@@ -1115,6 +1115,7 @@ Birth: function() {
     NormalAttack: function(a) {
       var b = $Z[a];
       b.PZ&&b.ExchangeLR(b, 0);
+	  b.ZKind=2;
       b.TurnLeft(b)
     },
     Summon: function(d, c) {
@@ -1523,6 +1524,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
       a.HP *= 2.5;
       a.OrnHP *= 2;
     } else {
+	  a.ZKind=-1;
       a.PicArr = a.PicArr3;
       a.EleBody.src = a.PicArr[a.NormalGif];
       a.BulletEle = NewImg(0, "images/interface/Zombie_catapult_basketball.png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 120) + "px;visibility:hidden;z-index:" + (a.zIndex + 2));
@@ -2008,6 +2010,7 @@ JudgeDirection:function(a){
 },
   jinyinAct1:function(a){
 	  var z=a.Ele;
+	  a.ZKind=-1;
 	  a.PrivateAct=function(a){
 		       var P = a.Ele;
       (a.WalkDirection == a.check) && a.Ornaments && (EditEle($(a.id + "_Bullet"), 0, {
@@ -2023,7 +2026,7 @@ JudgeDirection:function(a){
           Tz = A.length;
         for (let i = GetC(a.ZX + 20) - 3; i <= GetC(a.ZX + 20); i++) {
           for (let l = 0; l <= 3; l++) {
-            var m = oGd.$[a.R + "_" + i + "_" + l];
+            let m = oGd.$[a.R + "_" + i + "_" + l];
             (Tz || (m && a.PZ)) && a.canWalk(a, a.id) ? (
               EditImg($(z.FumeDoor), 0, "images/Plants/FumeShroom/FumeShroomAttack.gif", {}, 0),
               PlayAudio("fume"),
@@ -2063,24 +2066,22 @@ a.PrivateAct = function(a) {
 	a.JudgeDirection(a);
 	!a.nowHP&&(a.nowHP=a.MaxHP);
      a.canWalk(a,a.id)&&a.Ornaments&&(a.HP!=a.nowHP)&&(a.ChangeR(a),a.nowHP=a.HP);
-     a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.bedevil=CZombies.prototype.bedevil,a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.tasktime/=2,a.HP+=(300*a.level),a.ChangeR(a),(SummonZ=CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ)).Privatenum = 150,SummonZ.jinyinnum=100);
+     a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.bedevil=CZombies.prototype.bedevil,a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.ZKind=-2,a.tasktime/=2,a.HP+=(300*a.level),a.ChangeR(a),(SummonZ=CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ)).Privatenum = 150,SummonZ.jinyinnum=100);
     }
 },
 jinyinAct3:function(a){
-	a.PrivateAct=function(a){
-		a.JudgeDirection(a);
-	};
 	a.JudgeAttack=a.JudgeAttackH=function(){};
 	a.PrivateAct = function(a) {
+a.JudgeDirection(a);
       if (a.Ornaments) {
-        var C = GetC(a.ZX);
+        let C = GetC(a.ZX);
     for (i = 3; i >= 0; i--) {
-        var p = oGd.$[a.R + "_" + C + "_" + i];
+        let p = oGd.$[a.R + "_" + C + "_" + i];
           a.PZ&&a.canWalk(a,a.id)&& p && p.canEat && $(p.id) && (p.C == C) && (PlantKind = p.PKind, NewC = p.C + 1, p.AttackedLX += 80, p.pixelRight += 80, p.AttackedRX += 80, p.pixelLeft += 80, $(p.id).style.left = (p.pixelLeft) + "px",
 			(p.EName== "oBrains"||p.C>=9)?p.Die():(delete oGd.$[p.R + "_" + p.C + "_" + p.PKind], p.C = NewC, oGd.add(p, a.R + "_" + NewC + "_" + PlantKind),
 p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.AttackedLX,p.AttackedRX),PlayAudio("shovel")));//重置植物列数并重置索敌
         }
-	    var z = oZ["get" + (a.PZ ? "HZ1" : "Z0")](a.ZX, a.R);
+	    let z = oZ["get" + (a.PZ ? "HZ1" : "Z0")](a.ZX, a.R);
         z &&(z.Altitude==1)&&a.canWalk(a,a.id)&&(z.getr(z, 80), z.getHit0(z, 60, 0),PlayAudio("shovel"))
 	  }
 	}
@@ -2127,6 +2128,7 @@ p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.Attack
     a.Speed *= 3;
 	a.bedevil=function(){},
     a.OSpeed *= 3;
+	a.ZKind=2;
 	PlayAudio("jack_surprise");
   },
   CheckOrnHP: function(g, h, d, c, f, b, a) {
@@ -2366,7 +2368,7 @@ jinyinWalkGif12: 14,
         OrnHP: 1100,
         Lvl: 3,
         SunNum: 125,
-		ZKind:2,
+		ZKind:-1,
         PlayNormalballAudio: function() {
             PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)])
         },
@@ -3320,7 +3322,6 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   AttackGif: 2,
   OSpeed: 3.6,
   Speed: 3.6,
-  ZKind:-2,
   Produce: '这种僵尸带着个会爆炸的惊喜<br>精英形态一：樱桃炸弹，残血必开盒<br>精英形态二：毁灭菇，爆炸范围扩大并在原地留坑<br>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快</font><br>特点：<font color="#FF0000">打开玩偶匣会爆炸</font><br>一个天天喊着"just brainz"的精神病人，根本不会意识到最大的食脑障碍来源于自己',
   AudioArr: ["jackinthebox", "jack_surprise", "explosion"],
   PicArr: (function() {
