@@ -1523,7 +1523,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
       a.HP *= 2.5;
       a.OrnHP *= 2;
     } else {
-      a.PicArr = a.PicArr2;
+      a.PicArr = a.PicArr3;
       a.EleBody.src = a.PicArr[a.NormalGif];
       a.BulletEle = NewImg(0, "images/interface/Zombie_catapult_basketball.png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 120) + "px;visibility:hidden;z-index:" + (a.zIndex + 2));
       oSym.addTask(750, function(a) {
