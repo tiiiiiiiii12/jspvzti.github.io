@@ -3584,7 +3584,7 @@ oBalloonZombie = InheritO(OrnIZombies, {
     }
   },
   jinyinAct2: function(g) {
-	g.NoramlGif=12;
+	g.NormalGif=12;
 	g.EleBody.src=g.PicArr[g.NormalGif];
     g.PrivateAct = function(z) {
       let AZ = oZ[z.PZ ? "getZ0" : "getHZ1"](z.AttackedRX + 1, z.R);
