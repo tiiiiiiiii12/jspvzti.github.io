@@ -183,15 +183,15 @@ var oGargantuar = InheritO(oZombie, {
   },
   jinyinAct: function(a) {
     a.num = Math.random() * 100 || a.Privatenum;
-    var z = $(a.id);
+    let z = a.Ele;
     z.FumeDoor = "Fume" + Math.random();
-    var Sh = NewImg(z.FumeDoor, a.num >= 50 ? "images/interface/target.png" : "images/Plants/Blover/Blover.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:200px;top:80px", 0);
+    let Sh = NewImg(z.FumeDoor, a.num >= 50 ? "images/interface/target.png" : "images/Plants/Blover/Blover.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:200px;top:80px", 0);
     z.appendChild(Sh);
     if (a.num >= 50) {
-      var z = oS.ZName;
+    let Z = oS.ZName;
       a.zl = [];
-      for (i = 0; i < z.length; i++) {
-        z[i].prototype.Lvl < 4 && z[i].prototype.CanSelect && a.zl.push(z[i]);
+      for (i = 0; i < Z.length; i++) {
+        Z[i].prototype.Lvl < 4 && Z[i].prototype.CanSelect && a.zl.push(Z[i]);
       }!a.zl.length && (a.zl = [oZombie]);
       oSym.addTask(1000, function(b) {
         $Z[b.id] && b.hasthrew < b.throwImpnum && (oP.SetTimeoutAirdropZombie(5, 9, 1, b.zl, !b.PZ),
@@ -946,7 +946,7 @@ jianshangtime:500,
       Z && Z.PZ != b.PZ && Z.beAttacked && a.push(Z);
     }
     if (!a.length) return;
-    var i = Math.floor(Math.random() * a.length);
+    let i = Math.floor(Math.random() * a.length);
     b.Boom(a[i], b)
   },
   Boom: function(a, b) {
