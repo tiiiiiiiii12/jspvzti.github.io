@@ -1,3 +1,3 @@
 # jspvz-Ti版
 # a jspvz mod
-tiiiiiiiii12.github.io/tiiiiiiiiiii12.github.io/plantsvszombies.htm
+<p class="ff"><a href="tiiiiiiiii12.github.io/tiiiiiiiiiii12.github.io/plantsvszombies.htm">点我游玩</a></p><br/>
