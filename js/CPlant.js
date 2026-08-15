@@ -889,8 +889,8 @@ NormalAttack: function() {
             id: h
           },
           0, EDPZ),a,N,0,20]);
-      ++N <= 4&&$P[g.id]&& oSym.addTask(10, arguments.callee, ["StarB0" + Math.random(), N]);
-    })("StarB0" + Math.random(), -4)
+      ++N <= 3&&$P[g.id]&& oSym.addTask(10, arguments.callee, ["StarB0" + Math.random(), N]);
+    })("StarB0" + Math.random(), -3)
   },
         jinyinAct:function(a){
 		a.AttTime=0;
@@ -1013,7 +1013,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "一次发射四颗豌豆<br>(需要双发射手)",
-        Produce: '机枪射手可以一次三条线发射四颗豌豆</font></p>精英形态：本行有概率是冰豆或火豆<p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
+        Produce: '机枪射手可以一次三条线发射四颗豌豆，本行有概率是冰豆或火豆</font><p>伤害：<font color="#FF0000">中等(每颗)</font><br>发射速度：<font color="#FF0000">四倍<br>只能种在双发射手上</font></p>当机枪豌豆宣布他要参军的时候，他的父母很为他担心，他们异口同声地对他说：“亲爱的，但这太危险了。”加特林拒绝让步，“生活本就危险，”他这样回答着，此时他的眼睛里，正闪烁着钢铁般的信念。',
         PrivateBirth: function(f) {
             var e = f.AttackedLX,
                 d = e - 40,
