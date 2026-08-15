@@ -2094,7 +2094,7 @@ NormalAttack:function(a){
       EditEle($(a.id).childNodes[1], {}, {
         width: (a.width) + "px",
         height: (a.height) + "px"
-      }), $(a.id).style.left = (Left - 4) + "px");
+      }),a.AttackedLX-=4,a.AttackedRX+=4,$(a.id).style.left = (Left - 4) + "px");
 		var d=oZ.getArZ(a.AttackedLX,a.AttackedRX,a.R),
 			b=d.length;
 	    var num=Math.random()*100>15?false:true;
