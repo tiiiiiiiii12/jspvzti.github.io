@@ -32,6 +32,7 @@ oS.Init({
 	}, 
 	StartGame: function() {
 		oP.Monitor(), SetVisible($("tdShovel"), $("dFlagMeter"), $("dTop"));
+	NewEle("DivTeach", "div", 0, 0, EDAll);
     innerText($("DivTeach"),"请在7分钟内通关!");
     oSym.addTask(500, ClearChild,[$("DivTeach")]);
     oSym.addTask(42000,function(){
