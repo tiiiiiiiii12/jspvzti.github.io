@@ -33,10 +33,10 @@ oS.Init({
 	StartGame: function() {
 		oP.Monitor(), SetVisible($("tdShovel"), $("dFlagMeter"), $("dTop"));
 	NewEle("DivTeach", "div", 0, 0, EDAll);
-    innerText($("DivTeach"),"请在7分钟内通关!");
+    innerText($("DivTeach"),"请在6分钟内通关!");
     oSym.addTask(500, ClearChild,[$("DivTeach")]);
-    oSym.addTask(42000,function(){
-      !($("imgSF"))&&GameOver("您已超过规定时间！再接再厉")
+    oSym.addTask(36000,function(){
+      !(oFlowerVase.prototype.GetLevelStatus())&&GameOver("您已超过规定时间！再接再厉")
     },[]);
     for (i=2;i<=4;i++){
       let torch=CustomSpecial(oTorchwood,i,1);
