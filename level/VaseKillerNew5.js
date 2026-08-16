@@ -39,7 +39,7 @@ oS.Init({
       !($("imgSF"))&&GameOver("您已超过规定时间！再接再厉")
     },[]);
     for (i=2;i<=4;i++){
-      let torch=CustomSpecial(oTorchwood,1,i);
+      let torch=CustomSpecial(oTorchwood,i,1);
       !torch.jinyin&&torch.jinyinAct(torch)
     }
 		StopMusic(), PlayMusic(oS.LoadMusic = oS.StartGameMusic);
