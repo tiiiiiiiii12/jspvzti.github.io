@@ -966,7 +966,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
             id: h
           },
           0, EDPZ), a, N, C, C==1 ? 40 : 20]);
-      (N += 2) < 2 && oSym.addTask(0, arguments.callee, ["StarB1" + Math.random(), N, Img,C]);
+      (N += 2) <= 2 && oSym.addTask(0, arguments.callee, ["StarB1" + Math.random(), N, Img,C]);
     })("StarB1" + Math.random(), -2, D,C)
   },
 		Attack2:50,
