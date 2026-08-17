@@ -3935,10 +3935,8 @@ NormalAttack2: function() {
         	通关条件: 场地上没有罐子、且场地上没有僵尸
         */
         GetLevelStatus: function() {
-            for (var O in $P)
-                if ($P[O].EName == "oFlowerVase") return false; // 如果有花瓶，直接返回
-            for (var O in $Z)
-                if ($Z[O].PZ != 0) return false; // 如果有非魅惑的僵尸，直接返回
+            for (var O in $P)if ($P[O].EName == "oFlowerVase") return false; // 如果有花瓶，直接返回
+            for (var O in $Z) if ($Z[O]&&($Z[O].PZ != 0)) return false; // 如果有非魅惑的僵尸，直接返回
             return true;
         }
     });
