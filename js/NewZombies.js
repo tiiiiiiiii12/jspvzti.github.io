@@ -192,7 +192,7 @@ var oGargantuar = InheritO(oZombie, {
       a.zl = [];
       for (i = 0; i < Z.length; i++) {
         Z[i].prototype.Lvl < 4 && Z[i].prototype.CanSelect && a.zl.push(Z[i]);
-      }!a.zl.length && (a.zl = [oZombie]);
+      }!a.zl.length && (a.zl = [oFlagZombie]);
       oSym.addTask(1000, function(b) {
         $Z[b.id] && b.hasthrew < b.throwImpnum && (oP.SetTimeoutAirdropZombie(5, 9, 1, b.zl, !b.PZ),
           oSym.addTask(1000, arguments.callee, [b]));
@@ -591,7 +591,7 @@ oNutZombie = InheritO(oTallNutZombie, {
 	oJalapenoZombie= InheritO(oZombie,{
 	EName: "oJalapenoZombie",
 	CName: "辣椒僵尸",
-	Lvl: 4,
+	Lvl: 3,
 	HP:500,
 	SunNum: 125,
 	ZKind:2,
