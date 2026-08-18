@@ -827,6 +827,7 @@ oGatlingPeaZombie = InheritO(oNewspaperZombie, {
     a.shootPeaSpeed *= 2;
     a.LostPaperSpeed = 0;
   },
+  shootPea1:oPeashooter.prototype.NormalAttack,
   bedevil: oPeaZombie.prototype.bedevil,
   shootPea: function() {
     var a = this,
