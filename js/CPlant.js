@@ -103,12 +103,12 @@ getLadder:function() {
             e.PrivateBirth(e, n)
         },
 	    getFreeze: function(d, c,a) {
-			d.EleBody.style.opacity*=0.5;
+			d.EleBody.style.opacity=0.5;
                     oSym.addTask(a||400,
                         function(g, f, e) {
                             ClearChild(e);
                             var h = $P[g];
-                            h && h.FreeFreezeTime == f && (h.FreeFreezeTime=0,h.EleBody.style.opacity*=2)
+                            h && h.FreeFreezeTime == f && (h.FreeFreezeTime=0,h.EleBody.style.opacity=1)
                         },
                         [c, d.FreeFreezeTime = oSym.Now + (a||400), NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", d.getShadow(d), $(d.id))])
                 },
@@ -129,7 +129,7 @@ getLadder:function() {
   switch (true) {
     case !e:
 	  h.AttTime+=140;
-	  h.EleBody.style.opacity*=0.75;
+	  h.EleBody.style.opacity=0.75;
 	  PlayAudio("frozen");
       h.FreeSlowTime = d;
       c = 1;
@@ -142,7 +142,7 @@ getLadder:function() {
   c && oSym.addTask(g,
     function(j, i) {
       var k = $P[j];
-      k && k.FreeSlowTime == i && (k.FreeSlowTime = 0,k.AttTime-=140,h.EleBody.style.opacity/=0.75)
+      k && k.FreeSlowTime == i && (k.FreeSlowTime = 0,k.AttTime-=140,h.EleBody.style.opacity=1)
     },
     [f, d])
 },
