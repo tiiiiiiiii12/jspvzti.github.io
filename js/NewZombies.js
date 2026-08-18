@@ -305,9 +305,9 @@ CanPass:CZombies.prototype.CanPass,
         var Kind = 3,
 			Z = oZ["getHZ1"](n,i),
           d, isHit;
-		Z && Z.Altitude == 1 && (Z.getSnowPea(Z,25*a.level,0),Math.random*100<5&&Z.getFreeze(Z,Z.id),isHit=true);
+		Z && Z.Altitude == 1 && (Z.getSnowPea(Z,25*a.level,0),Math.random()*100<5&&Z.getFreeze(Z,Z.id),isHit=true);
         while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getSnowPea(d,25*a.level,1500),Math.random*100<5&&d.getFreeze(d,d.id))
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getSnowPea(d,25*a.level,1500),Math.random()*100<5&&d.getFreeze(d,d.id))
         }
 	  isHit?((SetStyle(j, {
             left: o + 28 + "px",
