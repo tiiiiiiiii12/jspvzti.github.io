@@ -108,7 +108,7 @@ getLadder:function() {
                         function(g, f, e) {
                             ClearChild(e);
                             var h = $P[g];
-                            h && h.FreeFreezeTime == f && (h.FreeFreezeTime=0,h.EleBody.style.opacity=1)
+                            h && h.FreeFreezeTime == f && (h.FreeFreezeTime=0,h.EleBody.style.opacity=(k.FreeSlowTime?0.75:1))
                         },
                         [c, d.FreeFreezeTime = oSym.Now + (a||400), NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", d.getShadow(d), $(d.id))])
                 },
@@ -142,7 +142,7 @@ getLadder:function() {
   c && oSym.addTask(g,
     function(j, i) {
       var k = $P[j];
-      k && k.FreeSlowTime == i && (k.FreeSlowTime = 0,k.AttTime-=140,k.EleBody.style.opacity=1)
+      k && k.FreeSlowTime == i && (k.FreeSlowTime = 0,k.AttTime-=140,k.EleBody.style.opacity=(k.FreeFreezeTime?0.5:1))
     },
     [f, d])
 },
