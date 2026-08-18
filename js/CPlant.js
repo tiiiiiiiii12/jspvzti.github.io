@@ -142,7 +142,7 @@ getLadder:function() {
   c && oSym.addTask(g,
     function(j, i) {
       var k = $P[j];
-      k && k.FreeSlowTime == i && (k.FreeSlowTime = 0,k.AttTime-=140,h.EleBody.style.opacity=1)
+      k && k.FreeSlowTime == i && (k.FreeSlowTime = 0,k.AttTime-=140,k.EleBody.style.opacity=1)
     },
     [f, d])
 },
