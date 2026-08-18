@@ -103,12 +103,12 @@ getLadder:function() {
             e.PrivateBirth(e, n)
         },
 	    getFreeze: function(d, c,a) {
-			d.Ele.style.opacity=0.5;
+			d.EleBody.style.opacity*=0.5;
                     oSym.addTask(a||400,
                         function(g, f, e) {
                             ClearChild(e);
                             var h = $P[g];
-                            h && h.FreeFreezeTime == f && (h.FreeFreezeTime=0,h.Ele.style.opacity=1)
+                            h && h.FreeFreezeTime == f && (h.FreeFreezeTime=0,h.EleBody.style.opacity*=2)
                         },
                         [c, d.FreeFreezeTime = oSym.Now + (a||400), NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", d.getShadow(d), $(d.id))])
                 },
@@ -121,6 +121,35 @@ getLadder:function() {
                 },
                 a, EDPZ)
         },
+	FreeSlowTime:0,
+	getSlow:function(h, f, g) {
+  var d = oSym.Now + g,
+    e = h.FreeSlowTime,
+    c = 0;
+  switch (true) {
+    case !e:
+	  h.AttTime+=140;
+	  h.EleBody.style.opacity*=0.75;
+	  PlayAudio("frozen");
+      h.FreeSlowTime = d;
+      c = 1;
+      break;
+    case e < d:
+      h.FreeSlowTime = d;
+      PlayAudio("splat1");
+      c = 1
+  }
+  c && oSym.addTask(g,
+    function(j, i) {
+      var k = $P[j];
+      k && k.FreeSlowTime == i && (k.FreeSlowTime = 0,k.AttTime-=140,h.EleBody.style.opacity/=0.75)
+    },
+    [f, d])
+},
+	getSnowPea:function(a,d,T){
+		a.getSlow(a,a.id,T);
+		a.getHurt(a,3,d);
+	},
         PrivateBirth: function(a) {},
         getTriggerRange: function(a, b, c) {
             return [
@@ -663,6 +692,7 @@ oSnowPea = InheritO(oPeashooter, {
   BKind: -1,
   power: 20,
   getFreeze:function(){},
+  getSlow:function(){},
   PicArr: ["images/Card/Plants/SnowPea.png", "images/Plants/SnowPea/0.gif", "images/Plants/SnowPea/SnowPea.gif", "images/Plants/PB-10.gif", "images/Plants/PeaBulletHit.gif"],
   AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
   Tooltip: "寒冰射手可造成伤害, 同时又有减速效果",
@@ -1200,7 +1230,7 @@ NormalAttack:function(a){
 		},
         CheckLoop: function(a, b) {
             !this.FreeFreezeTime&&this.NormalAttack(b);
-            oSym.addTask(140,
+            oSym.addTask(140+this.AttTime,
                 function(c, e, g) {
                     var f;
                     (f = $P[c]) && f.AttackCheck1(e, g)
@@ -1229,7 +1259,7 @@ NormalAttack:function(a){
                         function(i, m, k, f, q, l, p, n, r, j) {
                             var o, h = GetC(q),
                                 g = oZ["getZ" + f](q, l);
-                            p == 0 && j[l + "_" + h] && n != h && (PlayAudio("firepea"), p = 1, k = 40, n = h, m.src = "images/Plants/PB" + p + f + ".gif");
+                            p == 0 && j[l + "_" + h] && n != h && (PlayAudio("firepea"), p = 1, k = 40, n = h, m.src = "images/Plants/PB" + p+"0.gif");
                             g && g.Altitude == 1 ? (g[{
                                 "-1": "getSnowPea",
                                 0: "getPea",
@@ -1583,6 +1613,7 @@ NormalAttack:function(a){
 			c.PrivateDie(c);
 			c.PrivateBirth(c);
 		},
+		getSlow:function(){},
 		jinyinAct:function(a){
 		oSym.addTask(3000, function(a) {
 			a.SetVase(a)&&oSym.addTask(4000, arguments.callee,[a]);
@@ -2588,6 +2619,8 @@ getFreeze:function(){},
       id: d
     }, a, EDPZ);
   },
+  getSlow:function(){},
+  getFreeze:function(){},
   ChangeCallback:function(c){
 	SetStyle($(c.id + "_Bullet"),{
 		left:(c.AttackedLX-60)+"px",
@@ -2926,6 +2959,7 @@ NewEle("oAttack_" + c.id, "div",
         SunNum: 100,
         coolTime: 50,
 		getFreeze:function(){},
+		getSlow:function(){},
         PicArr: ["images/Card/Plants/IceShroom.png", "images/Plants/IceShroom/0.gif", "images/Plants/IceShroom/IceShroom.gif", "images/Plants/IceShroom/IceShroomSleep.gif", "images/Plants/IceShroom/Snow.gif", "images/Plants/IceShroom/icetrap.gif"],
         AudioArr: ["frozen", "wakeup"],
         Tooltip: "暂时使画面里的所有敌人停止行动",
