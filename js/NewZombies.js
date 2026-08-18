@@ -278,18 +278,59 @@ oPeaZombie = InheritO(oZombie, {
 shootPeaSpeed:140,
 CanPass:CZombies.prototype.CanPass,
    HP:300,
-  jinyinAct:function(a){a.Ele.style.opacity=0.5,a.HP*=1.5},
+  jinyinAct:function(a){
+	  a.num=Math.random()*100||a.Privatenum;
+	  if(a.num>=50){
+	  a.Ele.style.opacity=0.5;
+	  a.HP*=1.5;
+	  a.shootPeaSpeed*=0.5;
+	  }else{
+		  a.shootPea1=oSnowPea.prototype.NormalAttack;
+		  a.shootPea=function() {
+    var a = this,
+      b = "PB" + Math.random();
+    EditEle(a.BulletEle.cloneNode(false), {
+        id: b
+      },
+      0, EDPZ);
+    oSym.addTask(1,
+      function(d) {
+        var c = $(d);
+        c && SetVisible(c)
+      },
+      [b]);
+    oSym.addTask(1,
+      function(f, j, n, i, o) {
+        var l, e = GetC(n);
+        var Kind = 3,
+			Z = oZ["getHZ1"](n,i),
+          d, isHit;
+		Z && Z.Altitude == 1 && (Z.getSnowPea(Z,25*a.level,0),Math.random*100<5&&Z.getFreeze(Z,Z.id),isHit=true);
+        while (Kind--) {
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getSnowPea(a,25*a.level,1500),Math.random*100<5&&d.getFreeze(d,d.id))
+        }
+	  isHit?((SetStyle(j, {
+            left: o + 28 + "px",
+            width: "52px",
+            height: "46px"
+          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])):((n += (l = -5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 140) + "px",j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+      },
+      [b, $(b), a.ZX, a.R, a.ZX - 20])
+  }
+	  }
+  },
   GoingDieHead:function(){},
+  NormalAttack1:function(){},
   PrivateBirth: function() {
     var c = this;
-    c.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (c.AttackedLX) + "px;top:" + (c.pixelTop + 20) + "px;visibility:hidden;z-index:" + (c.zIndex + 2));
+    c.BulletEle = NewImg(0, c.num<50?oSnowPea.prototype.PicArr[3]:oPeashooter.prototype.PicArr[3], "left:" + (c.AttackedLX) + "px;top:" + (c.pixelTop + 20) + "px;visibility:hidden;z-index:" + (c.zIndex + 2));
     oSym.addTask(100, function(c) {
-      c.canWalk(c,c.id) && c.beAttacked && (c.shootPea(c),c.jinyin&&c.getHit0(c,10));
-      $Z[c.id] ? oSym.addTask(c.shootPeaSpeed-(c.jinyin*c.shootPeaSpeed*0.5), arguments.callee, [c]) : c.BulletEle = null;
+      c.canWalk(c,c.id) && c.beAttacked && (c.shootPea(c),c.jinyin&&(c.num>=50)&&c.getHit0(c,10));
+      $Z[c.id] ? oSym.addTask(c.shootPeaSpeed, arguments.callee, [c]) : c.BulletEle = null;
     }, [c]);
 	var z = $(c.id);
     z.PeaHead = "Pea" + Math.random();
-    var pea = NewImg(z.PeaHead,"images/Plants/Peashooter/Peashooter.gif","position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
+    var pea = NewImg(z.PeaHead,c.num<50?"images/Plants/SnowPea/SnowPea.gif":"images/Plants/Peashooter/Peashooter.gif","position:absolute;width:80px;height:80px;transform:rotateY(180deg);left:45px;top:15px;",0);
     z.appendChild(pea);
   },
   bedevil: function(c,a) {
@@ -297,21 +338,23 @@ CanPass:CZombies.prototype.CanPass,
 	c.WalkDirection = 1;
     c.ZX = c.AttackedRX;
     c.ChkActs = c.ChkActs1;
-	c.PeaDire=c.PeaKind=0;
-    c.shootPea = oPeashooter.prototype.NormalAttack;
+	c.PeaDire=0;
+	c.PeaKind=(c.num<50?-1:0);
+    c.shootPea = c.shootPea1;
 	if(!a){
     c.JudgeAttack = c.JudgeAttackH;
     c.PZ = 0;
     oP.MonPrgs()
 	}
   },
+  shootPea1:oPeashooter.prototype.NormalAttack,
   PrivateAct:function(a){
 var z=a.Ele;
 	  if($Z[a.id]&&!a.IsDie){
 	a.WalkDirection==a.check&&(
-	EditImg($(z.PeaHead),0,"images/Plants/Peashooter/Peashooter.gif",{
+	SetStyle($(z.PeaHead),{
 		transform:!a.WalkDirection?"rotateY(180deg)":"rotateY(0deg)"
-	},0),a.check=a.WalkDirection?0:1);
+	}),a.check=a.WalkDirection?0:1);
 	!a.beAttacked&&(ClearChild($(z.PeaHead)),a.IsDie=true);
 	  }
   },
@@ -324,10 +367,6 @@ PrivateDie:function(a){
       b = "PB" + Math.random();
     EditEle(a.BulletEle.cloneNode(false), {
         id: b
-      },
-      0, EDPZ);
-	EditEle($(b), {
-        top:(GetY(a.R)-60) + "px"
       },
       0, EDPZ);
     oSym.addTask(1,
@@ -352,10 +391,10 @@ PrivateDie:function(a){
             height: "46px"
           })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])):((n += (l = -5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 140) + "px",j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
       },
-      [b, $(b), a.ZX, a.R, a.ZX - 40])
+      [b, $(b), a.ZX, a.R, a.ZX - 20])
   },
 Lvl:2,
-  Produce: '韧性：<font color="#FF0000">低(300)</font><br>精英形态：450血，攻速变快，但每次攻击扣自己10血</p>只是一只普普通通的小豌豆僵尸'
+  Produce: '韧性：<font color="#FF0000">低(300)</font><br>精英形态一：450血，攻速变快，但每次攻击扣自己10血<br>精英形态二：寒冰射手僵尸，发射寒冰子弹</p>只是一只普普通通的小豌豆僵尸'
 }),
 oWallNutZombie = InheritO(oConeheadZombie, {
     EName: "oWallNutZombie",
