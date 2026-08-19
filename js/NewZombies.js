@@ -968,9 +968,10 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
 jianshangtime:500,
  getAid:function(a,d,c){
 	 a.jianshang*=0.75;
+	 a.ofilter=a.EleBody.style.filter;
 	 a.EleBody.style.filter = "sepia(1) hue-rotate(20deg) brightness(5)";
 	 oSym.addTask(c,function(a,d){
-		$Z[a.id]&&(a.id!=d)&&(a.jianshang/=0.75,a.EleBody.style.filter = "sepia(0) hue-rotate(0deg) brightness(1)");
+		$Z[a.id]&&(a.id!=d)&&(a.jianshang/=0.75,a.EleBody.style.filter = a.ofilter);
 	 },[a,d])
  },
   checkP: function(b) {
