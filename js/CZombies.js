@@ -1471,12 +1471,10 @@ oZombie = InheritO(OrnNoneZombies, {
                 t.getHit=t.getHit1=t.getHit2=t.getHit3=t.getHit0=OrnIZombies.prototype.getHit0;
 				t.Ornaments=1,
 				t.PlayNormalballAudio = oBucketheadZombie.prototype.PlayNormalballAudio;
-             t.CName!== "铁桶鸭子救生圈僵尸"?(t.NormalGif = 2,
-                  t.AttackGif = 3,
-                  t.EleBody.src = t.isAttacking ? t.PicArr[3] : t.PicArr[2]):
-				 (t.NormalGif = 3,
-                  t.AttackGif = 5,
-                  t.EleBody.src = t.isAttacking ? t.PicArr[5] : t.PicArr[3])
+				t.PlayNormalballAudio();
+                  t.NormalGif = 2;
+                  t.AttackGif = 3;
+                  t.EleBody.src = t.isAttacking ? t.PicArr[3] : t.PicArr[2]
 			}
 			$Z[t.id]&&oSym.addTask(1000,arguments.callee,[t])
 			},[a])
@@ -2319,9 +2317,13 @@ p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.Attack
             return 5
         },
 		jinyinAct:function(a){
-			a.GoingDieHead=function(){}
+			a.GoingDieHead=function(){};
+			a.getThump=function(Att){
+				Att==undefined&&(Att=1800);
+				a.getHit0(a,Math.min(Att,a.HP-20),0)
+			};
 			a.PrivateAct=function(a){
-				!a.beAttacked&&(CustomZombie(oSmallDuckyTubeZombie1,a.R,GetC(a.ZX),!a.PZ),CustomZombie(oSmallDuckyTubeZombie1,a.R,GetC(a.ZX)+1,!a.PZ),a.DisappearDie())
+				!a.beAttacked&&(CustomZombie(oSmallDuckyTubeZombie1,a.R,GetC(a.ZX),!a.PZ),CustomZombie(oSmallDuckyTubeZombie1,a.R,GetC(a.ZX),!a.PZ),a.DisappearDie())
 			}
 		},
         Produce: '鸭子救生圈能让僵尸能浮在水面上<br>水路普通僵尸精英形态：<font color="#FF0000">濒死时分裂两只小鸭子救生圈僵尸</font><br><font color="#FF0000">水路铁桶无精英</font><br>韧性：<font color="#FF0000">低</font><br>只在水池关卡出现</font></p>只有特定的僵尸才能成为救生圈僵尸。并不是每个僵尸都能胜任的。有些救生圈有点漏气，但他们没能注意到，所以他们离开并放弃了对脑子的渴求。',
@@ -3094,11 +3096,17 @@ jinyinWalkGif12: 14,
             })
         },
 		jinyinAct:function(a){
+		a.num=Math.random()*100||a.Privatenum;
+		if(a.num>=50){
 		a.PicArr=(function() {
             var a = "images/Zombies/DolphinRiderZombie/";
             return ["images/Card/Zombies/DolphinRiderZombie.png", a + "0.gif", a + "jinyinWalk1.gif", a + "jinyinWalk2.gif", a + "1.gif", a + "Attack.gif", a + "Head.gif" + $Random, a + "jinyinDie.gif" + $Random, a + "jinyinJump.gif" + $Random, a + "jinyinJump2.gif" + $Random, a + "Walk3.gif", a + "Walk4.gif", a + "Die2.gif" + $Random, a + "jinyinJump3.gif" + $Random]
         })();
 		a.EleBody.src=(a.Altitude==1?a.PicArr[2]:a.PicArr[8])
+		}else{
+			SetHidden(a.EleBody,a.EleShadow);
+			a.Altitude=2;
+		}
 		},
         ChkActsL1: function(d, c, e, b) {
             if (d.JumpTime <= 0) {
@@ -3142,9 +3150,10 @@ jinyinWalkGif12: 14,
                     (p = g[d + e + "_" + a--]) && (p.EName != "oBrains" ? p.AttackedRX >= b && p.AttackedLX < b && (a = -1, f.JudgeAttack = CZombies.prototype.JudgeAttack, f.NormalAttack(f.id, p.id, p.AttackedLX)) : p.AttackedRX >= b && p.AttackedLX < b && (a = -1, f.JudgeAttack = CZombies.prototype.JudgeAttack, (f.NormalAttack = CZombies.prototype.NormalAttack)(f.id, p.id)))) {}
             }
         },
-        AttackZombie2: function(c, b, a) {
-            c.NormalAttack(b, a, $Z[a].AttackedLX)
+        AttackZombie: function(c,a) {
+            c.NormalAttack(c,a,$Z[a].AttackedRX)
         },
+		LostPaperSpeed:1.6,
         NormalAttack: function(d, b, g) {
             var f = $Z[d],
                 a = f.Ele,
@@ -3169,7 +3178,8 @@ jinyinWalkGif12: 14,
                             q.src = h.PicArr[10];
                             h.isAttacking = 0;
                             h.Altitude = 1;
-                            h.OSpeed = h.Speed = 1.6;
+                            h.Speed = (!h.FreeSlowTime?h.LostPaperSpeed:h.LostPaperSpeed*0.5);
+							h.OSpeed = h.LostPaperSpeed;
                             h.WalkGif0 = 11;
                             h.NormalGif = h.WalkGif1 = 10;
                             h.LostHeadGif = h.DieGif = 12;
@@ -3181,7 +3191,7 @@ jinyinWalkGif12: 14,
                         };
                     h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = r = k.AttackedRX) - (h.beAttackedPointL = 45)) + (h.beAttackedPointR = 100), SetStyle(i, {
                         left: h.X + "px"
-                    }), h.EleShadow.style.left = "45px", n()) : (h.jinyin&&k&&k.getLadder(k),h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g) - (h.beAttackedPointR = 100)) + (h.beAttackedPointL = 45), SetStyle(i, {
+                    }), h.EleShadow.style.left = "45px", n()) : (h.num>=50&&h.jinyin&&k&&k.getLadder(k),h.ZX = h.AttackedLX = (h.X = (h.AttackedRX = g-(h.WalkDirection?-h.plusJump:h.plusJump)) - (h.beAttackedPointR = 100)) + (h.beAttackedPointL = 45), SetStyle(i, {
                         left: h.X + "px"
                     }), h.EleShadow.style.left = "45px", q.src = h.PicArr[13] + Math.random(), oSym.addTask(170,
                         function(t, w) {
@@ -3229,18 +3239,28 @@ oImp = InheritO(OrnNoneZombies, {
   jinyinAct: function(a) {
 a.num=Math.random()*100||a.Privatenum;
 if(a.num>=50){
-    var z = a.Ele;
+    let z = a.Ele;
     z.JaHead = "Ja" + Math.random();
 	a.JudgeAttack=function(){};
-    var Ja = NewImg(z.JaHead, "images/Plants/PotatoMine/PotatoMineNotReady.gif", "position:absolute;transform:rotateY(180deg);left:0px;top:20px;", 0);
+    let Ja = NewImg(z.JaHead, "images/Plants/PotatoMine/PotatoMineNotReady.gif", "position:absolute;transform:rotateY(180deg);left:0px;top:20px;", 0);
     z.appendChild(Ja);
+	a.PrivateAct = function(a) {
+    let p = a.Ele;
+	a.WalkDirection==a.check&& !a.bool && a.beAttacked && (
+        EditImg($(p.JaHead), 0, "images/Plants/PotatoMine/PotatoMine.gif", {
+          transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
+          left: !a.WalkDirection ? "20px" : "0px"
+        }, 0),
+        a.check = a.WalkDirection?0:1);
+      !a.beAttacked && ClearChild($(p.JaHead));
+    };
 	oSym.addTask(250,function(a,z){
 	$(z.JaHead)&&($(z.JaHead).src="images/Plants/PotatoMine/PotatoMine.gif");
-    a.PrivateAct = function(a) {
-      var p = a.Ele;
+    $Z[a.id]&&(a.PrivateAct = function(a) {
+      let p = a.Ele;
       if (!a.bool && a.beAttacked&&a.canWalk(a,a.id)) {
         for (i = 3; i >= 0; i--) {
-          var tp = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
+          let tp = oGd.$[a.R + "_" + GetC(a.ZX) + "_" + i];
           if (tp && tp.canEat && a.PZ) {
             let l = GetX(tp.C) - 80,
               t = GetY(tp.R) - 80;
@@ -3249,8 +3269,8 @@ if(a.num>=50){
             tp.getHurt(a, 3, 1000*a.level);
           }
 		}
-		  var tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 40, a.ZX + 40, a.R);
-          var tzl = tz.length;
+		  let tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 40, a.ZX + 40, a.R);
+          let tzl = tz.length;
           while (tzl--) {
             if (tz[tzl] && (tz[tzl].Altitude == 1) && tz[tzl].beAttacked) {
               a.bool = 1;
@@ -3266,7 +3286,7 @@ if(a.num>=50){
         }, 0),
         a.check = a.WalkDirection?0:1);
       !a.beAttacked && ClearChild($(p.JaHead));
-    }
+    })
 	},[a,z]);
 	}else{
 		a.hiddenCard=Math.floor(Math.random()*$("dCardList").childNodes.length);
@@ -3347,21 +3367,20 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   })(),
   jinyinAct: function(a) {
     a.num=Math.random()*100||a.Privatenum;
-    var z = a.Ele;
+    let z = a.Ele;
     z.JaHead = "Ja" + Math.random();
-    var Ja = NewImg(z.JaHead, a.num>=50 ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/CherryBomb/CherryBomb.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:60px;top:30px;", 0);
+    let Ja = NewImg(z.JaHead, a.num>=50 ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/CherryBomb/CherryBomb.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:60px;top:30px;", 0);
     z.appendChild(Ja);
     a.PrivateAct = function(a) {
-      var p = a.Ele;
+      let p = a.Ele;
       a.WalkDirection == a.check&& (
-        EditImg($(p.JaHead), 0, a.num>=50 ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/CherryBomb/CherryBomb.gif", {
+        SetStyle($(p.JaHead), {
           transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
           left: !a.WalkDirection ? "60px" : "20px"
-        }, 0),
+        }),
         a.check = a.WalkDirection?0:1);
-		!a.beAttacked&&$Z[a.id]&&ClearChild($(p.JaHead));
       if (a.num<50&&a.jinyin&& !a.opennum) {
-        a.canWalk(a, a.id) && $Z[a.id].beAttacked && ($Z[a.id].HP < 210) && (a.OpenBox(a.id), a.opennum = 1)
+        a.canWalk(a, a.id) && $Z[a.id].beAttacked && ($Z[a.id].HP < 210) && (a.OpenBox(a.id), a.opennum = true)
       }
     }
   },
