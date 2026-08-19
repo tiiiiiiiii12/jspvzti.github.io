@@ -592,14 +592,16 @@ oNutZombie = InheritO(oTallNutZombie, {
     })(),
 	PrivateAct:oWallNutZombie.prototype.PrivateAct,
 	GoingDie:function(a){
-		if(this.PZ){
-		delete oGd.$Crater[this.SetR+"_"+this.SetC];
-		}
 		this.DisappearDie();
 	},
 	getr:function(){},
 	getSlow:function(){},
 	getFreeze:function(){},
+	PrivateDie:function(){		
+		if(this.PZ){
+		delete oGd.$Crater[this.SetR+"_"+this.SetC];
+		}
+	},
 	ExplosionDie:function(a){
 		this.DisappearDie();
 	},
@@ -649,7 +651,7 @@ oNutZombie = InheritO(oTallNutZombie, {
 			},
 		PrivateAct:function(a){     
 		var z=a.Ele;
-		a.ZX<=850&&!a.intograss&&(oSym.addTask(Math.random()*700+2000,function(a){
+		a.ZX<=850&&!a.intograss&&(oSym.addTask(Math.random()*700+1800,function(a){
 			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.DisappearDie())
 		},[a]),a.intograss=true);
 	  if($Z[a.id]&&!a.IsDie){
@@ -908,7 +910,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
   CName: "扶梯僵尸",
   OrnHP: 500,
   Lvl:3,
-  HP: 340,
+  HP: 400,
   BreakPoint: 1,
   SunNum: 125,
   StandGif: 13,
