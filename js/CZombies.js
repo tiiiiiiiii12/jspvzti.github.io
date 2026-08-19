@@ -191,7 +191,7 @@ Birth: function() {
   c.MaxHP=c.HP;
   c.MaxOrnHP=c.OrnHP;
   if (c.HPlook) {
-    var B = NewEle("dHP"+c.id, "div", "position:absolute;color:yellow;width:80px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
+    var B = NewEle("dHP"+c.id, "div", "position:absolute;color:yellow;width:80px;height:30px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
     oSym.addTask(0, function(c,B) {
       B.innerHTML = (c.OrnHP > 0 ? c.OrnHP + "+" + c.HP : c.HP) +"<br>精英:"+c.jinyin
       oSym.addTask(5, arguments.callee, [c,B])
@@ -2318,7 +2318,13 @@ p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.Attack
         GetDY: function() {
             return 5
         },
-        Produce: '鸭子救生圈能让僵尸能浮在水面上<br><font color="#FF0000">水路普僵、铁桶无精英</font><br>韧性：<font color="#FF0000">低</font><br>只在水池关卡出现</font></p>只有特定的僵尸才能成为救生圈僵尸。并不是每个僵尸都能胜任的。有些救生圈有点漏气，但他们没能注意到，所以他们离开并放弃了对脑子的渴求。',
+		jinyinAct:function(a){
+			a.GoingDieHead=function(){}
+			a.PrivateAct=function(a){
+				!a.beAttacked&&(CustomZombie(oSmallDuckyTubeZombie1,a.R,GetC(a.ZX),!a.PZ),CustomZombie(oSmallDuckyTubeZombie1,a.R,GetC(a.ZX)+1,!a.PZ),a.DisappearDie())
+			}
+		},
+        Produce: '鸭子救生圈能让僵尸能浮在水面上<br>水路普通僵尸精英形态：<font color="#FF0000">濒死时分裂两只小鸭子救生圈僵尸</font><br><font color="#FF0000">水路铁桶无精英</font><br>韧性：<font color="#FF0000">低</font><br>只在水池关卡出现</font></p>只有特定的僵尸才能成为救生圈僵尸。并不是每个僵尸都能胜任的。有些救生圈有点漏气，但他们没能注意到，所以他们离开并放弃了对脑子的渴求。',
         PicArr: (function() {
             var a = "images/Zombies/DuckyTubeZombie1/";
             return ["images/Card/Zombies/DuckyTubeZombie1.png", a + "0.gif", a + "Walk1.gif", a + "Walk2.gif", a + "1.gif", a + "Attack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, a + "Die.gif" + $Random]
@@ -2545,24 +2551,27 @@ jinyinWalkGif12: 14,
         SunNum: 15,
         width: 83,
         height: 72,
+		OSpeed:1.9,
+		Speed:1.9,
         beAttackedPointL: 41,
         beAttackedPointR: 78,
         BreakPoint: 25,
-        Init: function(e, g, c, b) {
-            var a = 0,
-                f = this,
-                d = [];
-            g.AttackedRX = (g.X = (g.ZX = g.AttackedLX = e) - g.beAttackedPointL) + g.beAttackedPointR;
-            while (--b) {
-                g.CanPass(b, c[b]) && (d[a++] = b)
-            }
-            g.ArR = d;
-            g.ArHTML = ['<div id="', '" style="position:absolute;display:', ";left:", "px;top:", "px;z-index:", '"><img src="' + ShadowPNG + '" style="' + g.getShadow(g) + '"><img style="position:absolute;clip:rect(0,auto,', ",0);width:83px;height:72px;top:", 'px" src="', '"></div>']
-        },
+		PrivateBirth:function(a){
+			SetStyle(a.EleBody,{
+				width:"83px",
+				height:"72px"
+			});
+			SetStyle(a.EleShadow,{
+				width:"43px",
+				height:"18px",
+				left:(a.beAttackedPointL - 5) + "px",
+				top:(a.height - 15) + "px"
+			})
+		},
         GoingDieHead: function(c, a, b) {
             oSym.addTask(200, ClearChild, [NewImg(0, a[b.HeadGif] + Math.random(), "width:75px;height:93px;left:" + b.AttackedLX + "px;top:" + (b.pixelTop - 20) + "px;z-index:" + b.zIndex, EDPZ)])
         },
-        getShadow: function(a) {
+		getShadow: function(a) {
             return "width:43px;height:18px;left:" + (a.beAttackedPointL - 5) + "px;top:" + (a.height - 15) + "px"
         }
     }),
@@ -2604,21 +2613,26 @@ jinyinWalkGif12: 14,
         beAttackedPointL: 41,
         beAttackedPointR: 73,
         BreakPoint: 25,
-        Init: function(e, g, c, b) {
-            var a = 0,
-                f = this,
-                d = [];
-            g.AttackedRX = (g.X = (g.ZX = g.AttackedLX = e) - g.beAttackedPointL) + g.beAttackedPointR;
-            while (--b) {
-                g.CanPass(b, c[b]) && (d[a++] = b)
-            }
-            g.ArR = d;
-            g.ArHTML = ['<div id="', '" style="position:absolute;display:', ";left:", "px;top:", "px;z-index:", '"><img src="' + ShadowPNG + '" style="' + g.getShadow(g) + '"><img style="position:absolute;clip:rect(0,auto,', ",0);width:83px;height:72px;top:", 'px" src="', '"></div>']
-        },
+		Speed:2,
+		OSpeed:2,
+		jinyinnum:0,
+		jinyinAct:function(){},
+	    PrivateBirth:function(a){
+			SetStyle(a.EleBody,{
+				width:"83px",
+				height:"72px"
+			});
+			SetStyle(a.EleShadow,{
+				width:"43px",
+				height:"18px",
+				left:(a.beAttackedPointL - 5) + "px",
+				top:(a.height - 15) + "px"
+			})
+		},
         GoingDieHead: function(c, a, b) {
             oSym.addTask(200, ClearChild, [NewImg(0, a[b.HeadGif] + Math.random(), "width:75px;height:93px;left:" + b.AttackedLX + "px;top:" + (b.pixelTop - 20) + "px;z-index:" + b.zIndex, EDPZ)])
         },
-        getShadow: function(a) {
+		getShadow: function(a) {
             return "width:43px;height:18px;left:" + (a.beAttackedPointL - 5) + "px;top:" + (a.height - 15) + "px"
         }
     }),
@@ -2633,17 +2647,18 @@ jinyinWalkGif12: 14,
         beAttackedPointL: 41,
         beAttackedPointR: 78,
         BreakPoint: 25,
-        Init: function(e, g, c, b) {
-            var a = 0,
-                f = this,
-                d = [];
-            g.AttackedRX = (g.X = (g.ZX = g.AttackedLX = e) - g.beAttackedPointL) + g.beAttackedPointR;
-            while (--b) {
-                g.CanPass(b, c[b]) && (d[a++] = b)
-            }
-            g.ArR = d;
-            g.ArHTML = ['<div id="', '" style="position:absolute;display:', ";left:", "px;top:", "px;z-index:", '"><img src="' + ShadowPNG + '" style="' + g.getShadow(g) + '"><img style="position:absolute;clip:rect(0,auto,', ",0);width:83px;height:72px;top:", 'px" src="', '"></div>']
-        },
+		PrivateBirth:function(a){
+			SetStyle(a.EleBody,{
+				width:"83px",
+				height:"72px"
+			});
+			SetStyle(a.EleShadow,{
+				width:"43px",
+				height:"18px",
+				left:(a.beAttackedPointL - 5) + "px",
+				top:(a.height - 15) + "px"
+			})
+		},
         GoingDieHead: function(c, a, b) {
             oSym.addTask(200, ClearChild, [NewImg(0, a[b.HeadGif] + Math.random(), "width:75px;height:93px;left:" + b.AttackedLX + "px;top:" + (b.pixelTop - 20) + "px;z-index:" + b.zIndex, EDPZ)])
         },
@@ -2662,17 +2677,18 @@ jinyinWalkGif12: 14,
         beAttackedPointL: 20,
         beAttackedPointR: 77,
         BreakPoint: 25,
-        Init: function(e, g, c, b) {
-            var a = 0,
-                f = this,
-                d = [];
-            g.AttackedRX = (g.X = (g.ZX = g.AttackedLX = e) - g.beAttackedPointL) + g.beAttackedPointR;
-            while (--b) {
-                g.CanPass(b, c[b]) && (d[a++] = b)
-            }
-            g.ArR = d;
-            g.ArHTML = ['<div id="', '" style="position:absolute;display:', ";left:", "px;top:", "px;z-index:", '"><img src="' + ShadowPNG + '" style="' + g.getShadow(g) + '"><img style="position:absolute;clip:rect(0,auto,', ",0);width:77px;height:80px;top:", 'px" src="', '"></div>']
-        },
+		PrivateBirth:function(a){
+			SetStyle(a.EleBody,{
+				width:"77px",
+				height:"80px"
+			});
+			SetStyle(a.EleShadow,{
+				width:"43px",
+				height:"18px",
+				left:(a.beAttackedPointL+15) + "px",
+				top:(a.height - 22) + "px"
+			})
+		},
         GoingDieHead: function(c, a, b) {
             oSym.addTask(200, ClearChild, [NewImg(0, a[b.HeadGif] + Math.random(), "width:75px;height:93px;left:" + b.AttackedLX + "px;top:" + (b.pixelTop - 20) + "px;z-index:" + b.zIndex, EDPZ)])
         },
@@ -2690,17 +2706,18 @@ jinyinWalkGif12: 14,
         beAttackedPointL: 20,
         beAttackedPointR: 50,
         BreakPoint: 25,
-        Init: function(e, g, c, b) {
-            var a = 0,
-                f = this,
-                d = [];
-            g.AttackedRX = (g.X = (g.ZX = g.AttackedLX = e) - g.beAttackedPointL) + g.beAttackedPointR;
-            while (--b) {
-                g.CanPass(b, c[b]) && (d[a++] = b)
-            }
-            g.ArR = d;
-            g.ArHTML = ['<div id="', '" style="position:absolute;display:', ";left:", "px;top:", "px;z-index:", '"><img src="' + ShadowPNG + '" style="' + g.getShadow(g) + '"><img style="position:absolute;clip:rect(0,auto,', ",0);width:71px;height:100px;top:", 'px" src="', '"></div>']
-        },
+		PrivateBirth:function(a){
+			SetStyle(a.EleBody,{
+				width:"71px",
+				height:"100px"
+			});
+			SetStyle(a.EleShadow,{
+				width:"43px",
+				height:"18px",
+				left:a.beAttackedPointL + "px",
+				top:(a.height - 45) + "px"
+			})
+		},
         GoingDieHead: function(c, a, b) {
             oSym.addTask(200, ClearChild, [NewImg(0, a[b.HeadGif] + Math.random(), "width:71px;height:105px;left:" + b.AttackedLX + "px;top:" + (b.pixelTop - 20) + "px;z-index:" + b.zIndex, EDPZ)])
         },
@@ -2841,11 +2858,11 @@ jinyinWalkGif12: 14,
         for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX)+1; i++) {
           for (let l = 0; l <= 3; l++) {
             var m = oGd.$[LR + "_" + i + "_" + l];
-            a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500),m.getHurt(m,3,50*a.level)))
+            a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500),m.getHurt(m,3,100*a.level)))
           }
         };
         while (Tz--) {
-          (t = A[Tz])&&a.canWalk(a,a.id)&& (t.getFreeze(t,t.id,500),t.getHit2(t,50*a.level))
+          (t = A[Tz])&&a.canWalk(a,a.id)&& (t.getFreeze(t,t.id,500),t.getHit2(t,100*a.level))
         };
 	}while(LR++ < Math.min(a.R+1,oS.R))
       $Z[a.id]&&(PlayAudio("frozen"),oSym.addTask(1000, arguments.callee, [a]))
