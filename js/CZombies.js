@@ -1514,8 +1514,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
   jinyinAct: function(a) {
     a.num = Math.random() * 100 || a.Privatenum;
     if (a.num >= 50) {
-      a.PicArr = a.PicArr2;
-      a.EleBody.src = a.PicArr[a.NormalGif];
+	  a.EleBody.style.filter = "brightness(0.8) contrast(1.3)";
       a.Speed *= 0.75;
       a.OSpeed *= 0.75;
       a.getFreeze = function() {};
@@ -1576,7 +1575,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
   getShadow: function(a) {
     return "left:" + (a.beAttackedPointL + 15) + "px;top:" + (a.height - 22) + "px"
   },
-  Produce: '橄榄球僵尸的表演秀。<br>韧性：<font color="#FF0000">极高</font><br>精英形态一：黑橄榄，两倍头盔血量，速度减慢，免疫冻结<br>精英形态二：每隔一段时间射出一个篮球，篮球在植物与僵尸间回弹，回弹一定次数后销毁<br>速度：<font color="#FF0000">快</font><br>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么，不然他也不会去踢篮球<br>黑橄榄贴图来源：江南游戏'
+  Produce: '橄榄球僵尸的表演秀。<br>韧性：<font color="#FF0000">极高</font><br>精英形态一：黑橄榄，两倍头盔血量，速度减慢，免疫冻结<br>精英形态二：每隔一段时间射出一个篮球，篮球在植物与僵尸间回弹，回弹一定次数后销毁<br>速度：<font color="#FF0000">快</font><br>在球场上，橄榄球僵尸表现出110%的激情，他进攻防守样样在行。虽然他完全不知道橄榄球是什么，不然他也不会去踢篮球'
 }),
     oPoleVaultingZombie = InheritO(OrnNoneZombies, {
         EName: "oPoleVaultingZombie",
