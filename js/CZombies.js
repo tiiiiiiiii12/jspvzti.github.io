@@ -1514,7 +1514,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
   jinyinAct: function(a) {
     a.num = Math.random() * 100 || a.Privatenum;
     if (a.num >= 50) {
-	  a.EleBody.style.filter = "brightness(0.8) contrast(1.3)";
+	  a.EleBody.style.filter = "brightness(0.8) contrast(1.6)";
       a.Speed *= 0.75;
       a.OSpeed *= 0.75;
       a.getFreeze = function() {};
@@ -2732,7 +2732,7 @@ jinyinWalkGif12: 14,
             switch (true) {
                 case (d.HP = c -=b*d.jianshang) < 60:
 					if(d.num>=50){
-						d.HP=390;
+						d.HP=d.BreakPoint2;
 						d.OSpeed*=2;
 						d.Speed*=2;
 						$(d.Ele.FumeDoor).src="images/Plants/PB10.gif";
@@ -2742,11 +2742,11 @@ jinyinWalkGif12: 14,
 					d.getHit0 = d.getHit1 = d.getHit2 = d.getHit3 = function(d,b) {(d.HP-=b)<0&&d.NormalDie()};
 					}
                     return;
-                case c < 391:
+                case c <= d.BreakPoint2:
 					d.num>=50&&(d.OSpeed*=2,d.Speed*=2,$(d.Ele.FumeDoor).src="images/Plants/PB10.gif",d.num=0);
                     d.EleBody.src = "images/Zombies/Zomboni/3.gif";
                     break;
-                case c < 871:
+                case c <= d.BreakPoint1:
                     d.EleBody.src = "images/Zombies/Zomboni/2.gif"
             }
             d.SetAlpha(d, d.EleBody, 50, 0.5);
@@ -2869,7 +2869,7 @@ jinyinWalkGif12: 14,
       $Z[a.id]&&(PlayAudio("frozen"),oSym.addTask(1000, arguments.callee, [a]))
     }, [a])):(a.getExplosion=a.getThump=function(b){
 		if(b==undefined){var b=1800}
-		a.getHit0(a,Math.min(b,a.num?a.HP-390:b),0)
+		a.getHit0(a,Math.min(b,a.num?a.HP-(a.BreakPoint2+1):b),0)
 	});
 	a.PrivateAct=function(a){
 		var P=$(a.id);
@@ -3029,6 +3029,10 @@ jinyinWalkGif12: 14,
             getThump: function() {
                 this.NormalDie()
             },
+			PrivateBirth:function(a){
+				a.BreakPoint1=Math.round(a.MaxHP*0.66);
+				a.BreakPoint2=Math.round(a.MaxHP*0.33);
+			},
             prepareBirth: function(f, R) {
                 var h = this,
                     e = h.ArR,
@@ -3070,6 +3074,7 @@ jinyinWalkGif12: 14,
         SunNum: 75,
         OSpeed: 3.2,
         Speed: 3.2,
+		plusJump:0,
         PicArr: (function() {
             var a = "images/Zombies/DolphinRiderZombie/";
             return ["images/Card/Zombies/DolphinRiderZombie.png", a + "0.gif", a + "Walk1.gif", a + "Walk2.gif", a + "1.gif", a + "Attack.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Jump.gif" + $Random, a + "Jump2.gif" + $Random, a + "Walk3.gif", a + "Walk4.gif", a + "Die2.gif" + $Random, a + "Jump3.gif" + $Random]
@@ -3105,6 +3110,7 @@ jinyinWalkGif12: 14,
 		}else{
 			SetHidden(a.EleBody,a.EleShadow);
 			a.Altitude=2;
+			a.plusJump=60;
 		}
 		},
         ChkActsL1: function(d, c, e, b) {
@@ -3461,7 +3467,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
                 g = n;
                 do {
                   j = q + "_" + g + "_";
-                  for (l = 0; l < 4; l++) {
+                  for (l = 0; l <= 4; l++) {
                     (m = r[j + l]) && m.BoomDie()
                   }
                 } while (g++ < h)
