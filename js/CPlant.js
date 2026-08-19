@@ -3815,7 +3815,7 @@ NormalAttack2: function() {
  
             self.InitImage(self.PotSize, self.XRay), self.FreshXRay(true); // 初始化图片等信息
         },
-		PKind:6,
+		PKind:4,
         PrivateBirth: function(self) {
             var Id = self.id,
                 Ele = self.Ele; // 获取
