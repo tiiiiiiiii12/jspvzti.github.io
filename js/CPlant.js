@@ -708,15 +708,17 @@ oSnowPea = InheritO(oPeashooter, {
     }
   },
 ChangeCallback:function(b){
+	oPeashooter.prototype.ChangeCallback(b);
+	if(b.jinyin){
 SetStyle($(b.id + "_Bullet"),{
 	left:(b.AttackRX) + "px",
 	top:(b.pixelTop+5) +"px"
 	});
-	oPeashooter.prototype.ChangeCallback(b);
 	SetStyle($("oAttack_" + b.id),{
 	left:(b.AttackedLX - 20) + "px",
 	top:(b.pixelTop - 10) +"px"
 	});
+	}
   },
   jinyinAct: function(b) {
     var B = NewEle("dskill", "div", "position:absolute;color:white;top:40px;left:10px;width:100px;font-size:16px;z-index:50", "", $(b.id));
@@ -1871,7 +1873,7 @@ NormalAttack:function(a){
           a = d.id;
         for (let i = oS.C; i >= 1; i--) {
           var e = oGd.$[d.R + "_" + i + "_" + 1];
-          e && (e.EName == "oTallNut") && !num && (e.getHurt(h, c, b), num = 1)
+          e && (e.EName == "oTallNut") &&e.jinyin&& !num && (e.getHurt(h, c, b), num = 1)
         };
 	  },
 	b.getHurt1=b.getHurt))
@@ -2002,8 +2004,10 @@ NormalAttack:function(a){
         },
         InitTrigger: function() {},
 	    ChangeCallback:function(c){
-			c.PrivateDie(c);
-			NewImg(c.id + "2", "images/Plants/PumpkinHead/PumpkinHead2.gif", "left:" + c.pixelLeft + "px;top:" + c.pixelTop + "px;z-index:" + (c.zIndex - 2), EDPZ)
+			SetStyle(c.id + "2", {
+				left:c.pixelLeft + "px",
+				top: c.pixelTop + "px"
+				)
 		},
         BirthStyle: function(c, d, b, a) {
             b.childNodes[1].src = "images/Plants/PumpkinHead/PumpkinHead1.gif";
@@ -2140,7 +2144,7 @@ NormalAttack:function(a){
         },
         getTriggerRange: function(a, b, c) {
             return [
-                [100, oS.W, 0]
+                [a.AttackedLX, a.AttackedRX+10, 0]
             ]
         },
         AttackCheck2: function(a) {
