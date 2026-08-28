@@ -2007,7 +2007,7 @@ NormalAttack:function(a){
 			SetStyle(c.id + "2", {
 				left:c.pixelLeft + "px",
 				top: c.pixelTop + "px"
-				)
+			})
 		},
         BirthStyle: function(c, d, b, a) {
             b.childNodes[1].src = "images/Plants/PumpkinHead/PumpkinHead1.gif";
