@@ -182,7 +182,7 @@ var oGargantuar = InheritO(oZombie, {
     h.canWalk(h, h.id) && h.hasthrew < h.throwImpnum && (GetC(h.ZX) > 3 || !h.PZ) && !h.isAttacking && (h.HP <= h.MaxHP * 0.5) && h.throwImp(h);
   },
   jinyinAct: function(a) {
-    a.num = Math.random() * 100 || a.Privatenum;
+    a.num = a.Privatenum||Math.random() * 100;
     let z = a.Ele;
     z.FumeDoor = "Fume" + Math.random();
     let Sh = NewImg(z.FumeDoor, a.num >= 50 ? "images/interface/target.png" : "images/Plants/Blover/Blover.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(0deg);" : "rotateY(180deg);") + "left:200px;top:80px", 0);
@@ -279,7 +279,7 @@ shootPeaSpeed:140,
 CanPass:CZombies.prototype.CanPass,
    HP:300,
   jinyinAct:function(a){
-	  a.num=Math.random()*100||a.Privatenum;
+	  a.num = a.Privatenum||Math.random() * 100;
 	  if(a.num>=50){
 	  a.Ele.style.opacity=0.5;
 	  a.HP*=1.5;
@@ -463,7 +463,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     },
 	PlayNormalballAudio:OrnNoneZombies.prototype.PlayNormalballAudio,
     jinyinAct: function(a) {
-	a.num=Math.random()*100||a.Privatenum;
+	a.num = a.Privatenum||Math.random() * 100;
 	if(a.num>=50){
       a.OSpeed *= 2;
       a.Speed *= 2;
@@ -663,7 +663,7 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpH
 	},
 	canBoomR:[],
 	jinyinAct:function(a){
-		a.num=Math.random()*100||a.Privatenum;
+		a.num = a.Privatenum||Math.random() * 100;
 		a.BirthImg(a);
 		if(a.num>=50){
 			a.PrivateCustom=function(i){
@@ -796,7 +796,7 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
   },
   jinyinAct: function(a) {
     var z = a.Ele;
-    a.num = Math.random() * 100 || a.Privatenum;
+    a.num = a.Privatenum||Math.random() * 100;
 	if (a.num<50){
 	z.FumeDoor = "Fume" + Math.random();
     var Sh = NewImg(z.FumeDoor, "images/interface/Sun.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:25px;top:60px;", 0);
@@ -930,7 +930,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     return ["images/Card/Zombies/LadderZombie.png", a + "1.gif", a + "Walk.gif", a + "Attack.gif", a + "Die.gif", a + "LostHeadAttack1.gif", a + "LostLadderWalk.gif", a + "LostLadderAttack.gif", a + "Die.gif", a + "Die.gif", b + "ZombieHead.gif" + $Random, a + "Die.gif" + $Random, b + "BoomDie.gif" + $Random, a + "1.gif", a + "throwLadder.gif"]
   })(),
   jinyinAct: function(a) {
-	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
+	a.num = a.Privatenum||Math.random() * 100;
 	if(!a.num){
     a.OSpeed /= 2;
     a.Speed /= 2;
