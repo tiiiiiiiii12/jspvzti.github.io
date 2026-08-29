@@ -2144,7 +2144,7 @@ NormalAttack:function(a){
         },
         getTriggerRange: function(a, b, c) {
             return [
-                [this.AttackedLX, this.AttackedRX+10, 0]
+                [this.AttackedLX-80, this.AttackedRX+80, 0]
             ]
         },
         AttackCheck2: function(a) {
