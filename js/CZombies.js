@@ -2873,7 +2873,7 @@ jinyinWalkGif12: 14,
       $Z[a.id]&&(PlayAudio("frozen"),oSym.addTask(1000, arguments.callee, [a]))
     }, [a])):(a.getExplosion=a.getThump=function(b){
 		if(b==undefined){var b=1800}
-		a.getHit0(a,Math.min(b,a.num?a.HP-(a.BreakPoint2+1):b),0)
+		a.getHit0(a,Math.min(b,a.num?a.HP-(a.BreakPoint2-1):b),0)
 	});
 	a.PrivateAct=function(a){
 		var P=$(a.id);
