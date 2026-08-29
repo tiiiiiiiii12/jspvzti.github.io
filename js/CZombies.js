@@ -625,7 +625,7 @@ Birth: function() {
       return e.getHTML(e.id = b, e.X, e.pixelTop = f, e.zIndex = 3 * g + 1, "none", j || 0, e.height + "px", e.PicArr[e.StandGif]);
     },
 		jinyinAct:function(a){
-			a.num=Math.random()*100||a.Privatenum;
+			a.num=a.Privatenum||Math.random()*100;
 			if(a.num>=50){
 			a.ZKind=-2;
 			a.ChangeChkActsTo0=function(){};
@@ -765,7 +765,7 @@ Birth: function() {
         LostHeadGif: 14,
 		jinyinAct:function(a){
 			var b=a.num;
-			if(!(a.num=Math.round(Math.random()*1+0)||a.Privatenum)){
+			if(!(a.num=a.Privatenum||Math.round(Math.random()*1+0))){
 				a.HP*=1.5;
 			a.JudgeLR=function(f, d, e, c, g) {
                     return e > 10 || e < 1 ? false : function() {
@@ -1207,7 +1207,7 @@ oZombie = InheritO(OrnNoneZombies, {
     return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "Zombie.gif", a + "ZombieAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif", a + "jinyinZombieWalk.gif", a + "jinyinZombieAttack.gif"]
   })(),
   jinyinAct: function(a) {
-    a.num = Math.random() * 100 || a.Privatenum;
+    a.num = a.Privatenum||Math.random() * 100;
     if (a.num >= 50) {
       a.NormalGif = a.jinyinGif;
       a.AttackGif = a.jinyinAttackGif;
@@ -1358,7 +1358,7 @@ oZombie = InheritO(OrnNoneZombies, {
 		jinyinGif2:14,
         jinyinAttackGif2:15,
 	jinyinAct: function(a) {
-    a.num = Math.random() * 100|| a.Privatenum;
+    a.num = a.Privatenum||Math.random() * 100;
 	a.NormalGif = a.num>=50?a.jinyinGif:a.jinyinGif2;
     a.AttackGif = a.num>=50?a.jinyinAttackGif:a.jinyinAttackGif2;
     a.EleBody.src = a.PicArr[a.NormalGif];
@@ -1379,14 +1379,17 @@ oZombie = InheritO(OrnNoneZombies, {
 	  a.getSlow=a.getFreeze=function(){};
 	  a.getSnowPea=a.getPea;
       a.PrivateBirth = function(h) {
+	  if(h.PZ){
         var e = h.id,
           c = h.Ele = $(e),
           d = h.R,
           f,
           b = oGd.$Ice;
         !b[d] ? (f = NewEle("dIceCar" + d, "div", "position:absolute;z-index:1;left:145px;top:" + (GetY(d) - 65) + "px;width:800px;height:72px", 0, EDPZ), NewImg("", "images/interface/blank.png", "position:absolute;clip:rect(0,auto,auto,800px);width:800px;height:72px;left:5px;background:url(images/Zombies/Zomboni/ice.png) repeat-x", f), NewImg("", "images/Zombies/Zomboni/ice_cap.png", "position:absolute;display:none;left:0", f), b[d] = [1, 11, h.AttackedLX]) : ++b[d][0];
+	  }
       };
       a.PrivateAct = function(e) {
+	if(e.PZ){
         var b, r, m, g, j = e.R,
           n = oGd.$Ice[j],
           d, h, f, c, l = $("dIceCar" + j);
@@ -1402,7 +1405,8 @@ oZombie = InheritO(OrnNoneZombies, {
         c = GetC(h);
         c > -1 && c < n[1] && (oGd.$Crater[j + "_" + c] = 1, n[1] = c);
         h > 120 && h < n[2] && (n[2] = h, l.firstChild.style.clip = "rect(0,auto,auto," + f + "px)", l.childNodes[1].style.left = Math.max(0, f) + "px");
-        e.AttackedLX > n[2]+60 && e.getr(e, e.PZ ? -e.Speed : e.Speed)//冰道上滑步
+        e.AttackedLX > n[2]+60 && e.getr(e, e.PZ ? -e.Speed*1.5 : e.Speed*1.5)//冰道上滑步
+	}
       };
       a.PrivateDie = function() {
         var d = this,
@@ -1442,7 +1446,7 @@ oZombie = InheritO(OrnNoneZombies, {
             PlayAudio(["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)])
         },
 		jinyinAct:function(a){
-			a.num=Math.random()*100||a.Privatenum;
+			a.num = a.Privatenum||Math.random() * 100;
 			if(a.num>=50){
 			a.NormalGif=a.jinyinGif;
 			a.AttackGif=a.jinyinAttackGif;
@@ -1480,7 +1484,7 @@ oZombie = InheritO(OrnNoneZombies, {
 			},[a])
 		  }
 		},
-        Produce: '他的铁桶头盔，能极大程度的承受伤害。<p>韧性：<font color="#FF0000">高</font><br>精英形态一：铁桶被打掉后，原地生成墓碑，铁桶掉落前可将前方血量低的植物变为墓碑</font><br>精英形态二：每隔一段时间给自己续铁桶</font><br>弱点：<font color="#FF0000">磁力菇</font></p>铁桶僵尸经常戴着水桶，在冷漠的世界里显得独一无二。但事实上，他只是忘记了，那铁桶还在他头上而已。'
+        Produce: '他的铁桶头盔，能极大程度的承受伤害。<p>韧性：<font color="#FF0000">高</font><br>精英形态一：铁桶被打掉后，原地生成墓碑，铁桶掉落前可将前方血量低的植物变为墓碑</font><br>精英形态二：每隔一段时间给自己续铁桶，速度变慢</font><br>弱点：<font color="#FF0000">磁力菇</font></p>铁桶僵尸经常戴着水桶，在冷漠的世界里显得独一无二。但事实上，他只是忘记了，那铁桶还在他头上而已。'
     }, {
         PicArr: {
             0: "images/Card/Zombies/BucketheadZombie.png",
@@ -1512,9 +1516,9 @@ oFootballZombie = InheritO(oConeheadZombie, {
     PlayAudio("plastichit")
   },
   jinyinAct: function(a) {
-    a.num = Math.random() * 100 || a.Privatenum;
+    a.num = a.Privatenum||Math.random() * 100;
     if (a.num >= 50) {
-	  a.EleBody.style.filter = "brightness(0.8) contrast(1.6)";
+	  a.EleBody.style.filter = "brightness(0.8) contrast(1.8)";
       a.Speed *= 0.75;
       a.OSpeed *= 0.75;
       a.getFreeze = function() {};
@@ -1649,7 +1653,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
     d && d.AttackedLX < oS.W && d.Altitude == 1 && !e.isAttacking && (e.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1,e.JudgeAttack=e.JudgeAttackH = CZombies.prototype.JudgeAttackH, e.NormalAttack(f, c = d.id, d.ZX+20))
   },
   jinyinAct: function(a) {
-	a.num=Math.round(Math.random()*1+0)||a.Privatenum;
+	a.num = a.Privatenum||Math.random() * 100;;
     a.num?a.ExchangeLR(a, 1):(a.PrivateAct=function(a){
 	for (let i = GetC(a.ZX-30);i>=1;i--) {
         for (let j = 0; j < 4; j++) {
@@ -1907,7 +1911,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
                 [b.id]))
         },
 		jinyinAct:function(a){
-			a.num=Math.round(Math.random()*1+0)||a.Privatenum;
+			a.num=a.Privatenum||Math.round(Math.random()*1+0);
 			a.num?(a.LostPaperGif=a.DieGif,a.Ele.style.opacity=0.7):(
 				a.tasktime*=0.5,a.OSpeed*=1.5,a.Speed*=1.5,a.LostPaperSpeed*=1.5,a.PicArr=a.PicArr2,a.EleBody.src=a.PicArr2[a.NormalGif],
 				a.PrivateAct=function(a){
@@ -2085,7 +2089,7 @@ p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.Attack
 },
   jinyinAct: function(a) {
     var z = a.Ele;
-    a.num = Math.random() * 300|| a.Privatenum;
+    a.num = a.Privatenum||Math.random() * 300;
 	a["jinyinAct"+Math.ceil(a.num*0.01)](a);
     a.num<=100 && (a.OrnHP *= 0.75);
     a.num>200 && (a.OrnHP *= 2.5);
@@ -2097,7 +2101,7 @@ p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.Attack
   PlayNormalballAudio: function() {
     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
   },
-  Produce: '他的铁栅门是有效的盾牌。<br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：手持大喷菇，对前方植物造成穿透伤害，防具血量降低<br>精英形态二：带着脑子，防具掉落后会逃跑到后方，召唤一个精英铁门并回头，啃咬血量较高的植物时会向前移动，有铁门时若本体受伤则换行<br>3.手持铲子，将植物铲至身后<br>弱点：大喷菇<br>脑子被吃了就是被吃了，不会启发一点灵智，相比之下，或许拿着脑子更有用',
+  Produce: '他的铁栅门是有效的盾牌。<br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：手持大喷菇，对前方植物造成穿透伤害，防具血量降低<br>精英形态二：带着脑子，防具掉落后会逃跑到后方，召唤一个精英铁门并回头，啃咬血量较高的植物时会向前移动，有铁门时若本体受伤则换行<br>精英形态三：手持铲子，将植物铲至身后<br>弱点：大喷菇<br>脑子被吃了就是被吃了，不会启发一点灵智，相比之下，或许拿着脑子更有用',
   GoingDie: CZombies.prototype.GoingDie,
   getFirePea: function(c, a, b) {
     PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
@@ -2846,7 +2850,7 @@ jinyinWalkGif12: 14,
             },
 			WalkToLadder:function(){},
 			jinyinAct:function(a){
-				a.num=Math.random()*100||a.Privatenum;
+				a.num = a.Privatenum||Math.random() * 100;
 				var z=$(a.id);
     z.FumeDoor = "Fume" + Math.random();
     var Sh = NewImg(z.FumeDoor, a.num>50 ? "images/Plants/Jalapeno/Jalapeno.gif" : "images/Plants/IceShroom/IceShroom.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:125px;top:280px;", 0);
@@ -3100,7 +3104,7 @@ jinyinWalkGif12: 14,
             })
         },
 		jinyinAct:function(a){
-		a.num=Math.random()*100||a.Privatenum;
+		a.num = a.Privatenum||Math.random() * 100;
 		if(a.num>=50){
 		a.PicArr=(function() {
             var a = "images/Zombies/DolphinRiderZombie/";
@@ -3242,7 +3246,7 @@ oImp = InheritO(OrnNoneZombies, {
     return 0
   },
   jinyinAct: function(a) {
-a.num=Math.random()*100||a.Privatenum;
+a.num = a.Privatenum||Math.random() * 100;
 if(a.num>=50){
     let z = a.Ele;
     z.JaHead = "Ja" + Math.random();
@@ -3371,7 +3375,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
     return ["images/Card/Zombies/JackboxZombie.png", a + "0.gif", a + "Attack.gif", a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif", a + "Walk.gif", a + "OpenBox.gif", a + "Boom.gif" + $Random, a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random]
   })(),
   jinyinAct: function(a) {
-    a.num=Math.random()*100||a.Privatenum;
+    a.num = a.Privatenum||Math.random() * 100;
     let z = a.Ele;
     z.JaHead = "Ja" + Math.random();
     let Ja = NewImg(z.JaHead, a.num>=50 ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/CherryBomb/CherryBomb.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:60px;top:30px;", 0);
@@ -3586,7 +3590,7 @@ oBalloonZombie = InheritO(OrnIZombies, {
     return c
   },
   jinyinAct: function(a) {
-    a.num = Math.random() * 100 || a.Privatenum;
+    a.num = a.Privatenum||Math.random() * 100;
     a["jinyinAct" + (a.num >= 50 ? "1" : "2")](a)
   },
   jinyinAct1: function(a) {
@@ -3915,7 +3919,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
   GoingDieHead: function() {},
   AudioArr: ["dirt_rise","wakeup"],  
 jinyinAct: function(a) {
-	a.num=Math.random()*100||a.Privatenum;
+	a.num = a.Privatenum||Math.random() * 100;
 	if(a.num>=50){
 	a.JudgeAttack_Dig=function(){};
 	a.EleBody.style.filter = 'grayscale(500%)';
