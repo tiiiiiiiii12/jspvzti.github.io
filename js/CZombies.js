@@ -2860,7 +2860,7 @@ jinyinWalkGif12: 14,
 		do{
         let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.ZX - 120,a.ZX + 120, LR),
           Tz = A.length;
-        for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX)+1; i++) {
+        for (let i = Math.max(GetC(a.ZX) - 1,1); i <= GetC(a.ZX)+1; i++) {
           for (let l = 0; l <= 3; l++) {
             var m = oGd.$[LR + "_" + i + "_" + l];
             a.PZ&&a.canWalk(a,a.id)&&(m && (m.getFreeze(m, m.id,500),m.getHurt(m,3,100*a.level)))
