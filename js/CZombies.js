@@ -3156,7 +3156,7 @@ jinyinWalkGif12: 14,
             }
         },
         AttackZombie: function(c,a) {
-            c.NormalAttack(c,a,$Z[a].AttackedRX)
+            $Z[c]&&$Z[c].NormalAttack(c,a,$Z[a].AttackedRX)
         },
 		LostPaperSpeed:1.6,
         NormalAttack: function(d, b, g) {
