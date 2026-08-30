@@ -409,7 +409,7 @@ Birth: function() {
                         function(f, e) {
                             var h = $Z[f],
                                 g;
-                            h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((g = $Z[e]) && g.getHit0(g, 10, 0), h.JudgeAttack())
+                            h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((g = $Z[e]) && g.getHit0(g, h.Attack*0.1, 0), h.JudgeAttack())
                         },
                         [d, c])
                 },
@@ -1253,8 +1253,8 @@ oZombie = InheritO(OrnNoneZombies, {
         })(),
         EName: "oFlagZombie",
         CName: "旗帜僵尸",
-        OSpeed: 3.3,
-        Speed: 3.3,
+        OSpeed: 2.2,
+        Speed: 2.2,
 		HP:500,
 		increaseSpeed:1.5,
 		SunNum:150,
@@ -1286,7 +1286,7 @@ oZombie = InheritO(OrnNoneZombies, {
 			a.NormalGif=a.jinyinGif;
 			a.AttackGif=a.jinyinAttackGif;
 			a.EleBody.src=a.PicArr[a.NormalGif];
-			a.tasktime*=0.1;
+			a.tasktime*=0.2;
 			a.increaseSpeed=2;
 			a.GoingDieHead=function(){};
 			a.JudgeAttack=function() {
@@ -1304,13 +1304,11 @@ oZombie = InheritO(OrnNoneZombies, {
                 $P[b].getHurt(d, 2, d.Attack)
             };
 			a.WalkToLadder=function(){};
-			a.Speed*=2;
-			a.OSpeed*=2;
-			a.getSnowPea=OrnNoneZombies.prototype.getPea;
-			a.getSlow=function(){};
+			a.Speed*=4;
+			a.OSpeed*=4;
 		},
         beAttackedPointR: 101,
-        Produce: '旗帜僵尸标志着即将来袭的一大堆僵尸"流"。</font><br>通用技能：号召</font><br>当旗帜僵尸存在时，全场僵尸速度和伤害都翻倍</font><br>精英形态：处决者旗帜</font><br>本身速度更快，碾压植物，免疫减速等负面效果<br>韧性：<font color="#FF0000">中（400）</font><br>毫无疑问，摇旗僵尸喜爱脑髓。但在私下里他也迷恋旗帜。也许是因为旗帜上也画有脑子吧，这很难说。'
+        Produce: '旗帜僵尸标志着即将来袭的一大堆僵尸"流"。</font><br>通用技能：号召</font><br>当旗帜僵尸存在时，全场僵尸速度和伤害都翻倍</font><br>精英形态：处决者旗帜</font><br>本身速度更快，碾压植物<br>韧性：<font color="#FF0000">中（500）</font><br>毫无疑问，摇旗僵尸喜爱脑髓。但在私下里他也迷恋旗帜。也许是因为旗帜上也画有脑子吧，这很难说。'
     }),
     OrnIZombies = function() {
         var a = function(f, b) {
