@@ -644,9 +644,9 @@ oNutZombie = InheritO(oTallNutZombie, {
   },
 	GoingDieHead:function(){},
     PrivateBirth:function(a) {
-		let z=a.Ele;
+		var z=a.Ele;
 		z.JaHead = "Ja" + Math.random();
-      let Ja = NewImg(z.JaHead,a.num>=50?"images/Plants/Torchwood/Torchwood.gif":"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:50px;top:0px;z-index:20",0);
+      var Ja = NewImg(z.JaHead,a.num>=50?"images/Plants/Torchwood/Torchwood.gif":"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:50px;top:0px;z-index:20",0);
       z.appendChild(Ja)
 			},
 		PrivateAct:function(a){     
@@ -659,7 +659,7 @@ oNutZombie = InheritO(oTallNutZombie, {
 SetStyle($(z.JaHead),{
 	transform:!a.WalkDirection?"rotateY(180deg)":"rotateY(0deg)"
 }),
-!a.Boom&&SetStyle($(z.jinyinImg),{
+!a.Boom&&a.jinyin&&SetStyle($(z.jinyinImg),{
 	transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"
 }),a.check=a.WalkDirection?0:1);
 	!a.beAttacked&&(ClearChild($(z.jinyinImg)),ClearChild($(z.JaHead)),a.IsDie=true);
