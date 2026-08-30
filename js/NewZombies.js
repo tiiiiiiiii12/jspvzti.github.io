@@ -633,31 +633,38 @@ oNutZombie = InheritO(oTallNutZombie, {
 	EName: "oJalapenoZombie",
 	CName: "辣椒僵尸",
 	Lvl: 3,
-	HP:500,
+	HP:600,
 	SunNum: 125,
 	ZKind:2,
 	BirthImg: function(a) {
-    var z = a.Ele;
+    let z = a.Ele;
+	a.num>=50&&SetStyle($(z.JaHead),{
+	src:"images/Plants/Torchwood/Torchwood.gif"
+});
 	z.jinyinImg = "jinyin_" + Math.random();
-    var Sh = NewImg(z.jinyinImg, a.num>=50 ? "images/Zombies/Imp/ZombieImpHead.png" : "images/Plants/Jalapeno/Jalapeno.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:40px;top:40px;", 0);
+    let Sh = NewImg(z.jinyinImg, "images/Plants/Jalapeno/Jalapeno.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:40px;top:40px;", 0);
     z.appendChild(Sh);
   },
 	GoingDieHead:function(){},
     PrivateBirth:function(a) {
-		var z=a.Ele;
+		let z=a.Ele;
 		z.JaHead = "Ja" + Math.random();
-      var Ja = NewImg(z.JaHead,"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:50px;top:0px;",0);
+      let Ja = NewImg(z.JaHead,"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:50px;top:0px;",0);
       z.appendChild(Ja);
 			},
 		PrivateAct:function(a){     
-		var z=a.Ele;
+		let z=a.Ele;
 		a.ZX<=850&&!a.intograss&&(oSym.addTask(Math.random()*700+1800,function(a){
-			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.DisappearDie())
-		},[a]),a.intograss=true);
+			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.jinyin&&a.num<50&&a.DisappearDie())
+		},[a]),a.intograss=true); //进场后再倒计时，以防场外爆炸
 	  if($Z[a.id]&&!a.IsDie){
 	a.WalkDirection==a.check&&(
-EditImg($(z.JaHead),0,"images/Plants/Jalapeno/Jalapeno.gif",{transform:!a.WalkDirection?"rotateY(180deg)":"rotateY(0deg)"},0),
-z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpHead.png" : "images/Plants/Jalapeno/Jalapeno.gif", {transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"},0),a.check=a.WalkDirection?0:1);
+SetStyle($(z.JaHead),{
+	transform:!a.WalkDirection?"rotateY(180deg)":"rotateY(0deg)"
+}),
+z.jinyinImg&&SetStyle($(z.jinyinImg),{
+	transform:a.PZ?"rotateY(180deg)":"rotateY(0deg)"
+}),a.check=a.WalkDirection?0:1);
 	!a.beAttacked&&(ClearChild($(z.jinyinImg)),ClearChild($(z.JaHead)),a.IsDie=true);
 	  }
 	},
@@ -666,11 +673,27 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpH
 		a.num = a.Privatenum||Math.random() * 100;
 		a.BirthImg(a);
 		if(a.num>=50){
-			a.PrivateCustom=function(i){
-				try{
-					CustomZombie(oImp,this.R,i,!this.PZ).jinyinnum=0
-				}catch{}
-			}
+		a.getSlow=a.getFreeze=function(){};
+		a.getSnowPea=a.getPea;
+	oSym.addTask(500, function(a) {
+		var LR=Math.max(a.R-1,1);
+		for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX)+1; i++) {
+          for (let l = 0; l <= 3; l++) {
+            var m = oGd.$[LR + "_" + i + "_" + l];
+            !a.PZ&&a.canWalk(a,a.id)&&a.beAttacked&&m && (SetStyle(m.EleBody,{
+				opacity:"1"
+			}),m.FreeSlowTime&&(m.AttTime-=140),m.FreeSlowTime=m.FreeFreezeTime=0)
+          }
+        };
+		do{
+		let A = oZ["getAr" + (a.PZ ? "Z" : "HZ")](a.ZX - 100,a.ZX + 100, LR),
+          Tz = A.length;
+        while (Tz--) {
+          (t = A[Tz])&&a.canWalk(a,a.id)&&a.beAttacked&&(t.FreeSlowTime=t.FreeFreezeTime=0,t.Speed=t.OSpeed)
+        };
+	}while(LR++ < Math.min(a.R+1,oS.R))
+      a.beAttacked&&$Z[a.id]&&(PlayAudio("firepea"),oSym.addTask(500, arguments.callee, [a]))
+    }, [a])
 		}
 		a.PrivateDie=function(a){
 			a.Ele.jinyinImg&&ClearChild($(a.Ele.jinyinImg))
@@ -681,7 +704,6 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpH
 			i!=a.R&&a.canBoomR.push(i)
 		}
 	},
-	PrivateCustom:function(){},
     BoomFire: function (y) {
       PlayAudio("jalapeno");
       fireid = "fire_" + Math.random();
@@ -702,20 +724,17 @@ z.jinyinImg&&EditImg($(z.jinyinImg),0,a.num>=50 ? "images/Zombies/Imp/ZombieImpH
 	var k = n.length;
                 while (k--) {
                   n[k].getExplosion(1600*this.level);
-				  n[k].HP<=0&&this.PrivateCustom(GetC(n[k].ZX))
                 }
-		if(this.PZ){
       for (let i = 1; i <= oS.C; i++) {
 		if(oGd.$Ladder[y+"_"+i]&&!this.PZ) delete oGd.$Ladder[y+"_"+i];
         for (let j = 0; j < 4; j++) {
           let g = oGd.$[y + "_" + i + "_" + j];
-          g&&(g.getHurt(this,3,1600*this.level),g.HP<=0&&this.PrivateCustom(i))//精英小鬼辣椒僵尸释放技能
-        }
+          this.PZ&&g&&g.getHurt(this,3,1600*this.level)//精英小鬼辣椒僵尸释放技能
       }
 	}
     },
 	PicArr:oPeaZombie.prototype.PicArr,
-	Produce: '他过一段时间会给你的阵容以“火热”的惊喜<p>韧性：<font color="#FF0000">中（500）</font><br>特点：<font color="#FF0000">过段时间爆炸</font><br>精英形态一：<font color="#FF0000">在本路爆炸时，另外随机一行产生爆炸</font><br>精英形态二：<font color="#FF0000">爆炸烧死植物时在植物的格子召唤一个小鬼僵尸</font><br>他对待什么都是热情似火'
+	Produce: '他过一段时间会给你的阵容以“火热”的惊喜<p>韧性：<font color="#FF0000">中（600）</font><br>特点：<font color="#FF0000">过段时间爆炸</font><br>精英形态一：<font color="#FF0000">在本路爆炸时，另外随机一行产生爆炸</font><br>精英形态二：<font color="#FF0000">火炬树桩僵尸，给周围僵尸解除寒冰控制并且自身免疫，手中的辣椒过一段时间爆炸</font><br>他对待什么都是热情似火'
 }),
 oPeashooterZombie=oPeaZombie,
 oSquashZombie = InheritO(oScreenDoorZombie, {
