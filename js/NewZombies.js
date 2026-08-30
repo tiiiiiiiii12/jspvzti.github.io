@@ -638,24 +638,21 @@ oNutZombie = InheritO(oTallNutZombie, {
 	ZKind:2,
 	BirthImg: function(a) {
     let z = a.Ele;
-	a.num>=50&&SetStyle($(z.JaHead),{
-	src:"images/Plants/Torchwood/Torchwood.gif"
-});
 	z.jinyinImg = "jinyin_" + Math.random();
-    let Sh = NewImg(z.jinyinImg, "images/Plants/Jalapeno/Jalapeno.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:40px;top:40px;", 0);
+    let Sh = NewImg(z.jinyinImg, "images/Plants/Jalapeno/Jalapeno.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:40px;top:40px;z-index:50", 0);
     z.appendChild(Sh);
   },
 	GoingDieHead:function(){},
     PrivateBirth:function(a) {
 		let z=a.Ele;
 		z.JaHead = "Ja" + Math.random();
-      let Ja = NewImg(z.JaHead,"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:50px;top:0px;",0);
-      z.appendChild(Ja);
+      let Ja = NewImg(z.JaHead,a.num>=50?"images/Plants/Torchwood/Torchwood.gif":"images/Plants/Jalapeno/Jalapeno.gif","position:absolute;transform:"+(a.PZ?"rotateY(180deg);":"rotateY(0deg);")+"left:50px;top:0px;z-index:20",0);
+      z.appendChild(Ja)
 			},
 		PrivateAct:function(a){     
 		let z=a.Ele;
 		a.ZX<=850&&!a.intograss&&(oSym.addTask(Math.random()*700+1800,function(a){
-			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.jinyin&&a.num<50?a.DisappearDie():ClearChild(a.jinyinImg))
+			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.jinyin&&a.num<50?a.DisappearDie():ClearChild(a.Ele.jinyinImg))
 		},[a]),a.intograss=true); //进场后再倒计时，以防场外爆炸
 	  if($Z[a.id]&&!a.IsDie){
 	a.WalkDirection==a.check&&(
