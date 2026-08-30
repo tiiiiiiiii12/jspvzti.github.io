@@ -652,7 +652,7 @@ oNutZombie = InheritO(oTallNutZombie, {
 		PrivateAct:function(a){     
 		let z=a.Ele;
 		a.ZX<=850&&!a.intograss&&(oSym.addTask(Math.random()*700+1800,function(a){
-			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),a.jinyin&&a.num<50?a.DisappearDie():ClearChild(a.Ele.jinyinImg))
+			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),!a.jinyin||a.num<50?a.DisappearDie():ClearChild(a.Ele.jinyinImg))
 		},[a]),a.intograss=true); //进场后再倒计时，以防场外爆炸
 	  if($Z[a.id]&&!a.IsDie){
 	a.WalkDirection==a.check&&(
