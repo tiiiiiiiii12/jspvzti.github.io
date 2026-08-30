@@ -244,7 +244,7 @@ Birth: function() {
                         c = 0;
                     switch (true) {
                         case !e:
-                            !(h.FreeFreezeTime || h.FreeSetbodyTime) && (h.Speed = 0.5 * h.OSpeed);
+                            !h.FreeFreezeTime && (h.Speed = 0.5 * h.OSpeed);
                             h.Attack = 50;
                             h.PlaySlowballAudio();
                             h.FreeSlowTime = d;
@@ -268,12 +268,12 @@ Birth: function() {
                         function(g, f, e) {
                             ClearChild(e);
                             var h = $Z[g];
-                            h && h.FreeFreezeTime == f && (h.FreeFreezeTime = 0, h.Attack = 50, !h.FreeSetbodyTime && (h.Speed = 0.5 * h.OSpeed, h.isAttacking && h.JudgeAttack()), oSym.addTask(1500,
+                            h && h.FreeFreezeTime == f && (h.FreeFreezeTime = 0, h.Attack = 50, h.Speed = 0.5 * h.OSpeed, h.isAttacking && h.JudgeAttack()), oSym.addTask(1500,
                                 function(j, i) {
                                     var k = $Z[j];
-                                    k && k.FreeSlowTime == i && (k.FreeSlowTime = 0, k.Attack = 100, !k.FreeSetbodyTime && (k.Speed = k.OSpeed))
+                                    k && k.FreeSlowTime == i && (k.FreeSlowTime = 0, k.Attack = 100, k.Speed = k.OSpeed)
 								},
-                                [g, h.FreeSlowTime = oSym.Now + 1500]))
+                                [g, h.FreeSlowTime = oSym.Now + 1500])
                         },
                         [c, d.FreeFreezeTime = oSym.Now + 400, NewImg("icetrap_" + Math.random(), "images/Plants/IceShroom/icetrap.gif", d.getShadow(d), d.Ele)])
                 },
@@ -502,7 +502,7 @@ Birth: function() {
                 c.GoingDie(c.PicArr[[c.LostHeadGif, c.LostHeadAttackGif][c.isAttacking]]);
                 c.getHit0 = c.getHit1 = c.getHit2 = c.getHit3 = function(c,b) {
 					(c.HP-=(b*c.jianshang))<1&&(
-					c.NormalDie==oAquaticZombie.prototype.NormalDie&&oSym.addTask(50,ClearChild,[c.Ele]),
+					c.NormalDie==oAquaticZombie.prototype.NormalDie&&oSym.addTask(150,ClearChild,[c.Ele]),
 					c.NormalDie())
 				};
                 return
