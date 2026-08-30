@@ -629,7 +629,7 @@ oNutZombie = InheritO(oTallNutZombie, {
 	},
     Produce: '韧性：<font color="#FF0000">1100</font><br>精英形态：无</p>由精英高坚果僵尸召唤'
   }),
-	oJalapenoZombie= InheritO(oZombie,{
+oJalapenoZombie= InheritO(oZombie,{
 	EName: "oJalapenoZombie",
 	CName: "辣椒僵尸",
 	Lvl: 3,
@@ -672,7 +672,7 @@ SetStyle($(z.JaHead),{
 		if(a.num>=50){
 		a.getSlow=a.getFreeze=function(){};
 		a.getSnowPea=a.getPea;
-	oSym.addTask(500, function(a) {
+	oSym.addTask(200, function(a) {
 		var LR=Math.max(a.R-1,1);
 		for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX)+1; i++) {
           for (let l = 0; l <= 3; l++) {
@@ -689,7 +689,7 @@ SetStyle($(z.JaHead),{
           (t = A[Tz])&&a.canWalk(a,a.id)&&a.beAttacked&&(t.FreeSlowTime=t.FreeFreezeTime=0,t.Speed=t.OSpeed,t.Attack=100)
         };
 	}while(LR++ < Math.min(a.R+1,oS.R))
-      a.beAttacked&&$Z[a.id]&&(PlayAudio("firepea"),oSym.addTask(500, arguments.callee, [a]))
+      a.beAttacked&&$Z[a.id]&&(PlayAudio("firepea"),oSym.addTask(200, arguments.callee, [a]))
     }, [a])
 		}
 		a.PrivateDie=function(a){
