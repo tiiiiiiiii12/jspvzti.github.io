@@ -271,7 +271,7 @@ Birth: function() {
                             h && h.FreeFreezeTime == f && (h.FreeFreezeTime = 0, h.Attack = 50, h.Speed = 0.5 * h.OSpeed, h.isAttacking && h.JudgeAttack()), oSym.addTask(1500,
                                 function(j, i) {
                                     var k = $Z[j];
-                                    k && k.FreeSlowTime == i && (k.FreeSlowTime = 0, k.Attack = 100, k.Speed = k.OSpeed)
+                                    k && k.FreeSlowTime && k.FreeSlowTime == i && (k.FreeSlowTime = 0, k.Attack = 100, k.Speed = k.OSpeed)
 								},
                                 [g, h.FreeSlowTime = oSym.Now + 1500])
                         },
