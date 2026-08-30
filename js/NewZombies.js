@@ -689,7 +689,7 @@ SetStyle($(z.JaHead),{
           (t = A[Tz])&&a.canWalk(a,a.id)&&a.beAttacked&&(t.FreeSlowTime=t.FreeFreezeTime=0,t.Speed=t.OSpeed,t.Attack=100)
         };
 	}while(LR++ < Math.min(a.R+1,oS.R))
-      a.beAttacked&&$Z[a.id]&&(PlayAudio("firepea"),oSym.addTask(200, arguments.callee, [a]))
+      a.beAttacked&&$Z[a.id]&&oSym.addTask(200, arguments.callee, [a])
     }, [a])
 		}
 		a.PrivateDie=function(a){
