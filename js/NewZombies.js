@@ -652,7 +652,7 @@ oNutZombie = InheritO(oTallNutZombie, {
 		PrivateAct:function(a){     
 		let z=a.Ele;
 		a.ZX<=850&&!a.intograss&&(oSym.addTask(Math.random()*700+1800,function(a){
-			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),!a.jinyin||a.num<50?a.DisappearDie():ClearChild(a.Ele.jinyinImg))
+			$Z[a.id]&&a.beAttacked&&(a.BoomFire(a.R),a.checkBoomR(a),a.jinyin&&a.num<50&&a.canBoomR.length&&a.BoomFire(a.canBoomR[Math.floor(Math.random() * a.canBoomR.length)]),!a.jinyin||a.num<50?a.DisappearDie():ClearChild($(a.Ele.jinyinImg)))
 		},[a]),a.intograss=true); //进场后再倒计时，以防场外爆炸
 	  if($Z[a.id]&&!a.IsDie){
 	a.WalkDirection==a.check&&(
@@ -686,7 +686,7 @@ z.jinyinImg&&SetStyle($(z.jinyinImg),{
 		let A = oZ["getAr" + (a.PZ ? "Z" : "HZ")](a.ZX - 100,a.ZX + 100, LR),
           Tz = A.length;
         while (Tz--) {
-          (t = A[Tz])&&a.canWalk(a,a.id)&&a.beAttacked&&(t.FreeSlowTime=t.FreeFreezeTime=0,t.Speed=t.OSpeed)
+          (t = A[Tz])&&a.canWalk(a,a.id)&&a.beAttacked&&(t.FreeSlowTime=t.FreeFreezeTime=0,t.Speed=t.OSpeed,t.Attack=100)
         };
 	}while(LR++ < Math.min(a.R+1,oS.R))
       a.beAttacked&&$Z[a.id]&&(PlayAudio("firepea"),oSym.addTask(500, arguments.callee, [a]))
