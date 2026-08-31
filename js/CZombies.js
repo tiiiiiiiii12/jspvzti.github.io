@@ -1614,7 +1614,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
             oSym.addTask(200, ClearChild, [NewImg(0, a[b.HeadGif] + Math.random(), "left:" + b.X + "px;top:" + (b.pixelTop - 20) + "px;z-index:" + b.zIndex, EDPZ)])
         },
 		  bedevil: function(c,a) {
-    !(c.num && c.NormalAttack != CZombies.prototype.NormalAttack) && c.ExchangeLR(c, 1);
+    !(c.num>=50 && c.NormalAttack != CZombies.prototype.NormalAttack) && c.ExchangeLR(c, 1);
     c.WalkDirection = 1;
     c.ZX = c.AttackedRX;
     c.ChkActs = c.ChkActs1;
@@ -1651,8 +1651,8 @@ oFootballZombie = InheritO(oConeheadZombie, {
     d && d.AttackedLX < oS.W && d.Altitude == 1 && !e.isAttacking && (e.JudgeAttackH1 = CZombies.prototype.JudgeAttackH1,e.JudgeAttack=e.JudgeAttackH = CZombies.prototype.JudgeAttackH, e.NormalAttack(f, c = d.id, d.ZX+20))
   },
   jinyinAct: function(a) {
-	a.num = a.Privatenum||Math.random() * 100;;
-    a.num?a.ExchangeLR(a, 1):(a.PrivateAct=function(a){
+	a.num = a.Privatenum||Math.random() * 100;
+    a.num>=50?a.ExchangeLR(a, 1):(a.PrivateAct=function(a){
 	for (let i = GetC(a.ZX-30);i>=1;i--) {
         for (let j = 0; j < 4; j++) {
           let g = oGd.$[a.R + "_" + i + "_" + j];
@@ -1698,8 +1698,8 @@ oFootballZombie = InheritO(oConeheadZombie, {
                 c = f.EleShadow,
                 e = f.EleBody;
 			f&&(f.PrivateAct=function(){});
-			f.num&&(PlayAudio("dancer"),f.PZ&&f.ExchangeLR(f,0));
-            e.src = !(f.jinyin&&!f.num)?"images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump.gif" + $Random + Math.random():"images/Zombies/PoleVaultingZombie/jinyinjump.gif" + $Random + Math.random();
+			f.num>=50&&(PlayAudio("dancer"),f.PZ&&f.ExchangeLR(f,0));
+            e.src = !(f.jinyin&&f.num<50)?"images/Zombies/PoleVaultingZombie/PoleVaultingZombieJump.gif" + $Random + Math.random():"images/Zombies/PoleVaultingZombie/jinyinjump.gif" + $Random + Math.random();
             PlayAudio("grassstep");
             SetHidden(c);
             f.isAttacking = 1;
@@ -1707,7 +1707,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
             f.getFreeze = function() {
                 f.getSnowPea(f, 20)
             };
-			if(f&&f.jinyin&&!f.num){
+			if(f&&f.jinyin&&f.num<50&&f.PZ){
 			for(let k = 0;k <= 3;k++){
 				var P=oGd.$[f.R+"_"+GetC(f.ZX-75)+"_"+k];
 				P&&P.getHurt(P,3,1800)
@@ -1743,7 +1743,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
                         },
                         [m, n])));
 					var C = GetC(h.ZX);
-			if(h.num){
+			if(h.num>=50){
 					var R = Math.max(h.R - 1,1),
                         RM = h.R + 1 <= oS.R ? h.R + 1 : oS.R;
 			for(let i = R;i <= RM;i++){
