@@ -191,14 +191,17 @@ Birth: function() {
   c.MaxHP=c.HP;
   c.MaxOrnHP=c.OrnHP;
   if (c.HPlook) {
-    var B = NewEle("dHP"+c.id, "div", "position:absolute;color:yellow;width:80px;height:30px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
+	  c.lookHP(c);
+  }
+  c.PrivateBirth && c.PrivateBirth(c);
+},
+lookHP:function(c){
+	var B = NewEle("dHP"+c.id, "div", "position:absolute;color:yellow;width:80px;height:30px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
     oSym.addTask(0, function(c,B) {
       B.innerHTML = (c.OrnHP > 0 ? c.OrnHP + "+" + c.HP : c.HP) +"<br>精英:"+c.jinyin
       oSym.addTask(5, arguments.callee, [c,B])
     }, [c,B]);
-  }
-  c.PrivateBirth && c.PrivateBirth(c);
-},
+	},
                 getCrushed: function(c) {
                     return true
                 },
@@ -2407,6 +2410,7 @@ jinyinWalkGif12: 14,
         JumpTime: 40,
 		catchCoolTime:1000,
 		jinyinAct:function(a){
+			a.EleBody.style.filter = 'grayscale(400%)';
 			a.cangetOrn=1;
 			a.OrnLostNormalGif=a.NormalGif;
 			a.OrnLostAttackGif=a.AttackGif;
@@ -2423,7 +2427,7 @@ jinyinWalkGif12: 14,
 			a.cangetOrn=0;
 			var z = a.Ele;
             z.NutHead = "nut" + Math.random();
-            var Nut = NewImg(z.NutHead, c, "position:absolute;transform:"+(!a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)")+";left:30px;top:90px;", 0);
+            var Nut = NewImg(z.NutHead, c, "position:absolute;transform:"+(!a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)")+";left:30px;top:110px;", 0);
             z.appendChild(Nut);//防具贴图
 			a.Speed/=2;
 			a.OSpeed/=2;
@@ -2494,7 +2498,7 @@ jinyinWalkGif12: 14,
                 [f,e]))
         },
         NormalAttack: function(b, a) {
-            oSym.addTask(100,
+            oSym.addTask(this.tasktime,
                 function(d, c) {
                     var f = $Z[d],
                         e;
@@ -2522,7 +2526,7 @@ jinyinWalkGif12: 14,
             c.EleBody.src = c.PicArr[9] + Math.random();
             oSym.addTask(50,
                 function(g, e, d, f) {
-                    $Z[e] && g.beAttacked && ((f = $Z[d]) && f.beAttacked ? (g.EleBody.src = g.PicArr[g.AttackGif], g.Altitude = 1, oSym.addTask(10,
+                    $Z[e] && g.beAttacked && ((f = $Z[d]) && f.beAttacked ? (g.EleBody.src = g.PicArr[g.AttackGif], g.Altitude = 1, oSym.addTask(g.tasktime*0.1,
                         function(k, i, j, h) {
                             $Z[i] && k.beAttacked && !k.FreeFreezeTime && !k.FreeSetbodyTime && ($Z[h] && j.beAttacked ? (k.cangetOrn&&((j.HP+j.OrnHP)<1000)?(k.getOrn(k,j.OrnHP+j.HP,j.EleBody.src),j.DisappearDie()):j.getHit0(j, 10, 0),k.HP<k.MaxHP&&(k.HP+=3),oSym.addTask(10, arguments.callee, [k, i, j, h])) : (k.EleBody.src = k.PicArr[10] + Math.random(), k.Altitude = 0, oSym.addTask(70,
                                 function(l, m) {
