@@ -1707,10 +1707,10 @@ oFootballZombie = InheritO(oConeheadZombie, {
             f.getFreeze = function() {
                 f.getSnowPea(f, 20)
             };
-			if(f&&f.jinyin&&f.num<50&&f.PZ){
+			if(f&&f.jinyin&&f.num<50){
 			for(let k = 0;k <= 3;k++){
 				var P=oGd.$[f.R+"_"+GetC(f.ZX-75)+"_"+k];
-				P&&P.getHurt(P,3,1800)
+				f.PZ&&P&&P.getHurt(P,3,1800)
 			}
 			var Z=oZ[f.PZ?"getArHZ":"getArZ"](f.ZX-75,f.ZX+75,f.R);
 				      Zl=Z.length;
