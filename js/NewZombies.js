@@ -1147,7 +1147,7 @@ oCatapultZombie=InteritO(oZomboni,{
 	JudgeIce:function(){},
 	getSnowPea:OrnNoneZombies.prototype.getSnowPea,
 	getFirePea:OrnNoneZombies.prototype.getFirePea,
-	PrepareBirth:CZombies.prototype.PrepareBirth,
+	prepareBirth:CZombies.prototype.prepareBirth,
 	flatTire: function() {
 			var b = this;
 			b.EleBody.src = "images/Zombies/CatapultZombie/flatTire.gif";
