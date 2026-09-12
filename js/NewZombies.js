@@ -1131,7 +1131,7 @@ oCatapultZombie=InheritO(oZomboni,{
 	CName:"投石车僵尸",
 	HP:1000,
 	Lvl:4,
-	SunNum:0,
+	SunNum:225,
 	Speed:3.5,
 	OSpeed:3.5,
 LostPaperSpeed:3.5,
