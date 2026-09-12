@@ -1152,9 +1152,12 @@ PrivateAct:function(a){
 a.Move&&a.canWalk(a,a.id)&&(GetC(a.ZX+30)<=8)&&a.basketballNum>0&&a.checkThrow(a)
 },
 checkThrow:function(a){
-if(a.basketballNum<=0||!a.PZ){return (a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)}
-let Order=[1,2,3,0];
+if(a.basketballNum<=0){return (a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)}
 let num;
+let Order=[1,2,3,0];
+let Z=oZ[a.PZ?"getArHZ":"getArZ"](a.PZ?oS.W:a.ZX,a.PZ?a.ZX:oS.W,a.R);
+let TZ=a.PZ?Z[0]:Z[Z.length-1];
+!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(TZ,TZ.AttackedLX+40,GetY(a.R)-40),num=true)
 for (let C=1;C<=GetC(a.ZX);C++){
   for (let i=0;i<Order.length;i++){
 let P=oGd.$[a.R+"_"+C+"_"+Order[i]];
@@ -1201,16 +1204,6 @@ a.EleBody.src=a.PicArr[4];
       var zY = RelativePos[1];
       var [lastX, lastY] = [x, y];
       var defAngle = a.getAngle(x - vx, y + vy + gravity, lastX, lastY);
-      var bulletShadow = NewEle(
-        `${a.id}_B_${Math.random()}_Shadow`,
-        "div",
-        `opacity:0.5;background-size:29px;background-repeat: no-repeat;width:29px;left:${x}px;top:${
-          a.pixelTop + a.height - 10
-        }px;`, {
-          className: "Shadow",
-        },
-        EDPZ
-      );
       (function drawFrame() {
         vy += gravity;
         bullet.style.left = (x -= vx) + "px";
@@ -1219,6 +1212,7 @@ a.EleBody.src=a.PicArr[4];
         if ((x <= X &&y>=Y) || s < 40) {
           bullet && ClearChild(bullet);
           $P[P.id]&&P.getHurt(a, 3, 75);
+		  $Z[P.id]&&P.getHit2(P,75,0);
           $Z[a.id]&&(a.EleBody.src=a.PicArr[a.NormalGif],--a.basketballNum,a.checkThrow(a));
           return;
         }
@@ -1266,6 +1260,7 @@ b.AutoReduceHP(b.id)
 	getHit2:OrnNoneZombies.prototype.getHit2,
 	getHit3:OrnNoneZombies.prototype.getHit3,
 	getSlow:CZombies.prototype.getSlow,
+	AttackZombie:CZombies.prototype.AttackZombie,
 	BirthCallBack:CZombies.prototype.BirthCallBack,
 	ChkActs:CZombies.prototype.ChkActs,
 	ChkActs1:CZombies.prototype.ChkActs1
