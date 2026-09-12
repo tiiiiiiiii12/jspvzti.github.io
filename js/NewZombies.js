@@ -1135,6 +1135,7 @@ oCatapultZombie=InheritO(oZomboni,{
 	Speed:3.5,
 	OSpeed:3.5,
 LostPaperSpeed:3.5,
+tasktime:25,
 	StandGif: 1,
 	DieGif: 3,
 	BoomDieGif: 3,
@@ -1155,9 +1156,9 @@ checkThrow:function(a){
 if(a.basketballNum<=0){return (a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)}
 let num;
 let Order=[1,2,3,0];
-let Z=oZ[a.PZ?"getArHZ":"getArZ"](a.PZ?oS.W:a.ZX,a.PZ?a.ZX:oS.W,a.R);
+let Z=oZ[a.PZ?"getArHZ":"getArZ"](a.PZ?100:a.ZX,a.PZ?a.ZX:oS.W,a.R);
 let TZ=a.PZ?Z[0]:Z[Z.length-1];
-!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(TZ,TZ.AttackedLX+40,GetY(a.R)-40),num=true)
+Z.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(TZ,TZ.AttackedLX+20,GetY(a.R)-40),num=true)
 for (let C=1;C<=GetC(a.ZX);C++){
   for (let i=0;i<Order.length;i++){
 let P=oGd.$[a.R+"_"+C+"_"+Order[i]];
@@ -1195,21 +1196,20 @@ a.EleBody.src=a.PicArr[4];
       var x = a.ZX + (a.WalkDirection?-140:140);
       var y = a.pixelTop + 100;
       var RelativePos = [X,Y];
-      var s = x - RelativePos[0];
-      var x2 = x - s;
+      var s = Math.abs(x - RelativePos[0]);
+      var x2 = Math.abs(x - s);
       var gravity = 0.2;
       var vy = -10;
       var vx = -(gravity * s) / (2 * vy);
       var lastTime = 0;
       var zY = RelativePos[1];
       var [lastX, lastY] = [x, y];
-      var defAngle = a.getAngle(x - vx, y + vy + gravity, lastX, lastY);
+      var defAngle = a.getAngle(x - (a.PZ?vx:-vx), y + vy + gravity, lastX, lastY);
       (function drawFrame() {
         vy += gravity;
-        bullet.style.left = (x -= vx) + "px";
-        bulletShadow.style.left = x + "px";
+        bullet.style.left = (x -= (a.PZ?vx:-vx)) + "px";
         bullet.style.top = (y += vy) + "px";
-        if ((x <= X &&y>=Y) || s < 40) {
+        if ((a.PZ? x <= X: x >= X && y>=Y) || s < 40) {
           bullet && ClearChild(bullet);
           $P[P.id]&&P.getHurt(a, 3, 75);
 		  $Z[P.id]&&P.getHit2(P,75,0);
