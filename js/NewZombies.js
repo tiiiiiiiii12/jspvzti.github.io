@@ -1125,4 +1125,54 @@ jianshangtime:500,
     var e = OrnNoneZombies.prototype;
     (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering,g.OSpeed=g.LostPaperSpeed,g.Speed=g.LostPaperSpeed*(g.FreeSlowTime?0.5:1),(!g.jinyin||g.num<50)&&(g.getSnowPea = e.getSnowPea), g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.canLadderList = [], g.Boom = function() {}, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
   }
+}),
+oCatapultZombie=InteritO(oZomboni,{
+	EName:"oCatapultZombie",
+	CName:"投石车僵尸",
+	HP:1000,
+	Lvl:4,
+	SunNum:250,
+	Speed:3.5,
+	OSpeed:3.5,
+	StandGif: 1,
+	DieGif: 3,
+	BoomDieGif: 3,
+	Move:true,
+	basketballNum:20,
+	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">高（1000）</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
+	PicArr: (function() {
+			var b = "images/Zombies/CatapultZombie/";
+			return ["images/Card/Zombies/CatapultZombie.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif", b + "throw.gif"]
+	})(),
+	JudgeIce:function(){},
+	getSnowPea:OrnNoneZombies.prototype.getSnowPea,
+	getFirePea:OrnNoneZombies.prototype.getFirePea,
+	PrepareBirth:OrnNoneZombies.prototype.PrepareBirth,
+	flatTire: function() {
+			var b = this;
+			b.EleBody.src = "images/Zombies/CatapultZombie/flatTire.gif";
+			b.beAttacked = 0;
+			b.HP = 0;
+			b.getHit0 = b.getHit1 = b.getHit2 = b.getHit3 = function() {};
+			b.ChkActs = b.ChkActs1 = function() {};
+			oSym.addTask(290,
+			function(e, c) {
+				var d = $Z[e];
+				d && d.NormalDie()
+			},
+			[b.id, b.EleBody])
+		},
+	jinyinAct:function(){},
+	getFirePeaSputtering:OrnNoneZombies.prototype.getFirePeaSputtering,
+	getPea:OrnNoneZombies.prototype.getPea,
+	getFreeze:OrnNoneZombies.prototype.getFreeze,
+	getHit:OrnNoneZombies.prototype.getHit,
+	getHit0:OrnNoneZombies.prototype.getHit0,
+	getHit1:OrnNoneZombies.prototype.getHit1,
+	getHit2:OrnNoneZombies.prototype.getHit2,
+	getHit3:OrnNoneZombies.prototype.getHit3,
+	getSlow:OrnNoneZombies.prototype.getSlow,
+	BirthCallBack:OrnNoneZombies.prototype.BirthCallBack,
+	ChkActs:OrnNoneZombies.prototype.ChkActs,
+	ChkActs1:OrnNoneZombies.prototype.ChkActs1
 })
