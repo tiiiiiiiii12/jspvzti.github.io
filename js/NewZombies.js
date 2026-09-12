@@ -1147,7 +1147,7 @@ oCatapultZombie=InteritO(oZomboni,{
 	JudgeIce:function(){},
 	getSnowPea:OrnNoneZombies.prototype.getSnowPea,
 	getFirePea:OrnNoneZombies.prototype.getFirePea,
-	PrepareBirth:OrnNoneZombies.prototype.PrepareBirth,
+	PrepareBirth:CZombies.prototype.PrepareBirth,
 	flatTire: function() {
 			var b = this;
 			b.EleBody.src = "images/Zombies/CatapultZombie/flatTire.gif";
@@ -1165,14 +1165,14 @@ oCatapultZombie=InteritO(oZomboni,{
 	jinyinAct:function(){},
 	getFirePeaSputtering:OrnNoneZombies.prototype.getFirePeaSputtering,
 	getPea:OrnNoneZombies.prototype.getPea,
-	getFreeze:OrnNoneZombies.prototype.getFreeze,
+	getFreeze:CZombies.prototype.getFreeze,
 	getHit:OrnNoneZombies.prototype.getHit,
 	getHit0:OrnNoneZombies.prototype.getHit0,
 	getHit1:OrnNoneZombies.prototype.getHit1,
 	getHit2:OrnNoneZombies.prototype.getHit2,
 	getHit3:OrnNoneZombies.prototype.getHit3,
-	getSlow:OrnNoneZombies.prototype.getSlow,
-	BirthCallBack:OrnNoneZombies.prototype.BirthCallBack,
-	ChkActs:OrnNoneZombies.prototype.ChkActs,
-	ChkActs1:OrnNoneZombies.prototype.ChkActs1
+	getSlow:CZombies.prototype.getSlow,
+	BirthCallBack:CZombies.prototype.BirthCallBack,
+	ChkActs:CZombies.prototype.ChkActs,
+	ChkActs1:CZombies.prototype.ChkActs1
 })
