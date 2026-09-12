@@ -945,6 +945,10 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
       b = "images/Zombies/Zombie/";
     return ["images/Card/Zombies/LadderZombie.png", a + "1.gif", a + "Walk.gif", a + "Attack.gif", a + "Die.gif", a + "LostHeadAttack1.gif", a + "LostLadderWalk.gif", a + "LostLadderAttack.gif", a + "Die.gif", a + "Die.gif", b + "ZombieHead.gif" + $Random, a + "Die.gif" + $Random, b + "BoomDie.gif" + $Random, a + "1.gif", a + "throwLadder.gif"]
   })(),
+flatTire:function(){
+this.OrnHP=0;
+this.getPea(this,this.OrnHP,0)
+},
   jinyinAct: function(a) {
 	a.num = a.Privatenum||Math.random() * 100;
 	if(a.num<50){
@@ -957,6 +961,31 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
     var Sh = NewImg(z.FumeDoor, "images/Plants/CobCannon/noReady.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:-70px;top:-110px;", 0);
     z.appendChild(Sh);
     a.Ready(a);
+    a.PrivateAct = function(b) {
+if(b.Ornaments){
+      (b.WalkDirection == b.check) && (
+        SetStyle($(b.Ele.FumeDoor), {
+          "left": !b.WalkDirection ? "-70px" : "30px",
+          transform: !b.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)"
+        }),
+        b.check=(b.WalkDirection?0:1));
+        for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX); i++) {
+          for (let l = 0; l <= 3; l++) {
+            let m = oGd.$[a.R + "_" + i + "_" + l];
+            a.PZ && m && m.getHurt(a, 2, 100)
+          }
+        }
+let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.PZ ? a.ZX - 120 : a.ZX, a.PZ ? a.ZX : a.ZX + 120, a.R),
+        Tz = A.length;
+        while (Tz--) {
+          (t = A[Tz]) && (t.Altitude == 1) && (t.getHit2(t,5,0))
+        }
+      b.CanShoot && b.checkP(b);
+}else{
+      ClearChild($(b.Ele.FumeDoor));
+      b.PrivateAct=function(){}
+}
+    }
 	}else{
 		a.EleBody.style.filter = "sepia(1) hue-rotate(20deg) brightness(5)";
 		a.jianshang*=0.75;
@@ -972,16 +1001,6 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
 		$Z[a.id]&&oSym.addTask(750,arguments.callee,[a])
 		},[a]);
 	}
-    a.PrivateAct = function(b) {
-      (b.WalkDirection == b.check) && (!b.num&&b.Ornaments && (
-        SetStyle($(b.Ele.FumeDoor), {
-          "left": !b.WalkDirection ? "-70px" : "30px",
-          transform: !b.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)"
-        }),
-        b.check=(b.WalkDirection?0:1)));
-      !b.Ornaments && ClearChild($(b.Ele.FumeDoor));
-      b.CanShoot && b.Ornaments && b.checkP(b);
-    }
   },
 jianshangtime:500,
  getAid:function(a,d,c){
@@ -1101,7 +1120,7 @@ jianshangtime:500,
     oPumpkinHead,
     oGarlic: true
   },
-  Produce: '他遇到防御植物可将梯子搭在上面<br>韧性：<font color="#FF0000">中</font><br>扶梯韧性：<font color="#FF0000">中(500)</font><br>精英形态一：<font color="#FF0000">扶梯→玉米加农炮，速度变慢，每隔一段时间朝随机一颗植物发射炮弹，对该植物的3*3范围造成1600伤害</font><br>精英形态二：<font color="#FF0000">金色扶梯，无限搭梯，自身有25%减伤，免疫减速、冻结、击退，每隔一段时间给周围僵尸附上25%减伤</font><br>这架梯子花了他$114514。',
+  Produce: '他遇到防御植物可将梯子搭在上面<br>扶梯韧性：<font color="#FF0000">中(500)</font><br>精英形态一：<font color="#FF0000">扶梯→玉米加农炮，速度变慢，每隔一段时间朝随机一颗植物发射炮弹，对该植物的3*3范围造成1600伤害，利用玉米炮碾压植物</font><br>精英形态二：<font color="#FF0000">金色扶梯，无限搭梯，自身有减伤，免疫负面效果，每隔一段时间给周围僵尸附上25%减伤</font><br>这架梯子花了他$114514。',
   CheckOrnHP: function(g, h, d, c, f, b, a) {
     var e = OrnNoneZombies.prototype;
     (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering,g.OSpeed=g.LostPaperSpeed,g.Speed=g.LostPaperSpeed*(g.FreeSlowTime?0.5:1),(!g.jinyin||g.num<50)&&(g.getSnowPea = e.getSnowPea), g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.canLadderList = [], g.Boom = function() {}, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
