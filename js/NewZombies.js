@@ -1131,23 +1131,117 @@ oCatapultZombie=InheritO(oZomboni,{
 	CName:"投石车僵尸",
 	HP:1000,
 	Lvl:4,
-	SunNum:250,
+	SunNum:0,
 	Speed:3.5,
 	OSpeed:3.5,
+LostPaperSpeed:3.5,
 	StandGif: 1,
 	DieGif: 3,
 	BoomDieGif: 3,
 	Move:true,
+width:166,
+height:180,
+GetDTop:0,
 	basketballNum:20,
 	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">高（1000）</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
 	PicArr: (function() {
 			var b = "images/Zombies/CatapultZombie/";
-			return ["images/Card/Zombies/CatapultZombie.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif", b + "throw.gif"]
+			return ["images/Card/Zombies/Catapult.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif"+$Random, b + "Throw.gif"]
 	})(),
+PrivateAct:function(a){
+a.Move&&a.canWalk(a,a.id)&&(GetC(a.ZX+30)<=8)&&a.basketballNum>0&&a.checkThrow(a)
+},
+checkThrow:function(a){
+if(a.basketballNum<=0||!a.PZ){return (a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)}
+let Order=[1,2,3,0];
+let num;
+for (let C=1;C<=GetC(a.ZX);C++){
+  for (let i=0;i<Order.length;i++){
+let P=oGd.$[a.R+"_"+C+"_"+Order[i]];
+!num&&P&&P.canEat&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(P,P.AttackedLX+40, GetY(a.R)-40),num=true)
+  }
+}
+!num&&!a.Move&&(a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)
+},
+  getAngle(x, y, lastX, lastY) {
+    return (180 / Math.PI) * Math.atan2(y - lastY, x - lastX);
+  },
+Throw:function(p,X,Y){
+var a=this;
+var P=p;
+a.EleBody.src=a.PicArr[4];
+    a.BulletEle = NewImg(
+      0,
+     "images/interface/Zombie_catapult_basketball.png",
+      "left:" +
+      (a.ZX + (a.WalkDirection?-140:140)) +
+      "px;top:" +
+      (a.pixelTop + 100) +
+      "px;visibility:hidden;z-index:" +
+      (a.zIndex + 2)
+    );
+    var bullet = EditEle(
+      a.BulletEle.cloneNode(false), {
+        id: "CB" + Math.random(),
+      },
+      0,
+      EDPZ
+    );
+    oSym.addTask(100, (_) => {
+      SetVisible(bullet);
+      var x = a.ZX + (a.WalkDirection?-140:140);
+      var y = a.pixelTop + 100;
+      var RelativePos = [X,Y];
+      var s = x - RelativePos[0];
+      var x2 = x - s;
+      var gravity = 0.2;
+      var vy = -10;
+      var vx = -(gravity * s) / (2 * vy);
+      var lastTime = 0;
+      var zY = RelativePos[1];
+      var [lastX, lastY] = [x, y];
+      var defAngle = a.getAngle(x - vx, y + vy + gravity, lastX, lastY);
+      var bulletShadow = NewEle(
+        `${a.id}_B_${Math.random()}_Shadow`,
+        "div",
+        `opacity:0.5;background-size:29px;background-repeat: no-repeat;width:29px;left:${x}px;top:${
+          a.pixelTop + a.height - 10
+        }px;`, {
+          className: "Shadow",
+        },
+        EDPZ
+      );
+      (function drawFrame() {
+        vy += gravity;
+        bullet.style.left = (x -= vx) + "px";
+        bulletShadow.style.left = x + "px";
+        bullet.style.top = (y += vy) + "px";
+        if ((x <= X &&y>=Y) || s < 40) {
+          bullet && ClearChild(bullet);
+          $P[P.id]&&P.getHurt(a, 3, 75);
+          $Z[a.id]&&(a.EleBody.src=a.PicArr[a.NormalGif],--a.basketballNum,a.checkThrow(a));
+          return;
+        }
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 50 / 3 - (currTime - lastTime)) / 10;
+        oSym.addTask(timeToCall, drawFrame);
+        lastTime = currTime + timeToCall;
+        [lastX, lastY] = [x, y];
+      })();
+    })
+},
 	JudgeIce:function(){},
 	getSnowPea:OrnNoneZombies.prototype.getSnowPea,
 	getFirePea:OrnNoneZombies.prototype.getFirePea,
 	prepareBirth:CZombies.prototype.prepareBirth,
+GoingDie:function(){
+var b=this;
+b.beAttacked=0;
+b.AutoReduceHP(b.id)
+},
+		beAttackedPointL: 0,
+		beAttackedPointR: 150,
+		BreakPoint: 90,
 	flatTire: function() {
 			var b = this;
 			b.EleBody.src = "images/Zombies/CatapultZombie/flatTire.gif";
