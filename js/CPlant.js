@@ -2431,7 +2431,7 @@ jinyinAttackGif2: 8,
     })
   },
   NormalAttack: function(a, b) {
-    $P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].AttackGif] + Math.random());
+    $P[a] && (PlayAudio("chomper"),$(a).childNodes[1].src = $P[a].PicArr[$P[a].AttackGif] + Math.random());
     oSym.addTask(70,
       function(c, d) {
         $P[c] && oSym.addTask(18,
@@ -3126,7 +3126,7 @@ NormalAttack2: function() {
         SunNum: 125,
         PicArr: ["images/Card/Plants/DoomShroom.png", "images/Plants/DoomShroom/0.gif", "images/Plants/DoomShroom/DoomShroom.gif", "images/Plants/DoomShroom/Sleep.gif", "images/Plants/DoomShroom/BeginBoom.gif", "images/Plants/DoomShroom/crater10.png", "images/Plants/DoomShroom/crater11.png", "images/Plants/DoomShroom/crater20.png", "images/Plants/DoomShroom/crater21.png", "images/Plants/DoomShroom/crater30.png", "images/Plants/DoomShroom/crater31.png", "images/Plants/DoomShroom/Boom.png"],
         Tooltip: "造成大规模的伤害, 但会在原地留下一个坑, 坑中无法种植物",
-        Produce: '毁灭菇可以摧毁大范围的僵尸，并留下一个不能种植物的大弹坑。<p>伤害：<font color="#FF0000">极高(2700)</font><br>范围：<font color="#FF0000">大范围内的所有僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">留下一个弹坑<br>白天睡觉</font></p>“你很幸运，我是和你一伙的，”毁灭菇说，“我能摧毁任何你所珍视的东西，小菜一碟。”',
+        Produce: '毁灭菇可以摧毁大范围的僵尸，并留下一个不能种植物的大弹坑。<p>伤害：<font color="#FF0000">极高(2700)</font><br>范围：<font color="#FF0000">大范围内的所有僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>特点：<font color="#FF0000">留下一个弹坑<br>白天睡觉</font></p>“我赐僵尸下地狱”',
         InitTrigger: function() {},
         AudioArr: ["doomshroom"],
         BirthStyle: function(c, d, b, a) {
@@ -3386,6 +3386,7 @@ NormalAttack2: function() {
         PrivateBirth: function(c) {
             var a = c.R,
                 b = c.C;
+			PlayAudio("plantern");
             oGd.$Plantern[a + "_" + b] = c.id;
             NewImg("", "images/Plants/Plantern/light.gif", "filter:alpha(opacity="+(c.jinyin?"60":"30")+");opacity:.3"+";left:0;top:0;z-index:" + c.zIndex, $(c.id));
             oS.HaveFog && oGd.GatherFog(a, b, 4, 6, 0), oFlowerVase.prototype.FreshXRay(); // 刷新场地上花瓶 XRAY
