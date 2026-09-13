@@ -1144,7 +1144,7 @@ width:166,
 height:180,
 GetDTop:0,
 	basketballNum:20,
-	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">高（1000）</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
+	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">高（1000）</font><br>精英形态一：<font color="#FF0000">随机投掷，在落点生成小僵尸或正常体型僵尸</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
 	PicArr: (function() {
 			var b = "images/Zombies/CatapultZombie/";
 			return ["images/Card/Zombies/Catapult.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif"+$Random, b + "Throw.gif"]
@@ -1162,7 +1162,7 @@ Z.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(TZ,TZ.Attacke
 for (let C=1;C<=GetC(a.ZX);C++){
   for (let i=0;i<Order.length;i++){
 let P=oGd.$[a.R+"_"+C+"_"+Order[i]];
-a.PZ&&!num&&P&&P.canEat&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(P,P.AttackedLX+40, GetY(a.R)-40),num=true)
+a.PZ&&!num&&P&&P.canEat&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(P,P.AttackedLX+20, GetY(a.R)-40),num=true)
   }
 }
 !num&&!a.Move&&(a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)
@@ -1215,7 +1215,11 @@ a.EleBody.src=a.PicArr[4];
           bullet && ClearChild(bullet);
           $P[P.id]&&P.getHurt(a, 3, 75);
 		  $Z[P.id]&&P.getHit2(P,75,0);
-          $Z[a.id]&&(a.EleBody.src=a.PicArr[a.NormalGif],--a.basketballNum,a.checkThrow(a));
+		  a.jinyinCustom(a,X,Y);
+          $Z[a.id]&&(a.EleBody.src=a.PicArr[a.NormalGif],--a.basketballNum,
+					 oSym.addTask(a.cd,function(a){
+						 $Z[a.id]&&a.checkThrow(a)
+					 },[a]));
           return;
         }
         var currTime = new Date().getTime();
@@ -1226,6 +1230,8 @@ a.EleBody.src=a.PicArr[4];
       })();
     })
 },
+	cd:100,
+	jinyinCustom:function(){},
 	JudgeIce:function(){},
 	getSnowPea:OrnNoneZombies.prototype.getSnowPea,
 	getFirePea:OrnNoneZombies.prototype.getFirePea,
@@ -1252,7 +1258,33 @@ b.AutoReduceHP(b.id)
 			},
 			[b.id, b.EleBody])
 		},
-	jinyinAct:function(){},
+	jinyinAct:function(a){
+		a.jinyinCustom=function(a,X,Y){
+			CustomZombie(oSmallZombie,GetR(Y),GetC(X),!a.PZ);
+		};
+	a.checkThrow=function(a){
+if(a.basketballNum<=0){return (a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)}
+let num;
+let Order=[1,2,3,0];
+let Z=oZ[a.PZ?"getArHZ":"getArZ"](a.PZ?100:a.ZX,a.PZ?a.ZX:oS.W,a.R);
+let TZ=Z[Math.floor(Math.random()*Z.length)];
+Z.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(TZ,TZ.AttackedLX+20,GetY(a.R)-40),num=true);
+if(a.PZ){
+let Plist=[];
+for (let C=1;C<=GetC(a.ZX);C++){
+  for (let i=0;i<Order.length;i++){
+	  let P=oGd.$[a.R+"_"+C+"_"+Order[i]];
+	  if(P && ((Plist.findIndex(P=>P.C===C))!=-1)) continue;
+	  P&&P.canEat&&Plist.push(P);
+  }
+}
+let HitP=Plist[Math.floor(Math.random()*Plist.length)];
+Plist.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(HitP,HitP.AttackedLX+20,GetY(a.R)-40),num=true);
+}
+!num&&!a.Move&&(a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)
+};
+		a.cd*=2.5;
+	},
 	getFirePeaSputtering:OrnNoneZombies.prototype.getFirePeaSputtering,
 	getPea:OrnNoneZombies.prototype.getPea,
 	getFreeze:CZombies.prototype.getFreeze,
