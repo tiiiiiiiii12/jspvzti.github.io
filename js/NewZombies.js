@@ -1111,7 +1111,7 @@ jianshangtime:500,
     var a = $Z[c];
     a&&(a.EleBody.src = a.PicArr[a.LadGif]);
     oSym.addTask(50, function(a, b) {
-      a&&a.beAttacked&&($P[b]&&$P[b].canEat&&(a.Ornaments&&$P[b].getLadder(),(!a.jinyin||a.num<50)&&(a.OrnHP=0,a.getHit0(a, 0, 0))),a.JudgeAttack());
+      a&&a.beAttacked&&($P[b]&&$P[b].canEat&&(a.Ornaments&&$P[b].getLadder(),PlayAudio("ladder"),(!a.jinyin||a.num<50)&&(a.OrnHP=0,a.getHit0(a, 0, 0))),a.JudgeAttack());
     }, [a, b])
   },
   canLadderList: {
