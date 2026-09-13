@@ -1260,7 +1260,7 @@ b.AutoReduceHP(b.id)
 		},
 	jinyinAct:function(a){
 		a.jinyinCustom=function(a,X,Y){
-			CustomZombie(oSmallZombie,GetR(Y),GetC(X),!a.PZ);
+			CustomZombie(oImp,GetR(Y),Math.max(GetC(X),3),!a.PZ).jinyinnum=0;
 		};
 	a.checkThrow=function(a){
 if(a.basketballNum<=0){return (a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)}
