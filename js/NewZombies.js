@@ -1162,7 +1162,7 @@ Z.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(TZ,TZ.Attacke
 for (let C=1;C<=GetC(a.ZX);C++){
   for (let i=0;i<Order.length;i++){
 let P=oGd.$[a.R+"_"+C+"_"+Order[i]];
-!num&&P&&P.canEat&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(P,P.AttackedLX+40, GetY(a.R)-40),num=true)
+a.PZ&&!num&&P&&P.canEat&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(P,P.AttackedLX+40, GetY(a.R)-40),num=true)
   }
 }
 !num&&!a.Move&&(a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)
