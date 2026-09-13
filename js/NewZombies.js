@@ -1192,6 +1192,8 @@ a.EleBody.src=a.PicArr[4];
       EDPZ
     );
     oSym.addTask(100, (_) => {
+	if(!$Z[a.id])return;
+	PlayAudio("basketball");
       SetVisible(bullet);
       var x = a.ZX + (a.WalkDirection?-140:140);
       var y = a.pixelTop + 100;
