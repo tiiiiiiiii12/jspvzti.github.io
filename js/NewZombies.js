@@ -1302,7 +1302,7 @@ Plist.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(HitP,HitP
 };
 		a.ballAttack*=2;
 		a.ballsrc="images/Zombies/Zombie/ZombieHead.png";
-		a.cd*=2.5;
+		a.cd*=3.5;
 	},
 	getFirePeaSputtering:OrnNoneZombies.prototype.getFirePeaSputtering,
 	getPea:OrnNoneZombies.prototype.getPea,
