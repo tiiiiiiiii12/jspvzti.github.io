@@ -827,100 +827,6 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
   GoingDie: CZombies.prototype.GoingDie,
   back: function(a) {}
 }),
-oGatlingPeaZombie = InheritO(oNewspaperZombie, {
-  EName: "oGatlingPeaZombie",
-  CName: "机枪读报僵尸",
-  Lvl: 4,
-  HP: 550,
-  shootPeaSpeed: 15,
-  SunNum: 150,
-  ZKind:1,
-  PicArr: (function() {
-    var a = "images/Zombies/GatlingPeaZombie/";
-    return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif", a + "1.gif"]
-  })(),
-  AudioArr: ["newspaper_rarrgh2"],
-  Produce: '他的报纸只能提供有限的防御，失去报纸后快速发射豌豆<p>韧性：<font color="#FF0000">中（550）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>精英形态：<font color="#FF0000">发怒后攻速减半，速度为0，几秒后射速加快，快速移动，50%减伤生效</font></p>读报僵尸总是误伤别人',
-  jinyinAct: function(a) {
-    a.shootPeaSpeed *= 2;
-    a.LostPaperSpeed = 0;
-  },
-  shootPea1:oPeashooter.prototype.NormalAttack,
-  bedevil: oPeaZombie.prototype.bedevil,
-  shootPea: function() {
-    var a = this,
-      b = "PB" + Math.random();
-    EditEle(a.BulletEle.cloneNode(false), {
-        id: b
-      },
-      0, EDPZ);
-    oSym.addTask(2,
-      function(d) {
-        var c = $(d);
-        c && SetVisible(c)
-      },
-      [b]);
-    oSym.addTask(1,
-      function(f, j, n, i, o) {
-        var l, e = GetC(n);
-        var Kind = 3,
-          Z = oZ["getHZ1"](n, i),
-          d, isHit;
-        Z && Z.Altitude == 1 && (Z.getPea(Z, 20 * a.level, 0), isHit = true);
-        while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20 * a.level))
-        }
-        isHit ? ((SetStyle(j, {
-          left: o + 28 + "px",
-          width: "52px",
-          height: "46px"
-        })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : ((n += (l = -5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 100) + "px", j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
-      },
-      [b, $(b), a.ZX, a.R, a.ZX - 40])
-  },
-  CheckOrnHP: function(g, h, d, c, f, b, a) {
-    var e = OrnNoneZombies.prototype;
-    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.ChkActs = function() {
-        return 1
-      },
-      g.ChkActs1 = function() {
-        return 1
-      },
-      g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(150,
-        function(m, l) {
-          var k = $Z[m];
-          if (!k) {
-            return
-          }
-          var j = CZombies.prototype,
-            i = k.OSpeed = k.LostPaperSpeed;
-          k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
-          k.ChkActs1 = j.ChkActs1;
-          k.tasktime *= 0.25;
-          k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (k.pixelTop + 60) + "px;visibility:hidden;z-index:" + (k.zIndex + 2));
-          k.jinyin && oSym.addTask(600, function(k) {
-            k && (k.jianshang*=0.5,k.Speed = k.OSpeed = 8.1, k.shootPeaSpeed /= 5, k.tasktime /= 2, PlayAudio("newspaper_rarrgh2"));
-          }, [k]);
-          oSym.addTask(k.shootPeaSpeed, function(k, m) {
-            k.canWalk(k, m) && k.beAttacked && k.shootPea(k);
-            $Z[k.id] ? oSym.addTask(k.shootPeaSpeed, arguments.callee, [k, m]) : k.BulletEle = null;
-          }, [k, m]);
-          k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
-          oSym.addTask(1, function(k, Contrast, Brightness) {
-            if (!k) return;
-            k.jinyin && (k.EleBody.style.filter = "brightness(" + (Brightness -= 0.001) + ") contrast(" + (Contrast += 0.001) + ")");
-            !k.Speed && oSym.addTask(1, arguments.callee, [k, Contrast, Brightness])
-          }, [k, 1, 1]);//精英读报黑化
-          if (!k.beAttacked) {
-            return
-          }
-          PlayAudio("newspaper_rarrgh2");
-          k.EleBody.src = l;
-          k.JudgeAttack()
-        },
-        [h, f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]]]))
-  }
-}),
 oLadderZombie = InheritO(oScreenDoorZombie, {
   EName: "oLadderZombie",
   CName: "扶梯僵尸",
@@ -1317,4 +1223,221 @@ Plist.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(HitP,HitP
 	BirthCallBack:CZombies.prototype.BirthCallBack,
 	ChkActs:CZombies.prototype.ChkActs,
 	ChkActs1:CZombies.prototype.ChkActs1
+}),oGatlingPeaZombie = InheritO(oNewspaperZombie, {
+  EName: "oGatlingPeaZombie",
+  CName: "机枪读报僵尸",
+  Lvl: 4,
+  HP: 550,
+  shootPeaSpeed: 15,
+  SunNum: 150,
+  ZKind:1,
+  PicArr: (function() {
+    var a = "images/Zombies/GatlingPeaZombie/";
+    return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif", a + "1.gif"]
+  })(),
+  AudioArr: ["newspaper_rarrgh2"],
+  Produce: '他的报纸只能提供有限的防御，失去报纸后快速发射豌豆<br>韧性：<font color="#FF0000">中（550）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>精英形态一：<font color="#FF0000">篮球，发怒前向前几格植物抛射豌豆，发怒后攻速减半，速度为0，几秒后射速加快，快速移动，50%减伤生效</font><br>精英形态二：<font color="#FF0000">魅惑菇，发怒后召唤一波带路障的豌豆僵尸，将植物转化为豌豆射手僵尸（能转化三次）</font><br>读报僵尸总是误伤别人',
+  jinyinAct: function(a) {
+a.num=a.Privatenum||Math.random()*100;
+if(a.num>=50){
+var z = a.Ele;
+	z.FumeDoor = "Fume" + Math.random();
+    var Sh = NewImg(z.FumeDoor,oCatapultZombie.prototype.ballsrc, "position:absolute;left:50px;top:80px;", 0);
+    z.appendChild(Sh);
+    a.shootPeaSpeed *= 2;
+    a.LostPaperSpeed = 0;
+	a.getAngle=oCatapultZombie.prototype.getAngle;
+	a.ballsrc="images/Plants/PB00.gif";
+	a.ballAttack=20;
+	a.OrnHP*=4;
+	a.Move=true;
+	a.PrivateAct=function(a){
+		!a.Ornaments?(a.PrivateAct=function(){},ClearChild($(a.Ele.FumeDoor))):GetC(a.ZX)<=9&&a.Move&&a.checkThrow(a)
+	};
+	a.checkThrow=function(a){
+let num;
+let Order=[1,2,3,0];
+let Z=oZ[a.PZ?"getArHZ":"getArZ"](a.PZ?a.ZX-300:a.ZX+30,a.PZ?a.ZX-30:a.ZX+300,a.R);
+let TZ=a.PZ?Z[0]:Z[Z.length-1];
+Z.length&&!num&&(a.Move&&(a.Move=false),a.Throw(TZ,TZ.AttackedLX+20,GetY(a.R)-40),num=true)
+for (let C=Math.max(GetC(a.ZX)-4,1);C<=GetC(a.ZX)-1;C++){
+  for (let i=0;i<Order.length;i++){
+let P=oGd.$[a.R+"_"+C+"_"+Order[i]];
+a.PZ&&!num&&P&&P.canEat&&(a.Move&&(a.Move=false),a.Throw(P,P.AttackedLX+20, GetY(a.R)-40),num=true)
+  }
+}
+!num&&!a.Move&&(a.Move=true)
+};
+a.Throw=function(p,X,Y){
+var a=this;
+var P=p;
+    a.BulletEle = NewImg(
+      0,
+     a.ballsrc,
+      "left:" +
+      ((a.PZ?40:-40)+a.ZX) +
+      "px;top:" +
+      (a.pixelTop + 100) +
+      "px;visibility:hidden;z-index:" +
+      (a.zIndex + 2)
+    );
+    var bullet = EditEle(
+      a.BulletEle.cloneNode(false), {
+        id: "CB" + Math.random(),
+      },
+      0,
+      EDPZ
+    );
+      SetVisible(bullet);
+      var x = (a.PZ?40:-40)+a.ZX;
+      var y = a.pixelTop + 100;
+      var RelativePos = [X,Y];
+      var s = Math.abs(x - RelativePos[0]);
+      var x2 = Math.abs(x - s);
+      var gravity = 0.2;
+      var vy = -10;
+      var vx = -(gravity * s) / (2 * vy);
+      var lastTime = 0;
+      var zY = RelativePos[1];
+      var [lastX, lastY] = [x, y];
+      var defAngle = a.getAngle(x - (a.PZ?vx:-vx), y + vy + gravity, lastX, lastY);
+      (function drawFrame() {
+        vy += gravity;
+        bullet.style.left = (x -= (a.PZ?vx:-vx)) + "px";
+        bullet.style.top = (y += vy) + "px";
+		bullet.style.transform = `rotate(${
+          a.getAngle(x, y, lastX, lastY) - defAngle - 25
+        }deg)`;
+        if ((a.PZ? x <= X && y>=Y : x >= X && y>=Y) || s < 40) {
+          bullet && ClearChild(bullet);
+if($P[P.id]){
+P.getHurt(a, 3, a.ballAttack*a.level);
+}else if($Z[P.id]){
+P.getHit2(P,a.ballAttack*a.level,0)
+}
+a.Ornaments&&$Z[a.id]&&a.checkThrow(a);
+          return;
+        }
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 50 / 3 - (currTime - lastTime)) / 10;
+        oSym.addTask(timeToCall, drawFrame);
+        lastTime = currTime + timeToCall;
+        [lastX, lastY] = [x, y];
+      })();
+   }
+}else{
+a.bedevilNum=0;
+	var z = a.Ele;
+	z.FumeDoor = "Fume" + Math.random();
+    var Sh = NewImg(z.FumeDoor,oHypnoShroom.prototype.PicArr[oHypnoShroom.prototype.SleepGif], "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:50px;top:25px;", 0);
+    z.appendChild(Sh);
+	a.PrivateAct=function(a){
+	var P = a.Ele;
+var z=oZ[a.PZ?"getHZ1":"getZ0"](a.ZX,a.R);
+z&&a.bedevilNum<3&&(a.OSpeed==a.LostPaperSpeed)&&(a.bedevilNum++ ,CustomZombie(oPeaZombie,z.R,Math.min(Math.max(GetC(z.ZX),1),9),!a.PZ),z.getThump(10000));
+      (a.WalkDirection == a.check) && (SetStyle($(P.FumeDoor), {
+            transform: a.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)",
+            left: a.WalkDirection ? "80px" : "50px"
+          }),
+        a.check = a.WalkDirection ? 0 : 1);
+      !a.beAttacked && ClearChild($(P.FumeDoor))
+}
+}
+	  a.PrivateDie=function(a){
+		  $(a.Ele.FumeDoor)&&ClearChild($(a.Ele.FumeDoor))
+	  }
+  },
+shootPea1:oPeashooter.prototype.NormalAttack,
+  bedevil: oPeaZombie.prototype.bedevil,
+  shootPea:function() {
+    var a = this,
+      b = "PB" + Math.random();
+    EditEle(a.BulletEle.cloneNode(false), {
+        id: b
+      },
+      0, EDPZ);
+    oSym.addTask(2,
+      function(d) {
+        var c = $(d);
+        c && SetVisible(c)
+      },
+      [b]);
+    oSym.addTask(1,
+      function(f, j, n, i, o) {
+        var l, e = GetC(n);
+        var Kind = 3,
+          Z = oZ["getHZ1"](n, i),
+          d, isHit;
+        Z && Z.Altitude == 1 && (Z.getPea(Z, 20 * a.level, 0), isHit = true);
+        while (Kind--) {
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20 * a.level))
+        }
+        isHit ? ((SetStyle(j, {
+          left: o + 28 + "px",
+          width: "52px",
+          height: "46px"
+        })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : ((n += (l = -5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 100) + "px", j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+      },
+      [b, $(b), a.ZX, a.R, a.ZX - 40])
+  },
+  CheckOrnHP: function(g, h, d, c, f, b, a) {
+    var e = OrnNoneZombies.prototype;
+    (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.ChkActs = function() {
+        return 1
+      },
+      g.ChkActs1 = function() {
+        return 1
+      },
+      g.EleBody.src = f[g.LostPaperGif] + $Random + Math.random(), g.Ornaments = 0, g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getFirePea = e.getFirePea, g.getSnowPea = e.getSnowPea, g.getFreezePea = e.getFreezePea, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit, oSym.addTask(150,
+        function(m, l) {
+          var k = $Z[m];
+          if (!k) {
+            return
+          }
+          var j = CZombies.prototype,
+            i = k.OSpeed = k.LostPaperSpeed;
+          k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
+          k.ChkActs1 = j.ChkActs1;
+          k.tasktime *= 0.25;
+          k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (k.pixelTop + 60) + "px;visibility:hidden;z-index:" + (k.zIndex + 2));
+          k.num>=50&&oSym.addTask(600, function(k) {
+            k && (k.jianshang*=0.5,k.Speed = k.OSpeed = 8.1, k.shootPeaSpeed /= 5, k.tasktime /= 2, PlayAudio("newspaper_rarrgh2"));
+          }, [k]);
+		  if(k.jinyin &&k.num<50){
+k.PrivateAttack=function(a,b){
+a&&a.bedevilNum<3&&$P[b]&&(a.bedevilNum++,CustomZombie(oPeaZombie,$P[b].R,Math.min(Math.max($P[b].C,1))),$P[b].getHurt(a,1,1000))
+};			  $(k.Ele.FumeDoor).src=oHypnoShroom.prototype.PicArr[oHypnoShroom.prototype.NormalGif];
+			  for (t=1;t<=5;t++){
+				  let SummonZ=CustomZombie(oPeaZombie,Math.floor(Math.random()*oS.R+1),k.PZ?10:0,!k.PZ);
+				  SummonZ.OrnHP=370;
+				  SummonZ.PicArr=oConeheadZombie.prototype.PicArr;				  
+				  SummonZ.getHit=SummonZ.getHit0=SummonZ.getHit1=SummonZ.getHit2=SummonZ.getHit3=oConeheadZombie.prototype.getHit0;
+				  SummonZ.Ornaments=1;				  
+				  SummonZ.PlayNormalballAudio=oConeheadZombie.prototype.PlayNormalballAudio;
+				  SummonZ.OrnLostNormalGif=9;
+				  SummonZ.OrnLostAttackGif=10;
+oSym.addTask(0,function(SummonZ){
+	SummonZ.EleBody.src=SummonZ.PicArr[SummonZ.NormalGif];
+	},[SummonZ])
+			  }
+		  }
+          oSym.addTask(k.shootPeaSpeed, function(k, m) {
+            k.canWalk(k, m) && k.beAttacked && k.shootPea(k);
+            $Z[k.id] ? oSym.addTask(k.shootPeaSpeed, arguments.callee, [k, m]) : k.BulletEle = null;
+          }, [k, m]);
+          k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
+          oSym.addTask(1, function(k, Contrast, Brightness) {
+            if (!k) return;
+            k.num>=50&& (k.EleBody.style.filter = "brightness(" + (Brightness -= 0.001) + ") contrast(" + (Contrast += 0.001) + ")");
+            !k.Speed && oSym.addTask(1, arguments.callee, [k, Contrast, Brightness])
+          }, [k, 1, 1]);//精英读报黑化
+          if (!k.beAttacked) {
+            return
+          }
+          PlayAudio("newspaper_rarrgh2");
+          k.EleBody.src = l;
+          k.JudgeAttack()
+        },
+        [h, f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]]]))
+  }
 })
