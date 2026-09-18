@@ -1129,7 +1129,7 @@ jianshangtime:500,
 oCatapultZombie=InheritO(oZomboni,{
 	EName:"oCatapultZombie",
 	CName:"投石车僵尸",
-	HP:1000,
+	HP:850,
 	Lvl:4,
 	SunNum:225,
 	Speed:3.5,
@@ -1143,8 +1143,10 @@ tasktime:25,
 width:166,
 height:180,
 GetDTop:0,
+	ballsrc:"images/interface/Zombie_catapult_basketball.png",
+	ballAttack:75,
 	basketballNum:20,
-	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">高（1000）</font><br>精英形态一：<font color="#FF0000">随机投掷，在落点生成小僵尸或正常体型僵尸</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
+	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">中（850）</font><br>精英形态一：<font color="#FF0000">随机投掷，在落点生成小僵尸或正常体型僵尸</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
 	PicArr: (function() {
 			var b = "images/Zombies/CatapultZombie/";
 			return ["images/Card/Zombies/Catapult.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif"+$Random, b + "Throw.gif"]
@@ -1176,7 +1178,7 @@ var P=p;
 a.EleBody.src=a.PicArr[4];
     a.BulletEle = NewImg(
       0,
-     "images/interface/Zombie_catapult_basketball.png",
+     a.ballsrc,
       "left:" +
       (a.ZX + (a.WalkDirection?-140:140)) +
       "px;top:" +
@@ -1211,11 +1213,23 @@ a.EleBody.src=a.PicArr[4];
         vy += gravity;
         bullet.style.left = (x -= (a.PZ?vx:-vx)) + "px";
         bullet.style.top = (y += vy) + "px";
-        if ((a.PZ? x <= X: x >= X && y>=Y) || s < 40) {
+		bullet.style.transform = `rotate(${
+          self.getAngle(x, y, lastX, lastY) - defAngle - 25
+        }deg)`;
+        if ((a.PZ? x <= X && y>=Y : x >= X && y>=Y) || s < 40) {
           bullet && ClearChild(bullet);
-          $P[P.id]&&P.getHurt(a, 3, 75);
-		  $Z[P.id]&&P.getHit2(P,75,0);
-		  a.jinyinCustom(a,X,Y);
+		  switch(true){
+			  case $P[P.id]:
+				P.getHurt(a, 3, a.ballAttack*a.level);
+				P.HP<1&&a.jinyinCustom(a,X,Y)
+				return;
+			  case $Z[P.id]:
+				P.getHit2(P,a.ballAttack*a.level,0);
+				P.HP<1&&a.jinyinCustom(a,X,Y)
+				break;
+			  default:
+				a.jinyinCustom(a,a.ZX,Y)
+		  };
           $Z[a.id]&&(a.EleBody.src=a.PicArr[a.NormalGif],--a.basketballNum,
 					 oSym.addTask(a.cd,function(a){
 						 $Z[a.id]&&a.checkThrow(a)
@@ -1260,7 +1274,13 @@ b.AutoReduceHP(b.id)
 		},
 	jinyinAct:function(a){
 		a.jinyinCustom=function(a,X,Y){
-			CustomZombie(oZombie,GetR(Y),Math.max(GetC(X),3),!a.PZ).jinyinnum=0;
+			let z=CustomZombie(oZombie,GetR(Y),Math.max(GetC(X),3),!a.PZ);
+			z.jinyinnum=0;
+			z.Privatenum=30;
+			z.PrivateBirth=function(b){
+				b.EleBody.style.top=b.height+"px";
+				b.AppearDownZ(b)
+			}
 		};
 	a.checkThrow=function(a){
 if(a.basketballNum<=0){return (a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)}
@@ -1283,6 +1303,8 @@ Plist.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(HitP,HitP
 }
 !num&&!a.Move&&(a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)
 };
+		a.ballAttack*=2;
+		a.ballsrc="images/Zombies/Zombie/ZombieHead.png";
 		a.cd*=2.5;
 	},
 	getFirePeaSputtering:OrnNoneZombies.prototype.getFirePeaSputtering,
