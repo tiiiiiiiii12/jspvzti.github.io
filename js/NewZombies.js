@@ -1146,7 +1146,7 @@ GetDTop:0,
 	ballsrc:"images/interface/Zombie_catapult_basketball.png",
 	ballAttack:75,
 	basketballNum:20,
-	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">中（850）</font><br>精英形态一：<font color="#FF0000">随机投掷，在落点生成小僵尸或正常体型僵尸</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
+	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">中（850）</font><br>精英形态一：<font color="#FF0000">随机投掷僵尸头，若杀死植物则在落点生成僵尸，反之则在投篮车的位置</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
 	PicArr: (function() {
 			var b = "images/Zombies/CatapultZombie/";
 			return ["images/Card/Zombies/Catapult.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif"+$Random, b + "Throw.gif"]
@@ -1214,22 +1214,19 @@ a.EleBody.src=a.PicArr[4];
         bullet.style.left = (x -= (a.PZ?vx:-vx)) + "px";
         bullet.style.top = (y += vy) + "px";
 		bullet.style.transform = `rotate(${
-          self.getAngle(x, y, lastX, lastY) - defAngle - 25
+          a.getAngle(x, y, lastX, lastY) - defAngle - 25
         }deg)`;
         if ((a.PZ? x <= X && y>=Y : x >= X && y>=Y) || s < 40) {
           bullet && ClearChild(bullet);
-		  switch(true){
-			  case $P[P.id]:
-				P.getHurt(a, 3, a.ballAttack*a.level);
-				P.HP<1&&a.jinyinCustom(a,X,Y)
-				return;
-			  case $Z[P.id]:
-				P.getHit2(P,a.ballAttack*a.level,0);
-				P.HP<1&&a.jinyinCustom(a,X,Y)
-				break;
-			  default:
-				a.jinyinCustom(a,a.ZX,Y)
-		  };
+if($P[P.id]){
+a.jinyinCustom(a,P.HP<=150?X:a.ZX,Y);
+P.getHurt(a, 3, a.ballAttack*a.level);
+}else if($Z[P.id]){
+a.jinyinCustom(a,P.HP<=150?X:a.ZX,Y);
+P.getHit2(P,a.ballAttack*a.level,0)
+}else{
+a.jinyinCustom(a,a.ZX,Y);
+}
           $Z[a.id]&&(a.EleBody.src=a.PicArr[a.NormalGif],--a.basketballNum,
 					 oSym.addTask(a.cd,function(a){
 						 $Z[a.id]&&a.checkThrow(a)
