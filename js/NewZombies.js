@@ -1406,7 +1406,9 @@ shootPea1:oPeashooter.prototype.NormalAttack,
 		  if(k.jinyin &&k.num<50){
 k.PrivateAttack=function(a,b){
 a&&a.bedevilNum<3&&$P[b]&&(a.bedevilNum++,CustomZombie(oPeaZombie,$P[b].R,Math.min(Math.max($P[b].C,1))),$P[b].getHurt(a,1,1000))
-};			  $(k.Ele.FumeDoor).src=oHypnoShroom.prototype.PicArr[oHypnoShroom.prototype.NormalGif];
+};
+			  $(k.Ele.FumeDoor).src=oHypnoShroom.prototype.PicArr[oHypnoShroom.prototype.NormalGif];
+			  ShowLargeWave();
 			  for (t=1;t<=5;t++){
 				  let SummonZ=CustomZombie(oPeaZombie,Math.floor(Math.random()*oS.R+1),k.PZ?10:0,!k.PZ);
 				  SummonZ.OrnHP=370;
