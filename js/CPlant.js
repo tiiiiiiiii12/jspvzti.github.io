@@ -697,7 +697,7 @@ oSnowPea = InheritO(oPeashooter, {
   AudioArr: ["frozen", "splat1", "splat2", "splat3", "shieldhit", "shieldhit2", "plastichit"],
   Tooltip: "寒冰射手可造成伤害, 同时又有减速效果",
   Produce: '寒冰射手会发射寒冰豌豆来攻击敌人，并具有减速效果，有概率冻结僵尸<br>精英形态：攻击有概率发射整行的减速喷雾<br>精英特殊技能：点击它花费150阳光发射400伤害整行的减速喷雾，有冷却提示<p>伤害：<font color="#FF0000">中等，带有减速效果</font></p>人们经常告诉寒冰射手他是多么“冷酷”，或者告诫他要“冷静”。他们叫他要“保持镇静”。寒冰射手只是转转他的眼睛。其实他都听见了。',
-  LoadingComplelete: function(a) {
+  LoadingComplete: function(a) {
     $("oAttack_" + a.id).onclick = function() {
       (oS.SunNum>=150 || !oS.StaticCard) && (
         !oS.CardKind&&oS.StaticCard && (ESSunNum.innerHTML = +ESSunNum.innerHTML-150,oS.SunNum-=150),
@@ -733,7 +733,7 @@ SetStyle($(b.id + "_Bullet"),{
     NewEle(b.id + "_Bullet", "div", "position:absolute;visibility:hidden;width:686px;height:62px;left:" + b.AttackedRX +
       "px;top:" + (b.pixelTop + 5) + "px;background:url(images/Plants/SnowPea/FumeShroomBullet.gif);z-index:" + (b.zIndex + 1), 0, EDPZ);
     oSym.addTask(100, function(b) {
-      b.HP > 1 && (b.power < 40 ? (b.power += 1) : ($(b.id).style.opacity = 0.7, b.LoadingComplelete(b)));
+      b.HP > 1 && (b.power < 40 ? (b.power += 1) : ($(b.id).style.opacity = 0.7, b.LoadingComplete(b)));
       b.HP > 1 && oSym.addTask(100, arguments.callee, [b])
     }, [b])
   },
@@ -1089,15 +1089,17 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
 		jinyinAct:function(){},
         PeaKind:0,
         NormalAttack: function(a) {
+			var num=Math.random()*100;
+			num<3&&(this.AttTime+=560,this.getHurt=function(){},PlayAudio("newspaper_rarrgh2"));
             oSym.addTask(0,
                 function(d, b) {
                     var c = $P[d];
                     c && (c.NormalAttack2(),
                           c.PeaKind=Math.floor(Math.random()*3-1),
                         c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif");
-                    --b && oSym.addTask(15, arguments.callee, [d, b])
+                    --b ? oSym.addTask(num<3?2:15, arguments.callee, [d, b]) : num<3&&c&&(c.getHurt=CPlants.prototype.getHurt)
                 },
-                [this.id,4])
+                [this.id,num<3?100:4])
         }
     }),
 	oSniperPea=InheritO(CPlants,{
@@ -2379,7 +2381,7 @@ jinyinAttackGif2: 8,
       a = d.id;
     !(c % 3) ? (d.HP -= b) < 1 && d.Die(): (oSym.addTask(200, ClearChild, [NewImg(0, d.PicArr[1] ? d.PicArr[d.StaticGif] : d.PicArr[d.NormalGif],
       "left:" + (d.AttackedLX - 25) + "px;top:" + (d.pixelTop + 60) + "px;height:15px;width:" + (d.width) + "px;z-index:" + d.zIndex, EDPZ)]), PlayAudio("chomp"), d.Die());
-    d.jinyin && $P[a] && (d.HP <= 700) && !d.nopaper && (d.BreakPaper(d, a));
+    d.jinyin && $P[a] && (d.HP <= 700) && !d.nopaper && (d.BreakPaper(d, a),d.getHurt=CPlants.prototype.getHurt);
   },
   BreakPaper: function(a, c) {
     a.nopaper = true;
@@ -2388,17 +2390,18 @@ jinyinAttackGif2: 8,
     var R = Math.max(j.R - 1, 1);
 	$(c).childNodes[1].src = "images/Plants/Chomper/jinyinAttack2.gif"+$Random+Math.random();
     do {
+	oSym.addTask(1,function(t,c){
+	if(!j)return;
       var Z = oZ.getArZ(j.AttackedLX, Math.min(j.AttackedRX + 160,oS.W),R);
       var zl = Z.length;
       while (zl--) {
-	  oSym.addTask(1,function(Z,zl,t,c){
-        Z[zl].Altitude == 1 && j && (Z[zl].getHit1(Z[zl], 15, 0), Z[zl].getr(Z[zl],5));
-		j&&(--t?oSym.addTask(1,arguments.callee,[Z,zl,t,c]):(j.canTrigger=1,$(c).childNodes[1].src = j.PicArr[j.NormalGif],
-		j.getTriggerR=oGatlingPea.prototype.getTriggerR,
-		j.oTrigger&&oT.delP(j),
-		j&&j.InitTrigger(j,c,j.R,j.C,j.AttackedLX,j.AttackedRX)))//重置索敌
-	  },[Z,zl,20,c])
+        Z[zl].Altitude == 1 && j && (Z[zl].getHit0(Z[zl], 15, 0), Z[zl].getr(Z[zl],5));
       }
+	--t?oSym.addTask(1,arguments.callee,[t,c]):(j.canTrigger=1,$(c).childNodes[1].src = j.PicArr[j.NormalGif],
+	j.getTriggerR=oGatlingPea.prototype.getTriggerR,
+	j.oTrigger&&oT.delP(j),
+	j&&j.InitTrigger(j,c,j.R,j.C,j.AttackedLX,j.AttackedRX))//重置索敌
+	},[20,c]);
     } while (R++ < Math.min(j.R + 1, oS.R))
     j && (j.DigestGif = 4,
       j.AttackGif = j.jinyinAttackGif2,
@@ -2622,7 +2625,7 @@ getFreeze:function(){},
   PicArr: ["images/Card/Plants/GloomShroom.png", "images/Plants/GloomShroom/0.gif", "images/Plants/GloomShroom/GloomShroom.gif", "images/Plants/GloomShroom/GloomShroomSleep.gif", "images/Plants/GloomShroom/GloomShroomAttack.gif", "images/Plants/GloomShroom/GloomShroomBullet.gif"],
   AudioArr: ["kernelpult", "kernelpult2"],
   Tooltip: "围绕自身释放大量绵羊音<br>(需要大喷菇)",
-  Produce: '它有两种形态，点击可切换（有冷却提示），两种形态有不同的效果<br>寒冰形态：对僵尸造成伤害和概率击退<br>火焰形态：伤害更高，有概率直接破甲(不会抵消减速)<br><font color="#FF0000">必须种植在大喷菇上</font><br>曾哥有一个爱打棒球的姐姐，据坊间传言她是个病娇，曾将出轨她的男友和小三活活打死，并像《植物大战僵尸：旅行》的job一样创建了新游戏…不知怎的，曾哥对这件事讳莫如深。另外向日葵似乎很害怕曾姐，尽管她们从未见过面',
+  Produce: '它有两种形态，点击可切换（有冷却提示），两种形态有不同的效果<br>寒冰形态：对僵尸造成伤害和概率击退<br>火焰形态：伤害更高，有概率直接破甲(不会抵消减速)<br><font color="#FF0000">必须种植在大喷菇上</font><br>曾哥有一个爱打棒球的姐姐，据坊间传言她曾将出轨她的男友和小三活活打死，并像《植物大战僵尸：旅行》的job一样创建（其实是修改）了游戏，和她的“真命天子”培养感情…不知怎的，曾哥对这件事讳莫如深。另外向日葵似乎很害怕曾姐，尽管她们似乎从未见过面',
   CanGrow: function(b, a, d) {
     var c = b[1];
     return c && c.EName == "oFumeShroom"
@@ -3599,7 +3602,7 @@ NormalAttack2: function() {
                 if(num>75){
                     e && e.Altitude == 1&&(e.getHit0(e, 2, d)),(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
                 }else{
-                e && e.Altitude == 1?(num>50&&e.getr(e,20),e.getPea(e,20,d), ClearChild(i)):(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
+                e && e.Altitude == 1?(num>55&&e.getr(e,20),e.getPea(e,20,d), ClearChild(i)):(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
                 }
                 },
                 [c, $(c), 0, b.AttackedLX, b.R, b.AttackedLX - 40])
