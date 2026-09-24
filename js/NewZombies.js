@@ -1326,6 +1326,7 @@ a.Ornaments&&$Z[a.id]&&a.checkThrow(a);
       })();
    }
 }else{
+a.LostPaperSpeed*=1.5;
 a.bedevilNum=0;
 	var z = a.Ele;
 	z.FumeDoor = "Fume" + Math.random();
@@ -1334,7 +1335,7 @@ a.bedevilNum=0;
 	a.PrivateAct=function(a){
 	var P = a.Ele;
 var z=oZ[a.PZ?"getHZ1":"getZ0"](a.ZX,a.R);
-z&&a.bedevilNum<3&&(a.OSpeed==a.LostPaperSpeed)&&(a.bedevilNum++ ,CustomZombie(oPeaZombie,z.R,Math.min(Math.max(GetC(z.ZX),1),9),!a.PZ),z.getThump(10000));
+z&&a.bedevilNum<3&&(a.OSpeed==a.LostPaperSpeed)&&(a.bedevilNum++,CustomZombie(oPeaZombie,z.R,Math.min(Math.max(GetC(z.ZX),1),9),!a.PZ),z.getThump(10000));
       (a.WalkDirection == a.check) && (SetStyle($(P.FumeDoor), {
             transform: a.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)",
             left: a.WalkDirection ? "80px" : "50px"
