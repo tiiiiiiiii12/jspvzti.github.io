@@ -12,41 +12,11 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
     SunNum: 114514,
     BrainsNum: 6,
     CardKind: 1,
+    ShowScroll:false,
     LevelName: "斗蛐蛐测试页面",
     LvlEName: "ImZombieTest",
     LoadMusic: "Mountains",
     StartGameMusic: "Mountains",
-    LoadAccess: function(i) {
-        !oS.LvlVar ? oS.LvlVar = {
-            ScrollScreen: oS.ScrollScreen
-        } : oS.LvlVar.ScrollScreen = oS.ScrollScreen;
-        $("tGround").style.left = "-115px";
-        SetStyle($("dTop"), {
-            left: "105px",
-            top: 0,
-            visibility: "visible"
-        });
-        innerText(ESSunNum, oS.SunNum);
-        oS.ScrollScreen = function() {
-            $("tGround").style.left = 0;
-            ClearChild($("dButton1"), $("dButton2"));
-            (function() {
-                (EDAll.scrollLeft += 25) < 500 ? oSym.addTask(2, arguments.callee, []) : SetVisible($("dMenu"), $("dSelectCard"), $("dCardList"));
-            })();
-        };
-        NewEle("dButton1", "button", "position:absolute;left:650px;top:510px;width:100px;height:35px;z-index:255", {
-            innerHTML: "开始挑战",
-            onclick: function() {
-                i(0);
-            }
-        }, EDAll);
-        NewEle("dButton2", "button", "position:absolute;left:760px;top:510px;width:100px;height:35px;z-index:255", {
-            innerHTML: "不玩这个",
-            onclick: function() {
-                SelectModal(0);
-            }
-        }, EDAll);
-    },
         PNameList:[
                 oPeashooter,
                 oSunFlower,
@@ -143,12 +113,62 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 }
             }
         },
-    LvlClearFunc: function() {
-        oS.ScrollScreen = oS.LvlVar.ScrollScreen;
-        delete oS.LvlVar.ScrollScreen
-    },
+        PlantZ: function() {
+            var dChooseZombie = NewEle("dchooseZombie", "div", "z-index:200;display:none;position:absolute;left:0px;top:0px", 0, EDAll, {
+                "class": "Almanac_PlantBack"
+            });
+            var dChooseZombieTitle = NewEle("dchooseZombieTitle", "div", "position:relative;text-align:center;line-height:88px;height:88px;width:100%;font-size:30px;font-weight:bold;font-family:黑体;color:#fff", {
+                innerHTML: "选  择  僵  尸"
+            }, dChooseZombie, {
+                "class": "dRiddleTitle"
+            });
+            var dChooseZombieBack = NewEle("dChooseZombieBack", "input", "position:absolute;left:5px;top:550px;width:225px;height:35px;border-radius:12.5px;white-space:pre;background:rgba(0,0,0,0.733);color:rgb(255,255,255);font-family:楷体;font-size:22px;font-weight:bold;cursor:pointer;visibility:visible;", {
+                onclick: function() {
+                    PlayAudio("tap"), SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dCardList")), SetNone(dChooseZombie);
+                }
+            }, dChooseZombie, {
+                "type": "button",
+                "value": "返回"
+            });
+            var dChooseZombieBoard = NewEle("dChooseZombieBoard", "div", "position:relative;width:850px;height:455px;left:25px;", 0, dChooseZombie, {
+                "class": "dCardZ"
+            });
+            var PL = oS.ZName; // 引用对象
+            { // 负责生成每张卡片
+                var NormalLeft = 20,
+                    NormalTop = 20,
+                    LeftAdd = 120,
+                    TopAdd = 70,
+                    LineMax = 7;
+                var Left = NormalLeft,
+                    Top = NormalTop,
+                    Obj,
+                    LineNum = 0;
+                // 生成卡片元素
+                for (var _ = 0; _ < PL.length; ++_) {
+                    Obj = PL[_].prototype; // 获取当前的卡片数据
+                    if(!Obj.CanSelect) continue;
+                    var dCardZ = NewEle("dCard_" + _, "div", "position:absolute;width:100;height:60;overflow:hidden;left:" + Left + "px;top:" + Top + "px;cursor:pointer;", {
+                        value: _,
+                        "onmouseout": function() {
+                            SetHidden($("dTitle"));
+                        },
+                        "onmousemove": function(event) {
+                            ViewCardTitle(PL[this.value], event);
+                        },
+                        "onclick": function(i) {
+                            SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"), $("dCardList")),SetNone(dChooseZombie),AppearCard(Math.random()*400+200,Math.random()*200+200,PL[this.value],0,Infinity);
+                        }
+                    }, dChooseZombieBoard);
+                    var dImg = NewImg("dImg_" + _, Obj.PicArr[Obj.CardGif], "width:100;height:120;top:0px", dCardZ);
+                    Left += LeftAdd, ++LineNum; // 偏移下一个卡片的位置
+                    if (LineNum % LineMax == 0) LineNum = 0, Left = NormalLeft, Top += TopAdd; // 如果超过，则下一个就换行
+                }
+            }
+        },
     StartGame: function() {
         oS.Plant();
+        oS.PlantZ();
         NewEle("dButton1", "button", "position:absolute;left:250px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
             onclick: function() {
