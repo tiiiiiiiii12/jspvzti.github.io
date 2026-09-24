@@ -109,7 +109,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         },
         PlantZ: function() {
             var dChooseZombie = NewEle("dChooseZombie", "div", "z-index:200;display:none;position:absolute;left:0px;top:0px", 0, EDAll, {
-                "class": "Almanac_PlantBack"
+                "class": "Almanac_ZombieBack"
             });
             var dChooseZombieTitle = NewEle("dChooseZombieTitle", "div", "position:relative;text-align:center;line-height:88px;height:88px;width:100%;font-size:30px;font-weight:bold;font-family:黑体;color:#fff", {
                 innerHTML: "选  择  僵  尸"
@@ -145,7 +145,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                     var dCardZ = NewEle("dCardZ_" + _, "div", "position:absolute;width:100;height:60;overflow:hidden;left:" + Left + "px;top:" + Top + "px;cursor:pointer;", {
                         value: _,
                         "onclick": function(i) {
-                            SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),$("dCardList")),SetNone(dChooseZombie),AppearCard(Math.random()*400+200,Math.random()*200+200,ZL[this.value],0,Infinity);
+                            SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),$("dCardList")),SetNone(dChooseZombie),AppearCard(Math.random()*400+200,200,ZL[this.value],0,Infinity);
                         }
                     }, dChooseZombieBoard);
                     var dImg = NewImg("dImg_" + _, Obj.PicArr[Obj.CardGif], "width:100;height:120;top:0px", dCardZ);
@@ -157,7 +157,6 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
     StartGame: function() {
         oS.Plant();
         oS.PlantZ();
-        oP.Monitor,BeginCool();
         NewEle("dButton1", "button", "position:absolute;left:250px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
             onclick: function() {
