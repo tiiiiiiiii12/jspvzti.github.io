@@ -114,10 +114,10 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             }
         },
         PlantZ: function() {
-            var dChooseZombie = NewEle("dchooseZombie", "div", "z-index:200;display:none;position:absolute;left:0px;top:0px", 0, EDAll, {
+            var dChooseZombie = NewEle("dChooseZombie", "div", "z-index:200;display:none;position:absolute;left:0px;top:0px", 0, EDAll, {
                 "class": "Almanac_PlantBack"
             });
-            var dChooseZombieTitle = NewEle("dchooseZombieTitle", "div", "position:relative;text-align:center;line-height:88px;height:88px;width:100%;font-size:30px;font-weight:bold;font-family:黑体;color:#fff", {
+            var dChooseZombieTitle = NewEle("dChooseZombieTitle", "div", "position:relative;text-align:center;line-height:88px;height:88px;width:100%;font-size:30px;font-weight:bold;font-family:黑体;color:#fff", {
                 innerHTML: "选  择  僵  尸"
             }, dChooseZombie, {
                 "class": "dRiddleTitle"
@@ -218,8 +218,8 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 PlayAudio("tap"), SetNone($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),$("dCardList")), SetBlock(dChoosePlant)
             }
         }, EDAll);
-        NewEle("dButton5", "button", "position:absolute;left:550px;top:20px;width:100px;height:35px;z-index:255", {
-            innerHTML: "种植植物",
+        NewEle("dButton5", "button", "position:absolute;left:650px;top:20px;width:100px;height:35px;z-index:255", {
+            innerHTML: "放置僵尸",
             onclick: function() {
                 PlayAudio("tap"), SetNone($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),$("dCardList")), SetBlock(dChooseZombie)
             }
