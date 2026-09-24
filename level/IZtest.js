@@ -13,6 +13,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
     BrainsNum: 6,
     CardKind: 1,
     ShowScroll:false,
+    CanSelectCard: 0,
     LevelName: "斗蛐蛐测试页面",
     LvlEName: "ImZombieTest",
     LoadMusic: "Mountains",
