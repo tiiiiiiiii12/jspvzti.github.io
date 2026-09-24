@@ -1,7 +1,6 @@
 oS.Init({
     PName: [oPeashooter],
-    ZName: [oZombie],
-    ZList: [oImp,oZombie,oConeheadZombie,oBucketheadZombie,oFlagZombie,oScreenDoorZombie, oDuckyTubeZombie1,oDuckyTubeZombie2,
+    ZName: [oImp,oZombie,oConeheadZombie,oBucketheadZombie,oFlagZombie,oScreenDoorZombie, oDuckyTubeZombie1,oDuckyTubeZombie2,
 oPoleVaultingZombie,oDuckyTubeZombie3, oNewspaperZombie, oDolphinRiderZombie, 
 oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBoxZombie,oBalloonZombie,oGatlingPeaZombie,oPeaZombie,oWallNutZombie,oTallNutZombie,oDiggerZombie,oLadderZombie,oCatapultZombie,oJalapenoZombie,oSquashZombie,oBackupDancer],
     PicArr: ["images/interface/background4.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
@@ -129,7 +128,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             var dChooseZombieBoard = NewEle("dChooseZombieBoard", "div", "position:relative;width:850px;height:455px;left:25px;", 0, dChooseZombie, {
                 "class": "dCardZ"
             });
-            var ZL = oS.ZList; // 引用对象
+            var ZL = oS.ZName; // 引用对象
             { // 负责生成每张卡片
                 var NormalLeft = 20,
                     NormalTop = 20,
@@ -159,7 +158,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
     StartGame: function() {
         oS.Plant();
         oS.PlantZ();
-        SetHidden($("dCardList"));
+        SetHidden($("dCardList").childNodes[0]);
         NewEle("dButton1", "button", "position:absolute;left:150px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
             onclick: function() {
@@ -233,4 +232,8 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             oSym.addTask(1,arguments.callee,[])
         },[]);//僵尸来回走动
     }
+},0,{
+    AutoSelectCard:function(){
+   SelectCard("oZombie") 
+}
 });
