@@ -12,7 +12,6 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
     SunNum: 114514,
     BrainsNum: 6,
     CardKind: 1,
-    StaticCard:0,
     ShowScroll:false,
     LevelName: "斗蛐蛐测试页面",
     LvlEName: "ImZombieTest",
@@ -171,6 +170,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
     StartGame: function() {
         oS.Plant();
         oS.PlantZ();
+        oP.Monitor,BeginCool();
         NewEle("dButton1", "button", "position:absolute;left:250px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
             onclick: function() {
