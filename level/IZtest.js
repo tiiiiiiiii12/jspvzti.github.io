@@ -129,7 +129,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             var dChooseZombieBoard = NewEle("dChooseZombieBoard", "div", "position:relative;width:850px;height:455px;left:25px;", 0, dChooseZombie, {
                 "class": "dCardZ"
             });
-            var ZList = oS.ZName; // 引用对象
+            var ZL = oS.ZList; // 引用对象
             { // 负责生成每张卡片
                 var NormalLeft = 20,
                     NormalTop = 20,
