@@ -1,6 +1,6 @@
 oS.Init({
     PName: [oPeashooter],
-    ZName: [],
+    ZName: [oZombie],
     ZList: [oImp,oZombie,oConeheadZombie,oBucketheadZombie,oFlagZombie,oScreenDoorZombie, oDuckyTubeZombie1,oDuckyTubeZombie2,
 oPoleVaultingZombie,oDuckyTubeZombie3, oNewspaperZombie, oDolphinRiderZombie, 
 oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBoxZombie,oBalloonZombie,oGatlingPeaZombie,oPeaZombie,oWallNutZombie,oTallNutZombie,oDiggerZombie,oLadderZombie,oCatapultZombie,oJalapenoZombie,oSquashZombie,oBackupDancer],
@@ -160,6 +160,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
         oS.Plant();
         oS.PlantZ();
         oP.Monitor(),BeginCool();
+        SetHidden($("dCardList"));
         NewEle("dButton1", "button", "position:absolute;left:150px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
             onclick: function() {
