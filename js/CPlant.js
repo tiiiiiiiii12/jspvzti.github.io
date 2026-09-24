@@ -1090,16 +1090,16 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
         PeaKind:0,
         NormalAttack: function(a) {
 			var num=Math.random()*100;
-			num<3&&(this.AttTime+=560,this.getHurt=function(){},PlayAudio("newspaper_rarrgh2"));
+			num<3&&(this.AttTime+=460,this.getHurt=function(){},PlayAudio("newspaper_rarrgh2"));
             oSym.addTask(0,
                 function(d, b) {
                     var c = $P[d];
                     c && (c.NormalAttack2(),
                           c.PeaKind=Math.floor(Math.random()*3-1),
                         c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif");
-                    --b ? oSym.addTask(num<3?2:15, arguments.callee, [d, b]) : num<3&&c&&(c.getHurt=CPlants.prototype.getHurt)
+                    --b ? oSym.addTask(num<3?2:15, arguments.callee, [d, b]) : num<3&&c&&(c.getHurt=CPlants.prototype.getHurt,c.AttTime-=460)
                 },
-                [this.id,num<3?100:4])
+                [this.id,num<3?50:4])
         }
     }),
 	oSniperPea=InheritO(CPlants,{
