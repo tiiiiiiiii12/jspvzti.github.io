@@ -1,5 +1,5 @@
 oS.Init({
-    PName: [],
+    PName: [oPeashooter],
     ZName: [oImp,oZombie,oConeheadZombie,oBucketheadZombie,oFlagZombie,oScreenDoorZombie, oDuckyTubeZombie1,oDuckyTubeZombie2,
 oPoleVaultingZombie,oDuckyTubeZombie3, oNewspaperZombie, oDolphinRiderZombie, 
 oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBoxZombie,oBalloonZombie,oGatlingPeaZombie,oPeaZombie,oWallNutZombie,oTallNutZombie,oDiggerZombie,oLadderZombie,oCatapultZombie,oJalapenoZombie,oSquashZombie,oBackupDancer],
@@ -157,7 +157,8 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
     StartGame: function() {
         oS.Plant();
         oS.PlantZ();
-        NewEle("dButton1", "button", "position:absolute;left:250px;top:20px;width:100px;height:35px;z-index:255", {
+        oP.Monitor(),BeginCool();
+        NewEle("dButton1", "button", "position:absolute;left:150px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
             onclick: function() {
             var h=1,
@@ -171,7 +172,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             }
         }, EDAll);
-        NewEle("dButton2", "button", "position:absolute;left:350px;top:20px;width:100px;height:35px;z-index:255", {
+        NewEle("dButton2", "button", "position:absolute;left:250px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "秒杀正常僵尸",
             onclick: function() {
             var h=1,
@@ -185,7 +186,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             }
         }, EDAll);
-       NewEle("dButton3", "button", "position:absolute;left:450px;top:20px;width:100px;height:35px;z-index:255", {
+       NewEle("dButton3", "button", "position:absolute;left:350px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "秒杀魅惑僵尸",
             onclick: function() {
             var h=1,
@@ -199,13 +200,13 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             }
         }, EDAll);
-        NewEle("dButton4", "button", "position:absolute;left:550px;top:20px;width:100px;height:35px;z-index:255", {
+        NewEle("dButton4", "button", "position:absolute;left:450px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "种植植物",
             onclick: function() {
                 PlayAudio("tap"), SetNone($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),$("dCardList")), SetBlock(dChoosePlant)
             }
         }, EDAll);
-        NewEle("dButton5", "button", "position:absolute;left:650px;top:20px;width:100px;height:35px;z-index:255", {
+        NewEle("dButton5", "button", "position:absolute;left:550px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "放置僵尸",
             onclick: function() {
                 PlayAudio("tap"), SetNone($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),$("dCardList")), SetBlock(dChooseZombie)
@@ -229,6 +230,5 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             oSym.addTask(1,arguments.callee,[])
         },[]);//僵尸来回走动
-        SetVisible($("dTop"));
     }
-},0,{AutoSelectCard:function(){}});
+});
