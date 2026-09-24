@@ -12,6 +12,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
     SunNum: 114514,
     BrainsNum: 6,
     CardKind: 1,
+    StaticCard:0,
     ShowScroll:false,
     LevelName: "斗蛐蛐测试页面",
     LvlEName: "ImZombieTest",
