@@ -97,12 +97,6 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                     Obj = PL[_].prototype; // 获取当前的卡片数据
                     var dCard = NewEle("dCard_" + _, "div", "position:absolute;width:100;height:60;overflow:hidden;left:" + Left + "px;top:" + Top + "px;cursor:pointer;", {
                         value: _,
-                        "onmouseout": function() {
-                            SetHidden($("dTitle"));
-                        },
-                        "onmousemove": function(event) {
-                            ViewCardTitle(PL[this.value], event);
-                        },
                         "onclick": function(i) {
                             SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),$("dCardList")),SetNone(dChoosePlant),AppearCard(Math.random()*400+200,400,PL[this.value],0,Infinity);
                         }
@@ -150,12 +144,6 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                     if(!Obj.CanSelect) continue;
                     var dCardZ = NewEle("dCardZ_" + _, "div", "position:absolute;width:100;height:60;overflow:hidden;left:" + Left + "px;top:" + Top + "px;cursor:pointer;", {
                         value: _,
-                        "onmouseout": function() {
-                            SetHidden($("dTitle"));
-                        },
-                        "onmousemove": function(event) {
-                            ViewCardTitle(PL[this.value], event);
-                        },
                         "onclick": function(i) {
                             SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),$("dCardList")),SetNone(dChooseZombie),AppearCard(Math.random()*400+200,Math.random()*200+200,PL[this.value],0,Infinity);
                         }
