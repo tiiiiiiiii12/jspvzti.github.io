@@ -127,7 +127,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
             var dChooseZombieBoard = NewEle("dChooseZombieBoard", "div", "position:relative;width:850px;height:455px;left:25px;", 0, dChooseZombie, {
                 "class": "dCardZ"
             });
-            var PL = oS.ZName; // 引用对象
+            var ZL = oS.ZName; // 引用对象
             { // 负责生成每张卡片
                 var NormalLeft = 20,
                     NormalTop = 20,
@@ -139,13 +139,13 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                     Obj,
                     LineNum = 0;
                 // 生成卡片元素
-                for (var _ = 0; _ < PL.length; ++_) {
-                    Obj = PL[_].prototype; // 获取当前的卡片数据
+                for (var _ = 0; _ < ZL.length; ++_) {
+                    Obj = ZL[_].prototype; // 获取当前的卡片数据
                     if(!Obj.CanSelect) continue;
                     var dCardZ = NewEle("dCardZ_" + _, "div", "position:absolute;width:100;height:60;overflow:hidden;left:" + Left + "px;top:" + Top + "px;cursor:pointer;", {
                         value: _,
                         "onclick": function(i) {
-                            SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),$("dCardList")),SetNone(dChooseZombie),AppearCard(Math.random()*400+200,Math.random()*200+200,PL[this.value],0,Infinity);
+                            SetBlock($("dButton1"), $("dButton2"), $("dButton3"), $("dButton4"),$("dButton5"),$("dCardList")),SetNone(dChooseZombie),AppearCard(Math.random()*400+200,Math.random()*200+200,ZL[this.value],0,Infinity);
                         }
                     }, dChooseZombieBoard);
                     var dImg = NewImg("dImg_" + _, Obj.PicArr[Obj.CardGif], "width:100;height:120;top:0px", dCardZ);
