@@ -114,7 +114,7 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                 }
             }
         },
-    AutoSelectPlant:function(){},
+    AutoSelectCard:function(){},
         PlantZ: function() {
             var dChooseZombie = NewEle("dchooseZombie", "div", "z-index:200;display:none;position:absolute;left:0px;top:0px", 0, EDAll, {
                 "class": "Almanac_PlantBack"
