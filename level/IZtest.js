@@ -241,7 +241,6 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
                    } while (h++ < oS.R)
             oSym.addTask(1,arguments.callee,[])
         },[]);//僵尸来回走动
-        oP.Monitor(), BeginCool();
         SetVisible($("dTop"));
     }
 });
