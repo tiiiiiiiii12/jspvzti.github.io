@@ -159,7 +159,6 @@ oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBo
     StartGame: function() {
         oS.Plant();
         oS.PlantZ();
-        oP.Monitor(),BeginCool();
         SetHidden($("dCardList"));
         NewEle("dButton1", "button", "position:absolute;left:150px;top:20px;width:100px;height:35px;z-index:255", {
             innerHTML: "全体魅惑",
