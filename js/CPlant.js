@@ -3654,7 +3654,7 @@ NormalAttack2: function() {
             var id = this.id,
                 z, oBalloon;
             $(id).childNodes[1].src = 'images/Plants/Blover/Blover.gif';
-            for (z in $Z) oBalloon = $Z[z],oBalloon&& oBalloon.getr(oBalloon,160),this.jinyin&&oBalloon&&((oBalloon.EName == 'oDiggerZombie')&&oBalloon.PZ&&oBalloon.Stone_of_Sinan_Up(),(oBalloon.EName == 'oJackinTheBoxZombie')&&oBalloon.PZ&&(oBalloon.OpenBox=function(){}),oBalloon.OrnHP=0,oBalloon.getHit0(oBalloon,0,0)), (oBalloon.EName == 'oBalloonZombie') && oBalloon.getDispelled(); //把气球吹跑
+            for (z in $Z) oBalloon = $Z[z],oBalloon&& oBalloon.getr(oBalloon,160),this.jinyin&&oBalloon&&((oBalloon.EName == 'oDiggerZombie')&&oBalloon.PZ&&oBalloon.Stone_of_Sinan_Up(),(oBalloon.EName == 'oJackinTheBoxZombie')&&oBalloon.PZ&&(oBalloon.MagnetBox(oBalloon)),oBalloon.OrnHP=0,oBalloon.getHit0(oBalloon,0,0)), (oBalloon.EName == 'oBalloonZombie') && oBalloon.getDispelled(); //把气球吹跑
             if (oS.HaveFog) { // 如果场地上有雾，驱散
                 oGd.MoveFogRight(); // 驱散雾
                 oSym.addTask(2400 + 150, oGd.MoveFogLeft, []); // 24s后恢复
