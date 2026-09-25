@@ -1097,7 +1097,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
                     c && (c.NormalAttack2(),
                           c.PeaKind=Math.floor(Math.random()*3-1),
                         c.PicArr[3]="images/Plants/PB"+c.PeaKind+"0.gif");
-                    --b ? oSym.addTask(num<3?2:15, arguments.callee, [d, b]) : num<3&&c&&(c.getHurt=CPlants.prototype.getHurt,c.AttTime-=460)
+                    --b ? oSym.addTask(num<3?5:15, arguments.callee, [d, b]) : num<3&&c&&(c.getHurt=CPlants.prototype.getHurt,c.AttTime-=460)
                 },
                 [this.id,num<3?50:4])
         }
@@ -2389,8 +2389,8 @@ jinyinAttackGif2: 8,
     var j = $P[c];
     var R = Math.max(j.R - 1, 1);
 	$(c).childNodes[1].src = "images/Plants/Chomper/jinyinAttack2.gif"+$Random+Math.random();
-    do {
 	oSym.addTask(1,function(t,c){
+    do {
 	if(!j)return;
       var Z = oZ.getArZ(j.AttackedLX, Math.min(j.AttackedRX + 160,oS.W),R);
       var zl = Z.length;
@@ -2401,8 +2401,8 @@ jinyinAttackGif2: 8,
 	j.getTriggerR=oGatlingPea.prototype.getTriggerR,
 	j.oTrigger&&oT.delP(j),
 	j&&j.InitTrigger(j,c,j.R,j.C,j.AttackedLX,j.AttackedRX))//重置索敌
-	},[20,c]);
     } while (R++ < Math.min(j.R + 1, oS.R))
+	},[20,c]);
     j && (j.DigestGif = 4,
       j.AttackGif = j.jinyinAttackGif2,
       j.NormalGif = 2);
