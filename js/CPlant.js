@@ -2381,17 +2381,16 @@ jinyinAttackGif2: 8,
       a = d.id;
     !(c % 3) ? (d.HP -= b) < 1 && d.Die(): (oSym.addTask(200, ClearChild, [NewImg(0, d.PicArr[1] ? d.PicArr[d.StaticGif] : d.PicArr[d.NormalGif],
       "left:" + (d.AttackedLX - 25) + "px;top:" + (d.pixelTop + 60) + "px;height:15px;width:" + (d.width) + "px;z-index:" + d.zIndex, EDPZ)]), PlayAudio("chomp"), d.Die());
-    d.jinyin && $P[a] && (d.HP <= 700) && !d.nopaper && (d.BreakPaper(d, a),d.getHurt=CPlants.prototype.getHurt);
+    d.jinyin && $P[a] && (d.HP <= 700) && (d.BreakPaper(d, a),d.getHurt=CPlants.prototype.getHurt);
   },
   BreakPaper: function(a, c) {
-    a.nopaper = true;
     PlayAudio("newspaper_rarrgh2");
     var j = $P[c];
-    var R = Math.max(j.R - 1, 1);
 	$(c).childNodes[1].src = "images/Plants/Chomper/jinyinAttack2.gif"+$Random+Math.random();
 	oSym.addTask(1,function(t,c){
-    do {
 	if(!j)return;
+	var R = Math.max(j.R - 1, 1);
+    do {
       var Z = oZ.getArZ(j.AttackedLX, Math.min(j.AttackedRX + 160,oS.W),R);
       var zl = Z.length;
       while (zl--) {
