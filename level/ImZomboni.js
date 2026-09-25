@@ -13,7 +13,7 @@ var oJalapenoZomboni=InheritO(oZomboni,{
     SunNum:225
 });
 oS.Init({
-    PName: [oSunFlower,oRepeater,oGatlingPea,oChomper,oFumeShroom,oTallNut,oBlover,oPeashooter,oThreepeater,oSpikerock,oPotatoMine,oSquash], // 植物名称数组
+    PName: [oSunFlower,oRepeater,oGatlingPea,oChomper,oFumeShroom,oTallNut,oBlover,oPeashooter,oThreepeater,oSpikerock,oPotatoMine,oSquash,oSpikeweed], // 植物名称数组
     ZName: [oJalapenoZomboni,oIceShroomZomboni], // 僵尸名称数组
     PicArr: ["images/interface/background2.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"], // 图片数组
     backgroundImage: "images/interface/background2.jpg", // 背景图片
@@ -49,14 +49,21 @@ oS.Init({
 	  [5, 2, 4],
 	  [1, 1, 4],
 	  [4, 3, 4],
-	  [10, 6, 4],
+	  [3, 6, 4],
 	  [0, 5, 4],
-	  [0,4,4],
+	  [11,4,4],
 	  [1,3,3],
 	  [4,1,3],
 	  [3,6,3],
 	  [10, 5, 3],
-	  [4, 4, 3]
+	  [4, 4, 3],
+	  [0, 9, 5],
+	  [1, 6, 5],
+	  [12, 2, 5],
+	  [1, 1, 5],
+	  [1, 5, 5],
+	  [3, 4, 5],
+	  [7, 3, 5]
 	] // P数组
     },
     // 自动增长谜题
