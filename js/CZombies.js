@@ -3393,7 +3393,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   AudioArr: ["jackinthebox", "jack_surprise", "explosion"],
   PicArr: (function() {
     var a = "images/Zombies/JackinTheBoxZombie/";
-    return ["images/Card/Zombies/JackboxZombie.png", a + "0.gif", a + "Attack.gif", a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif", a + "Walk.gif", a + "OpenBox.gif", a + "Boom.gif" + $Random, a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random,a + "LostBox.gif", a + "LostBoxAttack.gif",]
+    return ["images/Card/Zombies/JackboxZombie.png", a + "0.gif", a + "Attack.gif", a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif", a + "Walk.gif", a + "OpenBox.gif", a + "Boom.gif" + $Random, a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random,a + "LostBox.gif", a + "LostBoxAttack.gif"]
   })(),
   jinyinAct: function(a) {
     a.num = a.Privatenum||Math.random() * 100;
@@ -4096,6 +4096,7 @@ jinyinAct: function(a) {
     g.isAttacking &&
       ((g.isAttacking = 0), (g.EleBody.src = g.PicArr[g.NormalGif]));
   },
+  PutZ:function(){},
   Stone_of_Sinan_Up: function() {
     // 被磁铁吸了镐子调用的函数
     var g = this; //alert(1);
