@@ -3245,7 +3245,7 @@ oImp = InheritO(OrnNoneZombies, {
   EName: "oImp",
   CName: "小鬼僵尸",
   HP: 180,
-  BreakPoint: 23,
+  BreakPoint: 50,
   beAttackedPointL: 30,
   beAttackedPointR: 60,
   width: 81,
@@ -3320,7 +3320,7 @@ if(a.num>=50){
 		a.hiddenCard=Math.floor(Math.random()*$("dCardList").childNodes.length);
 		a.PZ&&oS.StaticCard&&(oS.CardKind?AppearCard(a.ZX,GetY(a.R),oImp,0,1500):SetHidden($("dCardList").childNodes[a.hiddenCard]));
 		a.PrivateDie=function(a){
-			SetVisible($("dCardList").childNodes[a.hiddenCard])
+			oS.CardKind&&SetVisible($("dCardList").childNodes[a.hiddenCard])
 		}
 	}
   },
