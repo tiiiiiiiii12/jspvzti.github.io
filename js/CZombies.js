@@ -3387,11 +3387,13 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   AttackGif: 2,
   OSpeed: 3.6,
   Speed: 3.6,
+  LostBoxGif:12,
+  LostBoxAttack:13,
   Produce: '这种僵尸带着个会爆炸的惊喜<br>精英形态一：樱桃炸弹，残血必开盒<br>精英形态二：毁灭菇，爆炸范围扩大并在原地留坑<br>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快</font><br>特点：<font color="#FF0000">打开玩偶匣会爆炸</font><br>一个天天喊着"just brainz"的精神病人，根本不会意识到最大的食脑障碍来源于自己',
   AudioArr: ["jackinthebox", "jack_surprise", "explosion"],
   PicArr: (function() {
     var a = "images/Zombies/JackinTheBoxZombie/";
-    return ["images/Card/Zombies/JackboxZombie.png", a + "0.gif", a + "Attack.gif", a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif", a + "Walk.gif", a + "OpenBox.gif", a + "Boom.gif" + $Random, a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random]
+    return ["images/Card/Zombies/JackboxZombie.png", a + "0.gif", a + "Attack.gif", a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif", a + "Walk.gif", a + "OpenBox.gif", a + "Boom.gif" + $Random, a + "LostHead.gif", a + "LostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random,a + "LostBox.gif", a + "LostBoxAttack.gif",]
   })(),
   jinyinAct: function(a) {
     a.num = a.Privatenum||Math.random() * 100;
@@ -3415,6 +3417,17 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   PrivateDie: function(a) {
     var z = a.Ele;
     z.JaHead && ClearChild($(z.JaHead))
+  },
+  MagnetBox:function(a){
+	  if(a.Status){
+	!--oGd.$JackinTheBox && StopAudio("jackinthebox");
+	  a.GoingDie=a.NormalDie;
+	  a.jinyin&&ClearChild($(a.Ele.JaHead));
+	  a.NormalGif=a.LostBoxGif;
+	  a.AttackGif=a.LostBoxAttackGif;
+	  a.EleBody.src=a.isAttacking?a.PicArr[a.LostBoxAttackGif]:a.PicArr[a.LostBoxGif];
+	  a.OpenBox=function(){};
+      }
   },
   RandomOpenBox: function(a) {
     oSym.addTask(Math.floor(Math.random() * 100) > 4 ? Math.floor(1325 + Math.random() * 976) : Math.floor(450 + Math.random() * 301),
@@ -3941,25 +3954,31 @@ jinyinAct: function(a) {
 	a.num = a.Privatenum||Math.random() * 100;
 	if(a.num>=50){
 	a.JudgeAttack_Dig=function(){};
+	a.SetZ=function(a,z){
+		a.pushZ = z;
+		PlayAudio("dirt_rise");																	 
+		z.Altitude = 4;
+		z.isAttacking = 0;
+		a.AppearDownZ(z, 1);
+        z.FreeSetbodyTime = 1
+	};
+	a.PutZ=function(a){
+		a.pushZ && a.pushZ.HP && (
+          a.pushZ.Altitude = 1,
+		  PlayAudio("wakeup"),
+          a.pushZ.FreeSetbodyTime = 0, a.AppearDownZ(a.pushZ));
+		a.pushZ = null
+	}
 	a.EleBody.style.filter = 'grayscale(500%)';
     a.Act = function(a) {
       var z = oZ.getZ0(a.ZX, a.R);
-      (a.pushZ || (z &&(z.Lvl<4)&&z.Altitude==1&&z.EName != a.EName)) && (!a.pushZ ? (a.ZX >= 420 && (a.pushZ = z,PlayAudio("dirt_rise"), 																	 
-		z.Altitude = 4, z.isAttacking = 0, a.AppearDownZ(z, 1),
-        z.FreeSetbodyTime = 1)) : (
-        a.ZX >= 400 && a.pushZ && a.pushZ.HP ? (a.canWalk(a,a.id)&&!a.isAttacking&&a.pushZ.getr(a.pushZ, -a.Speed, 1)) : (a.pushZ.HP && (
-          a.pushZ.Altitude = 1,
-		  PlayAudio("wakeup"),
-          a.pushZ.FreeSetbodyTime = 0, a.AppearDownZ(a.pushZ)), a.pushZ = null)))
+      (a.pushZ || (z &&z.Lvl<4&&z.Altitude==1&&z.EName != a.EName)) && (!a.pushZ ? a.ZX >= 470 && a.SetZ(a,z) : (
+        a.ZX >= 450 && a.pushZ && a.pushZ.HP ? (a.canWalk(a,a.id)&&!a.isAttacking&&a.pushZ.getr(a.pushZ, -a.Speed, 1)) : a.PutZ(a))
 	}
 	}
   },
   PrivateDie: function(a) {
-    a.pushZ && a.pushZ.HP && (
-      a.pushZ.Altitude = 1,
-		PlayAudio("wakeup"),
-      a.pushZ.FreeSetbodyTime = 0,a.AppearDownZ(a.pushZ));
-    a.pushZ = null
+	  a.PutZ(a);
   },
   Act: function() {},
   Go_Up: function(a, WD) {
@@ -4089,6 +4108,7 @@ jinyinAct: function(a) {
         ];
     } else {
       g.Go_Up(g, 0);
+	  g.num>=50&&g.PutZ(g);
     }
     g.Stone_of_Sinan_Up = function() {};
   },
