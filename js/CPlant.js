@@ -1067,8 +1067,8 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
                 f.BulletEle.push(NewImg(0, "images/Plants/PB00.gif", "left:" + d + "px;top:" + (GetY(b) - 80) + "px;visibility:hidden;z-index:" + (3 * b + 2)))
             }
 			oSym.addTask(1,function(c){
-				var P=oGd.$[c.R+"_"+(c.C-1)+"_"+1],d;
-				!c.SpecialPlant&&P&&P.EName=="oSniperPea"&&(PlayAudio("wakeup"),c.jinyin=true,c.AttTime-=30,c.SpecialPlant=true);
+				var P=oGd.$[c.R+"_"+(c.C+1)+"_"+1],d;
+				!c.SpecialPlant&&P&&P.EName=="oSniperPea"&&(PlayAudio("wakeup"),c.AttTime-=30,c.SpecialPlant=true);
 				$P[c.id]&&oSym.addTask(1,arguments.callee,[c])
 			},[f])
         },
@@ -1082,7 +1082,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
 		NormalAttack2:oThreepeater.prototype.NormalAttack2,
 		PrivateDie:function(a){
 			oThreepeater.prototype.PrivateDie(a);
-			var P=oGd.$[a.R+"_"+(a.C-1)+"_"+1];
+			var P=oGd.$[a.R+"_"+(a.C+1)+"_"+1];
 			P&&P.EName=="oSniperPea"&&P.SpecialPlant&&(P.canEat=1,P.Boom=18,P.Ele.style.opacity=1,P.AttTime+=100,P.SpecialPlant=false)
 		},
 		NormalAttack1:function(){},
@@ -1117,7 +1117,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
         PicArr: ["images/Card/Plants/GatlingPea.png", "images/Plants/GatlingPea/0.gif", "images/Plants/GatlingPea/GatlingPea.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "优先锁定场上血量最高的僵尸，每6秒对其造成300伤害，每攻击18次对下一次攻击的目标造成1000灰烬伤害",
-        Produce: '狙击手锁定场上血量最高的僵尸，隔一段时间对其造成较高伤害，每攻击18次对下一次攻击的目标造成暴击，若前一格植物为机枪射手，两者都会得到增强<br>伤害：<font color="#FF0000">高(300/1000)</font><br><font color="#FF0000">只能种在双发射手上</font><br>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
+        Produce: '狙击手锁定场上血量最高的僵尸，隔一段时间对其造成较高伤害，每攻击18次对下一次攻击的目标造成暴击，若后一格植物为机枪射手，两者都会得到增强<br>伤害：<font color="#FF0000">高(300/1000)</font><br><font color="#FF0000">只能种在双发射手上</font><br>为什么他和机枪射手长那么像？是因为它以前是机枪射手的战友（其实现在也是）',
 		checkTarget:function(a) {
   var TargeteachR = [];
   PlayAudio("portal");
@@ -1138,7 +1138,7 @@ NormalAttack1: function(A, B, C, D) {//分裂子弹
 },
 	PrivateDie:function(a){
 		ClearChild($("P_" + a.id));
-		var P=oGd.$[a.R+"_"+(a.C+1)+"_"+1];
+		var P=oGd.$[a.R+"_"+(a.C-1)+"_"+1];
 		P&&P.EName=="oGatlingPea"&&P.SpecialPlant&&(P.AttTime+=30,P.SpecialPlant=false);
 	},
 	CanGrow:oGatlingPea.prototype.CanGrow,
@@ -1162,7 +1162,7 @@ NormalAttack:function(a){
 		PrivateBirth:function(a){
 			$(a.id).childNodes[1].style.filter = 'brightness(50%)';
 			oSym.addTask(1,function(c){
-				var P=oGd.$[c.R+"_"+(c.C+1)+"_"+1],d;
+				var P=oGd.$[c.R+"_"+(c.C-1)+"_"+1],d;
 				!c.SpecialPlant&&P&&P.EName=="oGatlingPea"&&(PlayAudio("wakeup"),c.canEat=0,c.Boom=18,c.Ele.style.opacity=0.5,c.AttTime-=100,c.SpecialPlant=true);
 				$P[c.id]&&oSym.addTask(1,arguments.callee,[c])
 			},[a])
