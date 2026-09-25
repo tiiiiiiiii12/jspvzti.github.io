@@ -3973,7 +3973,7 @@ jinyinAct: function(a) {
     a.Act = function(a) {
       var z = oZ.getZ0(a.ZX, a.R);
       (a.pushZ || (z &&z.Lvl<4&&z.Altitude==1&&z.EName != a.EName)) && (!a.pushZ ? a.ZX >= 470 && a.SetZ(a,z) : (
-        a.ZX >= 450 && a.pushZ && a.pushZ.HP ? (a.canWalk(a,a.id)&&!a.isAttacking&&a.pushZ.getr(a.pushZ, -a.Speed, 1)) : a.PutZ(a))
+        a.ZX >= 450 && a.pushZ && a.pushZ.HP ? (a.canWalk(a,a.id)&&!a.isAttacking&&a.pushZ.getr(a.pushZ, -a.Speed, 1)) : a.PutZ(a)))
 	}
 	}
   },
