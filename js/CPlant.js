@@ -2396,11 +2396,11 @@ jinyinAttackGif2: 8,
       while (zl--) {
         Z[zl].Altitude == 1 && j && (Z[zl].getHit0(Z[zl], 15, 0), Z[zl].getr(Z[zl],5));
       }
+    } while (R++ < Math.min(j.R + 1, oS.R));
 	--t?oSym.addTask(1,arguments.callee,[t,c]):(j.canTrigger=1,$(c).childNodes[1].src = j.PicArr[j.NormalGif],
 	j.getTriggerR=oGatlingPea.prototype.getTriggerR,
 	j.oTrigger&&oT.delP(j),
 	j&&j.InitTrigger(j,c,j.R,j.C,j.AttackedLX,j.AttackedRX))//重置索敌
-    } while (R++ < Math.min(j.R + 1, oS.R))
 	},[20,c]);
     j && (j.DigestGif = 4,
       j.AttackGif = j.jinyinAttackGif2,
