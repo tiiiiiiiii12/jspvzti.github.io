@@ -3388,7 +3388,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   OSpeed: 3.6,
   Speed: 3.6,
   LostBoxGif:12,
-  LostBoxAttack:13,
+  LostBoxAttackGif:13,
   Produce: '这种僵尸带着个会爆炸的惊喜<br>精英形态一：樱桃炸弹，残血必开盒<br>精英形态二：毁灭菇，爆炸范围扩大并在原地留坑<br>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快</font><br>特点：<font color="#FF0000">打开玩偶匣会爆炸</font><br>一个天天喊着"just brainz"的精神病人，根本不会意识到最大的食脑障碍来源于自己',
   AudioArr: ["jackinthebox", "jack_surprise", "explosion"],
   PicArr: (function() {
