@@ -574,7 +574,7 @@ if(b[c].id!=a.id){
 		c.HitBlock=0;
 		c.getHit=c.getHit0=c.getHit1=c.getHit2=c.getHit3=function(c,d){
 			d=Math.max(1,d-c.HitBlock);
-			oWallNutZombie.prototype.getHit(c,d)
+			oWallNutZombie.prototype.getHit0(c,d)
 		};
 	}
 	},
