@@ -546,7 +546,9 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 let b=oZ["getAr"+(a.PZ?"Z":"HZ")](a.PZ?a.ZX+1:a.ZX-160,a.PZ?a.ZX+160:a.ZX,a.R);
 for(let c=0;c<b.length;c++){
 if(b[c].id!=a.id){
-	return (a.HitBlock=(8+a.Ornbreak*3),$(z.NutHead2).style.opacity=1)
+	a.HitBlock=(8+a.Ornbreak*3);
+	$(z.NutHead2).style.opacity=1;
+	return
     }else{
 	a.HitBlock=0;
 	$(z.NutHead2).style.opacity=0.5
