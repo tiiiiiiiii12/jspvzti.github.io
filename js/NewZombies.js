@@ -543,7 +543,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 	var z=a.Ele;
 	if ($Z[a.id] && a.beAttacked&&a.jinyin) {
 	if(a.num<50){
-let b=oZ["getAr"+(a.PZ?"Z":"HZ")](a.PZ?a.ZX+1:a.ZX-160,a.PZ?a.ZX+160:a.ZX,a.R);
+let b=oZ["getAr"+(a.PZ?"Z":"HZ")](a.PZ?a.ZX+1:a.ZX-160,a.PZ?a.ZX+160:a.ZX-1,a.R);
 for(let c=0;c<b.length;c++){
 if(b[c].id!=a.id){
 	a.HitBlock=(8+a.Ornbreak*3);
@@ -554,6 +554,7 @@ if(b[c].id!=a.id){
 	$(z.NutHead2).style.opacity=0.5
 	}
   }
+	}
         a.WalkDirection == a.check &&
         ($(z.NutHead2).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)")
       }
@@ -573,7 +574,7 @@ if(b[c].id!=a.id){
 		c.HitBlock=0;
 		c.getHit=c.getHit0=c.getHit1=c.getHit2=c.getHit3=function(c,d){
 			d=Math.max(1,d-c.HitBlock);
-			oWallNut.prototype.getHit(c,d)
+			oWallNutZombie.prototype.getHit(c,d)
 		};
 	}
 	},
