@@ -249,7 +249,7 @@ var oGargantuar = InheritO(oZombie, {
           PlayAudio("ImpToLand");
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
           oSym.addTask(100, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 150) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)]);
-          k && (k.num >= 50) && ClearChild($(k.Ele.FumeDoor));
+          k && k.jinyin&&(k.num >= 50?ClearChild($(k.Ele.FumeDoor)):(k.Speed*=2.5,k.OSpeed*=2.5,PlayAudio("blover")));
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
             k && (k.num>=50) && (k.throwImpnum == 1) && oP.SetTimeoutAirdropZombie(5, 9, 5, k.zl, !k.PZ)
