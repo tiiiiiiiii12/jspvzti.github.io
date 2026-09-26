@@ -573,8 +573,8 @@ if(b[c].id!=a.id){
 	}else{
 		c.HitBlock=0;
 		c.getHit=c.getHit0=c.getHit1=c.getHit2=c.getHit3=function(c,d){
-			d=Math.max(1,d-c.HitBlock);
-			oWallNutZombie.prototype.getHit0(c,d)
+			var Att=Math.max(1,d-c.HitBlock);
+			oWallNutZombie.prototype.getHit0(c,Att)
 		};
 	}
 	},
@@ -1080,7 +1080,7 @@ a.Move&&a.canWalk(a,a.id)&&(GetC(a.ZX+30)<=8)&&a.basketballNum>0&&a.checkThrow(a
 lookHP:function(c){
 	var B = NewEle("dHP"+c.id, "div", "position:absolute;color:yellow;width:80px;height:30px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
     oSym.addTask(0, function(c,B) {
-      B.innerHTML = (c.OrnHP > 0 ? c.OrnHP + "+" + c.HP : c.HP) +"/"+c.basketballNum+"+<br>精英:"+c.jinyin//增加篮球数量的显示（没有找到无篮球的动画qwq)
+      B.innerHTML = (c.OrnHP > 0 ? c.OrnHP + "+" + c.HP : c.HP) +"/"+c.basketballNum+"<br>精英:"+c.jinyin//增加篮球数量的显示（没有找到无篮球的动画qwq)
       oSym.addTask(5, arguments.callee, [c,B])
     }, [c,B])
 	},
