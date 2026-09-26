@@ -878,13 +878,13 @@ if(b.Ornaments){
         for (let i = GetC(a.ZX) - 1; i <= GetC(a.ZX); i++) {
           for (let l = 0; l <= 3; l++) {
             let m = oGd.$[a.R + "_" + i + "_" + l];
-            a.PZ && m && m.getHurt(a, 2, 100)
+            a.PZ && m && m.getHurt(a, 2, 100)//碾压
           }
         }
 let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.PZ ? a.ZX - 120 : a.ZX, a.PZ ? a.ZX : a.ZX + 120, a.R),
         Tz = A.length;
         while (Tz--) {
-          (t = A[Tz]) && (t.Altitude == 1) && (t.getHit2(t,5,0))
+          (t = A[Tz]) && (t.Altitude == 1) && (t.getHit2(t,8,0))
         }
       b.CanShoot && b.checkP(b);
 }else{
@@ -1060,6 +1060,13 @@ GetDTop:0,
 PrivateAct:function(a){
 a.Move&&a.canWalk(a,a.id)&&(GetC(a.ZX+30)<=8)&&a.basketballNum>0&&a.checkThrow(a)
 },
+lookHP:function(c){
+	var B = NewEle("dHP"+c.id, "div", "position:absolute;color:yellow;width:80px;height:30px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
+    oSym.addTask(0, function(c,B) {
+      B.innerHTML = (c.OrnHP > 0 ? c.OrnHP + "+" + c.HP : c.HP) +"/"+c.basketballNum+"+<br>精英:"+c.jinyin//增加篮球数量的显示（没有找到无篮球的动画qwq)
+      oSym.addTask(5, arguments.callee, [c,B])
+    }, [c,B])
+	},
 checkThrow:function(a){
 if(a.basketballNum<=0){return (a.Speed=a.OSpeed=a.LostPaperSpeed,a.Move=true)}
 let num;
