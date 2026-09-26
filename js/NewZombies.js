@@ -181,6 +181,7 @@ var oGargantuar = InheritO(oZombie, {
     }
     h.canWalk(h, h.id) && h.hasthrew < h.throwImpnum && (GetC(h.ZX) > 3 || !h.PZ) && !h.isAttacking && (h.HP <= h.MaxHP * 0.5) && h.throwImp(h);
   },
+  flycd:1500,
   jinyinAct: function(a) {
     a.num = a.Privatenum||Math.random() * 100;
     let z = a.Ele;
@@ -198,8 +199,8 @@ var oGargantuar = InheritO(oZombie, {
           oSym.addTask(1000, arguments.callee, [b]));
       }, [a]);
     } else {
-      oSym.addTask(1500, function(b) {
-        $Z[b.id] && (b.Jump(b), oSym.addTask(1500, arguments.callee, [b]));
+      oSym.addTask(b.flycd, function(b) {
+        $Z[b.id] && (b.Jump(b), oSym.addTask(b.flycd, arguments.callee, [b]));
       }, [a]);
     }
   },
@@ -249,7 +250,7 @@ var oGargantuar = InheritO(oZombie, {
           PlayAudio("ImpToLand");
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
           oSym.addTask(100, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 150) + "px;transform:" + (k.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + k.zIndex, EDPZ)]);
-          k && k.jinyin&&(k.num >= 50?ClearChild($(k.Ele.FumeDoor)):(k.Speed*=2.5,k.OSpeed*=2.5,PlayAudio("blover")));
+          k && k.jinyin&&(k.num >= 50?ClearChild($(k.Ele.FumeDoor)):(k.flycd*=0.5,k.Speed*=2.5,k.OSpeed*=2.5,PlayAudio("blover")));
           oSym.addTask(100, function(k) {
             CustomZombie(oImp, k.R, AC, k.PZ ? 0 : 1);
             k && (k.num>=50) && (k.throwImpnum == 1) && oP.SetTimeoutAirdropZombie(5, 9, 5, k.zl, !k.PZ)
@@ -510,14 +511,17 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       var z = a.Ele;
       $(z.NutHead) && ClearChild($(z.NutHead))
     },
+	Ornbreak:0,
     checkHP: function(z, a) {
 	if(!$Z[a.id]&&a.beAttacked)return;
       var c = a.OrnHP;
       switch (true) {
         case c < a.OrnBreakPoint2:
+		  a.Ornbreak=2;
           $(z.NutHead).src = a.PicArr[14]
           break;
         case c < a.OrnBreakPoint1:
+		  a.Ornbreak=1;
           $(z.NutHead).src = a.PicArr[13]
       }
     },
@@ -538,10 +542,20 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 	PrivateAct:function(a){
 	var z=a.Ele;
 	if ($Z[a.id] && a.beAttacked&&a.jinyin) {
+	if(a.num<50){
+let b=oZ["getAr"+(a.PZ?"Z":"HZ")](a.PZ?a.ZX+1:a.ZX-160,a.PZ?a.ZX+160:a.ZX,a.R);
+for(let c=0;c<b.length;c++){
+if(b[c].id!=a.id){
+	return (a.HitBlock=(8+a.Ornbreak*3),$(z.NutHead2).style.opacity=1)
+    }else{
+	a.HitBlock=0;
+	$(z.NutHead2).style.opacity=0.5
+	}
+  }
         a.WalkDirection == a.check &&
         ($(z.NutHead2).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)")
-      }!a.beAttacked && (ClearChild($(z.NutHead2)));
-		oWallNutZombie.prototype.PrivateAct(a)
+      }
+	oWallNutZombie.prototype.PrivateAct(a);
 	},
     jinyinAct: function(c) {      
 	  var z = c.Ele;
@@ -554,11 +568,11 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan"+Math.floor(Math.random()*5+1)),CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(c.SetNutTime,arguments.callee,[c]));
 	  },[c]);
 	}else{
-		c.checkHP=function(z,a){
-			oWallNutZombie.prototype.checkHP(z,a);
-			var g=oGargantuar.prototype;
-			a.OrnHP<=a.OrnBreakPoint1&&a.beAttacked&&($(z.NutHead2).src=oNutBowling.prototype.PicArr[2],a.JudgeAttack=a.PZ?g.JudgeAttack:g.JudgeAttackH,a.NormalAttack=g.NormalAttack,a.AttackZombie=g.AttackZombie,a.JudgeLR=g.JudgeLR,a.JudgeSR=g.JudgeSR,a.checkHP=oWallNutZombie.prototype.checkHP)
-		}
+		c.HitBlock=0;
+		c.getHit=c.getHit0=c.getHit1=c.getHit2=c.getHit3=function(c,d){
+			d=Math.max(1,d-c.HitBlock);
+			oWallNut.prototype.getHit(c,d)
+		};
 	}
 	},
 	PrivateDie:function(c){
@@ -566,7 +580,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 		ClearChild($(c.Ele.NutHead2));
 	},
     Boom: function() {},
-    Produce: '韧性：<font color="#FF0000">极高(2400+270)</font><br>精英形态一：每隔一段时间在场上放置一个坚果障碍，坚果障碍所在格不可种植植物<br>精英形态二：头部到达第一个损伤点时攻击方式变为巨人</p>太好了，高仁僵尸来了'
+    Produce: '韧性：<font color="#FF0000">极高(2400+270)</font><br>精英形态一：每隔一段时间在场上放置一个坚果障碍，坚果障碍所在格不可种植植物<br>精英形态二：若身后有僵尸则获得一定伤害减免</p>太好了，高仁僵尸来了'
   }, {
     PicArr: {
       12: "images/Plants/TallNut/TallNut.gif",
