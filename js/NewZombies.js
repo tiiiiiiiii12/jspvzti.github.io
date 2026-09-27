@@ -1074,9 +1074,6 @@ GetDTop:0,
 			var b = "images/Zombies/CatapultZombie/";
 			return ["images/Card/Zombies/Catapult.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif"+$Random, b + "Throw.gif"]
 	})(),
-PrivateAct:function(a){
-a.Move&&a.canWalk(a,a.id)&&(GetC(a.ZX+30)<=8)&&a.basketballNum>0&&a.checkThrow(a)
-},
 lookHP:function(c){
 	var B = NewEle("dHP"+c.id, "div", "position:absolute;color:yellow;width:80px;height:30px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
     oSym.addTask(0, function(c,B) {
@@ -1199,7 +1196,28 @@ b.AutoReduceHP(b.id)
 			},
 			[b.id, b.EleBody])
 		},
+	PrivateDie:function(a){
+		ClearChild($(a.Ele.jinyinImg))
+	},
+	PrivateAct:function(a){
+a.Move&&a.canWalk(a,a.id)&&(GetC(a.ZX+30)<=8)&&a.basketballNum>0&&a.checkThrow(a);
+a.JudgeDirection(a);
+},
+JudgeDirection:function(a){},
 	jinyinAct:function(a){
+		a.num=a.Privatenum||a.num;
+	var z = a.Ele;
+    z.jinyinImg = "jinyin_" + Math.random();
+	if(a.num>=50){
+	let jinyinImg = NewImg(z.jinyinImg, "images/Zombies/Zombie/Squash.gif", "position:absolute;left:30px;top:80px;", 0);
+    z.appendChild(jinyinImg);
+	a.JudgeDirection=function(a){
+	var P = a.Ele;
+      (a.WalkDirection == a.check) && (SetStyle($(P.jinyinImg), {
+            transform: a.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)"
+          }),
+        a.check = a.WalkDirection ? 0 : 1);
+	};
 		a.jinyinCustom=function(a,X,Y){
 			let z=CustomZombie(oZombie,GetR(Y),Math.max(GetC(X),3),!a.PZ);
 			z.jinyinnum=0;
@@ -1233,6 +1251,26 @@ Plist.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(HitP,HitP
 		a.ballAttack*=2;
 		a.ballsrc="images/Zombies/Zombie/ZombieHead.png";
 		a.cd*=3.5;
+	}else{
+	let jinyinImg = NewImg(z.jinyinImg, "images/Plants/san.gif", "position:absolute;opacity:.5;left:-100px;top:-40px;", 0);
+    z.appendChild(jinyinImg);
+	a.JudgeDirection=function(a){
+	var P = a.Ele;
+      (a.WalkDirection == a.check) && (SetStyle($(P.jinyinImg), {
+            transform: a.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)",
+            left: a.WalkDirection ? "40px" : "-100px"
+          }),
+        a.check = a.WalkDirection ? 0 : 1);
+	};
+	a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(a,d){
+		var Att=a.Move?d:Math.min(d,a.HP-a.MaxHP*0.2);
+		if(!a.Move&&Att==a.HP-a.MaxHP*0.2){
+			a.cd=0;
+			$(a.Ele.jinyinImg).style.opacity=1;
+		};
+		OrnNoneZombies.prototype.getHit0(a,Att)
+	};
+	}
 	},
 	getFirePeaSputtering:OrnNoneZombies.prototype.getFirePeaSputtering,
 	getPea:OrnNoneZombies.prototype.getPea,
