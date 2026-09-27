@@ -199,7 +199,7 @@ var oGargantuar = InheritO(oZombie, {
           oSym.addTask(1000, arguments.callee, [b]));
       }, [a]);
     } else {
-      oSym.addTask(b.flycd, function(b) {
+      oSym.addTask(a.flycd, function(b) {
         $Z[b.id] && (b.Jump(b), oSym.addTask(b.flycd, arguments.callee, [b]));
       }, [a]);
     }
