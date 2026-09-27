@@ -1162,7 +1162,7 @@ lookHP:function(c){
       for (i = 0; i < Z.length; i++) {
         Z[i].prototype.Lvl < 4 && Z[i].prototype.CanSelect && h.zl.push(Z[i]);
       }!h.zl.length && (h.zl = [oFlagZombie]);
-				h.SummonNum>=12&&(h.SummonNum=0,h.PZ?oP.SetTimeoutTomZombie(h.zl):oP.SetTimeoutTomZombie1(h.zl));
+				h.SummonNum>=12&&(h.SummonNum=0,h.PZ?oP.SetTimeoutTomZombie(h.zl):oP.SetTimeoutTomZombies1(h.zl));
                 oSym.addTask(220,
                   function() {
                     var i = arguments.length;
