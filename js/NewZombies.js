@@ -1062,6 +1062,7 @@ tasktime:25,
 	StandGif: 1,
 	DieGif: 3,
 	BoomDieGif: 3,
+	AttackGif:2,
 	Move:true,
 width:166,
 height:180,
@@ -1205,16 +1206,16 @@ a.JudgeDirection(a);
 },
 JudgeDirection:function(a){},
 	jinyinAct:function(a){
-		a.num=a.Privatenum||a.num;
+		a.num=a.Privatenum||Math.random()*100;
 	var z = a.Ele;
     z.jinyinImg = "jinyin_" + Math.random();
 	if(a.num>=50){
-	let jinyinImg = NewImg(z.jinyinImg, "images/Zombies/Zombie/Squash.gif", "position:absolute;left:30px;top:80px;", 0);
+	let jinyinImg = NewImg(z.jinyinImg, "images/Zombies/Zombie/ZombieHead.png", "position:absolute;left:30px;top:80px;", 0);
     z.appendChild(jinyinImg);
 	a.JudgeDirection=function(a){
 	var P = a.Ele;
       (a.WalkDirection == a.check) && (SetStyle($(P.jinyinImg), {
-            transform: a.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)"
+            transform: a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)"
           }),
         a.check = a.WalkDirection ? 0 : 1);
 	};
@@ -1262,10 +1263,16 @@ Plist.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(HitP,HitP
           }),
         a.check = a.WalkDirection ? 0 : 1);
 	};
+a.shootPea=oPeaZombie.prototype.shootPea;
+a.shootPea1=oPeaZombie.prototype.shootPea1;
+	a.CanRebound=true;
+	a.bedevil=oPeaZombie.prototype.bedevil;
 	a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(a,d){
+	a.CanRebound&&(a.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 60) + "px;visibility:hidden;z-index:" + (a.zIndex + 2)),a.shootPea(a));
 		var Att=a.Move?d:Math.min(d,a.HP-a.MaxHP*0.2);
 		if(!a.Move&&Att==a.HP-a.MaxHP*0.2){
 			a.cd=0;
+			a.CanRebound=false;
 			$(a.Ele.jinyinImg).style.opacity=1;
 		};
 		OrnNoneZombies.prototype.getHit0(a,Att)
@@ -1284,8 +1291,9 @@ Plist.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(HitP,HitP
 	AttackZombie:CZombies.prototype.AttackZombie,
 	BirthCallBack:CZombies.prototype.BirthCallBack,
 	ChkActs:CZombies.prototype.ChkActs,
-	ChkActs1:CZombies.prototype.ChkActs1
-}),oGatlingPeaZombie = InheritO(oNewspaperZombie, {
+	AttackZombie:oZomboni.prototype.AttackZombie
+}),
+oGatlingPeaZombie = InheritO(oNewspaperZombie, {
   EName: "oGatlingPeaZombie",
   CName: "机枪读报僵尸",
   Lvl: 4,
