@@ -818,7 +818,7 @@ lookHP:function(c){
                 b = d + "spotlight2" + c + ".png" + $Random;
             return ["images/Card/Zombies/DancingZombie.png", d + "0.gif", d + "DancingZombie.gif", d + "Attack.gif", d + "LostHead.gif", d + "LostHeadAttack.gif", d + "Head.gif" + $Random, d + "Die.gif" + $Random, d + "BoomDie.gif" + $Random, d + "SlidingStep.gif" + $Random, d + "Dancing.gif" + $Random, d + "Summon1.gif", d + "Summon2.gif", d + "Summon3.gif", d + "LostHeadSlidingStep.gif" + $Random, d + "LostHeadDancing.gif" + $Random, d + "LostHeadSummon.gif" + $Random, a, b]
         })(),
-        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：一直滑步，无视植物，碰到脑子召唤伴舞（750血）<br>精英形态二：每次召唤在全场最多10个僵尸的位置复制一个伴舞<br>特点：<font color="#FF0000">召唤伴舞僵尸</font></p>舞王僵尸的最新唱片“来个脑子啃一啃”在僵尸界的人气正急速飙升。',
+        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：一直滑步，无视植物，碰到脑子召唤伴舞（750血）<br>精英形态二：每次召唤在全场最多10个僵尸的位置复制一个伴舞<br>特点：<font color="#FF0000">召唤满12个伴舞僵尸后召唤墓碑出怪</font><br>舞王僵尸的最新唱片“来个脑子啃一啃”在僵尸界的人气正急速飙升。',
         getSnowPea: function() {
             this.PlaySlowballAudio();
         },
@@ -1121,6 +1121,7 @@ lookHP:function(c){
 	  b.ZKind=2;
       b.TurnLeft(b)
     },
+	SummonNum:0,
     Summon: function(d, c) {
       d.LostHeadGif = 16;
       var a = d.EleBody,
@@ -1154,8 +1155,14 @@ lookHP:function(c){
                 h.num &&(AZlength<=9)&&$Z[i] &&$Z[i].beAttacked&&($Z[i].PZ==h.PZ)&& !$Z[i].ChkSpeed && (AZ[AZlength] = (DZid[AZlength] = new oBackupDancer).CustomBirth($Z[i].R, $Z[i].AttackedLX, 100, "Z_" + Math.random(),h.PZ),DZid[AZlength].masterid=h.id,++AZlength);
               }
                 while (r--) {
-                  (q = m[r]) && (!(l = q[0]) || !$Z[l]) && (u[o] = (w[o] = new oBackupDancer).CustomBirth(q[1], q[2](v), 100, q[0] = "Z_" + Math.random(), h.PZ), n.push(NewImg("", k, "z-index:" + q[3] + ";left:" + q[4](v) + "px;top:" + q[5] + "px", EDPZ)),w[o].masterid=h.id,++o)
+                  (q = m[r]) && (!(l = q[0]) || !$Z[l]) && (u[o] = (w[o] = new oBackupDancer).CustomBirth(q[1], q[2](v), 100, q[0] = "Z_" + Math.random(), h.PZ), n.push(NewImg("", k, "z-index:" + q[3] + ";left:" + q[4](v) + "px;top:" + q[5] + "px", EDPZ)),w[o].masterid=h.id,++o,++h.SummonNum)
                 }
+				    let Z = oS.ZName;
+      h.zl = [];
+      for (i = 0; i < Z.length; i++) {
+        Z[i].prototype.Lvl < 4 && Z[i].prototype.CanSelect && h.zl.push(Z[i]);
+      }!h.zl.length && (h.zl = [oFlagZombie]);
+				h.SummonNum>=12&&oP.SetTimeoutTomZombie(h.zl);
                 oSym.addTask(220,
                   function() {
                     var i = arguments.length;
