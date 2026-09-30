@@ -1070,7 +1070,7 @@ GetDTop:0,
 	ballsrc:"images/interface/Zombie_catapult_basketball.png",
 	ballAttack:75,
 	basketballNum:20,
-	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">中（850）</font><br>精英形态一：<font color="#FF0000">随机投掷僵尸头，若杀死植物则在落点生成僵尸，反之则在投篮车的位置</font><br>精英形态二：<font color="#FF0000">叶子保护伞，投篮球时血量低于170时锁血十秒并加快投掷速度，期间每收到一次攻击发射一颗豌豆</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
+	Produce: '它操作着重型机器<br>韧性：<font color="#FF0000">中（850）</font><br>精英形态一：<font color="#FF0000">随机投掷僵尸头，若杀死植物则在落点生成僵尸，反之则在投篮车的位置</font><br>精英形态二：<font color="#FF0000">叶子保护伞，投篮球时血量低于170时锁血十秒并加快投掷速度，期间每收到一次攻击发射一颗豌豆</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font><br>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
 	PicArr: (function() {
 			var b = "images/Zombies/CatapultZombie/";
 			return ["images/Card/Zombies/Catapult.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif"+$Random, b + "Throw.gif",b+"BoomDie.gif"+$Random]
