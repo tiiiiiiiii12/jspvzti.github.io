@@ -1325,6 +1325,7 @@ PicArr2: (function() {
 			}
 		}},
 		jinyinAct:function(a){
+		a.num=a.Privatenum||Math.random()*100;
 		if(a.num>=50){
 			a.NormalGif=a.jinyinGif;
 			a.AttackGif=a.jinyinAttackGif;
