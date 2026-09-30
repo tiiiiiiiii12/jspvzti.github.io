@@ -1224,7 +1224,7 @@ oZombie = InheritO(OrnNoneZombies, {
       a.EleBody.src = a.PicArr[a.NormalGif];
       a.OSpeed *= 2;
       a.Speed *= 2;
-	  a.PrivateAct:function(a){
+	  a.PrivateAct=function(a){
 		  a.HP<a.MaxHP*0.7&&(a.Speed+=0.001,a.OSpeed+=0.001)
 	  };
       a.tasktime *= 0.5;
