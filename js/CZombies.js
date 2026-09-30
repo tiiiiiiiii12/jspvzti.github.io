@@ -1225,7 +1225,7 @@ oZombie = InheritO(OrnNoneZombies, {
       a.OSpeed *= 2;
       a.Speed *= 2;
 	  a.PrivateAct=function(a){
-		  a.HP<a.MaxHP*0.7&&(a.Speed+=0.001,a.OSpeed+=0.001)
+		  a.HP<a.MaxHP*0.7&&(a.Speed+=0.002,a.OSpeed+=0.002)
 	  };
       a.tasktime *= 0.5;
     } else {
