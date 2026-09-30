@@ -541,22 +541,20 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 	ZKind:-1,
 	PrivateAct:function(a){
 	var z=a.Ele;
-	if ($Z[a.id] && a.beAttacked&&a.jinyin) {
+	if (a.beAttacked&&a.jinyin) {
+	a.WalkDirection == a.check && ($(z.NutHead2).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)");
 	if(a.num<50){
-let b=oZ["getAr"+(a.PZ?"Z":"HZ")](a.PZ?a.ZX+1:a.ZX-160,a.PZ?a.ZX+160:a.ZX-1,a.R);
+let b=oZ["getAr"+(a.PZ?"Z":"HZ")](a.PZ?a.AttackedRX+1:a.AttackedLX-160,a.PZ?a.AttackedRX+160:a.AttackedLX-1,a.R);
 for(let c=0;c<b.length;c++){
 if(b[c].id!=a.id){
 	a.HitBlock=(8+a.Ornbreak*3);
 	$(z.NutHead2).style.opacity=1;
-	return
     }else{
 	a.HitBlock=0;
 	$(z.NutHead2).style.opacity=0.5
 	}
   }
 	}
-        a.WalkDirection == a.check &&
-        ($(z.NutHead2).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)")
       }
 	oWallNutZombie.prototype.PrivateAct(a);
 	},
