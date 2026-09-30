@@ -265,7 +265,7 @@ var oGargantuar = InheritO(oZombie, {
   SunNum: 275,
   EName: "oGargantuar",
   CName: "伽刚特尔",
-  Produce: '非常强力的僵尸<br>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态一：<font color="#FF0000">背着标靶，扔小鬼前每10秒空降一只僵尸，扔小鬼时召唤五个空降僵尸</font><br>精英形态二：<font color="#FF0000">每隔一段时间跳到随机位置，丢小鬼后会加速</font><br>伽刚特尔的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，他是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
+  Produce: '非常强力的僵尸<br>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态一：<font color="#FF0000">背上标靶存在时不断空投僵尸，扔小鬼时空投五个僵尸</font><br>精英形态二：<font color="#FF0000">每隔一段时间跳到随机位置，丢小鬼后会加速</font><br>伽刚特尔自带的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
 }),
 oPeaZombie = InheritO(oZombie, {
   EName: "oPeaZombie",
@@ -525,7 +525,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
           $(z.NutHead).src = a.PicArr[13]
       }
     },
-    Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态一：<font color="#FF0000">爆炸坚果，碰到植物产生爆炸并自身死亡</font><br>精英形态二：<font color="#FF0000">一类防具存在时每次受伤反伤1x3的植物15点</font></p>他有限的感官，只能让他在被植物打时产生一种麻麻的感觉'
+    Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态一：<font color="#FF0000">爆炸坚果，碰到植物产生爆炸并自身死亡</font><br>精英形态二：<font color="#FF0000">一类防具存在时每次受伤反伤周围植物（伤害15）</font></p>他有限的感官，只能让他在被植物打时产生一种麻麻的感觉'
   }),
   oTallNutZombie = InheritO(oWallNutZombie, {
     EName: "oTallNutZombie",
