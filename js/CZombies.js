@@ -818,7 +818,7 @@ lookHP:function(c){
                 b = d + "spotlight2" + c + ".png" + $Random;
             return ["images/Card/Zombies/DancingZombie.png", d + "0.gif", d + "DancingZombie.gif", d + "Attack.gif", d + "LostHead.gif", d + "LostHeadAttack.gif", d + "Head.gif" + $Random, d + "Die.gif" + $Random, d + "BoomDie.gif" + $Random, d + "SlidingStep.gif" + $Random, d + "Dancing.gif" + $Random, d + "Summon1.gif", d + "Summon2.gif", d + "Summon3.gif", d + "LostHeadSlidingStep.gif" + $Random, d + "LostHeadDancing.gif" + $Random, d + "LostHeadSummon.gif" + $Random, a, b]
         })(),
-        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：一直滑步，无视植物，碰到脑子召唤伴舞（750血）<br>精英形态二：每次召唤在全场最多10个僵尸的位置复制一个伴舞<br>特点：<font color="#FF0000">召唤满12个伴舞僵尸后召唤墓碑出怪</font><br>舞王僵尸的最新唱片“来个脑子啃一啃”在僵尸界的人气正急速飙升。',
+        Produce: '舞王僵尸和人类(在世或者死去的)如有雷同，纯属巧合。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：一直滑步，无视植物，碰到脑子召唤伴舞（750血）<br>精英形态二：每次召唤在全场最多8个僵尸的位置复制一个伴舞<br>特点：<font color="#FF0000">召唤满12个伴舞僵尸后召唤墓碑出怪</font><br>舞王僵尸的最新唱片“来个脑子啃一啃”在僵尸界的人气正急速飙升。',
         getSnowPea: function() {
             this.PlaySlowballAudio();
         },
@@ -1152,7 +1152,7 @@ lookHP:function(c){
               if (h && h.beAttacked) {
                 s.src = "images/Zombies/DancingZombie/Summon3.gif";
 			for (i in $Z) {
-                h.num &&(AZlength<=9)&&$Z[i] &&$Z[i].beAttacked&&($Z[i].PZ==h.PZ)&& !$Z[i].ChkSpeed && (AZ[AZlength] = (DZid[AZlength] = new oBackupDancer).CustomBirth($Z[i].R, $Z[i].AttackedLX, 100, "Z_" + Math.random(),h.PZ),DZid[AZlength].masterid=h.id,++AZlength);
+                h.num &&(AZlength<=7)&&$Z[i] &&$Z[i].beAttacked&&($Z[i].PZ==h.PZ)&& !$Z[i].ChkSpeed && (AZ[AZlength] = (DZid[AZlength] = new oBackupDancer).CustomBirth($Z[i].R, $Z[i].AttackedLX, 100, "Z_" + Math.random(),h.PZ),DZid[AZlength].masterid=h.id,++AZlength);
               }
                 while (r--) {
                   (q = m[r]) && (!(l = q[0]) || !$Z[l]) && (u[o] = (w[o] = new oBackupDancer).CustomBirth(q[1], q[2](v), 100, q[0] = "Z_" + Math.random(), h.PZ), n.push(NewImg("", k, "z-index:" + q[3] + ";left:" + q[4](v) + "px;top:" + q[5] + "px", EDPZ)),w[o].masterid=h.id,++o,++h.SummonNum)
@@ -1224,6 +1224,9 @@ oZombie = InheritO(OrnNoneZombies, {
       a.EleBody.src = a.PicArr[a.NormalGif];
       a.OSpeed *= 2;
       a.Speed *= 2;
+	  a.PrivateAct:function(a){
+		  a.HP<a.MaxHP*0.7&&(a.Speed+=0.001,a.OSpeed+=0.001)
+	  };
       a.tasktime *= 0.5;
     } else {
 	oSym.addTask(1,function(a){
@@ -1256,71 +1259,7 @@ oZombie = InheritO(OrnNoneZombies, {
             9: "images/Zombies/Zombie/3.gif"
         }
     }),
-    oFlagZombie = InheritO(oZombie, {
-        PicArr: (function() {
-            var a = "images/Zombies/FlagZombie/";
-            return ["images/Card/Zombies/FlagZombie.png", a + "0.gif", a + "FlagZombie.gif", a + "FlagZombieAttack.gif", a + "FlagZombieLostHead.gif", a + "FlagZombieLostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, "images/Zombies/Zombie/ZombieDie.gif" + $Random, "images/Zombies/Zombie/BoomDie.gif" + $Random, a + "1.gif",a + "FlagZombiejinyin.gif",a + "FlagZombiejinyinAttack.gif"]
-        })(),
-        EName: "oFlagZombie",
-        CName: "旗帜僵尸",
-        OSpeed: 2.2,
-        Speed: 2.2,
-		HP:500,
-		increaseSpeed:1.5,
-		SunNum:150,
-		ZKind:2,
-		PrivateAct:function(a){
-			for (u in $Z) {
-              e = $Z[u];	
-			if($Z[a.id]&&!e.angry&&u!==a.id){
-				e.angry=1;
-				e.OSpeed*=a.increaseSpeed;
-				e.Speed*=a.increaseSpeed;
-				e.LostPaperSpeed*=a.increaseSpeed;
-				e.tasktime*=0.5;
-			}
-		}
-	},
-		PrivateDie:function(a){			
-			for (u in $Z) {
-              e = $Z[u];	
-			if(e.angry&&(e.id!==a.id)){
-				e.angry=0;
-				e.OSpeed/=a.increaseSpeed;
-				e.Speed/=a.increaseSpeed;
-				e.LostPaperSpeed/=a.increaseSpeed;
-				e.tasktime/=0.5;
-			}
-		}},
-		jinyinAct:function(a){
-			a.NormalGif=a.jinyinGif;
-			a.AttackGif=a.jinyinAttackGif;
-			a.EleBody.src=a.PicArr[a.NormalGif];
-			a.tasktime*=0.2;
-			a.increaseSpeed=2;
-			a.GoingDieHead=function(){};
-			a.JudgeAttack=function() {
-                var f = this,
-                    c = f.ZX,
-                    d = f.R + "_",
-                    e = GetC(c),
-                    g = oGd.$,
-					a,
-                    b;
-                ((a=f.JudgeAttackH1())&&a.beAttacked)||(b = f.JudgeLR(f, d, e, c, g) || f.JudgeSR(f, d, e, c, g))&&!(a&&a.beAttacked)&&f.NormalAttack(b[0], b[1])
-            };
-			a.NormalAttack=function(c, b) {
-                var d = $Z[c];
-                $P[b].getHurt(d, 2, d.Attack)
-            };
-			a.WalkToLadder=function(){};
-			a.Speed*=4;
-			a.OSpeed*=4;
-		},
-        beAttackedPointR: 101,
-        Produce: '旗帜僵尸标志着即将来袭的一大堆僵尸"流"。</font><br>通用技能：号召</font><br>当旗帜僵尸存在时，全场僵尸速度和伤害都翻倍</font><br>精英形态：处决者旗帜</font><br>本身速度更快，碾压植物<br>韧性：<font color="#FF0000">中（500）</font><br>毫无疑问，摇旗僵尸喜爱脑髓。但在私下里他也迷恋旗帜。也许是因为旗帜上也画有脑子吧，这很难说。'
-    }),
-    OrnIZombies = function() {
+	    OrnIZombies = function() {
         var a = function(f, b) {
             var d = f.OrnHP,
                 c = f.HP,
@@ -1345,6 +1284,125 @@ oZombie = InheritO(OrnNoneZombies, {
             getHit3: a
         })
     }(),
+	oFlagZombie = InheritO(oZombie, {
+        PicArr: (function() {
+            var a = "images/Zombies/FlagZombie/";
+            return ["images/Card/Zombies/FlagZombie.png", a + "0.gif", a + "FlagZombie.gif", a + "FlagZombieAttack.gif", a + "FlagZombieLostHead.gif", a + "FlagZombieLostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, "images/Zombies/Zombie/ZombieDie.gif" + $Random, "images/Zombies/Zombie/BoomDie.gif" + $Random, a + "1.gif",a + "FlagZombiejinyin.gif",a + "FlagZombiejinyinAttack.gif"]
+        })(),
+PicArr2: (function() {
+            var a = "images/Zombies/FlagZombie/";
+            return ["images/Card/Zombies/FlagZombie.png", a + "0.gif", a + "FootballFlagWalk.gif", a + "FootballFlagAttack.gif", a + "FlagZombieLostHead.gif", a + "FlagZombieLostHeadAttack.gif", "images/Zombies/Zombie/ZombieHead.gif" + $Random, "images/Zombies/Zombie/ZombieDie.gif" + $Random, "images/Zombies/Zombie/BoomDie.gif" + $Random, a + "FlagZombie.gif", a + "FlagZombieAttack.gif",a + "1.gif"]
+        })(),
+        EName: "oFlagZombie",
+        CName: "旗帜僵尸",
+        OSpeed: 2.2,
+        Speed: 2.2,
+		HP:500,
+		increaseSpeed:1.5,
+		SunNum:150,
+		ZKind:2,
+		PrivateAct:function(a){
+			for (u in $Z) {
+              e = $Z[u];	
+			if(e.EName!="oFlagZombie"&&!e.angry&&e.PZ==a.PZ){
+				e.angry=1;
+				e.OSpeed*=a.increaseSpeed;
+				e.Speed*=a.increaseSpeed;
+				e.LostPaperSpeed*=a.increaseSpeed;
+				e.tasktime*=0.5;
+			}
+		}
+	},
+		PrivateDie:function(a){			
+			for (u in $Z) {
+              e = $Z[u];	
+			if(e.angry){
+				e.angry=0;
+				e.OSpeed/=a.increaseSpeed;
+				e.Speed/=a.increaseSpeed;
+				e.LostPaperSpeed/=a.increaseSpeed;
+				e.tasktime/=0.5;
+			}
+		}},
+		jinyinAct:function(a){
+		if(a.num>=50){
+			a.NormalGif=a.jinyinGif;
+			a.AttackGif=a.jinyinAttackGif;
+			a.EleBody.src=a.PicArr[a.NormalGif];
+			a.tasktime*=0.2;
+			a.increaseSpeed=2;
+			a.GoingDieHead=function(){};
+			a.AttackZombie=function(c,b){
+				var a=this;
+				if(a.PZ){
+				var z=oZ["getArHZ"](a.AttackedLX,a.AttackedRX,a.R);
+				zl=z.length;
+				while(zl--){
+					z[zl].Altitude==1&&z[zl].getHit2(z[zl],30,0)
+				}
+				}else{
+				  CZombies.prototype.AttackZombie(c,b)
+				}
+			};
+			a.JudgeAttack=function() {
+                var f = this,
+                    c = f.ZX,
+                    d = f.R + "_",
+                    e = GetC(c),
+                    g = oGd.$,
+					a,
+                    b;
+                ((a=f.JudgeAttackH1())&&a.beAttacked)||(b = f.JudgeLR(f, d, e, c, g) || f.JudgeSR(f, d, e, c, g))&&!(a&&a.beAttacked)&&f.NormalAttack(b[0], b[1])
+            };
+			a.NormalAttack=function(c, b) {
+                var d = $Z[c];
+                $P[b].getHurt(d, 2, d.Attack)
+            };
+			a.WalkToLadder=function(){};
+			a.Speed*=4;
+			a.OSpeed*=4;
+		}else{
+		a.Speed*=2;
+		a.OSpeed*=2;
+		a.tasktime*=0.5;
+		a.PrivateAct=function(a){
+				var z=oZ[a.PZ?"getArZ":"getArHZ"](a.AttackedLX,a.AttackedRX,a.R),
+				zl=z.length,
+				Z;
+zl&&PlayAudio("ImpToLand");
+				while(zl--){
+				(Z=z[zl])&&Z.EName=="oImp"&&Z.Altitude==1&&(a.PZ?GetC(Z.ZX)>3:GetC(Z.ZX)<7)&&a.kickImp(Z,a.PZ?Math.max(a.R-2,3):Math.min(a.R+2,7))
+				}
+		};
+		a.kickImp=function(z,C){
+			z.getr(z,GetX(C)-z.ZX);
+			SetHidden(z.Ele);
+			z.Altitude=4;
+			z.FreeSetBodyTime=1;
+			var Img=NewImg(0, oGargantuar.prototype.PicArr[oGargantuar.prototype.ImpToLandGif], "left:" + (GetX(C) - 30) + "px;top:" + (a.pixelTop) + "px;transform:" + (a.PZ ? "rotateY(0px)" : "rotateY(180px)") + ";z-index:" + a.zIndex, EDPZ);
+			oSym.addTask(100, function(z,Img){
+			ClearChild(Img);
+			if(!$Z[z.id])return;
+			SetVisible(z.Ele);
+			z.Altitude=1;
+			z.FreeSetBodyTime=0;
+			}, [z,Img]);
+		};
+		a.OrnHP=1600*a.level;
+		a.PicArr=a.PicArr2;
+		a.EleBody.src=a.PicArr[a.NormalGif];
+		a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=OrnIZombies.prototype.getHit0;
+		a.Ornaments=1;				  
+		a.PlayNormalballAudio=function() {
+            PlayAudio("plastichit")
+		};
+		a.OrnLostNormalGif=9;
+		a.OrnLostAttackGif=10;
+		}
+	},
+        beAttackedPointR: 101,
+        Produce: '旗帜僵尸标志着即将来袭的一大堆僵尸"流"。</font><br>通用技能：号召</font><br>当旗帜僵尸存在时，全场僵尸速度和伤害都翻倍</font><br>精英形态一：处决者旗帜<br>本身速度更快，碾压植物<br>精英形态二：橄榄旗帜，将小鬼向前踢，速度较快<br>韧性：<font color="#FF0000">中（500）</font><br>毫无疑问，摇旗僵尸喜爱脑髓。但在私下里他也迷恋旗帜。也许是因为旗帜上也画有脑子吧，这很难说。'
+    }),
     oConeheadZombie = InheritO(OrnIZombies, {
         EName: "oConeheadZombie",
         CName: "路障僵尸",
