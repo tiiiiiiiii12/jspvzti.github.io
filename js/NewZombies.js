@@ -1060,8 +1060,8 @@ oCatapultZombie=InheritO(oZomboni,{
 LostPaperSpeed:3.5,
 tasktime:25,
 	StandGif: 1,
-	DieGif: 3,
-	BoomDieGif: 3,
+	DieGif: 5,
+	BoomDieGif: 5,
 	AttackGif:2,
 	Move:true,
 width:166,
@@ -1073,7 +1073,7 @@ GetDTop:0,
 	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">中（850）</font><br>精英形态一：<font color="#FF0000">随机投掷僵尸头，若杀死植物则在落点生成僵尸，反之则在投篮车的位置</font><br>精英形态二：<font color="#FF0000">叶子保护伞，投篮球时血量低于170时锁血十秒并加快投掷速度，期间每收到一次攻击发射一颗豌豆</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
 	PicArr: (function() {
 			var b = "images/Zombies/CatapultZombie/";
-			return ["images/Card/Zombies/Catapult.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif"+$Random, b + "Throw.gif"]
+			return ["images/Card/Zombies/Catapult.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif"+$Random, b + "Throw.gif",b+"Die.gif"]
 	})(),
 lookHP:function(c){
 	var B = NewEle("dHP"+c.id, "div", "position:absolute;color:yellow;width:80px;height:30px;font-size:12px;z-index:100;" + c.getShadow(c), "", c.Ele);
