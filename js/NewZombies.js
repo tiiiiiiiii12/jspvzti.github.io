@@ -1070,7 +1070,7 @@ GetDTop:0,
 	ballsrc:"images/interface/Zombie_catapult_basketball.png",
 	ballAttack:75,
 	basketballNum:20,
-	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">中（850）</font><br>精英形态一：<font color="#FF0000">随机投掷僵尸头，若杀死植物则在落点生成僵尸，反之则在投篮车的位置</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
+	Produce: '它操作着重型机器<p>韧性：<font color="#FF0000">中（850）</font><br>精英形态一：<font color="#FF0000">随机投掷僵尸头，若杀死植物则在落点生成僵尸，反之则在投篮车的位置</font><br>精英形态二：<font color="#FF0000">叶子保护伞，投篮球时血量低于170时锁血十秒并加快投掷速度，期间每收到一次攻击发射一颗豌豆</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font></p>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
 	PicArr: (function() {
 			var b = "images/Zombies/CatapultZombie/";
 			return ["images/Card/Zombies/Catapult.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif"+$Random, b + "Throw.gif"]
@@ -1123,6 +1123,7 @@ a.EleBody.src=a.PicArr[4];
     );
     oSym.addTask(100, (_) => {
 	if(!$Z[a.id])return;
+	--a.basketballNum;
 	PlayAudio("basketball");
       SetVisible(bullet);
       var x = a.ZX + (a.WalkDirection?-140:140);
@@ -1155,7 +1156,7 @@ P.getHit2(P,a.ballAttack*a.level,0)
 }else{
 a.jinyinCustom(a,a.ZX,Y);
 }
-          $Z[a.id]&&(a.EleBody.src=a.PicArr[a.NormalGif],--a.basketballNum,
+          $Z[a.id]&&(a.EleBody.src=a.PicArr[a.NormalGif],
 					 oSym.addTask(a.cd,function(a){
 						 $Z[a.id]&&a.checkThrow(a)
 					 },[a]));
@@ -1210,7 +1211,35 @@ JudgeDirection:function(a){},
 	var z = a.Ele;
     z.jinyinImg = "jinyin_" + Math.random();
 	if(a.num>=50){
-	let jinyinImg = NewImg(z.jinyinImg, "images/Zombies/Zombie/ZombieHead.png", "position:absolute;left:30px;top:80px;", 0);
+			let jinyinImg = NewImg(z.jinyinImg, "images/Plants/san.gif", "position:absolute;opacity:.5;left:-100px;top:-40px;", 0);
+    z.appendChild(jinyinImg);
+	a.JudgeDirection=function(a){
+	var P = a.Ele;
+      (a.WalkDirection == a.check) && ($(P.jinyinImg)&&SetStyle($(P.jinyinImg), {
+            transform: a.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)",
+            left: a.WalkDirection ? "40px" : "-100px"
+          }),
+        a.check = a.WalkDirection ? 0 : 1);
+	};
+a.shootPea=oPeaZombie.prototype.shootPea;
+a.shootPea1=oPeaZombie.prototype.shootPea1;
+	a.CanRebound=false;
+	a.bedevil=oPeaZombie.prototype.bedevil;
+	a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(a,d){
+	a.CanRebound&&(a.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (parseInt($(a.Ele.jinyinImg).style.left)+160)+ "px;top:" + (a.pixelTop + 120) + "px;visibility:hidden;z-index:" + (a.zIndex + 2)),a.shootPea(a));
+		var Att=Math.min(d,a.HP-a.MaxHP*0.2);
+		if(!a.Move&&Att==a.HP-a.MaxHP*0.2){
+			a.cd=0;
+			a.CanRebound=true;
+			$(a.Ele.jinyinImg).style.opacity=1;
+			oSym.addTask(1000,function(a){
+				$Z[a.id]&&a.CanRebound&&(ClearChild($(a.Ele.jinyinImg)),a.CanRebound=false,a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=OrnNoneZombies.prototype.getHit);
+			},[a])
+		};
+		OrnNoneZombies.prototype.getHit0(a,Att)
+	};
+	}else{
+			let jinyinImg = NewImg(z.jinyinImg, "images/Zombies/Zombie/ZombieHead.png", "position:absolute;left:30px;top:80px;", 0);
     z.appendChild(jinyinImg);
 	a.JudgeDirection=function(a){
 	var P = a.Ele;
@@ -1240,7 +1269,7 @@ let Plist=[];
 for (let C=1;C<=GetC(a.ZX);C++){
   for (let i=0;i<Order.length;i++){
 	  let P=oGd.$[a.R+"_"+C+"_"+Order[i]];
-	  if(P && ((Plist.findIndex(P=>P.C===C))!=-1)) continue;
+	  if(P && ((Plist.findIndex(P=>P.C===C))!=-1)) continue;//如果已有植物被锁定则跳过本格
 	  P&&P.canEat&&Plist.push(P);
   }
 }
@@ -1252,31 +1281,6 @@ Plist.length&&!num&&(a.Move&&(a.Speed=a.OSpeed=0,a.Move=false),a.Throw(HitP,HitP
 		a.ballAttack*=2;
 		a.ballsrc="images/Zombies/Zombie/ZombieHead.png";
 		a.cd*=3.5;
-	}else{
-	let jinyinImg = NewImg(z.jinyinImg, "images/Plants/san.gif", "position:absolute;opacity:.5;left:-100px;top:-40px;", 0);
-    z.appendChild(jinyinImg);
-	a.JudgeDirection=function(a){
-	var P = a.Ele;
-      (a.WalkDirection == a.check) && (SetStyle($(P.jinyinImg), {
-            transform: a.WalkDirection ? "rotateY(0deg)" : "rotateY(180deg)",
-            left: a.WalkDirection ? "40px" : "-100px"
-          }),
-        a.check = a.WalkDirection ? 0 : 1);
-	};
-a.shootPea=oPeaZombie.prototype.shootPea;
-a.shootPea1=oPeaZombie.prototype.shootPea1;
-	a.CanRebound=true;
-	a.bedevil=oPeaZombie.prototype.bedevil;
-	a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(a,d){
-	a.CanRebound&&(a.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 60) + "px;visibility:hidden;z-index:" + (a.zIndex + 2)),a.shootPea(a));
-		var Att=a.Move?d:Math.min(d,a.HP-a.MaxHP*0.2);
-		if(!a.Move&&Att==a.HP-a.MaxHP*0.2){
-			a.cd=0;
-			a.CanRebound=false;
-			$(a.Ele.jinyinImg).style.opacity=1;
-		};
-		OrnNoneZombies.prototype.getHit0(a,Att)
-	};
 	}
 	},
 	getFirePeaSputtering:OrnNoneZombies.prototype.getFirePeaSputtering,
@@ -1424,7 +1428,8 @@ shootPea1:oPeashooter.prototype.NormalAttack,
     var a = this,
       b = "PB" + Math.random();
     EditEle(a.BulletEle.cloneNode(false), {
-        id: b
+        id: b,
+		top:(GetY(a.R) - 100) + "px"
       },
       0, EDPZ);
     oSym.addTask(2,
@@ -1447,7 +1452,7 @@ shootPea1:oPeashooter.prototype.NormalAttack,
           left: o + 28 + "px",
           width: "52px",
           height: "46px"
-        })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : ((n += (l = -5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 100) + "px", j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+        })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])) : ((n += (l = -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
       },
       [b, $(b), a.ZX, a.R, a.ZX - 40])
   },
