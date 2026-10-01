@@ -1998,11 +1998,11 @@ NormalAttack:function(a){
             switch (true) {
                 case c && c < 3:
 					d.getHurt=function(){};
-                    d.jinyin?d.Die():d.NormalAttack(d,0);
+                    !d.jinyin?d.Die():d.NormalAttack(d,0);
                     break;
                 case (d.HP -= b) < 1:
 					d.getHurt=function(){};
-                    d.jinyin?d.Die():d.NormalAttack(d,0);
+                    !d.jinyin?d.Die():d.NormalAttack(d,0);
                     break;
                 case d.HP < 1334:
                     d.HurtStatus < 2 && (d.HurtStatus = 2, a.childNodes[1].src = "images/Plants/PumpkinHead/pumpkin_damage2.gif");
