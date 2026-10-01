@@ -969,8 +969,11 @@ oGd = {
 		this.$Balloon = new Array(oS.R + 1);
 		this.$Fog = []
 	},
-	add: function(c, a, b, d) { (b = (d = this.$)[a]) && b.Die();
+	add: function(c, a, b, d) {
+		let canjinyin;
+		(b = (d = this.$)[a])&& (b.Die(),canjinyin=true);
 		d[a] = c
+		return canjinyin
 	},
 	del: function(a) {
 		delete this.$[a.R + "_" + a.C + "_" + a.PKind]
