@@ -94,12 +94,11 @@ getLadder:function() {
                 n);
 			e.EleBody=$(e.id).childNodes[1];
 			e.Ele=$(e.id);
-        e.randomnum<e.jinyinnum&&(
+            (oGd.add(e, h + "_" + a + "_" + e.PKind)||e.randomnum<e.jinyinnum)&&(
                     e.jinyin=true,
                     e.jinyinAct&&e.jinyinAct(e)   
-                ); 
+                );//
 			e.MaxHP=e.HP;
-            oGd.add(e, h + "_" + a + "_" + e.PKind);
             e.PrivateBirth(e, n)
         },
 	    getFreeze: function(d, c,a) {
