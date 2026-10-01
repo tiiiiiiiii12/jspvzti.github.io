@@ -20,7 +20,7 @@ var CPlants = NewO({
         CanGrow: function(c, b, e) {
             var a = b + "_" + e,
                 d = oS.ArP;
-            return d ? oGd.$LF[b] == 1 ? (e > 0 && e < d.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1])) : c[0] && !c[1] : oGd.$LF[b] == 1 ? !(e < 1 || e > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1]) : c[0] && !c[1]
+            return d ? oGd.$LF[b] == 1 ? (e > 0 && e < d.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1]&&(c[1].EName!=this.EName))) : c[0]&&(!c[1]||c[1].EName==this.EName) : oGd.$LF[b] == 1 ? !(e < 1 || e > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1]&&(c[1].EName!=this.EName)) : c[0]&&(!c[1]||c[1].EName==this.EName)
         },
         getHurt: function(e, c, b) {
             var d = this,
@@ -1485,9 +1485,9 @@ NormalAttack:function(a){
             var a = b + "_" + d,
                 ArP = oS.ArP;
             if (ArP) {
-                return d > 0 && d < ArP.ArC[1] && oGd.$LF[b] == 2 && !c[0] && !c[1] && !oGd.$Crater[a]
+                return d > 0 && d < ArP.ArC[1] && oGd.$LF[b] == 2 && (!c[0]||(c[0].EName!=this.EName)) && !c[1] && !oGd.$Crater[a]
             } else {
-                return !(d < 1 || d > 9 || oGd.$LF[b] - 2 || c[0] || c[1] || oGd.$Crater[a])
+                return !(d < 1 || d > 9 || oGd.$LF[b] - 2 || (c[0]&&(c[0].EName!=this.EName)) || c[1] || oGd.$Crater[a])
             }
         },
         Tooltip: "使你能够将非水生植物种在上面",
@@ -1508,22 +1508,20 @@ NormalAttack:function(a){
                 e = oS.ArP;
             if (e) {
                 switch (a) {
-                    case 0,
-                    3:
-                        return (false);
+                    case 0,2:
+                        return false;
                     case 1:
-                        return (f > 0 && f < e.ArC[1] && !(d[1] || oGd.$Crater[b] || oGd.$Tombstones[b]==1));
-                    case 2:
-                        return (f > 0 && f < e.ArC[1] && d[0] && !d[1])
+                        return (f > 0 && f < e.ArC[1] && !(d[1]&&(d[1].EName!=this.EName) || oGd.$Crater[b] || oGd.$Tombstones[b]==1));
+                    case 3:
+                        return (f > 0 && f < e.ArC[1] && d[0] && !(d[1]&&(d[1].EName!=this.EName)))
                 }
             } else {
                 switch (a) {
-                    case 0,
-                    3:
-                        return (false);
+                    case 0,2:
+                        return false;
                     case 1:
                         return (!(f < 1 || f > 9 || d[1] || oGd.$Crater[b] || oGd.$Tombstones[b]==1));
-                    case 2:
+                    case 3:
                         return (d[0] && !d[1])
                 }
             }
@@ -1983,7 +1981,7 @@ NormalAttack:function(a){
         zIndex: 1,
         PicArr: ["images/Card/Plants/PumpkinHead.png", "images/Plants/PumpkinHead/0.gif", "images/Plants/PumpkinHead/PumpkinHead.gif", "images/Plants/PumpkinHead/PumpkinHead1.gif", "images/Plants/PumpkinHead/PumpkinHead2.gif", "images/Plants/PumpkinHead/pumpkin_damage1.gif", "images/Plants/PumpkinHead/pumpkin_damage2.gif", "images/Plants/PumpkinHead/Pumpkin_back.gif"],
         Tooltip: "能保护种在里面的植物",
-        Produce: '南瓜头，可以用他的外壳保护其他植物，濒死或被碾概率爆炸<br>精英形态：濒死必定爆炸，并掉落一张被自身保护的植物卡牌<p>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">可以种在其他植物上</font></p>南瓜头最近都没收到，关于他表哥刃菲尔德的消息。很明显，刃菲尔德是个大明星，是一种……叫什么运动来着……的体育明星？佩格跳跳球大师？南瓜头反正搞不懂是什么运动，他只想做好他自己的工作。',
+        Produce: '南瓜头，可以用他的外壳保护其他植物，死亡时掉落一张被自身保护的植物卡牌<br>精英形态：濒死爆炸<p>韧性：<font color="#FF0000">高</font><br>特点：<font color="#FF0000">可以种在其他植物上</font></p>南瓜头最近都没收到，关于他表哥刃菲尔德的消息。很明显，刃菲尔德是个大明星，是一种……叫什么运动来着……的体育明星？佩格跳跳球大师？南瓜头反正搞不懂是什么运动，他只想做好他自己的工作。',
         CanGrow: function(c, b, d) {
             var a = b + "_" + d;
             return c[2] ? 1 : oGd.$LF[b] == 1 ? !(d < 1 || d > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1) : c[0]
@@ -2000,11 +1998,11 @@ NormalAttack:function(a){
             switch (true) {
                 case c && c < 3:
 					d.getHurt=function(){};
-                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):Math.random()*100>10?d.Die():d.NormalAttack(d,0);
+                    d.jinyin?d.Die():d.NormalAttack(d,0);
                     break;
                 case (d.HP -= b) < 1:
 					d.getHurt=function(){};
-                    d.jinyin?(d.NormalAttack(d,0),oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)):Math.random()*100>10?d.Die():d.NormalAttack(d,0);
+                    d.jinyin?d.Die():d.NormalAttack(d,0);
                     break;
                 case d.HP < 1334:
                     d.HurtStatus < 2 && (d.HurtStatus = 2, a.childNodes[1].src = "images/Plants/PumpkinHead/pumpkin_damage2.gif");
@@ -2028,8 +2026,9 @@ NormalAttack:function(a){
                 a, EDPZ);
             NewImg(d + "2", "images/Plants/PumpkinHead/PumpkinHead2.gif", "left:" + c.pixelLeft + "px;top:" + c.pixelTop + "px;z-index:" + (c.zIndex - 2), EDPZ)
         },
-        PrivateDie: function(a) {
-            ClearChild($(a.id + "2"))
+        PrivateDie: function(d) {
+            ClearChild($(d.id + "2"));
+			oGd.$[d.R+"_"+d.C+"_"+1]&& AppearCard(d.pixelLeft+20,d.pixelTop+40,window[oGd.$[d.R+"_"+d.C+"_"+1].EName],0,114514)
         }
     }),
     oJalapeno = InheritO(oCherryBomb, {
@@ -2111,7 +2110,7 @@ NormalAttack:function(a){
         CanGrow: function(c, b, e) {
             var a = b + "_" + e,
                 d = oS.ArP;
-            return d ? e > 0 && e < d.ArC[1] && oGd.$LF[b] == 1 && !(c[1] || c[0]) : !(e < 1 || e > 9 || oGd.$LF[b] - 1 || c[1] || c[0] || oGd.$Crater[a] || oGd.$Tombstones[a]==1)
+            return d ? e > 0 && e < d.ArC[1] && oGd.$LF[b] == 1 && !(c[1]&&(c[1].EName!="oSpikeweed") || c[0]) : !(e < 1 || e > 9 || oGd.$LF[b] - 1 || c[1]&&(c[1].EName!="oSpikeweed") || c[0] || oGd.$Crater[a] || oGd.$Tombstones[a]==1)
         },
         getHurt: function(d, b, a) {
             var c = this;
@@ -3250,9 +3249,9 @@ NormalAttack2: function() {
             var a = b + "_" + d,
                 ArP = oS.ArP;
             if (ArP) {
-                return d > 0 && d < ArP.ArC[1] && oGd.$LF[b] == 2 && !c[0] && !c[1] && !oGd.$Crater[a]
+                return d > 0 && d < ArP.ArC[1] && oGd.$LF[b] == 2 && !c[0] && !(c[1]&&(c[1].EName!="oTangleKelp")) && !oGd.$Crater[a]
             } else {
-                return !(oGd.$LF[b] != 2 || d < 1 || d > 9 || oGd.$Crater[a] || c[0] || c[1])
+                return !(oGd.$LF[b] != 2 || d < 1 || d > 9 || oGd.$Crater[a] || c[0] || (c[1]&&(c[1].EName!="oTangleKelp")))
             }
         },
         getShadow: function(a) {
@@ -3360,9 +3359,9 @@ NormalAttack2: function() {
             var a = b + "_" + d,
                 ArP = oS.ArP;
             if (ArP) {
-                return d > 0 && d < ArP.ArC[1] && oGd.$LF[b] == 2 && !c[0] && !c[1] && !oGd.$Crater[a]
+                return d > 0 && d < ArP.ArC[1] && oGd.$LF[b] == 2 && !c[0] && !(c[1]&&(c[1].EName!="SeaShroom")) && !oGd.$Crater[a]
             } else {
-                return !(d < 1 || d > 9 || oGd.$LF[b] - 2 || c[0] || c[1] || oGd.$Crater[a])
+                return !(d < 1 || d > 9 || oGd.$LF[b] - 2 || c[0] || (c[1]&&(c[1].EName!="oTangleKelp")) || oGd.$Crater[a])
             }
         },
         getShadow: function(a) {
