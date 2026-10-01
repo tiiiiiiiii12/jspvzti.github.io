@@ -82,6 +82,13 @@ oS.Init({
 								}), ++k);
 								oSym.addTask(10, arguments.callee, [k]);
 								break;
+							case 4:
+							innerText($("DivTeach"), "精英植物种植时概率出现，也可以用两份种子包合成！"), EditImg($("PointerUD"), "", "images/interface/PointerDown.gif", {
+									left: "170px",
+									top: "270px"
+								});
+								oSym.addTask(200,function(k){++k},[k]);
+								break;
 							default:
 								var j = 0,
 									h = oGd.$;
