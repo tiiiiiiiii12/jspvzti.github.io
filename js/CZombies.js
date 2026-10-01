@@ -2134,7 +2134,7 @@ a.PrivateAct = function(a) {
 	a.JudgeDirection(a);
 	!a.nowHP&&(a.nowHP=a.MaxHP);
      a.canWalk(a,a.id)&&a.Ornaments&&(a.HP!=a.nowHP)&&(a.ChangeR(a),a.nowHP=a.HP);
-     a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.bedevil=CZombies.prototype.bedevil,a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.ZKind=-2,a.tasktime/=2,a.HP+=(300*a.level),a.ChangeR(a),(SummonZ=CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ)).Privatenum = 150,SummonZ.jinyinnum=100);
+     a.beAttacked && a.WalkDirection == a.PZ && !a.Ornaments && (a.PZ ? a.ZX > 800 : a.ZX < 100) && (a.bedevil=CZombies.prototype.bedevil,a.PZ ? a.reNormal(a) : a.bedevil(a, 1),a.ZKind=-2,a.ChangeR(a),(SummonZ=CustomZombie(oScreenDoorZombie, a.R, a.PZ ? 9 : 0, !a.PZ)).Privatenum = 150,SummonZ.jinyinnum=100);
     }
 },
 jinyinAct3:function(a){
@@ -2168,7 +2168,7 @@ p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.Attack
   PlayNormalballAudio: function() {
     PlayAudio("splat" + Math.floor(1 + Math.random() * 3))
   },
-  Produce: '他的铁栅门是有效的盾牌。<br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：手持大喷菇，对前方植物造成穿透伤害，防具血量降低<br>精英形态二：带着脑子，防具掉落后会逃跑到后方，召唤一个精英铁门并回头，啃咬血量较高的植物时会向前移动，有铁门时若本体受伤则换行<br>精英形态三：手持铲子，将植物铲至身后<br>弱点：大喷菇<br>脑子被吃了就是被吃了，不会启发一点灵智，相比之下，或许拿着脑子更有用',
+  Produce: '他的铁栅门是有效的盾牌。<br>铁栅门韧性：<font color="#FF0000">高(1000)</font><br>精英形态一：手持大喷菇，对前方植物造成穿透伤害<br>精英形态二：带着脑子，防具掉落后会逃跑到后方，召唤一个同类并回头，啃咬血量较高的植物时会向前移动，有铁门时若本体受伤则换行<br>精英形态三：手持铲子，将植物铲至身后<br>弱点：大喷菇<br>脑子被吃了就是被吃了，不会启发一点灵智，相比之下，或许拿着脑子更有用，反正这也只是豆制脑子',
   GoingDie: CZombies.prototype.GoingDie,
   getFirePea: function(c, a, b) {
     PlayAudio(b == c.WalkDirection ? ["shieldhit", "shieldhit2"][Math.floor(Math.random() * 2)] : "splat" + Math.floor(1 + Math.random() * 3));
@@ -2197,6 +2197,8 @@ p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.Attack
 	a.bedevil=function(){},
     a.OSpeed *= 3;
 	a.ZKind=2;
+	a.tasktime/=2;
+	a.HP+=(300*a.level);
 	PlayAudio("jack_surprise");
   },
   CheckOrnHP: function(g, h, d, c, f, b, a) {
@@ -2536,9 +2538,9 @@ a.Jump(a)
 			a.Ele.NutHead&&ClearChild($(a.Ele.NutHead));
 		},
         Jump: function(a) {
-            a.beAttacked && (PlayAudio("zombie_entering_water"), a.Altitude = 2, SetHidden(a.EleShadow), a.EleBody.src = a.PicArr[8] + Math.random(), oSym.addTask(160,
+            a.beAttacked && (a.beAttacked=0,PlayAudio("zombie_entering_water"), a.Altitude = 2, SetHidden(a.EleShadow), a.EleBody.src = a.PicArr[8] + Math.random(), oSym.addTask(160,
                 function(c, b) {
-                    $Z[c] && b.beAttacked && (b.WalkStatus = 1, b.Altitude = 0, b.OSpeed = b.Speed = b.intoWaterSpeed, b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = !b.WalkDirection?b.ChkActsL2:b.ChkActs1)
+                    $Z[c] && b.beAttacked && (b.WalkStatus = 1,b.beAttacked=1,b.Altitude = 0, b.OSpeed = b.Speed = b.intoWaterSpeed, b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = !b.WalkDirection?b.ChkActsL2:b.ChkActs1)
                 },
                 [a.id, a]), a.ChkActs = function() {
                 return 1
@@ -3197,7 +3199,6 @@ a.Jump(a)
         })();
 		a.EleBody.src=(a.Altitude==1?a.PicArr[2]:a.PicArr[8])
 		}else{
-			SetHidden(a.EleBody,a.EleShadow);
 			a.Altitude=2;
 			a.plusJump=60;
 		}
