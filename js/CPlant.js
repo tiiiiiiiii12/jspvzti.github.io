@@ -1513,7 +1513,7 @@ NormalAttack:function(a){
                     case 1:
                         return (f > 0 && f < e.ArC[1] && !(d[1]&&(d[1].EName!=this.EName||d[1].jinyin) || oGd.$Crater[b] || oGd.$Tombstones[b]==1));
                     case 3:
-                        return (f > 0 && f < e.ArC[1] && d[0] && !(d[1]&&(d[1].EName!=this.EName||d[1].jinyin))
+                        return (f > 0 && f < e.ArC[1] && d[0] && !(d[1]&&(d[1].EName!=this.EName||d[1].jinyin)))
                 }
             } else {
                 switch (a) {
