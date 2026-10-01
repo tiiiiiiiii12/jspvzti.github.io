@@ -20,7 +20,7 @@ var CPlants = NewO({
         CanGrow: function(c, b, e) {
             var a = b + "_" + e,
                 d = oS.ArP;
-            return d ? oGd.$LF[b] == 1 ? (e > 0 && e < d.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1]&&(c[1].EName!=this.EName))) : c[0]&&(!c[1]||c[1].EName==this.EName) : oGd.$LF[b] == 1 ? !(e < 1 || e > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1]&&(c[1].EName!=this.EName)) : c[0]&&(!c[1]||c[1].EName==this.EName)
+            return d ? oGd.$LF[b] == 1 ? (e > 0 && e < d.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1]&&(c[1].EName!=this.EName)&&!c[1].jinyin)) : c[0]&&(!c[1]||(c[1].EName==this.EName&&!c[1].jinyin)) : oGd.$LF[b] == 1 ? !(e < 1 || e > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1]&&(c[1].EName!=this.EName)) : c[0]&&(!c[1]||c[1].EName==this.EName)
         },
         getHurt: function(e, c, b) {
             var d = this,
@@ -1485,9 +1485,9 @@ NormalAttack:function(a){
             var a = b + "_" + d,
                 ArP = oS.ArP;
             if (ArP) {
-                return d > 0 && d < ArP.ArC[1] && oGd.$LF[b] == 2 && (!c[0]||(c[0].EName!=this.EName)) && !c[1] && !oGd.$Crater[a]
+                return d > 0 && d < ArP.ArC[1] && oGd.$LF[b] == 2 && (!c[0]||(c[0].EName!=this.EName&&!c[0].jinyin)) && !c[1] && !oGd.$Crater[a]
             } else {
-                return !(d < 1 || d > 9 || oGd.$LF[b] - 2 || (c[0]&&(c[0].EName!=this.EName)) || c[1] || oGd.$Crater[a])
+                return !(d < 1 || d > 9 || oGd.$LF[b] - 2 || (c[0]&&(c[0].EName!=this.EName)&&!c[0].jinyin) || c[1] || oGd.$Crater[a])
             }
         },
         Tooltip: "使你能够将非水生植物种在上面",
@@ -1511,7 +1511,7 @@ NormalAttack:function(a){
                     case 0,2:
                         return false;
                     case 1:
-                        return (f > 0 && f < e.ArC[1] && !(d[1]&&(d[1].EName!=this.EName) || oGd.$Crater[b] || oGd.$Tombstones[b]==1));
+                        return (f > 0 && f < e.ArC[1] && !(d[1]&&(d[1].EName!=this.EName)&&!d[1].jinyin || oGd.$Crater[b] || oGd.$Tombstones[b]==1));
                     case 3:
                         return (f > 0 && f < e.ArC[1] && d[0] && !(d[1]&&(d[1].EName!=this.EName)))
                 }
@@ -1522,7 +1522,7 @@ NormalAttack:function(a){
                     case 1:
                         return (!(f < 1 || f > 9 || d[1] || oGd.$Crater[b] || oGd.$Tombstones[b]==1));
                     case 3:
-                        return (d[0] && !d[1])
+                        return (d[0] && !(d[1]&&(d[1].EName!=this.EName)&&!d[1].jinyin))
                 }
             }
         },
@@ -2110,7 +2110,7 @@ NormalAttack:function(a){
         CanGrow: function(c, b, e) {
             var a = b + "_" + e,
                 d = oS.ArP;
-            return d ? e > 0 && e < d.ArC[1] && oGd.$LF[b] == 1 && !(c[1]&&(c[1].EName!="oSpikeweed") || c[0]) : !(e < 1 || e > 9 || oGd.$LF[b] - 1 || c[1]&&(c[1].EName!="oSpikeweed") || c[0] || oGd.$Crater[a] || oGd.$Tombstones[a]==1)
+            return d ? e > 0 && e < d.ArC[1] && oGd.$LF[b] == 1 && !(c[1]&&(c[1].EName!="oSpikeweed")&&!c[1].jinyin || c[0]) : !(e < 1 || e > 9 || oGd.$LF[b] - 1 || c[1]&&(c[1].EName!="oSpikeweed")&&!c[1].jinyin || c[0] || oGd.$Crater[a] || oGd.$Tombstones[a]==1)
         },
         getHurt: function(d, b, a) {
             var c = this;
@@ -3251,7 +3251,7 @@ NormalAttack2: function() {
             if (ArP) {
                 return d > 0 && d < ArP.ArC[1] && oGd.$LF[b] == 2 && !c[0] && !(c[1]&&(c[1].EName!="oTangleKelp")) && !oGd.$Crater[a]
             } else {
-                return !(oGd.$LF[b] != 2 || d < 1 || d > 9 || oGd.$Crater[a] || c[0] || (c[1]&&(c[1].EName!="oTangleKelp")))
+                return !(oGd.$LF[b] != 2 || d < 1 || d > 9 || oGd.$Crater[a] || c[0] || (c[1]&&(c[1].EName!="oTangleKelp")&&!c[1].jinyin))
             }
         },
         getShadow: function(a) {
@@ -3359,9 +3359,9 @@ NormalAttack2: function() {
             var a = b + "_" + d,
                 ArP = oS.ArP;
             if (ArP) {
-                return d > 0 && d < ArP.ArC[1] && oGd.$LF[b] == 2 && !c[0] && !(c[1]&&(c[1].EName!="SeaShroom")) && !oGd.$Crater[a]
+                return d > 0 && d < ArP.ArC[1] && oGd.$LF[b] == 2 && !c[0] && !(c[1]&&(c[1].EName!="SeaShroom")&&!c.jinyin) && !oGd.$Crater[a]
             } else {
-                return !(d < 1 || d > 9 || oGd.$LF[b] - 2 || c[0] || (c[1]&&(c[1].EName!="oTangleKelp")) || oGd.$Crater[a])
+                return !(d < 1 || d > 9 || oGd.$LF[b] - 2 || c[0] || (c[1]&&(c[1].EName!="SeaShroom")&&!c.jinyin) || oGd.$Crater[a])
             }
         },
         getShadow: function(a) {
