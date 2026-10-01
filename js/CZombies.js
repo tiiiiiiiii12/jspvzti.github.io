@@ -1370,12 +1370,12 @@ PicArr2: (function() {
 				var z=oZ[a.PZ?"getArZ":"getArHZ"](a.AttackedLX,a.AttackedRX,a.R),
 				zl=z.length,
 				Z;
-zl&&PlayAudio("ImpToLand");
 				while(zl--){
-				(Z=z[zl])&&Z.EName=="oImp"&&Z.Altitude==1&&(a.PZ?GetC(Z.ZX)>3:GetC(Z.ZX)<7)&&a.kickImp(Z,a.PZ?Math.max(a.R-2,3):Math.min(a.R+2,7))
+				(Z=z[zl])&&Z.EName=="oImp"&&Z.Altitude==1&&(a.PZ?GetC(Z.ZX)>3:GetC(Z.ZX)<7)&&a.kickImp(Z,a.PZ?Math.max(GetC(a.ZX)-2,3):Math.min(GetC(a.ZX)+2,7))
 				}
 		};
 		a.kickImp=function(z,C){
+			PlayAudio("ImpToLand");
 			z.getr(z,GetX(C)-z.ZX);
 			SetHidden(z.Ele);
 			z.Altitude=4;
