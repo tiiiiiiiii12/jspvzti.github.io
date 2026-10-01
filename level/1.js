@@ -75,19 +75,12 @@ oS.Init({
 								oSym.addTask(10, arguments.callee, [k]);
 								break;
 							case 3:
-								oS.SunNum > 99 && (innerText($("DivTeach"), "你拥有了足够的阳光来种植另一个豌豆射手！"), EditImg($("PointerUD"), "", "images/interface/PointerUP.gif", {
+								oS.SunNum > 99 && (innerText($("DivTeach"), "精英植物种植时概率出现，也可以用两份种子包合成！"), EditImg($("PointerUD"), "", "images/interface/PointerUP.gif", {
 									left: "50px",
 									top: "60px",
 									visibility: "visible"
 								}), ++k);
 								oSym.addTask(10, arguments.callee, [k]);
-								break;
-							case 4:
-							innerText($("DivTeach"), "精英植物种植时概率出现，也可以用两份种子包合成！"), EditImg($("PointerUD"), "", "images/interface/PointerDown.gif", {
-									left: "170px",
-									top: "270px"
-								});
-								oSym.addTask(200,function(k){++k},[k]);
 								break;
 							default:
 								var j = 0,
