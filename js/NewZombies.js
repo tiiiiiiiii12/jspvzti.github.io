@@ -1306,7 +1306,7 @@ oGatlingPeaZombie = InheritO(oNewspaperZombie, {
   SunNum: 150,
   ZKind:1,
   PicArr: (function() {
-    var a = "images/Zombies/GatlingPeaZombie/",b.oGatlingPea.prototype;
+    var a = "images/Zombies/GatlingPeaZombie/",b=oGatlingPea.prototype;
     return [b.PicArr[b.CardGif],b.PicArr[b.StaticGif], a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif",b.PicArr[b.NormalGif]]
   })(),
   AudioArr: ["newspaper_rarrgh2"],
