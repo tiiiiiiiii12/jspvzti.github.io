@@ -22,8 +22,8 @@ oS.Init({
 	},
 	UserDefinedFlagFunc: function(b) {
 		var a = oP.FlagZombies;
-		a > 3 && AppearTombstones(3, 9, 1);
-		a&&!(a%10)&& oP.SetTimeoutTomZombie([oZombie, oConeheadZombie])
+		a > 3 && AppearTombstones(4, 9, 1);
+		a&&!(a%10)&& oP.SetTimeoutTomZombie([oZombie, oConeheadZombie,oPoleVaultingZombie,oNewspaperZombie])
 	},
 	StartGameMusic: "Ultimate battle"
 }, {
@@ -42,7 +42,7 @@ oS.Init({
 	FlagNum: 20,
 	FlagToSumNum: {
 		a1: [3, 5, 9, 10, 13, 15, 19],
-		a2: [2, 2, 4, 20, 8, 10, 12, 45]
+		a2: [2, 2, 4, 15, 8, 10, 16, 35]
 	},
 	FlagToMonitor: {
 		9: [ShowLargeWave, 0],
