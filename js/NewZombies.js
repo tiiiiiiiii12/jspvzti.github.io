@@ -273,8 +273,8 @@ oPeaZombie = InheritO(oZombie, {
   StandGif: 9,
   ZKind:1,
   PicArr: (function() {
-    var a = "images/Zombies/Zombie/";
-    return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "1.gif"]
+    var a = "images/Zombies/Zombie/",b=oPeashooter.prototype;
+    return [b.PicArr[b.CardGif], b.PicArr[b.StaticGif], a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random,b.PicArr[b.NormalGif]]
   })(),
 shootPeaSpeed:140,
 CanPass:CZombies.prototype.CanPass,
@@ -409,8 +409,8 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     OrnTop: 12,
 	ZKind:-1,
     PicArr: (function() {
-      var a = "images/Zombies/Zombie/";
-      return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif",a+"jinyinNutZombie.gif",a+"jinyinNutZombieAttack.gif"]
+      var a = "images/Zombies/Zombie/",b=oWallNut.prototype;
+      return [b.PicArr[b.CardGif], b.PicArr[b.StaticGif], a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif",b.PicArr[b.NormalGif],"images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif",a+"jinyinNutZombie.gif",a+"jinyinNutZombieAttack.gif"]
     })(),
     Boom: function(a) {
       var e = $Z[a.id],
@@ -580,14 +580,12 @@ if(b[c].id!=a.id){
 		ClearChild($(c.Ele.NutHead));
 		ClearChild($(c.Ele.NutHead2));
 	},
+	PicArr: (function() {
+      var a = "images/Zombies/Zombie/",b=oTallNut.prototype;
+      return [b.PicArr[b.CardGif], b.PicArr[b.StaticGif], a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif",b.PicArr[b.NormalGif],"images/Plants/TallNut/TallNut.gif","images/Plants/TallNut/TallnutCracked1.gif","images/Plants/TallNut/TallnutCracked2.gif","images/Plants/WallNut/BoomWallNutRoll.gif",a+"jinyinNutZombie.gif",a+"jinyinNutZombieAttack.gif"]
+    })(),
     Boom: function() {},
     Produce: '韧性：<font color="#FF0000">极高(2400+270)</font><br>精英形态一：每隔一段时间在场上放置一个坚果障碍，坚果障碍所在格不可种植植物<br>精英形态二：若身后有僵尸则获得一定伤害减免</p>太好了，高仁僵尸来了'
-  }, {
-    PicArr: {
-      12: "images/Plants/TallNut/TallNut.gif",
-      13: "images/Plants/TallNut/TallnutCracked1.gif",
-      14: "images/Plants/TallNut/TallnutCracked2.gif"
-    }
   }),
 oNutZombie = InheritO(oTallNutZombie, {
     EName: "oNutZombie",
@@ -745,7 +743,10 @@ SetStyle($(z.JaHead),{
       }
 	}
     },
-	PicArr:oPeaZombie.prototype.PicArr,
+	PicArr: (function() {
+    var a = "images/Zombies/Zombie/",b=oJalapeno.prototype;
+    return [b.PicArr[b.CardGif], b.PicArr[b.StaticGif], a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random,b.PicArr[b.NormalGif]]
+  })(),
 	Produce: '他过一段时间会给你的阵容以“火热”的惊喜<p>韧性：<font color="#FF0000">中（600）</font><br>特点：<font color="#FF0000">过段时间爆炸</font><br>精英形态一：<font color="#FF0000">在本路爆炸时，另外随机一行产生爆炸</font><br>精英形态二：<font color="#FF0000">火炬树桩僵尸，给周围僵尸解除寒冰控制并且自身免疫，手中的辣椒过一段时间爆炸</font><br>他对待什么都是热情似火'
 }),
 oPeashooterZombie=oPeaZombie,
@@ -765,8 +766,9 @@ oSquashZombie = InheritO(oScreenDoorZombie, {
   ZKind:-2,
   PicArr: (function() {
     var a = "images/Zombies/ScreenDoorZombie/",
-      b = "images/Zombies/Zombie/";
-    return ["images/Card/Zombies/ScreenDoorZombie.png", a + "0.gif", a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieHead.gif" + $Random, b + "ZombieDie.gif" + $Random, b + "BoomDie.gif" + $Random, a + "1.gif"]
+      b = "images/Zombies/Zombie/",
+	  c=oSquash.prototype;
+    return [c.PicArr[c.CardGif], c.PicArr[c.StaticGif], a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", a + "LostHeadWalk1.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieLostHead.gif", b + "ZombieHead.gif" + $Random, b + "ZombieDie.gif" + $Random, b + "BoomDie.gif" + $Random,c.PicArr[c.NormalGif]]
   })(),
   CanPass:function(d,c){return c},
   GoingDieHead: function() {},
@@ -1304,8 +1306,8 @@ oGatlingPeaZombie = InheritO(oNewspaperZombie, {
   SunNum: 150,
   ZKind:1,
   PicArr: (function() {
-    var a = "images/Zombies/GatlingPeaZombie/";
-    return ["images/Card/Zombies/NewspaperZombie.png", a + "0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif", a + "1.gif"]
+    var a = "images/Zombies/GatlingPeaZombie/",b.oGatlingPea.prototype;
+    return [b.PicArr[b.CardGif],b.PicArr[b.StaticGif], a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif",b.PicArr[b.NormalGif]]
   })(),
   AudioArr: ["newspaper_rarrgh2"],
   Produce: '他的报纸只能提供有限的防御，失去报纸后快速发射豌豆<br>韧性：<font color="#FF0000">中（550）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>精英形态一：<font color="#FF0000">篮球，发怒前向前几格植物抛射豌豆，发怒后攻速减半，速度为0，几秒后射速加快，快速移动，50%减伤生效</font><br>精英形态二：<font color="#FF0000">魅惑菇，发怒后召唤一波带路障的豌豆僵尸，将植物转化为豌豆射手僵尸（能转化三次）</font><br>读报僵尸总是误伤别人',
