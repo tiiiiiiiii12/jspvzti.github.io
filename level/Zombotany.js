@@ -19,7 +19,7 @@ LargeWaveFlag:{
 AZ:[
 [oPeaZombie,3,1],
 [oWallNutZombie,1,1],
-[oSqushZombie,1,1],
+[oSquashZombie,1,1],
 [oJalapenoZombie,1,1]
 ],
 FlagNum:30,
