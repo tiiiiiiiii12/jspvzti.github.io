@@ -2538,9 +2538,9 @@ a.Jump(a)
 			a.Ele.NutHead&&ClearChild($(a.Ele.NutHead));
 		},
         Jump: function(a) {
-            a.beAttacked && (a.beAttacked=0,PlayAudio("zombie_entering_water"), a.Altitude = 2, SetHidden(a.EleShadow), a.EleBody.src = a.PicArr[8] + Math.random(), oSym.addTask(160,
+            a.beAttacked && (PlayAudio("zombie_entering_water"), a.Altitude = 2, SetHidden(a.EleShadow), a.EleBody.src = a.PicArr[8] + Math.random(), oSym.addTask(160,
                 function(c, b) {
-                    $Z[c] && b.beAttacked && (b.WalkStatus = 1,b.beAttacked=1,b.Altitude = 0, b.OSpeed = b.Speed = b.intoWaterSpeed, b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = !b.WalkDirection?b.ChkActsL2:b.ChkActs1)
+                    $Z[c] && b.beAttacked && (b.WalkStatus = 1,b.Altitude = 0, b.OSpeed = b.Speed = b.intoWaterSpeed, b.EleBody.src = b.PicArr[b.NormalGif = b.WalkGif1], b.ChkActs = !b.WalkDirection?b.ChkActsL2:b.ChkActs1)
                 },
                 [a.id, a]), a.ChkActs = function() {
                 return 1
@@ -3171,7 +3171,7 @@ a.Jump(a)
             return ["images/Card/Zombies/DolphinRiderZombie.png", a + "0.gif", a + "Walk1.gif", a + "Walk2.gif", a + "1.gif", a + "Attack.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "Jump.gif" + $Random, a + "Jump2.gif" + $Random, a + "Walk3.gif", a + "Walk4.gif", a + "Die2.gif" + $Random, a + "Jump3.gif" + $Random]
         })(),
         AudioArr: ["dolphin_before_jumping", "dolphin_appears", "zombie_entering_water"],
-        Produce: '海豚骑士僵尸善于利用你水池防御的弱点。<p>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快，慢（跳越后）</font><br>特点：<font color="#FF0000">跃过他所遇到的第一株植物，出场时有5秒无敌</font><br>精英形态一：<font color="#FF0000">跳跃后给跳过的植物搭上梯子</font><br>精英形态二：<font color="#FF0000">隐身，跳跃距离更远</font><br>只在水池关卡出现</font></p>那海豚其实也是个僵尸。',
+        Produce: '海豚骑士僵尸善于利用你水池防御的弱点。<p>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快，慢（跳越后）</font><br>特点：<font color="#FF0000">跃过他所遇到的第一株植物，出场时有5秒无敌</font><br>精英形态一：<font color="#FF0000">跳跃后给跳过的植物搭上梯子</font><br>精英形态二：<font color="#FF0000">跳跃距离更远，且跳跃完毕一段时间后会重新获得一次跳跃机会</font><br>只在水池关卡出现</font></p>那海豚其实也是个僵尸。',
         BirthCallBack: function(a) {
             PlayAudio("dolphin_appears");
 			a.jianshang=0;
@@ -3199,8 +3199,8 @@ a.Jump(a)
         })();
 		a.EleBody.src=(a.Altitude==1?a.PicArr[2]:a.PicArr[8])
 		}else{
-			a.Altitude=2;
 			a.plusJump=60;
+			a.Ele.style.opacity=0.7;
 		}
 		},
         ChkActsL1: function(d, c, e, b) {
@@ -3282,7 +3282,16 @@ a.Jump(a)
                             h.getCrushed = s.getCrushed;
                             h.getFreeze = s.getFreeze;
                             h.getRaven = s.getRaven;
-                            h.AttackZombie= s.AttackZombie
+                            h.AttackZombie= s.AttackZombie;
+							h.jinyin&&oSym.addTask(Math.random()*200+500,function(h){
+							if(h&&h.beAttacked&&h.num<50){
+							let z=CustomZombie(oDolphinRiderZombie,h.R,GetC(h.ZX),!h.PZ);
+								z.HP=z.MaxHP=h.HP;
+								z.jinyinnum=100;
+								z.Privatenum=h.num;
+								h.DisappearDie()//清除原僵尸
+							}
+							},[h]);
                         };
                     h && ((k = $P[j]) && k.Stature > 0 ? (h.AttackedRX = (h.X = (h.AttackedLX = h.ZX = r = k.AttackedRX) - (h.beAttackedPointL = 45)) + (h.beAttackedPointR = 100), SetStyle(i, {
                         left: h.X + "px"
@@ -3349,7 +3358,7 @@ if(a.num>=50){
         a.check = a.WalkDirection?0:1);
       !a.beAttacked && ClearChild($(p.JaHead));
     };
-	oSym.addTask(250,function(a,z){
+	oSym.addTask(100,function(a,z){
 	$(z.JaHead)&&($(z.JaHead).src="images/Plants/PotatoMine/PotatoMine.gif");
     $Z[a.id]&&(a.PrivateAct = function(a) {
       let p = a.Ele;
@@ -3373,7 +3382,7 @@ if(a.num>=50){
               tz[tzl].getHit0(tz[tzl], 1000*a.level, 0);
             }
           }
-		a.bool&&(ClearChild($(p.JaHead)),PlayAudio("potato_mine"),a.JudgeAttack=CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"]);
+		a.bool&&(ClearChild($(p.JaHead)),PlayAudio("potato_mine"),a.DisappearDie());
       } a.WalkDirection==a.check&& !a.bool && a.beAttacked && (
         EditImg($(p.JaHead), 0, "images/Plants/PotatoMine/PotatoMine.gif", {
           transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
@@ -3384,17 +3393,21 @@ if(a.num>=50){
     })
 	},[a,z]);
 	}else{
-		a.hiddenCard=Math.floor(Math.random()*$("dCardList").childNodes.length);
-		a.PZ&&oS.StaticCard&&(oS.CardKind?AppearCard(a.ZX,GetY(a.R),oImp,0,1500):SetHidden($("dCardList").childNodes[a.hiddenCard]));
+	var z = a.Ele,Ja;
+    z.JaHead = "Ja" + Math.random();
+	a.hiddenCard=Math.floor(Math.random()*$("dCardList").childNodes.length);
+	a.PZ&&oS.StaticCard&&(oS.CardKind?AppearCard(a.ZX,GetY(a.R),oImp,0,1500):(SetHidden($("dCardList").childNodes[a.hiddenCard]),
+    z.appendChild((Ja = NewImg(z.JaHead, $("dCardList").childNodes[a.hiddenCard].src, "position:absolute;left:0px;top:20px;", 0)))));
 		a.PrivateDie=function(a){
-			oS.CardKind&&SetVisible($("dCardList").childNodes[a.hiddenCard])
+			!oS.CardKind&&SetVisible($("dCardList").childNodes[a.hiddenCard]);
+			$(a.Ele.JaHead)&&ClearChild($(a.Ele.JaHead))
 		}
 	}
   },
   getShadow: function(a) {
     return "left:" + (a.beAttackedPointL - 20) + "px;top:" + (a.height - 32) + "px"
   },
-  Produce: '小鬼们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。<br>精英形态一：<font color="#FF0000">携带土豆雷，2.5秒后出土，对植物或敌对僵尸造成1000范围伤害</font><br>精英形态二：<font color="#FF0000">随机隐藏一个卡槽，死亡后复原</font><br>韧性：<font color="#FF0000">低</font><br>小鬼虽然瘦小，也不结实，但他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴（只会一首曲子）。',
+  Produce: '小鬼们是一群小型僵尸，他们被伽刚特尔用来投掷进你的防御体系。<br>精英形态一：<font color="#FF0000">携带土豆雷，1秒后出土，碰到植物产生单格爆炸</font><br>精英形态二：<font color="#FF0000">随机隐藏一个卡槽，死亡后复原</font><br>韧性：<font color="#FF0000">低</font><br>小鬼虽然瘦小，也不结实，但他精通僵尸柔道，僵尸空手道和僵尸关节技。另外，他还会吹口琴（只会一首曲子）。',
   GoingDie: function() {
     var b = this,
       c = b.id,
