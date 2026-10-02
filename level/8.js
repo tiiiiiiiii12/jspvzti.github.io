@@ -25,7 +25,7 @@ oS.Init({
 	FlagNum: 12,
 	FlagToSumNum: {
 		a1: [3, 5, 11],
-		a2: [1, 5, 10, 30]
+		a2: [1, 5, 12, 20]
 	},
 	FlagToMonitor: {
 		11: [ShowFinalWave, 0]
