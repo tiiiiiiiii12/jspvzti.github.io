@@ -3317,7 +3317,7 @@ a.Jump(a)
             b.AutoReduceHP(c)
         }
     }),
-oImp = InheritO(OrnNoneZombies, {
+oImp = InheritO(oZombie, {
   EName: "oImp",
   CName: "小鬼僵尸",
   HP: 180,
