@@ -78,7 +78,7 @@ oS.Init({
 	FlagNum: 20,
 	FlagToSumNum: {
 		a1: [3, 5, 9, 10, 13, 15, 19],
-		a2: [4, 15, 18, 50, 36, 52, 60, 80]
+		a2: [4, 15, 18, 30, 25, 30, 35, 50]
 	},
 	FlagToMonitor: {
 		9: [ShowLargeWave, 0],
