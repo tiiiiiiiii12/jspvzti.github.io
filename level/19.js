@@ -14,7 +14,7 @@ oS.Init({
 	},
 	Monitor: {
 		f: AppearTombstones,
-		ar: [5, 9, 11]
+		ar: [5, 9, 20]
 	},
 	UserDefinedFlagFunc: function(a) {
 		oP.FlagNum == oP.FlagZombies && oP.SetTimeoutTomZombie([oZombie, oConeheadZombie, oBucketheadZombie,oNewspaperZombie,oPeaZombie])
@@ -35,7 +35,7 @@ oS.Init({
 	FlagNum: 10,
 	FlagToSumNum: {
 		a1: [3, 5, 9, 10, 13, 15, 19],
-		a2: [1, 3, 4, 40, 8, 10, 12, 80]
+		a2: [1, 3, 4, 20, 8, 10, 12, 40]
 	},
 	FlagToMonitor: {
 		9: [ShowLargeWave, 0],
