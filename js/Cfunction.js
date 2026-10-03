@@ -1205,6 +1205,24 @@ oZ = {
 		}
 		return
 	},
+	getRangeLeftHZ: function(e, d, b) {
+		if (b < 1 || b > oS.R) {
+			return
+		}
+		var g = 0,
+		l = this.$[b],
+		f = [],
+		k = 0,
+		c,
+		h = l.length,
+		j;
+		while (g < h && (j = (c = l[g++]).AttackedRX) > e) {
+			if (!c.PZ && c.HP && (j > e || c.AttackedRX < d)) {
+				return c
+			}
+		}
+		return
+	},
 	moveTo: function(g, f, c) {
 		var b = this.$[f],
 		a = this.$[c],
