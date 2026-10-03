@@ -16,7 +16,7 @@ oS.Init({
     DKind: 0,
     ShowScroll:false,
     CanSelectCard: 0,
-    LevelName: "解谜模式：最终决战!",
+    LevelName: "解谜模式：你所有脑子，都是属于我的",
     LvlEName: "ImZombie4",
     LoadMusic: "2.75",
     StartGameMusic: "2.75",
