@@ -913,6 +913,10 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
 		g = 0,
 		a = b.length;
 		while (e < a) {
+			if(b[e].prototype.FallDownZombie){
+				b[e].prepareBirth();
+				continue
+			}
 			c[e] = (f[e] = new b[e]).prepareBirth(g);
 			g += d; ++e
 		}
@@ -921,10 +925,9 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
 			EDPZ.appendChild(k);
 			var h = j.length;
 			while (h--) {
-				j[h].Birth()
+			  j[h].Birth()
 			}
-		},
-		f)
+		},f)
 	},
 	FlagPrgs: function() {
 		var f = oP,
