@@ -980,7 +980,7 @@ jianshangtime:500,
           } while (g++ < h)
         } while (q++ < o)
       })(a.R, GetC(a.AttackedLX + 20),b);
-      (function(j, l,b) {
+      (function(j,l,b) {
         var m = j - 120,
           o = j + 120,
           h = Math.max(1, l - 1),
