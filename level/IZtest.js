@@ -1,8 +1,8 @@
 oS.Init({
     PName: [oPeashooter],
-    ZName: [oImp,oZombie,oConeheadZombie,oBucketheadZombie,oFlagZombie,oScreenDoorZombie, oDuckyTubeZombie1,oDuckyTubeZombie2,
-oPoleVaultingZombie,oDuckyTubeZombie3, oNewspaperZombie, oDolphinRiderZombie, 
-oGargantuar, oSnorkelZombie,oFootballZombie,oDancingZombie,oZomboni,oJackinTheBoxZombie,oBalloonZombie,oGatlingPeaZombie,oPeaZombie,oWallNutZombie,oTallNutZombie,oDiggerZombie,oLadderZombie,oCatapultZombie,oJalapenoZombie,oSquashZombie,oBackupDancer],
+    ZName: [oImp,oZombie,oConeheadZombie,oBucketheadZombie,oFlagZombie,oScreenDoorZombie, 
+oPoleVaultingZombie,oFootballZombie,oDancingZombie,oZomboni,oNewspaperZombie, oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3oDolphinRiderZombie, 
+oSnorkelZombie,oJackinTheBoxZombie,oBalloonZombie,oDiggerZombie,oLadderZombie,oBungeeZombie,oCatapultZombie,oGargantuar,oGatlingPeaZombie,oPeaZombie,oWallNutZombie,oTallNutZombie, oJalapenoZombie,oSquashZombie,oBackupDancer],
     PicArr: ["images/interface/background4.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background4.jpg",
     Coord: 2,
