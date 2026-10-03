@@ -1049,6 +1049,141 @@ jianshangtime:500,
     (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.Ornaments = 0, g.EleBody.src = f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]], g.LostHeadGif = 8, g.LostHeadAttackGif = 9, g.getPea = e.getPea, g.getFreezePea = e.getFreezePea, g.getFirePea = e.getFirePea, g.getFirePeaSputtering = e.getFirePeaSputtering,g.OSpeed=g.LostPaperSpeed,g.Speed=g.LostPaperSpeed*(g.FreeSlowTime?0.5:1),(!g.jinyin||g.num<50)&&(g.getSnowPea = e.getSnowPea), g.PlayNormalballAudio = e.PlayNormalballAudio, g.PlayFireballAudio = e.PlayFireballAudio, g.PlaySlowballAudio = e.PlaySlowballAudio, g.canLadderList = [], g.Boom = function() {}, g.getHit = g.getHit0 = g.getHit1 = g.getHit2 = g.getHit3 = e.getHit)
   }
 }),
+oBungeeZombie=InheritO(oZombie,{
+	HP:450,
+	Altitude:4,
+	BreakPoint:1,
+	SunNum:125,
+	CatchPlantGif:3,
+	CatchPlant1Gif:4,
+	CatchPlant2Gif:5,
+	prepareCatchPlantGif:6,
+	getr:function(){},
+	PicArr: (function() {
+		var a = "images/Zombies/BungeeZombie/";
+		return ["images/Card/Zombies/Bungeezombie.png", a + "1.gif", a + "1.gif", a + "CatchPlant.gif", a + "CatchPlant1.gif", a + "CatchPlant2.gif", a + "prepareCatchPlant.gif", a + "1.gif" + $Random, a + "1.gif" + $Random, a + "1.gif"]
+	})(),
+CanGrow:function(){
+return true
+},
+CanPass:function(d,c){
+return c
+},
+	NormalDie:function(){
+		this.DisappearDie()
+	},
+	GoingDie:function(){
+		this.DisappearDie()
+	},
+	CrushDie:function(){
+		this.DisappearDie()
+	},
+	ExplosionDie:function(){
+		this.DisappearDie()
+	},
+prepareBirth:function(PZ){
+	let a = [];
+    for (let i=1;i<=oS.R;i++) {
+		for (l=1;l<=oS.C;l++){
+			for(K=1;K<=3;K++){
+              let p = oGd.$[i+"_"+l+"_"+K];
+              !PZ&&p&&a.push(p);
+           }
+		}
+    }
+	for (let z in $Z) {
+      let Z = $Z[z];
+      Z && Z.PZ == PZ && Z.beAttacked && a.push(Z);
+    }
+    var Len = Math.floor(Math.random() * a.length),
+		R=Len?a[Len].R:Math.floor(Math.random()*oS.R+1),
+		C=Len?GetC(a[Len].AttackedLX+20):Math.round(Math.random()*6+1);
+	CustomZombie(oBungeeZombie,R,C,PZ)
+},
+	Birth:function(){
+		var a=this;
+		$(a.id).childNodes[1].style.top="-900px";
+		SetHidden($(a.id).childNodes[0]);
+		a.Birth=CZombies.prototype.Birth;
+		a.Birth();
+		a.TargetEle=NewImg(0, "images/interface/target.png", "left:60px;top:-900px;visibility:visible;z-index:" + a.zIndex, $(a.id));
+		a.Move(a.TargetEle,1,80);
+		oSym.addTask(150,function(a){
+			PlayAudio("bungee");
+			a.Move($(a.id).childNodes[1],1,0);
+			oSym.addTask(50,function(a){
+SetVisible($(a.id).childNodes[0]);
+a.Altitude=1;
+},[a])
+		},[a]);
+	},
+	Move:function(Ele,t,TarY){
+	let top=parseInt(Ele.style.top);
+        oSym.addTask(5,
+          function(l, k, j,t) {
+            k = t?Math.min(k + j, TarY):Math.max(k + j, TarY);
+            l&&SetStyle(l, {
+              top: k + "px"
+            });
+            !(k == TarY)&&oSym.addTask(5, arguments.callee, [l, k, j,t])
+          },
+          [Ele, top, (TarY-top) * 0.05,t]);
+	},
+	StealTake:60,
+	PrivateAct:function(a){
+a.canWalk(a,a.id)&&--a.StealTake;
+	!a.StealTake&&a.StealPlant(a)
+	},
+PrivateSummon:function(){},
+jinyinAct:function(a){
+a.EleBody.style.fliter='greyscale(500%)';
+a.PrivateSummon=function(Name,PZ){
+  for (let i=1;i<=oS.R;i++) {
+	for (l=1;l<=oS.C;l++){
+	for(K=1;K<=3;K++){
+              let p = oGd.$[i+"_"+l+"_"+K],P;
+             p&&p.EName==Name&& ((P=CustomZombie(oBungeeZombie,i,l,!PZ)).jinyinnum=0,P.HP/=3);
+           }
+	}
+    }
+for (let z in $Z) {
+      let Z = $Z[z],P;
+      Z && Z.PZ != PZ && Z.beAttacked&&Z.EName==Name&& ((P=CustomZombie(oBungeeZombie,Z.R,GetC(Z.AttackedLX+20),!PZ)).jinyinnum=0,P.HP/=3);
+    }
+}
+},
+	AttackZombie:function(){},
+	StealPlant:function(a){
+	a.EleBody.src=a.PicArr[a.prepareCatchPlantGif];
+	oSym.addTask(20,function(a){
+		if(!$Z[a.id])return;
+		a.EleBody.src=a.PicArr[a.CatchPlant2Gif];
+		oSym.addTask(5,function(a){
+		if(!$Z[a.id])return;
+		a.EleBody.src=a.PicArr[a.CatchPlant1Gif];
+let Order=[1,2,3,0];
+let Num;
+for(K=0;K<Order.length;K++){
+              var p = oGd.$[a.R+"_"+GetC(a.ZX)+"_"+Order[K]];
+             !a.Num&&a.PZ&&p&&(a.Num=p,a.PrivateSummon(p.EName,a.PZ),p.top=parseInt(p.Ele.style.top),a.Move(p.Ele,0,p.top-500));
+}
+let z=oZ["getRangeLeft"+a.PZ?"HZ":"Z"](a.AttackedLX-10,a.AttackedRX,a.R);
+z&&!a.Num&&(a.Num=p,a.PrivateSummon(p.EName,a.PZ),p.top=parseInt(p.Ele.style.top),a.Move(p.Ele,0,p.top-500));
+a.Altitude=4;
+a.Move(a.EleBody,0,-500);
+a.Move(a.TargetEle,0,-500);
+		oSym.addTask(110,function(a,p){
+			$Z[a.id]?(a.DisappearDie(),p&&($P[p]?p.Die():p.DisappearDie())):p&&(p.Ele.style.top=p.top+"px")
+		},[a,a.Num]);
+		},[a]);
+	},[a])
+	},
+	Speed:0,
+	OSpeed:0,
+	EName:"oBungeeZombie",
+	CName:"蹦极僵尸",
+	Produce: '从天而降，过段时间偷走你的植物<br>韧性：<font color="#FF0000">中(450)</font><br>其实僵尸只是被博士洗脑的工具罢了，而蹦极僵尸恰是程度最深的那一批……哦不对，僵尸没有脑子，而且根本不存在什么“博士”',
+}),
 oCatapultZombie=InheritO(oZomboni,{
 	EName:"oCatapultZombie",
 	CName:"投石车僵尸",
