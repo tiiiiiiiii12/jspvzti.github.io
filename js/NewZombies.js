@@ -1063,7 +1063,7 @@ oBungeeZombie=InheritO(oZombie,{
 		var a = "images/Zombies/BungeeZombie/";
 		return ["images/Card/Zombies/Bungeezombie.png", a + "1.gif", a + "1.gif", a + "CatchPlant.gif", a + "CatchPlant1.gif", a + "CatchPlant2.gif", a + "prepareCatchPlant.gif", a + "1.gif" + $Random, a + "1.gif" + $Random, a + "1.gif"]
 	})(),
-CanGrow:function(){
+CanGrow:function(d,c,e){
 return this.CanPass(c, oGd.$LF[c])
 },
 CanPass:function(d,c){
