@@ -1098,7 +1098,7 @@ prepareBirth:function(PZ){
     var Len = Math.floor(Math.random() * a.length),
 		R=Len?a[Len].R:Math.floor(Math.random()*oS.R+1),
 		C=Len?GetC(a[Len].AttackedLX+20):Math.round(Math.random()*6+1);
-	CustomZombie(oBungeeZombie,R,C,PZ)
+	CustomZombie(oBungeeZombie,R,C,PZ)//锁定位置下降
 },
 	Birth:function(){
 		var a=this;
@@ -1109,6 +1109,7 @@ prepareBirth:function(PZ){
 		a.TargetEle=NewImg(0, "images/interface/target.png", "left:60px;top:-900px;visibility:visible;z-index:" + a.zIndex, $(a.id));
 		a.Move(a.TargetEle,1,80);
 		oSym.addTask(150,function(a){
+if(!$Z[a.id])return;
 			PlayAudio("bungee");
 			a.Move($(a.id).childNodes[1],1,0);
 			oSym.addTask(50,function(a){
@@ -1136,23 +1137,24 @@ a.canWalk(a,a.id)&&--a.StealTake;
 	},
 PrivateSummon:function(){},
 jinyinAct:function(a){
-a.EleBody.style.fliter='greyscale(500%)';
+a.EleBody.style.filter="grayscale(4)";
 a.PrivateSummon=function(Name,PZ){
   for (let i=1;i<=oS.R;i++) {
 	for (l=1;l<=oS.C;l++){
 	for(K=1;K<=3;K++){
               let p = oGd.$[i+"_"+l+"_"+K],P;
-             p&&p.EName==Name&& ((P=CustomZombie(oBungeeZombie,i,l,!PZ)).jinyinnum=0,P.HP/=3);
+             p&&p.EName==Name&& ((P=CustomZombie(oBungeeZombie,i,l,!PZ)).jinyinnum=0);
            }
 	}
     }
 for (let z in $Z) {
       let Z = $Z[z],P;
-      Z && Z.PZ != PZ && Z.beAttacked&&Z.EName==Name&& ((P=CustomZombie(oBungeeZombie,Z.R,GetC(Z.AttackedLX+20),!PZ)).jinyinnum=0,P.HP/=3);
+      Z && Z.PZ != PZ && Z.beAttacked&&Z.EName==Name&& ((P=CustomZombie(oBungeeZombie,Z.R,GetC(Z.AttackedLX+20)+(a.PZ?1:-1),!PZ)).jinyinnum=0);
     }
 }
 },
-	AttackZombie:function(){},
+	JudgeAttack:function(){},
+	JudgeAttackH:function(){},
 	StealPlant:function(a){
 	a.EleBody.src=a.PicArr[a.prepareCatchPlantGif];
 	oSym.addTask(20,function(a){
@@ -1167,13 +1169,13 @@ for(K=0;K<Order.length;K++){
               var p = oGd.$[a.R+"_"+GetC(a.ZX)+"_"+Order[K]];
              !a.Num&&a.PZ&&p&&(a.Num=p,a.PrivateSummon(p.EName,a.PZ),p.top=parseInt(p.Ele.style.top),a.Move(p.Ele,0,p.top-500));
 }
-let z=oZ["getRangeLeft"+a.PZ?"HZ":"Z"](a.AttackedLX-10,a.AttackedRX,a.R);
-z&&!a.Num&&(a.Num=p,a.PrivateSummon(p.EName,a.PZ),p.top=parseInt(p.Ele.style.top),a.Move(p.Ele,0,p.top-500));
+let z=oZ["getRangeLeft"+(a.PZ?"HZ":"Z")](a.AttackedLX-10,a.AttackedRX+10,a.R);
+z&&!a.Num&&(a.Num=z,a.PrivateSummon(z.EName,a.PZ),z.top=parseInt(z.Ele.style.top),a.Move(z.Ele,0,z.top-500));
 a.Altitude=4;
 a.Move(a.EleBody,0,-500);
 a.Move(a.TargetEle,0,-500);
 		oSym.addTask(110,function(a,p){
-			$Z[a.id]?(a.DisappearDie(),p&&($P[p]?p.Die():p.DisappearDie())):p&&(p.Ele.style.top=p.top+"px")
+			$Z[a.id]?(a.DisappearDie(),p&&($P[p.id]&&p.Die(),$Z[p.id]&&p.DisappearDie())):p&&(p.Ele.style.top=p.top+"px")
 		},[a,a.Num]);
 		},[a]);
 	},[a])
@@ -1182,7 +1184,7 @@ a.Move(a.TargetEle,0,-500);
 	OSpeed:0,
 	EName:"oBungeeZombie",
 	CName:"蹦极僵尸",
-	Produce: '从天而降，过段时间偷走你的植物<br>韧性：<font color="#FF0000">中(450)</font><br>其实僵尸只是被博士洗脑的工具罢了，而蹦极僵尸恰是程度最深的那一批……哦不对，僵尸没有脑子，而且根本不存在什么“博士”',
+	Produce: '从天而降，过段时间偷走你的植物<br>韧性：<font color="#FF0000">中(450)</font><br>精英形态一：偷取植物后在场上所有同名植物处召唤一个非精英蹦极僵尸<br>其实僵尸只是被博士洗脑的工具罢了，而蹦极僵尸恰是程度最深的那一批……哦不对，僵尸没有脑子，而且根本不存在什么“博士”',
 }),
 oCatapultZombie=InheritO(oZomboni,{
 	EName:"oCatapultZombie",
