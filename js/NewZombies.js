@@ -1365,7 +1365,7 @@ a.shootPea1=oPeaZombie.prototype.shootPea1;
 	a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(a,d){
 	a.CanRebound&&(a.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (parseInt($(a.Ele.jinyinImg).style.left)+160)+ "px;top:" + (a.pixelTop + 120) + "px;visibility:hidden;z-index:" + (a.zIndex + 2)),a.shootPea(a));
 		var Att=Math.min(d,a.HP-a.MaxHP*0.2);
-		if(!a.Move&&Att==a.HP-a.MaxHP*0.2){
+		if(Att==a.HP-a.MaxHP*0.2){
 			a.cd=0;
 			a.CanRebound=true;
 			$(a.Ele.jinyinImg).style.opacity=1;
