@@ -29,8 +29,8 @@ jinyinAct:function(b){
 var B = NewEle("dskill"+b.id,"div", "position:absolute;color:white;top:200px;left:100px;width:100px;font-size:16px;z-index:50", "", $(b.id));
     var C = $("dskill"+b.id);
     oSym.addTask(100, function(C, B, b) {
+      B.innerHTML = b.power < 40 ? (40 - b.power) : b.CanIngoreNum;
       b.HP > 1 && (b.power < 40 ? (b.power += 1) : (!b.IngoreFallDown&&b.LoadingComplete(b)));
-      B.innerHTML = b.power < 40 ? (41 - b.power) : b.CanIngoreNum;
       b.HP > 1 && oSym.addTask(100, arguments.callee, [C, B, b])
     }, [C, B, b])
 },
