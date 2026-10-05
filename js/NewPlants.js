@@ -40,7 +40,7 @@ var B = NewEle("dskill"+b.id,"div", "position:absolute;color:white;top:200px;lef
   AttackCheck2: function(a) {
     return a.Altitude == 1 && (a.FallDownZombie||this.IngoreFallDown) &&!a.BodyType&&a.canWalk(a,a.id)
   },
-MaxIngoreNum:0,
+CanIngoreNum:0,
 NormalAttack:function(a,b,t){
 var c=$Z[b];
 c&&(c.FreeSetbodyTime=1,c.beAttacked=0,oBungeeZombie.prototype.Move(c.EleBody,0,-600));
