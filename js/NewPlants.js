@@ -42,7 +42,7 @@ var B = NewEle("dskill"+b.id,"div", "position:absolute;color:white;top:200px;lef
 NormalAttack:function(a,b,t){
 var c=$Z[b];
 c&&(c.FreeSetbodyTime=1,c.beAttacked=0,oBungeeZombie.prototype.Move(c.EleBody,0,-600));
-$P[a] && (t&&($P[a].power=$P[a].IngoreFallDown=0,$(a).style.opacity=1),$(a).childNodes[1].src = $P[a].PicArr[3]);
+$P[a] && (t&&($P[a].power=0,$P[a].IngoreFallDown=false,$(a).style.opacity=1),$(a).childNodes[1].src = $P[a].PicArr[3]);
 oSym.addTask(80,function(a){
 $P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].NormalGif]);
 },[a]);
