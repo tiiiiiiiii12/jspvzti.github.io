@@ -8,6 +8,7 @@ var CZombies = function(b, a) {
                 StaticGif: 1,
 			    jinyin:false,
 			    jinyinnum:25,
+			    BodyType:0,
                 StandGif: 2,
                 BookHandBack: 0,
                 AudioArr: [],
@@ -1585,6 +1586,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
   jinyinAct: function(a) {
     a.num = a.Privatenum||Math.random() * 100;
     if (a.num >= 50) {
+	  a.BodyType=1;
 	  a.EleBody.style.filter = "brightness(0.8) contrast(1.8)";
       a.Speed *= 0.75;
       a.OSpeed *= 0.75;
@@ -2853,6 +2855,7 @@ a.Jump(a)
             HP: 1350,
             Lvl: 4,
             StandGif: 2,
+			BodyType:1,
             DieGif: 6,
             BoomDieGif: 7,
             BookHandPosition: "40% 35%",
