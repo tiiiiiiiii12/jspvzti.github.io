@@ -1058,6 +1058,7 @@ oBungeeZombie=InheritO(oZombie,{
 	CatchPlant1Gif:4,
 	CatchPlant2Gif:5,
 	prepareCatchPlantGif:6,
+	FallDownZombie:true,
 	getr:function(){},
 	PicArr: (function() {
 		var a = "images/Zombies/BungeeZombie/";
