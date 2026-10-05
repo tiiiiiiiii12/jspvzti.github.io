@@ -265,6 +265,7 @@ var oGargantuar = InheritO(oZombie, {
   SunNum: 275,
   EName: "oGargantuar",
   CName: "伽刚特尔",
+  BodyType:2,
   Produce: '非常强力的僵尸<br>韧性：<font color="#FF0000">极高(3000)</font><br>特点：<font color="#FF0000">半血丢小鬼，砸击植物，免疫击退</font><br>精英形态一：<font color="#FF0000">背上标靶存在时不断空投僵尸，扔小鬼时空投五个僵尸</font><br>精英形态二：<font color="#FF0000">每隔一段时间跳到随机位置，丢小鬼后会加速</font><br>伽刚特尔自带的气场，是任何僵尸都无法比拟的，他是僵尸世界公认的偶像，是最成功之僵。只是他出道十几年以来一直有个老大难的问题：他还是没有女朋友！'
 }),
 oPeaZombie = InheritO(oZombie, {
@@ -532,6 +533,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     CName: "高坚果僵尸",
     OrnHP: 2400,
     SunNum: 225,
+	BodyType:1,
     Boom: function() {},
     StandGif: 11,
     OrnTop: -40,
@@ -1113,10 +1115,12 @@ prepareBirth:function(PZ){
 if(!$Z[a.id])return;
 			PlayAudio("bungee");
 			a.Move($(a.id).childNodes[1],1,0);
+oSym.addTask(105,function(a){
+	a.Altitude=1;
+},[a]);
 			oSym.addTask(50,function(a){
 SetVisible($(a.id).childNodes[0]);
-a.Altitude=1;
-},[a])
+},[a]);
 		},[a]);
 	},
 	Move:function(Ele,t,TarY){
@@ -1202,6 +1206,7 @@ tasktime:25,
 	BoomDieGif: 5,
 	AttackGif:2,
 	Move:true,
+	BodyType:1,
 width:166,
 height:180,
 GetDTop:0,
