@@ -53,12 +53,12 @@ oSnorkelZombie,oJackinTheBoxZombie,oBalloonZombie,oDiggerZombie,oLadderZombie,oB
                 oFlowerPot,
                 oCoffeeBean,
                 oGarlic,
+            oUmbrellaLeaf,
                 oGatlingPea,
                 oTwinSunflower,
                 oGloomShroom,
                 oSpikerock,
                 oLawnCleaner,
-                oPoolCleaner,
                 oRepeater2,
                 oSniperPea
             ],
