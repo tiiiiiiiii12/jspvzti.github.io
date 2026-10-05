@@ -1109,14 +1109,16 @@ prepareBirth:function(PZ){
 		SetHidden($(a.id).childNodes[0]);
 		a.Birth=CZombies.prototype.Birth;
 		a.Birth();
+		a.FreeSetbodyTime=1;
 		a.TargetEle=NewImg(0, "images/interface/target.png", "left:60px;top:-900px;visibility:visible;z-index:" + a.zIndex, $(a.id));
 		a.Move(a.TargetEle,1,80);
 		oSym.addTask(150,function(a){
 if(!$Z[a.id])return;
 			PlayAudio("bungee");
 			a.Move($(a.id).childNodes[1],1,0);
-oSym.addTask(105,function(a){
+oSym.addTask(120,function(a){
 	a.Altitude=1;
+	a.FreeSetbodyTime=0;
 },[a]);
 			oSym.addTask(50,function(a){
 SetVisible($(a.id).childNodes[0]);
