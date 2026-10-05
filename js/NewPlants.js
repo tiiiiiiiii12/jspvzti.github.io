@@ -33,7 +33,7 @@ var B = NewEle("dskill"+b.id,"div", "position:absolute;color:white;top:200px;lef
     !this.FreeFreezeTime&&this.AttackCheck2(a) && this.NormalAttack(this.id, a.id,this.IngoreFallDown)
   },
   AttackCheck2: function(a) {
-    return a.Altitude == 1 && (a.FallDownZombie||this.IngoreFallDown) &&!a.Boss&&!a.BodyType
+    return a.Altitude == 1 && (a.FallDownZombie||this.IngoreFallDown) &&!a.BodyType&&a.canWalk(a,a.id)
   },
 NormalAttack:function(a,b,t){
 var c=$Z[b];
