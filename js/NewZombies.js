@@ -1349,7 +1349,7 @@ JudgeDirection:function(a){},
 	var z = a.Ele;
     z.jinyinImg = "jinyin_" + Math.random();
 	if(a.num>=50){
-			let jinyinImg = NewImg(z.jinyinImg, "images/Plants/san.gif", "position:absolute;opacity:.5;left:-100px;top:-40px;", 0);
+			let jinyinImg = NewImg(z.jinyinImg, "images/Plants/UmbrellaLeaf/UmbrellaLeaf.gif", "position:absolute;opacity:.5;left:-100px;top:-40px;", 0);
     z.appendChild(jinyinImg);
 	a.JudgeDirection=function(a){
 	var P = a.Ele;
