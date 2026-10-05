@@ -22,27 +22,29 @@ getPea:function(){},
 getSnowPea:function(){},
 LoadingComplete: function(a) {
 a.IngoreFallDown=true;
+a.CanIngoreNum=Math.ceil(Math.random()*2+1);
 $(a.id).style.opacity = 0.7
 },
 jinyinAct:function(b){
 var B = NewEle("dskill"+b.id,"div", "position:absolute;color:white;top:200px;left:100px;width:100px;font-size:16px;z-index:50", "", $(b.id));
     var C = $("dskill"+b.id);
     oSym.addTask(100, function(C, B, b) {
-      b.HP > 1 && (b.power < 40 ? (b.power += 1) : (b.LoadingComplete(b)));
-      B.innerHTML = b.power < 40 ? (40 - b.power) : "就绪";
+      b.HP > 1 && (b.power < 40 ? (b.power += 1) : (!b.IngoreFallDown&&b.LoadingComplete(b)));
+      B.innerHTML = b.power < 40 ? (41 - b.power) : b.CanIngoreNum;
       b.HP > 1 && oSym.addTask(100, arguments.callee, [C, B, b])
     }, [C, B, b])
 },
   TriggerCheck: function(a) {
-    !this.FreeFreezeTime&&this.AttackCheck2(a) && this.NormalAttack(this.id, a.id,this.IngoreFallDown)
+    !this.FreeFreezeTime&&this.AttackCheck2(a) && (this.NormalAttack(this.id, a.id,this.IngoreFallDown))
   },
   AttackCheck2: function(a) {
     return a.Altitude == 1 && (a.FallDownZombie||this.IngoreFallDown) &&!a.BodyType&&a.canWalk(a,a.id)
   },
+MaxIngoreNum:0,
 NormalAttack:function(a,b,t){
 var c=$Z[b];
 c&&(c.FreeSetbodyTime=1,c.beAttacked=0,oBungeeZombie.prototype.Move(c.EleBody,0,-600));
-$P[a] && (t&&($P[a].power=0,$P[a].IngoreFallDown=false,$(a).style.opacity=1),$(a).childNodes[1].src = $P[a].PicArr[3]);
+$P[a] && (t&&(!--$P[a].CanIngoreNum&&($P[a].power=0,$P[a].IngoreFallDown=false,$(a).style.opacity=1)),$(a).childNodes[1].src = $P[a].PicArr[3]);
 oSym.addTask(80,function(a){
 $P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].NormalGif]);
 },[a]);
