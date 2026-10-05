@@ -14,7 +14,7 @@ oUmbrellaLeaf = InheritO(CPlants, {
         Produce: '叶子保护伞可以抵御空中的攻击<p>特点：<font color="#FF0000">弹走篮球和蹦极僵尸</font><br>精英形态：每隔一段时间发动一次强力弹击，弹走保护范围内的一只小体型僵尸</p>只是一个叶子保护伞',
 getTriggerRange:function(a, b, c) {
             return [
-                [this.AttackedLX-60, this.AttackedRX+60, 0]
+                [this.AttackedLX-80, this.AttackedRX+80, 0]
             ]
         },
 getTriggerR:oGatlingPea.prototype.getTriggerR,
