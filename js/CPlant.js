@@ -22,6 +22,15 @@ var CPlants = NewO({
                 d = oS.ArP;
             return d ? oGd.$LF[b] == 1 ? (e > 0 && e < d.ArC[1] && !(oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1]&&(c[1].EName!=this.EName||c[1].jinyin))) : c[0]&&(!c[1]||(c[1].EName!=this.EName||c[1].jinyin)) : oGd.$LF[b] == 1 ? !(e < 1 || e > 9 || oGd.$Crater[a] || oGd.$Tombstones[a]==1|| c[1]&&(c[1].EName!=this.EName||c[1].jinyin)) : c[0]&&(!c[1]||(c[1].EName==this.EName&&!c.jinyin))
         },
+	getPea:function(c,b,a){
+		var d=this;
+		d.getHurt(c,b,a)
+	},
+	getSnowPea:function(c,b,a){
+		var d=this;
+		d.getHurt(c,b,a);
+		d.getSlow(d,d.id)
+	},
         getHurt: function(e, c, b) {
             var d = this,
                 a = d.id;
