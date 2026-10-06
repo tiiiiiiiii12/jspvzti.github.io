@@ -15,7 +15,7 @@ oS.Init({
 	AudioArr: ["puff"],
 	LargeWaveFlag: {
     10: $("imgFlag3"),
-		20: $("imgFlag1")
+	20: $("imgFlag1")
 	},
 	Monitor: {
 		f: AppearTombstones,
@@ -85,9 +85,9 @@ oS.Init({
 				case 7:
 					ClearChild($("DivTeach"));
           oSym.addTask(1,function(Left){
-            $("dDave").style.left=(Left-1)+"px";
-            --Left>-200?oSym.addTask(1,b,[Left]):(ClearChild($("dDave")),a(0));
-          },[parseInt($("dDave").style.left)]);
+            $("dDave").style.left=Left+"px";
+            Left-->-200?oSym.addTask(1,b,[Left]):(ClearChild($("dDave")),a(0));
+          },[0]);
 			}
 		})(0)
 	}
