@@ -856,15 +856,17 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
         SetBlock(g.Ele);
         pz && g.bedevil(g);
 		g.Altitude=4;
-        let BungeeEle = NewImg(0, "images/Zombies/BungeeZombie/BungeeBringZombie.png", "z-index: " + (3 * g.R) + ";left:" + (g.ZX - 100) + "px;top:" + (Ttop + g.pixelTop - 1900) + "px", EDPZ);
+		g.FallDownZombie=true;
+        g.BungeeEle = NewImg(0, "images/Zombies/BungeeZombie/BungeeBringZombie.png", "z-index: " + (3 * g.R) + ";left:" + (g.ZX - 100) + "px;top:" + (Ttop + g.pixelTop - 1900) + "px", EDPZ);
         Ele.style.top = "-900px";
         oSym.addTask(5,
           function(l, k, j,g) {
+			if(!g.FallDownZombie)return;//预留保护伞
             k = Math.min(k + j, 0);
             SetStyle(l, {
               top: k + "px"
             });
-            !(k == 0) ? oSym.addTask(5, arguments.callee, [l, k, j,g]):g.Altitude=1
+            !(k == 0) ? oSym.addTask(5, arguments.callee, [l, k, j,g]):(g.Altitude=1,g.FallDownZombie=false)
           },
           [g.EleBody, B = -900, -B * 0.05,g]);//僵尸落下
         oSym.addTask(5,
@@ -876,7 +878,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
             k == i && (Dire = 1); //回去
             !(k == A) ? oSym.addTask(5, arguments.callee, [l, k, j, i, Dire]): ClearChild(l)
           },
-          [BungeeEle, A = Ttop + g.pixelTop - 1900, ((TBtop = Ttop + g.pixelTop - 900) - A) * 0.05, TBtop, 0]);
+          [g.BungeeEle, A = Ttop + g.pixelTop - 1900, ((TBtop = Ttop + g.pixelTop - 900) - A) * 0.05, TBtop, 0]);
       }
     }, m)
 },
