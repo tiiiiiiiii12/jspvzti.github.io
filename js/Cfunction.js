@@ -917,11 +917,11 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
 		a = b.length;
 		while (e < a) {
 			if(b[e].prototype.FallDownZombie){
-				b[e].prototype.prepareBirth(0);
+				b[e].prototype.prepareBirth();
 				++e;
 				continue
 			}
-			c[h] = (f[h] = new b[h]).prepareBirth(g);
+			c[h] = (f[h] = new b[e]).prepareBirth(g);
 			g += d;
 			++e;
 			++h;
