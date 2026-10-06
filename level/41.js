@@ -85,7 +85,7 @@ oS.Init({
 					ClearChild($("DivTeach"));
           oSym.addTask(1,function(Left){
             $("dDave").style.left=Left+"px";
-            --Left>-200?oSym.addTask(1,arguments.callee,[Left]):(ClearChild($("dDave")),a(0));
+            (Left-=5)>-250?oSym.addTask(1,arguments.callee,[Left]):(ClearChild($("dDave")),a(0));
           },[0]);
 			}
 		})(0)
