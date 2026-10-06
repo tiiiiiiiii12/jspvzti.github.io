@@ -1139,7 +1139,7 @@ SetVisible($(a.id).childNodes[0]);
           },
           [Ele, top, (TarY-top) * 0.05,t]);
 	},
-	StealTake:60,
+	StealTake:50,
 	PrivateAct:function(a){
 a.canWalk(a,a.id)&&--a.StealTake;
 	!a.StealTake&&a.StealPlant(a)
