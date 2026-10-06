@@ -916,7 +916,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
 		a = b.length;
 		while (e < a) {
 			if(b[e].prototype.FallDownZombie){
-				b[e].prepareBirth();
+				b[e].prototype.prepareBirth(0);
 				continue
 			}
 			c[e] = (f[e] = new b[e]).prepareBirth(g);
