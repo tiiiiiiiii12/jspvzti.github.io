@@ -913,14 +913,18 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
 		c = [],
 		e = 0,
 		g = 0,
+		h=0,
 		a = b.length;
 		while (e < a) {
 			if(b[e].prototype.FallDownZombie){
 				b[e].prototype.prepareBirth(0);
+				++e;
 				continue
 			}
-			c[e] = (f[e] = new b[e]).prepareBirth(g);
-			g += d; ++e
+			c[h] = (f[h] = new b[h]).prepareBirth(g);
+			g += d;
+			++e;
+			++h;
 		}
 		asyncInnerHTML(c.join(""),
 		function(k, j) {
