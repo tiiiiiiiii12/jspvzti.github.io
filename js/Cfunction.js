@@ -2255,7 +2255,7 @@ SelectModal = function(g) {
 	AllAudioStop();
 	PausedAudioArr = [];
 	g == undefined && (g = $User.Visitor.Progress);
-	if (g > 39) {
+	if (g==40||g > 41) {
 		alert("本关卡暂未开放！");
 		SelectModal(0);
 		return
