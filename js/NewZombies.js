@@ -1118,7 +1118,7 @@ prepareBirth:function(PZ){
 if(!$Z[a.id])return;
 			PlayAudio("bungee");
 			a.Move($(a.id).childNodes[1],1,0);
-oSym.addTask(120,function(a){
+oSym.addTask(110,function(a){
 	a.Altitude=1;
 	a.FreeSetbodyTime=0;
 },[a]);
