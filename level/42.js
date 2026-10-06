@@ -1,3 +1,4 @@
+if($User.Visitor.Progress==42){
 let warn=confirm("您真的要打开这一关吗？");
 if(warn==true){
 oS.Init({
@@ -137,4 +138,5 @@ oS.Init({
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:185px;left:676px", EDAll)
 	}
 });
-}
+}else{SelectModal(0)}
+}else{alert("您未解锁本关！");SelectModal(0)}
