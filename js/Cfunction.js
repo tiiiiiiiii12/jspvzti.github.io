@@ -866,7 +866,7 @@ SetTimeoutAirdropZombie:function(j, b, Num, h, pz) {//仿蹦极空投
             SetStyle(l, {
               top: k + "px"
             });
-            !(k == 0) ? oSym.addTask(5, arguments.callee, [l, k, j,g]):(g.Altitude=1,g.FallDownZombie=false)
+            !(k == 0) ? oSym.addTask(5, arguments.callee, [l, k, j,g]):(g.Altitude=1,oSym.addTask(2,function(g){g.FallDownZombie=false},[g]))
           },
           [g.EleBody, B = -900, -B * 0.05,g]);//僵尸落下
         oSym.addTask(5,
