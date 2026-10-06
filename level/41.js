@@ -41,7 +41,6 @@ oS.Init({
 					break;
 				case 1:
 					PlayAudio("puff");
-					$("dDave").src = "images/interface/Dave.gif";
 					c.onclick = function() {
 						oSym.addTask(10, b, [2])
 					};
@@ -69,7 +68,7 @@ oS.Init({
 					innerText(c, "有好多的僵尸……");
 					break;
 				case 5:
-					PlayAudio("crazydavelong" + Math.floor(1 + Math.random() * 3));
+					PlayAudio("puff");
 					c.onclick = null;
 						c.onclick = function() {
 							oSym.addTask(10, b, [6])
