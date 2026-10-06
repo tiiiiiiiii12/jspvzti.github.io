@@ -17,9 +17,52 @@ getTriggerRange:function(a, b, c) {
                 [this.AttackedLX-80, this.AttackedRX+80, 0]
             ]
         },
+PrivateBirth:function(a){
+for (let l = a.C-1; l <= a.C+1; l++) {
+    for (let i = Math.max(a.R-1,1); i <= Math.min(a.R+1,oS.R);i++) {
+        for (let K = 0; K <= 3;K++) {
+      var b = oGd.$[i + "_" + l + "_" + K];
+      $P[a.id] && b &&!b.Protected&&(b.id!=a.id)&& (b.Protected=true,b.getSnowPea = b.getPea = function(h, c, b) {
+        var d = this,
+          num,
+          a = d.id;
+for (let l = d.C-1; l <= d.C+1; l++) {
+    for (let i = Math.max(d.R-1,1); i <= Math.min(d.R+1,oS.R);i++) {
+          var e = oGd.$[i + "_" + l + "_" + oUmbrellaLeaf.prototype.PKind];
+          e && (e.EName == "oUmbrellaLeaf") && !num && (e.getPea(h, c, b), num = 1)
+    }
+};
+	  },b.getSnowPea1=b.getSnowPea,b.getPea1=b.getPea)
+        }
+    }
+}
+    $P[a.id] && oSym.addTask(1, arguments.callee, [a]);
+},
+PrivateDie:function(a){
+   for (let l = a.C-1; l <= a.C+1; l++) {
+    for (let i = Math.max(a.R-1,1); i <= Math.max(a.R+1,oS.R);i++) {
+        for (let K = 0; K <= 3;K++) {
+      var b = oGd.$[i + "_" + l + "_" + K];
+      b && b.Protected&& (b.Protected=false,b.getSnowPea=b.getSnowPea1,b.getPea=b.getPea1)
+        }
+    }
+}     
+},
 getTriggerR:oGatlingPea.prototype.getTriggerR,
-getPea:function(){},
-getSnowPea:function(){},
+getPea:function(a){
+     var a=this.id;
+     $(a).childNodes[1].src = $P[a].PicArr[3];
+     oSym.addTask(80,function(a){
+$P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].NormalGif]);
+},[a]);
+},
+getSnowPea:function(a){   
+     var a=this.id;
+     $(a).childNodes[1].src = $P[a].PicArr[3];
+oSym.addTask(80,function(a){
+$P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].NormalGif]);
+},[a]);
+},
 LoadingComplete: function(a) {
 a.IngoreFallDown=true;
 a.CanIngoreNum=Math.ceil(Math.random()*2+1);
