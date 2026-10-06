@@ -385,7 +385,7 @@ PrivateDie:function(a){
           d, isHit;
 		Z && Z.Altitude == 1 && (Z.getPea(Z,20*a.level,0),isHit=true);
         while (Kind--) {
-          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getHurt(a, 3, 20*a.level))
+          (d = oGd.$[i + "_" + e + "_" + Kind]) && (d.canEat) && (d.Stature >= 0) && (d.EName != "oBrains") && (d.AttackedLX < n) && (d.AttackedRX > n) && (isHit = true, d.getPea(a, 3, 20*a.level))
         }
 	  isHit?((SetStyle(j, {
             left: o + 28 + "px",
@@ -1296,7 +1296,7 @@ a.EleBody.src=a.PicArr[4];
           bullet && ClearChild(bullet);
 if($P[P.id]){
 a.jinyinCustom(a,P.HP<=150?X:a.ZX,Y);
-P.getHurt(a, 3, a.ballAttack*a.level);
+P.getPea(a, 3, a.ballAttack*a.level);
 }else if($Z[P.id]){
 a.jinyinCustom(a,P.HP<=150?X:a.ZX,Y);
 P.getHit2(P,a.ballAttack*a.level,0)
@@ -1532,7 +1532,7 @@ var P=p;
         if ((a.PZ? x <= X && y>=Y : x >= X && y>=Y) || s < 40) {
           bullet && ClearChild(bullet);
 if($P[P.id]){
-P.getHurt(a, 3, a.ballAttack*a.level);
+P.getPea(a, 3, a.ballAttack*a.level);
 }else if($Z[P.id]){
 P.getHit2(P,a.ballAttack*a.level,0)
 }
