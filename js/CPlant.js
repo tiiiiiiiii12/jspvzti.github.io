@@ -26,11 +26,6 @@ var CPlants = NewO({
 		var d=this;
 		d.getHurt(c,b,a)
 	},
-	getSnowPea:function(c,b,a){
-		var d=this;
-		d.getHurt(c,b,a);
-		d.getSlow(d,d.id)
-	},
         getHurt: function(e, c, b) {
             var d = this,
                 a = d.id;
