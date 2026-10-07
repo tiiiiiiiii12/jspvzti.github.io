@@ -23,7 +23,11 @@ oS.Init({
 		ar: [6, 9, 11]
 	},
 	UserDefinedFlagFunc: function(a) {
-		if(oP.FlagZombies>22){
+	if(oP.FlagZombies>20){
+      AppearTombstones(8,9,1);
+      oP.SetTimeoutTomZombie([oZombie,oConeheadZombie,oPeaZombie,oImp]);
+    }
+	if(oP.FlagZombies>25){
       AppearTombstones(8,9,1);
       oP.SetTimeoutTomZombie([oZombie,oConeheadZombie,oPeaZombie,oImp,oWallNutZombie]);
       oSym.addTask(400,function(){
