@@ -36,7 +36,7 @@ oS.Init({
 	},
 	StartGameMusic: "rebeatedupnight",
 	LoadAccess: function(a) {
-	if($User.Visitor.Progress<=42)return document.write("跳关好玩吗？");
+	if($User.Visitor.Progress<42)return document.write("跳关好玩吗？");
 let warn=confirm("您真的要打开这一关吗？");
 if(warn!=true){return SelectModal(0)};
   oHypnoShroom.prototype.Tooltip="";
