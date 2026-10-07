@@ -25,7 +25,6 @@ oS.Init({
 	UserDefinedFlagFunc: function(a) {
 	if(oP.FlagZombies>20){
       AppearTombstones(8,9,1);
-      oP.SetTimeoutTomZombie([oZombie,oConeheadZombie,oPeaZombie,oImp]);
     }
 	if(oP.FlagZombies>25){
       AppearTombstones(8,9,1);
@@ -76,14 +75,14 @@ if(warn!=true){return SelectModal(0)};
 						c.onclick = function() {
 							oSym.addTask(10, b, [4])
 					};
-					innerText(c, "我觉得，");
+					innerText(c, "我已经感觉到，");
 					break;
 				case 4:
 					PlayAudio("fume");
 						c.onclick = function() {
 							oSym.addTask(10, b, [5])
 						};
-					innerText(c, "有一股神秘的力量介入到了这里");
+					innerText(c, "有一股神秘的力量介入到这里了");
 					break;
 				case 5:
           PlayAudio("fume");
@@ -93,13 +92,6 @@ if(warn!=true){return SelectModal(0)};
 					innerText(c, "那股力量很强大，祝你好运吧！");
 					break;
 				case 6:
-            PlayAudio("fume");
-						c.onclick = function() {
-							oSym.addTask(10, b, [7])
-						};
-					innerText(c, "另外你可以带上我，我很好用！");
-					break;
-				case 7:
 			c.onclick = null;
           oSym.addTask(1,function(Left){
             $("dDave").style.left=Left+"px";
