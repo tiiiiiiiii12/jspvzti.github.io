@@ -35,7 +35,13 @@ if (N === "Zalljinyin") {
 }else if(N === "HPlooknone"){
     alert("僵尸隐藏了自己血量");
     CZombies.prototype.HPlook=0
-} else {
+} else if(N === "AmrcRmDmprwmlc"){
+    alert("跳过5-1");
+	$User.Visitor.Progress=42;
+} else if(N === "VnmsOhyhoIruwbwzr"){
+    alert("跳过5-2");
+	$User.Visitor.Progress=43;
+} else if(N!=null){
     alert("没有任何用");
  }
 }
@@ -624,7 +630,7 @@ LvlList=function(BLvl,SLvl1,SLvl2){
 
 <!--游戏调速-->
 <div id="dSpeedContainer">
-	<div class="title">应玩家要求，囧姨她特推出游戏调速功能</div>
+	<div class="title">游戏调速</div>
 	<div class="dSpeed" title="点击一个速度选择软加速">
 		<div class="dS1">在相应的速度上点击</div>
 		<div class="dS2"><div onclick="CSpeed(1,20,.5)">1/2<br><br>◎……</div><div onclick="CSpeed(1,10,1)">原速<br><br>…◎…</div><div onclick="CSpeed(2,10,2)">2<br><br>…◎…</div><div onclick="CSpeed(5,10,5)">5<br><br>…◎…</div><div onclick="CSpeed(5,5,10)">10<br><br>…◎</div></div>
@@ -656,11 +662,6 @@ $User.Client.PC&&$User.HTTP?(
 //初始化系统对象
 ShowAD();
 InitGame();
-</script>
-<script>let a=prompt('请再次确定你的名字');
-if (a){
-      document.getElementById("dName").innerHTML =
-a;}
 </script>
 <script id="JSPVZ"></script>
 </body>
