@@ -367,7 +367,7 @@ oStarfruit = InheritO(CPlants, {
   width: 77,
   height: 70,
   beAttackedPointR: 57,
-  SunNum: 175,
+  SunNum: 150,
   GetDY: function(b, c, a) {
     return a[0] ? -17 : -10
   },
@@ -1978,7 +1978,7 @@ NormalAttack:function(a){
         height: 67,
         beAttackedPointL: 15,
         beAttackedPointR: 82,
-        SunNum: 200,
+        SunNum: 150,
         PKind: 2,
         HP: 4000,
         coolTime: 30,
