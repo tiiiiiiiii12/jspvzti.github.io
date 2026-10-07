@@ -181,7 +181,7 @@ var oGargantuar = InheritO(oZombie, {
     }
     h.canWalk(h, h.id) && h.hasthrew < h.throwImpnum && (GetC(h.ZX) > 3 || !h.PZ) && !h.isAttacking && (h.HP <= h.MaxHP * 0.5) && h.throwImp(h);
   },
-  flycd:1500,
+  flycd:2200,
   jinyinAct: function(a) {
     a.num = a.Privatenum||Math.random() * 100;
     let z = a.Ele;
@@ -1113,14 +1113,20 @@ prepareBirth:function(PZ){
 		a.Birth();
 		a.FreeSetbodyTime=1;
 		a.TargetEle=NewImg(0, "images/interface/target.png", "left:60px;top:-900px;visibility:visible;z-index:" + a.zIndex, $(a.id));
+		a.jinyin&&a.num<50&&(a.TargetEle.style.filter="grayscale(4)");
 		a.Move(a.TargetEle,1,80);
 		oSym.addTask(150,function(a){
 if(!$Z[a.id])return;
-			PlayAudio("bungee");
-			a.Move($(a.id).childNodes[1],1,0);
+PlayAudio("bungee");
+a.Move($(a.id).childNodes[1],1,0);
 oSym.addTask(110,function(a){
 	a.Altitude=1;
 	a.FreeSetbodyTime=0;
+	if(a.jinyin&&a.num<50){
+	for (i in $Z)
+		u=$Z[i];
+	u&&u.PZ==a.PZ&&u.EName==a.EName&&(u.StealTake=Math.max(0,u.StealTake-20));//减少间隔
+}
 },[a]);
 			oSym.addTask(50,function(a){
 SetVisible($(a.id).childNodes[0]);
@@ -1139,13 +1145,15 @@ SetVisible($(a.id).childNodes[0]);
           },
           [Ele, top, (TarY-top) * 0.05,t]);
 	},
-	StealTake:50,
+	StealTake:40,
 	PrivateAct:function(a){
 a.canWalk(a,a.id)&&--a.StealTake;
 	!a.StealTake&&a.StealPlant(a)
 	},
 PrivateSummon:function(){},
 jinyinAct:function(a){
+a.num=a.Privatenum||Math.random()*100;
+if(a.num>=50){
 a.EleBody.style.filter="grayscale(4)";
 a.PrivateSummon=function(Name,PZ){
   for (let i=1;i<=oS.R;i++) {
@@ -1160,6 +1168,7 @@ for (let z in $Z) {
       let Z = $Z[z],P;
       Z && Z.PZ != PZ && Z.beAttacked&&Z.EName==Name&& ((P=CustomZombie(oBungeeZombie,Z.R,GetC(Z.AttackedLX+20)+(a.PZ?1:-1),!PZ)).jinyinnum=0);
     }
+}
 }
 },
 	JudgeAttack:function(){},
@@ -1193,7 +1202,7 @@ a.Move(a.TargetEle,0,-500);
 	OSpeed:0,
 	EName:"oBungeeZombie",
 	CName:"蹦极僵尸",
-	Produce: '从天而降，过段时间偷走你的植物<br>韧性：<font color="#FF0000">中(450)</font><br>精英形态一：偷取非底座植物后在场上所有同名植物处召唤一个非精英蹦极僵尸<br>其实僵尸只是被博士洗脑的工具罢了，而蹦极僵尸恰是程度最深的那一批……哦不对，僵尸没有脑子，而且根本不存在什么“博士”',
+	Produce: '从天而降，过段时间偷走你的植物<br>韧性：<font color="#FF0000">中(450)</font><br>精英形态一：偷取非底座植物后在场上所有同名植物处召唤一个非精英蹦极僵尸<br>精英形态二：入场时使场上所有的蹦极停留间隔减少一半<br>其实僵尸只是被博士洗脑的工具罢了，而蹦极僵尸恰是程度最深的那一批……哦不对，僵尸没有脑子，而且根本不存在什么“博士”',
 }),
 oCatapultZombie=InheritO(oZomboni,{
 	EName:"oCatapultZombie",
