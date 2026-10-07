@@ -1125,7 +1125,7 @@ oSym.addTask(110,function(a){
 	if(a.jinyin&&a.num<50){
 	for (i in $Z)
 		u=$Z[i];
-	u&&u.PZ==a.PZ&&u.EName==a.EName&&(u.StealTake=Math.max(0,u.StealTake-20));//减少间隔
+	u&&u.PZ==a.PZ&&u.EName==a.EName&&(u.StealTake=Math.max(1,u.StealTake-20));//减少间隔
 }
 },[a]);
 			oSym.addTask(50,function(a){
@@ -1169,7 +1169,7 @@ for (let z in $Z) {
       Z && Z.PZ != PZ && Z.beAttacked&&Z.EName==Name&& ((P=CustomZombie(oBungeeZombie,Z.R,GetC(Z.AttackedLX+20)+(a.PZ?1:-1),!PZ)).jinyinnum=0);
     }
 }
-}
+}else{a.StealTake=1}
 },
 	JudgeAttack:function(){},
 	JudgeAttackH:function(){},
@@ -1202,7 +1202,7 @@ a.Move(a.TargetEle,0,-500);
 	OSpeed:0,
 	EName:"oBungeeZombie",
 	CName:"蹦极僵尸",
-	Produce: '从天而降，过段时间偷走你的植物<br>韧性：<font color="#FF0000">中(450)</font><br>精英形态一：偷取非底座植物后在场上所有同名植物处召唤一个非精英蹦极僵尸<br>精英形态二：入场时使场上所有的蹦极停留间隔减少一半<br>其实僵尸只是被博士洗脑的工具罢了，而蹦极僵尸恰是程度最深的那一批……哦不对，僵尸没有脑子，而且根本不存在什么“博士”',
+	Produce: '从天而降，过段时间偷走你的植物<br>韧性：<font color="#FF0000">中(450)</font><br>精英形态一：偷取非底座植物后在场上所有同名植物处召唤一个非精英蹦极僵尸<br>精英形态二：入场时使场上所有的蹦极停留间隔减半，降落后直接偷走植物<br>其实僵尸只是被博士洗脑的工具罢了，而蹦极僵尸恰是程度最深的那一批……哦不对，僵尸没有脑子，而且根本不存在什么“博士”',
 }),
 oCatapultZombie=InheritO(oZomboni,{
 	EName:"oCatapultZombie",
