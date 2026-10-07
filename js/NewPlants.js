@@ -11,35 +11,41 @@ oUmbrellaLeaf = InheritO(CPlants, {
         IngoreFallDown:false,
         PicArr: ["images/Card/Plants/UmbrellaLeaf.png", "images/Plants/UmbrellaLeaf/UmbrellaLeaf.gif", "images/Plants/UmbrellaLeaf/UmbrellaLeaf.gif","images/Plants/UmbrellaLeaf/Protect.gif"],
         Tooltip: "抵御天上的攻击",
-        Produce: '叶子保护伞可以抵御空中的攻击<p>特点：<font color="#FF0000">弹走3*3范围的篮球、蹦极僵尸和3×1范围的豌豆</font><br>精英形态：每隔一段时间发动一次强力弹击，弹走保护范围内几只小体型僵尸</p>只是一个叶子保护伞',
+        Produce: '叶子保护伞可以抵御空中的攻击<p>特点：<font color="#FF0000">弹走篮球、豌豆和蹦极僵尸</font><br>精英形态：每隔一段时间发动一次强力弹击，弹走保护范围内几只小体型僵尸</p>只是一个叶子保护伞',
 getTriggerRange:function(a, b, c) {
             return [
                 [this.AttackedLX-80, this.AttackedRX+80, 0]
             ]
         },
 PrivateBirth:function(a){
+for (let l = a.C-1; l <= a.C+1; l++) {
     for (let i = Math.max(a.R-1,1); i <= Math.min(a.R+1,oS.R);i++) {
         for (let K = 0; K <= 3;K++) {
-      var b = oGd.$[i + "_" + a.C + "_" + K];
-      $P[a.id] && b &&!b.Protected&&(b.EName!="oUmbrellaLeaf")&& (b.Protected=true,b.getSnowPea = b.getPea = function(h, c, b) {
+      var b = oGd.$[i + "_" + l + "_" + K];
+      $P[a.id] && b &&!b.Protected&&(b.EName!=a.EName)&& (b.Protected=true,b.getSnowPea = b.getPea = function(h, c, b) {
         var d = this,
           num,
           a = d.id;
+for (let l = d.C-1; l <= d.C+1; l++) {
     for (let i = Math.max(d.R-1,1); i <= Math.min(d.R+1,oS.R);i++) {
-          var e = oGd.$[i + "_" + d.C + "_" + oUmbrellaLeaf.prototype.PKind];
+          var e = oGd.$[i + "_" + l + "_" + oUmbrellaLeaf.prototype.PKind];
           e && (e.EName == "oUmbrellaLeaf") && !num && (e.getPea(h, c, b), num = 1)
     }
+};
 	  },b.getSnowPea1=b.getSnowPea,b.getPea1=b.getPea)
         }
     }
+}
     $P[a.id] && oSym.addTask(1, arguments.callee, [a]);
 },
 PrivateDie:function(a){
+   for (let l = a.C-1; l <= a.C+1; l++) {
     for (let i = Math.max(a.R-1,1); i <= Math.max(a.R+1,oS.R);i++) {
         for (let K = 0; K <= 3;K++) {
-      var b = oGd.$[i + "_" + a.C + "_" + K];
+      var b = oGd.$[i + "_" + l + "_" + K];
       b && b.Protected&& (b.Protected=false,b.getSnowPea=b.getSnowPea1,b.getPea=b.getPea1)
         }
+    }
 }     
 },
 getTriggerR:oGatlingPea.prototype.getTriggerR,
