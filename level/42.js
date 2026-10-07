@@ -112,7 +112,7 @@ if(warn!=true){return SelectModal(0)};
     [oWallNutZombie, 1, 1],
     [oBungeeZombie, 1, 1],
     [oPeaZombie, 1, 1],
-		[oCatapultZombie, 1, 1]
+	[oCatapultZombie, 1, 1]
 	],
 	FlagNum: 30,
 	FlagToSumNum: {
@@ -129,6 +129,7 @@ if(warn!=true){return SelectModal(0)};
 			onclick: function() {
                 ClearChild($("PointerUD"));
 				GetNewCard(this,oCoffeeBean, 43);
+				alert("下次打开游戏时，您可以在指令行输入“VnmsOhyhoIruwbwzr”以证明你通过此关<br>（建议自行保存）");
 			}
 		});
 		NewImg("PointerUD", "images/interface/PointerDown.gif", "top:185px;left:676px", EDAll)
