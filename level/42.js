@@ -83,7 +83,6 @@ if(warn!=true){return SelectModal(0)};
 					break;
 				case 5:
           PlayAudio("fume");
-					c.onclick = null;
 						c.onclick = function() {
 							oSym.addTask(10, b, [6])
 						};
@@ -97,6 +96,7 @@ if(warn!=true){return SelectModal(0)};
 					innerText(c, "另外你可以带上我，我很好用！");
 					break;
 				case 7:
+			c.onclick = null;
           oSym.addTask(1,function(Left){
             $("dDave").style.left=Left+"px";
             (Left-=5)>-400?oSym.addTask(1,arguments.callee,[Left]):(ClearChild($("dDave")),a(0),ClearChild($("DivTeach")));
