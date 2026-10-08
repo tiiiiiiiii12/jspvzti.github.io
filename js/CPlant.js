@@ -2964,6 +2964,7 @@ NewEle("oAttack_" + c.id, "div",
                     (c.HP -= 100) < 1 && c.Die();
                     break;
                 default:
+					!c.num&&d.bedevil(d);
                     c.Die()
             }
         }
@@ -3689,7 +3690,7 @@ NormalAttack2: function() {
                 function(f, j, h, c, n, i, m, k, o, g) {
                     var l, e = GetC(n),
                         d = oZ["getZ" + c](n, i);
-                    m == 0 && g[i + "_" + e] && k != e && (PlayAudio("firepea"), m = 1, h = 40, k = e, j.src = "images/Plants/PB" + m + c + ".gif");
+                    m == 0 && g[i + "_" + e] && k != e && (PlayAudio("firepea"), m = 1, h = 40, k = e, j.src = "images/Plants/PB" + m + "0.gif");
                     d && d.Altitude == 1 ? (d[{
                         "-1": "getSnowPea",
                         0: "getPea",
