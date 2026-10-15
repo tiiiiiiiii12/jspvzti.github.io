@@ -2164,13 +2164,12 @@ NormalAttack:function(a){
         AttackCheck2: function(a) {
             return a.Altitude == 1 && a.beAttacked
         }
-    }),
-oSpikerockShadow= InheritO(oSpikeweed, {
+    }),oSpikerockShadow= InheritO(oSpikeweed, {
 	EName: "oSpikeweed1",
 	CName: "地刺幻影",
 	HP:100,
 	PKind:2.5,
-	AttTime:-50,
+	AttTime:-40,
 	LiveTime:2000,
 	Tooltip: "能伤害走在上面的僵尸",
 	Produce: '只是一个没有灵魂的替身<p>伤害：<font color="#FF0000">普通</font><br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>由地刺王召唤',
@@ -2188,15 +2187,15 @@ oSpikerockShadow= InheritO(oSpikeweed, {
             oGd.del({
               R: b.R,
               C: b.C,
-              PKind: Kind
-            }), oGd.add(b,R + "_" + NewC + "_" + (b.PKind=Math.random()*1+2)))
+              PKind: b.PKind
+            }), oGd.add(b,R + "_" + NewC + "_" + Kind))
       } else {
         Kind=b.PKind,R=b.R,NewC = GetC(b.pixelRight -= 1),b.AttackedLX = k -= 1, b.AttackedRX = j -= 1, g.style.left = (b.pixelLeft -= 1) + "px",NewC != b.C && (b.C = NewC,
             oGd.del({
               R: b.R,
               C: b.C,
-              PKind: Kind
-            }), oGd.add(b,R + "_" + NewC + "_" + (b.PKind=Math.random()*1+2)))
+              PKind: b.PKind
+            }), oGd.add(b,R + "_" + NewC + "_" +Kind))
       }
       oSym.addTask(1, arguments.callee, [b, c, k, j, e, g])
     })(a, oS.W, a.AttackedLX, a.AttackedRX, a.R, $(a.id));
@@ -2207,7 +2206,7 @@ oSpikerockShadow= InheritO(oSpikeweed, {
             if (!k) return;
 	    opacity<=0.25&&(Shine=true);
 	    opacity>=0.5&&(Shine=false);
-            k.EleBody.style.opacity = (!Shine?opacity-=0.01:opacity+=0.01);
+            k.EleBody.style.opacity = (!Shine?opacity-=0.02:opacity+=0.02);
             oSym.addTask(1, arguments.callee, [k,opacity,Shine])
           }, [$P[a.id], 0.25, 1]);
 	},[a])
@@ -2219,7 +2218,7 @@ oSpikerockShadow= InheritO(oSpikeweed, {
 	while(b--){
 		var c = a[b];
 		c&&((c.EName=="oZomboni"||c.EName=="oCatapultZombie")?c.flatTire():(c.flatTire(),c.getHit2(c,this.Attack, 0)))
-$P[d.id]&&d.Die()
+$P[d.id]&&!b&&d.Die();
 	}
 	},
 	NormalAttack: function() {
