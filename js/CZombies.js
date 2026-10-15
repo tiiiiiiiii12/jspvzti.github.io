@@ -461,7 +461,7 @@ lookHP:function(c){
 			if(!e.FreeWeedTime) {
 				T=oSym.Now+b;
                 e.FreeWeedTime=a=T;
-			var BulletImg = NewImg(0, "images/Plants/Spikerock/Weed.png", "z-index:24;"+e.getShadow(e),e.Ele);
+		e.WeedImg = NewImg(0, "images/Plants/Spikerock/Weed.png", "z-index:24;"+e.getShadow(e),e.Ele);
                 oSym.addTask(100,function(g){
 					var d=$Z[g];
                     d&&d.getHit2(d,10);
@@ -470,9 +470,9 @@ lookHP:function(c){
 			}else{
                 e.FreeWeedTime=a=oSym.Now+b
 			}
-			oSym.addTask(b,function(e,a,BulletImg){
-               e.FreeWeedTime==a&&(e.FreeWeedTime = 0,ClearChild(BulletImg))
-			},[e,a,BulletImg]);
+			oSym.addTask(b,function(e,a){
+               e.FreeWeedTime==a&&(e.FreeWeedTime = 0,ClearChild(e.WeedImg))
+				},[e,a]);
             },
                 bedevil: function(c,a) {
                     c.ExchangeLR(c, 1);
