@@ -273,6 +273,7 @@ oPeaZombie = InheritO(oZombie, {
   CName:"豌豆僵尸",
   StandGif: 9,
   ZKind:1,
+  PKind:0,
   PicArr: (function() {
     var a = "images/Zombies/Zombie/",b=oPeashooter.prototype;
     return [b.PicArr[b.CardGif], b.PicArr[b.StaticGif], a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random,b.PicArr[b.NormalGif]]
@@ -287,6 +288,7 @@ CanPass:CZombies.prototype.CanPass,
 	  a.HP*=1.5;
 	  a.shootPeaSpeed*=0.5;
 	  }else{
+		  a.PeaKind=-1;
 		  a.shootPea1=oSnowPea.prototype.NormalAttack;
 		  a.shootPea=function() {
     var a = this,
@@ -1226,7 +1228,7 @@ GetDTop:0,
 	ballsrc:"images/interface/Zombie_catapult_basketball.png",
 	ballAttack:75,
 	basketballNum:20,
-	Produce: '它操作着重型机器<br>韧性：<font color="#FF0000">中（850）</font><br>精英形态一：<font color="#FF0000">随机投掷僵尸头，若杀死植物则在落点生成僵尸，反之则在投篮车的位置</font><br>精英形态二：<font color="#FF0000">叶子保护伞，投篮球时血量低于170时锁血十秒并加快投掷速度，期间每收到一次攻击发射一颗豌豆</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font><br>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
+	Produce: '它操作着重型机器<br>韧性：<font color="#FF0000">中（850）</font><br>精英形态一：<font color="#FF0000">随机投掷僵尸头，若杀死植物则在落点生成僵尸，反之则在投篮车的位置</font><br>精英形态二：<font color="#FF0000">叶子保护伞，投篮球时血量低于170时锁血一段时间</font><br>特点：<font color="#FF0000">碾压植物，投掷篮球</font><br>自从有僵尸提议“把篮球和鸡联系起来想一想”之后，他似乎开窍了许多',
 	PicArr: (function() {
 			var b = "images/Zombies/CatapultZombie/";
 			return ["images/Card/Zombies/Catapult.png", b + "1.gif", b + "Walk.gif", b + "flatTire.gif"+$Random, b + "Throw.gif",b+"BoomDie.gif"+$Random]
@@ -1361,6 +1363,7 @@ b.AutoReduceHP(b.id)
 a.Move&&a.canWalk(a,a.id)&&(GetC(a.ZX+30)<=8)&&a.basketballNum>0&&a.checkThrow(a);
 a.JudgeDirection(a);
 },
+BlockHPTime:1200,
 JudgeDirection:function(a){},
 	jinyinAct:function(a){
 		a.num=a.Privatenum||Math.random()*100;
@@ -1377,25 +1380,20 @@ JudgeDirection:function(a){},
           }),
         a.check = a.WalkDirection ? 0 : 1);
 	};
-a.shootPea=oPeaZombie.prototype.shootPea;
-a.shootPea1=oPeaZombie.prototype.shootPea1;
-	a.CanRebound=false;
-	a.bedevil=oPeaZombie.prototype.bedevil;
 	a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=function(a,d){
-	a.CanRebound&&(a.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (parseInt($(a.Ele.jinyinImg).style.left)+160)+ "px;top:" + (a.pixelTop + 120) + "px;visibility:hidden;z-index:" + (a.zIndex + 2)),a.shootPea(a));
 		var Att=Math.min(d,a.HP-a.MaxHP*0.2);
 		if(Att==a.HP-a.MaxHP*0.2){
 			a.cd=0;
 			a.CanRebound=true;
 			$(a.Ele.jinyinImg).style.opacity=1;
-			oSym.addTask(1000,function(a){
+			oSym.addTask(a.BlockHPTime,function(a){
 				$Z[a.id]&&a.CanRebound&&(ClearChild($(a.Ele.jinyinImg)),a.CanRebound=false,a.getHit=a.getHit0=a.getHit1=a.getHit2=a.getHit3=OrnNoneZombies.prototype.getHit);
 			},[a])
 		};
 		OrnNoneZombies.prototype.getHit0(a,Att)
 	};
 	}else{
-			let jinyinImg = NewImg(z.jinyinImg, "images/Zombies/Zombie/ZombieHead.png", "position:absolute;left:30px;top:80px;", 0);
+	let jinyinImg = NewImg(z.jinyinImg, "images/Zombies/Zombie/ZombieHead.png", "position:absolute;left:30px;top:80px;", 0);
     z.appendChild(jinyinImg);
 	a.JudgeDirection=function(a){
 	var P = a.Ele;
@@ -1457,14 +1455,16 @@ oGatlingPeaZombie = InheritO(oNewspaperZombie, {
   EName: "oGatlingPeaZombie",
   CName: "机枪读报僵尸",
   Lvl: 4,
-  HP: 550,
+  HP: 600,
   shootPeaSpeed: 15,
   SunNum: 150,
   ZKind:1,
+  LostPaperSpeed:4.8,
   PicArr: (function() {
     var a = "images/Zombies/GatlingPeaZombie/",b=oGatlingPea.prototype;
     return [b.PicArr[b.CardGif],b.PicArr[b.StaticGif], a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadAttack0.gif", a + "LostHeadWalk0.gif", a + "LostHeadAttack0.gif", a + "Head.gif" + $Random, a + "Die.gif" + $Random, a + "BoomDie.gif" + $Random, a + "LostPaper.gif",b.PicArr[b.NormalGif]]
   })(),
+  PKind:0,
   AudioArr: ["newspaper_rarrgh2"],
   Produce: '他的报纸只能提供有限的防御，失去报纸后快速发射豌豆<br>韧性：<font color="#FF0000">中（550）</font><br>报纸韧性：<font color="#FF0000">低</font><br>速度：正常，而后快(失去报纸后)</font><br>伤害：正常，而后4倍(失去报纸后)<br>精英形态一：<font color="#FF0000">篮球，发怒前向前几格植物抛射豌豆，发怒后攻速减半，速度为0，几秒后射速加快，快速移动，50%减伤生效</font><br>精英形态二：<font color="#FF0000">魅惑菇，发怒后召唤一波带路障的豌豆僵尸，将植物转化为豌豆射手僵尸（能转化三次）</font><br>读报僵尸总是误伤别人',
   jinyinAct: function(a) {
