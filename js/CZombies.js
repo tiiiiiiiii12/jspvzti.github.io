@@ -459,9 +459,10 @@ lookHP:function(c){
 				var a;
 				T=oSym.Now+b;
                 e.FreeWeedTime=a=T;
-			oSym.addTask(b,function(e,a){
-               e.FreeWeedTime==a&&(e.FreeWeedTime = 0)
-				},[e,a]);
+			var BulletImg = NewImg(0, "images/Plants/Spikerock/Weed.png", "z-index:24;"+e.getShadow(e),e.Ele);
+			oSym.addTask(b,function(e,a,BulletImg){
+               e.FreeWeedTime==a&&(e.FreeWeedTime = 0,ClearChild(BulletImg))
+				},[e,a,BulletImg]);
                 oSym.addTask(100,function(g){
 					var d=$Z[g];
                     d&&d.getHit2(d,10);
