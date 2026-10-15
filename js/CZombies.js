@@ -3378,10 +3378,10 @@ if(a.num>=50){
 	a.PrivateAct = function(a) {
     let p = a.Ele;
 	a.WalkDirection==a.check&& !a.bool && a.beAttacked && (
-        EditImg($(p.JaHead), 0, "images/Plants/PotatoMine/PotatoMine.gif", {
+        SetStyle($(p.JaHead), {
           transform: !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",
           left: !a.WalkDirection ? "20px" : "0px"
-        }, 0),
+        }),
         a.check = a.WalkDirection?0:1);
       !a.beAttacked && ClearChild($(p.JaHead));
     };
@@ -3423,8 +3423,8 @@ if(a.num>=50){
 	var z = a.Ele,Ja;
     z.JaHead = "Ja" + Math.random();
 	a.hiddenCard=Math.floor(Math.random()*$("dCardList").childNodes.length);
-	a.PZ&&oS.StaticCard&&(oS.CardKind?AppearCard(a.ZX,GetY(a.R),oImp,0,1500):(SetHidden($("dCardList").childNodes[a.hiddenCard]),
-    z.appendChild((Ja = NewImg(z.JaHead, $("dCardList").childNodes[a.hiddenCard].src, "position:absolute;left:0px;top:20px;", 0)))));
+	a.PZ&&oS.StaticCard&&(oS.CardKind?AppearCard(a.ZX,GetY(a.R),oImp,0,1500):(
+    z.appendChild((Ja = NewImg(z.JaHead, $("dCardList").childNodes[a.hiddenCard].src, "position:absolute;left:0px;top:20px;", 0))),SetHidden($("dCardList").childNodes[a.hiddenCard])));
 		a.PrivateDie=function(a){
 			!oS.CardKind&&SetVisible($("dCardList").childNodes[a.hiddenCard]);
 			$(a.Ele.JaHead)&&ClearChild($(a.Ele.JaHead))
@@ -4055,6 +4055,7 @@ oDiggerZombie = InheritO(OrnNoneZombies, {
       a + "BoomDie.gif" + $Random,
     ];
   })(),
+WaitTime:400,
   GoingDieHead: function() {},
   AudioArr: ["dirt_rise","wakeup"],  
 jinyinAct: function(a) {
@@ -4082,11 +4083,65 @@ jinyinAct: function(a) {
       (a.pushZ || (z &&z.Lvl<4&&z.Altitude==1&&z.EName != a.EName)) && (!a.pushZ ? a.ZX >= 470 && a.SetZ(a,z) : (
         a.ZX >= 450 && a.pushZ && a.pushZ.HP ? (a.canWalk(a,a.id)&&!a.isAttacking&&a.pushZ.getr(a.pushZ, -a.Speed, 1)) : a.PutZ(a)))
 	}
+	}else{
+		a.RiseC=Math.floor(Math.random()*3+2);
+		a.WaitTime*=2;
+		a.GoingDie=a.NormalDie;
+		a.OpenBox=function(b) {
+    var a = $Z[b];
+    a.ChkActs = a.ChkActs1 = function() {
+      return 1
+    };
+    PlayAudio("jack_surprise");
+	oSym.addTask(90,
+          function(f) {
+            var e = $Z[f],
+              d;
+            e && (PlayAudio("explosion"),(d = NewImg("", "images/interface/blank.png", "width:306px;height:300px;left:" + (e.X - 16) + "px;top:" + (e.pixelTop - 90) + "px;z-index:20"),
+              d.src = e.PicArr[8] + Math.random(), EDPZ.appendChild(d), oSym.addTask(70, ClearChild, [d])), e.PZ&&(function(k, g) {
+              var q = Math.max(1, k - 1),
+                o = Math.min(oS.R, k + 1),
+                n = Math.max(1, g - 1),
+                h = Math.min(oS.C, g + 1),
+                r = oGd.$,
+                l,
+                j = "",
+                m;
+              do {
+                g = n;
+                do {
+                  j = q + "_" + g + "_";
+                  for (l = 0; l <= 4; l++) {
+                    (m = r[j + l]) && m.BoomDie()
+                  }
+                } while (g++ < h)
+              } while (q++ < o)
+            })(e.R, GetC(e.ZX)), (function(j, l) {
+              var m = j - 120,
+                o = j+120,
+                h = Math.max(1, l - 1),
+                g = Math.min(oS.R,l + 1),
+                n,
+                k;
+              do {
+				  	for (i=GetC(j)-1;i<=GetC(j)+1;i++){
+							if(oGd.$Ladder[h+"_"+i]&&!e.PZ) delete oGd.$Ladder[h+"_"+i];
+					}
+                k = (n = oZ["getAr" + (e.PZ ? "HZ" : "Z")](m, o, h)).length
+                while (k--) {
+                  n[k].getExplosion(1600)
+                }
+              } while (h++ < g)
+            })(e.ZX, e.R), e.ExplosionDie())
+          },
+          [b])
+  }
 	}
   },
   PrivateDie: function(a) {
 	  a.PutZ(a);
   },
+  OpenBox:function(){},
   Act: function() {},
   Go_Up: function(a, WD) {
     // WD: 方向，1右0左
@@ -4123,26 +4178,30 @@ jinyinAct: function(a) {
         $Z[c] &&
           b.beAttacked &&
           oSym.addTask(
-            WD ? 400 : 0,
+            WD ? b.WaitTime : 0,
             function(c, b) {
               // 行走
               (b.EleBody.src =
                 b.PicArr[(b.NormalGif = WD ? b.WalkGif1 : b.WalkGif2)]),
               (b.OSpeed = b.Speed = b.LostPaperSpeed),
+			  (b.OpenBox(c)),
 			  (b.WalkToLadder=CZombies.prototype.WalkToLadder),
               (b.ChkActs =
                 OrnNoneZombies["prototype"][WD ? "ChkActs1" : "ChkActs"]);
             },
-            [c, b]
-          );
+            [c, b]);
       },
       [a.id, a]
     );
   },
   LostPaperSpeed:1.6,
+  PrivateAct:function(f){ 
+	if (f.jinyin&& f.num<50 && f.Altitude == 0 && f.AttackedRX < GetX(6) - 40) return f.Go_Up(f, f.RiseC),1;
+    if (f.Altitude == 0 && f.AttackedRX < GetX(1) - 40) return f.Go_Up(f, 1)
+  },
   ChkActs: function(f, d, g, c) {
     // 到了左边自己钻出来
-	if (f.jinyin&&f.num<50&&f.Altitude == 0 && f.AttackedRX < GetX(6) - 40) return (f.Go_Up(f, 0),f.HP*=3,f.LostPaperSpeed*=0.4), 0;
+	if (f.jinyin&&f.num<50&&f.Altitude == 0 && f.AttackedRX < GetX(6) - 40) return f.Go_Up(f, f.RiseC),1;
     if (f.Altitude == 0 && f.AttackedRX < GetX(1) - 40) return f.Go_Up(f, 1), 1;
     var b, a, e;
     !(f.FreeFreezeTime || f.FreeSetbodyTime) ?
@@ -4168,11 +4227,7 @@ jinyinAct: function(a) {
     return e;
   },
   CanDig: {
-    oPotatoMine,
-    oWallNut,
-    oTallNut,
-    oChomper,
-    oPumpkinHead: true
+    oPotatoMine: true
   },
   JudgeAttack_Dig: function() {
     var g = this,
