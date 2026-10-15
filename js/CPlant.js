@@ -2170,30 +2170,33 @@ NormalAttack:function(a){
 	CName: "地刺幻影",
 	HP:100,
 	PKind:2.5,
-	AttTime:-20,
+	AttTime:-40,
 	LiveTime:2000,
 	Tooltip: "能伤害走在上面的僵尸",
 	Produce: '只是一个没有灵魂的替身<p>伤害：<font color="#FF0000">普通</font><br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>由地刺王召唤',
 	PrivateBirth:function(a){
 	var leftnum;
+	a.PKind=Math.random()*1+2;
 	$(a.id).style.opacity=0.25;
 	(function(b, c, k, j, e, g) {
 	  if(!$P[a.id])return;
       k > c && (leftnum = 1), k < 100 && (leftnum = 0);
       if (!leftnum) {
-        R=b.R,NewC = GetC(b.pixelRight += 1),b.AttackedLX = k += 1, b.AttackedRX = j += 1, g.style.left = (b.pixelLeft += 1) + "px",NewC != b.C && (b.C = NewC,
+        Kind=b.PKind,
+		R=b.R,
+		NewC = GetC(b.pixelRight += 1),b.AttackedLX = k += 1, b.AttackedRX = j += 1, g.style.left = (b.pixelLeft += 1) + "px",NewC != b.C && (b.C = NewC, 
             oGd.del({
               R: b.R,
               C: b.C,
-              PKind: 2.5
-            }), oGd.add(b,R + "_" + NewC + "_" + Math.random()*1+2))
+              PKind: Kind
+            }), oGd.add(b,R + "_" + NewC + "_" + Kind))
       } else {
-        R=b.R,NewC = GetC(b.pixelRight -= 1),b.AttackedLX = k -= 1, b.AttackedRX = j -= 1, g.style.left = (b.pixelLeft -= 1) + "px",NewC != b.C && (b.C = NewC,
+        Kind=b.PKind,R=b.R,NewC = GetC(b.pixelRight -= 1),b.AttackedLX = k -= 1, b.AttackedRX = j -= 1, g.style.left = (b.pixelLeft -= 1) + "px",NewC != b.C && (b.C = NewC,
             oGd.del({
               R: b.R,
               C: b.C,
-              PKind: 2.5
-            }), oGd.add(b,R + "_" + NewC + "_" + Math.random()*1+2))
+              PKind: Kind
+            }), oGd.add(b,R + "_" + NewC + "_" + Kind))
       }
       oSym.addTask(1, arguments.callee, [b, c, k, j, e, g])
     })(a, oS.W, a.AttackedLX, a.AttackedRX, a.R, $(a.id));
@@ -2204,7 +2207,7 @@ NormalAttack:function(a){
             if (!k) return;
 			k.opacity<=0.25&&(Shine=true);
 			k.opacity>=0.5&&(Shine=false);
-            k.EleBody.style.opacity = (!Shine?opacity-=0.05:opacity+=0.05);
+            k.EleBody.style.opacity = (Shine?opacity-=0.05:opacity+=0.05);
             oSym.addTask(1, arguments.callee, [k,opacity,Shine])
           }, [$P[a.id], 1,1]);
 	},[a])
@@ -2213,11 +2216,11 @@ NormalAttack:function(a){
 		var d=this;
 		var a=oZ.getArZ(this.AttackedLX-40,this.AttackedRX+40,this.R),
 			b=a.length;
+		b&&d.Die();
 	while(b--){
 		var c = a[b];
 		c&&((c.EName=="oZomboni"||c.EName=="oCatapultZombie")?c.flatTire():(c.flatTire(),c.getHit2(c,this.Attack, 0)))
 	}
-	d.Die();
 	},
 	NormalAttack: function() {
 		var d=this;
