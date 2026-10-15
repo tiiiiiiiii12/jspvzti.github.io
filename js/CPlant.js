@@ -2165,12 +2165,12 @@ NormalAttack:function(a){
             return a.Altitude == 1 && a.beAttacked
         }
     }),
-	oSpikerockShadow= InheritO(oSpikeweed, {
+oSpikerockShadow= InheritO(oSpikeweed, {
 	EName: "oSpikeweed1",
 	CName: "地刺幻影",
 	HP:100,
 	PKind:2.5,
-	AttTime:-40,
+	AttTime:-50,
 	LiveTime:2000,
 	Tooltip: "能伤害走在上面的僵尸",
 	Produce: '只是一个没有灵魂的替身<p>伤害：<font color="#FF0000">普通</font><br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>由地刺王召唤',
@@ -2189,14 +2189,14 @@ NormalAttack:function(a){
               R: b.R,
               C: b.C,
               PKind: Kind
-            }), oGd.add(b,R + "_" + NewC + "_" + Kind))
+            }), oGd.add(b,R + "_" + NewC + "_" + (b.PKind=Math.random()*1+2)))
       } else {
         Kind=b.PKind,R=b.R,NewC = GetC(b.pixelRight -= 1),b.AttackedLX = k -= 1, b.AttackedRX = j -= 1, g.style.left = (b.pixelLeft -= 1) + "px",NewC != b.C && (b.C = NewC,
             oGd.del({
               R: b.R,
               C: b.C,
               PKind: Kind
-            }), oGd.add(b,R + "_" + NewC + "_" + Kind))
+            }), oGd.add(b,R + "_" + NewC + "_" + (b.PKind=Math.random()*1+2)))
       }
       oSym.addTask(1, arguments.callee, [b, c, k, j, e, g])
     })(a, oS.W, a.AttackedLX, a.AttackedRX, a.R, $(a.id));
@@ -2205,21 +2205,21 @@ NormalAttack:function(a){
 		a.Attack*=5;
 		$P[a.id]&&oSym.addTask(1, function(k,opacity,Shine) {
             if (!k) return;
-			k.opacity<=0.25&&(Shine=true);
-			k.opacity>=0.5&&(Shine=false);
-            k.EleBody.style.opacity = (Shine?opacity-=0.05:opacity+=0.05);
+	    opacity<=0.25&&(Shine=true);
+	    opacity>=0.5&&(Shine=false);
+            k.EleBody.style.opacity = (!Shine?opacity-=0.01:opacity+=0.01);
             oSym.addTask(1, arguments.callee, [k,opacity,Shine])
-          }, [$P[a.id], 1,1]);
+          }, [$P[a.id], 0.25, 1]);
 	},[a])
 	},
 	NormalAttack1: function() {
 		var d=this;
 		var a=oZ.getArZ(this.AttackedLX-40,this.AttackedRX+40,this.R),
 			b=a.length;
-		b&&d.Die();
 	while(b--){
 		var c = a[b];
 		c&&((c.EName=="oZomboni"||c.EName=="oCatapultZombie")?c.flatTire():(c.flatTire(),c.getHit2(c,this.Attack, 0)))
+$P[d.id]&&d.Die()
 	}
 	},
 	NormalAttack: function() {
