@@ -2165,6 +2165,70 @@ NormalAttack:function(a){
             return a.Altitude == 1 && a.beAttacked
         }
     }),
+	oSpikerockShadow= InheritO(oSpikeweed, {
+	EName: "oSpikeweed1",
+	CName: "地刺幻影",
+	HP:100,
+	PKind:2.5,
+	AttTime:-20,
+	LiveTime:2000,
+	Tooltip: "能伤害走在上面的僵尸",
+	Produce: '只是一个没有灵魂的替身<p>伤害：<font color="#FF0000">普通</font><br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>由地刺王召唤',
+	PrivateBirth:function(a){
+	var leftnum;
+	$(a.id).style.opacity=0.25;
+	(function(b, c, k, j, e, g) {
+	  if(!$P[a.id])return;
+      k > c && (leftnum = 1), k < 100 && (leftnum = 0);
+      if (!leftnum) {
+        R=b.R,NewC = GetC(b.pixelRight += 1),b.AttackedLX = k += 1, b.AttackedRX = j += 1, g.style.left = (b.pixelLeft += 1) + "px",NewC != b.C && (b.C = NewC,
+            oGd.del({
+              R: b.R,
+              C: b.C,
+              PKind: 2.5
+            }), oGd.add(b,R + "_" + NewC + "_" + Math.random()*1+2))
+      } else {
+        R=b.R,NewC = GetC(b.pixelRight -= 1),b.AttackedLX = k -= 1, b.AttackedRX = j -= 1, g.style.left = (b.pixelLeft -= 1) + "px",NewC != b.C && (b.C = NewC,
+            oGd.del({
+              R: b.R,
+              C: b.C,
+              PKind: 2.5
+            }), oGd.add(b,R + "_" + NewC + "_" + Math.random()*1+2))
+      }
+      oSym.addTask(1, arguments.callee, [b, c, k, j, e, g])
+    })(a, oS.W, a.AttackedLX, a.AttackedRX, a.R, $(a.id));
+	oSym.addTask(a.LiveTime,function(a){
+		a.NormalAttack=a.NormalAttack1;
+		a.Attack*=5;
+		$P[a.id]&&oSym.addTask(1, function(k,opacity,Shine) {
+            if (!k) return;
+			k.opacity<=0.25&&(Shine=true);
+			k.opacity>=0.5&&(Shine=false);
+            k.EleBody.style.opacity = (!Shine?opacity-=0.05:opacity+=0.05);
+            oSym.addTask(1, arguments.callee, [k,opacity,Shine])
+          }, [$P[a.id], 1,1]);
+	},[a])
+	},
+	NormalAttack1: function() {
+		var d=this;
+		var a=oZ.getArZ(this.AttackedLX-40,this.AttackedRX+40,this.R),
+			b=a.length;
+	while(b--){
+		var c = a[b];
+		c&&((c.EName=="oZomboni"||c.EName=="oCatapultZombie")?c.flatTire():(c.flatTire(),c.getHit2(c,this.Attack, 0)))
+	}
+	d.Die();
+	},
+	NormalAttack: function() {
+		var d=this;
+		var a=oZ.getArZ(this.AttackedLX,this.AttackedRX,this.R),
+			b=a.length;
+	while(b--){
+		var c = a[b];
+		c&&((c.EName=="oZomboni"||c.EName=="oCatapultZombie")?(c.flatTire(),$P[d.id]&&d.Die()):c.getHit2(c,Math.min(this.Attack,60), 0))
+	}
+	}
+}),
     oSpikerock = InheritO(oSpikeweed, {
         EName: "oSpikerock",
         CName: "地刺王",
@@ -2175,25 +2239,35 @@ NormalAttack:function(a){
         SunNum: 125,
         coolTime: 50,
         PicArr: ["images/Card/Plants/Spikerock.png", "images/Plants/Spikerock/0.gif", "images/Plants/Spikerock/Spikerock.gif", "images/Plants/Spikerock/2.gif", "images/Plants/Spikerock/3.gif"],
-        Attack: 50,
+        Attack: 30,
 		rpx:20,
+	PrivateDie:function(a){
+		a.privateweed&&(a.privateweed.risen=0,a.privateweed.Die());
+	},
+		PrivateBirth:function(a){
+			if(!$P[a.id])return;
+			a.privateweed=CustomSpecial(oSpikerockShadow,a.R,a.C);
+			oSym.addTask(3500,arguments.callee,[a])
+		},
 		jinyinAct:function(){},
 		HP:450,
         Tooltip: "能扎破多个轮胎, 并伤害经过上面的僵尸<br>(需要地刺)",
-        Produce: '地刺王可以扎破多个轮胎，并对踩到他的僵尸造成伤害，有概率击退僵尸<p><font color="#FF0000">必须种植在地刺上</font></p>地刺王刚刚从欧洲旅行回来。他玩的很高兴，也认识了很多有趣的人。这些都真的拓展了他的视野——他从来不知道，他们建造了这么大的博物馆，有这么多的画作。这对他来说太惊奇了。',
+        Produce: '地刺王可以扎破多个轮胎，并对踩到他的僵尸造成伤害，有概率在僵尸身上留下一根造成持续伤害的刺，出场时本格召唤地刺幻影<p><font color="#FF0000">必须种植在地刺上</font></p>地刺王刚刚从欧洲旅行回来。他玩的很高兴，也认识了很多有趣的人。这些都真的拓展了他的视野——他从来不知道，他们建造了这么大的博物馆，有这么多的画作。这对他来说太惊奇了。',
         CanGrow: function(b, a, d) {
             var c = b[1];
             return c && c.EName == "oSpikeweed"
         },
-		  NormalAttack: function() {
+		SpecialChance:15,
+	NormalAttack: function() {
 	  var a=this;
 		var d=oZ.getArZ(a.AttackedLX,a.AttackedRX,a.R),
 			b=d.length;
-	    var num=Math.random()*100>15?false:true,c;
+	    var SpecialAttack=Math.random()*100>a.SpecialChance?false:true,num=Math.random()*100>15?false:true,c;
 	while(b--){
 		c = d[b];
 		num&&c.getr(c,a.rpx);
-		c.getHit2(c,a.Attack,0);
+		SpecialAttack&&c.getWeed(c,1000);
+		c.getHit2(c,a.Attack);
 	}
   },
         GetDY: function(b, c, a) {
