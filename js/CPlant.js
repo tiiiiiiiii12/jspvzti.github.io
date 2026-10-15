@@ -2169,9 +2169,15 @@ NormalAttack:function(a){
 	EName: "oSpikeweed1",
 	CName: "地刺幻影",
 	HP:100,
-	PKind:2.5,
+	PKind:5,
 	AttTime:-50,
 	LiveTime:2000,
+	jinyinAct:function(){},
+	getTriggerRange: function(a, b, c) {
+        return [
+            [this.AttackedLX, this.AttackedRX, 0]
+        ]
+    },
 	Tooltip: "能伤害走在上面的僵尸",
 	Produce: '只是一个没有灵魂的替身<p>伤害：<font color="#FF0000">普通</font><br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>由地刺王召唤',
 	PrivateBirth:function(a){
@@ -2182,34 +2188,15 @@ NormalAttack:function(a){
 	  if(!$P[a.id])return;
       k > c && (leftnum = 1), k < 100 && (leftnum = 0);
       if (!leftnum) {
-        Kind=b.PKind,
-		R=b.R,
-		NewC = GetC(b.pixelRight += 1),b.AttackedLX = k += 1, b.AttackedRX = j += 1, g.style.left = (b.pixelLeft += 1) + "px",NewC != b.C && (b.C = NewC, 
-            oGd.del({
-              R: b.R,
-              C: b.C,
-              PKind: b.PKind
-            }), oGd.add(b,R + "_" + NewC + "_" + Kind))
+        b.pixelRight += 1,b.AttackedLX = k += 1, b.AttackedRX = j += 1, g.style.left = (b.pixelLeft += 1) + "px"
       } else {
-        Kind=b.PKind,R=b.R,NewC = GetC(b.pixelRight -= 1),b.AttackedLX = k -= 1, b.AttackedRX = j -= 1, g.style.left = (b.pixelLeft -= 1) + "px",NewC != b.C && (b.C = NewC,
-            oGd.del({
-              R: b.R,
-              C: b.C,
-              PKind: b.PKind
-            }), oGd.add(b,R + "_" + NewC + "_" +Kind))
+        b.pixelRight -= 1,b.AttackedLX = k -= 1, b.AttackedRX = j -= 1, g.style.left = (b.pixelLeft -= 1) + "px"
       }
       oSym.addTask(1, arguments.callee, [b, c, k, j, e, g])
     })(a, oS.W, a.AttackedLX, a.AttackedRX, a.R, $(a.id));
 	oSym.addTask(a.LiveTime,function(a){
 		a.NormalAttack=a.NormalAttack1;
-		a.Attack*=5;
-		$P[a.id]&&oSym.addTask(1, function(k,opacity,Shine) {
-            if (!k) return;
-	    opacity<=0.25&&(Shine=true);
-	    opacity>=0.5&&(Shine=false);
-            k.EleBody.style.opacity = (!Shine?opacity-=0.00025:opacity+=0.00025);
-            oSym.addTask(1, arguments.callee, [k,opacity,Shine])
-          }, [$P[a.id], 0.25, 1]);
+		a.EleBody.style.opacity = 0.5;
 	},[a])
 	},
 	NormalAttack1: function() {
@@ -2219,7 +2206,6 @@ NormalAttack:function(a){
 	while(b--){
 		var c = a[b];
 		c&&((c.EName=="oZomboni"||c.EName=="oCatapultZombie")?c.flatTire():(c.flatTire(),c.getHit2(c,this.Attack, 0)))
-$P[d.id]&&!b&&d.Die();
 	}
 	},
 	NormalAttack: function() {
@@ -2245,11 +2231,12 @@ $P[d.id]&&!b&&d.Die();
         Attack: 30,
 		rpx:20,
 	PrivateDie:function(a){
-		a.privateweed&&(a.privateweed.risen=0,a.privateweed.Die());
+		let P=oGd.$[a.R+"_"+a.C+"_"+5];
+		P&&P.Die();
 	},
 		PrivateBirth:function(a){
 			if(!$P[a.id])return;
-			a.privateweed=CustomSpecial(oSpikerockShadow,a.R,a.C);
+			CustomSpecial(oSpikerockShadow,a.R,a.C);
 			oSym.addTask(3500,arguments.callee,[a])
 		},
 		jinyinAct:function(){},
