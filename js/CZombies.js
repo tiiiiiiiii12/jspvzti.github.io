@@ -450,6 +450,24 @@ lookHP:function(c){
                     } : function(e, c, d) {
                         c.className = d ? "fliph" : ""
                     },
+			flatTire:function(){
+				var a=this;
+				a.Speed=Math.max(--a.Speed,a.FreeSlowTime?0.4:0.8);
+				a.OSpeed=Math.max(--a.OSpeed,0.8);
+			},
+			getWeed: function(e,b){
+				var a;
+				T=oSym.Now+b;
+                e.FreeWeedTime=a=T;
+			oSym.addTask(b,function(e,a){
+               e.FreeWeedTime==a&&(e.FreeWeedTime = 0)
+				},[e,a]);
+                oSym.addTask(100,function(g){
+					var d=$Z[g];
+                    d&&d.getHit2(d,10);
+                    d&&d.FreeWeedTime && oSym.addTask(100,arguments.callee,[g]);
+                },[e.id]);
+            },
                 bedevil: function(c,a) {
                     c.ExchangeLR(c, 1);
                     c.WalkDirection = 1;
