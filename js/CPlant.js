@@ -2164,12 +2164,13 @@ NormalAttack:function(a){
         AttackCheck2: function(a) {
             return a.Altitude == 1 && a.beAttacked
         }
-    }),oSpikerockShadow= InheritO(oSpikeweed, {
+    }),
+	oSpikerockShadow= InheritO(oSpikeweed, {
 	EName: "oSpikeweed1",
 	CName: "地刺幻影",
 	HP:100,
 	PKind:2.5,
-	AttTime:-40,
+	AttTime:-50,
 	LiveTime:2000,
 	Tooltip: "能伤害走在上面的僵尸",
 	Produce: '只是一个没有灵魂的替身<p>伤害：<font color="#FF0000">普通</font><br>范围：<font color="#FF0000">所有踩到他的僵尸</font><br>特点：<font color="#FF0000">不会被僵尸吃掉</font></p>由地刺王召唤',
@@ -2206,7 +2207,7 @@ NormalAttack:function(a){
             if (!k) return;
 	    opacity<=0.25&&(Shine=true);
 	    opacity>=0.5&&(Shine=false);
-            k.EleBody.style.opacity = (!Shine?opacity-=0.02:opacity+=0.02);
+            k.EleBody.style.opacity = (!Shine?opacity-=0.00025:opacity+=0.00025);
             oSym.addTask(1, arguments.callee, [k,opacity,Shine])
           }, [$P[a.id], 0.25, 1]);
 	},[a])
