@@ -3743,7 +3743,7 @@ NormalAttack2: function() {
 				$P[id].Dispel();
 			oSym.addTask(1, function(id) {
                 if(!$P[id])return;
-				for (z in $Z) oBalloon = $Z[z],oBalloon&&oBalloon.PZ&&(oBalloon.EName!= 'oBalloonZombie')&&oBalloon.getr(oBalloon,12);
+				for (z in $Z) oBalloon = $Z[z],oBalloon&&oBalloon.PZ&&(oBalloon.EName!= 'oBalloonZombie')&&oBalloon.getr(oBalloon,1);
 				oSym.addTask(1,arguments.callee,[id])
             }, [id]);
             }, [o.id]);
