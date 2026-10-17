@@ -634,8 +634,20 @@ oStarfruit = InheritO(CPlants, {
             ClearChild($("oAttack_" + a.id));
         },
 ChangeCallback:function(d){
-	d.PrivateDie(d);
-	d.PrivateBirth(d);
+	a.PrivateBirth(a);
+	ClearChild($("oAttack_" + a.id));
+	if(a.jinyin){
+	NewEle(
+      "oAttack_" + a.id,
+      "div",
+      "left:" +
+      (a.AttackedLX - 20) +
+      "px;top:" +
+      (a.pixelTop - 10) +
+      "px;position:absolute;width:97px;height:87px;z-index:150",
+      0,
+      EDPZ);
+	}
   },
         jinyinAct:function(a){
       let s = NewEle(
@@ -716,10 +728,6 @@ ChangeCallback:function(b){
 SetStyle($(b.id + "_Bullet"),{
 	left:(b.AttackRX) + "px",
 	top:(b.pixelTop+5) +"px"
-	});
-	SetStyle($("oAttack_" + b.id),{
-	left:(b.AttackedLX - 20) + "px",
-	top:(b.pixelTop - 10) +"px"
 	});
 	}
   },
@@ -829,6 +837,10 @@ while (e--) {
 		jinyinAct:function(a){
 			a.AttTime=140;
 		},
+ChangeCallback:function(b){
+	b.BulletEle=null;
+	b.PrivateBirth(b);
+  },
         NormalAttack1: oPeashooter.prototype.NormalAttack,
 		NormalAttack2: function() {
             var a = this,
@@ -887,6 +899,10 @@ while (e--) {
         getTriggerR: function(a) {
             return [a > 2 ? a - 1 : 1, a < oS.R ? Number(a) + 1 : a]
         },
+	ChangeCallback:function(b){
+	b.PrivateDie(b);
+	b.PrivateBirth(b);
+  },
 NormalAttack: function() {
     var g = this,
       f = g.pixelLeft + 58,
@@ -1203,6 +1219,10 @@ NormalAttack:function(a){
             c.BulletEle = [NewImg(0, b[3], "left:" + (c.AttackedLX - 40) + a), NewImg(0, b[4], "left:" + (c.AttackedRX - 16) + a)],
                 c.aTri = [0, 0]
         },
+	ChangeCallback:function(b){
+	b.BulletEle.length = 0;
+	b.PrivateBirth(b)
+  },
         PrivateDie: function(a) {
             a.BulletEle.length = 0;
 			if(a.jinyin){
@@ -2017,7 +2037,7 @@ NormalAttack:function(a){
         },
         InitTrigger: function() {},
 	    ChangeCallback:function(c){
-			SetStyle(c.id + "2", {
+			SetStyle($(c.id + "2"), {
 				left:c.pixelLeft + "px",
 				top: c.pixelTop + "px"
 			})
@@ -2048,10 +2068,7 @@ NormalAttack:function(a){
         Produce: '火爆辣椒可以摧毁一整条线上的敌人。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">整条线上的僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>精英形态：给全屏非魅惑僵尸附上三倍易伤</p>“咕咕嘎嘎！”火爆辣椒说。他现在不会爆炸，还不到时候，不过快了，喔~，快了快了，快来了。他知道，他感受到了，他一生都是在等待这个时刻！',
 		jinyinAct:function(){},
 		PrivateDie:function(a){
-			for (i in $Z){
-				u=$Z[i];
-				u&&u.PZ&&a.jinyin&&(u.jianshang=3,u.EleBody.style.filter = 'grayscale(50%)');
-			}
+			
 		},
         PrivateBirth: function(a) {
             oSym.addTask(72,
@@ -2829,7 +2846,10 @@ NewEle("oAttack_" + c.id, "div",
                 [b, Math.min(c + 250, oS.W), 0]
             ]
         },
-	ChangeCallback:oPeashooter.prototype.ChangeCallback,
+	ChangeCallback:function(b){
+		b.BulletEle=null;
+		b.BulletEle=NewImg(0, "images/Plants/ShroomBullet.gif", "left:" + (a.AttackedLX - 46) + "px;top:" + (a.pixelTop + 40) + "px;visibility:hidden;z-index:" + (a.zIndex + 2))
+	},
         PrivateBirth: function(a) {
             a.BulletEle = NewImg(0, "images/Plants/ShroomBullet.gif", "left:" + (a.AttackedLX - 46) + "px;top:" + (a.pixelTop + 40) + "px;visibility:hidden;z-index:" + (a.zIndex + 2))
         },
@@ -2874,7 +2894,7 @@ NewEle("oAttack_" + c.id, "div",
         Cry: 0,
         ArZ: [],
         Attacking: 0,
-		ChangeCallback:oPeashooter.prototype.ChangeCallback,
+		ChangeCallback:oPuffShroom.prototype.ChangeCallback,
         PicArr: ["images/Card/Plants/ScaredyShroom.png", "images/Plants/ScaredyShroom/0.gif", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "images/Plants/ScaredyShroom/ScaredyShroomSleep.gif", "images/Plants/ScaredyShroom/ScaredyShroomCry.gif", "images/Plants/ShroomBullet.gif", "images/Plants/ShroomBulletHit.gif"],
         Tooltip: "它是远程射手，但敌人靠近时会蜷缩不动",
         Produce: '胆小菇在敌人接近后会躲起来。<br>伤害：<font color="#FF0000">普通</font><br>特点：<font color="#FF0000">敌人接近后就停止攻击，攻击间隔随攻击次数的增多而减少，不睡觉</font><br>精英形态：发射包括普通孢子、阳光（击中僵尸生成5阳光）、草皮卷（对僵尸造成80伤害并修补弹坑）、脑子（使僵尸逃跑）、铲子（对僵尸造成高伤）、奖杯（直接过关（iz无效））六种子弹<br>虽然曾哥令令令申申申申申不让胆小菇去见马戏团的精神病人，但经胆小菇软磨硬泡后还是同意了，尽管如此，曾哥还是给他塞了一大堆防身用品',
@@ -3460,6 +3480,11 @@ NormalAttack2: function() {
             NewImg("", "images/Plants/Plantern/light.gif", "filter:alpha(opacity="+(c.jinyin?"60":"30")+");opacity:.3"+";left:0;top:0;z-index:" + c.zIndex, $(c.id));
             oS.HaveFog && oGd.GatherFog(a, b, 4, 6, 0), oFlowerVase.prototype.FreshXRay(); // 刷新场地上花瓶 XRAY
         },
+		ChangeCallBack:function(a){
+			a.PrivateDie(a);
+			a.jinyin&&a.jinyinAct(a);
+			a.PrivateBirth(a)
+		},
         jinyinAct:function(c){
         var a = c.R,
             b = c.C;
@@ -3714,7 +3739,13 @@ NormalAttack2: function() {
         InitTrigger: function() {},
         PrivateBirth: function(o) { // 种植后0.5秒开始吹风
             oSym.addTask(50, function(id) {
-                PlayAudio('blover'), $P[id].Dispel();
+                PlayAudio('blover');
+				$P[id].Dispel();
+			oSym.addTask(1, function(id) {
+                if(!$P[id])return;
+				for (z in $Z) oBalloon = $Z[z],oBalloon&&oBalloon.PZ&&(oBalloon.EName!= 'oBalloonZombie')&&oBalloon.getr(oBalloon,12);
+				oSym.addTask(1,arguments.callee,[id])
+            }, [id]);
             }, [o.id]);
         },
         Dispel: function() { // 吹风
