@@ -4084,7 +4084,7 @@ jinyinAct: function(a) {
         a.ZX >= 450 && a.pushZ && a.pushZ.HP ? (a.canWalk(a,a.id)&&!a.isAttacking&&a.pushZ.getr(a.pushZ, -a.Speed, 1)) : a.PutZ(a)))
 	}
 	}else{
-		a.RiseC=Math.floor(Math.random()*3+2);
+		a.RiseC=Math.floor(Math.random()*5+2);
 		a.WaitTime*=2;
 		a.GoingDie=a.NormalDie;
 		a.OpenBox=function(b) {
