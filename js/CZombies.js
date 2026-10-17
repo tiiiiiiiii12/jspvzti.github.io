@@ -4196,12 +4196,12 @@ jinyinAct: function(a) {
   },
   LostPaperSpeed:1.6,
   PrivateAct:function(f){ 
-	if (f.jinyin&& f.num<50 && f.Altitude == 0 && f.AttackedRX < GetX(6) - 40) return f.Go_Up(f, f.RiseC),1;
+	if (f.jinyin&& f.num<50 && f.Altitude == 0 && f.AttackedRX < GetX(f.RiseC) - 40) return f.Go_Up(f, 0),1;
     if (f.Altitude == 0 && f.AttackedRX < GetX(1) - 40) return f.Go_Up(f, 1)
   },
   ChkActs: function(f, d, g, c) {
     // 到了左边自己钻出来
-	if (f.jinyin&&f.num<50&&f.Altitude == 0 && f.AttackedRX < GetX(6) - 40) return f.Go_Up(f, f.RiseC),1;
+	if (f.jinyin&&f.num<50&&f.Altitude == 0 && f.AttackedRX < GetX(f.RiseC) - 40) return f.Go_Up(f, 0),1;
     if (f.Altitude == 0 && f.AttackedRX < GetX(1) - 40) return f.Go_Up(f, 1), 1;
     var b, a, e;
     !(f.FreeFreezeTime || f.FreeSetbodyTime) ?
