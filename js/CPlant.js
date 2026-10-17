@@ -1922,7 +1922,7 @@ NormalAttack:function(a){
         getHurt: function(e, b, a) {
             var c = this,
                 d = $(c.id).childNodes[1];
-			b % 3 &&(a=2000,$Z[e.id]&&e.getr(e,80,1));
+			b % 3 &&(a=2000,$Z[e.id]&&e.getr(e,80));
              (c.HP -= Math.min(a,2000)) < 1 ? (c.Die()): 
                     c.HP < 2667 ? c.HurtStatus < 2 && (c.HurtStatus = 2, d.src = "images/Plants/TallNut/TallnutCracked2.gif") : 
                     c.HP < 5333 && c.HurtStatus < 1 && (c.HurtStatus = 1, d.src = "images/Plants/TallNut/TallnutCracked1.gif");          
