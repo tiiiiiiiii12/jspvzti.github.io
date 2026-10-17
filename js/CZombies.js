@@ -4098,7 +4098,7 @@ jinyinAct: function(a) {
             var e = $Z[f],
               d;
             e && (PlayAudio("explosion"),(d = NewImg("", "images/interface/blank.png", "width:306px;height:300px;left:" + (e.X - 16) + "px;top:" + (e.pixelTop - 90) + "px;z-index:20"),
-              d.src = e.PicArr[8] + Math.random(), EDPZ.appendChild(d), oSym.addTask(70, ClearChild, [d])), e.PZ&&(function(k, g) {
+              d.src = oJackinTheBoxZombie.prototype.PicArr[8] + Math.random(), EDPZ.appendChild(d), oSym.addTask(70, ClearChild, [d])), e.PZ&&(function(k, g) {
               var q = Math.max(1, k - 1),
                 o = Math.min(oS.R, k + 1),
                 n = Math.max(1, g - 1),
@@ -4182,12 +4182,12 @@ jinyinAct: function(a) {
             function(c, b) {
               // 行走
               (b.EleBody.src =
-                b.PicArr[(b.NormalGif = WD ? b.WalkGif1 : b.WalkGif2)]),
-              (b.OSpeed = b.Speed = b.LostPaperSpeed),
-			  (b.OpenBox(c)),
-			  (b.WalkToLadder=CZombies.prototype.WalkToLadder),
+                b.PicArr[(b.NormalGif = WD ? b.WalkGif1 : b.WalkGif2)]);
+              (b.OSpeed = b.Speed = b.LostPaperSpeed);
+			  (b.WalkToLadder=CZombies.prototype.WalkToLadder);
               (b.ChkActs =
                 OrnNoneZombies["prototype"][WD ? "ChkActs1" : "ChkActs"]);
+			  (b.OpenBox(c))
             },
             [c, b]);
       },
@@ -4196,12 +4196,12 @@ jinyinAct: function(a) {
   },
   LostPaperSpeed:1.6,
   PrivateAct:function(f){ 
-	if (f.jinyin&& f.num<50 && f.Altitude == 0 && f.AttackedRX < GetX(f.RiseC) - 40) return f.Go_Up(f, 0),1;
+	if (f.jinyin&& f.num<50 && f.Altitude == 0 && f.AttackedRX < GetX(f.RiseC) - 40) return f.Go_Up(f, 1),1;
     if (f.Altitude == 0 && f.AttackedRX < GetX(1) - 40) return f.Go_Up(f, 1)
   },
   ChkActs: function(f, d, g, c) {
     // 到了左边自己钻出来
-	if (f.jinyin&&f.num<50&&f.Altitude == 0 && f.AttackedRX < GetX(f.RiseC) - 40) return f.Go_Up(f, 0),1;
+	if (f.jinyin&&f.num<50&&f.Altitude == 0 && f.AttackedRX < GetX(f.RiseC) - 40) return f.Go_Up(f, 1),1;
     if (f.Altitude == 0 && f.AttackedRX < GetX(1) - 40) return f.Go_Up(f, 1), 1;
     var b, a, e;
     !(f.FreeFreezeTime || f.FreeSetbodyTime) ?
