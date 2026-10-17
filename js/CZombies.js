@@ -765,7 +765,7 @@ lookHP:function(c){
     oDancingZombie = InheritO(OrnNoneZombies, {
         EName: "oDancingZombie",
         CName: "舞王僵尸",
-        HP: 500,
+        HP: 600,
         BreakPoint: 166,
         Lvl: 3,
         StandGif: 9,
@@ -1887,7 +1887,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
         height: 164,
         beAttackedPointL: 60,
         beAttackedPointR: 130,
-        LostPaperSpeed: 6.4,
+        LostPaperSpeed: 7.2,
 		ZKind:-2,
         PicArr: (function() {
             var a = "images/Zombies/NewspaperZombie/";
@@ -1898,7 +1898,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
             return ["images/Card/Zombies/NewspaperZombie.png","images/Zombies/NewspaperZombie/0.gif", a + "HeadWalk1.gif", a + "HeadAttack1.gif", a + "LostHeadWalk1.gif", a + "LostHeadAttack1.gif", a + "HeadWalk0.gif", a + "HeadWalk0.gif", a + "LostHeadWalk0.gif", a + "LostHeadWalk0.gif", "images/Zombies/NewspaperZombie/Head.gif" + $Random, a + "Die.gif" + $Random,"images/Zombies/NewspaperZombie/BoomDie.gif" + $Random, a + "LostNewspaper.gif", a + "1.gif"]
         })(),
         AudioArr: ["newspaper_rarrgh2"],
-        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（450）</font><br>精英形态一：破报进入假死状态，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：速度提升，破报犹豫时间变长，有75%减伤，发怒后碾压植物，有25%减伤，并使全场读报类僵尸解封<br>读报僵尸，他总幻想着有叱咤风云的能力，甚至为此付出实践，虽然他还是那个老头，但好歹取得了些成效',
+        Produce: '他的报纸只能提供有限的防御。<br>韧性：<font color="#FF0000">中（450）</font><br>精英形态一：破报进入假死状态，4.5s后狂暴并虚化（可被路灯花显形）<br>精英形态二：速度提升，破报犹豫时间变长(75%减伤)，发怒后碾压植物(25%减伤)，并使全场读报类僵尸解封<br>读报僵尸，他总幻想着有叱咤风云的能力，甚至为此付出实践，虽然他还是那个老头，但好歹取得了些成效',
         getShadow: function(a) {
             return "left:75px;top:" + (a.height - 25) + "px"
         },
