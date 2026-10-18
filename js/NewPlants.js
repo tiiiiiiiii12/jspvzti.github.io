@@ -613,7 +613,7 @@ oWinterMelon= InheritO(oMelonPult, {
   SunNum: 200,
   CanGrow:function(b, a, d) {
             var c = b[1];
-            return c && c.EName == "oRepeater"
+            return c && c.EName == "oMelonPult"
         },
   PicArr: (function() {
     var a = "images/Plants/WinterMelon/";
