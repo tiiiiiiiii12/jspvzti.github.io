@@ -182,13 +182,12 @@ a.NormalAttack= function(a) {
       self.pixelLeft + self.beAttackedPointR,
       oS.W,
       self.R
-    ),
-	Le=zombieT.length;
-	while(Le--){
+    );
+   for (Le=0;Le<zombieT.length;Le++){
     if (!self.AttackCheck2(zombieT[Le])) continue;
 	zombieTarget=zombieT[Le];
         break
-	}
+       }
     var bullet = EditEle(
       self.BulletEle.cloneNode(false), {
         id: "CB" + Math.random(),
@@ -206,7 +205,7 @@ a.NormalAttack= function(a) {
     );
     oSym.addTask(95, (_) => {
       //PlayAudio(self.AudioArr.slice(0, 2).random());
-	  if(!$P[self.id])return;
+	  if(!$P[self.id]||!zombieTarget)return;
       SetVisible(bullet);
       var x = self.pixelLeft + 50;
       var y = self.pixelTop + 10;
