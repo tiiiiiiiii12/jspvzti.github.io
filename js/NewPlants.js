@@ -114,8 +114,8 @@ oCabbage = InheritO(oPeashooter, {
       "images/Card/Plants/Cabbagepult.png",
       a + "Cabbage.gif",
       a + "Cabbage.gif",
-      a + "Bullet.png",
-      a + "BulletHit.gif",
+      a + "CabbageBullet.png",
+      a + "CabbageBulletHit.gif",
       a + "CabbageAttack.gif",
     ];
   })(),
@@ -128,6 +128,20 @@ oCabbage = InheritO(oPeashooter, {
     var b = c.Altitude;
     return b == 1 || c.EName == "oSnorkelZombie";
   },
+jinyinAct:function(a){
+a.Ele.style.opacity=0.5;
+a.NormalAttack2=a.NormalAttack;
+a.ThrowNum=4;
+a.NormalAttack= function(a) {
+            oSym.addTask(0,
+                function(d, b) {
+                    var c = $P[d];
+                    c && (c.NormalAttack2(),c.ThrowNum<=1&&(c.ThrowNum=4));
+                    --b && oSym.addTask(15, arguments.callee, [d, b])
+                },
+                [this.id,--this.ThrowNum])
+        }
+},
   PrivateBirth(a) {
     a.BulletEle = NewImg(
       0,
@@ -163,13 +177,18 @@ oCabbage = InheritO(oPeashooter, {
   NormalAttack(zid) {
     var self = this;
     var ele = $(self.id);
-    var zombieTarget = oZ.getRangeLeftZ(
+    var zombieTarget;
+    var zombieT = oZ.getArZ(
       self.pixelLeft + self.beAttackedPointR,
       oS.W,
-      self.R,
-      true
-    );
-    if (!zombieTarget||!self.AttackCheck2(zombieTarget)) return;
+      self.R
+    ),
+	Le=zombieT.length;
+	while(Le--){
+    if (!self.AttackCheck2(zombieT[Le])) continue;
+	zombieTarget=zombieT[Le];
+        break
+	}
     var bullet = EditEle(
       self.BulletEle.cloneNode(false), {
         id: "CB" + Math.random(),
@@ -191,7 +210,7 @@ oCabbage = InheritO(oPeashooter, {
       SetVisible(bullet);
       var x = self.pixelLeft + 50;
       var y = self.pixelTop + 10;
-      var zomRelativePos = [zombieTarget.AttackedLX+20, GetY(a.R)-30];
+      var zomRelativePos = [zombieTarget.AttackedLX+20, GetY(zombieTarget.R)-80];
       var s =
         zomRelativePos[0] -
         10 -
@@ -236,7 +255,7 @@ oCabbage = InheritO(oPeashooter, {
             ((bullet.src = self.PicArr[4]),
               (bullet.style.transform = `rotate(0deg)`),
               oSym.addTask(120, ClearChild, [bullet]));
-		  let z=oZ.getZ0(x,self.R);
+		  let z=oZ.getRangeLeftZ(x-5,x+5,self.R,true);
 		  z&&z.Altitude==1&&self.HitZombie(z,self);
           return;
         }
