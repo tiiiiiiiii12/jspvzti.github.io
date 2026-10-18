@@ -51,18 +51,19 @@ PrivateDie:function(a){
 getTriggerR:oGatlingPea.prototype.getTriggerR,
 getPea:function(a){
      var a=this.id;
-     $(a).childNodes[1].src = $P[a].PicArr[3];
+	 $P[a]&&!$P[a].isProtecting&&($P[a].isProtecting=true,$(a).childNodes[1].src = $P[a].PicArr[3],
      oSym.addTask(80,function(a){
-$P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].NormalGif]);
-},[a]);
+$P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].NormalGif],$P[a].isProtecting=false);
+},[a]))
 },
-getSnowPea:function(a){   
+getSnowPea:function(a){
      var a=this.id;
-     $(a).childNodes[1].src = $P[a].PicArr[3];
-oSym.addTask(80,function(a){
-$P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].NormalGif]);
-},[a]);
+	 $P[a]&&!$P[a].isProtecting&&($P[a].isProtecting=true,$(a).childNodes[1].src = $P[a].PicArr[3],
+     oSym.addTask(80,function(a){
+$P[a] && ($(a).childNodes[1].src = $P[a].PicArr[$P[a].NormalGif],$P[a].isProtecting=false);
+},[a]))
 },
+isProtecting:0,
 LoadingComplete: function(a) {
 a.IngoreFallDown=true;
 a.CanIngoreNum=Math.ceil(Math.random()*2+1);
@@ -95,4 +96,156 @@ oSym.addTask(110,function(c){
 c&&c.DisappearDie();
 },[c]);
 }
+}),
+oCabbage = InheritO(oPeashooter, {
+  EName: "oCabbage",
+  CName: "卷心菜投手",
+  width: 140,
+  height: 103,
+  beAttackedPointL: 20,
+  beAttackedPointR: 80,
+  SunNum: 100,
+  AttackGif: 5,
+  Attack: 40,
+  AudioArr: ["CabbageAttack1", "CabbageAttack2"],
+  PicArr: (function() {
+    var a = "images/Plants/Cabbage/";
+    return [
+      "images/Card/Plants/Cabbagepult.png",
+      a + "Cabbage.gif",
+      a + "Cabbage.gif",
+      a + "Bullet.png",
+      a + "BulletHit.gif",
+      a + "CabbageAttack.gif",
+    ];
+  })(),
+  Tooltip: "向敌人抛出卷心菜",
+  Produce: '卷心菜投手可以投掷卷心菜。<p>伤害：<font color="#FF0000">一般<br></font>距离：<font color="#FF0000">投掷</font></p>卷心菜投手用卷心菜砸僵尸干得很好，它以此赚钱，毕竟，它擅长这个。只是首先他不明白僵尸们是怎么爬上屋顶的。',
+  TriggerCheck: function(b, a) {
+    this.AttackCheck2(b) && ((this.canTrigger = 0), this.CheckLoop(b.id, a));
+  },
+  AttackCheck2: function(c) {
+    var b = c.Altitude;
+    return b == 1 || c.EName == "oSnorkelZombie";
+  },
+  PrivateBirth(a) {
+    a.BulletEle = NewImg(
+      0,
+      a.PicArr[3],
+      "left:" +
+      (a.pixelLeft + 50) +
+      "px;top:" +
+      (a.pixelTop + 10) +
+      "px;visibility:hidden;z-index:" +
+      (a.zIndex + 2)
+    );
+  },
+  getAngle(x, y, lastX, lastY) {
+    return (180 / Math.PI) * Math.atan2(y - lastY, x - lastX);
+  },
+  CheckLoop(zid, direction) {
+    var self = this;
+    var pid = self.id;
+    if ($P[pid]) {
+      self.NormalAttack(zid);
+      oSym.addTask(290, (_) => {
+        $P[pid] && self.AttackCheck1(zid, direction);
+      });
+    }
+  },
+  HitZombie(zombieTarget, self) {
+    zombieTarget.getPea(zombieTarget, 0);
+    zombieTarget.getHit2(zombieTarget, self.Attack);
+  },
+  AttackAnim(ele, self) {
+    ele.childNodes[1].src = self.PicArr[self.AttackGif] + "?" + this.id;
+  },
+  NormalAttack(zid) {
+    var self = this;
+    var ele = $(self.id);
+    var zombieTarget = oZ.getRangeLeftZ(
+      self.pixelLeft + self.beAttackedPointR,
+      oS.W,
+      self.R,
+      true
+    );
+    if (!zombieTarget||!self.AttackCheck2(zombieTarget)) return;
+    var bullet = EditEle(
+      self.BulletEle.cloneNode(false), {
+        id: "CB" + Math.random(),
+      },
+      0,
+      EDPZ
+    );
+    //alert(bullet);
+    self.AttackAnim(ele, self);
+    oSym.addTask(
+      275,
+      (_) =>
+      $P[self.id] &&
+      (ele.childNodes[1].src = self.PicArr[self.NormalGif] + "?" + this.id)
+    );
+    oSym.addTask(95, (_) => {
+      //PlayAudio(self.AudioArr.slice(0, 2).random());
+	  if(!$P[self.id])return;
+      SetVisible(bullet);
+      var x = self.pixelLeft + 50;
+      var y = self.pixelTop + 10;
+      var zomRelativePos = [zombieTarget.AttackedLX+20, GetY(a.R)-30];
+      var s =
+        zomRelativePos[0] -
+        10 -
+        x -
+        !zombieTarget.isAttacking *
+        (zombieTarget.WalkDirection?-zombieTarget.Speed:zombieTarget.Speed) *
+        10 *
+        1;
+      //alert(1);
+      var x2 = x + s;
+      var gravity = 0.2;
+      var vy = -10;
+      var vx = -(gravity * s) / (2 * vy);
+      var lastTime = 0;
+      var zY =
+        zomRelativePos[1] - 20;
+      var [lastX, lastY] = [x, y];
+      var defAngle = self.getAngle(x + vx, y + vy + gravity, lastX, lastY);
+      var bulletShadow = NewEle(
+        `${self.id}_B_${Math.random()}_Shadow`,
+        "div",
+        `opacity:0.5;background-size:29px;background-repeat: no-repeat;width:29px;left:${x}px;top:${
+          self.pixelTop + self.height - 10
+        }px;`, {
+          className: "Shadow",
+        },
+        EDPZ
+      );
+      (function drawFrame() {
+        vy += gravity;
+        bullet.style.left = (x += vx) + "px";
+        bulletShadow.style.left = x + "px";
+        bullet.style.top = (y += vy) + "px";
+        bullet.style.transform = `rotate(${
+          self.getAngle(x, y, lastX, lastY) - defAngle - 25
+        }deg)`;
+        if (!$Z[zombieTarget.id]) {
+          zY = GetY(self.R) - 70;
+        }
+        if ((x >= x2 - 0 && y >= zY && vy > 0) || s < 40) {
+          bullet &&
+            ((bullet.src = self.PicArr[4]),
+              (bullet.style.transform = `rotate(0deg)`),
+              oSym.addTask(120, ClearChild, [bullet]));
+		  let z=oZ.getZ0(x,self.R);
+		  z&&z.Altitude==1&&self.HitZombie(z,self);
+          return;
+        }
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 50 / 3 - (currTime - lastTime)) / 10;
+        oSym.addTask(timeToCall, drawFrame);
+        lastTime = currTime + timeToCall;
+        [lastX, lastY] = [x, y];
+      })();
+    });
+  }
 })
