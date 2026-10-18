@@ -120,7 +120,7 @@ oCabbage = InheritO(oPeashooter, {
     ];
   })(),
   Tooltip: "向敌人抛出卷心菜",
-  Produce: '卷心菜投手可以投掷卷心菜。<p>伤害：<font color="#FF0000">一般<br></font>距离：<font color="#FF0000">投掷</font></p>卷心菜投手用卷心菜砸僵尸干得很好，它以此赚钱，毕竟，它擅长这个。只是首先他不明白僵尸们是怎么爬上屋顶的。',
+  Produce: '卷心菜投手可以投掷卷心菜。<p>伤害：<font color="#FF0000">一般<br></font>精英形态：<font color="#FF0000">按规律连续投掷卷心菜<br></font>距离：<font color="#FF0000">投掷</font></p>卷心菜投手用卷心菜砸僵尸干得很好，它以此赚钱，毕竟，它擅长这个。只是首先他不明白僵尸们是怎么爬上屋顶的。',
   TriggerCheck: function(b, a) {
     this.AttackCheck2(b) && ((this.canTrigger = 0), this.CheckLoop(b.id, a));
   },
@@ -255,6 +255,495 @@ a.NormalAttack= function(a) {
               (bullet.style.transform = `rotate(0deg)`),
               oSym.addTask(120, ClearChild, [bullet]));
 		  let z=oZ.getRangeLeftZ(x,x+10,self.R,true);
+		  z&&(z.Altitude==1||z.EName=="oSnorkelZombie")&&self.HitZombie(z,self);
+          return;
+        }
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 50 / 3 - (currTime - lastTime)) / 10;
+        oSym.addTask(timeToCall, drawFrame);
+        lastTime = currTime + timeToCall;
+        [lastX, lastY] = [x, y];
+      })();
+    });
+  }
+}),
+oMelonPult= InheritO(oCabbage, {
+  EName: "oMelonPult",
+  CName: "西瓜投手",
+  width: 210,
+  height: 133,
+  beAttackedPointL: 0,
+  beAttackedPointR: 140,
+  SunNum: 300,
+  AttackGif: 4,
+  Attack: 80,
+  SpreadAttMax:26,
+  SpreadAttMin:1,//溅射伤害
+  PicArr: (function() {
+    var a = "images/Plants/MelonPult/";
+    return [
+      "images/Card/Plants/Melonpult.png",
+      a + "MelonPult.gif",
+      a + "MelonPult.gif",
+      a + "Bullet.png",
+      a + "MelonPultAttack.gif"
+    ];
+  })(),
+  Tooltip: "向敌人投出西瓜造成极大伤害",
+  Produce: '西瓜投手可以对成群的敌人造成伤害。<p>伤害：<font color="#FF0000">高（80）<br></font>精英形态：<font color="#FF0000">一次性投出多个西瓜攻击整行僵尸<br></font>距离：<font color="#FF0000">投掷</font></p>没错，西瓜投手是“重力系”，他会用自己的“重力”打退成群的僵尸',
+jinyinAct:function(a){},
+  PrivateBirth(a) {
+    a.BulletEle = NewImg(
+      0,
+      a.PicArr[3],
+      "left:" +
+      (a.pixelLeft + 50) +
+      "px;top:" +
+      (a.pixelTop + 10) +
+      "px;visibility:hidden;z-index:" +
+      (a.zIndex + 2)
+    );
+  },
+  getAngle(x, y, lastX, lastY) {
+    return (180 / Math.PI) * Math.atan2(y - lastY, x - lastX);
+  },
+  CheckLoop(zid, direction) {
+    var self = this;
+    var pid = self.id;
+    if ($P[pid]) {
+      self.NormalAttack(zid,0);
+	  if(Math.random()*100<self.SpecialAttackChance||self.jinyin){
+		self.NormalAttack(zid,1);
+		if(Math.random()*100<self.SpecialAttackChance&&self.jinyin){
+			for (P=0;P<Math.min(5,oZ.getArZ(self.pixelLeft + self.beAttackedPointR,oS.W,self.R).length);P++){
+				self.NormalAttack(zid,1);
+			}
+		}
+	}
+      oSym.addTask(290, (_) => {
+        $P[pid] && self.AttackCheck1(zid, direction);
+      });
+    }
+  },
+  HitZombie(zombieTarget, self) {
+	for (i=Math.max(zombieTarget.R-1,1);i<=Math.min(zombieTarget.R+1,oS.R);i++){
+		let SpreadZ=oZ.getArZ(zombieTarget.ZX-10,zombieTarget.ZX+10,i);
+		let ZL=SpreadZ.length;
+		var Att;
+		ZL&&(Att=Math.max(Math.min(80/ZL,self.SpreadAttMax),self.SpreadAttMin));
+		while(ZL--){
+			let z=SpreadZ[ZL];
+			z&&(z.Altitude==1||z.EName=="oSnorkelZombie")&&(z.id!=zombieTarget.id)&&z.getHit1(z,Att);
+		}
+	}//处理溅射伤害
+    zombieTarget.getPea(zombieTarget, 0);
+    zombieTarget.getHit1(zombieTarget, self.Attack);
+  },
+  SpecialAttackChance:20,
+  AttackAnim(ele, self) {
+    ele.childNodes[1].src = self.PicArr[self.AttackGif] + "?" + this.id;
+  },
+  NormalAttack(zid,IsSpecial) {
+    var self = this;
+    var ele = $(self.id);
+    var zombieTarget;
+    var zombieT = oZ.getArZ(
+      self.pixelLeft + self.beAttackedPointR,
+      oS.W,
+      self.R
+    );
+   if(IsSpecial){
+	   zombieTarget=zombieT[Math.floor(Math.random()*zombieT.length)];
+   }else{
+   for (Le=0;Le<zombieT.length;Le++){
+    if (!self.AttackCheck2(zombieT[Le])) continue;
+	zombieTarget=zombieT[Le];
+        break
+       }
+   }
+    var bullet = EditEle(
+      self.BulletEle.cloneNode(false), {
+        id: "CB" + Math.random(),
+      },
+      0,
+      EDPZ
+    );
+    //alert(bullet);
+    self.AttackAnim(ele, self);
+    oSym.addTask(
+      120,
+      (_) =>
+      $P[self.id] &&
+      (ele.childNodes[1].src = self.PicArr[self.NormalGif] + "?" + this.id)
+    );
+    oSym.addTask(95, (_) => {
+      //PlayAudio(self.AudioArr.slice(0, 2).random());
+	  if(!$P[self.id]||!zombieTarget)return;
+      SetVisible(bullet);
+      var x = self.pixelLeft + 50;
+      var y = self.pixelTop + 10;
+      var zomRelativePos = [zombieTarget.AttackedLX+20, GetY(zombieTarget.R)-80];
+      var s =
+        zomRelativePos[0] -
+        10 -
+        x -
+        !zombieTarget.isAttacking *
+        (zombieTarget.WalkDirection?-zombieTarget.Speed:zombieTarget.Speed) *
+        10 *
+        1;
+      //alert(1);
+      var x2 = x + s;
+      var gravity = 0.2;
+      var vy = -10;
+      var vx = -(gravity * s) / (2 * vy);
+      var lastTime = 0;
+      var zY =
+        zomRelativePos[1] - 20;
+      var [lastX, lastY] = [x, y];
+      var defAngle = self.getAngle(x + vx, y + vy + gravity, lastX, lastY);
+      var bulletShadow = NewEle(
+        `${self.id}_B_${Math.random()}_Shadow`,
+        "div",
+        `opacity:0.5;background-size:29px;background-repeat: no-repeat;width:29px;left:${x}px;top:${
+          self.pixelTop + self.height - 10
+        }px;`, {
+          className: "Shadow",
+        },
+        EDPZ
+      );
+      (function drawFrame() {
+        vy += gravity;
+        bullet.style.left = (x += vx) + "px";
+        bulletShadow.style.left = x + "px";
+        bullet.style.top = (y += vy) + "px";
+        bullet.style.transform = `rotate(${
+          self.getAngle(x, y, lastX, lastY) - defAngle - 25
+        }deg)`;
+        if (!$Z[zombieTarget.id]) {
+          zY = GetY(self.R) - 70;
+        }
+        if ((x >= x2 - 0 && y >= zY && vy > 0) || s < 40) {
+          bullet &&ClearChild(bullet);
+		  let z=oZ.getRangeLeftZ(x,x+15,self.R,true);
+		  z&&(z.Altitude==1||z.EName=="oSnorkelZombie")&&self.HitZombie(z,self);
+          return;
+        }
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 50 / 3 - (currTime - lastTime)) / 10;
+        oSym.addTask(timeToCall, drawFrame);
+        lastTime = currTime + timeToCall;
+        [lastX, lastY] = [x, y];
+      })();
+    });
+  }
+}),
+oMelonPult= InheritO(oCabbage, {
+  EName: "oMelonPult",
+  CName: "西瓜投手",
+  width: 210,
+  height: 133,
+  beAttackedPointL: 0,
+  beAttackedPointR: 140,
+  SunNum: 300,
+  AttackGif: 4,
+  Attack: 80,
+  SpreadAttMax:26,
+  SpreadAttMin:1,//溅射伤害
+  PicArr: (function() {
+    var a = "images/Plants/MelonPult/";
+    return [
+      "images/Card/Plants/Melonpult.png",
+      a + "MelonPult.gif",
+      a + "MelonPult.gif",
+      a + "Bullet.png",
+      a + "MelonPultAttack.gif"
+    ];
+  })(),
+  Tooltip: "向敌人投出西瓜造成极大伤害",
+  Produce: '西瓜投手可以对成群的敌人造成伤害。<p>伤害：<font color="#FF0000">高（80）<br></font>精英形态：<font color="#FF0000">一次性投出多个西瓜攻击整行僵尸<br></font>距离：<font color="#FF0000">投掷</font></p>没错，西瓜投手是“重力系”，他会用自己的“重力”打退成群的僵尸',
+jinyinAct:function(a){},
+  PrivateBirth(a) {
+    a.BulletEle = NewImg(
+      0,
+      a.PicArr[3],
+      "left:" +
+      (a.pixelLeft + 50) +
+      "px;top:" +
+      (a.pixelTop + 10) +
+      "px;visibility:hidden;z-index:" +
+      (a.zIndex + 2)
+    );
+  },
+  getAngle(x, y, lastX, lastY) {
+    return (180 / Math.PI) * Math.atan2(y - lastY, x - lastX);
+  },
+  CheckLoop(zid, direction) {
+    var self = this;
+    var pid = self.id;
+    if ($P[pid]) {
+      self.NormalAttack(zid,0);
+	  if(Math.random()*100<self.SpecialAttackChance||self.jinyin){
+		self.NormalAttack(zid,1);
+		if(Math.random()*100<self.SpecialAttackChance&&self.jinyin){
+			for (P=0;P<Math.min(5,oZ.getArZ(self.pixelLeft + self.beAttackedPointR,oS.W,self.R).length);P++){
+				self.NormalAttack(zid,1);
+			}
+		}
+	}
+      oSym.addTask(290, (_) => {
+        $P[pid] && self.AttackCheck1(zid, direction);
+      });
+    }
+  },
+  HitZombie(zombieTarget, self) {
+	for (i=Math.max(zombieTarget.R-1,1);i<=Math.min(zombieTarget.R+1,oS.R);i++){
+		let SpreadZ=oZ.getArZ(zombieTarget.ZX-20,zombieTarget.ZX+20,i);
+		let ZL=SpreadZ.length;
+		var Att;
+		ZL&&(Att=Math.max(Math.min(80/ZL,self.SpreadAttMax),self.SpreadAttMin));
+		while(ZL--){
+			let z=SpreadZ[ZL];
+			z&&(z.Altitude==1||z.EName=="oSnorkelZombie")&&(z.id!=zombieTarget.id)&&z.getHit1(z,Att);
+		}
+	}//处理溅射伤害
+    zombieTarget.getPea(zombieTarget, 0);
+    zombieTarget.getHit1(zombieTarget, self.Attack);
+  },
+  SpecialAttackChance:20,
+  AttackAnim(ele, self) {
+    ele.childNodes[1].src = self.PicArr[self.AttackGif] + "?" + this.id;
+  },
+  NormalAttack(zid,IsSpecial) {
+    var self = this;
+    var ele = $(self.id);
+    var zombieTarget;
+    var zombieT = oZ.getArZ(
+      self.pixelLeft + self.beAttackedPointR,
+      oS.W,
+      self.R
+    );
+   if(IsSpecial){
+	   zombieTarget=zombieT[Math.floor(Math.random()*zombieT.length)];
+   }else{
+   for (Le=0;Le<zombieT.length;Le++){
+    if (!self.AttackCheck2(zombieT[Le])) continue;
+	zombieTarget=zombieT[Le];
+        break
+       }
+   }
+    var bullet = EditEle(
+      self.BulletEle.cloneNode(false), {
+        id: "CB" + Math.random(),
+      },
+      0,
+      EDPZ
+    );
+    //alert(bullet);
+    self.AttackAnim(ele, self);
+    oSym.addTask(
+      120,
+      (_) =>
+      $P[self.id] &&
+      (ele.childNodes[1].src = self.PicArr[self.NormalGif] + "?" + this.id)
+    );
+    oSym.addTask(95, (_) => {
+      //PlayAudio(self.AudioArr.slice(0, 2).random());
+	  if(!$P[self.id]||!zombieTarget)return;
+      SetVisible(bullet);
+      var x = self.pixelLeft + 50;
+      var y = self.pixelTop + 10;
+      var zomRelativePos = [zombieTarget.AttackedLX+20, GetY(zombieTarget.R)-80];
+      var s =
+        zomRelativePos[0] -
+        10 -
+        x -
+        !zombieTarget.isAttacking *
+        (zombieTarget.WalkDirection?-zombieTarget.Speed:zombieTarget.Speed) *
+        10 *
+        1;
+      //alert(1);
+      var x2 = x + s;
+      var gravity = 0.2;
+      var vy = -10;
+      var vx = -(gravity * s) / (2 * vy);
+      var lastTime = 0;
+      var zY =
+        zomRelativePos[1] - 20;
+      var [lastX, lastY] = [x, y];
+      var defAngle = self.getAngle(x + vx, y + vy + gravity, lastX, lastY);
+      var bulletShadow = NewEle(
+        `${self.id}_B_${Math.random()}_Shadow`,
+        "div",
+        `opacity:0.5;background-size:29px;background-repeat: no-repeat;width:29px;left:${x}px;top:${
+          self.pixelTop + self.height - 10
+        }px;`, {
+          className: "Shadow",
+        },
+        EDPZ
+      );
+      (function drawFrame() {
+        vy += gravity;
+        bullet.style.left = (x += vx) + "px";
+        bulletShadow.style.left = x + "px";
+        bullet.style.top = (y += vy) + "px";
+        bullet.style.transform = `rotate(${
+          self.getAngle(x, y, lastX, lastY) - defAngle - 25
+        }deg)`;
+        if (!$Z[zombieTarget.id]) {
+          zY = GetY(self.R) - 70;
+        }
+        if ((x >= x2 - 0 && y >= zY && vy > 0) || s < 40) {
+          bullet &&ClearChild(bullet);
+		  let z=oZ.getRangeLeftZ(x-15,x+15,self.R,true);
+		  z&&(z.Altitude==1||z.EName=="oSnorkelZombie")&&self.HitZombie(z,self);
+          return;
+        }
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 50 / 3 - (currTime - lastTime)) / 10;
+        oSym.addTask(timeToCall, drawFrame);
+        lastTime = currTime + timeToCall;
+        [lastX, lastY] = [x, y];
+      })();
+    });
+  }
+}),
+oWinterMelon= InheritO(oMelonPult, {
+  EName: "oWinterMelon",
+  CName: "冰西瓜投手",
+  SunNum: 200,
+  CanGrow:function(b, a, d) {
+            var c = b[1];
+            return c && c.EName == "oRepeater"
+        },
+  PicArr: (function() {
+    var a = "images/Plants/WinterMelon/";
+    return [
+      "images/Card/Plants/WinterMelonpult.png",
+      a + "WinterMelon.gif",
+      a + "WinterMelon.gif",
+      a + "Bullet.png",
+      a + "WinterMelonAttack.gif"
+    ];
+  })(),
+  Tooltip: "向敌人投出冰西瓜造成极大伤害",
+  Produce: '冰西瓜投手可以对成群的敌人造成伤害。<p>伤害：<font color="#FF0000">高（80）<br></font><font color="#FF0000">一次性投出多个西瓜攻击整行僵尸<br></font>距离：<font color="#FF0000">投掷</font></p>没错，冰西瓜投手也是“重力系”，他会用自己冰冷的“重力”打退成群的僵尸',
+  CheckLoop(zid, direction) {
+    var self = this;
+    var pid = self.id;
+    if ($P[pid]) {
+      self.NormalAttack(zid,0);
+		self.NormalAttack(zid,1);
+		if(Math.random()*100>self.SpecialAttackChance){
+			for (P=0;P<Math.min(5,oZ.getArZ(self.pixelLeft + self.beAttackedPointR,oS.W,self.R).length);P++){
+				self.NormalAttack(zid,1);
+			}
+	}
+      oSym.addTask(290, (_) => {
+        $P[pid] && self.AttackCheck1(zid, direction);
+      });
+    }
+  },
+  HitZombie(zombieTarget, self) {
+	for (i=Math.max(zombieTarget.R-1,1);i<=Math.min(zombieTarget.R+1,oS.R);i++){
+		let SpreadZ=oZ.getArZ(zombieTarget.ZX-29,zombieTarget.ZX+20,i);
+		let ZL=SpreadZ.length;
+		var Att;
+		ZL&&(Att=Math.max(Math.min(80/ZL,self.SpreadAttMax),self.SpreadAttMin));
+		while(ZL--){
+			let z=SpreadZ[ZL];
+			z&&(z.Altitude==1||z.EName=="oSnorkelZombie")&&(z.id!=zombieTarget.id)&&(z.getSlow(z,z.id),z.getHit1(z,Att));
+		}
+	}//处理溅射伤害
+    zombieTarget.getPea(zombieTarget, 0);
+	zombieTarget.getSlow(zombieTarget, zombieTarget.id);
+    zombieTarget.getHit1(zombieTarget, self.Attack);
+  },
+  SpecialAttackChance:20,
+  AttackAnim(ele, self) {
+    ele.childNodes[1].src = self.PicArr[self.AttackGif] + "?" + this.id;
+  },
+  NormalAttack(zid,IsSpecial) {
+    var self = this;
+    var ele = $(self.id);
+    var zombieTarget;
+    var zombieT = oZ.getArZ(
+      self.pixelLeft + self.beAttackedPointR,
+      oS.W,
+      self.R
+    );
+   if(IsSpecial){
+	   zombieTarget=zombieT[Math.floor(Math.random()*zombieT.length)];
+   }else{
+   for (Le=0;Le<zombieT.length;Le++){
+    if (!self.AttackCheck2(zombieT[Le])) continue;
+	zombieTarget=zombieT[Le];
+        break
+       }
+   }
+    var bullet = EditEle(
+      self.BulletEle.cloneNode(false), {
+        id: "CB" + Math.random(),
+      },
+      0,
+      EDPZ
+    );
+    //alert(bullet);
+    self.AttackAnim(ele, self);
+    oSym.addTask(
+      120,
+      (_) =>
+      $P[self.id] &&
+      (ele.childNodes[1].src = self.PicArr[self.NormalGif] + "?" + this.id)
+    );
+    oSym.addTask(95, (_) => {
+      //PlayAudio(self.AudioArr.slice(0, 2).random());
+	  if(!$P[self.id]||!zombieTarget)return;
+      SetVisible(bullet);
+      var x = self.pixelLeft + 50;
+      var y = self.pixelTop + 10;
+      var zomRelativePos = [zombieTarget.AttackedLX+20, GetY(zombieTarget.R)-80];
+      var s =
+        zomRelativePos[0] -
+        10 -
+        x -
+        !zombieTarget.isAttacking *
+        (zombieTarget.WalkDirection?-zombieTarget.Speed:zombieTarget.Speed) *
+        10 *
+        1;
+      //alert(1);
+      var x2 = x + s;
+      var gravity = 0.2;
+      var vy = -10;
+      var vx = -(gravity * s) / (2 * vy);
+      var lastTime = 0;
+      var zY =
+        zomRelativePos[1] - 20;
+      var [lastX, lastY] = [x, y];
+      var defAngle = self.getAngle(x + vx, y + vy + gravity, lastX, lastY);
+      var bulletShadow = NewEle(
+        `${self.id}_B_${Math.random()}_Shadow`,
+        "div",
+        `opacity:0.5;background-size:29px;background-repeat: no-repeat;width:29px;left:${x}px;top:${
+          self.pixelTop + self.height - 10
+        }px;`, {
+          className: "Shadow",
+        },
+        EDPZ
+      );
+      (function drawFrame() {
+        vy += gravity;
+        bullet.style.left = (x += vx) + "px";
+        bulletShadow.style.left = x + "px";
+        bullet.style.top = (y += vy) + "px";
+        bullet.style.transform = `rotate(${
+          self.getAngle(x, y, lastX, lastY) - defAngle - 25
+        }deg)`;
+        if (!$Z[zombieTarget.id]) {
+          zY = GetY(self.R) - 70;
+        }
+        if ((x >= x2 - 0 && y >= zY && vy > 0) || s < 40) {
+          bullet &&ClearChild(bullet);
+		  let z=oZ.getRangeLeftZ(x-15,x+15,self.R,true);
 		  z&&(z.Altitude==1||z.EName=="oSnorkelZombie")&&self.HitZombie(z,self);
           return;
         }
