@@ -255,7 +255,7 @@ a.NormalAttack= function(a) {
               (bullet.style.transform = `rotate(0deg)`),
               oSym.addTask(120, ClearChild, [bullet]));
 		  let z=oZ.getRangeLeftZ(x-5,x+5,self.R,true);
-		  z&&z.Altitude==1&&self.HitZombie(z,self);
+		  z&&(z.Altitude==1||z.EName=="oSnorkelZombie")&&self.HitZombie(z,self);
           return;
         }
         var currTime = new Date().getTime();
