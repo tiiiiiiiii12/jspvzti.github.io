@@ -55,6 +55,8 @@ oSnorkelZombie,oJackinTheBoxZombie,oBalloonZombie,oDiggerZombie,oLadderZombie,oB
                 oCoffeeBean,
                 oGarlic,
                 oUmbrellaLeaf,
+                oMelonPult,
+                oWinterMelon,
                 oGatlingPea,
                 oTwinSunflower,
                 oGloomShroom,
