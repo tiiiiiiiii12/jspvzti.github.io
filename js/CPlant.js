@@ -505,7 +505,7 @@ oStarfruit = InheritO(CPlants, {
       c = g.R,
       e = f + 15,
       a = function(j, i, h) {
-        return (j && j.Altitude == 1 ? (j.getPea(j, this.Attack, i), ClearChild(h), false) : true)
+        return (j && j.Altitude == 1 ? (j.getPea(j, 25, i), ClearChild(h), false) : true)
       };
     (function(h) {
       oSym.addTask(15,
