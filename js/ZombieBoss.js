@@ -6,13 +6,14 @@ var oGargantuarBoss = InheritO(oGargantuar, {
   CanPass: function(d, c) {
     return c
   },
+  flatTire:function(){},
   beAttackedPointL: 154,
   beAttackedPointR: 285,
   HP:80000,
   level:1,
   WalkToLadder:function(){},//不走梯子
   height: 300,
-  lastHP:12000,
+  lastHP:15000,
   bedevil:function(a,b){
     if(b==2){
       CZombies.prototype.bedevil(a,0)
@@ -24,25 +25,33 @@ var oGargantuarBoss = InheritO(oGargantuar, {
       var h = $Z[f];
       var tp;
       $P[e]&&PrivateTombstones($P[e].R,$P[e].C);
+	  h.PrivateAttack&&h.PrivateAttack(h);
       for (i = -1; i <= 3; i++) {
         h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50),
           oSym.addTask(40, function(h) {
             $Z[f] && h.JudgeAttack()
-          }, [h]))
+          }, [h])))
       }
     }, [d, c]);
   },
 getFreeze:function(){},
   CheckSkill:function(a){
 	for(i=1;i<=oS.R;i++){
-		PrivateTombstones(i,a.PZ?9:1)
+		PrivateTombstones(i,a.PZ?9:1);
+		PrivateTombstones(i,a.PZ?8:2)
 	}
 	PlayAudio("explosion");
     oSym.addTask(1000, function(a) {
 		if($Z[a.id]){
 	var Num=Math.floor(Math.random() * a.Skill.length);
       a.Skill[Num].func(a);
-      a.HP<a.lastHP&&(a.Speed=a.OSpeed=1.6,a.jianshang*=0.5,oSym.addTask(500,function(a){a.jianshang=1},[a]));
+      a.HP<a.lastHP&&(a.PrivateAttack=function(a){
+CustomZombie(oWallNutZombie,a.R,GetC(a.ZX)-(a.WalkDirection?-1:1),!a.PZ).PrivateBirth=function(a){
+SetHidden(a.Ele);
+oSym.addTask(0,function(a){
+a.Boom(a);
+},[a])
+}},a.Speed=a.OSpeed=1.6,a.jianshang*=0.5);
 	NewEle("DivTeach", "div", 0, 0, EDAll);
 	innerText($("DivTeach"),a.Skill[Num].name);
 	oSym.addTask(500, ClearChild,[$("DivTeach")]);
@@ -57,64 +66,32 @@ getFreeze:function(){},
         a.ChangeR(a);
         if (a.HP >= 70000) {
 			try{
-          oP.SetTimeoutZombie([oZombie, oPeaZombie, oConeheadZombie,oPoleVaultingZombie], 0);
+          oP.SetTimeoutZombie(8,9,5,[oZombie, oPeaZombie, oConeheadZombie,oPoleVaultingZombie,oBucketheadZombie],!a.PZ);
 		  oP.SetTimeoutTomZombie([oZombie,oPeaZombie]);
-          oP.NumZombies += 4;
 		}catch{};
         } else if (a.HP >= 45000) {
           try{
-          oP.SetTimeoutZombie([oScreenDoorZombie, oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie], 0);
+          oP.SetTimeoutAirdropZombie(8,9,7, [oFootballZombie,oScreenDoorZombie,oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie], !a.PZ);
           oP.SetTimeoutTomZombie([oZombie, oPeaZombie, oConeheadZombie]);
 		  AppearTombstones(8, 9, 1);
-			oP.NumZombies += 5;
 			}catch{};
 } else if (a.HP >= a.lastHP) {
           try{
-          oP.SetTimeoutZombie([oJackinTheBoxZombie, oBucketheadZombie,oLadderZombie,oDancingZombie,oPoleVaultingZombie,oFootballZombie], 0);
-          oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie]);
-		oP.NumZombies += 6;
+          oP.SetTimeoutAirdropZombie(7,9,10,[oGatlingPeaZombie,oCatapultZombie,oJackinTheBoxZombie,oBucketheadZombie,oLadderZombie,oDancingZombie,oPoleVaultingZombie,oFootballZombie,oNewspaperZombie,oSquashZombie],!a.PZ);
+          oP.SetTimeoutTomZombie([oZombie, oBucketheadZombie, oConeheadZombie,oScreenDoorZombie]);
 		  AppearTombstones(8, 9, 1);
 			}catch{};
 }else {
           try{
-          oP.SetTimeoutZombie([oLadderZombie,oFootballZombie, oZomboni, oGargantuar, oTallNutZombie,oGatlingPeaZombie,oJalapenoZombie], 0);
+          oP.SetTimeoutAirdropZombie(6,9,12,[oCatapultZombie,oLadderZombie,oFootballZombie, oZomboni, oGargantuar, oTallNutZombie,oGatlingPeaZombie,oJalapenoZombie,oSquashZombie],!a.PZ);
           oP.SetTimeoutTomZombie([oZombie,oFootballZombie,oScreenDoorZombie,oBucketheadZombie]);
-          oP.NumZombies += 8;
-		  AppearTombstones(6, 9, 2);
+		  AppearTombstones(6, 9, 3);
 			}catch{};
         }
 		$Z[a.id]&&oSym.addTask(1500 + (a.HP * 0.01),arguments.callee,[a])
       }, [a])
   },
   Skill: [
-    {
-      name: "狂暴",
-      tip: "使全场僵尸能踩植物，此技能持续10秒",
-      func: function(a) {
-a.PrivateAct=function(a){
-            for (u in $Z) {
-              e = $Z[u];
-			if(!e.color){
-				 e.PZ&&e.beAttacked&&(e.EleBody.style.filter = 'saturate(25%)',e.color=1);
-			}
-		    if(e.PZ&&e.beAttacked&&e.canWalk(e,u)){
-				for (let i = 0; i < 4; i++) {
-				let p = oGd.$[e.R + "_" + GetC(e.ZX - 10) + "_" + i];
-                    p && (p.canEat) && p.getHurt(e, 1, 100);
-				        }
-			        }
-			}
-	};
-  oSym.addTask(1200, function(a) {
-            a.PrivateAct = function() {};
-            for (u in $Z) {
-              e = $Z[u];
-				e.EleBody.style.filter = 'saturate(100%)';
-				e.color=0;
-            }
-          }, [a])
-      }
-    },
 {
 name:"The world",
 tip:"使场上植物被冻结,持续5秒",
@@ -129,19 +106,18 @@ tip:"召唤坚果障碍",
 func:function(a){
 for (i=1;i<=oS.R;i++){
 	CustomZombie(oNutZombie,i,Math.floor(Math.random()*5+5),!a.PZ);
+	CustomZombie(oNutZombie,i,Math.floor(Math.random()*5+5),!a.PZ);
 	a.HP<=a.lastHP&&CustomZombie(oNutZombie,i,Math.floor(Math.random()*5+5),!a.PZ);
 }
 }
 },
 	{
 name:"脑旗号角",
-tip:"在本行最后一列召唤加强血量旗帜僵尸，在20000血以上为非精英，20000血以下为精英",
+tip:"在本行最后一列召唤旗帜僵尸",
 func:function(a){
 	var b=CustomZombie(oFlagZombie,a.R,!a.PZ?1:9,!a.PZ);
-	b.HP*=Math.max(5/Math.max(Math.round(a.HP/6000),1));
-	b.Speed/=3;
-	b.OSpeed/=3;
-	b.jinyinnum=(a.HP>=a.lastHP?0:100)
+	b.HP*=Math.max(5/Math.max(Math.round(a.HP/6000),1),500);
+	b.jinyinnum=(a.HP>=a.lastHP?25:100)
 }
 },
 {
