@@ -30,7 +30,7 @@ var oGargantuarBoss = InheritO(oGargantuar, {
         h && h.beAttacked && !h.FreeFreezeTime && !h.FreeSetbodyTime && ((d = $P[e]) && (tp = oGd.$[d.R + "_" + d.C + "_" + i]) && tp.getHurt(h, 1, 50),
           oSym.addTask(40, function(h) {
             $Z[f] && h.JudgeAttack()
-          }, [h])))
+          }, [h]))
       }
     }, [d, c]);
   },
