@@ -116,7 +116,7 @@ name:"脑旗号角",
 tip:"在本行最后一列召唤旗帜僵尸",
 func:function(a){
 	var b=CustomZombie(oFlagZombie,a.R,!a.PZ?1:9,!a.PZ);
-	b.HP*=Math.max(5/Math.max(Math.round(a.HP/6000),1),500);
+	b.HP=Math.max(500,Math.max(5/Math.max(Math.round(a.HP/6000),1),1));
 	b.jinyinnum=(a.HP>=a.lastHP?25:100)
 }
 },
