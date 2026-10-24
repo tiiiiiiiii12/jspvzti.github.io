@@ -217,6 +217,9 @@ getLadder:function() {
                 b = a.id;
             a.oTrigger && oT.delP(a);
             a.HP = 0;
+		if(oGd.$Ladder[a.R + "_" + a.C]){
+		delete oGd.$Ladder[a.R + "_" + a.C]
+		}
             delete $P[b];
             delete oGd.$[a.R + "_" + a.C + "_" + a.PKind];
             $P.length -= 1;
@@ -228,6 +231,9 @@ getLadder:function() {
                 c = b.id;
             b.oTrigger && oT.delP(b);
             b.HP = 0;
+		if(oGd.$Ladder[b.R + "_" + b.C]){
+		delete oGd.$Ladder[b.R + "_" + b.C]
+		}
             delete $P[c];
             delete oGd.$[b.R + "_" + b.C + "_" + b.PKind];
             $P.length -= 1;
@@ -296,7 +302,8 @@ getLadder:function() {
         canEat: 0,
         Stature: 1,
 		getHurt:function(b,a){
-			a!=3&&(a.canTrigger = 0,a.NormalAttack(a))
+			var c=this;
+			a!=3&&(c.canTrigger = 0,c.NormalAttack(c))
 		},
         getTriggerRange: function(a, b, c) {
             return [
@@ -368,6 +375,7 @@ oStarfruit = InheritO(CPlants, {
   height: 70,
   beAttackedPointR: 57,
   SunNum: 150,
+  Attack:25,
   GetDY: function(b, c, a) {
     return a[0] ? -17 : -10
   },
@@ -497,7 +505,7 @@ oStarfruit = InheritO(CPlants, {
       c = g.R,
       e = f + 15,
       a = function(j, i, h) {
-        return (j && j.Altitude == 1 ? (j.getPea(j, 30, i), ClearChild(h), false) : true)
+        return (j && j.Altitude == 1 ? (j.getPea(j, this.Attack, i), ClearChild(h), false) : true)
       };
     (function(h) {
       oSym.addTask(15,
@@ -891,7 +899,7 @@ ChangeCallback:function(b){
         SunNum:350,
 		coolTime:15,
         PeaKind:0,
-		AttTime:140,
+		AttTime:100,
         PicArr: ["images/Card/Plants/Threepeater.png", "images/Plants/Threepeater/0.gif", "images/Plants/Threepeater/Threepeater.gif", "images/Plants/PB00.gif", "images/Plants/PeaBulletHit.gif"],
         AudioArr: ["splat1", "splat2", "splat3", "plastichit", "shieldhit", "shieldhit2"],
         Tooltip: "散射水波型子弹，攻速变慢",
@@ -1722,6 +1730,7 @@ NormalAttack:function(a){
         Produce: "",
         CanAttack: 1,
         PKind:10,
+		HitNum:0,
 		getFreeze:function(){},
         InitTrigger: function() {},
         getHurt: function() {},
@@ -1740,6 +1749,8 @@ NormalAttack:function(a){
                 if (z.CanAttack && (A = oZ.getZ0(r, a)) && A.getCrushed(z)) {
                     u = A.id;
                     PlayAudio(["bowlingimpact", "bowlingimpact2"][Math.floor(Math.random() * 2)]);
+					z.HitNum++>=2&&CustomZombie(oNutZombie,a,l,1);
+					z.HitNum>=4&&CustomZombie(oWallNutZombie,a,l,1);
                     switch (A.Ornaments) {
                         case 0:
                             A.getHit0(A,1500);
@@ -1940,14 +1951,14 @@ NormalAttack:function(a){
         PicArr: ["images/Card/Plants/CherryBomb.png", "images/Plants/CherryBomb/0.gif", "images/Plants/CherryBomb/CherryBomb.gif", "images/Plants/CherryBomb/Boom.gif" + $Random],
         AudioArr: ["cherrybomb"],
         Tooltip: "炸掉一定区域内的所有僵尸",
-        Produce: '樱桃炸弹，能炸掉一定区域内所有僵尸。他们一种下就会立刻引爆。所以请把他们种在僵尸们的身边。<br>精英形态：爆炸后随机在场上召唤几只精英小丑僵尸<br>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">一个中等区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，立即爆炸</font></p>“我要‘爆’开了。”樱桃一号说。“不，我们是要‘炸’开了！”它哥哥樱桃二号说。经过激烈的商议之后，他们才统一“爆炸这个说法。”',
+        Produce: '樱桃炸弹，能炸掉一定区域内所有僵尸。他们一种下就会立刻引爆。所以请把他们种在僵尸们的身边。<br>精英形态：爆炸后在场上随机位置产生额外的爆炸<br>伤害：<font color="#FF0000">巨大</font><br>范围：<font color="#FF0000">一个中等区域内的所有僵尸</font><br>使用方法：<font color="#FF0000">单独使用，立即爆炸</font></p>“我要‘爆’开了。”樱桃一号说。“不，我们是要‘炸’开了！”它哥哥樱桃二号说。经过激烈的商议之后，他们才统一“爆炸这个说法。”',
         InitTrigger: function() {},
         getHurt: function() {},
 		jinyinAct:function(a){
 		a.PrivateDie=function(a){
 			var b;
 			oSym.addTask(0,function(a,b,num,maxnum){
-				((b=CustomZombie(oJackinTheBoxZombie,Math.floor(Math.random()*oS.R+1),Math.round(Math.random()*6+1),1)).jinyinnum=100,b.Privatenum=30,b.PrivateBirth=function(b){b.EleBody.style.top=b.height+"px";b.AppearDownZ(b)});
+				CustomZombie(oZombie,Math.floor(Math.random()*oS.R+1),Math.round(Math.random()*4+5),1).PrivateBirth=function(b){oBackupDancer.prototype.Boom(b)};
 				++num<maxnum&&oSym.addTask(0,arguments.callee,[a,b,num,maxnum]);
 			},[a,b,0,Math.round(Math.random()*3+4)])
 		 }
@@ -2065,11 +2076,17 @@ NormalAttack:function(a){
         PicArr: ["images/Card/Plants/Jalapeno.png", "images/Plants/Jalapeno/0.gif", "images/Plants/Jalapeno/Jalapeno.gif", "images/Plants/Jalapeno/JalapenoAttack.gif"],
         AudioArr: ["jalapeno"],
         Tooltip: "消灭整行的敌人",
-        Produce: '火爆辣椒可以摧毁一整条线上的敌人。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">整条线上的僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>精英形态：给全屏非魅惑僵尸附上三倍易伤</p>“咕咕嘎嘎！”火爆辣椒说。他现在不会爆炸，还不到时候，不过快了，喔~，快了快了，快来了。他知道，他感受到了，他一生都是在等待这个时刻！',
+        Produce: '火爆辣椒可以摧毁一整条线上的敌人。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">整条线上的僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>精英形态：在自身一列留下持续30秒的火焰，点燃经过的豌豆</p>“咕咕嘎嘎！”火爆辣椒说。他现在不会爆炸，还不到时候，不过快了，喔~，快了快了，快来了。他知道，他感受到了，他一生都是在等待这个时刻！',
 		jinyinAct:function(){},
-		PrivateDie:function(a){
-			
-		},
+        PrivateDie: function(c) {
+            var b = c.C;
+		for (let i=1;i<=oS.R;i++){
+			(!oGd.$[i + "_" + b + "_" + 1]||oGd.$[i + "_" + b + "_" + 1]&&oGd.$[i + "_" + b + "_" + 1].EName=="oTorchwood")&&(oGd.$Torch[i + "_" + b] = 1);
+			oSym.addTask(3000,function(P){
+				(!P||P&&P.EName=="oTorchwood")&&(oGd.$Torch[i + "_" + b] = 0);
+			},[oGd.$[i + "_" + b + "_" + 1]])
+		}
+        },
         PrivateBirth: function(a) {
             oSym.addTask(72,
                 function(j) {
@@ -2192,7 +2209,7 @@ NormalAttack:function(a){
 	jinyinAct:function(){},
 	getTriggerRange: function(a, b, c) {
         return [
-            [this.AttackedLX, this.AttackedRX, 0]
+            [100, oS.W, 0]
         ]
     },
 	Tooltip: "能伤害走在上面的僵尸",
