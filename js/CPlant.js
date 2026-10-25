@@ -820,7 +820,7 @@ while (e--) {
           "-1": "getSnowPea",
           0: "getFreezePea",
           1: "getFreezePea"
-        } [m]](d, h, c), (SetStyle(j, {
+        } [m]](d, h, c,50), (SetStyle(j, {
           left: o + 28 + "px",
           width: "52px",
           height: "46px"
