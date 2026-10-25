@@ -138,8 +138,7 @@ oS.Init({
 			oS.ChoseCard = "";
 			oS.Chose = 0;
 			GroundOnmousemove = function() {}
-		}()
+		}():CancelPlant()
 	},
 	ViewPlantTitle: function(a) {}
-
 });
