@@ -128,7 +128,7 @@ oS.Init({
               d=g.DID,
               e,
               h=oGd.$LF[f];
-            k.CanGrow(l,f,a)&&function(){
+            k.CanGrow(l,f,a)?function(){
               PlayAudio(h!=2?"plant"+Math.floor(1+Math.random()*2):"plant_water");
               (new i).Birth(c,b,f,a,l);
               oSym.addTask(20,SetNone,[SetStyle($("imgGrowSoil"),{
@@ -138,10 +138,11 @@ oS.Init({
               $("dCardList").removeChild(e=$(d));
               e=null;
               ArCard.splice(j,1);
-              oS.ChoseCard="";
+			  oS.ChoseCard="";
               oS.Chose=0;
-              GroundOnmousemove=function(){}
-            }()},
+              GroundOnmousemove=function(){};
+            }():CancelPlant();
+		  },
           ViewPlantTitle:function(a){
           }
         });
