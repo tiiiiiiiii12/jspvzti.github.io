@@ -2087,9 +2087,9 @@ NormalAttack:function(a){
         PrivateDie: function(c) {
             var b = c.C;
 		for (let i=1;i<=oS.R;i++){
-			(!oGd.$[i + "_" + b + "_" + 1]||oGd.$[i + "_" + b + "_" + 1]&&oGd.$[i + "_" + b + "_" + 1].EName=="oTorchwood")&&(oGd.$Torch[i + "_" + b] = 1);
+			(!oGd.$[i + "_" + b + "_" + 1]||oGd.$[i + "_" + b + "_" + 1]&&(oGd.$[i + "_" + b + "_" + 1].EName!="oTorchwood"))&&(oGd.$Torch[i + "_" + b] = 1);
 			oSym.addTask(3000,function(P){
-				(!P||P&&P.EName=="oTorchwood")&&(oGd.$Torch[i + "_" + b] = 0);
+				(!P||(P&&P.EName!="oTorchwood"))&&(oGd.$Torch[i + "_" + b] = 0);
 			},[oGd.$[i + "_" + b + "_" + 1]])
 		}
         },
