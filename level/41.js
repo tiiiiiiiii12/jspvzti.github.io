@@ -1,4 +1,4 @@
-let warn=alert("走上了这条路，就不能再回头了哦");
+alert("走上了这条路，就不能再回头了哦");
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit,oPumpkinHead,oGarlic],
 	ZName: [oZombie, oZombie2, oZombie3, oNewspaperZombie,oImp,oPoleVaultingZombie,oConeheadZombie,oPeaZombie,oLadderZombie,oBungeeZombie],
