@@ -11,7 +11,8 @@ var $User = function() {
 	e = c && !window.XMLHttpRequest,
 	j = location.protocol.toLowerCase() == "http:" ? 1 : 0;
 	$Random = j ? "#": "?";
-	innerText = c ?
+	innerText = c ? function(l,k,t){
+if(t){
 oSym.addTask(2,function(u,k){
 l.innerText = (u?l.innerText+k.charAt(u):k.charAt(u));
 u++< k.split("").length&&oSym.addTask(2,arguments.callee,[u,k])
