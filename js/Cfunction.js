@@ -23,7 +23,7 @@ u++< k.split("").length&&oSym.addTask(2,arguments.callee,[u,k])
 	if(t){
 oSym.addTask(2,function(u,k){
 l.textContent = (u?l.textContent+k.charAt(u):k.charAt(u));
-u++< k.split("").length&&oSym.addTask(2,arguments.callee,[u,k]):alert("92")
+u++< k.split("").length&&oSym.addTask(2,arguments.callee,[u,k])
 },[0,k]);
 	}else{
 		l.textContent = k
