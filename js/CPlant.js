@@ -1958,7 +1958,10 @@ NormalAttack:function(a){
 		a.PrivateDie=function(a){
 			var b;
 			oSym.addTask(0,function(a,b,num,maxnum){
-				CustomZombie(oZombie,Math.floor(Math.random()*oS.R+1),Math.round(Math.random()*4+5),1).PrivateBirth=function(b){oBackupDancer.prototype.Boom(b)};
+				CustomZombie(oZombie,Math.floor(Math.random()*oS.R+1),Math.round(Math.random()*4+5),1).PrivateBirth=function(b){
+					SetHidden(b.Ele);
+					oSym.addTask(0,oBackupDancer.prototype.Boom,[b])
+				};
 				++num<maxnum&&oSym.addTask(0,arguments.callee,[a,b,num,maxnum]);
 			},[a,b,0,Math.round(Math.random()*3+4)])
 		 }
@@ -1981,7 +1984,7 @@ NormalAttack:function(a){
                         do {
                             h = (d = oZ.getArZ(l, k, g)).length;
                             while (h--) {
-                                d[h].getExplosion()
+                                d[h].getExplosion(1600)
                             }
 						for (i=c.C-1;i<=c.C+1;i++){
 							if(oGd.$Ladder[g+"_"+i]) delete oGd.$Ladder[g+"_"+i]; 
@@ -2076,7 +2079,7 @@ NormalAttack:function(a){
         PicArr: ["images/Card/Plants/Jalapeno.png", "images/Plants/Jalapeno/0.gif", "images/Plants/Jalapeno/Jalapeno.gif", "images/Plants/Jalapeno/JalapenoAttack.gif"],
         AudioArr: ["jalapeno"],
         Tooltip: "消灭整行的敌人",
-        Produce: '火爆辣椒可以摧毁一整条线上的敌人。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">整条线上的僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>精英形态：在自身一列留下持续30秒的火焰，点燃经过的豌豆</p>“咕咕嘎嘎！”火爆辣椒说。他现在不会爆炸，还不到时候，不过快了，喔~，快了快了，快来了。他知道，他感受到了，他一生都是在等待这个时刻！',
+        Produce: '火爆辣椒可以摧毁一整条线上的敌人。<p>伤害：<font color="#FF0000">极高</font><br>范围：<font color="#FF0000">整条线上的僵尸</font><br>用法：<font color="#FF0000">单独使用，立即生效</font><br>在自身一列留下持续30秒的火焰，点燃经过的豌豆</p>“咕咕嘎嘎！”火爆辣椒说。他现在不会爆炸，还不到时候，不过快了，喔~，快了快了，快来了。他知道，他感受到了，他一生都是在等待这个时刻！',
 		jinyinAct:function(){},
         PrivateDie: function(c) {
             var b = c.C;
