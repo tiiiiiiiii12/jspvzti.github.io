@@ -36,52 +36,60 @@ oS.Init({
 			switch (d) {
 				case 0:
             innerText(c, "（?!）",1);
-						c.onclick = function() {
-							oSym.addTask(50, b, [1])
+						c.onclick = function(c) {
+							oSym.addTask(50, b, [1]);
+							c.onclick=null;
 						};
 					break;
 				case 1:
-					c.onclick = function() {
-						oSym.addTask(50, b, [2])
+					c.onclick = function(c) {
+						oSym.addTask(50, b, [2]);
+						c.onclick=null;
 					};
 					innerText(c, "（前院怎么变成这样了？！）",1);
 					break;
 				case 2:
 					NewImg("dDave", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "left:0;width:285px;height:405px;top:200px", EDAll);
 					    PlayAudio("puff");
-						c.onclick = function() {
-							oSym.addTask(50, b, [3])
+						c.onclick = function(c) {
+							oSym.addTask(50, b, [3]);
+							c.onclick=null;
 						};
 					innerText(c, "房主在吗？",1);
 					break;
 				case 3:
 					PlayAudio("puff");
-						c.onclick = function() {
-							oSym.addTask(50, b, [4])
+						c.onclick = function(c) {
+							oSym.addTask(50, b, [4]);
+							c.onclick=null;
 					};
 					innerText(c, "你知道戴夫去哪儿了吗？",1);
 					break;
 				case 4:
 					$("dDave").src = "images/Plants/ScaredyShroom/ScaredyShroomCry.gif";
 					PlayAudio("puff");
-						c.onclick = function() {
-							oSym.addTask(50, b, [5])
+						c.onclick = function(c) {
+							oSym.addTask(50, b, [5]);
+							c.onclick=null;
 						};
 					innerText(c, "没有他的日子，我好害怕……",1);
 					break;
 				case 5:
-						c.onclick = function() {
-							oSym.addTask(100, b, [6])
+						c.onclick = function(c) {
+							oSym.addTask(100, b, [6]);
+							c.onclick=null;
 						};
 					innerText(c, "（虽然戴夫失踪是大事，但似乎暂时无法顾及了……）",1);
 					break;
 				case 6:
-						c.onclick = function() {
-							oSym.addTask(100, b, [7])
+						c.onclick = function(c) {
+							oSym.addTask(100, b, [7]);
+							c.onclick=null;
 						};
 					innerText(c, "（草坪外不断传来僵尸的吼声，看来这是一场旷日持久的恶战……）",1);
 					break;
 				case 7:
+			c.onclick=null;
 			innerText(c, "“别哭了，一边去吧”");
           oSym.addTask(1,function(Left){
             $("dDave").style.left=Left+"px";
