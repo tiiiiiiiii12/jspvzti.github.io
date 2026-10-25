@@ -1,4 +1,4 @@
-let warn=alert("本关会改变部分游戏设置！");
+let warn=alert("走上了这条路，就不能再回头了哦");
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit,oPumpkinHead,oGarlic],
 	ZName: [oZombie, oZombie2, oZombie3, oNewspaperZombie,oImp,oPoleVaultingZombie,oConeheadZombie,oPeaZombie,oLadderZombie,oBungeeZombie],
@@ -29,60 +29,57 @@ oS.Init({
 	LoadAccess: function(a) {
 	SetHidden($("dChapter1"),$("dChapter2"),$("dChapter3"),$("dChapter4"));
 	oAudio["Look up at the Sky"].playbackRate=Math.random()*0.7+0.7;//音乐变速
-  NewImg("dDave", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "left:0;width:285px;height:405px;top:200px", EDAll);
 	NewEle("DivTeach", "div", 0, 0, EDAll);
 		(function(d) {
 			var b = arguments.callee,
 				c = $("DivTeach");
 			switch (d) {
 				case 0:
-            innerText(c, "您好，我是胆小菇。");
-					  PlayAudio("puff");
+            innerText(c, "（?!）",1);
 						c.onclick = function() {
-							oSym.addTask(10, b, [1])
+							oSym.addTask(50, b, [1])
 						};
 					break;
 				case 1:
-					PlayAudio("puff");
 					c.onclick = function() {
-						oSym.addTask(10, b, [2])
+						oSym.addTask(50, b, [2])
 					};
-					innerText(c, "请问，戴夫去哪了？");
+					innerText(c, "（前院怎么变成这样了？！）",1);
 					break;
 				case 2:
+					NewImg("dDave", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "left:0;width:285px;height:405px;top:200px", EDAll);
 					    PlayAudio("puff");
 						c.onclick = function() {
-							oSym.addTask(10, b, [3])
+							oSym.addTask(50, b, [3])
 						};
-					innerText(c, "还有为什么前院变成了这样…");
+					innerText(c, "房主在吗？",1);
 					break;
 				case 3:
 					PlayAudio("puff");
-					$("dDave").src = "images/Plants/ScaredyShroom/ScaredyShroomCry.gif";
 						c.onclick = function() {
-							oSym.addTask(10, b, [4])
+							oSym.addTask(50, b, [4])
 					};
-					innerText(c, "我好害怕……");
+					innerText(c, "你知道戴夫去哪儿了吗？",1);
 					break;
 				case 4:
+					$("dDave").src = "images/Plants/ScaredyShroom/ScaredyShroomCry.gif";
 					PlayAudio("puff");
 						c.onclick = function() {
-							oSym.addTask(10, b, [5])
+							oSym.addTask(50, b, [5])
 						};
-					innerText(c, "有好多僵尸……");
+					innerText(c, "没有他的日子，我好害怕……",1);
 					break;
 				case 5:
-					c.onclick = null;
 						c.onclick = function() {
-							oSym.addTask(10, b, [6])
+							oSym.addTask(100, b, [6])
 						};
-					innerText(c, "（虽然戴夫失踪是大事，但似乎暂时无法顾及了……）");
+					innerText(c, "（虽然戴夫失踪是大事，但似乎暂时无法顾及了……）",1);
 					break;
 				case 6:
 						c.onclick = function() {
-							oSym.addTask(10, b, [7])
+							oSym.addTask(100, b, [7])
 						};
-					innerText(c, "（草坪外不断传来僵尸的吼声，看来这是一场旷日持久的恶战……）");
+					innerText(c, "（草坪外不断传来僵尸的吼声，看来这是一场旷日持久的恶战……）",1);
 					break;
 				case 7:
 			innerText(c, "“别哭了，一边去吧”");
