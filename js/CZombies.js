@@ -2016,6 +2016,21 @@ oFootballZombie = InheritO(oConeheadZombie, {
             }
         })
 		},
+		JudgeHidden:function(h) {
+                   var Num = 0;
+                !h.xianxing ? (h.Altitude = 4,
+                h.Ele.style.opacity = 0.1) : (h.Altitude = 1,
+              h.Ele.style.opacity = 1);
+            var a = h.R,
+				PLeng=0,
+              b = GetC(h.ZX);
+            for (let i = a - 1; i <= a + 1; i++) {
+              for (let l = b - 2; l <= b + 2; l++) {
+                 oGd.$[i + "_" + l + "_" + "1"] && (oGd.$[i + "_" + l + "_" + "1"].EName== "oPlantern")&&(PLeng=1)
+              }
+            }
+			h.xianxing=PLeng;
+          },
         CheckOrnHP: function(g, h, d, c, f, b, a) {
             var e = OrnNoneZombies.prototype;
             (g.OrnHP = d -= c) < 1 && (a && (g.HP += d), g.ChkActs = function() {
@@ -2042,21 +2057,7 @@ oFootballZombie = InheritO(oConeheadZombie, {
 								u&&u.PZ==k.PZ&&(u.EName=="oNewspaperZombie"||u.EName=="oGatlingPeaZombie")&&u.Ornaments&&u.getHit0(u,u.OrnHP,0)//全场读报类僵尸解封
 							}
 						}
-					k.num&&(k.PrivateAct=function(h) {
-                   var Num = 0;
-                !h.xianxing ? (h.Altitude = 4,
-                h.Ele.style.opacity = 0.1) : (h.Altitude = 1,
-              h.Ele.style.opacity = 1);
-            var a = h.R,
-				PLeng=0,
-              b = GetC(h.ZX);
-            for (let i = a - 1; i <= a + 1; i++) {
-              for (let l = b - 2; l <= b + 2; l++) {
-                 oGd.$[i + "_" + l + "_" + "1"] && (oGd.$[i + "_" + l + "_" + "1"].EName== "oPlantern")&&(PLeng=1)
-              }
-            }
-			h.xianxing=PLeng;
-          });
+					k.num&&(k.PrivateAct=k.JudgeHidden);
                         k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
                         if (!k.beAttacked) {
                             return
