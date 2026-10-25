@@ -36,13 +36,13 @@ oS.Init({
 			switch (d) {
 				case 0:
             innerText(c, "（?!）",1);
-						c.onclick = function(c) {
+						c.onclick = function() {
 							oSym.addTask(50, b, [1]);
 							c.onclick=null;
 						};
 					break;
 				case 1:
-					c.onclick = function(c) {
+					c.onclick = function() {
 						oSym.addTask(50, b, [2]);
 						c.onclick=null;
 					};
@@ -51,7 +51,7 @@ oS.Init({
 				case 2:
 					NewImg("dDave", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "left:0;width:285px;height:405px;top:200px", EDAll);
 					    PlayAudio("puff");
-						c.onclick = function(c) {
+						c.onclick = function() {
 							oSym.addTask(50, b, [3]);
 							c.onclick=null;
 						};
@@ -59,7 +59,7 @@ oS.Init({
 					break;
 				case 3:
 					PlayAudio("puff");
-						c.onclick = function(c) {
+						c.onclick = function() {
 							oSym.addTask(50, b, [4]);
 							c.onclick=null;
 					};
@@ -68,21 +68,21 @@ oS.Init({
 				case 4:
 					$("dDave").src = "images/Plants/ScaredyShroom/ScaredyShroomCry.gif";
 					PlayAudio("puff");
-						c.onclick = function(c) {
+						c.onclick = function() {
 							oSym.addTask(50, b, [5]);
 							c.onclick=null;
 						};
 					innerText(c, "没有他的日子，我好害怕……",1);
 					break;
 				case 5:
-						c.onclick = function(c) {
+						c.onclick = function() {
 							oSym.addTask(100, b, [6]);
 							c.onclick=null;
 						};
 					innerText(c, "（虽然戴夫失踪是大事，但似乎暂时无法顾及了……）",1);
 					break;
 				case 6:
-						c.onclick = function(c) {
+						c.onclick = function() {
 							oSym.addTask(100, b, [7]);
 							c.onclick=null;
 						};
