@@ -30,7 +30,7 @@ oS.Init({
       AppearTombstones(8,9,1);
       oP.SetTimeoutTomZombie([oZombie,oConeheadZombie,oPeaZombie,oImp,oWallNutZombie]);
       oSym.addTask(400,function(){
-        for (i in $Z) $Z[i] && $Z[i].ZX>800&&$Z[i].PZ&&(Math.random()*100>30&&oLadderZombie.prototype.getAid($Z[i],0,1500),$Z[i].Speed*=1.5,$Z[i].OSpeed*=1.5,$Z[i].LostPaperSpeed*=1.5)
+        for (i in $Z) $Z[i] && $Z[i].ZX>800&&$Z[i].PZ&&(Math.random()*100>25&&oLadderZombie.prototype.getAid($Z[i],0,2000),$Z[i].Speed*=1.5,$Z[i].OSpeed*=1.5,$Z[i].LostPaperSpeed*=1.5)
       },[])
     }
 	},
@@ -53,12 +53,14 @@ if(warn!=true){return SelectModal(0)};
             innerText(c, "房主在吗？",1);
 					  PlayAudio("fume");
 						c.onclick = function() {
+							c.onclick=null;
 							oSym.addTask(50, b, [1])
 						};
 					break;
 				case 1:
 					PlayAudio("fume");
 					c.onclick = function() {
+						c.onclick=null;
 						oSym.addTask(80, b, [2])
 					};
 					innerText(c, "你应该知道戴夫失踪了吧？",1);
@@ -66,6 +68,7 @@ if(warn!=true){return SelectModal(0)};
 				case 2:
 					PlayAudio("fume");
 						c.onclick = function() {
+							c.onclick=null;
 							oSym.addTask(80, b, [3])
 						};
 					innerText(c, "他好像被抓走…或者被控制了",1);
@@ -73,6 +76,7 @@ if(warn!=true){return SelectModal(0)};
 				case 3:
 					PlayAudio("fume");
 						c.onclick = function() {
+							c.onclick=null;
 							oSym.addTask(80, b, [4])
 					};
 					innerText(c, "我已经感觉到，",1);
@@ -80,6 +84,7 @@ if(warn!=true){return SelectModal(0)};
 				case 4:
 					PlayAudio("fume");
 						c.onclick = function() {
+							c.onclick=null;
 							oSym.addTask(80, b, [5])
 						};
 					innerText(c, "有一股神秘的力量介入到这里了",1);
@@ -87,6 +92,7 @@ if(warn!=true){return SelectModal(0)};
 				case 5:
           PlayAudio("fume");
 						c.onclick = function() {
+							c.onclick=null;
 							oSym.addTask(80, b, [6])
 						};
 					innerText(c, "那股力量很强大，祝你好运吧！",1);
