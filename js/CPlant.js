@@ -1960,7 +1960,10 @@ NormalAttack:function(a){
 			oSym.addTask(0,function(a,b,num,maxnum){
 				CustomZombie(oZombie,Math.floor(Math.random()*oS.R+1),Math.round(Math.random()*4+5),1).PrivateBirth=function(b){
 					SetHidden(b.Ele);
-					oSym.addTask(0,oBackupDancer.prototype.Boom,[b])
+					oSym.addTask(0,function(b){
+						oBackupDancer.prototype.Boom(b);
+						b.DisappearDie()
+					},[b]);
 				};
 				++num<maxnum&&oSym.addTask(0,arguments.callee,[a,b,num,maxnum]);
 			},[a,b,0,Math.round(Math.random()*3+4)])
