@@ -632,11 +632,12 @@ oWinterMelon= InheritO(oMelonPult, {
     var pid = self.id;
     if ($P[pid]) {
       self.NormalAttack(zid,0);
-		self.NormalAttack(zid,1);
-		if(Math.random()*100>self.SpecialAttackChance){
+	if(Math.random()*100>self.SpecialAttackChance){
 			for (P=0;P<Math.min(5,oZ.getArZ(self.pixelLeft + self.beAttackedPointR,oS.W,self.R).length);P++){
 				self.NormalAttack(zid,1);
 			}
+	}else{
+		self.NormalAttack(zid,1);
 	}
       oSym.addTask(290, (_) => {
         $P[pid] && self.AttackCheck1(zid, direction);
