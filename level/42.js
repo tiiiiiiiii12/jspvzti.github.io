@@ -50,46 +50,46 @@ if(warn!=true){return SelectModal(0)};
 				c = $("DivTeach");
 			switch (d) {
 				case 0:
-            innerText(c, "房主在吗？");
+            innerText(c, "房主在吗？",1);
 					  PlayAudio("fume");
 						c.onclick = function() {
-							oSym.addTask(10, b, [1])
+							oSym.addTask(50, b, [1])
 						};
 					break;
 				case 1:
 					PlayAudio("fume");
 					c.onclick = function() {
-						oSym.addTask(10, b, [2])
+						oSym.addTask(80, b, [2])
 					};
-					innerText(c, "你应该知道戴夫失踪了吧？");
+					innerText(c, "你应该知道戴夫失踪了吧？",1);
 					break;
 				case 2:
 					PlayAudio("fume");
 						c.onclick = function() {
-							oSym.addTask(10, b, [3])
+							oSym.addTask(80, b, [3])
 						};
-					innerText(c, "他好像被抓走…或者被控制了");
+					innerText(c, "他好像被抓走…或者被控制了",1);
 					break;
 				case 3:
 					PlayAudio("fume");
 						c.onclick = function() {
-							oSym.addTask(10, b, [4])
+							oSym.addTask(80, b, [4])
 					};
-					innerText(c, "我已经感觉到，");
+					innerText(c, "我已经感觉到，",1);
 					break;
 				case 4:
 					PlayAudio("fume");
 						c.onclick = function() {
-							oSym.addTask(10, b, [5])
+							oSym.addTask(80, b, [5])
 						};
-					innerText(c, "有一股神秘的力量介入到这里了");
+					innerText(c, "有一股神秘的力量介入到这里了",1);
 					break;
 				case 5:
           PlayAudio("fume");
 						c.onclick = function() {
-							oSym.addTask(10, b, [6])
+							oSym.addTask(80, b, [6])
 						};
-					innerText(c, "那股力量很强大，祝你好运吧！");
+					innerText(c, "那股力量很强大，祝你好运吧！",1);
 					break;
 				case 6:
 			c.onclick = null;
