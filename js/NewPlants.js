@@ -652,11 +652,11 @@ oWinterMelon= InheritO(oMelonPult, {
 		ZL&&(Att=Math.max(Math.min(80/ZL,self.SpreadAttMax),self.SpreadAttMin));
 		while(ZL--){
 			let z=SpreadZ[ZL];
-			z&&(z.Altitude==1||z.EName=="oSnorkelZombie")&&(z.id!=zombieTarget.id)&&(z.getSlow(z,z.id),z.getHit1(z,Att));
+			z&&(z.Altitude==1||z.EName=="oSnorkelZombie")&&(z.id!=zombieTarget.id)&&(z.getSlow(z,z.id,1500),z.getHit1(z,Att));
 		}
 	}//处理溅射伤害
     zombieTarget.getPea(zombieTarget, 0);
-	zombieTarget.getSlow(zombieTarget, zombieTarget.id);
+	zombieTarget.getSlow(zombieTarget, zombieTarget.id,1500);
     zombieTarget.getHit1(zombieTarget, self.Attack);
   },
   SpecialAttackChance:20,
