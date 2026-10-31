@@ -1687,6 +1687,7 @@ MaxTop:60,
 width:180,
 height:180,
 LostPaperSpeed:1.6,
+StandGif:1,
 PicArr: (function() {
     var a = "images/Zombies/PogoZombie/";
     return ["images/Card/Zombies/ZombiesJump.png", a + "1.gif", a + "Jump.gif", a + "Jump.gif", a + "Walk.gif", a + "Attack.gif", oNewspaperZombie.prototype.PicArr[oNewspaperZombie.prototype.HeadGif], a + "Die.gif" + $Random, "images/Zombies/Zombie/BoomDie.gif" + $Random, a + "1.gif", oGarlic.prototype.PicArr[3],oGarlic.prototype.PicArr[4]]
