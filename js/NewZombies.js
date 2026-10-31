@@ -1726,8 +1726,8 @@ a.style.top=T+"px";
 $Z[self.id]&&self.beAttacked&&oSym.addTask(1,arguments.callee,[a,OTop,MaxTop,T])
 },[a,OTop,MaxTop,parseInt(a.style.top)])
 },
-OrnLeft:42,
-OrnTop:35,
+OrnLeft:80,
+OrnTop:12,
 SunNum:125,
 Boom:function(){},
 jinyinAct:function(c){
