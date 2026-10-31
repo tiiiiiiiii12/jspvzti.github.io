@@ -1686,6 +1686,7 @@ Speed:4.5,
 MaxTop:60,
 width:180,
 height:180,
+Lvl:3,
 LostPaperSpeed:1.6,
 StandGif:1,
 PicArr: (function() {
@@ -1703,7 +1704,7 @@ a.AttackGif=5;
 a.NormalGif=4;
 a.OrnLostNormalGif=a.NormalGif;
 a.OrnLostAttackGif=a.AttackGif;
-a.EleBody.src=a.PicArr[a.NormalGif];
+a.EleBody.src=a.PicArr[a.AttackGif];
 a.EleBody.style.top="0px";
 a.OSpeed=a.LostPaperSpeed;
 a.Speed=a.LostPaperSpeed*(a.FreeSlowTime?0.5:1);
@@ -1723,7 +1724,7 @@ a.EleBody.style.top="0px";
 a.JumpRange=jump||90;
 oSym.addTask(1,function(a,d,T){
 if(!$Z[a.id])return;
-if(oGd.$[a.R+"_"+GetC(a.ZX)+"_"+1]&&(oGd.$[a.R+"_"+GetC(a.ZX)+"_"+1].Stature>0|| oGd.$[a.R+"_"+GetC(a.ZX)+"_"+1].EName=="oBrains"))return a.HitDown(a);
+if(oGd.$[a.R+"_"+GetC(a.ZX)+"_"+1]&&(oGd.$[a.R+"_"+GetC(a.ZX)+"_"+1].Stature>0|| oGd.$[a.R+"_"+GetC(a.ZX)+"_"+1].EName=="oBrains")&&a.PZ)return a.HitDown(a);
 a.getr(a,a.WalkDirection?d:-d);
 --T?oSym.addTask(1,arguments.callee,[a,d,T]):(a.PrivateJump(a),a.JudgeAttack())
 },[a,a.JumpRange/(a.MaxTop/2),a.MaxTop/2])
@@ -1811,18 +1812,18 @@ PlayAudio("bowlingimpact");
 for(i=Math.min(9,Math.max(GetC(a.ZX)-1,1));i<=Math.max(Math.min(GetC(a.ZX)+1,9),1);i++){
   for(let k = 0;k <= 3;k++){
 	var P=oGd.$[a.R+"_"+i+"_"+k];
-	a.PZ&&P&&P.getHurt(P,3,(i==GetC(a.ZX)?1400:150)*a.level)
+	a.PZ&&P&&P.getHurt(P,3,(i==GetC(a.ZX)?1400:200)*a.level)
 }
 }
 var Z=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-100,a.ZX+100,a.R);
     Zl=Z.length;
     while(Zl--){
-        Z[Zl].getHit0(Z[Zl],a.level*150);
+        Z[Zl].getHit0(Z[Zl],a.level*200);
     }
 var Z=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-20,a.ZX+20,a.R);
     Zl=Z.length;
     while(Zl--){
-        Z[Zl].getHit0(Z[Zl],a.level*1250);
+        Z[Zl].getHit0(Z[Zl],a.level*1200);
     }
 };
 c.PrivateAct=function(a){
