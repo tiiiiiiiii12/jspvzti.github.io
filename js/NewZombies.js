@@ -1684,10 +1684,15 @@ HP:600,
 OSpeed:4.5,
 Speed:4.5,
 MaxTop:60,
- PicArr: (function() {
+width:180,
+height:180,
+PicArr: (function() {
     var a = "images/Zombies/PogoZombie/";
     return ["images/Card/Zombies/ZombiesJump.png", a + "1.gif", a + "Jump.gif", a + "Jump.gif", a + "Walk.gif", a + "Attack.gif", oNewspaperZombie.prototype.PicArr[oNewspaperZombie.prototype.HeadGif], a + "Die.gif" + $Random, "images/Zombies/Zombie/BoomDie.gif" + $Random, a + "1.gif"]
   })(),
+getShadow:function(c) {
+    return "left:" + (c.beAttackedPointL - 10) + "px;top:" + (c.height-42) + "px;"
+  },
 Produce: '韧性：<font color="#FF0000">中(600)</font><br>精英形态一：<font color="#FF0000">大蒜，防具400血，防具存在时2秒换一次行</font><br>精英形态二：<font color="#FF0000">每隔一段时间召唤一个虚影代替自己行走，虚影一段时间后消失，消失时自身跳至虚影的位置</font></p>中年僵尸爱耍起',
 TopNum:1,
 NormalAttack:function(b,nul,jump){
@@ -1696,7 +1701,7 @@ if(!a)return;
 a.EleBody.style.top="0px";
 a.JumpRange=jump||90;
 oSym.addTask(1,function(a,d,T){
-if(!a)return;
+if(!$Z[a.id])return;
 a.getr(a,a.WalkDirection?d:-d);
 --T?oSym.addTask(1,arguments.callee,[a,d,T]):a.JudgeAttack()
 },[a,a.JumpRange/(a.MaxTop/2),a.MaxTop/2])
