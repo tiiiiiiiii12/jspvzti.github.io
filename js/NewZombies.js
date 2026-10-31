@@ -1686,15 +1686,35 @@ Speed:4.5,
 MaxTop:60,
 width:180,
 height:180,
+LostPaperSpeed:1.6,
 PicArr: (function() {
     var a = "images/Zombies/PogoZombie/";
-    return ["images/Card/Zombies/ZombiesJump.png", a + "1.gif", a + "Jump.gif", a + "Jump.gif", a + "Walk.gif", a + "Attack.gif", oNewspaperZombie.prototype.PicArr[oNewspaperZombie.prototype.HeadGif], a + "Die.gif" + $Random, "images/Zombies/Zombie/BoomDie.gif" + $Random, a + "1.gif"]
+    return ["images/Card/Zombies/ZombiesJump.png", a + "1.gif", a + "Jump.gif", a + "Jump.gif", a + "Walk.gif", a + "Attack.gif", oNewspaperZombie.prototype.PicArr[oNewspaperZombie.prototype.HeadGif], a + "Die.gif" + $Random, "images/Zombies/Zombie/BoomDie.gif" + $Random, a + "1.gif", oGarlic.prototype.PicArr[3],oGarlic.prototype.PicArr[4]]
   })(),
 getShadow:function(c) {
     return "left:" + (c.beAttackedPointL - 10) + "px;top:" + (c.height-42) + "px;"
   },
-Produce: '韧性：<font color="#FF0000">中(600)</font><br>精英形态一：<font color="#FF0000">大蒜，防具400血，防具存在时2秒换一次行</font><br>精英形态二：<font color="#FF0000">每隔一段时间召唤一个虚影代替自己行走，虚影一段时间后消失，消失时自身跳至虚影的位置</font></p>中年僵尸爱耍起',
+Produce: '韧性：<font color="#FF0000">中(600)</font><br>精英形态一：<font color="#FF0000">大蒜，防具400血，防具存在时2秒换一次行</font><br>精英形态二：<font color="#FF0000">每隔一段时间召唤一个虚影代替自己行走，虚影一段时间后消失，消失时自身跳至虚影的位置，碾压自身格植物，并对周围植物造成150伤害</font></p>中年僵尸爱耍起',
 TopNum:1,
+PrivateJump:function(a){},
+HitDown:function(a){
+a.AttackGif=5;
+a.NormalGif=4;
+a.OrnLostNormalGif=a.NormalGif;
+a.OrnLostAttackGif=a.AttackGif;
+a.EleBody.src=a.PicArr[a.NormalGif];
+a.EleBody.style.top="0px";
+a.OSpeed=a.LostPaperSpeed;
+a.Speed=a.LostPaperSpeed*(a.FreeSlowTime?0.5:1);
+a.JudgeAttack=CZombies["prototype"][a.PZ?"JudgeAttack":"JudgeAttackH"];
+a.NormalAttack=CZombies.prototype.NormalAttack;
+a.AttackZombie=CZombies.prototype.AttackZombie;
+a.Move=function(){};
+a.NoPogo=true;
+a.WalkToLadder=CZombies.prototype.WalkToLadder;
+a.getFreeze=CZombies.prototype.getFreeze;
+a.JudgeAttack();
+},
 NormalAttack:function(b,nul,jump){
 oSym.addTask(this.tasktime,function(a){
 if(!a)return;
@@ -1702,8 +1722,9 @@ a.EleBody.style.top="0px";
 a.JumpRange=jump||90;
 oSym.addTask(1,function(a,d,T){
 if(!$Z[a.id])return;
+if(oGd.$[a.R+"_"+GetC(a.ZX)+"_"+1]&&(oGd.$[a.R+"_"+GetC(a.ZX)+"_"+1].Stature>0|| oGd.$[a.R+"_"+GetC(a.ZX)+"_"+1].EName=="oBrains"))return a.HitDown(a);
 a.getr(a,a.WalkDirection?d:-d);
---T?oSym.addTask(1,arguments.callee,[a,d,T]):a.JudgeAttack()
+--T?oSym.addTask(1,arguments.callee,[a,d,T]):(a.PrivateJump(a),a.JudgeAttack())
 },[a,a.JumpRange/(a.MaxTop/2),a.MaxTop/2])
 },[$Z[b]])
 },
@@ -1719,12 +1740,27 @@ a.jinyin&&ClearChild($(a.Ele.NutHead))
 c.NormalDie(c);
 c.GoingDieHead(c.id,c.PicArr,c);
   },
+ShadowLiveTime:800,
+BeShadow:function(a){
+a.Altitude=4;
+a.jianshang=0;//无敌
+a.Ele.style.opacity=0.5;
+a.HitDown=function(){};
+oSym.addTask(a.ShadowLiveTime+(Math.random()*800-400),function(a){
+$Z[a.id]&&a.DisappearDie();
+},[a]);
+a.PrivateDie=function(a){
+a.masterZombie&&$Z[a.masterZombie.id]&&(a.masterZombie.Shadow=null,a.masterZombie.JumpZX=Math.abs(a.masterZombie.ZX-a.ZX));
+};
+a.EleBody.style.top="0px";
+a.Move(a.EleBody,0,a.MaxTop)
+},
 getFreeze:function(){},
 WalkToLadder:function(){},
 Move:function(a,OTop,MaxTop){
 var self=this;
 oSym.addTask(1,function(a,OTop,MaxTop,T){
-if(!a)return;
+if(!$Z[self.id]||!a||self.NoPogo)return;
 T > OTop && (self.TopNum = 1),T < -MaxTop && (self.TopNum = 0);
 self.TopNum?(T-=2):(T+=2);
 a.style.top=T+"px";
@@ -1736,27 +1772,63 @@ OrnTop:12,
 SunNum:125,
 Boom:function(){},
 jinyinAct:function(c){
+c.num=c.Privatenum||Math.random()*100;
+if(c.num<50){
       var z = $(c.id);
       z.NutHead = "Nut" + Math.random();
       var Nut = NewImg(z.NutHead, oGarlic.prototype.PicArr[2], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:" + c.OrnTop + "px;", 0);				  c.getHit=c.getHit0=c.getHit1=c.getHit2=c.getHit3= function(c,d){
 OrnIZombies.prototype.getHit0(c,d);
-c.OrnHP<1&&ClearChild($(c.Ele.NutHead));
+c.OrnHP<1&&(ClearChild($(c.Ele.NutHead)),c.checkHP=function(){});
 };
+c.PrivateJump=function(c){c.Ornaments&&c.ChangeR(c)};
 z.appendChild(Nut);
 c.OrnLostNormalGif=c.NormalGif;
 c.OrnLostAttackGif=c.AttackGif;
       c.Ornaments=1;
       c.OrnHP=400*c.level;
+      c.MaxOrnHP=c.OrnHP;
       c.OrnBreakPoint1 = c.MaxOrnHP * 0.66;
       c.OrnBreakPoint2 = c.MaxOrnHP * 0.33;
-      c.OrnBreakGif1=oGarlic.prototype.PicArr[3];
-      c.OrnBreakGif2=oGarlic.prototype.PicArr[4];
+      c.OrnBreakGif1=10;
+      c.OrnBreakGif2=11;
       c.Move(Nut,c.OrnLeft,c.MaxTop-c.OrnTop);
 	  c.PrivateAct=oWallNutZombie.prototype.PrivateAct;
 	  c.checkHP=oWallNutZombie.prototype.checkHP;
       oSym.addTask(200,function(c){
       $Z[c.id]&&c.Ornaments&&(c.ChangeR(c),oSym.addTask(200,arguments.callee,[c]))
       },[c])
+}else{
+c.ReadyJump=function(a){
+  a.isAttacking=1;
+  a.Shadow=CustomZombie(oPogoZombie,a.R,GetC(a.ZX)+1,!a.PZ);
+  a.Shadow.PrivateBirth=a.BeShadow;
+  a.Shadow.jinyinnum=0;
+  a.Shadow.masterZombie=a;
+};
+c.PrivateJump=function(a){
+PlayAudio("bowlingimpact");
+for(i=Math.min(9,Math.max(GetC(a.ZX)-1,1));i<=Math.max(Math.min(GetC(a.ZX)+1,9),1);i++){
+  for(let k = 0;k <= 3;k++){
+	var P=oGd.$[a.R+"_"+i+"_"+k];
+	a.PZ&&P&&P.getHurt(P,3,(i==GetC(a.ZX)?1400:150)*a.level)
+}
+}
+var Z=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-100,a.ZX+100,a.R);
+    Zl=Z.length;
+    while(Zl--){
+        Z[Zl].getHit0(Z[Zl],a.level*150);
+    }
+var Z=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-20,a.ZX+20,a.R);
+    Zl=Z.length;
+    while(Zl--){
+        Z[Zl].getHit0(Z[Zl],a.level*1250);
+    }
+};
+c.PrivateAct=function(a){
+if(a.NoPogo)return;
+a.isAttacking?a.JumpZX&&(a.NormalAttack(a.id,0,a.JumpZX),a.JumpZX=0):!a.Shadow&&GetC(a.ZX)<9&&a.ReadyJump(a)
+}
+}
 },
 PrivateBirth:function(a){
 a.EleBody.style.top="0px";
