@@ -75,8 +75,8 @@ PicArr:function(){
   LF:[0,1,1,2,2,1,1],
   backgroundImage:"images/interface/background4.jpg",
   CanSelectCard:0,
-  LevelName:"3-10",
-  LvlEName:30,
+  LevelName:"4-10",
+  LvlEName:40,
   LargeWaveFlag:{
     10:$("imgFlag3"),
     20:$("imgFlag2"),
