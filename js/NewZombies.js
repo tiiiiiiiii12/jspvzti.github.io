@@ -515,17 +515,19 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       $(z.NutHead) && ClearChild($(z.NutHead))
     },
 	Ornbreak:0,
+	OrnBreakGif1:13,
+	OrnBreakGif2:14,
     checkHP: function(z, a) {
 	if(!$Z[a.id]&&a.beAttacked)return;
       var c = a.OrnHP;
       switch (true) {
         case c < a.OrnBreakPoint2:
 		  a.Ornbreak=2;
-          $(z.NutHead).src = a.PicArr[14]
+          $(z.NutHead).src = a.PicArr[a.OrnBreakGif2]
           break;
         case c < a.OrnBreakPoint1:
 		  a.Ornbreak=1;
-          $(z.NutHead).src = a.PicArr[13]
+          $(z.NutHead).src = a.PicArr[a.OrnBreakGif1]
       }
     },
     Produce: '韧性：<font color="#FF0000">中(1100+270)</font><br>精英形态一：<font color="#FF0000">爆炸坚果，碰到植物产生爆炸并自身死亡</font><br>精英形态二：<font color="#FF0000">一类防具存在时每次受伤反伤周围植物（伤害15）</font></p>他有限的感官，只能让他在被植物打时产生一种麻麻的感觉'
