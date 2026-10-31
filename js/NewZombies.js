@@ -505,7 +505,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       var c = a.HP;
       if ($Z[a.id] && a.beAttacked) {
 		a.checkHP(z, a);
-        a.WalkDirection == a.check &&
+        $(z.NutHead)&&a.WalkDirection == a.check &&
         ($(z.NutHead).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",a.check=(a.WalkDirection?0:1))
       }!a.beAttacked && (ClearChild($(z.NutHead)));
       a.num>=50 && a.isAttacking && a.Boom(a);
@@ -1676,4 +1676,84 @@ oSym.addTask(0,function(SummonZ){
         },
         [h, f[[g.NormalGif = g.OrnLostNormalGif, g.AttackGif = g.OrnLostAttackGif][b]]]))
   }
+}),
+oPogoZombie=InheritO(oZombie,{
+EName:"oPogoZombie",
+CName:"跳跳僵尸",
+HP:600,
+OSpeed:4.5,
+Speed:4.5,
+MaxTop:60,
+ PicArr: (function() {
+    var a = "images/Zombies/PogoZombie/";
+    return ["images/Card/Zombies/ZombiesJump.png", a + "1.gif", a + "Jump.gif", a + "Jump.gif", a + "Walk.gif", a + "Attack.gif", oNewspaperZombie.prototype.PicArr[oNewspaperZombie.prototype.HeadGif], a + "Die.gif" + $Random, "images/Zombies/Zombie/BoomDie.gif" + $Random, a + "1.gif"]
+  })(),
+Produce: '韧性：<font color="#FF0000">中(600)</font><br>精英形态一：<font color="#FF0000">大蒜，防具400血，防具存在时2秒换一次行</font><br>精英形态二：<font color="#FF0000">每隔一段时间召唤一个虚影代替自己行走，虚影一段时间后消失，消失时自身跳至虚影的位置</font></p>中年僵尸爱耍起',
+TopNum:1,
+NormalAttack:function(b,nul,jump){
+oSym.addTask(this.tasktime,function(a){
+if(!a)return;
+a.EleBody.style.top="0px";
+a.JumpRange=jump||90;
+oSym.addTask(1,function(a,d,T){
+if(!a)return;
+a.getr(a,a.WalkDirection?d:-d);
+--T?oSym.addTask(1,arguments.callee,[a,d,T]):a.JudgeAttack()
+},[a,a.JumpRange/(a.MaxTop/2),a.MaxTop/2])
+},[$Z[b]])
+},
+AttackZombie:function(a){
+$Z[a]&&$Z[a].NormalAttack(a)
+},
+PrivateDie:function(a){
+a.EleBody&&(a.EleBody.style.top="0px");
+a.jinyin&&ClearChild($(a.Ele.NutHead))
+},
+  GoingDie: function(d) {
+    var c = this;
+c.NormalDie(c);
+c.GoingDieHead(c.id,c.PicArr,c);
+  },
+getFreeze:function(){},
+WalkToLadder:function(){},
+Move:function(a,OTop,MaxTop){
+var self=this;
+oSym.addTask(1,function(a,OTop,MaxTop,T){
+if(!a)return;
+T > OTop && (self.TopNum = 1),T < -MaxTop && (self.TopNum = 0);
+self.TopNum?(T-=2):(T+=2);
+a.style.top=T+"px";
+$Z[self.id]&&self.beAttacked&&oSym.addTask(1,arguments.callee,[a,OTop,MaxTop,T])
+},[a,OTop,MaxTop,parseInt(a.style.top)])
+},
+OrnLeft:42,
+OrnTop:35,
+Boom:function(){},
+jinyinAct:function(c){
+      var z = $(c.id);
+      z.NutHead = "Nut" + Math.random();
+      var Nut = NewImg(z.NutHead, oGarlic.prototype.PicArr[2], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:" + c.OrnTop + "px;", 0);				  c.getHit=c.getHit0=c.getHit1=c.getHit2=c.getHit3= function(c,d){
+OrnIZombies.prototype.getHit0(c,d);
+c.OrnHP<1&&ClearChild($(c.Ele.NutHead));
+};
+z.appendChild(Nut);
+c.OrnLostNormalGif=c.NormalGif;
+c.OrnLostAttackGif=c.AttackGif;
+      c.Ornaments=1;
+      c.OrnHP=400*c.level;
+      c.OrnBreakPoint1 = c.MaxOrnHP * 0.66;
+      c.OrnBreakPoint2 = c.MaxOrnHP * 0.33;
+      c.OrnBreakGif1=oGarlic.prototype.PicArr[3];
+      c.OrnBreakGif2=oGarlic.prototype.PicArr[4];
+      c.Move(Nut,c.OrnLeft,c.MaxTop-c.OrnTop);
+	  c.PrivateAct=oWallNutZombie.prototype.PrivateAct;
+	  c.checkHP=oWallNutZombie.prototype.checkHP;
+      oSym.addTask(200,function(c){
+      $Z[c.id]&&c.Ornaments&&(c.ChangeR(c),oSym.addTask(200,arguments.callee,[c]))
+      },[c])
+},
+PrivateBirth:function(a){
+a.EleBody.style.top="0px";
+a.Move(a.EleBody,0,a.MaxTop)
+}
 })
