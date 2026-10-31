@@ -13,61 +13,6 @@ PicArr:function(){
          a+"0."+d,a+"1."+d,a+"2."+d,a+"3."+d
   ]
 }(),
-  LoadAccess:function(a){
-    EDAll.scrollLeft=0;
-    NewImg("dDave","images/interface/Dave.gif","left:0;top:81px;z-index:20",EDAll);
-    NewEle("DivTeach","div",0,0,EDAll);
-    (function(d){
-      var b=arguments.callee,
-        c=$("DivTeach");
-      switch(d){
-        case 0:
-          PlayAudio("crazydavelong1");
-          c.onclick=null;
-          $("dDave").src="images/interface/Dave3.gif";
-          oSym.addTask(110,function(){
-            $("dDave").src="images/interface/Dave.gif";
-            c.onclick=function(){
-              oSym.addTask(10,b,[1])
-            }
-          },[]);
-          c.innerHTML='<span style="font-size:22px">你知道，他们曾叫我“迷雾男”。(点击继续)</span>';
-          break;
-        case 1:
-          PlayAudio("crazydavelong3");
-          c.onclick=null;
-          $("dDave").src="images/interface/Dave3.gif";
-          oSym.addTask(100,function(){
-            $("dDave").src="images/interface/Dave.gif";
-            c.onclick=function(){
-              oSym.addTask(10,b,[2])
-            }
-          },[]);
-          c.innerHTML='<span style="font-size:22px">因为我曾停留在雾中并突然从人群中跳出！(点击继续)</span>';
-          break;
-        case 2:
-          PlayAudio("crazydavelong3");
-          c.onclick=null;
-          $("dDave").src="images/interface/Dave3.gif";
-          oSym.addTask(100,function(){
-            $("dDave").src="images/interface/Dave.gif";
-            c.onclick=function(){
-              oSym.addTask(10,b,[3])
-            }
-          },[]);
-          c.innerHTML='<span style="font-size:22px">噢，那都是过去的事了。(点击继续)</span>';
-          break;
-        case 3:
-          $("dDave").src="images/interface/Dave2.gif";
-          ClearChild($("DivTeach"));
-          oSym.addTask(50,function(){
-            ClearChild($("dDave"));
-            a(0);
-            StopMusic();
-            PlayMusic(oS.LoadMusic="Look up at the Sky")
-          },[])}
-    })(0)
-  },
   Coord:2,
   DKind:0,
   HaveFog:9,
