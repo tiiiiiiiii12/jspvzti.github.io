@@ -1728,6 +1728,7 @@ $Z[self.id]&&self.beAttacked&&oSym.addTask(1,arguments.callee,[a,OTop,MaxTop,T])
 },
 OrnLeft:42,
 OrnTop:35,
+SunNum:125,
 Boom:function(){},
 jinyinAct:function(c){
       var z = $(c.id);
