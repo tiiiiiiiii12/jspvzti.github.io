@@ -15,6 +15,7 @@ PicArr:function(){
   Coord:2,
   HaveFog:8,
   SunNum:50,
+  DKind:0,
   LF:[0,1,1,2,2,1,1],
   backgroundImage:"images/interface/background4.jpg",
   CanSelectCard:0,
