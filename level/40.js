@@ -15,6 +15,7 @@ PicArr:function(){
 }(),
   Coord:2,
   DKind:0,
+  ShowScroll:false,
   HaveFog:9,
   SunNum:50,
   LF:[0,1,1,2,2,1,1],
