@@ -1,5 +1,5 @@
 oS.Init({
-  PName:[oLilyPad,oSplitPea,oGarlic,oStarfruit,oPumpkinHead,oSeaShroom,oBlover,oCactus,oDoomShroom,oPlantern,oStarfruit],
+  PName:[oLilyPad,oSplitPea,oGarlic,oStarfruit,oPumpkinHead,oSeaShroom,oBlover,oCactus,oPlantern,oStarfruit],
   ZName:[oZombie,oZombie2,oZombie3,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oDiggerZombie,oBalloonZombie,oBucketheadZombie,oDolphinRiderZombie,oLadderZombie,oSnorkelZombie,oJackinTheBoxZombie,oJalapenoZombie,oSquashZombie],
 PicArr:function(){
   var b=oCabbage.prototype,
@@ -15,7 +15,6 @@ PicArr:function(){
 }(),
   Coord:2,
   DKind:0,
-  ShowScroll:false,
   HaveFog:9,
   SunNum:50,
   LF:[0,1,1,2,2,1,1],
