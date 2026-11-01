@@ -1,6 +1,6 @@
 oS.Init({
-  PName:[oLilyPad,oSplitPea,oGarlic,oStarfruit,oPumpkinHead,oSeaShroom,oBlover,oCactus,oPlantern,oStarfruit],
-  ZName:[oZombie,oZombie2,oZombie3,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oDiggerZombie,oBalloonZombie,oBucketheadZombie,oDolphinRiderZombie,oLadderZombie,oSnorkelZombie,oJackinTheBoxZombie,oJalapenoZombie,oSquashZombie],
+  PName:[oLilyPad,oSplitPea,oGarlic,oStarfruit,oPumpkinHead,oSeaShroom,oBlover,oCactus,oPlantern,oStarfruit,oPuffShroom,oSquash],
+  ZName:[oZombie,oZombie2,oZombie3,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oDiggerZombie,oBalloonZombie,oBucketheadZombie,oDolphinRiderZombie,oLadderZombie,oSnorkelZombie,oJackinTheBoxZombie,oJalapenoZombie],
 PicArr:function(){
   var b=oCabbage.prototype,
     c=b.PicArr,a="images/interface/fog",
@@ -89,7 +89,6 @@ PicArr:function(){
             [oBalloonZombie,2,1],
             [oJalapenoZombie,1,1],
             [oLadderZombie, 1, 1],
-            [oSquashZombie,2,1],
             [oDolphinRiderZombie,1,10,[10,14,15,16,18,19,20]],
             [oJackinTheBoxZombie,1,30,[30]],
             [oSnorkelZombie,1,15,[15,16,18,20,25,30]]
