@@ -7,7 +7,6 @@ PicArr:function(){
     d=$User.Browser.IE&&!$User.Browser.IE9?"gif":"png";
   return[
     "images/interface/background4.jpg",
-         "images/interface/Dave.gif",
          c[b.CardGif],
          c[b.NormalGif],
          a+"0."+d,a+"1."+d,a+"2."+d,a+"3."+d
@@ -114,6 +113,7 @@ PicArr:function(){
             NewImg("PointerUD","images/interface/PointerDown.gif","top:290px;left:636px",EDAll)
           }
         },{
+		AutoSelectCard:function(){},
 		GetChoseCard: function(b) {
 			var a = ArCard.length;
 			while (a--) ArCard[a].DID == b && (oS.ChoseCard = a, a = 0);
