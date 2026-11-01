@@ -14,8 +14,7 @@ PicArr:function(){
   ]
 }(),
   Coord:2,
-  DKind:0,
-  HaveFog:9,
+  HaveFog:8,
   SunNum:50,
   LF:[0,1,1,2,2,1,1],
   backgroundImage:"images/interface/background4.jpg",
@@ -29,7 +28,7 @@ PicArr:function(){
   },
   StaticCard:0,
   UserDefinedFlagFunc:function(a){
-    oP.FlagZombies>20&&oP.SetTimeoutWaterZombie(6,9,3,[oDuckyTubeZombie1,oDuckyTubeZombie2,oSnorkelZombie])
+    oP.FlagZombies>24&&oP.SetTimeoutWaterZombie(6,9,3,[oDuckyTubeZombie1,oDuckyTubeZombie2,oSnorkelZombie])
   },
   StartGameMusic:"MangZhong",
   StartGame:function(){
