@@ -1,7 +1,7 @@
-alert("走上了这条路，就不能再回头了哦");
+$User.Visitor.Progress==41?alert("走上了这条路，就不能再回头了哦"):$User.Visitor.Progress=41;
 oS.Init({
-	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit,oPumpkinHead,oGarlic],
-	ZName: [oZombie, oZombie2, oZombie3, oNewspaperZombie,oImp,oPoleVaultingZombie,oConeheadZombie,oPeaZombie,oLadderZombie,oBungeeZombie],
+	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit,oPumpkinHead,oGarlic,oCabbage],
+	ZName: [oZombie, oZombie2, oZombie3, oNewspaperZombie,oImp,oPoleVaultingZombie,oConeheadZombie,oPeaZombie,oLadderZombie,oBungeeZombie,oPogoZombie],
 	PicArr: function() {
 		var a = oUmbrellaLeaf.prototype,
 			b = a.PicArr;
@@ -79,21 +79,20 @@ oS.Init({
 							oSym.addTask(100, b, [6]);
 							c.onclick=null;
 						};
-					innerText(c, "（虽然戴夫失踪是大事，但似乎暂时无法顾及了……）",1);
+					innerText(c, "（虽然戴夫失踪是大事，但似乎暂时无法顾及了）",1);
 					break;
 				case 6:
 						c.onclick = function() {
 							oSym.addTask(100, b, [7]);
 							c.onclick=null;
 						};
-					innerText(c, "（草坪外不断传来僵尸的吼声，看来这是一场旷日持久的恶战……）",1);
+					innerText(c, "（草坪外不断传来僵尸的吼声，看来这是一场旷日持久的恶战）",1);
 					break;
 				case 7:
-			c.onclick=null;
-			innerText(c, "“别哭了，一边去吧”");
+			ClearChild($("DivTeach"));
           oSym.addTask(1,function(Left){
             $("dDave").style.left=Left+"px";
-            (Left-=5)>-400?oSym.addTask(1,arguments.callee,[Left]):(ClearChild($("dDave")),a(0),ClearChild($("DivTeach")));
+            (Left-=5)>-400?oSym.addTask(1,arguments.callee,[Left]):(ClearChild($("dDave")),a(0));
           },[0]);
 			}
 		})(0)
@@ -108,6 +107,7 @@ oS.Init({
     [oLadderZombie, 1, 1],
     [oPoleVaultingZombie, 1, 1],
     [oBungeeZombie, 1, 1],
+	[oPogoZombie, 1, 5,[10]],
 		[oNewspaperZombie, 1, 1]
 	],
 	FlagNum: 20,
