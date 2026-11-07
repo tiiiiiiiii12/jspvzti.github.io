@@ -86,7 +86,7 @@ PicArr:function(){
             [oDuckyTubeZombie3,1,6,[10,20,30]],
             [oDiggerZombie,4,1],
             [oBucketheadZombie,2,1],
-            [oBalloonZombie,2,1],
+            [oBalloonZombie,2,10,[10,14,15,16,18,19,20]],
             [oJalapenoZombie,1,1],
             [oLadderZombie, 1, 1],
             [oDolphinRiderZombie,1,10,[10,14,15,16,18,19,20]],
