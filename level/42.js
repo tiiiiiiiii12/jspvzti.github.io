@@ -1,6 +1,6 @@
 oS.Init({
-	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit,oPumpkinHead,oGarlic,oUmbrellaLeaf],
-	ZName: [oZombie, oZombie2, oZombie3, oGatlingPeaZombie,oImp,oWallNutZombie,oConeheadZombie,oPeaZombie,oBungeeZombie,oCatapultZombie,oDancingZombie,oBackupDancer],
+	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit,oPumpkinHead,oGarlic,oCabbage,oUmbrellaLeaf],
+	ZName: [oZombie, oZombie2, oZombie3, oGatlingPeaZombie,oImp,oWallNutZombie,oConeheadZombie,oPeaZombie,oBungeeZombie,oCatapultZombie,oPogoZombie,oDancingZombie,oBackupDancer],
 	PicArr: function() {
 		var a = oCoffeeBean.prototype,
 			b = a.PicArr;
@@ -36,9 +36,7 @@ oS.Init({
 	},
 	StartGameMusic: "rebeatedupnight",
 	LoadAccess: function(a) {
-	if($User.Visitor.Progress<42)return document.write("跳关好玩吗？");
-let warn=confirm("您真的要打开这一关吗？");
-if(warn!=true){return SelectModal(0)};
+if($User.Visitor.Progress<42)return document.write("跳关好玩吗？");
   oHypnoShroom.prototype.Tooltip="";
   oHypnoShroom.prototype.Produce="你好，房主<br>你好，……player";
 	SetHidden($("dChapter1"),$("dChapter2"),$("dChapter3"),$("dChapter4"));
@@ -118,6 +116,7 @@ if(warn!=true){return SelectModal(0)};
     [oWallNutZombie, 1, 1],
     [oBungeeZombie, 1, 1],
     [oPeaZombie, 1, 1],
+	[oPogoZombie, 1, 1,[10,20]],
 	[oCatapultZombie, 1, 1]
 	],
 	FlagNum: 30,
@@ -126,7 +125,7 @@ if(warn!=true){return SelectModal(0)};
 		a2: [2, 3, 10,18,6,12,30,10,20,45]
 	},
 	FlagToMonitor: {
-		9: [ShowLargeWave, 0],
+	9: [ShowLargeWave, 0],
     19: [ShowLargeWave, 0],
     29: [ShowLargeWave, 0]
 	},
