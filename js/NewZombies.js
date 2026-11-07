@@ -1696,7 +1696,7 @@ PicArr: (function() {
 getShadow:function(c) {
     return "left:" + (c.beAttackedPointL - 10) + "px;top:" + (c.height-42) + "px;"
   },
-Produce: '韧性：<font color="#FF0000">中(600)</font><br>精英形态一：<font color="#FF0000">大蒜，防具400血，防具存在时2秒换一次行</font><br>精英形态二：<font color="#FF0000">每隔一段时间召唤一个虚影代替自己行走，虚影一段时间后消失，消失时自身跳至虚影的位置，碾压自身格植物，并对周围植物造成150伤害</font></p>中年僵尸爱耍起',
+Produce: '韧性：<font color="#FF0000">中(600)</font><br>精英形态一：<font color="#FF0000">大蒜，防具400血，防具存在时2秒换一次行</font><br>精英形态二：<font color="#FF0000">每隔一段时间召唤一个虚影代替自己行走，虚影一段时间后消失，消失时自身跳至虚影的位置，碾压自身格植物，并对周围植物造成250伤害</font></p>中年僵尸爱耍起',
 TopNum:1,
 PrivateJump:function(a){},
 HitDown:function(a){
@@ -1812,18 +1812,18 @@ PlayAudio("bowlingimpact");
 for(i=Math.min(9,Math.max(GetC(a.ZX)-1,1));i<=Math.max(Math.min(GetC(a.ZX)+1,9),1);i++){
   for(let k = 0;k <= 3;k++){
 	var P=oGd.$[a.R+"_"+i+"_"+k];
-	a.PZ&&P&&P.getHurt(P,3,(i==GetC(a.ZX)?1400:200)*a.level)
+	a.PZ&&P&&P.getHurt(P,3,(i==GetC(a.ZX)?1400:250)*a.level)
 }
 }
 var Z=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-100,a.ZX+100,a.R);
     Zl=Z.length;
     while(Zl--){
-        Z[Zl].getHit0(Z[Zl],a.level*200);
+        Z[Zl].getHit0(Z[Zl],a.level*250);
     }
-var Z=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-20,a.ZX+20,a.R);
+var Z=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-30,a.ZX+30,a.R);
     Zl=Z.length;
     while(Zl--){
-        Z[Zl].getHit0(Z[Zl],a.level*1200);
+        Z[Zl].getHit0(Z[Zl],a.level*1150);
     }
 };
 c.PrivateAct=function(a){
