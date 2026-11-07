@@ -35,7 +35,7 @@ var oFarPogoZombie=InheritO(oPogoZombie,{
 });
 oS.Init({
     PName: [oIZombie, oWallNutZombie, oConeheadZombie,oIPeaZombie,oZomboni,oLadderZombie,oNewspaperZombie,oSquashZombie],
-    ZName: [oZombie, oPoleVaultingZombie,oIPogoZombie,oFarPogoZombie,oGarlicZombie,oIPeaZombie,oIZombie,oWallNutZombie,oConeheadZombie,oZomboni,oLadderZombie,oFlagZombie,oSquashZombie],
+    ZName: [oZombie, oPoleVaultingZombie,oIPogoZombie,oFarPogoZombie,oGarlicZombie,oIPeaZombie,oIZombie,oWallNutZombie,oConeheadZombie,oZomboni,oLadderZombie,oNewspaperZombie,oSquashZombie],
     PicArr: ["images/interface/background2.jpg", "images/interface/trophy.png", "images/interface/Stripe.png"],
     backgroundImage: "images/interface/background2.jpg",
     ShowScroll: false,
