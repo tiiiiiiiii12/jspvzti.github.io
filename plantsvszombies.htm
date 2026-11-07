@@ -331,168 +331,13 @@ LvlList=function(BLvl,SLvl1,SLvl2){
 						</script>
 					</table>
 					</div>
-				<div id="dRiddle1">
-				<div style="position:relative;width:862px;font-size:12px;margin-top:1px;margin-left:auto;margin-right:auto;color:#000">
-					<button class="jhp" style="height:23px" onclick="window.frames['fRiddleAlreadyCreateGame'].SearchLvl(0)">所有游戏</button><button class="jhp" style="height:23px" onclick="window.frames['fRiddleAlreadyCreateGame'].SearchLvl(1)">我创建的</button><button class="jhp" style="height:23px" onclick="window.frames['fRiddleAlreadyCreateGame'].SearchLvl(2)">我玩过的</button>
-					&nbsp;&nbsp;<input type=text id="tRiddleID" size="15"><button class="jhp" style="height:23px" onclick="window.frames['fRiddleAlreadyCreateGame'].SearchLvl(4,$('tRiddleID').value)">查作者</button><button class="jhp" style="height:23px" onclick="window.frames['fRiddleAlreadyCreateGame'].SearchLvl(5,$('tRiddleID').value)">查标题</button><button class="jhp" style="height:23px" onclick="window.frames['fRiddleAlreadyCreateGame'].SearchLvl(3,$('tRiddleID').value)">查序号</button>
-					&nbsp; &nbsp; &nbsp; &nbsp; 列表风格
-					<input name="rList" type="radio" value="图形" id="rLPic" onclick="addCookie('JSPVZIZList',0);location.reload();"><label for="rLPic">图形</label>
-					<input name="rList" type="radio" value="文字" id="rLText" onclick="addCookie('JSPVZIZList',1);location.reload();"><label for="rLText">文字</label>
-					<script>
-					getCookie("JSPVZIZList")==1 ? ($('rLText').checked=true) : (
-						$('rLPic').checked=true,
-						document.write('&nbsp;&nbsp;<select size="1" name="sOrder1" id="sOrder1"><option>标题</option><option>阳光</option><option>作者</option><option selected>日期</option><option>访问</option><option>过关</option><option>好评</option><option>中评</option><option>差评</option></select><select size="1" name="sOrder2" id="sOrder2"><option value="asc">升序</option><option value="desc" selected>降序</option></select><button class="jhp" style="height:23px" onclick="window.frames[\'fRiddleAlreadyCreateGame\'].ChangeOrderAD()">排序</button>')
-					);
-					</script>
-					<div style="border:1px solid #000;height:465px;width:100%">
-						<iframe name="fRiddleAlreadyCreateGame" id="fRiddleAlreadyCreateGame" marginwidth="1" marginheight="1" height="460" width="100%" scrolling="no" border="0" frameborder="0" allowtransparency="true" style="background-color:transparent"></iframe>
-					</div>
-				</div>
-				<div class="button" onmouseover="this.style.backgroundPosition='bottom'" onmouseout="this.style.backgroundPosition='top'"  onclick="ReturnRiddleInx()">益智模式索引</div>
-				<div class="button" style="left:204px" onmouseover="this.style.backgroundPosition='bottom'" onmouseout="this.style.backgroundPosition='top'"  onclick="if($User.Visitor.UserName!='游客'||confirm('游客只能体验创建功能无法存档\n请使用注册用户以保存你的创意！'))SelectModal('ImZombieCreateGame')">创建我是僵尸关卡</div>
-			</div>
+				<div id="dRiddle1"></div>
 				<div class="button" onmouseover="this.style.backgroundPosition='bottom'" onmouseout="this.style.backgroundPosition='top'"  onclick="ReturnRiddleInx()">益智模式索引</div>
 			</div>
 			<div id="dRiddleClose" onmouseover="this.style.backgroundPosition='bottom'" onmouseout="this.style.backgroundPosition='top'" onclick="HiddenRiddleGame()">关 闭&nbsp;</div>
 		</div>
 	</div>
-<div id="dShowMsgLogin" class="dShowMsg" style="display: none; width: 506px; height: 416px; text-shadow: rgb(0, 0, 0) 1px 1px; position: absolute; margin: auto; left: 0px; top: 0px; right: 0px; bottom: 0px;">
-<table class="dShowMsgTabBG" width="100%" height="100%" cellspacing="0" cellpadding="0">
-	<tbody><tr>
-		<td height="141" style="background:url(images/interface/dialog_topleft.png) left bottom no-repeat" width="107">
-		　</td>
-		<td height="141" style="background:url(images/interface/dialog_topmiddle.png) left bottom repeat-x"></td>
-		<td height="141" style="background:url(images/interface/dialog_topright.png) left bottom no-repeat" width="120">
-		　</td>
-	</tr>
-	<tr>
-		<td style="background:url(images/interface/dialog_centerleft.png) left bottom repeat-y"></td>
-		<td style="background:url(images/interface/dialog_centermiddle.png) left bottom "></td>
-		<td style="background:url(images/interface/dialog_centerright.png) left bottom repeat-y"></td>
-	</tr>
-	<tr class="dShowMsgBGTabTRBottom112" name="dShowMsgBGTabTRBottom112" style="display: none;">
-		<td height="112" style="background:url(images/interface/dialog_bottomleft.png) left top no-repeat" width="107">
-		　</td>
-		<td height="112" style="background:url(images/interface/dialog_bottommiddle.png) left top repeat-x"></td>
-		<td height="112" style="background:url(images/interface/dialog_bottomright.png) left top no-repeat" width="120">
-		　</td>
-	</tr>
-	<tr class="dShowMsgBGTabTRBottom150" style="display: table-row;">
-		<td height="150" style="background:url(images/interface/dialog_bigbottomleft.png) left top no-repeat" width="107">
-		　</td>
-		<td height="150" style="background:url(images/interface/dialog_bigbottommiddle.png) left top repeat-x"></td>
-		<td height="150" style="background:url(images/interface/dialog_bigbottomright.png) left top no-repeat" width="120">
-		　</td>
-	</tr>
-</tbody></table>
-<table class="dShowMsgTab" id="dLoginDataHTML" style="position:absolute;left:0;top:0" width="100%" height="100%" cellspacing="0" cellpadding="0">
-	<tbody><tr>
-		<td height="80" style="background:url(images/interface/dialog_header.png) 47% top no-repeat" colspan="3"></td>
-	</tr>
-	<tr>
-		<td width="50"></td>
-		<td class="dShowMsgTabTR" align="center" valign="top">
-		<!--英文fontsize:32px height:52px lineheight:35px-->
-		<!--中文fontsize:24px height:39px lineheight:38px-->
-		<!--无text只有标题：height:52px line-height:68px fontsize根据中英文来-->
-		<div class="dShowMsgTabTitle" style="white-space:normal;font-size:24px;line-height:38px;height:39px;font-family:DwarvenTC,SimSun;text-align:center">你是谁？</div>
-		<!--英文fontsize:20px lineheight:24px-->
-		<!--中文fontsize:15px lineheight:20px-->
-		<div class="dShowMsgTabText" style="white-space:normal;font-size:15px;line-height:20px;width:80%;margin:auto;font-family:DwarvenTC,'Microsoft Yahei';text-align:center;"><div style="position:relative;width:250px"><div>请输入你的用户名(分大小写)：</div><div style="position:relative;width:300px;height:42px"><input placeholder="3-10个字母/数字/下划线" name="txtName" id="txtName" type="text" maxlength="10" value="" style="padding-left:20px;background:url(images/interface/editbox.gif) no-repeat -20px 0/150% 100%;border:0px;height:42px;width:290px;position:absolute;left:0;top:0;color:white;font-size:22px;font-family:DwarvenTC,SimSun"><img src="images/interface/editbox.gif" style="position:absolute;left:0;clip:rect(0,20px,42px,0)"><img src="images/interface/editbox.gif" style="position:absolute;left:210px;clip:rect(0,90px,42px,80px)"></div></div><div style="margin-top:5px;width:250px"><div>请输入你的密码：</div><div style="position:relative;width:300px;height:42px"><input placeholder="注册密码6-20个字母+数字" name="txtPass" id="txtPass" type="password" maxlength="20" value="" style="padding-left:20px;background:url(images/interface/editbox.gif) no-repeat -20px 0/150% 100%;border:0px;height:42px;width:290px;position:absolute;left:0;top:0;color:white;font-size:22px;font-family:DwarvenTC,SimSun"><img src="images/interface/editbox.gif" style="position:absolute;left:0;clip:rect(0,20px,42px,0)"><img src="images/interface/editbox.gif" style="position:absolute;left:210px;clip:rect(0,90px,42px,80px)">
-		<div id="dLoadUserName">正在载入用户信息，请稍候!</div>
-		</div></div></div>
-		</td>
-		<td width="60"></td>
-	</tr>
-	<!---->
-	<tr class="dShowMsgTabTR1" style="display:none"><!--table-row-->
-		<td height="112" align="center" colspan="3">
-
-		<table width="80%" cellpadding="0" class="ButtonTab">
-			<tbody><tr>
-				<td class="ShowMsgButtonL"></td>
-				<!--英文fontsize:24px-->
-				<!--中文fontsize:20px-->
-				<td class="ShowMsgButton" valign="top">
-				<!--OK-->
-				</td>
-				<td class="ShowMsgButtonR"></td>
-			</tr>
-		</tbody></table>
-		
-		</td>
-	</tr>
-	<tr class="dShowMsgTabTR2" style="display:none">
-		<td height="112" align="center" colspan="3">
-		<div style="width:49%" align="right">
-		<table cellpadding="0" class="ButtonTab ButtonTabL">
-			<tbody><tr>
-				<td class="ShowMsgButtonL"></td>
-				<td class="ShowMsgButton" valign="top">
-				<!--OK-->
-				</td>
-				<td class="ShowMsgButtonR"></td>
-			</tr>
-		</tbody></table>
-		</div>
-		<div style="width:51%" align="left">
-		<table cellpadding="0" class="ButtonTab ButtonTabR">
-			<tbody><tr>
-				<td class="ShowMsgButtonL"></td>
-				<td class="ShowMsgButton" valign="top">
-				<!--Cancel-->
-				</td>
-				<td class="ShowMsgButtonR"></td>
-			</tr>
-		</tbody></table>
-		</div>
-		</td>
-	</tr>
-	<tr class="dShowMsgTabTR4" style="display: table-row;">
-		<td height="150" align="center" valign="top" colspan="3">
-		<div style="width:49%;margin-top:27px" align="right">
-		<table cellpadding="0" class="ButtonTab ButtonTabL">
-			<tbody><tr onclick="GameLogin();PlayAudio('gravebutton');">
-				<td class="ShowMsgButtonL"></td>
-				<td class="ShowMsgButton" valign="top" style="font-size:20px">登录</td>
-				<td class="ShowMsgButtonR"></td>
-			</tr>
-		</tbody></table>
-		</div>
-		<div style="width:51%;margin-top:27px;" align="left">
-		<table cellpadding="0" class="ButtonTab ButtonTabR">
-			<tbody><tr onclick="GameLogout();PlayAudio('gravebutton');">
-				<td class="ShowMsgButtonL"></td>
-				<td class="ShowMsgButton" valign="top" style="font-size:20px">登出</td>
-				<td class="ShowMsgButtonR"></td>
-			</tr>
-		</tbody></table>
-		</div>
-		<div style="width:49%" align="right">
-		<table cellpadding="0" class="ButtonTab ButtonTabL">
-			<tbody><tr onclick="GameLogin(1);PlayAudio('gravebutton');">
-				<td class="ShowMsgButtonL"></td>
-				<td class="ShowMsgButton" valign="top" style="font-size:20px">注册</td>
-				<td class="ShowMsgButtonR"></td>
-			</tr>
-		</tbody></table>
-		</div>
-		<div style="width:51%" align="left">
-		<table cellpadding="0" class="ButtonTab ButtonTabR">
-			<tbody><tr onclick="SetNone($('dShowMsgLogin'));PlayAudio('gravebutton');">
-				<td class="ShowMsgButtonL"></td>
-				<td class="ShowMsgButton" valign="top" style="font-size:20px">取消</td>
-				<td class="ShowMsgButtonR"></td>
-			</tr>
-		</tbody></table>
-		</div>
-		</td>
-	</tr>
-</tbody></table>
-<div id="dMsgFailed" style="display: none; top: 90px;"></div>
-</div>
-</div>
-
+<div id="dShowMsgLogin"></div>
 <!--主界面EDAll-->
 <div class="WindowFrame" id="dAll">
 	<!--背景图片-->
@@ -601,17 +446,7 @@ LvlList=function(BLvl,SLvl1,SLvl2){
 	<script>document.write('<a style="margin-left:50px;cursor:pointer;color:#FF0;font-size:15px;text-decoration:none;font-weight:bold" target="_blank" href="process.htm">查看更多开发进度信息 >>></a>');</script>
 </div>
 <div id="oEmbed"></div>
-<div id="dChat">
-	<div id="dChatView">
-		<div class="bg"></div>
-		<div>
-			<iframe name="ChatView" id="ChatView" src="asp/ViewChat.asp" allowtransparency="true" frameborder="0" width="842" height="585" scrolling="no"></iframe>
-		</div>
-		<div class="IF2">
-			<iframe id="IF2" name="IF2" style="display:none" allowtransparency="true" src="asp/ChatSend.asp?C=10000" marginwidth="0" marginheight="0" height="35" width="100%" scrolling="no" border="0" frameborder="0"></iframe>
-		</div>
-	</div>
-</div>
+<div id="dChat"></div>
 <!--公告和分享-->
 <div class="Announcement">
 	<div class="d1">
@@ -661,7 +496,6 @@ $User.Client.PC&&$User.HTTP?(
 	oS.Silence=0,$('cSilence').checked=false
 );
 //初始化系统对象
-ShowAD();
 InitGame();
 </script>
 <script id="JSPVZ"></script>
