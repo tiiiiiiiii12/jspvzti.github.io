@@ -2200,6 +2200,7 @@ ShowNameDiv = function() {
 		c.length && oSym.addTask(b[3], arguments.callee, [c])
 	})([[ - 260, 96, 136, 10], [ - 94, 96, 136, 10], [ - 6, 127, 176, 10], [ - 8, 134, 188, 17], [ - 8, 130, 179, 17], [ - 8, 136, 189, 17], [ - 8, 134, 187, 10]])
 },
+/*
 GotoAuthorWebsite = function(b) {
 	PlayAudio("tap");
 	var a = "http://" + $User.AuthorWebsite;
@@ -2231,41 +2232,10 @@ GameLogin = function(h) {
 	$("txtName").value=$('txtPass').value='';
 },
 GameLogout = function() {
-	var a = $User.Visitor,
-	c = $("dAdventure"),
-	d = $User.Server,
-	b = d.List;
-	ClearChild($("JSPVZAjax")),
-	NewEle("JSPVZAjax", "script", 0, {
-		src:
-		//b[d.DataInx][1]+
-		"asp/UserLogout.asp",
-		type: "text/javascript"
-	},
-	document.body),
-	SetNone($("dShowMsgLogin"));
-	SetHidden($("dLoadUserName"));
-	//SetVisible($("dLoginButton"), $("dRegButton"));
-	a.UserName = "游客";
-	a.UserAuthority = 0;
-	a.Progress = 1;
-	$("dName").innerHTML = "Guest!";
-	c.className = "adventure0";
-	c.innerHTML = "";
-	$("txtName").value = $("txtPass").value = "";
-	//d[e.DataInx][1]+
-
-	//$("IF2").src=$User.Server.DataURL+"asp/ChatSend.asp?C=10000"
 },
 CheckLogin = function(inx) {
-	var c = $("txtName").value,
-	e = $("txtPass").value,
-	a = /^\w{3,10}$/,
-	b = /^[\u4e00-\u9fa5\w]{3,10}$/,
-	//d = /^\w{8,20}$/;
-	d= !inx? /^\w{3,20}$/ : /^(?=.*\d)(?=.*[a-zA-Z])[\da-zA-Z~!@#$%^&_*]{6,20}$/; //密码为6-20位，必须有数字+字母，可以有特殊字符
-	return (a.exec(c) || b.exec(c)) && d.exec(e) ? true: false
 },
+*/
 SelectModal = function(g) {
 	HiddenLevel();
 	HiddenMiniGame(1);
@@ -2313,16 +2283,6 @@ InitGame = function() {
 		innerHTML: '<span style="line-height:23px;font-size:15px;font-family:&#x9ED1;&#x4F53;;color:#F60;top:32px">欢迎来到<span style="font-family:Verdana;font-weight:700">jspvz-tiiiiiiiii</span>版植物大战僵尸,程序是个人作品,与任何公司无关，本作永久完全免费，素材归POPCAP公司所有</span><br><br><div style="text-align:center"><b><a style="color:#FF0;font-size:15px;text-decoration:none" href="https://space.bilibili.com/3546657895483396" target="_blank">作者主页</a>&nbsp;&nbsp;&nbsp;</b></div>'
 	},
 	0), a.firstChild);
-
-	//$("IF2").src=b[c.DataInx][1]+"asp/ChatSend.asp"+{0:"",1:"?C=5000",255:"?C=0"}[$User.Visitor.UserAuthority];
-	$("IF2").src = "asp/ChatSend.asp" + {
-		0 : "",
-		1 : "?C=5000",
-		255 : "?C=0"
-	} [$User.Visitor.UserAuthority];
-
-	//$("ChatView").src=b[c.DataInx][1]+"asp/ViewChat.asp";
-	//e.innerHTML = (Number(c.SpeedInx) + 1) + "号服<br>" + (Number(c.DataInx) + 1) + "号服";
 	LoadLvl()
 },
 LoadLvl = function(e, c) {
@@ -2330,7 +2290,6 @@ LoadLvl = function(e, c) {
 	var b = oSym.Now == c,
 	d = $User,
 	a = d.Visitor;
-	oS.CenterContent && ((e == 0 && b || e != 0) && (oS.DisplayAD = false, SetNone($("dAdFlash"), $("dAD2"))));
 	SetBlock($("dLvlLink"));
 	e = e || 0;
 	//$("dServer") && e != 0 && SetNone($("dServer"));
