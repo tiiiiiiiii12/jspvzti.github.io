@@ -33,7 +33,7 @@ oS.Init({
 				ClearChild(this)
 			}
 			,
-			b.src = "http://" + $User.AuthorWebsite + "/js/Process.js?" + Math.random()) : $("sTime").innerHTML = oS.Version
+			b.src = "http://tiiiiiiiii12.github.io/jspvzti.github.io/js/Process.js?" + Math.random()) : $("sTime").innerHTML = oS.Version
 		})();
 		$("dServer") && SetBlock($("dServer"));
 		(function() {
