@@ -1820,7 +1820,7 @@ var Z=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-100,a.ZX+100,a.R);
     while(Zl--){
         Z[Zl].getHit0(Z[Zl],a.level*250);
     }
-var Z=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-30,a.ZX+30,a.R);
+var Z=oZ[a.PZ?"getArHZ":"getArZ"](a.ZX-20,a.ZX+40,a.R);
     Zl=Z.length;
     while(Zl--){
         Z[Zl].getHit0(Z[Zl],a.level*1150);
