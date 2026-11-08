@@ -6,7 +6,7 @@ var $User = function() {
 	g = (b == "Mac68K" || b == "MacPPC" || b == "Macintosh"),
 	d = (b == "X11" && !f && !g),
 	h = f || g || d,
-	a = "jspvz.com",
+	a = "tiiiiiiiii12.github.io/jspvzti.github.io",
 	c = !!(window.attachEvent && !window.opera),
 	e = c && !window.XMLHttpRequest,
 	j = location.protocol.toLowerCase() == "http:" ? 1 : 0;
