@@ -10,6 +10,8 @@ var oGargantuarBoss = InheritO(oGargantuar, {
   beAttackedPointL: 154,
   beAttackedPointR: 285,
   HP:80000,
+  lastHP2:40000,
+  lastHP3:65000,
   level:1,
   WalkToLadder:function(){},//不走梯子
   height: 300,
@@ -64,12 +66,12 @@ a.Boom(a);
 		if(!$Z[a.id])return;
 		a.getr(a,5,1);
         a.ChangeR(a);
-        if (a.HP >= 68000) {
+        if (a.HP >= a.lastHP3) {
 			try{
           oP.SetTimeoutAirDropZombie(8,9,3,[oZombie, oPeaZombie, oConeheadZombie,oPoleVaultingZombie,oBucketheadZombie],!a.PZ);
 		  oP.SetTimeoutTomZombie([oZombie,oPeaZombie]);
 		}catch{};
-        } else if (a.HP >= 40000) {
+        } else if (a.HP >= a.lastHP2) {
           try{
           oP.SetTimeoutAirdropZombie(8,9,5, [oZombie, oPeaZombie,oFootballZombie,oScreenDoorZombie,oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie], !a.PZ);
           oP.SetTimeoutTomZombie([oZombie, oPeaZombie, oConeheadZombie]);
@@ -217,5 +219,5 @@ func:function(a) {
   coolTime:Infinity,
   EName: "oGargantuarBoss",
   CName: "首领巨人",
-  Produce: '他统领着一大堆僵尸，<br>韧性：<font color="#FF0000">极高</font><br>那机甲似乎不会回来了，就由我来统领僵尸们踏平这座房子吧'
+  Produce: 'boss类僵尸，有不同的阶段，每失去25000血进入下一阶段，且每隔一段时间发动特殊技能<br>韧性：<font color="#FF0000">极高(80000)</font><br>应该就是最终boss了……吗？'
 })
