@@ -2190,15 +2190,7 @@ deleteCookie = function(a) {
 },
 WordUTF8 = '<div id="dLogo" style="position:absolute;width:900px;height:600px;z-index:1"><div id="LogoWord" style="position:absolute;color:#FF0;top:285px;width:100%;height:140px"><span style="position:absolute;width:135px;height:100%;left:400px;top:0;cursor:pointer" onclick="PlayAudio(\'gravebutton\');SetBlock($(\'dSurface\'),$(\'iSurfaceBackground\'));ShowNameDiv()"></span><div style="position:absolute;font-size:13px;left:610px;text-align:center;width:140px;top:110px;line-height:1.6;font-weight:bold"><span style="cursor:pointer"><span id="sTime" style="cursor:pointer">(v12.08.15.1500)</span></span></div></div><div style="position:absolute;width:155px;height:110px;left:600px;top:340px;cursor:pointer;z-index:300" onclick="SetVisible($(\'dProcess\'))"></div><div id="dBalloonZombie"><img src="images/interface/balloon_zombie32.png"></div></div>',
 ShowNameDiv = function() {
-	oSym.Start(); (function(c) {
-		var b = c[0],
-		d = 3;
-		c.shift();
-		while (d--) {
-			SetStyle($("dNameDiv" + d).style.top = b[d] + "px")
-		}
-		c.length && oSym.addTask(b[3], arguments.callee, [c])
-	})([[ - 260, 96, 136, 10], [ - 94, 96, 136, 10], [ - 6, 127, 176, 10], [ - 8, 134, 188, 17], [ - 8, 130, 179, 17], [ - 8, 136, 189, 17], [ - 8, 134, 187, 10]])
+	oSym.Start();
 },
 /*
 GotoAuthorWebsite = function(b) {
