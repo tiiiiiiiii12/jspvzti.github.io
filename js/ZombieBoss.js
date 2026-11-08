@@ -71,13 +71,13 @@ a.Boom(a);
 		a.getr(a,5,1);
         a.ChangeR(a);
         if (a.HP >= a.lastHP3) {
-			try{
-          oP.SetTimeoutAirDropZombie(8,9,3,[oZombie, oPeaZombie, oConeheadZombie,oPoleVaultingZombie,oBucketheadZombie],!a.PZ);
+		try{
+          oP.SetTimeoutAirdropZombie(8,9,3,[oZombie, oPeaZombie, oConeheadZombie,oPoleVaultingZombie,oBucketheadZombie],!a.PZ);
 		  oP.SetTimeoutTomZombie([oZombie,oPeaZombie]);
 		}catch{};
         } else if (a.HP >= a.lastHP2) {
           try{
-          oP.SetTimeoutAirdropZombie(8,9,5, [oZombie, oPeaZombie,oFootballZombie,oScreenDoorZombie,oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie], !a.PZ);
+          oP.SetTimeoutAirdropZombie(8,9,5,[oZombie, oPeaZombie,oFootballZombie,oScreenDoorZombie,oConeheadZombie,oDancingZombie,oPoleVaultingZombie,oNewspaperZombie], !a.PZ);
           oP.SetTimeoutTomZombie([oZombie, oPeaZombie, oConeheadZombie]);
 		  AppearTombstones(8, 9, 1);
 			}catch{};
