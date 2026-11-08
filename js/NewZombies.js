@@ -199,7 +199,7 @@ var oGargantuar = InheritO(oZombie, {
           oSym.addTask(1000, arguments.callee, [b]));
       }, [a]);
     } else {
-	  let c=oGargantuarBoss.prototype;
+	  let c=oGargantuarBoss.prototype.PicArr;
 	  a.PicArr[a.ImplessWalkGif]=c[a.ImplessWalkGif];
 	  a.PicArr[a.ImplessAttackGif]=c[a.ImplessAttackGif];
 	  a.PicArr[a.ImplessDieGif]=c[a.ImplessDieGif];
