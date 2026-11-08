@@ -6,6 +6,10 @@ var oGargantuarBoss = InheritO(oGargantuar, {
   CanPass: function(d, c) {
     return c
   },
+PicArr: (function() {
+    var a = "images/Zombies/GigaGargantuar/";
+    return ["images/Card/Zombies/dr.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif" + $Random + Math.random(), "images/Zombies/Gargantuar/ImpToLand.gif", a + "throwImp.gif", a + "ImplessDie.gif", a + "Die.gif", a + "ImplessWalk.gif", a + "0.gif", a + "ImplessAttack.gif" + $Random + Math.random()]
+  })(),
   flatTire:function(){},
   beAttackedPointL: 154,
   beAttackedPointR: 285,
