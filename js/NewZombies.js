@@ -181,7 +181,7 @@ var oGargantuar = InheritO(oZombie, {
     }
     h.canWalk(h, h.id) && h.hasthrew < h.throwImpnum && (GetC(h.ZX) > 3 || !h.PZ) && !h.isAttacking && (h.HP <= h.MaxHP * 0.5) && h.throwImp(h);
   },
-  flycd:2200,
+  flycd:2000,
   jinyinAct: function(a) {
     a.num = a.Privatenum||Math.random() * 100;
     let z = a.Ele;
@@ -199,6 +199,10 @@ var oGargantuar = InheritO(oZombie, {
           oSym.addTask(1000, arguments.callee, [b]));
       }, [a]);
     } else {
+	  let c=oGargantuarBoss.prototype;
+	  a.PicArr[a.ImplessWalkGif]=c[a.ImplessWalkGif];
+	  a.PicArr[a.ImplessAttackGif]=c[a.ImplessAttackGif];
+	  a.PicArr[a.ImplessDieGif]=c[a.ImplessDieGif];
       oSym.addTask(a.flycd, function(b) {
         $Z[b.id] && (b.Jump(b), oSym.addTask(b.flycd, arguments.callee, [b]));
       }, [a]);
