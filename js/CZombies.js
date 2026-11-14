@@ -684,7 +684,7 @@ lookHP:function(c){
           let tz = oZ[a.PZ ? "getArHZ" : "getArZ"](a.ZX - 100, a.ZX + 100, a.R);
           let tzl = tz.length;
           while (tzl--) {
-              tz[tzl].Altitude == 1&&tz[tzl].getExplosion(1000);
+              tz[tzl].getExplosion(1000);
 		  }
 		oSym.addTask(200, ClearChild, [NewImg(0, "images/Plants/PotatoMine/PotatoMine_mashed.gif", "left:" + (a.ZX - 80) + "px;top:" + (a.pixelTop + 80) + "px;height:93px;width:132px;z-index:25;", EDPZ)]);
 		},
@@ -1396,7 +1396,7 @@ PicArr2: (function() {
 				zl=z.length,
 				Z;
 				while(zl--){
-				(Z=z[zl])&&Z.EName=="oImp"&&Z.Altitude==1&&(a.PZ?GetC(Z.ZX)>3:GetC(Z.ZX)<7)&&a.kickImp(Z,a.PZ?Math.max(GetC(a.ZX)-2,3):Math.min(GetC(a.ZX)+2,7))
+				(Z=z[zl])&&Z.EName=="oImp"&&Z.Altitude==1&&(a.PZ?GetC(Z.ZX)>3:GetC(Z.ZX)<7)&&a.kickImp(Z,a.PZ?Math.max(GetC(a.ZX)-3,3):Math.min(GetC(a.ZX)+3,7))
 				}
 		};
 		a.kickImp=function(z,C){
@@ -1481,6 +1481,24 @@ PicArr2: (function() {
 	  }
       };
       a.PrivateAct = function(e) {
+		if(!a.bool){
+		   if(!a.Ornaments){
+		var LR=Math.max(a.R-1,1);
+		do{
+        let A = oZ["getAr" + (a.PZ ? "HZ" : "Z")](a.ZX - 30,a.ZX + 30, LR),
+          Tz = A.length;
+          for (let l = 0; l <= 3; l++) {
+            var m = oGd.$[LR + "_" + GetC(a.ZX) + "_" + l];
+            a.PZ && m && m.getSlow(m, m.id,400)
+          }
+        while (Tz--) {
+          (t = A[Tz])&& t.getSlow(t,t.id,400)
+        };
+	}while(LR++ < Math.min(a.R+1,oS.R))
+					PlayAudio("frozen");
+					a.bool=1;
+				}
+		}
 	if(e.PZ){
         var b, r, m, g, j = e.R,
           n = oGd.$Ice[j],
@@ -1525,7 +1543,7 @@ PicArr2: (function() {
       }
     }
   },
-        Produce: '他的路障头盔，使他两倍坚韧于普通僵尸。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：<font color="#FF0000">真·路障僵尸（防具HP*1.5，使其附近的其他僵尸换行）</font><br>精英形态二：<font color="#FF0000">冰头僵尸（造冰道，若在冰道上则滑步，免疫寒冰控制）</font><br>和其他僵尸一样，路障头僵尸盲目地向前。但某些事物却使他停下脚步，捡起一个交通路障或冰块，并固实在自己的脑袋上。是的，他很喜欢参加聚会。'
+        Produce: '他的路障头盔，使他两倍坚韧于普通僵尸。<br>韧性：<font color="#FF0000">中</font><br>精英形态一：<font color="#FF0000">真·路障僵尸（防具HP*1.5，使其附近的其他僵尸换行）</font><br>精英形态二：<font color="#FF0000">冰头僵尸（造冰道，若在冰道上则滑步，免疫寒冰控制，防具掉落时减速周围植物）</font><br>和其他僵尸一样，路障头僵尸盲目地向前。但某些事物却使他停下脚步，捡起一个交通路障或冰块，并固实在自己的脑袋上。是的，他很喜欢参加聚会。'
     }),
     oBucketheadZombie = InheritO(oConeheadZombie, {
         EName: "oBucketheadZombie",
@@ -3476,7 +3494,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   EName: "oJackinTheBoxZombie",
   CName: "小丑僵尸",
   SunNum: 100,
-  HP: 500,
+  HP: 550,
   BreakPoint: 167,
   Lvl: 3,
   Status: 1,
@@ -3497,7 +3515,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   Speed: 3.6,
   LostBoxGif:12,
   LostBoxAttackGif:13,
-  Produce: '这种僵尸带着个会爆炸的惊喜<br>精英形态一：樱桃炸弹，残血必开盒<br>精英形态二：毁灭菇，爆炸范围扩大并在原地留坑<br>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快</font><br>特点：<font color="#FF0000">打开玩偶匣会爆炸</font><br>一个天天喊着"just brainz"的精神病人，根本不会意识到最大的食脑障碍来源于自己',
+  Produce: '这种僵尸带着个会爆炸的惊喜<br>精英形态一：南瓜头，有75%概率不携带盒子，双倍血量，前方有僵尸加速行走，若有盒子时则残血必开盒<br>精英形态二：毁灭菇，爆炸范围扩大并在原地留坑<br>韧性：<font color="#FF0000">中</font><br>速度：<font color="#FF0000">快</font><br>特点：<font color="#FF0000">打开玩偶匣会爆炸</font><br>一个天天喊着"just brainz"的精神病人，根本不会意识到最大的食脑障碍来源于自己',
   AudioArr: ["jackinthebox", "jack_surprise", "explosion"],
   PicArr: (function() {
     var a = "images/Zombies/JackinTheBoxZombie/";
@@ -3505,9 +3523,17 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
   })(),
   jinyinAct: function(a) {
     a.num = a.Privatenum||Math.random() * 100;
+	if(a.num<50){
+	a.canBoom=Math.random()*100;
+	a.canBoom>25&&a.MagnetBox(a);
+	a.HP*=2;
+	}
+	a.NormalGif=a.LostBoxGif;
+	a.AttackGif=a.LostBoxAttackGif;
+	a.EleBody.src=a.isAttacking?a.PicArr[a.LostBoxAttackGif]:a.PicArr[a.LostBoxGif];
     let z = a.Ele;
     z.JaHead = "Ja" + Math.random();
-    let Ja = NewImg(z.JaHead, a.num>=50 ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/CherryBomb/CherryBomb.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:60px;top:30px;", 0);
+    let Ja = NewImg(z.JaHead, a.num>=50 ? "images/Plants/DoomShroom/DoomShroom.gif" : "images/Plants/PumpkinHead/PumpkinHead.gif", "position:absolute;transform:" + (a.PZ ? "rotateY(180deg);" : "rotateY(0deg);") + "left:60px;top:"+(a.num>=50?30:80)+"px;",0);
     z.appendChild(Ja);
     a.PrivateAct = function(a) {
       let p = a.Ele;
@@ -3518,7 +3544,8 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
         }),
         a.check = a.WalkDirection?0:1);
       if (a.num<50&&a.jinyin&& !a.opennum) {
-        a.canWalk(a, a.id) && $Z[a.id].beAttacked && ($Z[a.id].HP < 210) && (a.OpenBox(a.id), a.opennum = true)
+oZ["getAr"+(a.WalkDirection?"HZ":"Z")](100,oS.W,a.R).length>1&&oZ["getAr"+(a.WalkDirection?"HZ":"Z")](!a.WalkDirection?100:a.ZX,!a.WalkDirection?a.ZX:oS.W,a.R).length&&a.getr(a,a.PZ?-a.Speed:a.Speed);
+        a.canWalk(a, a.id) && a.beAttacked && (a.HP < 210) && (a.OpenBox(a.id), a.opennum = true)
       }
     }
   },
@@ -3535,6 +3562,7 @@ oJackinTheBoxZombie = InheritO(OrnNoneZombies, {
 	  a.AttackGif=a.LostBoxAttackGif;
 	  a.EleBody.src=a.isAttacking?a.PicArr[a.LostBoxAttackGif]:a.PicArr[a.LostBoxGif];
 	  a.OpenBox=function(){};
+	  a.MagnetBox=function(){};
       }
   },
   RandomOpenBox: function(a) {
