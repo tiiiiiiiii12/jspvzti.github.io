@@ -1750,7 +1750,7 @@ NormalAttack:function(a){
                     u = A.id;
                     PlayAudio(["bowlingimpact", "bowlingimpact2"][Math.floor(Math.random() * 2)]);
 					z.HitNum++>=2&&CustomZombie(oNutZombie,a,l,1);
-					z.HitNum>=4&&CustomZombie(oWallNutZombie,a,l,1);
+					z.HitNum>=5&&CustomZombie(oWallNutZombie,a,l,1);
                     switch (A.Ornaments) {
                         case 0:
                             A.getHit0(A,1500);
@@ -2331,7 +2331,7 @@ NormalAttack:function(a){
         width: 60,
         height: 59,
         beAttackedPointR: 40,
-        SunNum: 50,
+        SunNum: 100,
         HP: 400,
         PicArr: ["images/Card/Plants/Garlic.png", "images/Plants/Garlic/0.gif", "images/Plants/Garlic/Garlic.gif", "images/Plants/Garlic/Garlic_body2.gif", "images/Plants/Garlic/Garlic_body3.gif"],
         Tooltip: "将僵尸赶到其它的横行",
@@ -3544,12 +3544,12 @@ NormalAttack2: function() {
             return "left:" + (a.width * 0.5 - 43) + "px;top:" + (a.height - 100) + "px"
         }
     }),
-    oCactus = InheritO(CPlants, {
+oCactus = InheritO(CPlants, {
         EName: "oCactus",
         CName: "仙人掌",
         width: 122,
         height: 157,
-        SunNum: 150,
+        SunNum: 200,
         beAttackedPointL: 10,
         beAttackedPointR: 80,
         AudioArr: ["plantgrow"],
@@ -3558,7 +3558,7 @@ NormalAttack2: function() {
             return ["images/Card/Plants/Cactus.png", "images/Plants/Cactus/0.gif", "images/Plants/Cactus/Cactus.gif", "images/Plants/Cactus/Cactus2.gif", "images/Plants/Cactus/Attack.gif", "images/Plants/Cactus/Attack2.gif", "images/Plants/Cactus/Elongation.gif", "images/Plants/Cactus/Shorten.gif", "images/Plants/Cactus/Projectile" + ($User.Browser.IE6 ? 8 : 32) + ".png"]
         })(),
         Tooltip: "能发射刺穿气球的子弹",
-        Produce: '仙人掌发射的穿刺弹可以用来打击地面和空中目标，有概率连发<br>精英形态：子弹有概率穿透或击退<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">地面和空中</font></p>确实，仙人掌非常“刺儿”，但是她的刺下，隐藏藏着颗温柔的心，充满着爱和善良。她只是想拥抱别人，和被别人拥抱。大多数人都做不到这点，但是仙人掌她并不介意。她盯着一只铠甲鼠好一阵子了，这次好像真的可以抱抱了。',
+        Produce: '仙人掌发射的穿刺弹可以用来打击地面和空中目标，能穿透几只僵尸，有概率连发<br>精英形态：子弹有概率击退<p>伤害：<font color="#FF0000">中等</font><br>范围：<font color="#FF0000">地面和空中</font></p>确实，仙人掌非常“刺儿”，但是她的刺下，隐藏藏着颗温柔的心，充满着爱和善良。她只是想拥抱别人，和被别人拥抱。大多数人都做不到这点，但是仙人掌她并不介意。她盯着一只铠甲鼠好一阵子了，这次好像真的可以抱抱了。',
         getShadow: function(a) {
             return "left:3px;top:132px"
         },
@@ -3689,6 +3689,7 @@ NormalAttack2: function() {
                 return false
             }
         },
+	penetrateNum:40,
         NormalAttack1: function() {
             var b = this,
                 c = "CB" + Math.random(),
@@ -3700,9 +3701,8 @@ NormalAttack2: function() {
                     var d = $(e);
                     d && (d.childNodes[1].src = "images/Plants/Cactus/Cactus.gif")
                 },
-                [a]);
-                
-            NewImg(c, b.PicArr[8], "left:" + (b.AttackedRX + 25) + "px;top:" + (b.pixelTop + 103) + "px;visibility:hidden;z-index:" + (b.zIndex + 2), EDPZ);
+                [a]);            
+            NewImg(c, b.PicArr[8], "left:" + (b.AttackedRX + 25) + "px;top:" + (b.pixelTop + 103) + "px;visibility:hidden;filter:brightness("+(num>=92?0:1)+");z-index:" + (b.zIndex + 2), EDPZ);
             oSym.addTask(20,
                 function(e) {
                     var d = $(e);
@@ -3710,16 +3710,13 @@ NormalAttack2: function() {
                 },
                 [c]);
             oSym.addTask(1,
-                function(g, i, d, k, h, l) {
+                function(g, i, d, k, h, l,Num) {
+	       if(Num>b.penetrateNum) return ClearChild(i);
                     var j, f = GetC(k),
                         e = oZ["getZ" + d](k, h);
-                if(num>75){
-                    e && e.Altitude == 1&&(e.getHit0(e, 2, d)),(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
-                }else{
-                e && e.Altitude == 1?(num>55&&e.getr(e,20),e.getPea(e,20,d), ClearChild(i)):(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i);
-                }
+                e && e.Altitude == 1 &&(num>92&&e.getr(e,5),e[Num%20?"getPea":"getHit0"](e,2,d),Num++),(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l,Num])) : ClearChild(i);
                 },
-                [c, $(c), 0, b.AttackedLX, b.R, b.AttackedLX - 40])
+                [c, $(c), 0, b.AttackedLX, b.R, b.AttackedLX - 40,0])
         },
         NormalAttack2: function() {
   var b = this,
@@ -3743,7 +3740,7 @@ NormalAttack2: function() {
     function(g, i, d, k, h, l) {
       var j, f = GetC(k),
         e = oZ["getZ" + d](k, h);
-      e && e.Altitude == 3 ? (e.getHit0(e, 20, d), e.Drop(), ClearChild(i)) : (k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i)
+      e && e.Altitude == 3 && (e.getHit0(e, 4, d), e.Drop()),(k += (j = !d ? 5 : -5)) < oS.W && k > 100 ? (i.style.left = (l += j) + "px", oSym.addTask(1, arguments.callee, [g, i, d, k, h, l])) : ClearChild(i)
     },
     [c, $(c), 0, b.AttackedLX, b.R, b.AttackedLX - 40])
 }
