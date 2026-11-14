@@ -130,7 +130,7 @@ PicArr:function(){
 		CancelPlant: function() {
 			ClearChild($("MovePlant"), $("MovePlantAlpha"));
 			oS.Chose = 0, oS.ChoseCard = "";
-			for(let Idx of ArCard) SetAlpha($(Idx.DID), 100, 1);		
+			SetAlpha($(ArCard[oS.ChoseCard].DID), 100, 1);
 			GroundOnmousemove = function() {};
 		},
           GrowPlant:function(l,c,b,f,a){
