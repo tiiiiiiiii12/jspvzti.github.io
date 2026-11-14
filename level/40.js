@@ -31,50 +31,83 @@ PicArr:function(){
     oP.FlagZombies>24&&oP.SetTimeoutWaterZombie(6,9,3,[oDuckyTubeZombie1,oDuckyTubeZombie2,oSnorkelZombie])
   },
   StartGameMusic:"MangZhong",
-  StartGame:function(){
-    StopMusic();
-    PlayMusic(oS.LoadMusic=oS.StartGameMusic);
-    SetVisible($("tdShovel"),$("dFlagMeter"),$("dTop"));
-    SetHidden($("dSunNum"));
-    oS.InitLawnMower();
-    PrepareGrowPlants(function(){
-      oP.Monitor({
-        f:function(){
-          (function(){
-            var a=ArCard.length;
-            if(a<10){
-              var c=oS.PName,
-                b=oP.FlagZombies<6?Math.floor(1+Math.random()*10)<4?1:Math.floor(Math.random()*c.length):Math.floor(1+Math.random()*10)<3?0:Math.floor(Math.random()*c.length),
-                e=c[b],
-                d=e.prototype,
-                f="dCard"+Math.random();
-              ArCard[a]={
-                DID:f,PName:e,PixelTop:600
-              };
-              NewImg(f,d.PicArr[d.CardGif],"top:600px;width:100px;height:120px;cursor:pointer;clip:rect(auto,auto,60px,auto)",
-                     $("dCardList"),{
-                       onmouseover:function(g){
-                         ViewPlantTitle(GetChoseCard(f),g)},
-                       onmouseout:function(){
-                         SetHidden($("dTitle"))
-                       },onclick:function(g){
-                         ChosePlant(g,oS.ChoseCard,f)
-                       }
-                     })}
-            oSym.addTask(600,arguments.callee,[])
-          })();
-          (function(){
-            var b=ArCard.length,
-              a,
-              c;
-            while(b--){
-              (c=(a=ArCard[b]).PixelTop)>60*b&&($(a.DID).style.top=(a.PixelTop=c-1)+"px")
-            }
-            oSym.addTask(5,arguments.callee,[])
-          }
-          )()},ar:[]});
-      oP.AddZombiesFlag();
-      SetVisible($("dFlagMeterContent"))})}
+  LoadAccess: function(a) {
+		(function(d) {
+			var b = arguments.callee;
+			switch (d) {
+				case 0:
+            innerText(c, "天色似乎又变黑了点，看来要下雨了",1);
+						c.onclick = function() {
+							oSym.addTask(50, b, [1]);
+							c.onclick=null;
+						};
+					break;
+				case 1:
+					c.onclick = function() {
+						oSym.addTask(50, b, [2]);
+						c.onclick=null;
+					};
+					innerText(c, "……",1);
+					break;
+				case 2:
+						c.onclick = function() {
+							oSym.addTask(50, b, [3]);
+							c.onclick=null;
+						};
+					innerText(c, "…虽然我知道大战在即，但我竟不感到慌张",1);
+					break;
+				case 3:
+						c.onclick = function() {
+							oSym.addTask(50, b, [4]);
+							c.onclick=null;
+					};
+					innerText(c, "在这里陪伴着我的，只有惬意与宁静",1);
+					break;
+				case 4:
+						c.onclick = function() {
+							oSym.addTask(50, b, [5]);
+							c.onclick=null;
+						};
+					innerText(c, "…当然还有这群难缠的僵尸",1);
+					break;
+				case 5:
+						c.onclick = function() {
+							oSym.addTask(100, b, [6]);
+							c.onclick=null;
+						};
+					innerText(c, "现在，只能让他们滚开了",1);
+					break;
+				case 6:
+						c.onclick = function() {
+							oSym.addTask(100, b, [7]);
+							c.onclick=null;
+						};
+					innerText(c, "希望以后还能有机会享受这悠闲吧",1);
+					break;
+				case 7:
+          oSym.addTask(80,function(Left){
+            a(0)
+          },[0]);
+			}
+		})(0)
+	},
+  StartGame: function() {
+		StopMusic(), PlayMusic(oS.LoadMusic = oS.StartGameMusic);
+		SetVisible($("tdShovel"), $("dFlagMeter"), $("dTop")), SetHidden($("dSunNum")); // 隐藏阳光和卡槽
+		EDAll.style.filter="brightness(0.5)";
+		(function(){ // 隐藏原卡槽
+			var c = $("dCardList");
+			for (var a = 0, b; b = c.childNodes.item(a); ++a) SetHidden(b);
+		})();
+		oS.InitLawnMower(), PrepareGrowPlants(function () {
+			oP.Monitor(oS.Monitor, oS.UserDefinedFlagFunc);
+			oSym.addTask(1500, function() { oP.AddZombiesFlag(), SetVisible($("dFlagMeterContent")); }, []);
+			(function(){
+				var a = dRand(GetX(0), GetX(oS.C)), b = dRand(GetY(1), GetY(oS.R - 1)), d = oS.PName[dRand(1, oS.PName.length) - 1];
+				AppearCard(a, b, d, 1, 1000), oSym.addTask(dRand(500, 900), arguments.callee, []);
+			})();
+		});
+	}
 },
         {
           AZ:[
@@ -113,49 +146,45 @@ PicArr:function(){
             NewImg("PointerUD","images/interface/PointerDown.gif","top:290px;left:636px",EDAll)
           }
         },{
-		AutoSelectCard:function(){},
-		GetChoseCard: function(b) {
-			var a = ArCard.length;
-			while (a--) ArCard[a].DID == b && (oS.ChoseCard = a, a = 0);
-			return oS.ChoseCard
-		},
-		ChosePlant: function(a, b) {
-			PlayAudio("seedlift"); a = window.event || a;
-			var f = ArCard[oS.ChoseCard = b], e = a.clientX - EDAlloffsetLeft + EBody.scrollLeft || EElement.scrollLeft, d = a.clientY + EBody.scrollTop || EElement.scrollTop, c = f.PName.prototype;
-			EditImg(NewImg("MovePlant", c.PicArr[c.StaticGif], "left:" + e - 0.5 * (c.beAttackedPointL + c.beAttackedPointR) + "px;top:" + d + 20 - c.height + "px;z-index:254", EDAll).cloneNode(false), "MovePlantAlpha", "", { visibility: "hidden", filter: "alpha(opacity=40)", opacity: 0.4, zIndex: 30 }, EDAll);
-			SetAlpha($(f.DID), 50, 0.5);
-			SetHidden($("dTitle"));
-			oS.Chose = 1, GroundOnmousemove = GroundOnmousemove1;
-		},
-		CancelPlant: function() {
-			ClearChild($("MovePlant"), $("MovePlantAlpha"));
-			parseInt(oS.ChoseCard)&&(SetAlpha($(ArCard[oS.ChoseCard].DID), 100, 1),oS.ChoseCard = "");
-			oS.Chose = 0;
-			GroundOnmousemove = function() {};
-		},
-          GrowPlant:function(l,c,b,f,a){
-            var j=oS.ChoseCard,
-              g=ArCard[j],
-              i=g.PName,
-              k=i.prototype,
-              d=g.DID,
-              e,
-              h=oGd.$LF[f];
-            k.CanGrow(l,f,a)?function(){
-              PlayAudio(h!=2?"plant"+Math.floor(1+Math.random()*2):"plant_water");
-              (new i).Birth(c,b,f,a,l);
-              oSym.addTask(20,SetNone,[SetStyle($("imgGrowSoil"),{
-                left:c-30+"px",top:b-40+"px",zIndex:3*f,visibility:"visible"
-              })]);
-              ClearChild($("MovePlant"),$("MovePlantAlpha"));
-              $("dCardList").removeChild(e=$(d));
-              e=null;
-              ArCard.splice(j,1);
-			  parseInt(oS.ChoseCard)&&(oS.ChoseCard="");
-              oS.Chose=0;
-              GroundOnmousemove=function(){};
-            }():CancelPlant();
-		  },
-          ViewPlantTitle:function(a){
-          }
-        });
+	dRand: function (l, r) { return Math.floor(Math.random() * (r - l + 1) + l); }, 
+	AppearCard: function (h, f, e, a, t) { // x, y, 植物id, 移动卡槽类型, 消失时间（默认 15s）
+		var b, d, g = "dCard" + Math.random(), c = "opacity:1;width:100px;height:120px;cursor:pointer;clip:rect(auto,auto,60px,auto);left:" + h + "px;top:-1000", t = t || 1500;
+ 
+		if (a) d = 0, oSym.addTask(1, MoveDropCard, [g, f, t]); // 从天而降，反之抛物线掉落
+		else d = f - 15 - 20, c += ";top:" + d + "px", oSym.addTask(1, DisappearCard, [g, t]), oSym.addTask(1,function(q,p,n,j,l,k,m,i){if(ArCard[q]&&$(q)){SetStyle($(q),{left:(p=p+j*k)+"px",top:(n=n+Number(l[0]))+"px"});l.shift();--m;m>0&&((l.length==0)&&(l=[8,16,24,32]),oSym.addTask(i,arguments.callee,[q,p,n,j,l,k,m,++i]))}},[g,h,d,Math.floor(Math.random()*4),[-32,-24,-16,-8],[-1,1][Math.floor(Math.random()*2)],8,2]); // 开始记时，确定抛物线，与阳光部分相似故压缩
+ 
+		ArCard[g] = { DID: g, PName: e, PixelTop: 600, CDReady: 1, SunReady: 1, top: d, HasChosen: false, Kind: 1 }; // 生成卡片数据，是否被点击过
+		NewImg(g, e.prototype.PicArr[e.prototype.CardGif], c, $("dCardList"), { // 生成卡片 ele
+			onclick: function (g) { 
+				var self = this, style = self.style, id = self.id; ClearChild($("MovePlant"), $("MovePlantAlpha")), CancelPlant(), style && (style.opacity = 0.5), ChosePlant(g, id), ArCard[id] && (ArCard[id].HasChosen = true);
+			}
+		});
+	},
+	MoveDropCard: function (c, b, t) { // 掉落目标
+		var a = ArCard[c], ele = $(c); a && ele && ((!a.HasChosen && a.top < b - 52) ? (ele.style.top = (a.top += 2) + "px", oSym.addTask(5, MoveDropCard, [c, b, t])) : DisappearCard(c, t));
+	},
+	DisappearCard: function (d, r) {
+		var q = 5, e = $(d), f = function (t) {
+			switch (true) {
+				case !ArCard[d] || !e: return; // 卡片已经消失，不做处理
+				case oS.Chose == 1 && oS.ChoseCard == d: break; // 选中
+				case t > 500: e.style.opacity = 1; break; // 未到闪烁时间
+				case t > 0: e.style.opacity = [1, 0.5][Math.ceil(t / 50) % 2]; break; // 闪烁
+				default: delete ArCard[d], ClearChild(e); return;
+			}
+			e = $(d), oSym.addTask(q, arguments.callee, [t - q]);
+		}; f(r);
+	},
+	GrowPlant: function (l, d, c, e, b) {
+		var j = oS.ChoseCard, f = ArCard[j], h = f.PName, k = h.prototype, i = k.coolTime, a, g = oGd.$LF[e], o = f.Kind, s = (k.name == "Plants");
+		k.CanGrow(l, e, b) && (PlayAudio(g != 2 ? "plant" + Math.floor(1 + Math.random() * 2) : "plant_water"), s ? (new h).Birth(d, c, e, b, l) : asyncInnerHTML((a = new h).CustomBirth(e, b, 0, "auto"), function(n, m) {
+			EDPZ.appendChild(n), m.Birth();
+		}, a), o ? (delete ArCard[j], ClearChild($(j))) : (innerText(ESSunNum, oS.SunNum -= k.SunNum), i && (f.CDReady = 0, DoCoolTimer(j, k.coolTime))), oSym.addTask(20, SetHidden, [SetStyle(g != 2 ? $("imgGrowSoil") : $("imgGrowSpray"), {
+			left: d - 30 + "px",
+			top: c - 30 + "px",
+			zIndex: 3 * e + 1,
+			visibility: "visible"
+		})]));
+		CancelPlant();
+	}
+});
