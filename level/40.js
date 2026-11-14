@@ -88,7 +88,8 @@ PicArr:function(){
 					break;
 				case 7:
           oSym.addTask(80,function(Left){
-            a(0)
+            a(0);
+			ClearChild($("DivTeach")
           },[0]);
 			}
 		})(0)
@@ -148,6 +149,7 @@ PicArr:function(){
             NewImg("PointerUD","images/interface/PointerDown.gif","top:290px;left:636px",EDAll)
           }
         },{
+	AutoSelectCard:function(){},
 	dRand: function (l, r) { return Math.floor(Math.random() * (r - l + 1) + l); }, 
 	AppearCard: function (h, f, e, a, t) { // x, y, 植物id, 移动卡槽类型, 消失时间（默认 15s）
 		var b, d, g = "dCard" + Math.random(), c = "opacity:1;width:100px;height:120px;cursor:pointer;clip:rect(auto,auto,60px,auto);left:" + h + "px;top:-1000", t = t || 1500;
