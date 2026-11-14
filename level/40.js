@@ -1,5 +1,5 @@
 oS.Init({
-  PName:[oLilyPad,oSplitPea,oGarlic,oStarfruit,oPumpkinHead,oSeaShroom,oBlover,oCactus,oPlantern,oStarfruit,oSquash,oCoffeeBean],
+  PName:[oLilyPad,oCactus,oSplitPea,oPlantern,oGarlic,oStarfruit,oPumpkinHead,oSeaShroom,oBlover,oStarfruit,oSquash,oCoffeeBean],
   ZName:[oZombie,oZombie2,oZombie3,oDuckyTubeZombie1,oDuckyTubeZombie2,oDuckyTubeZombie3,oDiggerZombie,oBalloonZombie,oBucketheadZombie,oDolphinRiderZombie,oLadderZombie,oSnorkelZombie,oJackinTheBoxZombie,oJalapenoZombie],
 PicArr:function(){
   var b=oCabbage.prototype,
@@ -96,7 +96,7 @@ PicArr:function(){
           FlagNum:30,
           FlagToSumNum:{
             a1:[3,5,9,10,13,15,19,20,23,25,29],
-            a2:[3,6,12,20,18,24,30,40,36,42,48,60]
+            a2:[2,6,12,20,18,24,30,40,36,42,48,60]
           },
           FlagToMonitor:{
             9:[ShowLargeWave,0],
