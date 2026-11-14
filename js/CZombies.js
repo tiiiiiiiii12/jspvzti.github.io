@@ -1639,13 +1639,13 @@ oFootballZombie = InheritO(oConeheadZombie, {
 	  a.ZKind=-1;
       a.PicArr = a.PicArr3;
       a.EleBody.src = a.PicArr[a.NormalGif];
-      a.BulletEle = NewImg(0, "images/interface/Zombie_catapult_basketball.png", "left:" + (a.AttackedLX) + "px;top:" + (a.pixelTop + 120) + "px;visibility:hidden;z-index:" + (a.zIndex + 2));
       oSym.addTask(750, function(a) {
-        a.canWalk(a, a.id) && a.beAttacked &&a.ZX>=100&&a.ZX<=oS.W&&a.shootPea(a);
+        a.canWalk(a, a.id) && a.beAttacked &&a.ZX>=100&&a.ZX<=oS.W&&(a.BulletEle = NewImg(0, "images/interface/Zombie_catapult_basketball.png", "left:" + (a.AttackedLX) + "px;top:" + (GetY(a.R)-a.BulletTop) + "px;visibility:hidden;z-index:" + (a.zIndex + 2)),a.shootPea(a));
         $Z[a.id] ? oSym.addTask(a.shootPeaSpeed, arguments.callee, [a]) : a.BulletEle = null
       }, [a]);
     }
   },
+  BulletTop:60,
   shootPea: function() {
     var a = this,
       b = "PB" + Math.random();
