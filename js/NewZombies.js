@@ -404,8 +404,7 @@ PrivateDie:function(a){
   },
 Lvl:2,
   Produce: '韧性：<font color="#FF0000">低(300)</font><br>精英形态一：450血，攻速变快，但每次攻击扣自己10血<br>精英形态二：寒冰射手僵尸，发射寒冰子弹</p>只是一只普普通通的小豌豆僵尸'
-}),
-oWallNutZombie = InheritO(oConeheadZombie, {
+}),oWallNutZombie = InheritO(oConeheadZombie, {
     EName: "oWallNutZombie",
     CName: "坚果僵尸",
     OrnHP: 1100,
@@ -511,7 +510,7 @@ oWallNutZombie = InheritO(oConeheadZombie, {
       if ($Z[a.id] && a.beAttacked) {
 		a.checkHP(z, a);
         $(z.NutHead)&&a.WalkDirection == a.check &&
-        ($(z.NutHead).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",a.check=(a.WalkDirection?0:1))
+        (a.OrnLeft1&&($(z.NutHead).style.left = (!a.WalkDirection ? a.OrnLeft : a.OrnLeft1)+"px"), $(z.NutHead).style.transform = !a.WalkDirection ? "rotateY(180deg)" : "rotateY(0deg)",a.check=(a.WalkDirection?0:1))
       }!a.beAttacked && (ClearChild($(z.NutHead)));
       a.num>=50 && a.isAttacking && a.Boom(a);
     },
@@ -526,12 +525,12 @@ oWallNutZombie = InheritO(oConeheadZombie, {
 	if(!$Z[a.id]&&a.beAttacked)return;
       var c = a.OrnHP;
       switch (true) {
-        case c < a.OrnBreakPoint2:
-		  a.Ornbreak=2;
+        case c < a.OrnBreakPoint2&&a.Ornbreak<2:
+	  a.Ornbreak=2;
           $(z.NutHead).src = a.PicArr[a.OrnBreakGif2]
           break;
-        case c < a.OrnBreakPoint1:
-		  a.Ornbreak=1;
+        case c < a.OrnBreakPoint1 && !a.Ornbreak:
+	  a.Ornbreak=1;
           $(z.NutHead).src = a.PicArr[a.OrnBreakGif1]
       }
     },
@@ -542,13 +541,13 @@ oWallNutZombie = InheritO(oConeheadZombie, {
     CName: "高坚果僵尸",
     OrnHP: 2400,
     SunNum: 225,
-	BodyType:1,
+    BodyType:1,
     Boom: function() {},
     StandGif: 11,
     OrnTop: -40,
     OrnLeft: 20,
     Lvl: 5,
-	SetNutTime:1200,
+    SetNutTime:1200,
 	ZKind:-1,
 	PrivateAct:function(a){
 	var z=a.Ele;
@@ -569,17 +568,21 @@ if(b[c].id!=a.id){
       }
 	oWallNutZombie.prototype.PrivateAct(a);
 	},
-    jinyinAct: function(c) {      
+    jinyinAct: function(c) {	  
+c.num=Math.random()*100||c.Privatenum;
+	if(c.num>=50){
 	  var z = c.Ele;
       z.NutHead2 = "nut" + Math.random();
-      var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
+      var Nut = NewImg(z.NutHead2, "images/interface/SelectorScreen_Almanac.png", "position:absolute; clip:rect(0,auto,90px,0);transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
       z.appendChild(Nut);
-	  c.num=Math.random()*100||c.Privatenum;
-	if(c.num>=50){
 	  oSym.addTask(c.SetNutTime,function(c){
 		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan"+Math.floor(Math.random()*5+1)),CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(c.SetNutTime,arguments.callee,[c]));
 	  },[c]);
 	}else{
+	  var z = c.Ele;
+      z.NutHead2 = "nut" + Math.random();
+      var Nut = NewImg(z.NutHead2, oWallNutZombie.prototype.PicArr[c.OrnGif], "position:absolute;transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
+      z.appendChild(Nut);
 		c.HitBlock=0;
 		c.getHit=c.getHit0=c.getHit1=c.getHit2=c.getHit3=function(c,d){
 			var Att=Math.max(1,d-c.HitBlock);
@@ -603,7 +606,8 @@ oNutZombie = InheritO(oTallNutZombie, {
     CName: "坚果障碍",
     OrnHP: 1100,
     SunNum: 75,
-	HP:1,
+    HP:1,
+    OrnLeft1:30,
     Boom: function() {},
     StandGif: 11,
     OrnTop: 80,
