@@ -89,7 +89,7 @@ PicArr:function(){
 				case 7:
           oSym.addTask(80,function(Left){
             a(0);
-			ClearChild($("DivTeach")
+			ClearChild($("DivTeach"))
           },[0]);
 			}
 		})(0)
