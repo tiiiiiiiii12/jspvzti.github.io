@@ -251,7 +251,7 @@ var oGargantuar = InheritO(oZombie, {
           if (!k) {
             return
           }
-          k.DieGif = k.ImplessDieGif;
+          k.DieGif = k.num<50?oGargantuarBoss.prototype.PicArr[k.ImplessDieGif]:k.ImplessDieGif;
           PlayAudio("ImpToLand");
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
           oSym.addTask(100, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 150) + "px;transform:" + (k.PZ ? "rotateY(0deg)" : "rotateY(180deg)") + ";z-index:" + k.zIndex, EDPZ)]);
@@ -265,7 +265,7 @@ var oGargantuar = InheritO(oZombie, {
           k.ChkActs1 = j.ChkActs1;
           k.EleBody.src = l;
         },
-        [g.id, g.PicArr[[g.NormalGif = g.ImplessWalkGif, g.AttackGif = g.ImplessAttackGif][g.isAttacking]]])
+        [g.id, g.PicArr[[g.NormalGif = g.num<50?oGargantuarBoss.prototype.PicArr[g.ImplessWalkGif]:g.ImplessWalkGif, g.AttackGif = g.num<50?oGargantuarBoss.prototype.PicArr[g.ImplessAttackGif]:g.ImplessAttackGif][g.isAttacking]]])
   },
   SunNum: 275,
   EName: "oGargantuar",
@@ -322,7 +322,7 @@ CanPass:CZombies.prototype.CanPass,
             left: o + 28 + "px",
             width: "52px",
             height: "46px"
-          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])):((n += (l = -5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 140) + "px",j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])):((n += (l = -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
       },
       [b, $(b), a.ZX, a.R, a.ZX - 20])
   }
@@ -330,11 +330,11 @@ CanPass:CZombies.prototype.CanPass,
   },
   GoingDieHead:function(){},
   NormalAttack1:function(){},
+  BulletTop:140,
   PrivateBirth: function() {
     var c = this;
-    c.BulletEle = NewImg(0, c.num<50?oSnowPea.prototype.PicArr[3]:oPeashooter.prototype.PicArr[3], "left:" + (c.AttackedLX) + "px;top:" + (c.pixelTop + 20) + "px;visibility:hidden;z-index:" + (c.zIndex + 2));
     oSym.addTask(100, function(c) {
-      c.canWalk(c,c.id) && c.beAttacked && (c.shootPea(c),c.jinyin&&(c.num>=50)&&c.getHit0(c,10));
+      c.canWalk(c,c.id) && c.beAttacked && (c.BulletEle = NewImg(0, c.num<50?oSnowPea.prototype.PicArr[3]:oPeashooter.prototype.PicArr[3], "left:" + (c.AttackedLX) + "px;top:" + (GetY(c.R) - c.BulletTop) + "px;visibility:hidden;z-index:" + (c.zIndex + 2)),c.shootPea(c),c.jinyin&&(c.num>=50)&&c.getHit0(c,10));
       $Z[c.id] ? oSym.addTask(c.shootPeaSpeed, arguments.callee, [c]) : c.BulletEle = null;
     }, [c]);
 	var z = $(c.id);
@@ -398,7 +398,7 @@ PrivateDie:function(a){
             left: o + 28 + "px",
             width: "52px",
             height: "46px"
-          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])):((n += (l = -5)) < oS.W && n > 100 ? (j.style.top = (GetY(i) - 140) + "px",j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
+          })).src = "images/Plants/PeaBulletHit.gif", oSym.addTask(10, ClearChild, [j])):((n += (l = -5)) < oS.W && n > 100 ? (j.style.left = (o += l) + "px", oSym.addTask(1, arguments.callee, [f, j, n, i, o])) : ClearChild(j))
       },
       [b, $(b), a.ZX, a.R, a.ZX - 20])
   },
@@ -1074,6 +1074,7 @@ oBungeeZombie=InheritO(oZombie,{
 	CatchPlant2Gif:5,
 	prepareCatchPlantGif:6,
 	FallDownZombie:true,
+	flatTire:function(){},
 	WalkToLadder:function(){},
 	ChangeR:function(){},
 	getr:function(){},
@@ -1589,14 +1590,27 @@ z&&a.bedevilNum<3&&(a.OSpeed==a.LostPaperSpeed)&&(a.bedevilNum++,CustomZombie(oP
 		  $(a.Ele.FumeDoor)&&ClearChild($(a.Ele.FumeDoor))
 	  }
   },
+BulletTop:100,
 shootPea1:oPeashooter.prototype.NormalAttack,
-  bedevil: oPeaZombie.prototype.bedevil,
+  bedevil: function(c,a) {
+    c.ExchangeLR(c, 1);
+	c.WalkDirection = 1;
+    c.ZX = c.AttackedRX;
+    c.ChkActs = c.ChkActs1;
+	c.PeaDire=0;
+	c.PeaKind=0;
+    c.shootPea = c.shootPea1;
+	if(!a){
+    c.JudgeAttack = c.JudgeAttackH;
+    c.PZ = 0;
+    oP.MonPrgs()
+	}
+  },
   shootPea:function() {
     var a = this,
       b = "PB" + Math.random();
     EditEle(a.BulletEle.cloneNode(false), {
-        id: b,
-		top:(GetY(a.R) - 100) + "px"
+        id: b
       },
       0, EDPZ);
     oSym.addTask(2,
@@ -1642,7 +1656,6 @@ shootPea1:oPeashooter.prototype.NormalAttack,
           k.ChkActs = !k.WalkDirection ? j.ChkActs : j.ChkActs1;
           k.ChkActs1 = j.ChkActs1;
           k.tasktime *= 0.25;
-          k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (k.pixelTop + 60) + "px;visibility:hidden;z-index:" + (k.zIndex + 2));
           k.num>=50&&oSym.addTask(600, function(k) {
             k && (k.jianshang*=0.5,k.Speed = k.OSpeed = 8.1, k.shootPeaSpeed /= 5, k.tasktime /= 2, PlayAudio("newspaper_rarrgh2"));
           }, [k]);
@@ -1667,7 +1680,7 @@ oSym.addTask(0,function(SummonZ){
 			  }
 		  }
           oSym.addTask(k.shootPeaSpeed, function(k, m) {
-            k.canWalk(k, m) && k.beAttacked && k.shootPea(k);
+            k.canWalk(k, m) && k.beAttacked && (k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (GetY(a.R) - a.BulletTop) + "px;visibility:hidden;z-index:" + (k.zIndex + 2)),k.shootPea(k));
             $Z[k.id] ? oSym.addTask(k.shootPeaSpeed, arguments.callee, [k, m]) : k.BulletEle = null;
           }, [k, m]);
           k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
