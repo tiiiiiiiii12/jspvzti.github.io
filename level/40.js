@@ -32,8 +32,9 @@ PicArr:function(){
   },
   StartGameMusic:"MangZhong",
   LoadAccess: function(a) {
+	  NewEle("DivTeach", "div", 0, 0, EDAll);
 		(function(d) {
-			var b = arguments.callee;
+			var b = arguments.callee,c = $("DivTeach");
 			switch (d) {
 				case 0:
             innerText(c, "天色似乎又变黑了点，看来要下雨了",1);
