@@ -111,8 +111,8 @@ oS.Init({
 		},
 		CancelPlant: function() {
 			ClearChild($("MovePlant"), $("MovePlantAlpha"));
+			SetAlpha($(ArCard[oS.ChoseCard].DID), 100, 1);
 			oS.Chose = 0, oS.ChoseCard = "";
-			for(let Idx of ArCard) SetAlpha($(Idx.DID), 100, 1);		
 			GroundOnmousemove = function() {};
 		},
 	GrowPlant: function(l, c, b, f, a) {
