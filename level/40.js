@@ -129,8 +129,8 @@ PicArr:function(){
 		},
 		CancelPlant: function() {
 			ClearChild($("MovePlant"), $("MovePlantAlpha"));
-			oS.Chose = 0, oS.ChoseCard = "";
 			SetAlpha($(ArCard[oS.ChoseCard].DID), 100, 1);
+			oS.Chose = 0, oS.ChoseCard = "";
 			GroundOnmousemove = function() {};
 		},
           GrowPlant:function(l,c,b,f,a){
