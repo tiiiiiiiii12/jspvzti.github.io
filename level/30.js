@@ -116,8 +116,8 @@ oS.Init({
 		},
 		CancelPlant: function() {
 			ClearChild($("MovePlant"), $("MovePlantAlpha"));
-			SetAlpha($(ArCard[oS.ChoseCard].DID), 100, 1);
-			oS.Chose = 0, oS.ChoseCard = "";		
+			parseInt(oS.ChoseCard)&&(SetAlpha($(ArCard[oS.ChoseCard].DID), 100, 1),oS.ChoseCard = "");
+			oS.Chose = 0;		
 			GroundOnmousemove = function() {};
 		},
           GrowPlant:function(l,c,b,f,a){
@@ -138,7 +138,7 @@ oS.Init({
               $("dCardList").removeChild(e=$(d));
               e=null;
               ArCard.splice(j,1);
-			  oS.ChoseCard="";
+			  parseInt(oS.ChoseCard)&&(oS.ChoseCard="");
               oS.Chose=0;
               GroundOnmousemove=function(){};
             }():CancelPlant();
