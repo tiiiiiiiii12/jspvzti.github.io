@@ -1,4 +1,4 @@
-$User.Visitor.Progress!=41&&(alert("走上了这条路，就不能再回头了哦"),$User.Visitor.Progress=41);
+$User.Visitor.Progress<41&&(alert("走上了这条路，就不能再回头了哦"),$User.Visitor.Progress=41);
 oS.Init({
 	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit,oPumpkinHead,oGarlic,oCabbage],
 	ZName: [oZombie, oZombie2, oZombie3, oNewspaperZombie,oImp,oPoleVaultingZombie,oConeheadZombie,oPeaZombie,oLadderZombie,oBungeeZombie,oPogoZombie],
@@ -35,7 +35,7 @@ oS.Init({
 				c = $("DivTeach");
 			switch (d) {
 				case 0:
-            innerText(c, "（?!）",1);
+            innerText(c, "?!",1);
 						c.onclick = function() {
 							oSym.addTask(50, b, [1]);
 							c.onclick=null;
@@ -46,54 +46,46 @@ oS.Init({
 						oSym.addTask(50, b, [2]);
 						c.onclick=null;
 					};
-					innerText(c, "（前院怎么变成这样了？！）",1);
+					innerText(c, "给我干哪儿来了，这还是草地吗",1);
 					break;
 				case 2:
-					NewImg("dDave", "images/Plants/ScaredyShroom/ScaredyShroom.gif", "left:0;width:285px;height:405px;top:200px", EDAll);
-					    PlayAudio("puff");
 						c.onclick = function() {
 							oSym.addTask(50, b, [3]);
 							c.onclick=null;
 						};
-					innerText(c, "房主在吗？",1);
+					innerText(c, "这也不像是戴夫所说的“僵尸的新进攻地点”啊…",1);
 					break;
 				case 3:
-					PlayAudio("puff");
 						c.onclick = function() {
 							oSym.addTask(50, b, [4]);
 							c.onclick=null;
 					};
-					innerText(c, "你知道戴夫去哪儿了吗？",1);
+					innerText(c, "对哦，戴夫他人呢？",1);
 					break;
 				case 4:
-					$("dDave").src = "images/Plants/ScaredyShroom/ScaredyShroomCry.gif";
-					PlayAudio("puff");
 						c.onclick = function() {
 							oSym.addTask(50, b, [5]);
 							c.onclick=null;
 						};
-					innerText(c, "没有他的日子，我好害怕……",1);
+					innerText(c, "真希望他快点回来…",1);
 					break;
 				case 5:
 						c.onclick = function() {
 							oSym.addTask(100, b, [6]);
 							c.onclick=null;
 						};
-					innerText(c, "（虽然戴夫失踪是大事，但似乎暂时无法顾及了）",1);
+					innerText(c, "这一定是个错误",1);
 					break;
 				case 6:
 						c.onclick = function() {
 							oSym.addTask(100, b, [7]);
 							c.onclick=null;
 						};
-					innerText(c, "（草坪外不断传来僵尸的吼声，看来这是一场旷日持久的恶战）",1);
+					innerText(c, "根本就没有这样的草坪",1);
 					break;
 				case 7:
 			ClearChild($("DivTeach"));
-          oSym.addTask(1,function(Left){
-            $("dDave").style.left=Left+"px";
-            (Left-=5)>-400?oSym.addTask(1,arguments.callee,[Left]):(ClearChild($("dDave")),a(0));
-          },[0]);
+			a(0)
 			}
 		})(0)
 	}
