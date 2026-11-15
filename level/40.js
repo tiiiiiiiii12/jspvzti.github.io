@@ -104,6 +104,10 @@ oSym.addTask(1, function(canvas, ctx, alpha, kind){
 		})(0)
 	},
   StartGame: function() {
+	  for (i=1;i<=3;i++){
+		  CustomSpecial(oLilyPad,3,i);
+		  CustomSpecial(oLilyPad,3,i);//自然赠与的莲叶
+	  }
 		StopMusic(), PlayMusic(oS.LoadMusic = oS.StartGameMusic);
 		SetVisible($("tdShovel"), $("dFlagMeter"), $("dTop")), SetHidden($("dSunNum")); // 隐藏阳光和卡槽
 		(function(){ // 隐藏原卡槽
