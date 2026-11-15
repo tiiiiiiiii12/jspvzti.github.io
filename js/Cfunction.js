@@ -223,7 +223,7 @@ oS = {
 	},
 	LoadTips: function() {
 		var b = NewEle("dTips", "div", "position:absolute;color:#fff;top:450px;width:100%;text-align:center;font-size:16px", "", EDAll),
-		a = ["本游戏自带调速功能", "在下方“指令行”中输入P(Z)+Alljinyin/nojinyin/normaljinyin可以打开植物（僵尸）的全精英/无精英/正常精英模式","在下方“指令行”中输入HPlook可以查看僵尸血量，HPlooknone则隐藏","不会玩?那就看游戏中的“帮助”吧！[doge]", "这游戏是不是给3岁小孩玩的?这么幼稚!亲爱的,如果你玩过原版植物僵尸就不会这么认为了","为什么无法注册用户和创建关卡？因为我没有服务器", "初次玩的朋友,请从第一关开始玩起,自然会有教学功能教你一步一步玩下去", "为啥看不到阳光或者僵尸?检查一下你浏览器里的广告杀手功能,也许是它在搞鬼!", "游戏毫无难度?在目前进度下,可以尝试着使用调速功能玩更快的速度","为啥这么卡?如果你是IE6-8的用户,请使用IE9,Chrome,Firefox,Opera等更好的浏览器!","这是用什么语言写的?javascript,一个简单而又神奇的语言,纯的,JS!"];b.innerHTML = '<span style="font-weight:bold">游戏小贴士:</span><span>' + a[Math.floor(Math.random() * a.length)] + "</span>"
+		a = ["本游戏自带调速功能", "在下方“指令行”中输入P(Z)+Alljinyin/nojinyin/normaljinyin可以打开植物（僵尸）的全精英/无精英/正常精英模式","在下方“指令行”中输入HPlook可以查看僵尸血量，HPlooknone则隐藏","不会玩?那就看游戏中的“帮助”吧！[doge]","为什么无法注册用户和创建关卡？因为我没有服务器","初次玩的朋友,请从第一关开始玩起,自然会有教学功能教你一步一步玩下去","游戏毫无难度?在目前进度下,可以尝试着设置更高的出怪倍率","为啥这么卡?如果你是IE6-8的用户,请使用IE9,Chrome,Firefox,Opera等更好的浏览器!","这是用什么语言写的?javascript,一个简单而又神奇的语言,纯的,JS!"];b.innerHTML = '<span style="font-weight:bold">游戏小贴士:</span><span>' + a[Math.floor(Math.random() * a.length)] + "</span>"
 	},
 	LoadProgress: function(r, l, a, t, b) {
 		SetVisible($("dFlagMeter"));
