@@ -24,14 +24,15 @@ oS.Init({
 	},
 	UserDefinedFlagFunc: function(a) {
 	if(oP.FlagZombies>20){
+	 try{
       AppearTombstones(8,9,1);
+	 }catch{}
     }
 	if(oP.FlagZombies>25){
+	try{
       AppearTombstones(8,9,1);
       oP.SetTimeoutTomZombie([oZombie,oConeheadZombie,oPeaZombie,oImp,oWallNutZombie]);
-      oSym.addTask(400,function(){
-        for (i in $Z) $Z[i] && $Z[i].ZX>800&&$Z[i].PZ&&(Math.random()*100>25&&oLadderZombie.prototype.getAid($Z[i],0,2000),$Z[i].Speed*=1.5,$Z[i].OSpeed*=1.5,$Z[i].LostPaperSpeed*=1.5)
-      },[])
+	}catch{}
     }
 	},
 	StartGameMusic: "rebeatedupnight",
@@ -41,7 +42,7 @@ if($User.Visitor.Progress<42)return document.write("跳关好玩吗？");
   oHypnoShroom.prototype.Produce="你好，房主<br>你好，……player";
 	SetHidden($("dChapter1"),$("dChapter2"),$("dChapter3"),$("dChapter4"));
 	oAudio["Look up at the Sky"].playbackRate=Math.random()*0.7+0.7;//音乐变速
-  NewImg("dDave", "images/Plants/FumeShroom/FumeShroom.gif", "left:0;width:400px;height:352px;top:200px", EDAll);
+  NewImg("dDave", "images/Plants/FumeShroom/FumeShroom.gif", "left:-30px;width:400px;height:352px;top:200px", EDAll);
 	NewEle("DivTeach", "div", 0, 0, EDAll);
 		(function(d) {
 			var b = arguments.callee,
@@ -99,7 +100,7 @@ if($User.Visitor.Progress<42)return document.write("跳关好玩吗？");
 			c.onclick = null;
           oSym.addTask(1,function(Left){
             $("dDave").style.left=Left+"px";
-            (Left-=5)>-400?oSym.addTask(1,arguments.callee,[Left]):(ClearChild($("dDave")),a(0),ClearChild($("DivTeach")));
+            (Left-=5)>-430?oSym.addTask(1,arguments.callee,[Left]):(ClearChild($("dDave")),a(0),ClearChild($("DivTeach")));
           },[0]);
 			}
 		})(0)
