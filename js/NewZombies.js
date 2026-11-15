@@ -720,7 +720,7 @@ oCoffeeBeanZombie = InheritO(oTallNutZombie, {
 				var P=oGd.$[a.SetR+"_"+a.SetC+"_"+i];
 				!a.PZ&&P&&P.HP<P.MaxHP&&(P.HP=Math.min(P.HP+200,P.MaxHP));
 			}
-			let Z=oZ[a.PZ?"getArZ":"getArHZ"](GetC(a.ZX)-40,GetC(a.ZX)+40,a.SetR);
+			let Z=oZ[a.PZ?"getArZ":"getArHZ"](a.ZX-40,a.ZX+40,a.SetR);
 			let Zl=Z.length;
 			while (Zl--){
 				!Z[Zl].ZPlant&&(Z[Zl].OrnHP>=1?Z[Zl].OrnHP=Math.min(P.OrnHP+200,P.MaxOrnHP):Z[Zl].HP=Math.min(P.HP+200,P.MaxHP))
