@@ -577,7 +577,7 @@ c.num=Math.random()*100||c.Privatenum;
       var Nut = NewImg(z.NutHead2, "images/interface/SelectorScreen_Almanac.png", "position:absolute; clip:rect(0,auto,90px,0);transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
       z.appendChild(Nut);
 	  oSym.addTask(c.SetNutTime,function(c){
-		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan"+Math.floor(Math.random()*5+1)),CustomZombie(oNutZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(c.SetNutTime,arguments.callee,[c]));
+		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan"+Math.floor(Math.random()*5+1)),CustomZombie(Math.round(Math.random()*1+0)?oNutZombie:oCoffeeBeanZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(c.SetNutTime,arguments.callee,[c]));
 	  },[c]);
 	}else{
 	  var z = c.Ele;
