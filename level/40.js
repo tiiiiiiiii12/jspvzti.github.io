@@ -32,8 +32,8 @@ PicArr:function(){
   StartGameMusic:"MangZhong",
   LoadAccess: function(a) {
 	  NewEle("DivTeach", "div", 0, 0, EDAll);
-NewEle("Dev_Canvas", "div", "left:0px; top:0px; pointer-events:none; position:absolute;width:900px;height:600px;z-index:200", 0, EDAll);
-NewEle("Canvas", "canvas", "pointer-events:none; border:0px solid red;top:0px;left:0px;z-index:200;", {height:600,width:900}, $("Dev_Canvas"));
+NewEle("Dev_Canvas", "div", "left:0px; top:0px; pointer-events:none; position:absolute;width:1500px;height:600px;z-index:200", 0, EDAll);
+NewEle("Canvas", "canvas", "pointer-events:none; border:0px solid red;top:0px;left:0px;z-index:200;", {height:600,width:1500}, $("Dev_Canvas"));
 Show_canvas = $('Canvas'), Show_ctx = Show_canvas.getContext('2d');
 oSym.addTask(1, function(canvas, ctx, alpha, kind){
 	canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
