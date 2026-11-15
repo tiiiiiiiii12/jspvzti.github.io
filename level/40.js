@@ -40,8 +40,6 @@ oSym.addTask(1, function(canvas, ctx, alpha, kind){
 	ctx.fillStyle = 'rgba(0,0,0,' + alpha +')', ctx.fillRect(0, 0, canvas.width, canvas.height);
 			if(kind == 0 && alpha <= 0.5){
 				oSym.addTask(1, arguments.callee, [canvas, ctx, alpha + 0.05, kind]);
-			}else{
-			   canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
 			}
 		}, [Show_canvas, Show_ctx, 0, 0]);
 		(function(d) {
