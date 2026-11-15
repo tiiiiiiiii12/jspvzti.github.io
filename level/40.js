@@ -26,13 +26,21 @@ PicArr:function(){
     20:$("imgFlag2"),
     30:$("imgFlag1")
   },
-  StaticCard:0,
   UserDefinedFlagFunc:function(a){
     oP.FlagZombies>24&&oP.SetTimeoutWaterZombie(6,9,3,[oDuckyTubeZombie1,oDuckyTubeZombie2,oSnorkelZombie])
   },
   StartGameMusic:"MangZhong",
   LoadAccess: function(a) {
 	  NewEle("DivTeach", "div", 0, 0, EDAll);
+NewEle("Dev_Canvas", "div", "left:0px; top:0px; pointer-events:none; position:absolute;width:900px;height:600px;z-index:200", 0, EDAll);
+NewEle("Canvas", "canvas", "pointer-events:none; border:0px solid red;top:0px;left:0px;z-index:200;", {height:600,width:900}, $("Dev_Canvas"));
+Show_canvas = $('Canvas'), Show_ctx = Show_canvas.getContext('2d');
+oSym.addTask(1, function(canvas, ctx, alpha, kind){
+	ctx.fillStyle = 'rgba(0,0,0,' + alpha +')', ctx.fillRect(0, 0, canvas.width, canvas.height);
+			if(kind == 0 && alpha <= 0.5){
+				oSym.addTask(1, arguments.callee, [canvas, ctx, alpha + 0.05, kind]);
+			}
+		}, [Show_canvas, Show_ctx, 0, 0]);
 		(function(d) {
 			var b = arguments.callee,
 				c = $("DivTeach");
@@ -97,7 +105,6 @@ PicArr:function(){
   StartGame: function() {
 		StopMusic(), PlayMusic(oS.LoadMusic = oS.StartGameMusic);
 		SetVisible($("tdShovel"), $("dFlagMeter"), $("dTop")), SetHidden($("dSunNum")); // 隐藏阳光和卡槽
-		EDAll.style.filter="brightness(0.5)";
 		(function(){ // 隐藏原卡槽
 			var c = $("dCardList");
 			for (var a = 0, b; b = c.childNodes.item(a); ++a) SetHidden(b);
@@ -149,7 +156,6 @@ PicArr:function(){
             NewImg("PointerUD","images/interface/PointerDown.gif","top:290px;left:636px",EDAll)
           }
         },{
-	AutoSelectCard:function(){},
 	dRand: function (l, r) { return Math.floor(Math.random() * (r - l + 1) + l); }, 
 	AppearCard: function (h, f, e, a, t) { // x, y, 植物id, 移动卡槽类型, 消失时间（默认 15s）
 		var b, d, g = "dCard" + Math.random(), c = "opacity:1;width:100px;height:120px;cursor:pointer;clip:rect(auto,auto,60px,auto);left:" + h + "px;top:-1000", t = t || 1500;
