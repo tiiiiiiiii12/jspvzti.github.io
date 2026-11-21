@@ -2045,7 +2045,7 @@ P.getHit2(P,a.ballAttack*a.level,0)
 	ZPlant:true,
     Produce: '韧性：<font color="#FF0000">300</font><br>精英形态：无</p>由精英高坚果僵尸召唤，给周围僵尸回血'
   }),
-oMelonPultZombie = InheritO(oTallNutZombie, {
+oMelonPultZombie = InheritO(oTallNutZombie, {//这里只能继承高坚果僵尸，不然会报错
     EName: "oMelonPultZombie",
     CName: "僵尸西瓜投手",
 	ballAttack:80,
