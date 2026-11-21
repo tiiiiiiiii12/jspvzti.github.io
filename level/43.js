@@ -6,6 +6,7 @@ var oPoleVaultingZombie = InheritO(OrnNoneZombies, {
         height: 218,
         OSpeed: 3.2,
         Speed: 3.2,
+	    HitAttack:1000,
         beAttackedPointL: 215,
         beAttackedPointR: 260,
         StandGif: 13,
@@ -189,7 +190,7 @@ PoleNum:0,
         }
   });
 oS.Init({
-	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit,oPumpkinHead,oGarlic,oCabbage],
+	PName: [oPeashooter, oSunFlower, oCherryBomb, oWallNut, oPotatoMine, oSnowPea, oChomper, oRepeater, oPuffShroom, oSunShroom, oFumeShroom, oGraveBuster, oScaredyShroom, oIceShroom, oDoomShroom, oLilyPad, oSquash, oThreepeater, oTangleKelp, oJalapeno, oSpikeweed, oTorchwood, oTallNut, oSeaShroom, oPlantern, oCactus, oBlover, oSplitPea, oStarfruit,oPumpkinHead,oGarlic,oUmbrellaLeaf,oCabbage],
 	ZName: [oZombie, oZombie2, oZombie3, oImp,oJackinTheBoxZombie,oConeheadZombie,oFootballZombie,oPoleVaultingZombie,oPeaZombie,oCatapultZombie],
 	PicArr: function() {
 		var a = oMelonPult.prototype,
@@ -228,6 +229,7 @@ oS.Init({
 	},
 	StartGameMusic: "rebeatedupnight",
 	LoadAccess: function(a) {
+	if($User.Visitor.Progress<43)return document.write("跳关好玩吗？");
 	oAudio["Look up at the Sky"].playbackRate=Math.random()*0.7+0.7;//音乐变速
 	NewEle("DivTeach", "div", 0, 0, EDAll);
 		(function(d) {
@@ -267,7 +269,7 @@ oS.Init({
 							oSym.addTask(50, b, [5]);
 							c.onclick=null;
 						};
-					innerText(c, "唉，祸福各由天命",1);
+					innerText(c, "唉，祸福各由天命吧。",1);
 					break;
 				case 5:
 			ClearChild($("DivTeach"));
