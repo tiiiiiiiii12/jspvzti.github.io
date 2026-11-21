@@ -22,9 +22,9 @@ u++< k.split("").length&&oSym.addTask(2,arguments.callee,[u,k])
 	}
 }: function(l,k,t) {
 	if(t){
-oSym.addTask(2,function(u,k){
+oSym.addTask(1,function(u,k){
 l.textContent = (u?l.textContent+k.charAt(u):k.charAt(u));
-u++< k.split("").length&&oSym.addTask(2,arguments.callee,[u,k])
+u++< k.split("").length&&oSym.addTask(1,arguments.callee,[u,k])
 },[0,k]);
 	}else{
 		l.textContent = k
@@ -372,7 +372,7 @@ oS = {
 		}
 		b = 139 - c.AccessNum++*140 / c.PicNum - 11;
 		$("imgFlagHead").style.left = b + "px";
-		$("sFlagMeterTitleF").innerHTML = '<span style="cursor:pointer;font-family:Yahei Mono;color:#fff">LOADING...:(' + c.AccessNum + "/" + c.PicNum + ")</span>";
+		$("sFlagMeterTitleF").innerHTML = '<span style="font-family:Yahei Mono;color:#fff">LOADING...(' + c.AccessNum + "/" + c.PicNum + ")</span>";
 		$("imgFlagMeterFull").style.clip = "rect(0,auto,21px," + (b + 11) + "px)";
 		if (c.AccessNum == c.PicNum) {
 			oS.Lvl == 0 && PlayAudio("groan2");
