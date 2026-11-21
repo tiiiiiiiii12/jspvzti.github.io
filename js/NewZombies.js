@@ -723,7 +723,7 @@ oCoffeeBeanZombie = InheritO(oTallNutZombie, {
 			let Z=oZ[a.PZ?"getArZ":"getArHZ"](a.ZX-40,a.ZX+40,a.SetR);
 			let Zl=Z.length;
 			while (Zl--){
-				!Z[Zl].ZPlant&&(Z[Zl].OrnHP>=1?Z[Zl].OrnHP=Math.min(P.OrnHP+200,P.MaxOrnHP):Z[Zl].HP=Math.min(P.HP+200,P.MaxHP))
+				!Z[Zl].ZPlant&&(Z[Zl].OrnHP>=1?Z[Zl].OrnHP=Math.min(Z[Zl].OrnHP+200,Z[Zl].MaxOrnHP):Z[Zl].HP=Math.min(Z[Zl].HP+200,Z[Zl].MaxHP))
 			}
 			oSym.addTask(500,arguments.callee,[a])
 		},[a])
