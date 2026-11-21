@@ -288,7 +288,6 @@ oS = {
 		p.PicNum = w += i.length;
 		r = i.length;
 		z.style["pointer-events"] = "auto"; // 此配置对 IE 并不兼容，但为了提升体验还是加上了
-		y.setAttribute("title", "如果长时间没有加载完毕或者不想再等待预读可以尝试点击跳过预读直接进入游戏");
 		y.style.cursor = "pointer";
 		y.onclick = function() {
 			oS.MustAllReady = false;
@@ -373,7 +372,7 @@ oS = {
 		}
 		b = 139 - c.AccessNum++*140 / c.PicNum - 11;
 		$("imgFlagHead").style.left = b + "px";
-		$("sFlagMeterTitleF").innerHTML = '<span style="cursor:pointer;font-family:Yahei Mono;color:#fff">LOADING...(<span style="cursor:pointer;color:#ff0">直接进入游戏</span>):(' + c.AccessNum + "/" + c.PicNum + ")</span>";
+		$("sFlagMeterTitleF").innerHTML = '<span style="cursor:pointer;font-family:Yahei Mono;color:#fff">LOADING...:(' + c.AccessNum + "/" + c.PicNum + ")</span>";
 		$("imgFlagMeterFull").style.clip = "rect(0,auto,21px," + (b + 11) + "px)";
 		if (c.AccessNum == c.PicNum) {
 			oS.Lvl == 0 && PlayAudio("groan2");
