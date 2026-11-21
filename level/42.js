@@ -117,8 +117,7 @@ if($User.Visitor.Progress<42)return document.write("跳关好玩吗？");
     [oWallNutZombie, 1, 1],
     [oBungeeZombie, 1, 1],
     [oPeaZombie, 1, 1],
-	[oPogoZombie, 1, 1,[10,20]],
-	[oCatapultZombie, 1, 1]
+	[oPogoZombie, 1, 1,[10,20]]
 	],
 	FlagNum: 30,
 	FlagToSumNum: {
