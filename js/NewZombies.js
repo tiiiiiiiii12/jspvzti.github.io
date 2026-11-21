@@ -728,6 +728,7 @@ oCoffeeBeanZombie = InheritO(oTallNutZombie, {
 			oSym.addTask(500,arguments.callee,[a])
 		},[a])
 	},
+	BreakPoint:1,
 	ZPlant:true,
     Produce: '韧性：<font color="#FF0000">400</font><br>精英形态：无</p>由精英高坚果僵尸召唤，给周围僵尸回血'
   }),
