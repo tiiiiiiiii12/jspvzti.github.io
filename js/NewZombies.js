@@ -1756,7 +1756,7 @@ oSym.addTask(0,function(SummonZ){
 			  }
 		  }
           oSym.addTask(k.shootPeaSpeed, function(k, m) {
-            k.canWalk(k, m) && k.beAttacked && (k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (GetY(a.R) - a.BulletTop) + "px;visibility:hidden;z-index:" + (k.zIndex + 2)),k.shootPea(k));
+            k.canWalk(k, m) && k.beAttacked && (k.BulletEle = NewImg(0, oPeashooter.prototype.PicArr[3], "left:" + (k.ZX) + "px;top:" + (GetY(k.R) - k.BulletTop) + "px;visibility:hidden;z-index:" + (k.zIndex + 2)),k.shootPea(k));
             $Z[k.id] ? oSym.addTask(k.shootPeaSpeed, arguments.callee, [k, m]) : k.BulletEle = null;
           }, [k, m]);
           k.Speed && (k.Speed = !k.FreeSlowTime ? i : 0.5 * i);
