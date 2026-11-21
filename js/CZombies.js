@@ -2434,6 +2434,7 @@ p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.Attack
             return 5
         },
 		jinyinAct:function(a){
+			a.HP*=2;
 			a.GoingDieHead=function(){};
 			a.getThump=function(Att){
 				Att==undefined&&(Att=1800);
@@ -2441,7 +2442,19 @@ p.oTrigger&&oT.delP(p),p.ChangeCallback(p),p.InitTrigger(p,p.id,p.R,p.C,p.Attack
 			};
 			a.PrivateAct=function(a){
 				!a.beAttacked&&(CustomZombie(oSmallDuckyTubeZombie1,a.R,GetC(a.ZX),!a.PZ),CustomZombie(oSmallDuckyTubeZombie1,a.R,GetC(a.ZX),!a.PZ),a.DisappearDie())
-			}
+			};
+			SetStyle(a.EleBody,{
+				width:"249px",
+				height:"216px",
+				top:"-60px",
+				left:"-20px"
+			});
+			SetStyle(a.EleShadow,{
+				width:"129px",
+				height:"54px",
+				left:(a.beAttackedPointL - 15) + "px",
+				top:(a.height - 25) + "px"
+			})
 		},
         Produce: '鸭子救生圈能让僵尸能浮在水面上<br>水路普通僵尸精英形态：<font color="#FF0000">濒死时分裂两只小鸭子救生圈僵尸</font><br><font color="#FF0000">水路铁桶无精英</font><br>韧性：<font color="#FF0000">低</font><br>只在水池关卡出现</font></p>只有特定的僵尸才能成为救生圈僵尸。并不是每个僵尸都能胜任的。有些救生圈有点漏气，但他们没能注意到，所以他们离开并放弃了对脑子的渴求。',
         PicArr: (function() {
@@ -2971,7 +2984,7 @@ a.Jump(a)
 				var z=oZ[a.PZ?"getArHZ":"getArZ"](a.AttackedLX,a.AttackedRX,a.R);
 				zl=z.length;
 				while(zl--){
-					z[zl].Altitude==1&&z[zl].getHit2(z[zl],30,0)
+					z[zl].Altitude==1&&z[zl].getHit2(z[zl],20,0)
 				}
 			},
             ChkActs1: function(f, d, g, c) {
@@ -3569,7 +3582,7 @@ oZ["getAr"+(a.WalkDirection?"HZ":"Z")](100,oS.W,a.R).length>1&&oZ["getAr"+(a.Wal
     oSym.addTask(Math.floor(Math.random() * 100) > 4 ? Math.floor(1325 + Math.random() * 976) : Math.floor(450 + Math.random() * 301),
       function(c) {
         var b = $Z[c];
-        b && b.beAttacked && b.OpenBox(c)
+        b && b.beAttacked &&!b.canBoom&& b.OpenBox(c)
       },
       [a])
   },
