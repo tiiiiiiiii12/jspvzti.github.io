@@ -1,7 +1,7 @@
 var oGargantuar = InheritO(oZombie, {
   PicArr: (function() {
-    var a = "images/Zombies/Gargantuar/";
-    return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif" + $Random + Math.random(), a + "ImpToLand.gif", a + "throwImp.gif", a + "ImplessDie.gif", a + "Die.gif", a + "ImplessWalk.gif", a + "0.gif", a + "ImplessAttack.gif" + $Random + Math.random()]
+    var a = "images/Zombies/Gargantuar/",b="images/Zombies/GigaGargantuar/";
+    return ["images/Card/Zombies/Gargantuar.png", a + "0.gif", a + "Walk.gif", a + "Attack.gif" + $Random + Math.random(), a + "ImpToLand.gif", a + "throwImp.gif", a + "ImplessDie.gif", a + "Die.gif", a + "ImplessWalk.gif", a + "0.gif", a + "ImplessAttack.gif" + $Random + Math.random(),b + "ImplessDie.gif",b + "ImplessWalk.gif",b + "ImplessAttack.gif" + $Random + Math.random()]
   })(),
   throwImpGif: 5,
   ImpToLandGif: 4,
@@ -251,7 +251,7 @@ var oGargantuar = InheritO(oZombie, {
           if (!k) {
             return
           }
-          k.DieGif = k.num<50?oGargantuarBoss.prototype.PicArr[k.ImplessDieGif]:k.ImplessDieGif;
+          k.DieGif = k.num<50?11:k.ImplessDieGif;
           PlayAudio("ImpToLand");
           var AC = Math.max(GetC(k.ZX) - 4 * k.PZ, 3);
           oSym.addTask(100, ClearChild, [NewImg(0, k.PicArr[k.ImpToLandGif], "left:" + (GetX(AC) - 30) + "px;top:" + (k.pixelTop + 150) + "px;transform:" + (k.PZ ? "rotateY(0deg)" : "rotateY(180deg)") + ";z-index:" + k.zIndex, EDPZ)]);
@@ -265,7 +265,7 @@ var oGargantuar = InheritO(oZombie, {
           k.ChkActs1 = j.ChkActs1;
           k.EleBody.src = l;
         },
-        [g.id, g.PicArr[[g.NormalGif = g.num<50?oGargantuarBoss.prototype.PicArr[g.ImplessWalkGif]:g.ImplessWalkGif, g.AttackGif = g.num<50?oGargantuarBoss.prototype.PicArr[g.ImplessAttackGif]:g.ImplessAttackGif][g.isAttacking]]])
+        [g.id, g.PicArr[[g.NormalGif = g.num<50?g.PicArr[12]:g.ImplessWalkGif, g.AttackGif = g.num<50?g.PicArr[13]:g.ImplessAttackGif][g.isAttacking]]])
   },
   SunNum: 275,
   EName: "oGargantuar",
@@ -601,62 +601,6 @@ c.num=Math.random()*100||c.Privatenum;
     })(),
     Boom: function() {},
     Produce: '韧性：<font color="#FF0000">极高(2400+270)</font><br>精英形态一：每隔一段时间在场上放置一个坚果障碍，坚果障碍所在格不可种植植物<br>精英形态二：若身后有僵尸则获得一定伤害减免</p>太好了，高仁僵尸来了'
-  }),
-oNutZombie = InheritO(oTallNutZombie, {
-    EName: "oNutZombie",
-    CName: "坚果障碍",
-    OrnHP: 1100,
-    SunNum: 75,
-    HP:1,
-    OrnLeft1:30,
-    Boom: function() {},
-    StandGif: 11,
-    OrnTop: 80,
-    OrnLeft: 80,
-	jinyinnum:100,
-    Lvl: 2,
-	PicArr: (function() {
-      var a = "images/Zombies/Zombie/";
-      return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
-    })(),
-	PrivateAct:oWallNutZombie.prototype.PrivateAct,
-	GoingDie:function(a){
-		this.DisappearDie();
-	},
-	getr:function(){},
-	getSlow:function(){},
-	getFreeze:function(){},
-	PrivateDie:function(){		
-		if(this.PZ){
-		delete oGd.$Crater[this.SetR+"_"+this.SetC];
-		}
-	},
-	ExplosionDie:function(a){
-		this.DisappearDie();
-	},
-	ChkActs:function(a){
-		a.PrivateAct(a);
-		return 1
-	},
-	ChkActs1:function(a){
-		a.PrivateAct(a);
-		return 1
-	},
-	bedevil:function(a){
-		delete oGd.$Crater[a.SetR+"_"+a.SetC];
-		CZombies.prototype.bedevil(a);
-	},
-	ChangeR:function(){},
-	WalkToLadder:function(){},
-    jinyinAct: function(a){
-		SetHidden(a.EleBody);
-		a.SetR=a.R;
-		a.SetC=GetC(a.ZX);
-		oSym.addTask(1,function(a){
-		$Z[a.id]&&a.PZ&&(oGd.$Crater[a.SetR+"_"+a.SetC]=1);
-		},[a])
-	},
-    Produce: '韧性：<font color="#FF0000">1100</font><br>精英形态：无</p>由精英高坚果僵尸召唤'
   }),
 oCoffeeBeanZombie = InheritO(oTallNutZombie, {
     EName: "oCoffeeBeanZombie",
@@ -1845,7 +1789,7 @@ LostPaperSpeed:1.6,
 StandGif:1,
 PicArr: (function() {
     var a = "images/Zombies/PogoZombie/";
-    return ["images/Card/Zombies/ZombiesJump.png", a + "1.gif", a + "Jump.gif", a + "Jump.gif", a + "Walk.gif", a + "Attack.gif", oNewspaperZombie.prototype.PicArr[oNewspaperZombie.prototype.HeadGif], a + "Die.gif" + $Random, "images/Zombies/Zombie/BoomDie.gif" + $Random, a + "1.gif", oGarlic.prototype.PicArr[3],oGarlic.prototype.PicArr[4]]
+    return ["images/Card/Zombies/ZombiesJump.png", a + "0.gif", a + "Jump.gif", a + "Jump.gif", a + "Walk.gif", a + "Attack.gif", oNewspaperZombie.prototype.PicArr[oNewspaperZombie.prototype.HeadGif], a + "Die.gif" + $Random, "images/Zombies/Zombie/BoomDie.gif" + $Random, a + "0.gif", oGarlic.prototype.PicArr[3],oGarlic.prototype.PicArr[4]]
   })(),
 getShadow:function(c) {
     return "left:" + (c.beAttackedPointL - 10) + "px;top:" + (c.height-42) + "px;"
