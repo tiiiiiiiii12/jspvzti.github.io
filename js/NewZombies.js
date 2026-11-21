@@ -602,137 +602,6 @@ c.num=Math.random()*100||c.Privatenum;
     Boom: function() {},
     Produce: '韧性：<font color="#FF0000">极高(2400+270)</font><br>精英形态一：每隔一段时间在场上放置一个坚果障碍，坚果障碍所在格不可种植植物<br>精英形态二：若身后有僵尸则获得一定伤害减免</p>太好了，高仁僵尸来了'
   }),
-oCoffeeBeanZombie = InheritO(oTallNutZombie, {
-    EName: "oCoffeeBeanZombie",
-    CName: "僵尸咖啡豆",
-    SunNum: 75,
-    HP:500,
-	OrnHP:0,
-    OrnLeft1:30,
-    Boom: function() {},
-    StandGif: 11,
-    OrnTop: 80,
-    OrnLeft: 80,
-	jinyinnum:100,
-    Lvl: 2,
-	PicArr: (function() {
-      var a = "images/Zombies/Zombie/";
-      return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/CoffeeBean/CoffeeBean.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
-    })(),
-	checkHP:function(){},
-	PrivateAct:oWallNutZombie.prototype.PrivateAct,
-	GoingDie:function(a){
-		this.DisappearDie();
-	},
-	getr:function(){},
-	getSlow:function(){},
-	getFreeze:function(){},
-	PrivateDie:function(){		
-		if(this.PZ){
-		delete oGd.$Crater[this.SetR+"_"+this.SetC];
-		}
-	},
-	ExplosionDie:function(a){
-		this.DisappearDie();
-	},
-	ChkActs:function(a){
-		a.PrivateAct(a);
-		return 1
-	},
-	ChkActs1:function(a){
-		a.PrivateAct(a);
-		return 1
-	},
-	bedevil:function(a){
-		delete oGd.$Crater[a.SetR+"_"+a.SetC];
-		CZombies.prototype.bedevil(a);
-	},
-	ChangeR:function(){},
-	WalkToLadder:function(){},
-    jinyinAct: function(a){
-		SetHidden(a.EleBody);
-		a.SetR=a.R;
-		a.SetC=GetC(a.ZX);
-		oSym.addTask(1,function(a){
-		$Z[a.id]&&a.PZ&&(oGd.$Crater[a.SetR+"_"+a.SetC]=1);
-		},[a]);
-		a.getHit(a,0);
-		oSym.addTask(500,function(a){
-				if(!$Z[a.id])return;
-				PlayAudio("coffee");
-			for (i=1;i<=2;i++){
-				var P=oGd.$[a.SetR+"_"+a.SetC+"_"+i];
-				!a.PZ&&P&&P.HP<P.MaxHP&&(P.HP=Math.min(P.HP+200,P.MaxHP));
-			}
-			let Z=oZ[a.PZ?"getArZ":"getArHZ"](a.ZX-40,a.ZX+40,a.SetR);
-			let Zl=Z.length;
-			while (Zl--){
-				!Z[Zl].ZPlant&&(Z[Zl].OrnHP>=1?Z[Zl].OrnHP=Math.min(Z[Zl].OrnHP+200,Z[Zl].MaxOrnHP):Z[Zl].HP=Math.min(Z[Zl].HP+200,Z[Zl].MaxHP))
-			}
-			oSym.addTask(500,arguments.callee,[a])
-		},[a])
-	},
-	BreakPoint:1,
-	ZPlant:true,
-    Produce: '韧性：<font color="#FF0000">400</font><br>精英形态：无</p>由精英高坚果僵尸召唤，给周围僵尸回血'
-  }),
-oNutZombie = InheritO(oTallNutZombie, {
-    EName: "oNutZombie",
-    CName: "坚果障碍",
-    OrnHP: 1100,
-    SunNum: 75,
-	ZPlant:true,
-    HP:1,
-    OrnLeft1:30,
-    Boom: function() {},
-    StandGif: 11,
-    OrnTop: 80,
-    OrnLeft: 80,
-	jinyinnum:100,
-    Lvl: 2,
-	PicArr: (function() {
-      var a = "images/Zombies/Zombie/";
-      return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
-    })(),
-	PrivateAct:oWallNutZombie.prototype.PrivateAct,
-	GoingDie:function(a){
-		this.DisappearDie();
-	},
-	getr:function(){},
-	getSlow:function(){},
-	getFreeze:function(){},
-	PrivateDie:function(){		
-		if(this.PZ){
-		delete oGd.$Crater[this.SetR+"_"+this.SetC];
-		}
-	},
-	ExplosionDie:function(a){
-		this.DisappearDie();
-	},
-	ChkActs:function(a){
-		a.PrivateAct(a);
-		return 1
-	},
-	ChkActs1:function(a){
-		a.PrivateAct(a);
-		return 1
-	},
-	bedevil:function(a){
-		delete oGd.$Crater[a.SetR+"_"+a.SetC];
-		CZombies.prototype.bedevil(a);
-	},
-	ChangeR:function(){},
-	WalkToLadder:function(){},
-    jinyinAct: function(a){
-		SetHidden(a.EleBody);
-		a.SetR=a.R;
-		a.SetC=GetC(a.ZX);
-		oSym.addTask(1,function(a){
-		a.PZ&&(oGd.$Crater[a.SetR+"_"+a.SetC]=1);
-		},[a])
-	},
-    Produce: '韧性：<font color="#FF0000">1100</font><br>精英形态：无</p>由精英高坚果僵尸召唤'
-  }),
 oJalapenoZombie= InheritO(oZombie,{
 	EName: "oJalapenoZombie",
 	CName: "辣椒僵尸",
@@ -939,7 +808,7 @@ oLadderZombie = InheritO(oScreenDoorZombie, {
   EName: "oLadderZombie",
   CName: "扶梯僵尸",
   OrnHP: 500,
-  Lvl:3,
+  Lvl:4,
   HP: 400,
   BreakPoint: 1,
   SunNum: 125,
@@ -1934,4 +1803,299 @@ PrivateBirth:function(a){
 a.EleBody.style.top="0px";
 a.Move(a.EleBody,0,a.MaxTop)
 }
-})
+}),
+oCoffeeBeanZombie = InheritO(oTallNutZombie, {
+    EName: "oCoffeeBeanZombie",
+    CName: "僵尸咖啡豆",
+    SunNum: 75,
+    HP:500,
+	OrnHP:0,
+    OrnLeft1:30,
+    Boom: function() {},
+    StandGif: 11,
+    OrnTop: 80,
+    OrnLeft: 80,
+	jinyinnum:100,
+    Lvl: 2,
+	PicArr: (function() {
+      var a = "images/Zombies/Zombie/";
+      return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/CoffeeBean/CoffeeBean.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
+    })(),
+	checkHP:function(){},
+	PrivateAct:oWallNutZombie.prototype.PrivateAct,
+	GoingDie:function(a){
+		this.DisappearDie();
+	},
+	getr:function(){},
+	getSlow:function(){},
+	getFreeze:function(){},
+	PrivateDie:function(){		
+		if(this.PZ){
+		delete oGd.$Crater[this.SetR+"_"+this.SetC];
+		}
+	},
+	ExplosionDie:function(a){
+		this.DisappearDie();
+	},
+	ChkActs:function(a){
+		a.PrivateAct(a);
+		return 1
+	},
+	ChkActs1:function(a){
+		a.PrivateAct(a);
+		return 1
+	},
+	bedevil:function(a){
+		delete oGd.$Crater[a.SetR+"_"+a.SetC];
+		CZombies.prototype.bedevil(a);
+	},
+	ChangeR:function(){},
+	WalkToLadder:function(){},
+    jinyinAct: function(a){
+		SetHidden(a.EleBody);
+		a.SetR=a.R;
+		a.SetC=GetC(a.ZX);
+		oSym.addTask(1,function(a){
+		$Z[a.id]&&a.PZ&&(oGd.$Crater[a.SetR+"_"+a.SetC]=1);
+		},[a]);
+		a.getHit(a,0);
+		oSym.addTask(500,function(a){
+				if(!$Z[a.id])return;
+				PlayAudio("coffee");
+			for (i=1;i<=2;i++){
+				var P=oGd.$[a.SetR+"_"+a.SetC+"_"+i];
+				!a.PZ&&P&&P.HP<P.MaxHP&&(P.HP=Math.min(P.HP+200,P.MaxHP));
+			}
+			let Z=oZ[a.PZ?"getArZ":"getArHZ"](a.ZX-40,a.ZX+40,a.SetR);
+			let Zl=Z.length;
+			while (Zl--){
+				!Z[Zl].ZPlant&&(Z[Zl].OrnHP>=1?Z[Zl].OrnHP=Math.min(Z[Zl].OrnHP+200,Z[Zl].MaxOrnHP):Z[Zl].HP=Math.min(Z[Zl].HP+200,Z[Zl].MaxHP))
+			}
+			oSym.addTask(500,arguments.callee,[a])
+		},[a])
+	},
+	BreakPoint:1,
+	ZPlant:true,
+    Produce: '韧性：<font color="#FF0000">400</font><br>精英形态：无</p>由精英高坚果僵尸召唤，给周围僵尸回血'
+  }),
+oCabbageZombie = InheritO(oTallNutZombie, {
+    EName: "oCabbageZombie",
+    CName: "僵尸卷心菜",
+	ballAttack:40,
+    SunNum: 100,
+    HP:300,
+	OrnHP:0,
+	ballsrc:"images/Plants/Cabbage/CabbageBullet.gif",
+    OrnLeft1:30,
+    Boom: function() {},
+    StandGif: 11,
+    OrnTop: 80,
+    OrnLeft: 80,
+	jinyinnum:100,
+    Lvl: 2,
+	PicArr: (function() {
+      var a = "images/Zombies/Zombie/";
+      return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/Cabbage/Cabbage.gif", "images/Plants/Cabbage/CabbageAttack.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
+    })(),
+	Move:true,
+	ThrowNum:1,
+	checkHP:function(){},
+	PrivateAct:function(a){
+		oWallNutZombie.prototype.PrivateAct(a);
+		a.Move&&a.canWalk(a,a.id)&&a.ZX<oS.W&&a.checkThrow(a);
+	},
+	GoingDie:function(a){
+		this.DisappearDie();
+	},
+	checkThrow:function(a){
+let num;
+let Order=[1,2,3,0];
+let Z=oZ[a.PZ?"getArHZ":"getArZ"](a.PZ?100:a.ZX,a.PZ?a.ZX:oS.W,a.R);
+let TZ=a.PZ?Z[Z.length-1]:Z[Z.length-0];
+Z.length&&!num&&(a.Move&&(a.Move=false),a.Throw(TZ,TZ.AttackedLX+20,GetY(a.R)-40),num=true);
+for (let C=1;C<=GetC(a.ZX);C++){
+  for (let i=0;i<Order.length;i++){
+let P=oGd.$[a.R+"_"+C+"_"+Order[i]];
+a.PZ&&!num&&P&&P.canEat&&(a.Move&&(a.Move=false),a.Throw(P,P.AttackedLX+20, GetY(a.R)-40),num=true)
+  }
+}
+ !num&&!a.Move?(a.Move=true):(--a.ThrowNum?oSym.addTask(15,arguments.callee,[a]):a.ThrowNum=Math.round(Math.random()*2+2));
+},
+  getAngle(x, y, lastX, lastY) {
+    return (180 / Math.PI) * Math.atan2(y - lastY, x - lastX);
+  },
+Throw:function(p,X,Y){
+var a=this;
+var P=p;
+a.EleBody.src=a.PicArr[13];
+    a.BulletEle = NewImg(
+      0,
+     a.ballsrc,
+      "left:" +
+      (a.ZX + (a.WalkDirection?-140:140)) +
+      "px;top:" +
+      (a.pixelTop + 100) +
+      "px;visibility:hidden;z-index:" +
+      (a.zIndex + 2)
+    );
+    var bullet = EditEle(
+      a.BulletEle.cloneNode(false), {
+        id: "CB" + Math.random(),
+      },
+      0,
+      EDPZ
+    );
+    oSym.addTask(100, (_) => {
+	if(!$Z[a.id])return;
+      SetVisible(bullet);
+      var x = a.ZX + (a.WalkDirection?-140:140);
+      var y = a.pixelTop + 100;
+      var RelativePos = [X,Y];
+      var s = Math.abs(x - RelativePos[0]);
+      var x2 = Math.abs(x - s);
+      var gravity = 0.2;
+      var vy = -10;
+      var vx = -(gravity * s) / (2 * vy);
+      var lastTime = 0;
+      var zY = RelativePos[1];
+      var [lastX, lastY] = [x, y];
+      var defAngle = a.getAngle(x - (a.PZ?vx:-vx), y + vy + gravity, lastX, lastY);
+      (function drawFrame() {
+        vy += gravity;
+        bullet.style.left = (x -= (a.PZ?vx:-vx)) + "px";
+        bullet.style.top = (y += vy) + "px";
+		bullet.style.transform = `rotate(${
+          a.getAngle(x, y, lastX, lastY) - defAngle - 25
+        }deg)`;
+        if ((a.PZ? x <= X && y>=Y : x >= X && y>=Y) || s < 40) {
+          bullet && ClearChild(bullet);
+if($P[P.id]){
+P.getPea(a, 3, a.ballAttack*a.level);
+}else if($Z[P.id]){
+P.getHit2(P,a.ballAttack*a.level,0)
+}
+          $Z[a.id]&&(a.EleBody.src=a.PicArr[12],
+					 oSym.addTask(a.cd,function(a){
+						 $Z[a.id]&&a.checkThrow(a)
+					 },[a]));
+          return;
+        }
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 50 / 3 - (currTime - lastTime)) / 10;
+        oSym.addTask(timeToCall, drawFrame);
+        lastTime = currTime + timeToCall;
+        [lastX, lastY] = [x, y];
+      })();
+    })
+},
+	getr:function(){},
+	cd:100,
+	getSlow:function(){},
+	getFreeze:function(){},
+	PrivateDie:function(){		
+		if(this.PZ){
+		delete oGd.$Crater[this.SetR+"_"+this.SetC];
+		}
+	},
+	ExplosionDie:function(a){
+		this.DisappearDie();
+	},
+	ChkActs:function(a){
+		a.PrivateAct(a);
+		return 1
+	},
+	ChkActs1:function(a){
+		a.PrivateAct(a);
+		return 1
+	},
+	bedevil:function(a){
+		delete oGd.$Crater[a.SetR+"_"+a.SetC];
+		CZombies.prototype.bedevil(a);
+	},
+	ChangeR:function(){},
+	WalkToLadder:function(){},
+    jinyinAct: function(a){
+		SetHidden(a.EleBody);
+		a.SetR=a.R;
+		a.SetC=GetC(a.ZX);
+		Math.random()*100>25&&(a.Ele.style.opacity=0.5);
+		oSym.addTask(1,function(a){
+		$Z[a.id]&&a.PZ&&(oGd.$Crater[a.SetR+"_"+a.SetC]=1);
+		},[a]);
+		a.getHit(a,0);
+		oSym.addTask(500,function(a){
+				if(!$Z[a.id])return;
+				PlayAudio("coffee");
+			for (i=1;i<=2;i++){
+				var P=oGd.$[a.SetR+"_"+a.SetC+"_"+i];
+				!a.PZ&&P&&P.HP<P.MaxHP&&(P.HP=Math.min(P.HP+200,P.MaxHP));
+			}
+			let Z=oZ[a.PZ?"getArZ":"getArHZ"](a.ZX-40,a.ZX+40,a.SetR);
+			let Zl=Z.length;
+			while (Zl--){
+				!Z[Zl].ZPlant&&(Z[Zl].OrnHP>=1?Z[Zl].OrnHP=Math.min(Z[Zl].OrnHP+200,Z[Zl].MaxOrnHP):Z[Zl].HP=Math.min(Z[Zl].HP+200,Z[Zl].MaxHP))
+			}
+			oSym.addTask(500,arguments.callee,[a])
+		},[a])
+	},
+	BreakPoint:1,
+	ZPlant:true,
+    Produce: '韧性：<font color="#FF0000">400</font><br>精英形态：无</p>由精英高坚果僵尸召唤，给周围僵尸回血'
+  }),
+oNutZombie = InheritO(oTallNutZombie, {
+    EName: "oNutZombie",
+    CName: "坚果障碍",
+    OrnHP: 1100,
+    SunNum: 75,
+	ZPlant:true,
+    HP:1,
+    OrnLeft1:30,
+    Boom: function() {},
+    StandGif: 11,
+    OrnTop: 80,
+    OrnLeft: 80,
+	jinyinnum:100,
+    Lvl: 2,
+	PicArr: (function() {
+      var a = "images/Zombies/Zombie/";
+      return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/WallNut/WallNut.gif", "images/Plants/WallNut/Wallnut_cracked1.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
+    })(),
+	PrivateAct:oWallNutZombie.prototype.PrivateAct,
+	GoingDie:function(a){
+		this.DisappearDie();
+	},
+	getr:function(){},
+	getSlow:function(){},
+	getFreeze:function(){},
+	PrivateDie:function(){		
+		if(this.PZ){
+		delete oGd.$Crater[this.SetR+"_"+this.SetC];
+		}
+	},
+	ExplosionDie:function(a){
+		this.DisappearDie();
+	},
+	ChkActs:function(a){
+		a.PrivateAct(a);
+		return 1
+	},
+	ChkActs1:function(a){
+		a.PrivateAct(a);
+		return 1
+	},
+	bedevil:function(a){
+		delete oGd.$Crater[a.SetR+"_"+a.SetC];
+		CZombies.prototype.bedevil(a);
+	},
+	ChangeR:function(){},
+	WalkToLadder:function(){},
+    jinyinAct: function(a){
+		SetHidden(a.EleBody);
+		a.SetR=a.R;
+		a.SetC=GetC(a.ZX);
+		oSym.addTask(1,function(a){
+		a.PZ&&(oGd.$Crater[a.SetR+"_"+a.SetC]=1);
+		},[a])
+	},
+    Produce: '韧性：<font color="#FF0000">1100</font><br>精英形态：无</p>由精英高坚果僵尸召唤'
+  })
