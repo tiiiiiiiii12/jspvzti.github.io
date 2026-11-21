@@ -577,7 +577,12 @@ c.num=Math.random()*100||c.Privatenum;
       var Nut = NewImg(z.NutHead2, "images/interface/SelectorScreen_Almanac.png", "position:absolute; clip:rect(0,auto,90px,0);transform:rotateY(180deg);left:" + c.OrnLeft + "px;top:80px;", 0);
       z.appendChild(Nut);
 	  oSym.addTask(c.SetNutTime,function(c){
-		  c.canWalk(c,c.id)&&c.beAttacked&&(PlayAudio("groan"+Math.floor(Math.random()*5+1)),CustomZombie(Math.round(Math.random()*1+0)?oNutZombie:oCoffeeBeanZombie,Math.floor(Math.random()*oS.R+1),Math.floor(Math.random()*4+5),!c.PZ),oSym.addTask(c.SetNutTime,arguments.callee,[c]));
+		  if(!(c.canWalk(c,c.id)&&c.beAttacked)){return}
+			  PlayAudio("groan"+Math.floor(Math.random()*5+1));
+		  let N=Math.random()*100;
+		  let SummonZList=["oCoffeeBeanZombie","oNutZombie","oCabbageZombie","oMelonPultZombie"];
+			  CustomZombie(window[SummonZList[Math.floor(Math.random()*SummonZList.length)]],Math.floor(Math.random()*oS.R+1),c.PZ?Math.floor(Math.random()*4+5):Math.floor(Math.random()*4+1),!c.PZ);
+			  oSym.addTask(c.SetNutTime,arguments.callee,[c]);
 	  },[c]);
 	}else{
 	  var z = c.Ele;
@@ -600,7 +605,7 @@ c.num=Math.random()*100||c.Privatenum;
       return [b.PicArr[b.CardGif], b.PicArr[b.StaticGif], a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif",b.PicArr[b.NormalGif],"images/Plants/TallNut/TallNut.gif","images/Plants/TallNut/TallnutCracked1.gif","images/Plants/TallNut/TallnutCracked2.gif","images/Plants/WallNut/BoomWallNutRoll.gif",a+"jinyinNutZombie.gif",a+"jinyinNutZombieAttack.gif"]
     })(),
     Boom: function() {},
-    Produce: '韧性：<font color="#FF0000">极高(2400+270)</font><br>精英形态一：每隔一段时间在场上放置一个坚果障碍，坚果障碍所在格不可种植植物<br>精英形态二：若身后有僵尸则获得一定伤害减免</p>太好了，高仁僵尸来了'
+    Produce: '韧性：<font color="#FF0000">极高(2400+270)</font><br>精英形态一：每隔一段时间在场上放置一个僵尸方的“植物”<br>精英形态二：若身后有僵尸则获得一定伤害减免</p>太好了，高仁僵尸来了'
   }),
 oJalapenoZombie= InheritO(oZombie,{
 	EName: "oJalapenoZombie",
@@ -1990,8 +1995,6 @@ P.getHit2(P,a.ballAttack*a.level,0)
 },
 	getr:function(){},
 	cd:100,
-	getSlow:function(){},
-	getFreeze:function(){},
 	PrivateDie:function(){		
 		if(this.PZ){
 		delete oGd.$Crater[this.SetR+"_"+this.SetC];
@@ -2040,7 +2043,193 @@ P.getHit2(P,a.ballAttack*a.level,0)
 	},
 	BreakPoint:1,
 	ZPlant:true,
-    Produce: '韧性：<font color="#FF0000">400</font><br>精英形态：无</p>由精英高坚果僵尸召唤，给周围僵尸回血'
+    Produce: '韧性：<font color="#FF0000">300</font><br>精英形态：无</p>由精英高坚果僵尸召唤，给周围僵尸回血'
+  }),
+oMelonPultZombie = InheritO(oTallNutZombie, {
+    EName: "oMelonPultZombie",
+    CName: "僵尸西瓜投手",
+	ballAttack:80,
+    SunNum: 100,
+    HP:300,
+	OrnHP:0,
+	ballsrc:"images/Plants/MelonPult/Bullet.gif",
+    OrnLeft1:30,
+    Boom: function() {},
+    StandGif: 11,
+    OrnTop: 80,
+    OrnLeft: 80,
+	jinyinnum:100,
+    Lvl: 4,
+	PicArr: (function() {
+      var a = "images/Zombies/Zombie/";
+      return ["images/Card/Zombies/Zombie.png", a + "0.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "ZombieHead.gif" + $Random, a + "ZombieDie.gif" + $Random, a + "BoomDie.gif" + $Random, a + "ZombieLostHead.gif", a + "ZombieLostHeadAttack.gif", a + "1.gif", "images/Plants/MelonPult/MelonPult.gif", "images/Plants/MelonPult/MelonPultAttack.gif", "images/Plants/WallNut/Wallnut_cracked2.gif", "images/Plants/WallNut/BoomWallNutRoll.gif"]
+    })(),
+	Move:true,
+	ThrowNum:1,
+	checkHP:function(){},
+	PrivateAct:function(a){
+		oWallNutZombie.prototype.PrivateAct(a);
+		a.Move&&a.canWalk(a,a.id)&&a.ZX<oS.W&&a.checkThrow(a);
+	},
+	GoingDie:function(a){
+		this.DisappearDie();
+	},
+	checkThrow:function(a){
+let num;
+let Order=[1,2,3,0];
+let Z=oZ[a.PZ?"getArHZ":"getArZ"](a.PZ?100:a.ZX,a.PZ?a.ZX:oS.W,a.R);
+let TZ=a.PZ?Z[Z.length-1]:Z[Z.length-0];
+Z.length&&!num&&(a.Move&&(a.Move=false),a.Throw(TZ,TZ.AttackedLX+20,GetY(a.R)-40),num=true);
+for (let C=1;C<=GetC(a.ZX);C++){
+  for (let i=0;i<Order.length;i++){
+let P=oGd.$[a.R+"_"+C+"_"+Order[i]];
+a.PZ&&!num&&P&&P.canEat&&(a.Move&&(a.Move=false),a.Throw(P,P.AttackedLX+20, GetY(a.R)-40),num=true)
+  }
+}
+ !num&&!a.Move?(a.Move=true):(--a.ThrowNum?oSym.addTask(15,arguments.callee,[a]):a.ThrowNum=Math.round(Math.random()*2+2));
+},
+  getAngle(x, y, lastX, lastY) {
+    return (180 / Math.PI) * Math.atan2(y - lastY, x - lastX);
+  },
+Spread:function(P){
+	var a=this;
+	for (i=Math.max(P.R-1,1);i<=Math.min(P.R+1,oS.R);i++){
+		let SpreadZ=oZ.getArZ(P.AttackedLX-20,P.AttackedLX+30,i);
+		let ZL=SpreadZ.length;
+		let L=ZL;
+		for (l=1;l<=3;l++){
+        let m = oGd.$[i + "_" + GetC(a.ZX) + "_" + l];
+        a.PZ && m && (L++)
+		}
+		var Att;
+		L&&(Att=Math.max(Math.min(80/L,26),10));
+		while(ZL--){
+			let z=SpreadZ[ZL];
+			z&&(z.Altitude==1||z.EName=="oSnorkelZombie")&&(z.id!=P.id)&&z.getHit1(z,Att);
+		};
+		for (l=1;l<=3;l++){
+        let m = oGd.$[i + "_" + GetC(a.ZX) + "_" + l];
+        a.PZ && m &&(m.id!=P.id)&& m.getPea(a,3,Att)
+		}
+	}//处理溅射伤害
+},
+Throw:function(p,X,Y){
+var a=this;
+var P=p;
+a.EleBody.src=a.PicArr[13];
+    a.BulletEle = NewImg(
+      0,
+     a.ballsrc,
+      "left:" +
+      (a.ZX + (a.WalkDirection?-140:140)) +
+      "px;top:" +
+      (a.pixelTop + 100) +
+      "px;visibility:hidden;z-index:" +
+      (a.zIndex + 2)
+    );
+    var bullet = EditEle(
+      a.BulletEle.cloneNode(false), {
+        id: "CB" + Math.random(),
+      },
+      0,
+      EDPZ
+    );
+    oSym.addTask(100, (_) => {
+	if(!$Z[a.id])return;
+      SetVisible(bullet);
+      var x = a.ZX + (a.WalkDirection?-140:140);
+      var y = a.pixelTop + 100;
+      var RelativePos = [X,Y];
+      var s = Math.abs(x - RelativePos[0]);
+      var x2 = Math.abs(x - s);
+      var gravity = 0.2;
+      var vy = -10;
+      var vx = -(gravity * s) / (2 * vy);
+      var lastTime = 0;
+      var zY = RelativePos[1];
+      var [lastX, lastY] = [x, y];
+      var defAngle = a.getAngle(x - (a.PZ?vx:-vx), y + vy + gravity, lastX, lastY);
+      (function drawFrame() {
+        vy += gravity;
+        bullet.style.left = (x -= (a.PZ?vx:-vx)) + "px";
+        bullet.style.top = (y += vy) + "px";
+		bullet.style.transform = `rotate(${
+          a.getAngle(x, y, lastX, lastY) - defAngle - 25
+        }deg)`;
+        if ((a.PZ? x <= X && y>=Y : x >= X && y>=Y) || s < 40) {
+          bullet && ClearChild(bullet);
+if($P[P.id]){
+P.getPea(a, 3, a.ballAttack*a.level);
+P.Spread(P)
+}else if($Z[P.id]){
+P.getHit2(P,a.ballAttack*a.level,0);
+P.Spread(P)
+}
+          $Z[a.id]&&(a.EleBody.src=a.PicArr[12],
+					 oSym.addTask(a.cd,function(a){
+						 $Z[a.id]&&a.checkThrow(a)
+					 },[a]));
+          return;
+        }
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 50 / 3 - (currTime - lastTime)) / 10;
+        oSym.addTask(timeToCall, drawFrame);
+        lastTime = currTime + timeToCall;
+        [lastX, lastY] = [x, y];
+      })();
+    })
+},
+	getr:function(){},
+	cd:100,
+	PrivateDie:function(){		
+		if(this.PZ){
+		delete oGd.$Crater[this.SetR+"_"+this.SetC];
+		}
+	},
+	ExplosionDie:function(a){
+		this.DisappearDie();
+	},
+	ChkActs:function(a){
+		a.PrivateAct(a);
+		return 1
+	},
+	ChkActs1:function(a){
+		a.PrivateAct(a);
+		return 1
+	},
+	bedevil:function(a){
+		delete oGd.$Crater[a.SetR+"_"+a.SetC];
+		CZombies.prototype.bedevil(a);
+	},
+	ChangeR:function(){},
+	WalkToLadder:function(){},
+    jinyinAct: function(a){
+		SetHidden(a.EleBody);
+		a.SetR=a.R;
+		a.SetC=GetC(a.ZX);
+		Math.random()*100>25&&(a.Ele.style.opacity=0.5);
+		oSym.addTask(1,function(a){
+		$Z[a.id]&&a.PZ&&(oGd.$Crater[a.SetR+"_"+a.SetC]=1);
+		},[a]);
+		a.getHit(a,0);
+		oSym.addTask(500,function(a){
+				if(!$Z[a.id])return;
+				PlayAudio("coffee");
+			for (i=1;i<=2;i++){
+				var P=oGd.$[a.SetR+"_"+a.SetC+"_"+i];
+				!a.PZ&&P&&P.HP<P.MaxHP&&(P.HP=Math.min(P.HP+200,P.MaxHP));
+			}
+			let Z=oZ[a.PZ?"getArZ":"getArHZ"](a.ZX-40,a.ZX+40,a.SetR);
+			let Zl=Z.length;
+			while (Zl--){
+				!Z[Zl].ZPlant&&(Z[Zl].OrnHP>=1?Z[Zl].OrnHP=Math.min(Z[Zl].OrnHP+200,Z[Zl].MaxOrnHP):Z[Zl].HP=Math.min(Z[Zl].HP+200,Z[Zl].MaxHP))
+			}
+			oSym.addTask(500,arguments.callee,[a])
+		},[a])
+	},
+	BreakPoint:1,
+	ZPlant:true,
+    Produce: '韧性：<font color="#FF0000">300</font><br>精英形态：无</p>由精英高坚果僵尸召唤，投掷伤害较高的西瓜'
   }),
 oNutZombie = InheritO(oTallNutZombie, {
     EName: "oNutZombie",
